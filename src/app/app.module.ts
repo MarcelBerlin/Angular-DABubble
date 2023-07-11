@@ -8,6 +8,11 @@ import { HeaderComponent } from './header/header.component';
 import { MenuChannelsWorkspacesComponent } from './menu-channels-workspaces/menu-channels-workspaces.component';
 import { MainChatComponent } from './main-chat/main-chat.component';
 import { SecondaryChatComponent } from './secondary-chat/secondary-chat.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -20,9 +25,12 @@ import { SecondaryChatComponent } from './secondary-chat/secondary-chat.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
-  providers: [],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

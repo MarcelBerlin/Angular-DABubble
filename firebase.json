@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "Angular-DABubble",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
