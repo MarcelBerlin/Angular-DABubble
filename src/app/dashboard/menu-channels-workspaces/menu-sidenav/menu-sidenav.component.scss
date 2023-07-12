@@ -7,6 +7,38 @@
   padding-right: 32px;
 }
 
-.new-Message {  
+.pointer {
   cursor: pointer;
+}
+
+.channels-container {
+  width: 100%;
+}
+
+.channels-headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+}
+
+.channels-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 76px;
+}
+
+.channels-line {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 16px;
+}
+
+.direct-messages-headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
 }

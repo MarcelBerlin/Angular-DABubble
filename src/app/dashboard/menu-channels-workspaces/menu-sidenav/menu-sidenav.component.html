@@ -3,11 +3,59 @@
         <div class="sidenavHeaderContainer">
             <img src="assets/img/sidenav/sidenavTitle.png">
 
-            <img class="new-Message" [src]="imagePath" alt="Bild" 
-            (mouseenter)="imagePath = 'assets/img/sidenav/newMessageHover.png'"
-            (mouseleave)="imagePath = 'assets/img/sidenav/newMessage.png'">
+            <img class="pointer" [src]="newMessagePath"
+                (mouseenter)="newMessagePath = 'assets/img/sidenav/newMessageHover.png'"
+                (mouseleave)="newMessagePath = 'assets/img/sidenav/newMessage.png'">
 
         </div>
 
+        <div class="channels-container">
+            <div class="channels-headline pd-left pd-right">
+                <img class="pointer" [src]="channelsPath"
+                (mouseenter)="channelsPath = 'assets/img/sidenav/channel_closed_hover.png'"
+                (mouseleave)="channelsPath = 'assets/img/sidenav/channel_closed.png'"
+                (click)="channelsPath = 'assets/img/sidenav/channel_closed_click.png'">
+
+                <img class="pointer" [src]="addPathChannel"
+                (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
+                (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'"
+                (click)="addPathChannel = 'assets/img/sidenav/add_Click.png'">
+            </div>
+
+                  
+            <div class="channels-content">
+                <div class="channels-line">
+                    <img class="pointer" [src]="firstTagPath"
+                    (mouseenter)="firstTagPath = 'assets/img/sidenav/tag_hover.png'"
+                    (mouseleave)="firstTagPath = 'assets/img/sidenav/tag.png'"
+                    (click)="firstTagPath = 'assets/img/sidenav/tag_click.png'">
+
+                    <span class="pointer">Allgemein</span>
+                </div>
+
+                <div class="channels-line">
+                    <img class="pointer" [src]="secondTagPath"
+                    (mouseenter)="secondTagPath = 'assets/img/sidenav/tag_hover.png'"
+                    (mouseleave)="secondTagPath = 'assets/img/sidenav/tag.png'"
+                    (click)="secondTagPath = 'assets/img/sidenav/tag_click.png'">
+
+                    <span class="pointer">Entwicklerteam</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="direct-messages">
+            <div class="direct-messages-headline pd-left pd-right pd-top">
+                <img class="pointer" [src]="directMessagePath"
+                (mouseenter)="directMessagePath = 'assets/img/sidenav/direct_message_closed_hover.png'"
+                (mouseleave)="directMessagePath = 'assets/img/sidenav/direct_message_closed.png'"
+                (click)="directMessagePath = 'assets/img/sidenav/direct_message_closed_Click.png'">
+
+                <img class="pointer" [src]="addPathMessage"
+                (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
+                (mouseleave)="addPathMessage = 'assets/img/sidenav/add.png'"
+                (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'">
+            </div>
+        </div>    
     </div>
 </div>
