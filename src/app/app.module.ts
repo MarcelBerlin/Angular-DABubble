@@ -23,6 +23,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatMenuModule} from '@angular/material/menu';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainChatHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-head.component';
 import { MainChatTimeSeparatorComponent } from './dashboard/main-chat/main-chat-time-separator/main-chat-time-separator.component';
@@ -48,6 +50,7 @@ import { MainChatTimeSeparatorComponent } from './dashboard/main-chat/main-chat-
     MatIconModule,
     MatInputModule,
     FormsModule,
+    MatMenuModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
@@ -56,4 +59,5 @@ import { MainChatTimeSeparatorComponent } from './dashboard/main-chat/main-chat-
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

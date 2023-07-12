@@ -1,1 +1,31 @@
-<p>header works!</p>
+<div class="header-body">
+    <div class="header-logo">
+        <img src="../../../assets/img/1. Logo animation.png">
+    </div>
+
+    <div class="header-searchbar">
+        <input class="input-searchbar" mat-icon="search" placeholder="Code learning durchsuchen">
+        <div class="search-icon-container">
+            <img src="../../../assets/img/search-icon.png">
+        </div>
+    </div>
+
+    <div class="header-profile">
+
+        <span> Frederik Deck</span> <!-- durch ts ersetzen -->
+        <img src="../../../assets/img/members/avatar6.png"> <!-- durch ts ersetzen -->
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu class="dropdown-menu" #menu="matMenu">        <!-- Design ändern ?? -->
+            <button mat-menu-item>
+                <span>Profile</span> <!-- mat menu einfügen -->
+            </button>
+            <button mat-menu-item>
+                <span>Log-out</span>
+            </button>
+        </mat-menu>
+
+    </div>
+</div>
