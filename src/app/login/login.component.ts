@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,8 @@ export class LoginComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 
+  constructor(private router: Router, private authService: AuthService){}
+
 
   loginWithEmailAndPassword(): void {
 
@@ -21,5 +25,14 @@ export class LoginComponent {
 
   forgotPassword(): void {
     
+  }
+
+  loginWithGoogle(){
+    this.authService.signInWithGoogle().then((res: any)=>{
+      console.log('logged in with google');
+      this.router.navigateByUrl('dashboard');
+    }).catch((error: any)=>{
+      console.error(error);
+    });
   }
 }
