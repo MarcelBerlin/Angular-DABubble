@@ -18,16 +18,19 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import { MatDialogActions,  } from '@angular/material/dialog';
+import { MatDialogContent } from '@angular/material/dialog';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainChatHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-head.component';
 import { MainChatTimeSeparatorComponent } from './dashboard/main-chat/main-chat-time-separator/main-chat-time-separator.component';
+import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,11 +42,13 @@ import { MainChatTimeSeparatorComponent } from './dashboard/main-chat/main-chat-
     LoginComponent,
     DashboardComponent,
     MainChatHeadComponent,
-    MainChatTimeSeparatorComponent
+    MainChatTimeSeparatorComponent,
+    HeaderDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatDialogModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCardModule,

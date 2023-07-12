@@ -1,0 +1,43 @@
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+    }
+
+    .mail-div {
+        display: flex;
+        align-items: center;
+    }
+
+    .head-span {
+        text-align: center;
+        font-size: 24px;
+        padding-bottom: 20px;
+    }
+
+    .online-span {
+        color: #92C83E;
+        font-size: 18px;
+    }
+
+    .offline-span {
+        color: #686868;
+        font-size: 18px;
+    }
+
+    .mail-span {
+        color: #1381FF;
+        font-size: 20px;
+    }
+
+    .profile-icon {
+        width: 20px;
+        height: 20px;
+        object-fit: cover;
+    }
+}

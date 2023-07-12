@@ -1,0 +1,20 @@
+<div>
+    <mat-dialog-content class="user-profile">
+        <span class="head-span"> {{ list[0].name }} </span> <!-- später durch firebase ersetzen -->
+        <img src="{{ list[0].img }}"> <!-- später durch firebase ersetzen -->
+        <div>
+            <img class="profile-icon" src="./../../assets/img/online-icon.png">
+            <span class="online-span">Aktiv</span> <br>     <!-- break kann entfernt werden, wenn *ngIf steht-->
+            <img class="profile-icon" src="./../../assets/img/offline-icon.png">
+            <span class="offline-span">Abwesend</span> <!-- is.offline/offline mit *ngIf  -->
+        </div>
+        <div class="mail-div">
+            <img class="profile-icon" src="./../../assets/img/mail-icon.png">
+            <span>E-Mail-Adresse</span>
+        </div>
+        <span class="mail-span">{{ list[0].email }}</span>
+    </mat-dialog-content>
+</div>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>close</button>
+</mat-dialog-actions>
