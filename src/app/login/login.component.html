@@ -51,7 +51,7 @@
                     <div class="line"></div>
                 </div>
 
-                <button type="submit" [disabled]="loading" class="googleButton">
+                <button  [disabled]="loading" class="googleButton" (click)="loginWithGoogle()">
                     <img src="../../assets/img/Login/Google.png"> 
                     <span>Anmelden mit Google</span>
                 </button>
