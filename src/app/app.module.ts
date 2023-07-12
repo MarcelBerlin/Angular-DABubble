@@ -19,6 +19,8 @@ import { LoginComponent } from './login/login.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MainChatHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-head.component';
+import { MainChatTimeSeparatorComponent } from './dashboard/main-chat/main-chat-time-separator/main-chat-time-separator.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MainChatComponent,
     SecondaryChatComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    MainChatHeadComponent,
+    MainChatTimeSeparatorComponent
   ],
   imports: [
     BrowserModule,

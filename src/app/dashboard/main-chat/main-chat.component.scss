@@ -1,0 +1,53 @@
+.chatContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 50%;
+  // height: calc(100% - 96px);
+}
+.inputContainer {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  left: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 145px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  textarea {
+    width: 90%;
+    max-width: 90%;
+    height: 60%;
+    max-height: 60%;
+    margin-top: 16px;
+    margin-left: 1px;
+    font-family: "Nunito";
+    font-weight: 400;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    resize: none;
+  }
+  .iconsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 8px;
+    .addElements {
+      display: flex;
+      align-items: center;
+      width: 135px;
+      height: 30px;
+      gap: 5px;
+      .vector {
+        width: 2px;
+        height: 40px;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
