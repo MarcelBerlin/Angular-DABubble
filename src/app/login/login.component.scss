@@ -103,6 +103,7 @@
                         font-family: 'Nunito'; 
                         font-weight:500; 
                         font-size: 18px;
+                        cursor: pointer;
                     }
                 }
             }
@@ -111,7 +112,7 @@
 }
 
 .warnContainer{
-    color: crimson; 
+    color: #ED1E79; 
     font-size: 16px;
 }
 
@@ -122,6 +123,7 @@
     line-height: 21.6px; 
     color: #797EF3; 
     margin: 0px;
+    cursor: pointer;
 }
 
 .orOuterContainer{
@@ -154,12 +156,38 @@
     border: 1px solid #7E83F5;
     padding: 11px 32px 11px 32px; 
     gap: 10px; 
-    background-color: #ECEEFE ;
+    background-color: #ECEEFE;
+    cursor: pointer;
 
     span{
         font-family: 'Nunito'; 
         font-weight:400; 
         font-size: 18px; 
         color: #444DF2;
+    }
+}
+
+mat-card-actions{
+    margin: 43px 0px; 
+    gap: 30px;
+
+    .submitBtn{
+        border-radius: 25px; 
+        font-family: 'Nunito'; 
+        font-weight:700; 
+        font-size: 18px; 
+        line-height: 24.55px;
+        cursor: pointer;
+    }
+
+    .guestBtn{
+        border-radius: 25px; 
+        padding: 12px, 25px, 12px, 25px; 
+        color: #444DF2; 
+        font-family: 'Nunito'; 
+        font-weight:700; 
+        font-size: 18px; 
+        line-height: 24.55px;
+        cursor: pointer;
     }
 }

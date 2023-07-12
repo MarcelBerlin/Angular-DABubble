@@ -56,10 +56,10 @@
                     <span>Anmelden mit Google</span>
                 </button>
 
-                <mat-card-actions align="end" style="margin: 43px 0px">
+                <mat-card-actions align="end">
                     <button mat-raised-button color="primary" type="submit"
-                        [disabled]="!loginForm.valid || loading">Anmelden</button>
-                    <button mat-button>Gäste-Login</button>
+                        [disabled]="!loginForm.valid || loading" class="submitBtn">Anmelden</button>
+                    <button mat-raised-button color="secondary" class="guestBtn">Gäste-Login</button>
                 </mat-card-actions>
             </mat-card>
 
