@@ -12,8 +12,8 @@
 
     <div class="header-profile">
 
-        <span> Frederik Deck</span> <!-- durch ts ersetzen -->
-        <img src="../../../assets/img/members/avatar6.png"> <!-- durch ts ersetzen -->
+        <span> {{ list[0].name }} </span>  <!-- später durch firebase ersetzen -->
+        <img src="{{ list[0].img }}"> <!-- später durch firebase ersetzen -->
 
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>keyboard_arrow_down</mat-icon>

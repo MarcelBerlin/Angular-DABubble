@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
+import { UsersService } from 'src/app/users.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +8,10 @@ import { AppComponent } from 'src/app/app.component';
 })
 export class HeaderComponent {
 
-  
-  constructor( ) {}
-  
+  list = this.users.list;
+
+
+  constructor( public users: UsersService ) {
+    console.log(this.list);
+  }
 }
