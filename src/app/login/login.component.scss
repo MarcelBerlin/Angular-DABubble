@@ -48,16 +48,18 @@
 
         mat-card {
             max-width: 606px;
-            max-height: 769px;
+            // max-height: 769px;
             border-radius: 30px;
             background-color: white;
             align-items: center;
 
             mat-card-header {
+                margin-bottom: 46px;
 
                 mat-card-title {
                     margin-top: 34px;
                     margin-bottom: 30px;
+                    padding: 0px 52px;
                     font-family: 'Nunito Sans';
                     text-align: center;
                     font-weight: 700;
@@ -67,6 +69,7 @@
                 }
 
                 mat-card-subtitle {
+                    padding: 0px 52px;
                     font-family: 'Nunito Sans';
                     font-size: 20px;
                     font-weight: 400;
@@ -77,9 +80,85 @@
 
             }
 
-           
+            .inputContainer{
+                height: 100px; 
+                width: 100%;
+
+                .inputInner{
+                    display: flex; 
+                    justify-content: center; 
+                    align-items: center;
+                    position: relative; 
+                    width: 100%; 
+                    gap: 10px;
+
+                    input{
+                        width: calc(100% - 207.2px); 
+                        height: 34.8px; 
+                        border-radius: 100px; 
+                        border: 1px solid #7E83F5;
+                        padding: 11px 32px 11px 66px; 
+                        gap: 10px; 
+                        background-color: #ECEEFE; 
+                        font-family: 'Nunito'; 
+                        font-weight:500; 
+                        font-size: 18px;
+                    }
+                }
+            }
         }
     }
+}
 
+.warnContainer{
 
+}
+
+.forgotPassword{
+    font-family: 'Figtree'; 
+    font-weight: 400; 
+    font-size: 18px; 
+    line-height: 21.6px; 
+    color: #797EF3; 
+    margin: 0px;
+}
+
+.orOuterContainer{
+    display: flex; 
+    width: calc(100% - 104px); 
+    align-items: center; 
+    margin: 65px 0px;
+
+    .line{
+        border: 1px solid black; 
+        width: calc(50% - 41.35px); 
+        height: 0px;
+    }
+
+    span{
+        font-family: 'Nunito'; 
+        font-weight:400; 
+        font-size: 18px; 
+        line-height: 24.55px; 
+        padding: 0px 16px;
+    }
+}
+
+.googleButton{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    width: calc(100% - 106.7px); 
+    height: 60px; border-radius: 100px; 
+    border: 1px solid #7E83F5;
+    padding: 11px 32px 11px 32px; 
+    gap: 10px; 
+    background-color: #ECEEFE ;
+
+    span{
+        font-family: 'Nunito'; 
+        font-weight:400; 
+        font-size: 18px; 
+        color: #444DF2;
+    }
 }
