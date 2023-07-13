@@ -1,0 +1,42 @@
+<div class="channelEditionContainer">
+    <div class="contentContainer">
+        <div class="head">
+            <div class="chanel">
+                <h2>Channel erstellen</h2>
+            </div>
+            <!-- <div class="close"><img src="assets/img/close.png" alt="" /></div> -->
+            <div class="close" (click)="closeDialog()">X</div>
+        </div>
+        <span>Channels dienen deinem Team zur Kommunikation. Am besten sollten sie themenbezogen sein #marketing
+            zum Beispiel.</span>
+        <div class="channelNameContainer">            
+            <div class="title">                
+                <span class="nunito-700-18 pd-bottom">Channel-Name</span>
+                <input id="5" [(ngModel)]="newTag" [placeholder]="'z.B.Kooperationsprojekte'" type="text">
+            </div>
+            <div class="name">
+               
+            </div>
+        </div>
+        <div class="descriptionContainer">
+            <div class="descriptionHead">
+                <div>
+                    <span class="nunito-700-18">Beschreibung</span><span class="edit">Bearbeiten</span>
+                </div>
+                <span class="nunito-400-18">Dieser Channel ist für alles rund um #dfsdf vorgesehen. Hier kannst
+                    du zusammen mit deinem Team Meetings abhalten, Dokumente teilen und
+                    Entscheidungen treffen.</span>
+            </div>
+            <div class="line"></div>
+            <div class="descriptionCreator">
+                <span class="nunito-700-18">Erstellt von</span>
+                <span class="creator">Noah Braun</span>
+            </div>
+        </div>
+        <div class="buttonContainer">
+            <button class="nunito-700-18" mat-raised-button color="primary" (click)="generateTag()">
+                Erstellen
+            </button>
+        </div>
+    </div>
+</div>

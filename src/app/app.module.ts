@@ -37,6 +37,8 @@ import { DialogChannelEditionComponent } from './dialog/dialog-channel-edition/d
 import { HeaderEditDialogComponent } from './header-edit-dialog/header-edit-dialog.component';
 import { DialogInfoComponent } from './dialog-info/dialog-info.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
+
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     HeaderEditDialogComponent,
     DialogInfoComponent,
     ForgotPasswordComponent,
+    DialogAddChannelComponent
 
   ],
   imports: [

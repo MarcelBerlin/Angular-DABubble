@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddChannelComponent } from 'src/app/dialog-add-channel/dialog-add-channel.component';
+import { DialogAddService } from 'src/app/services/dialog-add.service';
 
 
-interface Tag {
-  name: string;
-  imagePath: string;
-}
 
 @Component({
   selector: 'app-menu-sidenav',
@@ -18,11 +17,11 @@ interface Tag {
       transition('visible <=> hidden', animate('175ms ease-in-out'))
     ])
   ]
-
 })
 
 export class MenuSidenavComponent implements OnInit {
 
+  tags: any;
   tagState = 'visible';
 
   newMessagePath: string = 'assets/img/sidenav/newMessage.png';
@@ -36,19 +35,11 @@ export class MenuSidenavComponent implements OnInit {
 
   channelsVisible: boolean = true;
   directMessageUserVisible: boolean = true;
+   
 
-  tags: Tag[] = [
-    { name: 'Allgemein', imagePath: 'assets/img/sidenav/tag.png' },
-    { name: 'Entwicklerteam', imagePath: 'assets/img/sidenav/tag.png' },
-    // ... andere Tags ...
-  ];
-
-  addTag(tag: string) {
-    const newTag: Tag = { name: tag, imagePath: 'assets/img/sidenav/tag.png' }
-    this.tags.push(newTag); // Hinzufügen des neuen Tags zum Array
+  constructor(public dialog: MatDialog, public getService: DialogAddService) {
+    this.tags = this.getService.tags
   }
-
-  constructor() {}
 
   ngOnInit(): void {
     
@@ -62,5 +53,8 @@ export class MenuSidenavComponent implements OnInit {
     this.directMessageUserVisible = !this.directMessageUserVisible;
   }
  
+  addChannel() {
+    this.dialog.open(DialogAddChannelComponent)
+  }
 
 }

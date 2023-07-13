@@ -19,7 +19,7 @@
                 <img class="pointer" [src]="addPathChannel"
                 (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
                 (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'"
-                (click)="addPathChannel = 'assets/img/sidenav/add_Click.png'">
+                (click)="addChannel()">
             </div>
 
                   
@@ -29,7 +29,7 @@
                     (mouseenter)="tag.imagePath = 'assets/img/sidenav/tag_hover.png'"
                     (mouseleave)="tag.imagePath = 'assets/img/sidenav/tag.png'"
                     (click)="tag.imagePath = 'assets/img/sidenav/tag_click.png'">
-
+                    
                     <span class="pointer">{{ tag.name }}</span>
                 </div>
                
