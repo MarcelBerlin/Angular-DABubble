@@ -153,16 +153,6 @@ export class LoginComponent {
    * 
    * @returns {void}
    */
-  forgotPassword(): void {
-    this.openDialogForgotPassword();
-  }
-
-
-  /**
-   * Initiates the forgot password process.
-   * 
-   * @returns {void}
-   */
   openDialogForgotPassword(): void {
     // this.dialog.open(DialogForgotPasswordComponent);
   }

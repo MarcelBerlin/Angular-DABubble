@@ -36,6 +36,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { DialogChannelEditionComponent } from './dialog/dialog-channel-edition/dialog-channel-edition.component';
 import { HeaderEditDialogComponent } from './header-edit-dialog/header-edit-dialog.component';
 import { DialogInfoComponent } from './dialog-info/dialog-info.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { DialogInfoComponent } from './dialog-info/dialog-info.component';
     DialogChannelEditionComponent,
     HeaderEditDialogComponent,
     DialogInfoComponent,
+    ForgotPasswordComponent,
 
   ],
   imports: [
