@@ -3,6 +3,7 @@ import {Component, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatMenuTrigger, MatMenuModule} from '@angular/material/menu';
 import { HeaderDialogComponent } from 'src/app/header-dialog/header-dialog.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,7 @@ export class HeaderComponent {
   list = this.users.list;
 
 
-  constructor(public users: UsersService, public dialog: MatDialog) {
+  constructor(public users: UsersService, public dialog: MatDialog, private auth: AuthService) {
     console.log(this.list);
   }
 
@@ -27,6 +28,6 @@ export class HeaderComponent {
 
 
   logout() { 
-
+    this.auth.signOut();
   }
 }
