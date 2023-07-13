@@ -11,24 +11,30 @@
     <div class="channelNameContainer">
       <div class="title">
         <span class="nunito-700-18">Channel-Name</span>
-        <div class="edit">Bearbeiten</div>
+        <div *ngIf="!name" (click)="editOn('name')" class="edit">Bearbeiten</div>
+        <div *ngIf="name" (click)="editOn('name')" class="edit">Speichern</div>
       </div>
       <div class="name">
         <div>#</div>
-        <span class="nunito-400-18">Entwicklerteam</span>
+        <span *ngIf="!name" class="nunito-400-18">Entwicklerteam</span>
+        <div>
+          <input *ngIf="name" class="nunito-400-18" placeholder="Entwicklerteam" />
+        </div>
       </div>
     </div>
     <div class="descriptionContainer">
       <div class="descriptionHead">
         <div>
           <span class="nunito-700-18">Beschreibung</span
-          ><span class="edit">Bearbeiten</span>
+          ><span *ngIf="!description" (click)="editOn('description')" class="edit">Bearbeiten</span>
+          <div *ngIf="description" (click)="editOn('description')" class="edit">Speichern</div>
         </div>
-        <span class="nunito-400-18"
+        <span *ngIf="!description" class="nunito-400-18"
           >Dieser Channel ist für alles rund um #dfsdf vorgesehen. Hier kannst
           du zusammen mit deinem Team Meetings abhalten, Dokumente teilen und
           Entscheidungen treffen.</span
         >
+        <textarea *ngIf="description" id="" class="nunito-400-18"></textarea>
       </div>
       <div class="line"></div>
       <div class="descriptionCreator">
@@ -37,7 +43,12 @@
       </div>
     </div>
     <div class="buttonContainer">
-      <button class="nunito-700-18" mat-raised-button color="primary"  (click)="closeDialog()">
+      <button
+        class="nunito-700-18"
+        mat-raised-button
+        color="primary"
+        (click)="closeDialog()"
+      >
         Channel verlassen
       </button>
     </div>
