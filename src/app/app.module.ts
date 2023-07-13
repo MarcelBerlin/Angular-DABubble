@@ -33,6 +33,7 @@ import { MainChatTimeSeparatorComponent } from './dashboard/main-chat/main-chat-
 import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
 import { MenuSidenavComponent } from './dashboard/menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { MatTreeModule } from '@angular/material/tree';
+import { DialogChannelEditionComponent } from './dialog/dialog-channel-edition/dialog-channel-edition.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { MatTreeModule } from '@angular/material/tree';
     MainChatTimeSeparatorComponent,
     HeaderDialogComponent,
     MenuSidenavComponent,
+    DialogChannelEditionComponent,
 
   ],
   imports: [
