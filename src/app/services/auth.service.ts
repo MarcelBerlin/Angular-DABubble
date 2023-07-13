@@ -52,7 +52,7 @@ export class AuthService {
    * 
    * @returns {Promise<any>} - A promise that resolves when the sign-out process is completed. 
    */
-  async SignOut(): Promise<any> {
+  async signOut(): Promise<any> {
     return this.afs.signOut().then(() => {
       localStorage.removeItem('user');
       // localStorage.removeItem('userId');
@@ -171,7 +171,7 @@ export class AuthService {
    * @param {string} passwordResetEmail - The email address for password reset. 
    * @returns {Promise<void>} - A promise that resolves when the password reset email is sent. 
    */
-  async forgotPassword(passwordResetEmail: string) {
+  forgotPassword(passwordResetEmail: string) {
     return this.afs
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
