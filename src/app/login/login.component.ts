@@ -27,8 +27,8 @@ export class LoginComponent {
   constructor(
     private router: Router, 
     private authService: AuthService,
-    private dialog: MatDialog,
-    private dialogInfoService: DialogInfoService,
+    public dialog: MatDialog,
+    public dialogInfoService: DialogInfoService,
     ){}
 
 

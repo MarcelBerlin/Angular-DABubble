@@ -1,1 +1,7 @@
-<p>dialog-info works!</p>
+<mat-card style="padding: 16px">
+    <mat-card-header>
+        <mat-card-title class={{dialogInfoService.dialogTitleClass}}>{{dialogInfoService.dialogInfoTitle}}</mat-card-title>
+        <mat-card-subtitle>{{dialogInfoService.dialogInfoSubtitle}}</mat-card-subtitle>
+    </mat-card-header>
+    <button mat-raised-button color="primary" style="margin-right: 16px; margin-top: 32px" (click)="closeDialog()">OK</button>
+</mat-card>
