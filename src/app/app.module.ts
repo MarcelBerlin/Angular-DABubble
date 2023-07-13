@@ -34,6 +34,7 @@ import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
 import { MenuSidenavComponent } from './dashboard/menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { DialogChannelEditionComponent } from './dialog/dialog-channel-edition/dialog-channel-edition.component';
+import { HeaderEditDialogComponent } from './header-edit-dialog/header-edit-dialog.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import { DialogChannelEditionComponent } from './dialog/dialog-channel-edition/d
     HeaderDialogComponent,
     MenuSidenavComponent,
     DialogChannelEditionComponent,
+    HeaderEditDialogComponent,
 
   ],
   imports: [

@@ -53,12 +53,19 @@ body {
 
 // ####   DIALOG HEADER-PROFILE   ####  //
 
-#cdk-overlay-1 {
-  position: absolute !important;
+.cdk-overlay-pane {
+  position: absolute;
   top: 100px;
   right: 50px;
 }
 
+// #cdk-overlay-0 {
+//   first-dropdown-menu
+// }
+
 .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 40px 0 40px 40px !important;
+  // position: relative;
+  // top: -230px;
+  // left: 215%;
 }

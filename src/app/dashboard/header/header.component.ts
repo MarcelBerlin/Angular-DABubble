@@ -8,8 +8,6 @@ import { HeaderDialogComponent } from 'src/app/header-dialog/header-dialog.compo
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  // standalone: true,
-  // imports: [MatButtonModule, MatMenuModule, MatDialogModule],
 })
 
 export class HeaderComponent {
@@ -21,14 +19,12 @@ export class HeaderComponent {
     console.log(this.list);
   }
 
+  
   openProfile() {
     const dialogRef = this.dialog.open(HeaderDialogComponent);
     dialogRef.afterClosed();
   }
 
-  closeProfileOverview() {
-    
-  }
 
   logout() { 
 
