@@ -27,15 +27,31 @@
           font-size: 24px;
         }
       }
+      // .close {
+      //   display: flex;
+      //   justify-content: center;
+      //   align-items: center;
+      //   width: 40px;
+      //   height: 40px;
+      //   img {
+      //     width: 20px;
+      //     height: 20px;
+      //   }
+      // }
       .close {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 40px;
         height: 40px;
-        img {
-          width: 20px;
-          height: 20px;
+        border-radius: 20px;
+        font-size: 24px;
+        font-weight: 500;
+        border: 100%;
+        cursor: pointer;
+        &:hover {
+          background-color: #eceefe;
+          color: #535af1;
         }
       }
     }

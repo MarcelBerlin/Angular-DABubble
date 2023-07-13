@@ -1,4 +1,6 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-channel-edition',
@@ -7,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class DialogChannelEditionComponent {
 
+constructor(public dialog: MatDialog, private dialogRef : DialogRef){}
+
+  closeDialog() {
+    this.dialogRef.close()
+
+  }
 }

@@ -5,7 +5,8 @@
         <div>#</div>
         <span class="nunito-700-18">Entwicklerteam</span>
       </div>
-      <div class="close"><img src="assets/img/close.png" alt="" /></div>
+      <!-- <div class="close"><img src="assets/img/close.png" alt="" /></div> -->
+      <div class="close" (click)="closeDialog()">X</div>
     </div>
     <div class="channelNameContainer">
       <div class="title">
@@ -36,7 +37,7 @@
       </div>
     </div>
     <div class="buttonContainer">
-      <button class="nunito-700-18" mat-raised-button color="primary">
+      <button class="nunito-700-18" mat-raised-button color="primary"  (click)="closeDialog()">
         Channel verlassen
       </button>
     </div>
