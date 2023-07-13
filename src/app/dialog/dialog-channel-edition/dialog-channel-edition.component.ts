@@ -5,14 +5,19 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-dialog-channel-edition',
   templateUrl: './dialog-channel-edition.component.html',
-  styleUrls: ['./dialog-channel-edition.component.scss']
+  styleUrls: ['./dialog-channel-edition.component.scss'],
 })
 export class DialogChannelEditionComponent {
+  name: boolean = false;
+  description: boolean = false;
 
-constructor(public dialog: MatDialog, private dialogRef : DialogRef){}
+  constructor(public dialog: MatDialog, private dialogRef: DialogRef) {}
 
   closeDialog() {
-    this.dialogRef.close()
+    this.dialogRef.close();
+  }
 
+  editOn(item: string) {    
+    this[item] = !this[item];
   }
 }
