@@ -19,6 +19,7 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
+
   .content {
     width: calc(100% - 24px);
     height: calc(100% - 24px);
@@ -26,6 +27,7 @@ body {
     background-color: white;
   }
 }
+
 /*****************************************/
 
 .pd-left {
@@ -43,6 +45,7 @@ body {
 .pd-bottom {
   padding-bottom: 16px;
 }
+
 // html,
 // body {
 //   height: 100%;
@@ -58,19 +61,15 @@ body {
 
 // ####   DIALOG HEADER-PROFILE   ####  //
 
-.cdk-overlay-pane {
-  position: absolute;
-  top: 100px;
-  right: 50px;
-}
-
-// #cdk-overlay-0 {
-//   first-dropdown-menu
+// .cdk-overlay-pane {
+//   position: absolute;
+//   top: 100px;
+//   right: 50px;
 // }
 
-// .mat-mdc-dialog-container .mdc-dialog__surface {
-  // border-radius: 40px 0 40px 40px !important;
-  // position: relative;
-  // top: -230px;
-  // left: 215%;
+// .custom-profile {
+//   border-radius: 40px 0 40px 40px !important;
+//   position: fixed !important;
+//   top: 100px;
+//   left: 10%;
 // }

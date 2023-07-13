@@ -1,5 +1,14 @@
 .user-container {
-    // border-radius: 20px 0px 20px 20px;
+    
+    position: relative;
+
+    .custom-profile {
+        position: fixed !important;
+        right: 0;
+        top: 100px;
+        background-color: antiquewhite;
+        border-radius: 20px 0px 20px 20px;
+    }
 
     .user-profile {
         display: flex;
@@ -88,4 +97,9 @@
             object-fit: cover;
         }
     }
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    position: absolute !important;
+    left: 100px !important;
 }
