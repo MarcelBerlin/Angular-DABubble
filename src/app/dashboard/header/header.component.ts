@@ -1,4 +1,4 @@
-import { UsersService } from 'src/app/users.service';
+import { UsersService } from 'src/app/services/users.service';
 import {Component, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatMenuTrigger, MatMenuModule} from '@angular/material/menu';
@@ -23,7 +23,11 @@ export class HeaderComponent {
 
   openProfile() {
     const dialogRef = this.dialog.open(HeaderDialogComponent);
-    dialogRef.afterClosed().subscribe(() => this.menuTrigger.focus());
+    dialogRef.afterClosed();
+  }
+
+  closeProfileOverview() {
+    
   }
 
   logout() { 

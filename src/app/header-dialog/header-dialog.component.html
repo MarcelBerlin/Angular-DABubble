@@ -1,12 +1,22 @@
-<div>
+<div class="user-container">
     <mat-dialog-content class="user-profile">
-        <span class="head-span"> {{ list[0].name }} </span> <!-- später durch firebase ersetzen -->
-        <img src="{{ list[0].img }}"> <!-- später durch firebase ersetzen -->
-        <div>
-            <img class="profile-icon" src="./../../assets/img/online-icon.png">
+        <div class="profile-overview-head">
+            <span>Profil</span> 
+            <img class="close-icon" mat-button mat-dialog-close src="./../../assets/img/close.png">
+        </div>
+        
+        <img class="user-img" src="{{ list[0].img }}"> <!-- später durch firebase ersetzen -->
+        
+        <div class="edit-div">
+            <span class="head-span"> {{ list[0].name }} </span> <!-- später durch firebase ersetzen -->
+            <span class="edit-span">Bearbeiten</span>
+        </div>
+        
+        <div class="activity-div">
+            <img class="activity-icon" src="./../../assets/img/online-icon.png">
             <span class="online-span">Aktiv</span> <br>     <!-- break kann entfernt werden, wenn *ngIf steht-->
-            <img class="profile-icon" src="./../../assets/img/offline-icon.png">
-            <span class="offline-span">Abwesend</span> <!-- is.offline/offline mit *ngIf  -->
+            <!-- <img class="activity-icon" src="./../../assets/img/offline-icon.png">
+            <span class="offline-span">Abwesend</span> is.offline/offline mit *ngIf  -->
         </div>
         <div class="mail-div">
             <img class="profile-icon" src="./../../assets/img/mail-icon.png">
@@ -15,6 +25,3 @@
         <span class="mail-span">{{ list[0].email }}</span>
     </mat-dialog-content>
 </div>
-<mat-dialog-actions>
-    <button mat-button mat-dialog-close>close</button>
-</mat-dialog-actions>

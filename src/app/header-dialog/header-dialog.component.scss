@@ -1,43 +1,95 @@
-.user-profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.user-container {
+    // border-radius: 20px 0px 20px 20px;
 
-    img {
-        border-radius: 50%;
-        width: 200px;
-        height: 200px;
-    }
-
-    .mail-div {
+    .user-profile {
         display: flex;
+        flex-direction: column;
         align-items: center;
+        gap: 14px;
+        width: 300px;
+
+
+        .profile-overview-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 12px;
+            width: 100%;
+
+            .close-icon {
+                object-fit: contain;
+                width: 12px;
+                height: 12px;
+                cursor: pointer;
+            }
+        }
+
+        .user-img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+        }
+
+        .edit-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding-bottom: 20px;
+
+            .head-span {
+                text-align: center;
+                font-size: 24px;
+            }
+
+            .edit-span {
+                font-size: 14px;
+                color: #535AF1;
+                cursor: pointer;
+            }
+        }
+
+        .activity-div {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+
+            .online-span {
+                color: #92C83E;
+                font-size: 18px;
+            }
+
+            .offline-span {
+                color: #686868;
+                font-size: 18px;
+            }
+        }
+
+        .mail-div {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            gap: 12px;
+        }
+
+        .mail-span {
+            color: #1381FF;
+            font-size: 20px;
+            cursor: pointer;
+            padding-bottom: 10px;
+        }
+
+        .activity-icon {
+            width: 20px;
+            height: 20px;
+            object-fit: cover;
+        }
     }
 
-    .head-span {
-        text-align: center;
-        font-size: 24px;
-        padding-bottom: 20px;
-    }
+    // .close-button {
 
-    .online-span {
-        color: #92C83E;
-        font-size: 18px;
-    }
-
-    .offline-span {
-        color: #686868;
-        font-size: 18px;
-    }
-
-    .mail-span {
-        color: #1381FF;
-        font-size: 20px;
-    }
-
-    .profile-icon {
-        width: 20px;
-        height: 20px;
-        object-fit: cover;
-    }
+    // }
 }
