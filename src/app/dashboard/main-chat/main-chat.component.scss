@@ -1,9 +1,18 @@
 .chatContainer {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 100%;
   min-height: 50%;
+  height: auto;
   // height: calc(100% - 96px);
+  .line{
+    position: relative;
+    width: 90%;
+    height: 2px;
+    background-color: lightgray;
+  }
 }
 .inputContainer {
   position: absolute;
@@ -47,6 +56,28 @@
         width: 2px;
         height: 40px;
         background-color: rgba(0, 0, 0, 0.1);
+      }
+      .element{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 30px;
+        cursor: pointer;
+        img{
+          fill: red;
+          }
+
+        &:hover{
+          background-color: #ECEEFE;
+        }
+      }
+    }
+    .sendIcon{
+      cursor: pointer;
+      &:hover{
+        opacity: .7;
       }
     }
   }

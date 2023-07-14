@@ -3,7 +3,7 @@
     <div class="head">
       <div class="chanel">
         <div>#</div>
-        <span class="nunito-700-18">Entwicklerteam</span>
+        <span class="nunito-700-18">{{tBS.channelName}}</span>
       </div>
       <!-- <div class="close"><img src="assets/img/close.png" alt="" /></div> -->
       <div class="close" (click)="closeDialog()">X</div>
@@ -33,9 +33,10 @@
         [style.width]="name ? '100%' : '90%'"
       >
         <div [style.margin-left]="name ? '40px' : '0'">#</div>
-        <span *ngIf="!name" class="nunito-400-18">Entwicklerteam</span>
+        <span *ngIf="!name" class="nunito-400-18">{{tBS.channelName}}</span>
         <input
           *ngIf="name"
+          [(ngModel)]="tBS.channelName"
           class="nunito-400-18 editNameInput"
           placeholder="Entwicklerteam"
         />

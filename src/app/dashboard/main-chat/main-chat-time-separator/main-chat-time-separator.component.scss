@@ -1,8 +1,12 @@
 .timeSeparatorContainer{
-    width: calc(100% - 32px);
-    .line{
-        width: 100%;
-        height: 1px;
-        background-color: black;
-    }
+    width: 90%;
+    height: 2px;
+    margin: 32px 0;
+    background-color: black;
+
+    // .line{
+    //     width: 100%;
+    //     height: 2px;
+    //     background-color: black;
+    // }
 }

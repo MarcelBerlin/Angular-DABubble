@@ -12,6 +12,7 @@ export class DialogChannelEditionComponent {
   name: boolean = false;
   description: boolean = false;
 
+
   constructor(public dialog: MatDialog, private dialogRef: DialogRef,public tBS: TestBastiService) {}
 
   closeDialog() {
@@ -21,5 +22,6 @@ export class DialogChannelEditionComponent {
   editOn(item: string) {    
     this[item] = !this[item];
   }
+  
 
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogChannelEditionComponent } from 'src/app/dialog/dialog-channel-edition/dialog-channel-edition.component';
+import { TestBastiService } from 'src/app/services/test-basti.service';
 
 @Component({
   selector: 'app-main-chat-head',
@@ -9,7 +10,7 @@ import { DialogChannelEditionComponent } from 'src/app/dialog/dialog-channel-edi
 })
 export class MainChatHeadComponent {
 
-constructor(public dialog: MatDialog){}
+constructor(public dialog: MatDialog, public tBS: TestBastiService){}
 
   channelEdition() {
     this.dialog.open(DialogChannelEditionComponent)

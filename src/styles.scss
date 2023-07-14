@@ -38,16 +38,6 @@ body {
   padding-top: 16px;
 }
 
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
 
 
 
@@ -63,9 +53,3 @@ body {
 //   first-dropdown-menu
 // }
 
-.mat-mdc-dialog-container .mdc-dialog__surface {
-  border-radius: 40px 0 40px 40px !important;
-  // position: relative;
-  // top: -230px;
-  // left: 215%;
-}
