@@ -27,17 +27,6 @@
           font-size: 24px;
         }
       }
-      // .close {
-      //   display: flex;
-      //   justify-content: center;
-      //   align-items: center;
-      //   width: 40px;
-      //   height: 40px;
-      //   img {
-      //     width: 20px;
-      //     height: 20px;
-      //   }
-      // }
       .close {
         display: flex;
         justify-content: center;
@@ -55,6 +44,7 @@
         }
       }
     }
+
     .channelNameContainer {
       display: flex;
       flex-direction: column;
@@ -62,25 +52,35 @@
       align-items: center;
       width: 100%;
       height: 114px;
-      border: 1px solid lightgrey;
-      border-radius: 20px;
       .title {
         display: flex;
         justify-content: space-between;
-        width: 90%;
-        margin-top: 24px;
       }
       .name {
         display: flex;
+        align-items: center;
         gap: 8px;
-        width: 90%;
-        margin-bottom: 24px;
+        height: 42px;
         div {
           font-size: 22px;
           font-weight: 500;
         }
+        .editNameInput {
+          width: 90%;
+          border: 0;
+          outline: none;
+        }
+      }
+      .editName {
+        border: 1px solid lightgrey;
+        border-radius: 20px;
       }
     }
+    .editChannelNameContainer {
+      border: 1px solid lightgrey;
+      border-radius: 20px;
+    }
+
     .descriptionContainer {
       display: flex;
       flex-direction: column;
@@ -88,18 +88,34 @@
       align-items: center;
       width: 100%;
       height: 273px;
-      border: 1px solid lightgrey;
       border-radius: 20px;
       .descriptionHead {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        align-items: center;
         width: 90%;
-        height: 95px;
+        height: 120px;
         margin-top: 24px;
-        div {
+        .descriptionContent {
+          width: 100%;
           display: flex;
           justify-content: space-between;
+        }
+        .textareaContainer {
+          width: 100%;
+          height: 60px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid lightgrey;
+          border-radius: 20px;
+          textarea {
+            width: 90%;
+            border: none;
+            outline: none;
+            resize: none;
+          }
         }
       }
       .line {

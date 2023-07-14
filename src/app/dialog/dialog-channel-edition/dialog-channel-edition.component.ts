@@ -1,6 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { TestBastiService } from 'src/app/services/test-basti.service';
 
 @Component({
   selector: 'app-dialog-channel-edition',
@@ -11,7 +12,7 @@ export class DialogChannelEditionComponent {
   name: boolean = false;
   description: boolean = false;
 
-  constructor(public dialog: MatDialog, private dialogRef: DialogRef) {}
+  constructor(public dialog: MatDialog, private dialogRef: DialogRef,public tBS: TestBastiService) {}
 
   closeDialog() {
     this.dialogRef.close();
@@ -20,4 +21,5 @@ export class DialogChannelEditionComponent {
   editOn(item: string) {    
     this[item] = !this[item];
   }
+
 }

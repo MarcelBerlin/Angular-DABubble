@@ -8,40 +8,93 @@
       <!-- <div class="close"><img src="assets/img/close.png" alt="" /></div> -->
       <div class="close" (click)="closeDialog()">X</div>
     </div>
-    <div class="channelNameContainer">
-      <div class="title">
+    <div class="channelNameContainer" [class.editChannelNameContainer]="!name">
+      <div
+        class="title"
+        [style.margin-top]="name ? '0' : '24px'"
+        [style.width]="name ? '100%' : '90%'"
+      >
         <span class="nunito-700-18">Channel-Name</span>
-        <div *ngIf="!name" (click)="editOn('name')" class="edit">Bearbeiten</div>
-        <div *ngIf="name" (click)="editOn('name')" class="edit">Speichern</div>
-      </div>
-      <div class="name">
-        <div>#</div>
-        <span *ngIf="!name" class="nunito-400-18">Entwicklerteam</span>
-        <div>
-          <input *ngIf="name" class="nunito-400-18" placeholder="Entwicklerteam" />
+        <div *ngIf="!name" (click)="editOn('name')" class="edit">
+          Bearbeiten
+        </div>
+        <div
+          *ngIf="name"
+          (click)="editOn('name')"
+          [style.margin-right]="name ? '40px' : '0'"
+          class="edit"
+        >
+          Speichern
         </div>
       </div>
+      <div
+        class="name"
+        [class.editName]="name"
+        [style.width]="name ? '100%' : '90%'"
+      >
+        <div [style.margin-left]="name ? '40px' : '0'">#</div>
+        <span *ngIf="!name" class="nunito-400-18">Entwicklerteam</span>
+        <input
+          *ngIf="name"
+          class="nunito-400-18 editNameInput"
+          placeholder="Entwicklerteam"
+        />
+      </div>
     </div>
-    <div class="descriptionContainer">
-      <div class="descriptionHead">
-        <div>
+    <div
+      class="descriptionContainer"
+      [style.border]="description ? '0' : '1px solid lightgrey'"
+    >
+      <div
+        class="descriptionHead"
+        [style.margin-top]="description ? '0' : '24px'"
+        [style.width]="description ? '100%' : '90%'"
+      >
+        <div class="descriptionContent">
           <span class="nunito-700-18">Beschreibung</span
-          ><span class="edit">Bearbeiten</span>
+          ><span
+            *ngIf="!description"
+            (click)="editOn('description')"
+            class="edit"
+            >Bearbeiten</span
+          >
+          <div
+            *ngIf="description"
+            (click)="editOn('description')"
+            [style.margin-right]="description ? '40px' : '0'"
+            class="edit"
+          >
+            Speichern
+          </div>
         </div>
         <span *ngIf="!description" class="nunito-400-18"
           >Dieser Channel ist für alles rund um #dfsdf vorgesehen. Hier kannst
           du zusammen mit deinem Team Meetings abhalten, Dokumente teilen und
           Entscheidungen treffen.</span
         >
+        <div class="textareaContainer" *ngIf="description">
+          <textarea
+            class="nunito-400-18"
+            placeholder="Dein Text hier"
+          ></textarea>
+        </div>
       </div>
       <div class="line"></div>
-      <div class="descriptionCreator">
+      <div
+        class="descriptionCreator"
+        [style.width]="description ? '100%' : '90%'"
+      >
         <span class="nunito-700-18">Erstellt von</span>
         <span class="creator">Noah Braun</span>
       </div>
     </div>
     <div class="buttonContainer">
-      <button class="nunito-700-18" mat-raised-button color="primary"  (click)="closeDialog()">
+      <button
+        class="nunito-700-18"
+        mat-raised-button
+        color="primary"
+        (click)="closeDialog()"
+      >
         Channel verlassen
       </button>
     </div>
