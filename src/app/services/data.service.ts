@@ -42,7 +42,7 @@ export class DataService {
       this.loggedInUserEmail = JSON.parse(userJson);
       if (user.email == this.loggedInUserEmail) {
         this.loggedInUserData = this.getLoggedUserData(user);
-        console.log(this.loggedInUserData);
+        // console.log(this.loggedInUserData);
       }
     });
   }
