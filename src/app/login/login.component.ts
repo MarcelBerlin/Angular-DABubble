@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { Login } from '../login';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogInfoComponent } from '../dialog-info/dialog-info.component';
 import { DialogInfoService } from '../services/dialog-info.service';
+import { Login } from '../login';
+import { DataService } from '../services/data.service';
+import { User } from '../models/user.class';
 
 @Component({
   selector: 'app-login',
@@ -13,9 +15,9 @@ import { DialogInfoService } from '../services/dialog-info.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  loading:boolean = false;
-  passwordView:boolean = false;
-  inputType:string = 'password';
+  loading: boolean = false;
+  passwordView: boolean = false;
+  inputType: string = 'password';
   email: string = '';
   password: string = '';
   loginForm: FormGroup = new FormGroup({
@@ -25,23 +27,49 @@ export class LoginComponent {
 
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private authService: AuthService,
     public dialog: MatDialog,
     public dialogInfoService: DialogInfoService,
-    ){}
+    private dataService: DataService,
+  ) { }
 
-
-  loginWithGoogle(){
+  
+  /**
+   * Logs in the user using the Google authentication provider.
+   * 
+   * @returns {void}
+   */
+  loginWithGoogle():void {
     this.loading = true;
-    this.authService.signInWithGoogle().then((res: any)=>{
-      this.authService.setLocalStorage({email: res.additionalUserInfo.profile.email, password: ''});
+    this.authService.signInWithGoogle().then((res: any) => {
+      this.authService.setLocalStorage({ email: res.additionalUserInfo.profile.email, password: '' });
       this.router.navigateByUrl('dashboard');
+
+      this.setUserData(res.additionalUserInfo.profile);
+
       this.loading = false;
-    }).catch((error: any)=>{
+    }).catch((error: any) => {
       this.loading = false;
       console.error(error);
     });
+  }
+
+
+  /**
+   * Sets the user data based on the provided Google data.
+   * 
+   * @param {object} googleData - The Google data containing user information.
+   * @returns {void}
+   */
+  setUserData(googleData: any): void {
+    const email:string = googleData.email;
+    const familyName:string = googleData.family_name;
+    const given_name:string = googleData.given_name;
+    const userData: User = new User();
+    userData.email = email;
+    userData.name = given_name + ' ' + familyName;
+    this.dataService.createGoogleUser(userData);
   }
 
 
@@ -57,10 +85,10 @@ export class LoginComponent {
       this.loginOkProgramSettings();
     }).catch((error: any) => {
       this.loginFailedProgramSettings();
-      if(error.code === 'auth/user-not-found') this.dialogLoginEmailUnknown();
-      else if(error.code === 'auth/wrong-password') this.dialogLoginPasswordWrong();
+      if (error.code === 'auth/user-not-found') this.dialogLoginEmailUnknown();
+      else if (error.code === 'auth/wrong-password') this.dialogLoginPasswordWrong();
       else if (error.code === 'auth/network-request-failed') this.dialogNoServerConnection();
-      else this.dialogSystemError();   
+      else this.dialogSystemError();
     });
   }
 
@@ -70,7 +98,7 @@ export class LoginComponent {
    * 
    * @returns {void}
    */
-  dialogLoginEmailUnknown():void{
+  dialogLoginEmailUnknown(): void {
     this.dialogInfoService.setDialogInfoText(1);
     this.dialog.open(DialogInfoComponent);
   }
@@ -81,7 +109,7 @@ export class LoginComponent {
    * 
    * @returns {void}
    */
-  dialogLoginPasswordWrong():void{
+  dialogLoginPasswordWrong(): void {
     this.dialogInfoService.setDialogInfoText(7);
     this.dialog.open(DialogInfoComponent);;
   }
@@ -92,7 +120,7 @@ export class LoginComponent {
    * 
    * @returns {void}
    */
-  dialogNoServerConnection():void{
+  dialogNoServerConnection(): void {
     this.dialogInfoService.setDialogInfoText(6);
     this.dialog.open(DialogInfoComponent);;
   }
@@ -103,7 +131,7 @@ export class LoginComponent {
    * 
    * @returns {void}
    */
-  dialogSystemError():void{
+  dialogSystemError(): void {
     this.dialogInfoService.setDialogInfoText(5);
     this.dialog.open(DialogInfoComponent);;
   }
@@ -128,10 +156,9 @@ export class LoginComponent {
    */
   loginOkProgramSettings(): void {
     this.authService.setLocalStorage(this.getLoginFormData());
-    // this.dataService.loggedInUserEmail = this.getLoginFormData().email;
+    this.dataService.loggedInUserEmail = this.getLoginFormData().email;
     this.router.navigateByUrl('dashboard');
-    // this.dataService.getLoggedInUserData();
-    // this.menuService.activeMenuIndex = 0;
+    this.dataService.getLoggedInUserData();
     this.loading = false;
     this.loginForm.enable();
   }
@@ -168,6 +195,42 @@ export class LoginComponent {
     if (this.passwordView == true) this.inputType = 'text';
     else this.inputType = 'password';
   }
+
+
+  guestEmail: string = 'guest@guest.de';
+  guestPwd: string = 'Guest123456789';
+  // async guestLogin() {
+  //   await this.authService.signWithEmailAndPassword(this.getGuestLogin());
+  // }
+
+
+  getGuestLogin(): any{
+    this.email = this.guestEmail;
+    this.password = this.guestPwd;
+    console.log(this.email);
+    setTimeout(() => {
+      return { email: this.email.toLowerCase(), password: this.password };
+    }, 1000);
+    
+    
+  }
+
+  guestLogin(){
+    this.loading = true;
+    this.loginForm.disable();
+    
+    this.authService.signWithEmailAndPassword(this.getGuestLogin()).then((res: any) => {
+      this.loginOkProgramSettings();
+    }).catch((error: any) => {
+      this.loginFailedProgramSettings();
+      console.log(error.code, this.getGuestLogin());
+      if (error.code === 'auth/user-not-found') this.dialogLoginEmailUnknown();
+      else if (error.code === 'auth/wrong-password') this.dialogLoginPasswordWrong();
+      else if (error.code === 'auth/network-request-failed') this.dialogNoServerConnection();
+      else this.dialogSystemError();
+    });
+  }
+
 }
 
 
