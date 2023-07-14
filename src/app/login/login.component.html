@@ -59,7 +59,7 @@
                 <mat-card-actions align="end">
                     <button mat-raised-button color="primary" type="submit"
                         [disabled]="!loginForm.valid || loading" class="submitBtn">Anmelden</button>
-                    <button mat-raised-button color="secondary" class="guestBtn"  type="reset" (click) ="guestLogin()">Gäste-Login</button>
+                    <button mat-raised-button color="secondary" class="guestBtn" (click) ="guestLogin()" type="button">Gäste-Login</button>
                 </mat-card-actions>
             </mat-card>
 

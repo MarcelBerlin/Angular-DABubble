@@ -197,40 +197,19 @@ export class LoginComponent {
   }
 
 
-  guestEmail: string = 'guest@guest.de';
-  guestPwd: string = 'Guest123456789';
-  // async guestLogin() {
-  //   await this.authService.signWithEmailAndPassword(this.getGuestLogin());
-  // }
-
-
-  getGuestLogin(): any{
-    this.email = this.guestEmail;
-    this.password = this.guestPwd;
-    console.log(this.email);
-    setTimeout(() => {
-      return { email: this.email.toLowerCase(), password: this.password };
-    }, 1000);
-    
-    
-  }
-
-  guestLogin(){
-    this.loading = true;
-    this.loginForm.disable();
-    
-    this.authService.signWithEmailAndPassword(this.getGuestLogin()).then((res: any) => {
-      this.loginOkProgramSettings();
-    }).catch((error: any) => {
-      this.loginFailedProgramSettings();
-      console.log(error.code, this.getGuestLogin());
-      if (error.code === 'auth/user-not-found') this.dialogLoginEmailUnknown();
-      else if (error.code === 'auth/wrong-password') this.dialogLoginPasswordWrong();
-      else if (error.code === 'auth/network-request-failed') this.dialogNoServerConnection();
-      else this.dialogSystemError();
+  /**
+   * Performs a guest login by setting the login form values to a predefined guest email and password,
+   * and then calling the loginWithEmailAndPassword function.
+   * 
+   * @returns {void}
+   */
+  guestLogin(): void {
+    this.loginForm.patchValue({
+      email: 'guest@guest.de',
+      password: 'Guest123456789'
     });
+    this.loginWithEmailAndPassword();
   }
-
 }
 
 
