@@ -29,7 +29,6 @@ import { MatDialogContent } from '@angular/material/dialog';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainChatHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-head.component';
-import { MainChatTimeSeparatorComponent } from './dashboard/main-chat/main-chat-time-separator/main-chat-time-separator.component';
 import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
 import { MenuSidenavComponent } from './dashboard/menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { MatTreeModule } from '@angular/material/tree';
@@ -51,7 +50,6 @@ import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-chann
     LoginComponent,
     DashboardComponent,
     MainChatHeadComponent,
-    MainChatTimeSeparatorComponent,
     HeaderDialogComponent,
     MenuSidenavComponent,
     DialogChannelEditionComponent,
