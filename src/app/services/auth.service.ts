@@ -71,6 +71,8 @@ export class AuthService {
     if (localStorage.getItem('user')) {
       let jsonSting: any = localStorage.getItem('user');
       let user = JSON.parse(jsonSting);
+      console.log('User =',user);
+      
       return (user !== null && user.email !== false) ? true : false;
     } else {
       return false;

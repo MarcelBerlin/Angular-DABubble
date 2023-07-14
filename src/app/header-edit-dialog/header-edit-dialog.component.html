@@ -7,6 +7,25 @@
         
         <img class="user-img" src="{{ list[1].img }}">
         
-        
+        <div class="input-section">
+            <div class="edit-description">
+                <img src="./../../assets/img/user-icon.png">
+                <span>Vollständiger Name</span>
+            </div>
+            <input #editInput class="header-input" placeholder="{{ list[1].name }}">
+        </div>
+        <div class="input-section">
+            <div class="edit-description">
+                <img src="./../../assets/img/mail-icon.png">
+                <span> E-Mail Adresse </span>
+            </div>
+            <input #editInput class="header-input" placeholder="{{ list[1].email }}">
+        </div>
+
+        <div class="btn-container">
+            <button mat-dialog-close class="cancel-btn">Abbrechen</button>
+            <button class="save-btn">Speichern</button>
+        </div>
+
     </mat-dialog-content>
 </div>

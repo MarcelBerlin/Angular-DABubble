@@ -2,6 +2,7 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { User } from '../models/user.class';
 
 @Component({
   selector: 'app-header-edit-dialog',
@@ -14,6 +15,7 @@ export class HeaderEditDialogComponent {
   @Input() online = false; // mit user verknüpfen ---- bpsw: list[i].online
   
   list = this.users.list;
+  // user = new User();
 
   
   

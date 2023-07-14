@@ -4,6 +4,7 @@ import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog
 import {MatMenuTrigger, MatMenuModule} from '@angular/material/menu';
 import { HeaderDialogComponent } from 'src/app/header-dialog/header-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user.class';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,9 @@ export class HeaderComponent {
 
 
   constructor(public users: UsersService, public dialog: MatDialog, private auth: AuthService) {
-    console.log(this.list);
+    // console.log(this.list);
+    // console.log(User);
+    console.log(this.auth);
   }
 
   

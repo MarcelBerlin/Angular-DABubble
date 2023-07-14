@@ -3,9 +3,18 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
+
 export class UsersService {
 
+  name: string;
+  img: any;
+  email: string;
+  online: boolean;
+
+
+  
   public list = [{
+
     name: 'Frederik Beck',
     img: './assets/img/members/avatar6.png',
     email: 'fred.beck@gmail.com',
@@ -36,6 +45,5 @@ export class UsersService {
     email: 'stef.hoff@gmail.com',
     online: false
   }];
-  
-  constructor() { }
+
 }

@@ -1,13 +1,12 @@
 .user-container {
-    
     position: relative;
 
-    .custom-profile {
+    .custom-menu {
         position: fixed !important;
-        right: 0;
+        right: 3%;
         top: 100px;
-        background-color: antiquewhite;
-        border-radius: 20px 0px 20px 20px;
+        background-color: #ffffff;
+        border-radius: 30px 0px 30px 30px;
     }
 
     .user-profile {
@@ -15,7 +14,7 @@
         flex-direction: column;
         align-items: center;
         gap: 14px;
-        width: 300px;
+        width: 20%;
 
 
         .profile-overview-head {
@@ -29,7 +28,14 @@
                 object-fit: contain;
                 width: 12px;
                 height: 12px;
+                padding: 8px;
                 cursor: pointer;
+
+                &:hover {
+                    padding: 8px;
+                    background-color: #6c72e463;
+                    border-radius: 50%;
+                }
             }
         }
 
@@ -55,6 +61,12 @@
                 font-size: 14px;
                 color: #535AF1;
                 cursor: pointer;
+
+                &:hover {
+                    transform: scale(1.1);
+                    color: #343ef2;
+                    font-weight: 700;
+                }
             }
         }
 

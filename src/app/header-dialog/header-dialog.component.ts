@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { HeaderEditDialogComponent } from '../header-edit-dialog/header-edit-dialog.component';
+import { User } from '../models/user.class';
 
 @Component({
   selector: 'app-header-dialog',
@@ -10,12 +11,13 @@ import { HeaderEditDialogComponent } from '../header-edit-dialog/header-edit-dia
 })
 export class HeaderDialogComponent {
   list = this.users.list;
+  // user = new User();
 
 
-  @Input() online = false; // mit user verknüpfen ---- bpsw: list[i].online
+  @Input() online = false; // mit user verknüpfen ---- bpsw: user.online
 
   constructor(public users: UsersService, public dialog: MatDialog) {
-    console.log('User online = ',this.list[0].online);
+    // console.log('User online = ',this.user.online);
   }
 
   editingProfile() {
