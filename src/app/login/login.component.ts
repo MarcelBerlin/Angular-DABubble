@@ -45,9 +45,7 @@ export class LoginComponent {
     this.authService.signInWithGoogle().then((res: any) => {
       this.authService.setLocalStorage({ email: res.additionalUserInfo.profile.email, password: '' });
       this.router.navigateByUrl('dashboard');
-
       this.setUserData(res.additionalUserInfo.profile);
-
       this.loading = false;
     }).catch((error: any) => {
       this.loading = false;
@@ -69,7 +67,9 @@ export class LoginComponent {
     const userData: User = new User();
     userData.email = email;
     userData.name = given_name + ' ' + familyName;
-    this.dataService.createGoogleUser(userData);
+    setTimeout(() => {
+      this.dataService.createGoogleUser(userData);
+    }, 500);
   }
 
 
