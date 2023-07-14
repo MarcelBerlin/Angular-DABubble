@@ -11,8 +11,6 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-/*****************************************/
-/* für die grobe Struktur der Oberfläche */
 .contentContainer {
   display: flex;
   justify-content: center;
@@ -28,8 +26,6 @@ body {
   }
 }
 
-/*****************************************/
-
 .pd-left {
   padding-left: 32px;
 }
@@ -42,16 +38,34 @@ body {
   padding-top: 16px;
 }
 
-.pd-bottom {
-  padding-bottom: 16px;
+html,
+body {
+  height: 100%;
 }
 
-// html,
-// body {
-//   height: 100%;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+
+
+// ####   DIALOG HEADER-PROFILE   ####  //
+
+.cdk-overlay-pane {
+  position: absolute;
+  top: 100px;
+  right: 50px;
+}
+
+// #cdk-overlay-0 {
+//   first-dropdown-menu
 // }
 
-// body {
-//   margin: 0;
-//   font-family: Roboto, "Helvetica Neue", sans-serif;
-// }
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 40px 0 40px 40px !important;
+  // position: relative;
+  // top: -230px;
+  // left: 215%;
+}
