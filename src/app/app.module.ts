@@ -37,6 +37,7 @@ import { HeaderEditDialogComponent } from './header-edit-dialog/header-edit-dial
 import { DialogInfoComponent } from './dialog-info/dialog-info.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
+import { SecondaryChatHeadComponent } from './dashboard/secondary-chat/secondary-chat-head/secondary-chat-head.component';
 
 
 
@@ -56,7 +57,8 @@ import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-chann
     HeaderEditDialogComponent,
     DialogInfoComponent,
     ForgotPasswordComponent,
-    DialogAddChannelComponent
+    DialogAddChannelComponent,
+    SecondaryChatHeadComponent
 
   ],
   imports: [

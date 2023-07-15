@@ -5,10 +5,10 @@
     <div class="leftContainer">
       <app-menu-channels-workspaces></app-menu-channels-workspaces>
     </div>
-    <div class="mainChatContainer">
+    <div class="mainChatContainer" [class.slideRight]="tBS.secondaryChatSlideOut">
       <app-main-chat></app-main-chat>
     </div>
-    <div class="secondaryChatContainer">
+    <div class="secondaryChatContainer" [class.secondarySlideOut]="tBS.secondaryChatSlideOut">
       <app-secondary-chat></app-secondary-chat>
     </div>
   </div>

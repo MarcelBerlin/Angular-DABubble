@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TestBastiService } from '../services/test-basti.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+
+  constructor(public tBS:TestBastiService){}
 }

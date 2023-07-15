@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TestBastiService } from 'src/app/services/test-basti.service';
 
 @Component({
   selector: 'app-secondary-chat',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./secondary-chat.component.scss']
 })
 export class SecondaryChatComponent {
+
 
 }

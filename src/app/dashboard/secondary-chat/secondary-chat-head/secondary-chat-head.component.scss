@@ -1,0 +1,51 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 96px;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.03);
+  .titleSubtitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 32px;
+    height: 45px;
+    div {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+      .title {
+        font-family: "Nunito";
+        font-weight: 700;
+        font-size: 24px;
+      }
+      .subtitle {
+        font-family: "Nunito";
+        font-weight: 400;
+        font-size: 14px;
+        color: #797ef3;
+      }
+    }
+    .close {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      font-size: 20px;
+      font-weight: 500;
+      border: 100%;
+      margin-right: 24px;
+      cursor: pointer;
+      &:hover {
+        background-color: #eceefe;
+        color: #535af1;
+      }
+    }
+  }
+}
+
