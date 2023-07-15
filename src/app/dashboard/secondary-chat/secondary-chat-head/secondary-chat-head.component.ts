@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TestBastiService } from 'src/app/services/test-basti.service';
+import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
 
 @Component({
   selector: 'app-secondary-chat-head',
@@ -9,10 +9,10 @@ import { TestBastiService } from 'src/app/services/test-basti.service';
 export class SecondaryChatHeadComponent {
 
 
-  constructor(private tBS :TestBastiService){}
+  constructor(private dcshService: DashboardComponentsShowHideService){}
 
 
   slideOut() {
-    this.tBS.chatSlideOut()
+    this.dcshService.chatSlideOut()
   }
 }

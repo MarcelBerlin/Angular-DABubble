@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TestBastiService } from '../services/test-basti.service';
+import { DashboardComponentsShowHideService } from './dashboard-components-show-hide.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +7,11 @@ import { TestBastiService } from '../services/test-basti.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  
 
-
-  constructor(public tBS:TestBastiService){}
+  constructor(public dcshService: DashboardComponentsShowHideService) { }
+  
+  hideShowNavigation() {
+    this.dcshService.hideShowNavigation();
+  }
 }

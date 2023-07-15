@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class TestBastiService {
   channelName: string = 'Entwicklerteam';
-  secondaryChatSlideOut: boolean = false;
 
 
   constructor() {}
@@ -14,11 +13,4 @@ export class TestBastiService {
     this.channelName = channelName;
   }
 
-  chatSlideOut() {
-    this.secondaryChatSlideOut = true;
-  }
-
-  chatSlideIn() {
-    this.secondaryChatSlideOut = false;
-  }
 }

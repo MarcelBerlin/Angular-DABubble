@@ -1,15 +1,27 @@
 <div class="bubbleContainer">
-    <div class="header">
-      <app-header></app-header>
-    </div>
-    <div class="leftContainer">
-      <app-menu-channels-workspaces></app-menu-channels-workspaces>
-    </div>
-    <div class="mainChatContainer" [class.slideRight]="tBS.secondaryChatSlideOut">
-      <app-main-chat></app-main-chat>
-    </div>
-    <div class="secondaryChatContainer" [class.secondarySlideOut]="tBS.secondaryChatSlideOut">
-      <app-secondary-chat></app-secondary-chat>
-    </div>
+  <div class="header">
+    <app-header></app-header>
   </div>
-  
+  <div class="leftContainer" [class.leftContainerSlideOut]="dcshService.hideNavigation">
+    <app-menu-channels-workspaces></app-menu-channels-workspaces>
+  </div>
+  <div class="mainChatContainer" 
+  [class.slideRight]="dcshService.secondaryChatSlideOut"
+  [class.slideLeft]="dcshService.hideNavigation"
+  >
+    <app-main-chat></app-main-chat>
+  </div>
+  <div
+    class="secondaryChatContainer"
+    [class.secondarySlideOut]="dcshService.secondaryChatSlideOut"
+  >
+    <app-secondary-chat></app-secondary-chat>
+  </div>
+</div>
+
+<mat-card class="hideShowNavigationBar">
+  <div (click)="hideShowNavigation()">
+    <span *ngIf="!dcshService.hideNavigation">Workspace-Menü schließen</span>
+    <span *ngIf="dcshService.hideNavigation">Workspace-Menü öffnen</span>
+  </div>
+</mat-card>
