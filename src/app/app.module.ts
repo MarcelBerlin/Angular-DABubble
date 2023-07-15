@@ -40,6 +40,7 @@ import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-chann
 import { SecondaryChatHeadComponent } from './dashboard/secondary-chat/secondary-chat-head/secondary-chat-head.component';
 import { MainChatMessagefieldComponent } from './dashboard/main-chat/main-chat-messagefield/main-chat-messagefield.component';
 import { SecondaryChatMessagefieldComponent } from './dashboard/secondary-chat/secondary-chat-messagefield/secondary-chat-messagefield.component';
+import { DialogProfileViewUsersComponent } from './dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 
 
 
@@ -63,6 +64,7 @@ import { SecondaryChatMessagefieldComponent } from './dashboard/secondary-chat/s
     SecondaryChatHeadComponent,
     MainChatMessagefieldComponent,
     SecondaryChatMessagefieldComponent,
+    DialogProfileViewUsersComponent,
 
   ],
   imports: [

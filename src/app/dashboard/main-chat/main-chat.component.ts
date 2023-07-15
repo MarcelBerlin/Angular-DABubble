@@ -1,4 +1,6 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { TestBastiService } from 'src/app/services/test-basti.service';
 
 @Component({
@@ -9,14 +11,14 @@ import { TestBastiService } from 'src/app/services/test-basti.service';
 export class MainChatComponent {
 
 
-  constructor(private tBS: TestBastiService) { }
+  constructor(private tBS: TestBastiService, private dialog : Dialog) { }
   
-  openChat() {
+  openSecondaryChat() {
     this.tBS.chatSlideIn();
   }
 
-  profileViewOtherUsers() {
-    console.log('Profile view other users');
+  profileViewUsers() {
+    this.dialog.open(DialogProfileViewUsersComponent)
   }
 
 }
