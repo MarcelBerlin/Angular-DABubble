@@ -14,4 +14,9 @@ export class MainChatComponent {
   openChat() {
     this.tBS.chatSlideIn();
   }
+
+  profileViewOtherUsers() {
+    console.log('Profile view other users');
+  }
+
 }

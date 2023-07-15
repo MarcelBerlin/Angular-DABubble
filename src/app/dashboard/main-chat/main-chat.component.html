@@ -2,36 +2,34 @@
   <div class="content">
     <app-main-chat-head></app-main-chat-head>
     <div class="chatContainer">
-      <span>chat</span>
-
       <div class="timeLine">
         <div class="timeLineHead">Dienstag, 14 Januar</div>
       </div>
 
-      <div style="margin-top: 32px;">chat</div>
-      <div class="labelAnswersAndTime" (click)="openChat()">2 Antworten</div>
-
-    </div>
-    <div class="inputContainer">
-      <textarea
-        type="text"
-        placeholder="Nachricht an #Entwicklerteam"
-      ></textarea>
-      <div class="iconsContainer">
-        <div class="addElements">
-          <div class="element">
-            <img src="assets/img/add.png" />
+      <div class="messagesMainChat">
+        <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
+        <div class="messageContent">
+          <div class="nameTime">
+            <span class="name" (click)="profileViewOtherUsers()"
+              >Noah Braun</span
+            >
+            <span class="time">16:14</span>
           </div>
-          <div class="vector"></div>
-          <div class="element">
-            <img src="assets/img/satisfied.png" />
+          <div class="messageBox">
+            <span class="message">Welche Version ist aktuell von Angular?</span>
           </div>
-          <div class="element">
-            <img src="assets/img/email.png" />
+          <div class="labelAnswersAndTime">
+            <div class="label" (click)="openChat()">2 Antwort/en</div>
+            <div class="time">Letzte Antwort 14:56</div>
           </div>
         </div>
-        <div class="sendIcon"><img src="assets/img/send_icon.png" /></div>
+      </div>
+
+      <div class="timeLine">
+        <div class="timeLineHead">Heute</div>
       </div>
     </div>
+
+    <app-main-chat-messagefield></app-main-chat-messagefield>
   </div>
 </div>

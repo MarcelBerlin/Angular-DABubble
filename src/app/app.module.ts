@@ -38,6 +38,8 @@ import { DialogInfoComponent } from './dialog-info/dialog-info.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 import { SecondaryChatHeadComponent } from './dashboard/secondary-chat/secondary-chat-head/secondary-chat-head.component';
+import { MainChatMessagefieldComponent } from './dashboard/main-chat/main-chat-messagefield/main-chat-messagefield.component';
+import { SecondaryChatMessagefieldComponent } from './dashboard/secondary-chat/secondary-chat-messagefield/secondary-chat-messagefield.component';
 
 
 
@@ -58,7 +60,9 @@ import { SecondaryChatHeadComponent } from './dashboard/secondary-chat/secondary
     DialogInfoComponent,
     ForgotPasswordComponent,
     DialogAddChannelComponent,
-    SecondaryChatHeadComponent
+    SecondaryChatHeadComponent,
+    MainChatMessagefieldComponent,
+    SecondaryChatMessagefieldComponent,
 
   ],
   imports: [
