@@ -1,3 +1,4 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./dialog-profile-view-users.component.scss']
 })
 export class DialogProfileViewUsersComponent {
+
+  constructor(private dialogRef: DialogRef) { }
+  
+  close() {
+    this.dialogRef.close();
+  }
 
 }

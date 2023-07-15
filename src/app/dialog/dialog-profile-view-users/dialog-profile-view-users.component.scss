@@ -7,6 +7,9 @@ mat-card {
     display: flex;
     justify-content: space-between;
     margin: 40px;
+    .close{
+        cursor: pointer;
+    }
   }
   mat-card-content {
     display: flex;
