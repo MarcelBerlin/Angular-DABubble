@@ -23,15 +23,6 @@ export class DialogMembersComponent {
     console.warn('log von Basti aus: "dialog-members"', dataService);
   }
 
-  ngOnInit() {
-    this.testTime();
-  }
-
-  testTime() {
-    setInterval(() => {
-      this.online = !this.online;
-    }, 1000);
-  }
 
   close() {
     this.dialogRef.close();

@@ -6,14 +6,14 @@
   <mat-card-content>
     <div
       class="userMenu"
-      *ngFor="let member of dataService.userData; let i = index"
+      *ngFor="let member of dataService.userData"
     >
       <span (click)="openMember()"
-        ><img src="{{ member.img }}" /> {{ member.name }}</span
+        ><img [src]="member.img" /> {{ member.name }}</span
       >
       <div
         class="activeDot"
-        [style.background-color]="online ? '#92C83E' : '#686868'"
+        [style.background-color]="member.online ? '#92C83E' : '#686868'"
       ></div>
     </div>
   </mat-card-content>
