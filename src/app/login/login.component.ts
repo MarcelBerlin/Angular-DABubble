@@ -187,11 +187,9 @@ export class LoginComponent {
 
   /**
    * Toggles the password visibility.
-   * 
-   * @param {number} sw - The switch value (0 or 1).
    */
-  passwordViewToggle(sw: number): void {
-    if (sw == 0) this.passwordView = !this.passwordView;
+  passwordViewToggle(): void {
+    this.passwordView = !this.passwordView;
     if (this.passwordView == true) this.inputType = 'text';
     else this.inputType = 'password';
   }
@@ -211,6 +209,3 @@ export class LoginComponent {
     this.loginWithEmailAndPassword();
   }
 }
-
-
-
