@@ -8,7 +8,7 @@ export class User {
 
     constructor(obj?:any) {
         this.name = obj ? obj.name : '';
-        this.img = obj ? obj.img : '';
+        this.img = obj ? obj.img : '/assets/img/members/avatar2.png';
         this.email = obj ? obj.email : '';
         this.online = obj ? obj.online : false;
     }

@@ -5,6 +5,8 @@ import { DialogAddChannelComponent } from 'src/app/dialog-add-channel/dialog-add
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
+import { User } from 'src/app/models/user.class';
 
 interface Tag {
   id: string;
@@ -16,7 +18,7 @@ interface Tag {
 @Component({
   selector: 'app-menu-sidenav',
   templateUrl: './menu-sidenav.component.html',
-  styleUrls: ['./menu-sidenav.component.scss'],  
+  styleUrls: ['./menu-sidenav.component.scss'],
   animations: [
     trigger('tagAnimation', [
       state('visible', style({ opacity: 1 })),
@@ -28,7 +30,10 @@ interface Tag {
 
 export class MenuSidenavComponent implements OnInit {
 
-  items$: Observable<any[]>;
+  
+  tags$: Observable<any[]>;
+  user$: Observable<any[]>;
+  userData: any;  
   tags: any;
   tagState = 'visible';
 
@@ -43,20 +48,38 @@ export class MenuSidenavComponent implements OnInit {
 
   channelsVisible: boolean = true;
   directMessageUserVisible: boolean = true;
-   
 
-  constructor(public dialog: MatDialog, public getService: DialogAddService, private firestore: Firestore) {
-    this.tags = this.getService.tags
+
+  constructor(public dialog: MatDialog, public getService: DialogAddService, private firestore: Firestore, public getUserData: DataService) {
+    this.tags = this.getService.tags;
+    this.userData = this.getUserData.userData;
   }
 
   ngOnInit(): void {
-    const aCollection = collection(this.firestore, 'tags');
-    this.items$ = collectionData(aCollection, { idField: 'id' });
 
-    this.items$.subscribe(data => {
-      this.tags = data;      
+    this.allTags();
+    this.allUsers();
+
+  }
+
+
+  allTags() {
+    const tagCollection = collection(this.firestore, 'tags');
+    this.tags$ = collectionData(tagCollection, { idField: 'id' });
+
+    this.tags$.subscribe(data => {
+      this.tags = data;
     });
+  }
 
+  allUsers() {
+    const userCollection = collection(this.firestore, 'users');
+    this.user$ = collectionData(userCollection, { idField: 'id' });
+
+    this.user$.subscribe(data => {
+      this.userData = data;      
+      
+    });
   }
 
   toggleChannels() {
@@ -66,7 +89,7 @@ export class MenuSidenavComponent implements OnInit {
   toggleDirectMessage() {
     this.directMessageUserVisible = !this.directMessageUserVisible;
   }
- 
+
   addChannel() {
     this.dialog.open(DialogAddChannelComponent)
   }
