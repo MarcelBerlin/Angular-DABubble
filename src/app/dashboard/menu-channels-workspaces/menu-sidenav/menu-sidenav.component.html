@@ -53,10 +53,10 @@
                     (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'">
             </div>
 
-            <div class="direct-message-content" [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'">
+            <div class="direct-message-content" [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'">
                 <div *ngFor="let user of userData">
 
-                    <div class="channel-name">
+                    <div class="direct-message-user">
                         <img class="pointer" [src]="user.img">
                         <span class="pointer">{{ user.name }}</span>
                     </div>
