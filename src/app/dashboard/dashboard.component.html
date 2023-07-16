@@ -2,12 +2,16 @@
   <div class="header">
     <app-header></app-header>
   </div>
-  <div class="leftContainer" [class.leftContainerSlideOut]="dcshService.hideNavigation">
+  <div
+    class="leftContainer"
+    [class.leftContainerSlideOut]="dcshService.hideNavigation"
+  >
     <app-menu-channels-workspaces></app-menu-channels-workspaces>
   </div>
-  <div class="mainChatContainer" 
-  [class.slideRight]="dcshService.secondaryChatSlideOut"
-  [class.slideLeft]="dcshService.hideNavigation"
+  <div
+    class="mainChatContainer"
+    [class.slideRight]="dcshService.secondaryChatSlideOut"
+    [class.slideLeft]="dcshService.hideNavigation"
   >
     <app-main-chat></app-main-chat>
   </div>
@@ -20,8 +24,16 @@
 </div>
 
 <mat-card class="hideShowNavigationBar">
-  <div (click)="hideShowNavigation()">
-    <span *ngIf="!dcshService.hideNavigation">Workspace-Menü schließen</span>
-    <span *ngIf="dcshService.hideNavigation">Workspace-Menü öffnen</span>
+  <div
+    (click)="hideShowNavigation()"
+    (mouseenter)="changeImageOnHover(true)"
+    (mouseleave)="changeImageOnHover(false)"
+  >
+    <span *ngIf="!dcshService.hideNavigation"
+      >Workspace-Menü schließen <img [src]="imageUrl"
+    /></span>
+    <span *ngIf="dcshService.hideNavigation"
+      >Workspace-Menü öffnen <img [src]="imageUrl"
+    /></span>
   </div>
 </mat-card>
