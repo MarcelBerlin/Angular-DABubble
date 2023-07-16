@@ -42,6 +42,7 @@ import { MainChatMessagefieldComponent } from './dashboard/main-chat/main-chat-m
 import { SecondaryChatMessagefieldComponent } from './dashboard/secondary-chat/secondary-chat-messagefield/secondary-chat-messagefield.component';
 import { DialogProfileViewUsersComponent } from './dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { DialogMembersComponent } from './dialog/dialog-members/dialog-members.component';
+import { DialogAddMembersComponent } from './dialog/dialog-add-members/dialog-add-members.component';
 
 
 
@@ -67,6 +68,7 @@ import { DialogMembersComponent } from './dialog/dialog-members/dialog-members.c
     SecondaryChatMessagefieldComponent,
     DialogProfileViewUsersComponent,
     DialogMembersComponent,
+    DialogAddMembersComponent,
 
   ],
   imports: [

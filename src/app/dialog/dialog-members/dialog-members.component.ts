@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
 import { DialogProfileViewUsersComponent } from '../dialog-profile-view-users/dialog-profile-view-users.component';
+import { DialogAddMembersComponent } from '../dialog-add-members/dialog-add-members.component';
 
 @Component({
   selector: 'app-dialog-members',
@@ -46,5 +47,10 @@ export class DialogMembersComponent {
     this.imgUrl = isHovered
       ? 'assets/img/person_add_hover.png'
       : 'assets/img/person_add.png';
+  }
+
+  addMembers() {
+    this.dialogRef.close();
+    this.dialog.open(DialogAddMembersComponent);
   }
 }
