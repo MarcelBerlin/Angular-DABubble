@@ -7,19 +7,21 @@ import { DashboardComponentsShowHideService } from '../dashboard-components-show
 @Component({
   selector: 'app-main-chat',
   templateUrl: './main-chat.component.html',
-  styleUrls: ['./main-chat.component.scss']
+  styleUrls: ['./main-chat.component.scss'],
 })
 export class MainChatComponent {
+  hoveredMessagesMainChat: boolean = false;
 
+  constructor(
+    private dcshService: DashboardComponentsShowHideService,
+    private dialog: Dialog
+  ) {}
 
-  constructor(private dcshService: DashboardComponentsShowHideService, private dialog : Dialog) { }
-  
   openSecondaryChat() {
     this.dcshService.chatSlideIn();
   }
 
   profileViewUsers() {
-    this.dialog.open(DialogProfileViewUsersComponent)
+    this.dialog.open(DialogProfileViewUsersComponent);
   }
-
 }

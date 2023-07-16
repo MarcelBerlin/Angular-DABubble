@@ -2,8 +2,10 @@
   position: absolute;
   top: 115px;
   bottom: 185px;
-  right: 32px;
-  left: 32px;
+  // right: 32px;
+  // left: 32px;
+  right: 12px;
+  left: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +38,8 @@
 .messagesMainChat {
   display: flex;
   width: 100%;
-  margin: 48px 5%;
+  margin: 48px 0;
+  padding: 16px 0;
   .avatar {
     display: flex;
     justify-content: center;
@@ -78,7 +81,6 @@
       align-items: center;
       width: fit-content;
       min-height: 55px;
-      background-color: #eceefe;
       border-top-right-radius: 30px;
       border-bottom-right-radius: 30px;
       border-bottom-left-radius: 30px;
