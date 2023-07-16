@@ -16,7 +16,6 @@ export class DialogMembersComponent {
   imgUrl: string = 'assets/img/person_add.png';
 
   constructor(
-    public usersService: UsersService,
     public dataService: DataService,
     private dialog: MatDialog,
     private dialogRef: DialogRef
@@ -39,7 +38,7 @@ export class DialogMembersComponent {
   }
 
   openMember() {
-    this.dialogRef.close();
+    // this.dialogRef.close();
     this.dialog.open(DialogProfileViewUsersComponent);
   }
 

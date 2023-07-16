@@ -71,9 +71,9 @@ mat-card {
       }
     }
     .emailAddress {
-      width: 420px;
+      width: 400px;
       margin-top: 16px;
-      margin-left: 100px;
+      margin-left: 80px;
       font-family: "Nunito";
       font-weight: 400;
       font-size: 18px;
@@ -97,5 +97,5 @@ mat-card {
 }
 
 .mat-mdc-card {
-  border-radius: 30px;
+  border-radius: 30px !important;
 }
