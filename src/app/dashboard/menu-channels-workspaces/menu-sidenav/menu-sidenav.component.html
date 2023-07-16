@@ -12,49 +12,61 @@
         <div class="channels-container">
             <div class="channels-headline pd-left pd-right">
                 <img class="pointer" [src]="channelsPath"
-                (mouseenter)="channelsPath = 'assets/img/sidenav/channel_closed_hover.png'"
-                (mouseleave)="channelsPath = 'assets/img/sidenav/channel_closed.png'"
-                (click)="toggleChannels()">
+                    (mouseenter)="channelsPath = 'assets/img/sidenav/channel_closed_hover.png'"
+                    (mouseleave)="channelsPath = 'assets/img/sidenav/channel_closed.png'" (click)="toggleChannels()">
 
                 <img class="pointer" [src]="addPathChannel"
-                (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
-                (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'"
-                (click)="addChannel()">
+                    (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
+                    (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'" (click)="addChannel()">
+
             </div>
 
-                  
-            <div [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'" class="channels-content">
-                <div class="channels-line" *ngFor="let tag of tags">
+
+            <div class="channels-content" [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'">
+                <div class="channels-line" *ngFor="let tag of tags"
+                    (mouseenter)="tag.imagePath = 'assets/img/sidenav/tag_hover.png'"
+                    (mouseleave)="tag.imagePath = 'assets/img/sidenav/tag.png'"
+                    (click)="tag.imagePath = 'assets/img/sidenav/tag_click.png'">
+
                     <div class="channel-name">
-                        <img class="pointer" [src]="tag.imagePath"
-                        (mouseenter)="tag.imagePath = 'assets/img/sidenav/tag_hover.png'"
-                        (mouseleave)="tag.imagePath = 'assets/img/sidenav/tag.png'"
-                        (click)="tag.imagePath = 'assets/img/sidenav/tag_click.png'">
-                                            
+                        <img class="pointer" [src]="tag.imagePath">
                         <span class="pointer">{{ tag.name }}</span>
                     </div>
-                    
+
                     <!-- <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon> -->
-                                    
+
                 </div>
-               
+
             </div>
         </div>
 
         <div class="direct-messages">
             <div class="direct-messages-headline pd-left pd-right pd-top">
                 <img class="pointer" [src]="directMessagePath"
-                (mouseenter)="directMessagePath = 'assets/img/sidenav/direct_message_closed_hover.png'"
-                (mouseleave)="directMessagePath = 'assets/img/sidenav/direct_message_closed.png'"
-                (click)="toggleDirectMessage()">
+                    (mouseenter)="directMessagePath = 'assets/img/sidenav/direct_message_closed_hover.png'"
+                    (mouseleave)="directMessagePath = 'assets/img/sidenav/direct_message_closed.png'"
+                    (click)="toggleDirectMessage()">
 
                 <img class="pointer" [src]="addPathMessage"
-                (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
-                (mouseleave)="addPathMessage = 'assets/img/sidenav/add.png'"
-                (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'">
+                    (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
+                    (mouseleave)="addPathMessage = 'assets/img/sidenav/add.png'"
+                    (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'">
             </div>
 
-            
-        </div>    
+            <div class="direct-message-content" [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'">
+                <div *ngFor="let user of userData">
+
+                    <div class="channel-name">
+                        <img class="pointer" [src]="user.img">
+                        <span class="pointer">{{ user.name }}</span>
+                    </div>
+
+                    <!-- <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon> -->
+
+                </div>
+            </div>
+
+
+        </div>
     </div>
 </div>
