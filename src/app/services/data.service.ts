@@ -80,8 +80,9 @@ export class DataService {
    * @param {string} email - The email address of the signed up user.
    * @returns {void}
    */
-  saveSignUpUserEmail(email: string): void {
+  saveSignUpUserData(email: string, name: string): void {
     this.signUpUser.email = email;
+    this.signUpUser.name = name;
     const coll = collection(this.firestore, 'users');
     setDoc(doc(coll), this.signUpUser.toJSON()).then(() => {
 
