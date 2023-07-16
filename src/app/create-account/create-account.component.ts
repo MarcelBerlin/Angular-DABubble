@@ -9,8 +9,12 @@ import { Router } from '@angular/router';
 })
 export class CreateAccountComponent {
   loading: boolean = false;
-  forgotPasswordForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\.?[a-zA-Z]{0,2}')])
+  passwordView: boolean = false;
+  inputType: string = 'password';
+  createAccountForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\.?[a-zA-Z]{0,2}')]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]), 
   });
 
   constructor( 
@@ -30,5 +34,9 @@ export class CreateAccountComponent {
    */
    backToLogin(): void {
     this.router.navigateByUrl('');
+  }
+
+  passwordViewToggle():void{
+
   }
 }
