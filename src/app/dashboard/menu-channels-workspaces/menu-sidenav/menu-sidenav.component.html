@@ -25,12 +25,17 @@
                   
             <div [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'" class="channels-content">
                 <div class="channels-line" *ngFor="let tag of tags">
-                    <img class="pointer" [src]="tag.imagePath"
-                    (mouseenter)="tag.imagePath = 'assets/img/sidenav/tag_hover.png'"
-                    (mouseleave)="tag.imagePath = 'assets/img/sidenav/tag.png'"
-                    (click)="tag.imagePath = 'assets/img/sidenav/tag_click.png'">
+                    <div class="channel-name">
+                        <img class="pointer" [src]="tag.imagePath"
+                        (mouseenter)="tag.imagePath = 'assets/img/sidenav/tag_hover.png'"
+                        (mouseleave)="tag.imagePath = 'assets/img/sidenav/tag.png'"
+                        (click)="tag.imagePath = 'assets/img/sidenav/tag_click.png'">
+                                            
+                        <span class="pointer">{{ tag.name }}</span>
+                    </div>
                     
-                    <span class="pointer">{{ tag.name }}</span>
+                    <!-- <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon> -->
+                                    
                 </div>
                
             </div>

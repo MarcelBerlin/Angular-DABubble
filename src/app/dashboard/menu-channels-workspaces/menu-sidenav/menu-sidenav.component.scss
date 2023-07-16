@@ -9,6 +9,18 @@
 
 .pointer {
   cursor: pointer;
+  color: var(--black, #000);
+  font-family: 'Nunito';
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.delete-tag {
+  cursor: pointer;
+  padding-right: 35px;
+
 }
 
 .channels-container {
@@ -30,15 +42,22 @@
 }
 
 .channels-line {
+  width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   padding-top: 16px;
 }
 
+.channel-name {
+display: flex;
+justify-content: flex-start;
+align-items: center;
+}
+
 .direct-messages-headline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
 }

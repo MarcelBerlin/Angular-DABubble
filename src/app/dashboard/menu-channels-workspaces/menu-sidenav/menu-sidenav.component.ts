@@ -4,7 +4,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddChannelComponent } from 'src/app/dialog-add-channel/dialog-add-channel.component';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 
-
+interface Tag {
+  id: string;
+  name: string;
+  imagePath: string;
+  description: string;
+}
 
 @Component({
   selector: 'app-menu-sidenav',
@@ -55,6 +60,14 @@ export class MenuSidenavComponent implements OnInit {
  
   addChannel() {
     this.dialog.open(DialogAddChannelComponent)
+  }
+
+  deleteTag(tag: Tag) {
+    // Löschen des Tags aus der HTML-Ansicht
+    this.getService.tags = this.getService.tags.filter(t => t !== tag);
+
+    // Löschen des Tags aus der Firestore-Datenbank
+    this.getService.deleteTagFromFirestore(tag);
   }
 
 }
