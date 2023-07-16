@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -17,6 +18,7 @@ export class ForgotPasswordComponent {
 
   constructor( 
     private authService: AuthService,
+    private router: Router,
     ){}
 
   /**
@@ -29,5 +31,10 @@ export class ForgotPasswordComponent {
     this.forgotPasswordForm.disable();
     this.email = this.forgotPasswordForm.value.email;
     this.authService.forgotPassword(this.email);
+  }
+
+
+  backToLogin(): void {
+    this.router.navigateByUrl('');
   }
 }

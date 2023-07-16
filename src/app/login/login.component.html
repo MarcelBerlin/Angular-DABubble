@@ -9,7 +9,7 @@
     </div>
 
     <div class="card">
-        <form  [formGroup]="loginForm" (submit)="loginWithEmailAndPassword()">
+        <form [formGroup]="loginForm" (submit)="loginWithEmailAndPassword()">
             <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
             <mat-card>
                 <mat-card-header>
@@ -27,23 +27,26 @@
                     </div>
                     <div *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].touched"
                         class="warnContainer">
-                        <span *ngIf="loginForm.controls['email'].errors" style="padding: 0px 52px;">Diese Email-Adresse ist leider ungültig.</span>
+                        <span *ngIf="loginForm.controls['email'].errors">Diese Email-Adresse
+                            ist leider ungültig.</span>
                     </div>
                 </div>
 
                 <div class="inputContainer">
                     <div class="inputInner">
-                        <input type="password" placeholder="Passwort" formControlName="password">
-                        <img src="../../assets/img/Login/lock.png" style="position: absolute; left: 85px;">
+                        <input type="password" placeholder="Passwort" formControlName="password" [type]="inputType">
+                        <img src="../../assets/img/Login/lock.png" (click)="passwordViewToggle()" *ngIf="!passwordView">
+                        <img src="../../assets/img/Login/open_lock.png" (click)="passwordViewToggle()"
+                            *ngIf="passwordView">
                     </div>
                     <div *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].touched"
                         class="warnContainer">
-                        <span *ngIf="loginForm.controls['password'].errors" style="padding: 0px 52px;">Falsches Passwort, bitte nocheinmal
+                        <span *ngIf="loginForm.controls['password'].errors">Falsches Passwort, bitte nocheinmal
                             versuchen.</span>
                     </div>
                 </div>
 
-                <p  class="forgotPassword" [routerLink]="['forgot_password']">Passwort vergessen?</p>
+                <p class="forgotPassword" [routerLink]="['forgot_password']">Passwort vergessen?</p>
 
                 <div class="orOuterContainer">
                     <div class="line"></div>
@@ -51,15 +54,16 @@
                     <div class="line"></div>
                 </div>
 
-                <button  [disabled]="loading" class="googleButton" (click)="loginWithGoogle()">
-                    <img src="../../assets/img/Login/Google.png"> 
+                <button [disabled]="loading" class="googleButton" (click)="loginWithGoogle()">
+                    <img src="../../assets/img/Login/Google.png">
                     <span>Anmelden mit Google</span>
                 </button>
 
                 <mat-card-actions align="end">
-                    <button mat-raised-button color="primary" type="submit"
-                        [disabled]="!loginForm.valid || loading" class="submitBtn">Anmelden</button>
-                    <button mat-raised-button color="secondary" class="guestBtn" (click) ="guestLogin()" type="button">Gäste-Login</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid || loading"
+                        class="submitBtn">Anmelden</button>
+                    <button mat-raised-button color="secondary" class="guestBtn" (click)="guestLogin()"
+                        type="button">Gäste-Login</button>
                 </mat-card-actions>
             </mat-card>
 
