@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-title>
+    <span>Mitglieder</span>
+    <div class="close" (click)="close()">X</div></mat-card-title
+  >
+  <mat-card-content>
+    <div
+      class="userMenu"
+      *ngFor="let member of dataService.userData; let i = index"
+    >
+      <span (click)="openMember()"
+        ><img src="{{ usersService.list[i].img }}" /> {{ member.name }}</span
+      >
+      <div
+        class="activeDot"
+        [style.background-color]="online ? '#92C83E' : '#686868'"
+      ></div>
+    </div>
+  </mat-card-content>
+  <div
+    class="userAdd"
+    (mouseenter)="changeUserAddHover(true)"
+    (mouseleave)="changeUserAddHover(false)"
+  >
+    <div><img [src]="imgUrl" /></div>
+    <span> Mitglieder hinzufügen</span>
+  </div>
+</mat-card>

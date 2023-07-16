@@ -36,10 +36,24 @@
     align-items: center;
     gap: 10px;
     padding-right: 32px;
-    span {
-      font-family: "Nunito";
-      font-weight: 600;
-      font-size: 20px;
+    .members {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 30px;
+      gap: 10px;
+      &:hover {
+        background-color: #eceefe;
+        span {
+          color: #535af1;
+        }
+      }
+      span {
+        font-family: "Nunito";
+        font-weight: 600;
+        font-size: 20px;
+      }
     }
     .add {
       display: flex;
