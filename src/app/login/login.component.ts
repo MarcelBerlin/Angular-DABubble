@@ -208,4 +208,9 @@ export class LoginComponent {
     });
     this.loginWithEmailAndPassword();
   }
+
+
+  goTocreateAccount(): void {
+    this.router.navigateByUrl('createAccount');
+  }
 }

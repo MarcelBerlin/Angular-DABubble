@@ -43,7 +43,9 @@ import { SecondaryChatMessagefieldComponent } from './dashboard/secondary-chat/s
 import { DialogProfileViewUsersComponent } from './dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { DialogMembersComponent } from './dialog/dialog-members/dialog-members.component';
 import { DialogAddMembersComponent } from './dialog/dialog-add-members/dialog-add-members.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 import { ChannelFocusComponent } from './dashboard/main-chat/channel-focus/channel-focus.component';
+
 
 
 
@@ -71,6 +73,7 @@ import { ChannelFocusComponent } from './dashboard/main-chat/channel-focus/chann
     DialogMembersComponent,
     DialogAddMembersComponent,
     ChannelFocusComponent,
+    CreateAccountComponent,
 
   ],
   imports: [

@@ -1,0 +1,48 @@
+<div class="forgotPasswordContainer">
+
+    <div class="loginHead">
+        <img src="../../assets/img/Login/Logo.png">
+        <div class="loginHeadLinks">
+            <span>Neu bei DABubble?</span>
+            <span class="span2" >Konto erstellen</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <form [formGroup]="forgotPasswordForm" (submit)="createNewAccount()">
+            <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
+            <mat-card>
+                <img src="../../assets/img/Login/Forgot-Password/13. Go back.png" style="display: flex; position: absolute; top: 45px; left: 32px; cursor: pointer;" (click)="backToLogin()">
+                <mat-card-header>
+                    <mat-card-title>Konto erstellen</mat-card-title>
+                    <mat-card-subtitle>
+                        Mit deinem Namen und deiner E-Mail-Adresse hast du dein neues DABubble-Konto
+                    </mat-card-subtitle>
+                </mat-card-header>
+
+                <div class="inputContainer">
+                    <div class="inputInner">
+                        <input type="email" placeholder="beispielname@email.com" formControlName="email">
+                        <img src="../../assets/img/Login/mail.png" style="position: absolute; left: 85px;">
+                    </div>
+                    <div *ngIf="forgotPasswordForm.controls['email'].dirty && forgotPasswordForm.controls['email'].touched"
+                        class="warnContainer">
+                        <span *ngIf="forgotPasswordForm.controls['email'].errors">Diese Email-Adresse
+                            ist leider ungültig.</span>
+                    </div>
+                </div>
+                
+
+                <mat-card-actions align="end">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!forgotPasswordForm.valid || loading"
+                        class="submitBtn">E-Mail senden</button>
+                    
+                </mat-card-actions>
+            </mat-card>
+
+        </form>
+
+    </div>
+
+
+</div>
