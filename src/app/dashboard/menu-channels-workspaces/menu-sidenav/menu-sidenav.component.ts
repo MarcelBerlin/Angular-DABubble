@@ -3,6 +3,8 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddChannelComponent } from 'src/app/dialog-add-channel/dialog-add-channel.component';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 interface Tag {
   id: string;
@@ -26,6 +28,7 @@ interface Tag {
 
 export class MenuSidenavComponent implements OnInit {
 
+  items$: Observable<any[]>;
   tags: any;
   tagState = 'visible';
 
@@ -42,12 +45,18 @@ export class MenuSidenavComponent implements OnInit {
   directMessageUserVisible: boolean = true;
    
 
-  constructor(public dialog: MatDialog, public getService: DialogAddService) {
+  constructor(public dialog: MatDialog, public getService: DialogAddService, private firestore: Firestore) {
     this.tags = this.getService.tags
   }
 
   ngOnInit(): void {
-    
+    const aCollection = collection(this.firestore, 'tags');
+    this.items$ = collectionData(aCollection, { idField: 'id' });
+
+    this.items$.subscribe(data => {
+      this.tags = data;      
+    });
+
   }
 
   toggleChannels() {

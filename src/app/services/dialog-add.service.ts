@@ -14,6 +14,7 @@ interface Tag {
 @Injectable({
   providedIn: 'root'
 })
+
 export class DialogAddService {
 
   firestore: firebase.firestore.Firestore; // Variable greift auf die Instanz "firebase.firestore" und dann auf die Klasse ".Firestore" zu
