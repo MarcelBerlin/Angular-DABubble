@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from '../services/data.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -21,14 +20,12 @@ export class CreateAccountComponent {
 
   constructor( 
     private router: Router,
-    private dataService: DataService,
     private auth: AuthService
     ){}
 
   
     createNewAccount(): void{
-      this.auth.signup( this.createAccountForm.value.email, this.createAccountForm.value.password);
-      this.dataService.saveSignUpUserData(this.createAccountForm.value.email, this.createAccountForm.value.name);
+      this.auth.signup( this.createAccountForm.value.email, this.createAccountForm.value.password, this.createAccountForm.value.name);
     }
 
 

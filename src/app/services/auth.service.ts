@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DialogInfoService } from './dialog-info.service';
 import { DialogInfoComponent } from '../dialog-info/dialog-info.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DataService } from '../services/data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class AuthService {
     private router: Router,
     public dialogInfoService: DialogInfoService,
     public dialog: MatDialog,
+    private dataService: DataService,
     ) { }
 
 
@@ -87,12 +89,13 @@ export class AuthService {
    * @param {string} password - The password of the user.
    * @returns {void} 
    */
-  signup(email: string, password: string): void {
+  signup(email: string, password: string, name: string): void {
     this.afs.createUserWithEmailAndPassword(email, password)
       .then((userCredentials: any) => {
         this.router.navigate(['login']);
         this.openDialogSuccessfullySignup();
         // this.dataService.saveSignUpUserEmail(email);
+        this.dataService.saveSignUpUserData(email, name);
       }).catch((error) => {
         if (error.code === 'auth/email-already-in-use') this.openDialogEmailAlreadyExist();
         else if (error.code === 'auth/network-request-failed') this.openDialogNoServerConnection();
