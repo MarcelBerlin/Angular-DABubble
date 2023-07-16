@@ -22,15 +22,12 @@
 
                 <div class="inputContainer">
                     <div class="inputInner">
-                        <input type="name" placeholder="Name und Nachname" formControlName="name" [type]="inputType">
-                        <img src="../../assets/img/Login/lock.png" (click)="passwordViewToggle()" *ngIf="!passwordView">
-                        <img src="../../assets/img/Login/open_lock.png" (click)="passwordViewToggle()"
-                            *ngIf="passwordView">
+                        <input type="name" placeholder="Name und Nachname" formControlName="name">
+                        <img src="../../assets/img/Login/lock.png">
                     </div>
-                    <div *ngIf="createAccountForm.controls['password'].dirty && createAccountForm.controls['password'].touched"
+                    <div *ngIf="createAccountForm.controls['name'].dirty && createAccountForm.controls['password'].touched"
                         class="warnContainer">
-                        <span *ngIf="createAccountForm.controls['password'].errors">Falsches Passwort, bitte nocheinmal
-                            versuchen.</span>
+                        <span *ngIf="createAccountForm.controls['name'].errors">Mindestlänge</span>
                     </div>
                 </div>
 
@@ -63,7 +60,7 @@
 
                 <mat-card-actions align="end">
                     <button mat-raised-button color="primary" type="submit" [disabled]="!createAccountForm.valid || loading"
-                        class="submitBtn">E-Mail senden</button>
+                        class="submitBtn">Weiter</button>
                     
                 </mat-card-actions>
             </mat-card>
