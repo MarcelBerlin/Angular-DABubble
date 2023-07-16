@@ -41,6 +41,7 @@ export class MenuSidenavComponent implements OnInit {
   channelsPath: string = 'assets/img/sidenav/channel_closed.png';
   addPathChannel: string = 'assets/img/sidenav/add.png';
   addPathMessage: string = 'assets/img/sidenav/add.png';
+  addNewChannel: string = 'assets/img/sidenav/add_Channel.png';
   firstTagPath: string = 'assets/img/sidenav/tag.png';
   secondTagPath: string = 'assets/img/sidenav/tag.png';
   thirdTagPath: string = 'assets/img/sidenav/tag.png';
