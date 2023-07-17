@@ -1,65 +1,274 @@
-.outer{
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    width: 100%;
-}
+// .outer{
+//     display: flex; 
+//     justify-content: center; 
+//     align-items: center; 
+//     height: 100vh; 
+//     width: 100%;
+//     background-color: rgba(49, 58, 229, 1) ;
+//     background-color: rgba(121, 126, 243, 1);
+// }
 
-.image{
+// .image{
+//     display: flex;
+//     width: 70px;
+//     height: 70px;
+//     position:absolute;
+//     top: 75px;
+//     left: 75px;
+//     animation-name: moveImg;
+//     animation-delay: 500ms;
+//     animation-duration: 2500ms;
+//     animation: moveImg 2500ms ease-out 2500ms;
+//     top: calc(50% - 92px);
+//     left: calc(50% - 121.5px);
+//     width: 186.98px;
+//     height: 184px;
+//     z-index: 1;
+//     background-color: rgba(49, 58, 229, 1) ;
+
+
+// }
+
+// @keyframes moveImg {
+//     0%{
+//         top: calc(50% - 92px);
+//         left: calc(50% - 121.5px);
+//         width: 186.98px;
+//         height: 184px;
+//     }
+
+//     10%{
+//         left: calc(50% - 281.3px);
+//         width: 186.98px;
+//         height: 184px;
+//     }
+
+//     100%{
+//         top: 75px;
+//         left: 75px;
+//         width: 70px;
+//         height: 70px;
+//     }
+
+// }
+
+// .text{
+//     display: flex;
+//     position: absolute;
+//     top: 93px;
+//     left: 159px;
+//     font-family: 'Inter', sans-serif;
+//     font-weight: 700;
+//     font-size: 33px;
+//     color: black;
+//     animation-name: moveText;
+//     animation-delay: 500ms;
+//     animation-duration: 2500ms;
+//     animation: moveText 2000ms ease-out 2500ms;
+//     top: calc(50% - 16px);
+//     left: calc(50% - 111px);
+// }
+
+// @keyframes moveText{
+//     0%{
+//         top: calc(50% - 16px);
+//         left: calc(50% - 111px);
+//         color: white;
+//     }
+
+//     20%{
+//         top: calc(50% - 16px);
+//         left: calc(50% + 80px);
+//         color: white;
+//     }
+
+//     100%{
+//         top: 93px;
+//         left: 159px;
+//         color: black;
+//     }
+// }
+
+// test{
+//     animation: name duration timing-function delay iteration-count direction fill-mode;
+// }
+
+.outer {
     display: flex;
-    width: 70px;
-    height: 70px;
-    position:absolute;
-    top: 75px;
-    left: 75px;
-    animation-name: moveImg;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    opacity: 0;
+
+
+    // top: calc(50% - 92px);
+    // left: calc(50% - 182.65px);
+    // top: 75px;
+    // left: 75px;
+
+    z-index: 3;
+
+    animation: moveOuter;
     animation-delay: 500ms;
-    animation-duration: 2250ms;
-    
-}
+    animation-duration: 2500ms;
+    animation-fill-mode: forwards;
 
-@keyframes moveImg {
-    from{
-        top: 50%;
-        left: calc(50% - 121.5px);
-        width: 186.98px;
-        height: 184px;
-    }
-
-    to{
-        top: 75px;
-        left: 75px;
+    .image {
+        // width: 186.98px;
+        // height: 184px;
         width: 70px;
         height: 70px;
+        background-color: rgba(49, 58, 229, 1);
+        animation: moveImg;
+        animation-delay: 500ms;
+        animation-duration: 2500ms;
+        animation-fill-mode: forwards;
+        z-index: 4;
+        padding-left: 190px;
     }
-    
+
+
+    .text {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 33px;
+        color: black;
+        padding-left: 14px;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+        animation: moveRight;
+        animation-delay: 500ms;
+        animation-duration: 2500ms;
+        z-index: 3;
+    }
+
+
+    @keyframes moveOuter {
+        0% {
+            left: calc(50% - 282px);
+            top: calc(50% - 92px);
+            opacity: 1;
+        }
+
+        20% {
+            left: calc(50% - 451.07px);
+            top: calc(50% - 92px);
+        }
+
+        51% {
+            left: calc(50% - 451.07px);
+            top: calc(50% - 92px);
+        }
+
+        100% {
+            top: 75px;
+            left: 75px;
+            opacity: 1;
+        }
+    }
+
+
+    @keyframes moveRight {
+        0% {
+            margin-left: -390px;
+            color: white;
+            font-size: 66px;
+
+        }
+
+        20% {
+            margin-left: -390px;
+            color: white;
+        }
+
+        50% {
+            
+            margin-left: 0px;
+            font-size: 66px;
+            color: white;
+        }
+
+
+        100% {
+            margin-left: 0px;
+            font-size: 33px;
+            color: black;
+        }
+
+    }
+
+    @keyframes moveImg {
+        0% {
+            
+            // margin-left: 190px;
+            width: 186.98px;
+            height: 184px;
+        }
+
+        50% {
+            background-color: rgba(49, 58, 229, 1);
+            width: 186.98px;
+            height: 184px;
+        }
+
+        51% {
+            background-color: rgba(49, 58, 229, 0);
+            padding-left: 190px;
+        }
+
+        100% {
+            background-color: rgba(49, 58, 229, 0);
+            width: 70px;
+            height: 70px;
+            padding-left: 0px;
+        }
+    }
+
+
+
 }
 
-.text{
-    display: flex;
+.layover {
     position: absolute;
-    top: 10px;
-    left: 160px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 35px;
-    color: black;
-    animation-name: moveText;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(49, 58, 229, 1);
+    z-index: 2;
+    animation: layover;
+    animation-fill-mode: forwards;
     animation-delay: 500ms;
-    animation-duration: 2250ms;
+    animation-duration: 2500ms;
 }
 
-@keyframes moveText{
-    from{
-        top: 50%;
-        left: 50%;
-        color: white;
+
+@keyframes layover {
+    0% {
+        background-color: rgba(49, 58, 229, 1);
+        z-index: 2;
+        height: 100vh;
+        width: 100%;
     }
 
-    to{
-        top: 98px;
-        left: 161px;
-        color: white;
+    51% {
+        background-color: rgba(49, 58, 229, 1);
     }
+
+    75%{
+        background-color: (121, 126, 243, 1);
+    }
+
+    99%{
+        z-index: 2;
+        height: 100vh;
+        width: 100%;
+    }
+
+    100%{
+        background-color: rgba(121, 126, 243, 0);
+        z-index: -1;
+        height: 0px;
+        width: 0px;
+    }
+
 }

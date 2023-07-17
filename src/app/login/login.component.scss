@@ -4,7 +4,7 @@
 
     .loginHead {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         padding-top: 75px;
         padding-right: 75px;
         padding-left: 75px;
@@ -28,10 +28,7 @@
             }
 
             .span2 {
-
-                // width: 152px;
                 height: 42px;
-                // padding: 10px, 15px, 10px, 15px;
                 border-radius: 100%;
                 font-family: 'Figtree';
                 font-weight: 400;
