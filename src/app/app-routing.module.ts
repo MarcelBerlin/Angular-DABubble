@@ -20,7 +20,7 @@ const routes: Routes = [
    // ################## TEST ROUTE MARCEL ##################
 
    {
-    path: 'tags/:id',
+    path: 'channel/:name/:id',
       component: ChannelFocusComponent, 
   },
 
