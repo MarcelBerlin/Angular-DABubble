@@ -18,14 +18,20 @@ export class HeaderComponent {
 
   userData: any;
   users: any;
-  loggedUser: any;
+  loggedUserName: string = '';
+  loggedUserImg: string = '';
 
   constructor(
     public dialog: MatDialog,
     private auth: AuthService,
     public getUserData: DataService) {
-    this.loggedUser = this.getUserData.loggedInUserData;
-    // console.log(this.loggedUser);
+    // this.getUserData.loggedInUserData;
+    setTimeout(() => {
+      console.log(this.getUserData.loggedInUserData);
+      this.loggedUserImg = getUserData.loggedInUserData.img;
+      this.loggedUserName = getUserData.loggedInUserData.name;
+    }, 2000 );
+    
   }
 
 
