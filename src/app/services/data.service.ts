@@ -23,9 +23,7 @@ export class DataService {
     this.users$.subscribe((user: any) => {
       this.userData = user;
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
-        // setTimeout(() => {
         this.getLoggedInUserData();
-        // }, 1000);
       }
     });
   }
