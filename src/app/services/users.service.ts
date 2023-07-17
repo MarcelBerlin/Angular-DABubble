@@ -45,5 +45,4 @@ export class UsersService {
     email: 'stef.hoff@gmail.com',
     online: false
   }];
-
 }

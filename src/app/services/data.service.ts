@@ -57,8 +57,8 @@ export class DataService {
   getLoggedUserData(user: any): any {
     return {
       email: user.email,
-      firstName: user.name,
-      lastName: user.img,
+      name: user.name,
+      img: user.img,
       online: false,
     };
   }
