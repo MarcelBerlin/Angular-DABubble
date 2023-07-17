@@ -29,7 +29,7 @@ export class DialogMembersComponent {
   }
 
   openMember() {
-    // this.dialogRef.close();
+    this.dialogRef.close();
     this.dialog.open(DialogProfileViewUsersComponent);
   }
 

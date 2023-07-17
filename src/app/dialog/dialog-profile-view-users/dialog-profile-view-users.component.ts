@@ -31,5 +31,6 @@ export class DialogProfileViewUsersComponent {
 
   message() {
     this.varService.setVar('messagePNBox', true)
+    this.dialogRef.close();
   }
 }
