@@ -24,7 +24,7 @@ interface Tag {
     trigger('tagAnimation', [
       state('visible', style({ opacity: 1 })),
       state('hidden', style({ opacity: 0, display: 'none' })),
-      transition('visible <=> hidden', animate('175ms ease-in-out'))
+      transition('visible <=> hidden', animate('300ms ease-in-out')),
     ])
   ]
 })

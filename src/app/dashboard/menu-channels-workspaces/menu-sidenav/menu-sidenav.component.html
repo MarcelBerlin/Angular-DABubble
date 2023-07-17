@@ -11,10 +11,8 @@
 
         <div class="channels-container">
             <div class="channels-headline pd-left pd-right">
-                <img class="pointer" [src]="channelsPath"
-                    (mouseenter)="hoverChannels()"
-                    (mouseleave)="unhoverChannels()" 
-                    (click)="toggleChannels(); onClickChannels()">
+                <img class="pointer" [src]="channelsPath" (mouseenter)="hoverChannels()"
+                    (mouseleave)="unhoverChannels()" (click)="toggleChannels(); onClickChannels()">
 
                 <img class="pointer" [src]="addPathChannel"
                     (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
@@ -31,23 +29,21 @@
                     <div class="channel-name" (click)="openChannel()">
                         <img class="pointer" [src]="tag.imagePath">
                         <span class="pointer">{{ tag.name }}</span>
-                    </div>              
+                    </div>
 
                     <!-- <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon> -->
                 </div>
 
                 <img class="pointer channel-add" [src]="addNewChannel"
-                (mouseenter)="addNewChannel = 'assets/img/sidenav/add_channel_hover.png'"
-                (mouseleave)="addNewChannel = 'assets/img/sidenav/add_Channel.png'" (click)="addChannel()">
+                    (mouseenter)="addNewChannel = 'assets/img/sidenav/add_channel_hover.png'"
+                    (mouseleave)="addNewChannel = 'assets/img/sidenav/add_Channel.png'" (click)="addChannel()">
             </div>
         </div>
 
         <div class="direct-messages">
             <div class="direct-messages-headline pd-left pd-right pd-top">
-                <img class="pointer" [src]="directMessagePath"
-                    (mouseenter)="hoverDirectMessage()"
-                    (mouseleave)="unhoverDirectMessage()"
-                    (click)="toggleDirectMessage(); onClickDirectMessage()">
+                <img class="pointer" [src]="directMessagePath" (mouseenter)="hoverDirectMessage()"
+                    (mouseleave)="unhoverDirectMessage()" (click)="toggleDirectMessage(); onClickDirectMessage()">
 
                 <img class="pointer" [src]="addPathMessage"
                     (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
@@ -56,6 +52,7 @@
             </div>
 
             <div class="direct-message-content" [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'">
+                
                 <div *ngFor="let user of userData">
 
                     <div class="direct-message-user" (click)="messageToUser()">
@@ -63,19 +60,16 @@
                             <img class="pointer" [src]="user.img">
                         </div>
                         <span class="pointer">{{ user.name }}</span>
-                        <div
-                        class="activeDot"
-                        [style.background-color]="user.online ? '#92C83E' : '#686868'"
-                      ></div>
-                
+                        <div class="activeDot" [style.background-color]="user.online ? '#92C83E' : '#686868'"></div>
                     </div>
 
                     <!-- <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon> -->
+                    
 
                 </div>
+               
             </div>
-
-
         </div>
+        
     </div>
 </div>
