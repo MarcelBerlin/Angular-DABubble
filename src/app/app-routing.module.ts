@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { ChannelFocusComponent } from './dashboard/main-chat/channel-focus/channel-focus.component';
 
 const routes: Routes = [
   // {path: '', component: },
@@ -16,6 +17,14 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
+   // ################## TEST ROUTE MARCEL ##################
+
+   {
+    path: 'tags/:id',
+      component: ChannelFocusComponent, 
+  },
+
+  // ################## TEST ROUTE END ##################
   {
     path: 'createAccount',
     component: CreateAccountComponent
@@ -25,6 +34,8 @@ const routes: Routes = [
     component: LoginComponent,
     /* dieser Path muss zwingend am ende des routings stehen */
   },
+
+ 
 ];
 
 @NgModule({
