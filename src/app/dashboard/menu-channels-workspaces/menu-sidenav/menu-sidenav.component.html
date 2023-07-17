@@ -12,8 +12,9 @@
         <div class="channels-container">
             <div class="channels-headline pd-left pd-right">
                 <img class="pointer" [src]="channelsPath"
-                    (mouseenter)="channelsPath = 'assets/img/sidenav/channel_closed_hover.png'"
-                    (mouseleave)="channelsPath = 'assets/img/sidenav/channel_closed.png'" (click)="toggleChannels()">
+                    (mouseenter)="hoverChannels()"
+                    (mouseleave)="unhoverChannels()" 
+                    (click)="toggleChannels(); onClickChannels()">
 
                 <img class="pointer" [src]="addPathChannel"
                     (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
@@ -44,9 +45,9 @@
         <div class="direct-messages">
             <div class="direct-messages-headline pd-left pd-right pd-top">
                 <img class="pointer" [src]="directMessagePath"
-                    (mouseenter)="directMessagePath = 'assets/img/sidenav/direct_message_closed_hover.png'"
-                    (mouseleave)="directMessagePath = 'assets/img/sidenav/direct_message_closed.png'"
-                    (click)="toggleDirectMessage()">
+                    (mouseenter)="hoverDirectMessage()"
+                    (mouseleave)="unhoverDirectMessage()"
+                    (click)="toggleDirectMessage(); onClickDirectMessage()">
 
                 <img class="pointer" [src]="addPathMessage"
                     (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"

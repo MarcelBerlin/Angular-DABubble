@@ -31,15 +31,15 @@ interface Tag {
 
 export class MenuSidenavComponent implements OnInit {
 
-  
+
   tags$: Observable<any[]>;
   user$: Observable<any[]>;
-  userData: any;  
+  userData: any;
   tags: any;
   tagState = 'visible';
 
   newMessagePath: string = 'assets/img/sidenav/newMessage.png';
-  channelsPath: string = 'assets/img/sidenav/channel_closed.png';
+  channelsPath: string = 'assets/img/sidenav/channel_open.png';
   addPathChannel: string = 'assets/img/sidenav/add.png';
   addPathMessage: string = 'assets/img/sidenav/add.png';
   addNewChannel: string = 'assets/img/sidenav/add_Channel.png';
@@ -49,10 +49,11 @@ export class MenuSidenavComponent implements OnInit {
   directMessagePath: string = 'assets/img/sidenav/direct_message_closed.png';
 
   channelsVisible: boolean = true;
+  hover: boolean = false;
   directMessageUserVisible: boolean = true;
 
 
-  constructor(public dialog: MatDialog, public getService: DialogAddService, private firestore: Firestore, public getUserData: DataService,public varService:VariablesService) {
+  constructor(public dialog: MatDialog, public getService: DialogAddService, private firestore: Firestore, public getUserData: DataService, public varService: VariablesService) {
     this.tags = this.getService.tags;
     this.userData = this.getUserData.userData;
   }
@@ -79,17 +80,106 @@ export class MenuSidenavComponent implements OnInit {
     this.user$ = collectionData(userCollection, { idField: 'id' });
 
     this.user$.subscribe(data => {
-      this.userData = data;      
-      
+      this.userData = data;
+
     });
   }
 
+
+
   toggleChannels() {
     this.channelsVisible = !this.channelsVisible;
+    this.directMessageUserVisible = !this.directMessageUserVisible;
+
+    if (this.channelsVisible) {
+      this.channelsPath = 'assets/img/sidenav/channel_open.png';
+    } else {
+      this.channelsPath = 'assets/img/sidenav/channel_closed.png';
+    }
+
+    if (this.hover) {
+      this.channelsPath += '_hover';
+    }
   }
+
+  hoverChannels() {
+    this.hover = true;
+
+    if (this.channelsVisible) {
+      this.channelsPath = 'assets/img/sidenav/channel_open_hover.png';
+    } else {
+      this.channelsPath = 'assets/img/sidenav/channel_closed_hover.png';
+    }
+
+  }
+
+  unhoverChannels() {
+    this.hover = false;
+
+    if (this.channelsVisible) {
+      this.channelsPath = 'assets/img/sidenav/channel_open.png';
+    } else {
+      this.channelsPath = 'assets/img/sidenav/channel_closed.png';
+    }
+
+    if (this.directMessageUserVisible) {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_open.png';
+    } else {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_closed.png';
+    }
+  }
+
+
 
   toggleDirectMessage() {
     this.directMessageUserVisible = !this.directMessageUserVisible;
+
+    if (this.directMessageUserVisible) {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_open.png';
+    } else {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_closed.png';
+    }
+
+    if (this.hover) {
+      this.directMessagePath += '_hover';
+    }
+  }
+
+  hoverDirectMessage() {
+    this.hover = true;
+
+    if (this.directMessageUserVisible) {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_open_hover.png';
+    } else {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_closed_hover.png';
+    }
+  }
+
+  unhoverDirectMessage() {
+    this.hover = false;
+
+    if (this.directMessageUserVisible) {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_open.png';
+    } else {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_closed.png';
+    }
+  }
+
+  onClickChannels() {
+    if (this.channelsVisible) {
+      this.channelsPath = 'assets/img/sidenav/channel_open_click.png';
+    } else {
+      this.channelsPath = 'assets/img/sidenav/channel_closed_click.png';
+    }
+  }
+
+
+  onClickDirectMessage() {
+    if (this.directMessageUserVisible) {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_open_click.png';
+    } else {
+      this.directMessagePath = 'assets/img/sidenav/direct_message_closed_click.png';
+    }
   }
 
   addChannel() {
