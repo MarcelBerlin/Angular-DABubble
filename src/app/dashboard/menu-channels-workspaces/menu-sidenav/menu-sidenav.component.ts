@@ -107,4 +107,9 @@ export class MenuSidenavComponent implements OnInit {
   messageToUser() {
     this.varService.setVar('messagePNBox', true)
   }
+
+  openChannel() {
+    this.varService.setVar('messagePNBox', false)
+
+  }
 }
