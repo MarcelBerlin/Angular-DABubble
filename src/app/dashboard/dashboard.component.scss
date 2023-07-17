@@ -19,7 +19,8 @@
     bottom: 16px;
     left: 8px;
     width: 25%;
-    transition: 200ms;
+    transition: 200ms;    
+    overflow-y: hidden;
   }
   .leftContainerSlideOut{
     transform: translateX(-25vw);
