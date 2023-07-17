@@ -4,8 +4,9 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { MatMenuTrigger, MatMenuModule } from '@angular/material/menu';
 import { HeaderDialogComponent } from 'src/app/header-dialog/header-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user.class';
 import { DataService } from 'src/app/services/data.service';
+import { Observable } from 'rxjs';
+import { collection, collectionData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-header',
@@ -16,22 +17,34 @@ import { DataService } from 'src/app/services/data.service';
 export class HeaderComponent {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
 
-  userData: any;
-  users: any;
+  user: any;
   loggedUserName: string = '';
   loggedUserImg: string = '';
+  loggedUserMail: string = '';
+  loggedUserStatus: string = '';
 
   constructor(
     public dialog: MatDialog,
     private auth: AuthService,
     public getUserData: DataService) {
-    // this.getUserData.loggedInUserData;
-    setTimeout(() => {
-      console.log(this.getUserData.loggedInUserData);
-      this.loggedUserImg = getUserData.loggedInUserData.img;
-      this.loggedUserName = getUserData.loggedInUserData.name;
-    }, 2000 );
-    
+
+    getUserData.users$.subscribe((actualUser) => {
+      // console.log(actualUser);
+      setTimeout(() => {
+        console.log(this.loggedUserName);
+        console.log(this.loggedUserMail);
+        console.log(this.loggedUserImg);
+        console.log(this.loggedUserStatus);
+      }, 2000);
+      this.getActualUser();
+    })
+  }
+
+  getActualUser() {
+    this.loggedUserName = this.getUserData.loggedInUserData.name;
+    this.loggedUserImg = this.getUserData.loggedInUserData.img;
+    this.loggedUserMail = this.getUserData.loggedInUserData.email;
+    this.loggedUserStatus = this.getUserData.loggedInUserData.online;
   }
 
 

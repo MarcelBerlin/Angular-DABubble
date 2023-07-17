@@ -20,7 +20,7 @@
         left: 0;
 
         .input-searchbar {
-            width: 940px;
+            width: calc(100vw - 700px);
             height: 70px;
             border-radius: 42px;
             border: none;

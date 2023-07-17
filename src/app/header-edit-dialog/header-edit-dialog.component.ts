@@ -1,10 +1,9 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { UsersService } from '../services/users.service';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { User } from '../models/user.class';
 import { AuthService } from '../services/auth.service';
 import { DataService } from '../services/data.service';
+import { collection, doc, setDoc } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-header-edit-dialog',
@@ -14,16 +13,31 @@ import { DataService } from '../services/data.service';
 export class HeaderEditDialogComponent {
 
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
+  @ViewChild('inputName') inputName: ElementRef;
+  @ViewChild('inputMail') inputMail: ElementRef;
 
-  userData: any;
-  loggedUser: any;
+  loggedUserName: string = '';
+  loggedUserImg: string = '';
+  loggedUserMail: string = '';
+
+  newInputMail: string = '';
+  newInputName: string = '';
 
   constructor(
     public dialog: MatDialog,
     private auth: AuthService,
     public getUserData: DataService) {
-    this.loggedUser = this.getUserData.loggedInUserData;
-    // console.log(this.loggedUser);
+
+    setTimeout(() => {
+      this.loggedUserImg = getUserData.loggedInUserData.img;
+      this.loggedUserName = getUserData.loggedInUserData.name;
+      this.loggedUserMail = getUserData.loggedInUserData.email;
+    }, 1000);
+  }
+
+  saveUserChanges() {
+    console.log(this.inputMail.nativeElement.value);
+    console.log(this.inputName.nativeElement.value);
 
   }
 }

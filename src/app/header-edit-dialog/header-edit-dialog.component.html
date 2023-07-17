@@ -5,26 +5,26 @@
             <img class="close-icon" mat-button mat-dialog-close src="./../../assets/img/close.png">
         </div>
         
-        <img class="user-img" src="{{ this.loggedUser.img }}">
+        <img class="user-img" src="{{ loggedUserImg }}">
         
         <div class="input-section">
             <div class="edit-description">
                 <img src="./../../assets/img/user-icon.png">
                 <span>Vollständiger Name</span>
             </div>
-            <input #editInput class="header-input" placeholder="{{this.loggedUser.name }}">
+            <input #inputName [(ngModel)]="newInputName" class="header-input" placeholder="{{ loggedUserName  }}">
         </div>
         <div class="input-section">
             <div class="edit-description">
                 <img src="./../../assets/img/mail-icon.png">
                 <span> E-Mail Adresse </span>
             </div>
-            <input #editInput class="header-input" placeholder="{{ this.loggedUser.email }}">
+            <input #inputMail [(ngModel)]="newInputMail" class="header-input" placeholder="{{ loggedUserMail }}">
         </div>
 
         <div class="btn-container">
             <button mat-dialog-close class="cancel-btn">Abbrechen</button>
-            <button class="save-btn">Speichern</button>
+            <button (click)="saveUserChanges()" class="save-btn">Speichern</button>
         </div>
 
     </mat-dialog-content>
