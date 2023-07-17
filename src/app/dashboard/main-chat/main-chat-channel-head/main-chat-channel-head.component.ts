@@ -5,11 +5,11 @@ import { DialogMembersComponent } from 'src/app/dialog/dialog-members/dialog-mem
 import { TestBastiService } from 'src/app/services/test-basti.service';
 
 @Component({
-  selector: 'app-main-chat-head',
-  templateUrl: './main-chat-head.component.html',
-  styleUrls: ['./main-chat-head.component.scss'],
+  selector: 'app-main-chat-channel-head',
+  templateUrl: './main-chat-channel-head.component.html',
+  styleUrls: ['./main-chat-channel-head.component.scss']
 })
-export class MainChatHeadComponent {
+export class MainChatChannelHeadComponent {
   constructor(public dialog: MatDialog, public tBS: TestBastiService) {}
 
   channelEdition() {
@@ -19,4 +19,5 @@ export class MainChatHeadComponent {
   showMembers() {
     this.dialog.open(DialogMembersComponent);
   }
+
 }

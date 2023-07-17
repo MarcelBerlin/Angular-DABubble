@@ -1,7 +1,12 @@
 <div class="contentContainer">
   <div class="content">
-    <app-main-chat-head></app-main-chat-head>
-   
+    <app-main-chat-channel-head
+      *ngIf="!varService.messagePNBox"
+    ></app-main-chat-channel-head>
+    <app-main-chat-message-head
+      *ngIf="varService.messagePNBox"
+    ></app-main-chat-message-head>
+
     <div class="chatContainer">
       <div class="timeLine">
         <div class="timeLineHead">Dienstag, 14 Januar</div>

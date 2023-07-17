@@ -4,18 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class VariablesService {
-
-
   /****Platz für alle Variablen****/
-
-
-
-
-
+  messagePNBox: boolean = false; // Main Chat PN Box
 
   /********************************/
 
-  
   constructor() {}
 
   [key: string]: any; // Index-Signatur für beliebige Eigenschaften

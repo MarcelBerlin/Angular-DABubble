@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { TestBastiService } from 'src/app/services/test-basti.service';
 import { DashboardComponentsShowHideService } from '../dashboard-components-show-hide.service';
+import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
   selector: 'app-main-chat',
@@ -14,7 +15,8 @@ export class MainChatComponent {
 
   constructor(
     private dcshService: DashboardComponentsShowHideService,
-    private dialog: Dialog
+    private dialog: Dialog,
+    public varService:VariablesService
   ) {}
 
   openSecondaryChat() {
