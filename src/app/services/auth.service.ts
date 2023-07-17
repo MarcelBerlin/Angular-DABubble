@@ -193,13 +193,11 @@ export class AuthService {
   }
 
   auth = getAuth();
-  lUser = this.auth.currentUser;
+  
 
   getLoggedUser(){
-    if (this.lUser){
-      console.log('getLogged', this.lUser);
-      
-    }
-    else console.log('No User');
+    this.afs.authState.subscribe(users => {
+      console.log(users);
+    });
   }
 }
