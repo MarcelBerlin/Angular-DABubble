@@ -45,6 +45,7 @@ import { DialogMembersComponent } from './dialog/dialog-members/dialog-members.c
 import { DialogAddMembersComponent } from './dialog/dialog-add-members/dialog-add-members.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { ChannelFocusComponent } from './dashboard/main-chat/channel-focus/channel-focus.component';
+import { StartAnimationComponent } from './start-animation/start-animation.component';
 
 
 
@@ -74,6 +75,7 @@ import { ChannelFocusComponent } from './dashboard/main-chat/channel-focus/chann
     DialogAddMembersComponent,
     ChannelFocusComponent,
     CreateAccountComponent,
+    StartAnimationComponent,
 
   ],
   imports: [

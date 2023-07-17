@@ -19,7 +19,9 @@ export class AuthService {
     public dialogInfoService: DialogInfoService,
     public dialog: MatDialog,
     private dataService: DataService,
-    ) { }
+    ) {
+      
+     }
 
 
   signInWithGoogle(){

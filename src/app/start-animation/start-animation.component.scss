@@ -1,0 +1,65 @@
+.outer{
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    width: 100%;
+}
+
+.image{
+    display: flex;
+    width: 70px;
+    height: 70px;
+    position:absolute;
+    top: 75px;
+    left: 75px;
+    animation-name: moveImg;
+    animation-delay: 500ms;
+    animation-duration: 2250ms;
+    
+}
+
+@keyframes moveImg {
+    from{
+        top: 50%;
+        left: calc(50% - 121.5px);
+        width: 186.98px;
+        height: 184px;
+    }
+
+    to{
+        top: 75px;
+        left: 75px;
+        width: 70px;
+        height: 70px;
+    }
+    
+}
+
+.text{
+    display: flex;
+    position: absolute;
+    top: 10px;
+    left: 160px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    color: black;
+    animation-name: moveText;
+    animation-delay: 500ms;
+    animation-duration: 2250ms;
+}
+
+@keyframes moveText{
+    from{
+        top: 50%;
+        left: 50%;
+        color: white;
+    }
+
+    to{
+        top: 98px;
+        left: 161px;
+        color: white;
+    }
+}
