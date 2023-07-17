@@ -1,5 +1,6 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
   selector: 'app-dialog-profile-view-users',
@@ -9,7 +10,10 @@ import { Component } from '@angular/core';
 export class DialogProfileViewUsersComponent {
   online: boolean = false;
 
-  constructor(private dialogRef: DialogRef) {}
+  constructor(
+    private dialogRef: DialogRef,
+    private varService: VariablesService
+  ) {}
 
   ngOnInit() {
     this.testTime();
@@ -22,6 +26,11 @@ export class DialogProfileViewUsersComponent {
   }
 
   close() {
+    this.dialogRef.close();
+  }
+
+  message() {
+    this.varService.setVar('messagePNBox', true)
     this.dialogRef.close();
   }
 }

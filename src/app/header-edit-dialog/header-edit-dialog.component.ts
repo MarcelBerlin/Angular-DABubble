@@ -3,6 +3,8 @@ import { UsersService } from '../services/users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { User } from '../models/user.class';
+import { AuthService } from '../services/auth.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-header-edit-dialog',
@@ -12,14 +14,16 @@ import { User } from '../models/user.class';
 export class HeaderEditDialogComponent {
 
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
-  @Input() online = false; // mit user verknüpfen ---- bpsw: list[i].online
-  
-  list = this.users.list;
-  // user = new User();
 
-  
-  
-  constructor(public users: UsersService, public dialog: MatDialog) {
-    console.log(this.list);
+  userData: any;
+  loggedUser: any;
+
+  constructor(
+    public dialog: MatDialog,
+    private auth: AuthService,
+    public getUserData: DataService) {
+    this.loggedUser = this.getUserData.loggedInUserData;
+    // console.log(this.loggedUser);
+
   }
 }

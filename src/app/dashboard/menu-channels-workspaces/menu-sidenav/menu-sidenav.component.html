@@ -27,7 +27,7 @@
                     (mouseleave)="tag.imagePath = 'assets/img/sidenav/tag.png'"
                     (click)="tag.imagePath = 'assets/img/sidenav/tag_click.png'">
 
-                    <div class="channel-name">
+                    <div class="channel-name" (click)="openChannel()">
                         <img class="pointer" [src]="tag.imagePath">
                         <span class="pointer">{{ tag.name }}</span>
                     </div>              
@@ -57,7 +57,7 @@
             <div class="direct-message-content" [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'">
                 <div *ngFor="let user of userData">
 
-                    <div class="direct-message-user">
+                    <div class="direct-message-user" (click)="messageToUser()">
                         <div>
                             <img class="pointer" [src]="user.img">
                         </div>

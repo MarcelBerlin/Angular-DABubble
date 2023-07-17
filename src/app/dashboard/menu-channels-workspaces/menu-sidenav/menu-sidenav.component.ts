@@ -7,6 +7,7 @@ import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { User } from 'src/app/models/user.class';
+import { VariablesService } from 'src/app/services/variables.service';
 
 interface Tag {
   id: string;
@@ -51,7 +52,7 @@ export class MenuSidenavComponent implements OnInit {
   directMessageUserVisible: boolean = true;
 
 
-  constructor(public dialog: MatDialog, public getService: DialogAddService, private firestore: Firestore, public getUserData: DataService) {
+  constructor(public dialog: MatDialog, public getService: DialogAddService, private firestore: Firestore, public getUserData: DataService,public varService:VariablesService) {
     this.tags = this.getService.tags;
     this.userData = this.getUserData.userData;
   }
@@ -103,4 +104,12 @@ export class MenuSidenavComponent implements OnInit {
     this.getService.deleteTagFromFirestore(tag);
   }
 
+  messageToUser() {
+    this.varService.setVar('messagePNBox', true)
+  }
+
+  openChannel() {
+    this.varService.setVar('messagePNBox', false)
+
+  }
 }

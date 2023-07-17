@@ -12,8 +12,8 @@
 
     <div class="header-profile">
 
-        <span> {{ list[1].name }} </span> <!-- später durch firebase ersetzen -->
-        <img src="{{ list[1].img }}"> <!-- später durch firebase ersetzen -->
+        <span> {{ this.loggedUser.name }} </span>
+        <img src="{{ this.loggedUser.img }}"> 
 
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>keyboard_arrow_down</mat-icon>

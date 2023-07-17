@@ -28,7 +28,6 @@ import { MatDialogActions, } from '@angular/material/dialog';
 import { MatDialogContent } from '@angular/material/dialog';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MainChatHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-head.component';
 import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
 import { MenuSidenavComponent } from './dashboard/menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { MatTreeModule } from '@angular/material/tree';
@@ -46,6 +45,8 @@ import { DialogAddMembersComponent } from './dialog/dialog-add-members/dialog-ad
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { ChannelFocusComponent } from './dashboard/main-chat/channel-focus/channel-focus.component';
 import { StartAnimationComponent } from './start-animation/start-animation.component';
+import { MainChatChannelHeadComponent } from './dashboard/main-chat/main-chat-channel-head/main-chat-channel-head.component';
+import { MainChatMessageHeadComponent } from './dashboard/main-chat/main-chat-message-head/main-chat-message-head.component';
 
 
 
@@ -59,7 +60,6 @@ import { StartAnimationComponent } from './start-animation/start-animation.compo
     SecondaryChatComponent,
     LoginComponent,
     DashboardComponent,
-    MainChatHeadComponent,
     HeaderDialogComponent,
     MenuSidenavComponent,
     DialogChannelEditionComponent,
@@ -76,6 +76,8 @@ import { StartAnimationComponent } from './start-animation/start-animation.compo
     ChannelFocusComponent,
     CreateAccountComponent,
     StartAnimationComponent,
+    MainChatChannelHeadComponent,
+    MainChatMessageHeadComponent
 
   ],
   imports: [
