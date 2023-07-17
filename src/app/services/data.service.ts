@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { User } from '../models/user.class';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +17,7 @@ export class DataService {
 
 
   constructor(
-    private firestore: Firestore
+    private firestore: Firestore,
   ) {
     const coll = collection(firestore, 'users');
     this.users$ = collectionData(coll, { idField: 'id' });
@@ -107,6 +108,9 @@ export class DataService {
       });
     }
   }
+
+
+
 }
 
 

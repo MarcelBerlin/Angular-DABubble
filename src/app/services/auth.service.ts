@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { GoogleAuthProvider } from '@angular/fire/auth';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireAuth} from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { DialogInfoService } from './dialog-info.service';
 import { DialogInfoComponent } from '../dialog-info/dialog-info.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
+import { getAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class AuthService {
     public dialog: MatDialog,
     private dataService: DataService,
     ) {
-      
+      this.getLoggedUser();
      }
 
 
@@ -189,5 +190,16 @@ export class AuthService {
         else if (error.code === 'auth/network-request-failed') this.openDialogNoServerConnection();
         else this.openDialogSystemFailure();
       });
+  }
+
+  auth = getAuth();
+  lUser = this.auth.currentUser;
+
+  getLoggedUser(){
+    if (this.lUser){
+      console.log('getLogged', this.lUser);
+      
+    }
+    else console.log('No User');
   }
 }
