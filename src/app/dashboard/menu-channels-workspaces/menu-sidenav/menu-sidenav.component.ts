@@ -59,10 +59,8 @@ export class MenuSidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.allTags();
     this.allUsers();
-
   }
 
 
@@ -81,15 +79,13 @@ export class MenuSidenavComponent implements OnInit {
 
     this.user$.subscribe(data => {
       this.userData = data;
-
     });
   }
 
 
 
   toggleChannels() {
-    this.channelsVisible = !this.channelsVisible;
-    this.directMessageUserVisible = !this.directMessageUserVisible;
+    this.channelsVisible = !this.channelsVisible;    
 
     if (this.channelsVisible) {
       this.channelsPath = 'assets/img/sidenav/channel_open.png';
@@ -128,7 +124,6 @@ export class MenuSidenavComponent implements OnInit {
       this.directMessagePath = 'assets/img/sidenav/direct_message_closed.png';
     }
   }
-
 
 
   toggleDirectMessage() {
