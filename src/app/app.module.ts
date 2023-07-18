@@ -49,6 +49,7 @@ import { MainChatChannelHeadComponent } from './dashboard/main-chat/main-chat-ch
 import { MainChatMessageHeadComponent } from './dashboard/main-chat/main-chat-message-head/main-chat-message-head.component';
 import { MainChatChannelChatFieldComponent } from './dashboard/main-chat/main-chat-channel-chat-field/main-chat-channel-chat-field.component';
 import { MainChatMessageChatFieldComponent } from './dashboard/main-chat/main-chat-message-chat-field/main-chat-message-chat-field.component';
+import { ConversationBetweenComponent } from './dashboard/main-chat/main-chat-message-chat-field/conversation-between/conversation-between.component';
 
 
 
@@ -81,7 +82,8 @@ import { MainChatMessageChatFieldComponent } from './dashboard/main-chat/main-ch
     MainChatChannelHeadComponent,
     MainChatMessageHeadComponent,
     MainChatChannelChatFieldComponent,
-    MainChatMessageChatFieldComponent
+    MainChatMessageChatFieldComponent,
+    ConversationBetweenComponent
 
   ],
   imports: [
