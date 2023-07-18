@@ -1,12 +1,20 @@
-<div class="headMembers">
+<!-- <div class="headMembers" *ngFor="let user of dataService.userData">
+  
   <div class="messageToUserContainer" (click)="openMember()">
-    <div>
-      <img src="assets/img/members/avatar1.png" />
+    <div >
+      <img *ngIf="user.id == varService.selectedUserId" src="{{user.img}}" />
       <div
         class="activeDot"
         [style.background-color]="online ? '#92C83E' : '#686868'"
       ></div>
     </div>
-    <span>Frederik Beck</span>
+    <span>{{user.name}}</span>
+  </div>
+</div> -->
+
+
+<div class="headMembers">
+  <div  *ngFor="let user of dataService.userData">
+    <div>{{varService.selectedUserId}}</div>
   </div>
 </div>

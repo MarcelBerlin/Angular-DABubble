@@ -22,5 +22,7 @@ export class VariablesService {
 
   setVar(variableValue: string, newValue: number | string | boolean) {
     this[variableValue] = newValue;
+    console.log(this.selectedUserId);
+    
   }
 }

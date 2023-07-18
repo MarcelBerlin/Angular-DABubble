@@ -11,20 +11,32 @@ import { VariablesService } from 'src/app/services/variables.service';
 })
 export class MainChatMessageHeadComponent {
   online: boolean = false;
-  
-  constructor(public dataService: DataService, private dialog:MatDialog, public varService:VariablesService) { }
-  
-  ngOnInit() { 
-    this.onlineAnimation()
+  userIdOfVarService: string = this.varService.selectedUserId;
+
+  constructor(
+    public dataService: DataService,
+    private dialog: MatDialog,
+    public varService: VariablesService
+  ) {}
+
+  ngOnInit() {
+    this.onlineAnimation();
+    // this.getUserId();
   }
 
-  onlineAnimation() { 
-    setInterval(() => { this.online = !this.online }, 1000);
+  onlineAnimation() {
+    setInterval(() => {
+      this.online = !this.online;
+    }, 1000);
+
   }
 
   openMember() {
-    // this.dialogRef.close();
     this.dialog.open(DialogProfileViewUsersComponent);
   }
-
+  getUserId() {
+    // this.varService.getVar('selectedUserId');
+    // this.userIdOfVarService=
+    // console.log(this.userIdOfVarService);
+  }
 }
