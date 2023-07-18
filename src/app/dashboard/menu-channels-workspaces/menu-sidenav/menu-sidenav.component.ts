@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddChannelComponent } from 'src/app/dialog-add-channel/dialog-add-channel.component';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
@@ -25,13 +31,10 @@ interface Tag {
       state('visible', style({ opacity: 1 })),
       state('hidden', style({ opacity: 0, display: 'none' })),
       transition('visible <=> hidden', animate('300ms ease-in-out')),
-    ])
-  ]
+    ]),
+  ],
 })
-
 export class MenuSidenavComponent implements OnInit {
-
-
   tags$: Observable<any[]>;
   user$: Observable<any[]>;
   userData: any;
@@ -52,8 +55,13 @@ export class MenuSidenavComponent implements OnInit {
   hover: boolean = false;
   directMessageUserVisible: boolean = true;
 
-
-  constructor(public dialog: MatDialog, public getService: DialogAddService, private firestore: Firestore, public getUserData: DataService, public varService: VariablesService) {
+  constructor(
+    public dialog: MatDialog,
+    public getService: DialogAddService,
+    private firestore: Firestore,
+    public getUserData: DataService,
+    public varService: VariablesService
+  ) {
     this.tags = this.getService.tags;
     this.userData = this.getUserData.userData;
   }
@@ -63,12 +71,11 @@ export class MenuSidenavComponent implements OnInit {
     this.allUsers();
   }
 
-
   allTags() {
     const tagCollection = collection(this.firestore, 'tags');
     this.tags$ = collectionData(tagCollection, { idField: 'id' });
 
-    this.tags$.subscribe(data => {
+    this.tags$.subscribe((data) => {
       this.tags = data;
     });
   }
@@ -77,15 +84,13 @@ export class MenuSidenavComponent implements OnInit {
     const userCollection = collection(this.firestore, 'users');
     this.user$ = collectionData(userCollection, { idField: 'id' });
 
-    this.user$.subscribe(data => {
+    this.user$.subscribe((data) => {
       this.userData = data;
     });
   }
 
-
-
   toggleChannels() {
-    this.channelsVisible = !this.channelsVisible;    
+    this.channelsVisible = !this.channelsVisible;
 
     if (this.channelsVisible) {
       this.channelsPath = 'assets/img/sidenav/channel_open.png';
@@ -106,7 +111,6 @@ export class MenuSidenavComponent implements OnInit {
     } else {
       this.channelsPath = 'assets/img/sidenav/channel_closed_hover.png';
     }
-
   }
 
   unhoverChannels() {
@@ -124,7 +128,6 @@ export class MenuSidenavComponent implements OnInit {
       this.directMessagePath = 'assets/img/sidenav/direct_message_closed.png';
     }
   }
-
 
   toggleDirectMessage() {
     this.directMessageUserVisible = !this.directMessageUserVisible;
@@ -144,9 +147,11 @@ export class MenuSidenavComponent implements OnInit {
     this.hover = true;
 
     if (this.directMessageUserVisible) {
-      this.directMessagePath = 'assets/img/sidenav/direct_message_open_hover.png';
+      this.directMessagePath =
+        'assets/img/sidenav/direct_message_open_hover.png';
     } else {
-      this.directMessagePath = 'assets/img/sidenav/direct_message_closed_hover.png';
+      this.directMessagePath =
+        'assets/img/sidenav/direct_message_closed_hover.png';
     }
   }
 
@@ -168,34 +173,37 @@ export class MenuSidenavComponent implements OnInit {
     }
   }
 
-
   onClickDirectMessage() {
     if (this.directMessageUserVisible) {
-      this.directMessagePath = 'assets/img/sidenav/direct_message_open_click.png';
+      this.directMessagePath =
+        'assets/img/sidenav/direct_message_open_click.png';
     } else {
-      this.directMessagePath = 'assets/img/sidenav/direct_message_closed_click.png';
+      this.directMessagePath =
+        'assets/img/sidenav/direct_message_closed_click.png';
     }
   }
 
   addChannel() {
-    this.dialog.open(DialogAddChannelComponent)
+    this.dialog.open(DialogAddChannelComponent);
   }
 
   deleteTag(tag: Tag) {
     // Löschen des Tags aus der HTML-Ansicht
-    this.getService.tags = this.getService.tags.filter(t => t !== tag);
+    this.getService.tags = this.getService.tags.filter((t) => t !== tag);
 
     // Löschen des Tags aus der Firestore-Datenbank
     this.getService.deleteTagFromFirestore(tag);
   }
 
-  messageToUser(arrayId:number) {
+  messageToUser(arrayId: number) {
     this.varService.setVar('messagePNBox', true);
-    this.varService.setVar('selectedUserArrayId', arrayId);    
+    this.varService.setVar('selectedUserArrayId', arrayId);
   }
 
   openChannel() {
-    this.varService.setVar('messagePNBox', false)
-
+    this.varService.setVar('messagePNBox', false);
+    // hier wird die Variable 'messagePNBox' auf false gesetzt, um im Mittelteil die Channelbox anzuzeigen.
+    // wenn die Variable auf true ist, wird im Mittelteil die Nachrichtenbox angezeigt
+    // die funktion für das anzeigen der messagebox ist 'messageToUser()' in Zeile 198
   }
 }
