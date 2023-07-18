@@ -22,7 +22,7 @@ export class DialogProfileViewUsersComponent {
 
 
   close() {
-    this.dialogRef.close();
+    this.dialogRef.close(); 
   }
 
   message() {

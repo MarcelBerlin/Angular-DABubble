@@ -1,16 +1,22 @@
 <div class="headMembers">
-    <div class="head" (click)="channelEdition()">
-      <div>#</div>
-      <span>{{ tBS.channelName }}</span>
-      <mat-icon>keyboard_arrow_down</mat-icon>
+  <div class="head" (click)="channelEdition()">
+    <div>#</div>
+    <span>{{ tBS.channelName }}</span>
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </div>
+  <div class="membersAndAdd">
+    <div class="members" (click)="showMembers()">
+      <img src="assets/img/members/MembersPreviewTest.png" />
+      <span>3</span>
     </div>
-    <div class="membersAndAdd">
-      <div class="members"
-      (click)="showMembers()"
-      >
-        <img src="assets/img/members/MembersPreviewTest.png" />
-        <span>3</span>
-      </div>
-      <div class="add"><img src="assets/img/person_add.png" /></div>
+    <div
+      class="add"
+      (mouseenter)="hoveredAddIcon = true"
+      (mouseleave)="hoveredAddIcon = false"
+      (click)="addMember()"
+    >
+      <img *ngIf="!hoveredAddIcon" src="assets/img/person_add.png" />
+      <img *ngIf="hoveredAddIcon" src="assets/img/person_add_hover.png" />
     </div>
   </div>
+</div>
