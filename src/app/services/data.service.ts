@@ -42,9 +42,7 @@ export class DataService {
       this.loggedInUserEmail = JSON.parse(userJson);
       if (user.email == this.loggedInUserEmail) {
         this.loggedInUserData = this.getLoggedUserData(user);
-        console.log(this.loggedInUserData);
         this.updateUser();
-        console.log(this.loggedInUserData);
       }
     });
   }
@@ -120,7 +118,6 @@ export class DataService {
    * @returns {Promise<void>} A promise that resolves when the update operation is complete.
    */  
   updateUser(): void{
-    debugger;
     const qData = doc(this.firestore, 'users', this.loggedInUserData.userId);
     const newData = this.loggedInUserData;
     updateDoc(qData, newData).then(() => {

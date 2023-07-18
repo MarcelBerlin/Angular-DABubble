@@ -1,3 +1,4 @@
+import { Component, HostListener } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -12,6 +13,10 @@ import { getAuth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class AuthService {
+// @HostListener('window:beforeunload', ['$event'])
+// beforeunloadHandler(event: Event) {
+//     this.signOut()
+//   }
 
 
   constructor(
@@ -20,7 +25,9 @@ export class AuthService {
     public dialogInfoService: DialogInfoService,
     public dialog: MatDialog,
     private dataService: DataService,
-  ) {}
+  ) {
+    
+  }
 
 
   /**
