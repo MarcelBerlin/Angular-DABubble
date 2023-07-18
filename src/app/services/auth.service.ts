@@ -192,12 +192,11 @@ export class AuthService {
       });
   }
 
-  auth = getAuth();
   
 
   getLoggedUser(){
     this.afs.authState.subscribe(users => {
-      console.log(users);
+      console.log('Alle eingeloggten User', users);
     });
   }
 }
