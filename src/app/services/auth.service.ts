@@ -20,12 +20,14 @@ export class AuthService {
     public dialogInfoService: DialogInfoService,
     public dialog: MatDialog,
     private dataService: DataService,
-  ) {
-    
-    
-  }
+  ) {}
 
 
+  /**
+   * Performs sign-in with Google using Firebase Authentication.
+   * 
+   * @returns {Promise<firebase.auth.UserCredential>} A promise that resolves with a UserCredential object. 
+   */
   signInWithGoogle() {
     return this.afs.signInWithPopup(new GoogleAuthProvider());
   }
@@ -60,7 +62,6 @@ export class AuthService {
    */
   async signOut(): Promise<any> {
     return this.afs.signOut().then(() => {
-      
       this.dataService.loggedInUserData.online = false;
       this.dataService.updateUser();
       localStorage.removeItem('user');
@@ -194,13 +195,4 @@ export class AuthService {
         else this.openDialogSystemFailure();
       });
   }
-
-
-
-  // getLoggedUserId():void {
-  //   let userId:string = '';
-  //   this.afs.authState.subscribe(users => {
-  //     userId = users.uid;
-  //   });
-  // }
 }
