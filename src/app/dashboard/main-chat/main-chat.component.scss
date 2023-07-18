@@ -10,7 +10,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  app-main-chat-message-chat-field {
+  app-main-chat-message-chat-field,
+  app-main-chat-channel-chat-field {
     width: 100%;
   }
   // .timeLine {
