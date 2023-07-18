@@ -1,14 +1,14 @@
 <div class="headMembers">
   <div class="messageToUserContainer" (click)="openMember()">
     <div>
-      <img [src]="userData[currentUser].img" />
+      <img [src]="userData[varService.selectedUserArrayId].img" />
       <div
         class="activeDot"
         [style.background-color]="
-          userData[currentUser].online ? '#92C83E' : '#686868'
+          userData[varService.selectedUserArrayId].online ? '#92C83E' : '#686868'
         "
       ></div>
     </div>
-    <span>{{ userData[currentUser].name }}</span>
+    <span>{{ userData[varService.selectedUserArrayId].name }}</span>
   </div>
 </div>

@@ -47,6 +47,8 @@ import { ChannelFocusComponent } from './dashboard/main-chat/channel-focus/chann
 import { StartAnimationComponent } from './start-animation/start-animation.component';
 import { MainChatChannelHeadComponent } from './dashboard/main-chat/main-chat-channel-head/main-chat-channel-head.component';
 import { MainChatMessageHeadComponent } from './dashboard/main-chat/main-chat-message-head/main-chat-message-head.component';
+import { MainChatChannelChatFieldComponent } from './dashboard/main-chat/main-chat-channel-chat-field/main-chat-channel-chat-field.component';
+import { MainChatMessageChatFieldComponent } from './dashboard/main-chat/main-chat-message-chat-field/main-chat-message-chat-field.component';
 
 
 
@@ -77,7 +79,9 @@ import { MainChatMessageHeadComponent } from './dashboard/main-chat/main-chat-me
     CreateAccountComponent,
     StartAnimationComponent,
     MainChatChannelHeadComponent,
-    MainChatMessageHeadComponent
+    MainChatMessageHeadComponent,
+    MainChatChannelChatFieldComponent,
+    MainChatMessageChatFieldComponent
 
   ],
   imports: [

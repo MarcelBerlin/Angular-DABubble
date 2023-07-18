@@ -12,8 +12,6 @@ import { VariablesService } from 'src/app/services/variables.service';
 export class MainChatMessageHeadComponent {
   online: boolean = false;
   userData = this.dataService.userData;
-  userIdOfVarService: string = this.varService.selectedUserId;
-  currentUser: number;
 
   constructor(
     public dataService: DataService,
@@ -22,18 +20,6 @@ export class MainChatMessageHeadComponent {
   ) {}
 
   
-  ngOnInit() {
-    this.user();
-  }
-
-  user() {
-    for (let i = 0; i < this.userData.length; i++) {
-      if (this.userData[i].id === this.userIdOfVarService) {
-        this.currentUser = i;
-      }
-    }
-  }
-
   openMember() {
     this.dialog.open(DialogProfileViewUsersComponent);
   }

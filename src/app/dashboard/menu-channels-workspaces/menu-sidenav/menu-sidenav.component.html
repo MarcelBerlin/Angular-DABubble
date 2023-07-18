@@ -53,9 +53,9 @@
 
             <div class="direct-message-content" [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'">
                 
-                <div *ngFor="let user of userData">
+                <div *ngFor="let user of userData; let i=index">
 
-                    <div class="direct-message-user" (click)="messageToUser(user.id)">
+                    <div class="direct-message-user" (click)="messageToUser(i)">
                         <div>
                             <img class="pointer" [src]="user.img">
                         </div>
