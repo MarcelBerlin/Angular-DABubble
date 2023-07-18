@@ -11,7 +11,7 @@ import { VariablesService } from 'src/app/services/variables.service';
   styleUrls: ['./main-chat.component.scss'],
 })
 export class MainChatComponent {
-  hoveredMessagesMainChat: boolean = false;
+  // hoveredMessagesMainChat: boolean = false;
 
   constructor(
     private dcshService: DashboardComponentsShowHideService,
@@ -19,11 +19,11 @@ export class MainChatComponent {
     public varService:VariablesService
   ) {}
 
-  openSecondaryChat() {
-    this.dcshService.chatSlideIn();
-  }
+  // openSecondaryChat() {
+  //   this.dcshService.chatSlideIn();
+  // }
 
-  profileViewUsers() {
-    this.dialog.open(DialogProfileViewUsersComponent);
-  }
+  // profileViewUsers() {
+  //   this.dialog.open(DialogProfileViewUsersComponent);
+  // }
 }
