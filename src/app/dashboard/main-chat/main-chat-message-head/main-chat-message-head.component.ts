@@ -11,7 +11,9 @@ import { VariablesService } from 'src/app/services/variables.service';
 })
 export class MainChatMessageHeadComponent {
   online: boolean = false;
+  userData = this.dataService.userData;
   userIdOfVarService: string = this.varService.selectedUserId;
+  currentUser: number;
 
   constructor(
     public dataService: DataService,
@@ -19,24 +21,20 @@ export class MainChatMessageHeadComponent {
     public varService: VariablesService
   ) {}
 
+  
   ngOnInit() {
-    this.onlineAnimation();
-    // this.getUserId();
+    this.user();
   }
 
-  onlineAnimation() {
-    setInterval(() => {
-      this.online = !this.online;
-    }, 1000);
-
+  user() {
+    for (let i = 0; i < this.userData.length; i++) {
+      if (this.userData[i].id === this.userIdOfVarService) {
+        this.currentUser = i;
+      }
+    }
   }
 
   openMember() {
     this.dialog.open(DialogProfileViewUsersComponent);
-  }
-  getUserId() {
-    // this.varService.getVar('selectedUserId');
-    // this.userIdOfVarService=
-    // console.log(this.userIdOfVarService);
   }
 }

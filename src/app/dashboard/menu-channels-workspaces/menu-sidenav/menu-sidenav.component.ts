@@ -191,7 +191,7 @@ export class MenuSidenavComponent implements OnInit {
 
   messageToUser(userId:string) {
     this.varService.setVar('messagePNBox', true);
-    this.varService.setVar('selectedUserId', userId);        
+    this.varService.setVar('selectedUserId', userId);    
   }
 
   openChannel() {
