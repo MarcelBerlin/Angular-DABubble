@@ -17,7 +17,7 @@ import { collection, collectionData } from '@angular/fire/firestore';
 export class HeaderComponent {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
 
-  user: any;
+  actualUser: any;
   loggedUserName: string = '';
   loggedUserImg: string = '';
   loggedUserMail: string = '';
@@ -27,17 +27,8 @@ export class HeaderComponent {
     public dialog: MatDialog,
     private auth: AuthService,
     public getUserData: DataService) {
-
-    getUserData.users$.subscribe((actualUser) => {
-      // console.log(actualUser);
-      setTimeout(() => {
-        console.log(this.loggedUserName);
-        console.log(this.loggedUserMail);
-        console.log(this.loggedUserImg);
-        console.log(this.loggedUserStatus);
-      }, 2000);
-      this.getActualUser();
-    })
+      
+    this.getActualUser();
   }
 
   getActualUser() {

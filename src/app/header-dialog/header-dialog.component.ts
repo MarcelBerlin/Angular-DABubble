@@ -30,6 +30,13 @@ export class HeaderDialogComponent {
       this.loggedUserStatus = getUserData.loggedInUserData.online;
     }, 1000);
 
+    setTimeout(() => {
+      console.log(this.loggedUserName);
+      console.log(this.loggedUserMail);
+      console.log(this.loggedUserImg);
+      console.log(this.loggedUserStatus);
+    }, 2000);
+
   }
 
   editingProfile() {

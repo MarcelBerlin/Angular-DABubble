@@ -20,8 +20,8 @@ export class HeaderEditDialogComponent {
   loggedUserImg: string = '';
   loggedUserMail: string = '';
 
-  newInputMail: string = '';
   newInputName: string = '';
+  newInputMail: string = '';
 
   constructor(
     public dialog: MatDialog,
@@ -36,8 +36,16 @@ export class HeaderEditDialogComponent {
   }
 
   saveUserChanges() {
-    console.log(this.inputMail.nativeElement.value);
-    console.log(this.inputName.nativeElement.value);
+    console.log('inputvalue',this.inputMail.nativeElement.value);
+    console.log('inputvalue',this.inputName.nativeElement.value);
 
+    this.inputName.nativeElement.value = this.loggedUserName; // setDoc()
+    this.inputMail.nativeElement.value = this.loggedUserMail; // setDoc()
+
+    setTimeout(() => {
+      console.log('DataService value',this.loggedUserName);
+      console.log('DataService value',this.loggedUserMail);
+    }, 1000)
+  
   }
 }
