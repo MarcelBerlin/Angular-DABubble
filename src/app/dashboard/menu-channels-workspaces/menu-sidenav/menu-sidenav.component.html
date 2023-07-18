@@ -55,7 +55,7 @@
                 
                 <div *ngFor="let user of userData">
 
-                    <div class="direct-message-user" (click)="messageToUser()">
+                    <div class="direct-message-user" (click)="messageToUser(user.id)">
                         <div>
                             <img class="pointer" [src]="user.img">
                         </div>

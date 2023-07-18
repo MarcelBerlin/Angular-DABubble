@@ -189,8 +189,9 @@ export class MenuSidenavComponent implements OnInit {
     this.getService.deleteTagFromFirestore(tag);
   }
 
-  messageToUser() {
-    this.varService.setVar('messagePNBox', true)
+  messageToUser(userId:string) {
+    this.varService.setVar('messagePNBox', true);
+    this.varService.setVar('selectedUser', userId);    
   }
 
   openChannel() {
