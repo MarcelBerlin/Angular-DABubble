@@ -1,5 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
+import { DataService } from 'src/app/services/data.service';
 import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
@@ -12,18 +14,12 @@ export class DialogProfileViewUsersComponent {
 
   constructor(
     private dialogRef: DialogRef,
-    private varService: VariablesService
-  ) {}
-
-  ngOnInit() {
-    this.testTime();
+    public dataService:DataService,
+    public varService: VariablesService,
+    private dcshService: DashboardComponentsShowHideService
+  ) {        
   }
 
-  testTime() {
-    setInterval(() => {
-      this.online = !this.online;
-    }, 1000);
-  }
 
   close() {
     this.dialogRef.close();
@@ -32,5 +28,7 @@ export class DialogProfileViewUsersComponent {
   message() {
     this.varService.setVar('messagePNBox', true)
     this.dialogRef.close();
+    this.varService.setVar('selectedUserToMessage',this.varService.selectedUserDetailView)
+    this.dcshService.chatSlideOut()
   }
 }

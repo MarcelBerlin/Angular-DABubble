@@ -5,6 +5,7 @@ import { DataService } from 'src/app/services/data.service';
 import { UsersService } from 'src/app/services/users.service';
 import { DialogProfileViewUsersComponent } from '../dialog-profile-view-users/dialog-profile-view-users.component';
 import { DialogAddMembersComponent } from '../dialog-add-members/dialog-add-members.component';
+import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
   selector: 'app-dialog-members',
@@ -18,7 +19,8 @@ export class DialogMembersComponent {
   constructor(
     public dataService: DataService,
     private dialog: MatDialog,
-    private dialogRef: DialogRef
+    private dialogRef: DialogRef,
+    private varService:VariablesService
   ) {
     console.warn('log von Basti aus: "dialog-members"', dataService);
   }
@@ -28,8 +30,9 @@ export class DialogMembersComponent {
     this.dialogRef.close();
   }
 
-  openMember() {
-    this.dialogRef.close();
+  openMember(i:number) {
+    this.dialogRef.close();    
+    this.varService.setVar('selectedUserDetailView',i)
     this.dialog.open(DialogProfileViewUsersComponent);
   }
 

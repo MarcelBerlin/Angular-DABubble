@@ -5,19 +5,19 @@
   </mat-card-title>
   <mat-card-content>
     <div class="avatarContainer">
-      <img src="assets/img/members/avatar1.png" />
+      <img [src]="dataService.userData[varService.selectedUserDetailView].img" />
     </div>
-    <div class="name">Elise Roth</div>
+    <div class="name">{{dataService.userData[varService.selectedUserDetailView].name}}</div>
     <div class="active">
-      <div [style.background-color]="online ? '#92c83e' : '#686868'"></div>
-      <span *ngIf="online" class="online">Online</span>
-      <span *ngIf="!online" class="offline">Offline</span>
+      <div [style.background-color]="dataService.userData[varService.selectedUserDetailView].online ? '#92c83e' : '#686868'"></div>
+      <span *ngIf="dataService.userData[varService.selectedUserDetailView].online" class="online">Online</span>
+      <span *ngIf="!dataService.userData[varService.selectedUserDetailView].online" class="offline">Offline</span>
     </div>
     <div class="email">
       <img src="assets/img/mail-icon.png" />
       <span>E-Mail-Adresse</span>
     </div>
-    <div class="emailAddress">noahbra@beispiel.com</div>
+    <div class="emailAddress">{{dataService.userData[varService.selectedUserDetailView].email}}</div>
   </mat-card-content>
   <div class="buttonContainer">
     <button mat-raised-button color="primary" (click)="message()">Nachricht</button>

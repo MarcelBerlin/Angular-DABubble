@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 export class VariablesService {
   /****Platz für alle Variablen****/
   messagePNBox: boolean = false; // Main Chat PN Box
-  selectedUserArrayId: number;
+  selectedUserToMessage: number = 0;
+  selectedUserDetailView: number = 0;
 
   /********************************/
 

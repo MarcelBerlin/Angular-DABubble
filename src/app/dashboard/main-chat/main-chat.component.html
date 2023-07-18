@@ -6,7 +6,9 @@
     
     <div class="chatContainer">
      
+      <app-main-chat-channel-chat-field *ngIf="!varService.messagePNBox"></app-main-chat-channel-chat-field>
       <app-main-chat-message-chat-field *ngIf="varService.messagePNBox"></app-main-chat-message-chat-field>
+      
       <!-- <div class="timeLine">
         <div class="timeLineHead">Dienstag, 14 Januar</div>
       </div>

@@ -21,6 +21,7 @@ export class MainChatMessageHeadComponent {
 
   
   openMember() {
+    this.varService.setVar('selectedUserDetailView',this.varService.selectedUserToMessage)
     this.dialog.open(DialogProfileViewUsersComponent);
   }
 }

@@ -6,9 +6,9 @@
   <mat-card-content>
     <div
       class="userMenu"
-      *ngFor="let member of dataService.userData"
+      *ngFor="let member of dataService.userData;let i=index"
     >
-      <span (click)="openMember()"
+      <span (click)="openMember(i)"
         ><img [src]="member.img" /> {{ member.name }}</span
       >
       <div
