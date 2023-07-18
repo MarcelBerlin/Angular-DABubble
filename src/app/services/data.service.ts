@@ -14,6 +14,7 @@ export class DataService {
   signUpUser: User = new User();
   loggedInUserEmail: string = '';
   loggedInUserData: any;
+  loggedInUserId: string = '';
 
 
   constructor(
@@ -41,7 +42,9 @@ export class DataService {
       this.loggedInUserEmail = JSON.parse(userJson);
       if (user.email == this.loggedInUserEmail) {
         this.loggedInUserData = this.getLoggedUserData(user);
-        // console.log(this.loggedInUserData);
+        console.log(this.loggedInUserData);
+        this.updateUser();
+        console.log(this.loggedInUserData);
       }
     });
   }
@@ -58,7 +61,8 @@ export class DataService {
       email: user.email,
       name: user.name,
       img: user.img,
-      online: false,
+      online: true,
+      userId: user.id,
     };
   }
 
@@ -110,6 +114,21 @@ export class DataService {
   }
 
 
+  /**
+   * Updates the user data in Firestore.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the update operation is complete.
+   */  
+  updateUser(): void{
+    debugger;
+    const qData = doc(this.firestore, 'users', this.loggedInUserData.userId);
+    const newData = this.loggedInUserData;
+    updateDoc(qData, newData).then(() => {
+      
+    }).catch((error) => {
+      
+    })
+  }
 
 }
 

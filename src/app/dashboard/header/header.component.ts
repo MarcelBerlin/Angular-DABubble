@@ -31,11 +31,11 @@ export class HeaderComponent {
     this.getActualUser();
   }
 
-  getActualUser() {
-    this.loggedUserName = this.getUserData.loggedInUserData.name;
-    this.loggedUserImg = this.getUserData.loggedInUserData.img;
-    this.loggedUserMail = this.getUserData.loggedInUserData.email;
-    this.loggedUserStatus = this.getUserData.loggedInUserData.online;
+  getActualUser(){
+      this.loggedUserName = this.getUserData.loggedInUserData.name;
+      this.loggedUserImg = this.getUserData.loggedInUserData.img;
+      this.loggedUserMail = this.getUserData.loggedInUserData.email;
+      this.loggedUserStatus = this.getUserData.loggedInUserData.online;
   }
 
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GoogleAuthProvider } from '@angular/fire/auth';
-import { AngularFireAuth} from '@angular/fire/compat/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { DialogInfoService } from './dialog-info.service';
 import { DialogInfoComponent } from '../dialog-info/dialog-info.component';
@@ -15,17 +15,18 @@ export class AuthService {
 
 
   constructor(
-    private afs: AngularFireAuth, 
+    private afs: AngularFireAuth,
     private router: Router,
     public dialogInfoService: DialogInfoService,
     public dialog: MatDialog,
     private dataService: DataService,
-    ) {
-      this.getLoggedUser();
-     }
+  ) {
+    
+    
+  }
 
 
-  signInWithGoogle(){
+  signInWithGoogle() {
     return this.afs.signInWithPopup(new GoogleAuthProvider());
   }
 
@@ -36,7 +37,7 @@ export class AuthService {
    * @param {object} user - The user object containing the email and password. 
    * @returns {Promise<firebase.auth.userCredential>} - A promise that resolves with the sign-in result. 
    */
-  signWithEmailAndPassword(user: { email: string, password: string }):Promise<any> {
+  signWithEmailAndPassword(user: { email: string, password: string }): Promise<any> {
     return this.afs.signInWithEmailAndPassword(user.email, user.password);
   }
 
@@ -59,8 +60,10 @@ export class AuthService {
    */
   async signOut(): Promise<any> {
     return this.afs.signOut().then(() => {
+      
+      this.dataService.loggedInUserData.online = false;
+      this.dataService.updateUser();
       localStorage.removeItem('user');
-      // localStorage.removeItem('userId');
       this.router.navigate(['']);
     });
   }
@@ -77,7 +80,7 @@ export class AuthService {
       let jsonSting: any = localStorage.getItem('user');
       let user = JSON.parse(jsonSting);
       // console.log('User =',user);
-      
+
       return (user !== null && user.email !== false) ? true : false;
     } else {
       return false;
@@ -192,11 +195,12 @@ export class AuthService {
       });
   }
 
-  
 
-  getLoggedUser(){
-    this.afs.authState.subscribe(users => {
-      console.log('Alle eingeloggten User', users);
-    });
-  }
+
+  // getLoggedUserId():void {
+  //   let userId:string = '';
+  //   this.afs.authState.subscribe(users => {
+  //     userId = users.uid;
+  //   });
+  // }
 }
