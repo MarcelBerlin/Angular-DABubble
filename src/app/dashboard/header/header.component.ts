@@ -37,7 +37,7 @@ export class HeaderComponent {
       this.loggedUserName = this.getUserData.loggedInUserData.name;
       this.loggedUserImg = this.getUserData.loggedInUserData.img;
       this.loggedUserMail = this.getUserData.loggedInUserData.email;
-      this.loggedUserStatus = this.getUserData.loggedInUserData.online;
+      this.loggedUserStatus = this.getUserData.loggedInUserData.online; 
   }
 
 

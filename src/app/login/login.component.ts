@@ -46,6 +46,7 @@ export class LoginComponent {
       this.authService.setLocalStorage({ email: res.additionalUserInfo.profile.email, password: '' });
       this.router.navigateByUrl('dashboard');
       this.setUserData(res.additionalUserInfo.profile);
+      this.dataService.getLoggedInUserData();
       this.loading = false;
     }).catch((error: any) => {
       this.loading = false;
@@ -157,8 +158,8 @@ export class LoginComponent {
   loginOkProgramSettings(): void {
     this.authService.setLocalStorage(this.getLoginFormData());
     this.dataService.loggedInUserEmail = this.getLoginFormData().email;
-    this.router.navigateByUrl('dashboard');
     this.dataService.getLoggedInUserData();
+    this.router.navigateByUrl('dashboard');
     this.loading = false;
     this.loginForm.enable();
   }
