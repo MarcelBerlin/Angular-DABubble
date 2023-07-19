@@ -18,10 +18,10 @@ export class HeaderComponent {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
 
   actualUser: any;
-  loggedUserName: string  = '';
-  loggedUserImg: string = '';
-  loggedUserMail: string = '';
-  loggedUserStatus: string = '';
+  // loggedUserName: string  = '';
+  // loggedUserImg: string = '';
+  // loggedUserMail: string = '';
+  // loggedUserStatus: string = '';
 
   constructor(
     public dialog: MatDialog,
