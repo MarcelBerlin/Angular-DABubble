@@ -15,6 +15,7 @@ import { DataService } from 'src/app/services/data.service';
 import { User } from 'src/app/models/user.class';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
+import { MainChatChannelChatFieldComponent } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/main-chat-channel-chat-field.component';
 
 interface Tag {
   id: string;
@@ -55,6 +56,7 @@ export class MenuSidenavComponent implements OnInit {
   channelsVisible: boolean = true;
   hover: boolean = false;
   directMessageUserVisible: boolean = true;
+  
 
   constructor(
     public dialog: MatDialog,
@@ -124,12 +126,7 @@ export class MenuSidenavComponent implements OnInit {
       this.channelsPath = 'assets/img/sidenav/channel_closed.png';
     }
 
-    if (this.directMessageUserVisible) {
-      this.directMessagePath = 'assets/img/sidenav/direct_message_open.png';
-    } else {
-      this.directMessagePath = 'assets/img/sidenav/direct_message_closed.png';
-    }
-  }
+   }
 
   toggleDirectMessage() {
     this.directMessageUserVisible = !this.directMessageUserVisible;
@@ -188,6 +185,7 @@ export class MenuSidenavComponent implements OnInit {
   addChannel() {
     this.dialog.open(DialogAddChannelComponent);
   }
+  
 
   deleteTag(tag: Tag) {
     // Löschen des Tags aus der HTML-Ansicht
@@ -204,10 +202,20 @@ export class MenuSidenavComponent implements OnInit {
 
   }
 
-  openChannel() {
+  currentUser() {
+    return (
+      this.getUserData.loggedInUserData.email ===
+      this.getUserData.userData.email
+    );
+  }
+
+
+  openChannel(arrayId: number) {
     this.varService.setVar('messagePNBox', false);
-    // hier wird die Variable 'messagePNBox' auf false gesetzt, um im Mittelteil die Channelbox anzuzeigen.
-    // wenn die Variable auf true ist, wird im Mittelteil die Nachrichtenbox angezeigt
-    // die funktion für das anzeigen der messagebox ist 'messageToUser()' in Zeile 198
+    this.varService.setVar('selectedChannel', arrayId);
+
+  //   // hier wird die Variable 'messagePNBox' auf false gesetzt, um im Mittelteil die Channelbox anzuzeigen.
+  //   // wenn die Variable auf true ist, wird im Mittelteil die Nachrichtenbox angezeigt
+  //   // die funktion für das anzeigen der messagebox ist 'messageToUser()' in Zeile 198
   }
 }

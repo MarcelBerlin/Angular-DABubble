@@ -5,8 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class VariablesService {
   messagePNBox: boolean = false; // Main Chat PN Box
+  channelFocus: boolean = false; // Channel Focus
   selectedUserToMessage: number = 0;
   selectedUserDetailView: number = 0;
+  selectedChannel: number = 0;
   conversationBetween:boolean = false;
 
 
