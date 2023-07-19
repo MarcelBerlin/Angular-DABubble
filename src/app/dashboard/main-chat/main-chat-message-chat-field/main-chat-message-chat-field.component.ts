@@ -7,10 +7,5 @@ import { VariablesService } from 'src/app/services/variables.service';
   styleUrls: ['./main-chat-message-chat-field.component.scss'],
 })
 export class MainChatMessageChatFieldComponent {
-
-  constructor(public varService:VariablesService) {
-    setTimeout(() => {
-      this.varService.setVar('conversationBetween', true);
-    },17000)
-  }
+  constructor(public varService: VariablesService) {}
 }

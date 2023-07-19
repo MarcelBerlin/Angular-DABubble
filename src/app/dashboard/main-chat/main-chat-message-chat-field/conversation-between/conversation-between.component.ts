@@ -1,6 +1,7 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
+import { HeaderDialogComponent } from 'src/app/header-dialog/header-dialog.component';
 import { DataService } from 'src/app/services/data.service';
 import { VariablesService } from 'src/app/services/variables.service';
 
@@ -30,17 +31,14 @@ export class ConversationBetweenComponent {
     private dialog: Dialog
   ) {}
 
-  /**
-   * Opens the profile view for the selected user to message.
-   * Sets the 'selectedUserDetailView' variable in 'varService' to the selected user.
-   * Opens the 'DialogProfileViewUsersComponent' dialog to display the user's profile.
-   */
   profilView() {
     this.varService.setVar(
       'selectedUserDetailView',
       this.varService.selectedUserToMessage
     );
-    this.dialog.open(DialogProfileViewUsersComponent);
+    this.currentUser()
+      ? this.dialog.open(HeaderDialogComponent)
+      : this.dialog.open(DialogProfileViewUsersComponent);
   }
 
   /**
