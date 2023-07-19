@@ -44,12 +44,19 @@
         justify-content: center;
         margin-top: 11px;
 
+        // form{
+        //     height: 71.203vh;
+        //     // width: 31.56vw;
+        //     overflow: hidden;
+        // }
+
         mat-card {
             max-width: 606px;
-            // max-height: 769px;
+            max-height: 769px;
             border-radius: 30px;
             background-color: white;
             align-items: center;
+            
 
             mat-card-header {
                 margin-bottom: 46px;
