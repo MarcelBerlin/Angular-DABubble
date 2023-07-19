@@ -62,7 +62,7 @@ export class MenuSidenavComponent implements OnInit {
     private firestore: Firestore,
     public getUserData: DataService,
     public varService: VariablesService,
-    private dcshService: DashboardComponentsShowHideService
+    private dcshService:DashboardComponentsShowHideService
   ) {
     this.tags = this.getService.tags;
     this.userData = this.getUserData.userData;

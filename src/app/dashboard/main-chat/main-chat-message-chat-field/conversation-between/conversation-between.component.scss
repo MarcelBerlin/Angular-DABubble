@@ -2,6 +2,7 @@
     position: absolute;
     bottom: 8px;
     left: 45px;
+    right: 45px;
     width: fit-content;
     min-height: 150px;
     .characterInfo {
@@ -30,7 +31,6 @@
       font-weight: 400;
       font-size: 20px;
       color: #686868;
-      margin-right: 60px;
       .button{
           color: #535AF1;
           cursor: pointer;
