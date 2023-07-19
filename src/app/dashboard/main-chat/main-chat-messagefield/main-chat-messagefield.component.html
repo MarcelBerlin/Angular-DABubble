@@ -1,5 +1,7 @@
 <div class="inputContainer">
-  <textarea type="text" placeholder="Nachricht an #Entwicklerteam"></textarea>
+  <textarea *ngIf="!varService.messagePNBox" type="text" placeholder="Nachricht an #Entwicklerteam"></textarea>
+  <textarea *ngIf="varService.messagePNBox && !currentUser()" type="text" placeholder="Nachricht an {{dataService.userData[varService.selectedUserToMessage].name}}"></textarea>
+  <textarea *ngIf="varService.messagePNBox && currentUser()" type="text" placeholder="Nachricht an mich :-)"></textarea>
   <div class="iconsContainer">
     <div class="addElements">
       <div class="element">
