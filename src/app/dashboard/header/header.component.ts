@@ -27,8 +27,10 @@ export class HeaderComponent {
     public dialog: MatDialog,
     private auth: AuthService,
     public getUserData: DataService) {
-      
-    this.getActualUser();
+    setTimeout(() => {
+      this.getActualUser();
+    }, 5000);
+    
   }
 
   getActualUser(){
