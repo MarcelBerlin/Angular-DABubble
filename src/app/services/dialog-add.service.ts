@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import 'firebase/compat/firestore';
 
 
@@ -26,8 +26,8 @@ export class DialogAddService {
   ) {
     const coll = collection(firestore, 'tags');
     this.newTags$ = collectionData(coll, { idField: 'id' });
-    this.newTags$.subscribe((tags: any) => {
-      this.tagsData = tags;
+    this.newTags$.subscribe((tag: any) => {
+      this.tagsData = tag;
 
     });
   }
@@ -38,32 +38,40 @@ export class DialogAddService {
   description: string = '';
 
 
-  // async addTag(generatedTag: string) {
-  //   this.newTag = generatedTag;
-  //   if (this.newTag) {
-  //     const tag: Tag = { id: '', name: this.newTag, imagePath: 'assets/img/sidenav/tag.png', description: this.description };
+  async addTag(generatedTag: string) {
+    this.newTag = generatedTag;
+    if (this.newTag) {
+      const tag: Tag = { id: '', name: this.newTag, imagePath: 'assets/img/sidenav/tag.png', description: this.description };
 
-  //     // Firestore-Dokument erstellen und Tag speichern
-  //     const docRef = await this.firestore.collection('tags').add(tag);
+      // Firestore-Dokument erstellen und Tag speichern
+      const docRef = await addDoc(collection(this.firestore, 'tags'), tag);
 
-  //     // Tag mit generierter ID aus Firestore abrufen und dem lokalen Array hinzufügen
-  //     const tagWithId = { ...tag, id: docRef.id };
-  //     this.tags.push(tagWithId);
+      // Tag mit generierter ID aus Firestore abrufen und dem lokalen Array hinzufügen
+      const tagWithId = { ...tag, id: docRef.id };
+      this.tags.push(tagWithId);
 
-  //     setTimeout(() => {
-  //       console.log(this.tags);
-  //     }, 1000);
-  //   }
-  // }
+      setTimeout(() => {
+        console.log(this.tags);
+      }, 1000);
+    }
+  }
 
 
-  // async deleteTagFromFirestore(tag: Tag) {
-  //   const tagRef = this.firestore.collection('tags').doc(tag.id);
-  //   await tagRef.delete();
+  async deleteFromFirebase(tagId: string) {
+    try {      
+      
+      await deleteDoc(doc(this.firestore, 'tags', tagId));  
+      // Das Tag-Objekt aus dem lokalen Array entfernen
+      this.tags = this.tags.filter(tag => tag.id !== tagId);
 
-  //   // Tag aus dem lokalen Array entfernen
-  //   this.tags = this.tags.filter(t => t.id !== tag.id);
-  // }
+      console.log('Tag erfolgreich gelöscht.');
+    } catch (error) {
+      console.error('Fehler beim Löschen des Tags:', error);
+    }
+  }
+  
+
+  
 
 
 }
