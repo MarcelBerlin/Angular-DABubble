@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MenuSidenavComponent } from 'src/app/dashboard/menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { DialogAddMembersComponent } from 'src/app/dialog/dialog-add-members/dialog-add-members.component';
 import { DialogChannelEditionComponent } from 'src/app/dialog/dialog-channel-edition/dialog-channel-edition.component';
 import { DialogMembersComponent } from 'src/app/dialog/dialog-members/dialog-members.component';
 import { TestBastiService } from 'src/app/services/test-basti.service';
+import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
   selector: 'app-main-chat-channel-head',
@@ -12,7 +14,14 @@ import { TestBastiService } from 'src/app/services/test-basti.service';
 })
 export class MainChatChannelHeadComponent {
   hoveredAddIcon: boolean = false;
-  constructor(public dialog: MatDialog, public tBS: TestBastiService) {}
+
+  constructor(
+    public dialog: MatDialog,
+    public tBS: TestBastiService,
+    public tagChannel: MenuSidenavComponent,
+    public variableService: VariablesService
+
+  ) { }
 
   /**
    * Opens the 'DialogChannelEditionComponent'.

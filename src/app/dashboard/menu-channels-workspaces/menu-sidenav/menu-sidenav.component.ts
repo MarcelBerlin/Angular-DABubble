@@ -15,7 +15,6 @@ import { DataService } from 'src/app/services/data.service';
 import { User } from 'src/app/models/user.class';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
-import { MainChatChannelChatFieldComponent } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/main-chat-channel-chat-field.component';
 
 interface Tag {
   id: string;
@@ -38,8 +37,7 @@ interface Tag {
 })
 export class MenuSidenavComponent implements OnInit {
   tags$: Observable<any[]>;
-  user$: Observable<any[]>;
-  userData: any;
+  user$: Observable<any[]>;  
   tags: any;
   tagState = 'visible';
 
@@ -67,12 +65,12 @@ export class MenuSidenavComponent implements OnInit {
     private dcshService:DashboardComponentsShowHideService
   ) {
     this.tags = this.getService.tags;
-    this.userData = this.getUserData.userData;
+    
   }
 
   ngOnInit(): void {
     this.allTags();
-    this.allUsers();
+    
   }
 
   allTags() {
@@ -80,18 +78,10 @@ export class MenuSidenavComponent implements OnInit {
     this.tags$ = collectionData(tagCollection, { idField: 'id' });
 
     this.tags$.subscribe((data) => {
-      this.tags = data;
+      this.tags = data;      
     });
   }
 
-  allUsers() {
-    const userCollection = collection(this.firestore, 'users');
-    this.user$ = collectionData(userCollection, { idField: 'id' });
-
-    this.user$.subscribe((data) => {
-      this.userData = data;
-    });
-  }
 
   toggleChannels() {
     this.channelsVisible = !this.channelsVisible;
