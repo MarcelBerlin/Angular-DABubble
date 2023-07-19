@@ -19,8 +19,8 @@
             <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
         <mat-menu class="dropdown-menu custom-menu" #menu="matMenu">
-            <button mat-menu-item>
-                <span (click)="openProfile()">Profil</span>
+            <button mat-menu-item (click)="openProfile()">
+                <span >Profil</span>
             </button>
             <button mat-menu-item (click)="logout()">
                 <span  >Log-out</span>
