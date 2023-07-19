@@ -182,7 +182,7 @@ export class MenuSidenavComponent implements OnInit {
     this.getService.tags = this.getService.tags.filter((t) => t !== tag);
 
     // Löschen des Tags aus der Firestore-Datenbank
-    this.getService.deleteTagFromFirestore(tag);
+    // this.getService.deleteTagFromFirestore(tag);
   }
 
   messageToUser(arrayId: number) {
@@ -200,7 +200,7 @@ export class MenuSidenavComponent implements OnInit {
   }
 
 
-  openChannel(arrayId: number) {
+  openChannel(arrayId: number) {    
     this.varService.setVar('messagePNBox', false);
     this.varService.setVar('selectedChannel', arrayId);
 
