@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
 import { User } from 'src/app/models/user.class';
 import { VariablesService } from 'src/app/services/variables.service';
+import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
 
 interface Tag {
   id: string;
@@ -60,7 +61,8 @@ export class MenuSidenavComponent implements OnInit {
     public getService: DialogAddService,
     private firestore: Firestore,
     public getUserData: DataService,
-    public varService: VariablesService
+    public varService: VariablesService,
+    private dcshService: DashboardComponentsShowHideService
   ) {
     this.tags = this.getService.tags;
     this.userData = this.getUserData.userData;
@@ -198,6 +200,8 @@ export class MenuSidenavComponent implements OnInit {
   messageToUser(arrayId: number) {
     this.varService.setVar('messagePNBox', true);
     this.varService.setVar('selectedUserToMessage', arrayId);
+    this.dcshService.chatSlideOut()
+
   }
 
   openChannel() {
