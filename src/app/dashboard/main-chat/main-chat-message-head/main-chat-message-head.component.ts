@@ -24,4 +24,12 @@ export class MainChatMessageHeadComponent {
     this.varService.setVar('selectedUserDetailView',this.varService.selectedUserToMessage)
     this.dialog.open(DialogProfileViewUsersComponent);
   }
+
+  currentUser() {
+    return (
+      this.dataService.loggedInUserData.email ===
+      this.dataService.userData[this.varService.selectedUserToMessage].email
+    );
+  }
+
 }

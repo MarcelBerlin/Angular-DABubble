@@ -9,6 +9,6 @@
         "
       ></div>
     </div>
-    <span>{{ userData[varService.selectedUserToMessage].name }}</span>
+    <span>{{ userData[varService.selectedUserToMessage].name }} <span *ngIf="currentUser()">(Du)</span></span>
   </div>
 </div>

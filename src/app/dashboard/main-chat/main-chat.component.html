@@ -1,19 +1,20 @@
 <div class="contentContainer">
-  
   <div class="content">
-    <app-main-chat-channel-head *ngIf="!varService.messagePNBox"></app-main-chat-channel-head>
-    <app-main-chat-message-head *ngIf="varService.messagePNBox"></app-main-chat-message-head>    
-    
-    <div class="chatContainer">
-     
-      <app-main-chat-channel-chat-field *ngIf="!varService.messagePNBox"></app-main-chat-channel-chat-field>
-      <app-main-chat-message-chat-field *ngIf="varService.messagePNBox"></app-main-chat-message-chat-field>
-      
-    </div>
+    <app-main-chat-channel-head
+      *ngIf="!varService.messagePNBox"
+    ></app-main-chat-channel-head>
+    <app-main-chat-message-head
+      *ngIf="varService.messagePNBox"
+    ></app-main-chat-message-head>
 
+    <div class="chatContainer">
+      <app-main-chat-channel-chat-field
+        *ngIf="!varService.messagePNBox"
+      ></app-main-chat-channel-chat-field>
+      <app-main-chat-message-chat-field
+        *ngIf="varService.messagePNBox"
+      ></app-main-chat-message-chat-field>
+    </div>
   </div>
   <app-main-chat-messagefield></app-main-chat-messagefield>
-
-
-
 </div>
