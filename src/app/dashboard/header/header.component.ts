@@ -29,7 +29,7 @@ export class HeaderComponent {
     public getUserData: DataService) {
     setTimeout(() => {
       this.getActualUser();
-    }, 5000);
+    }, 2000);
     
   }
 
