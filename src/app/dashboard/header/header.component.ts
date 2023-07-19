@@ -18,7 +18,7 @@ export class HeaderComponent {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
 
   actualUser: any;
-  loggedUserName: string = '';
+  loggedUserName: string  = '';
   loggedUserImg: string = '';
   loggedUserMail: string = '';
   loggedUserStatus: string = '';
@@ -27,18 +27,17 @@ export class HeaderComponent {
     public dialog: MatDialog,
     private auth: AuthService,
     public getUserData: DataService) {
-    setTimeout(() => {
-      this.getActualUser();
-    }, 2000);
-    
+    // setTimeout(() => {
+    //   this.getActualUser();
+    // }, 2000);
   }
 
-  getActualUser(){
-      this.loggedUserName = this.getUserData.loggedInUserData.name;
-      this.loggedUserImg = this.getUserData.loggedInUserData.img;
-      this.loggedUserMail = this.getUserData.loggedInUserData.email;
-      this.loggedUserStatus = this.getUserData.loggedInUserData.online; 
-  }
+  // getActualUser(){
+  //     this.loggedUserName = this.getUserData.loggedInUserData.name;
+  //     this.loggedUserImg = this.getUserData.loggedInUserData.img;
+  //     this.loggedUserMail = this.getUserData.loggedInUserData.email;
+  //     this.loggedUserStatus = this.getUserData.loggedInUserData.online; 
+  // }
 
 
   /**

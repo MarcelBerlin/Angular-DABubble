@@ -11,19 +11,23 @@
     </div>
 
     <div class="header-profile">
+        <div *ngIf="getUserData.loggedInUserData" style="display: flex; align-items: center; flex-direction:  row;">
+            <span> {{ getUserData.loggedInUserData.name }} </span>
+            <img src="{{ getUserData.loggedInUserData.img }}">
+        </div>
+        <!-- <span> {{ loggedUserName }} </span>
+        <img src="{{ loggedUserImg }}"> -->
 
-        <span > {{ loggedUserName }} </span>
-        <img src="{{ loggedUserImg }}"> 
 
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
         <mat-menu class="dropdown-menu custom-menu" #menu="matMenu">
             <button mat-menu-item (click)="openProfile()">
-                <span >Profil</span>
+                <span>Profil</span>
             </button>
             <button mat-menu-item (click)="logout()">
-                <span  >Log-out</span>
+                <span>Log-out</span>
             </button>
         </mat-menu>
     </div>
