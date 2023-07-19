@@ -43,7 +43,6 @@ import { DialogProfileViewUsersComponent } from './dialog/dialog-profile-view-us
 import { DialogMembersComponent } from './dialog/dialog-members/dialog-members.component';
 import { DialogAddMembersComponent } from './dialog/dialog-add-members/dialog-add-members.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
-import { ChannelFocusComponent } from './dashboard/main-chat/channel-focus/channel-focus.component';
 import { StartAnimationComponent } from './start-animation/start-animation.component';
 import { MainChatChannelHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-channel-head/main-chat-channel-head.component';
 import { MainChatMessageHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-message-head/main-chat-message-head.component';
@@ -77,8 +76,7 @@ import { MainChatChatfieldComponent } from './dashboard/main-chat/main-chat-chat
     SecondaryChatMessagefieldComponent,
     DialogProfileViewUsersComponent,
     DialogMembersComponent,
-    DialogAddMembersComponent,
-    ChannelFocusComponent,
+    DialogAddMembersComponent,    
     CreateAccountComponent,
     StartAnimationComponent,
     MainChatChannelHeadComponent,

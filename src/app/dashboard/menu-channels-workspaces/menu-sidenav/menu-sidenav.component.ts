@@ -205,7 +205,7 @@ export class MenuSidenavComponent implements OnInit {
   currentUser() {
     return (
       this.getUserData.loggedInUserData.email ===
-      this.getUserData.userData.email
+      this.getUserData.userData[this.varService.selectedUserToMessage].email
     );
   }
 
