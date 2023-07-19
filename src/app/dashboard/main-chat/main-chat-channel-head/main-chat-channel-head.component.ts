@@ -8,22 +8,33 @@ import { TestBastiService } from 'src/app/services/test-basti.service';
 @Component({
   selector: 'app-main-chat-channel-head',
   templateUrl: './main-chat-channel-head.component.html',
-  styleUrls: ['./main-chat-channel-head.component.scss']
+  styleUrls: ['./main-chat-channel-head.component.scss'],
 })
 export class MainChatChannelHeadComponent {
-  hoveredAddIcon:boolean = false;
+  hoveredAddIcon: boolean = false;
   constructor(public dialog: MatDialog, public tBS: TestBastiService) {}
 
+  /**
+   * Opens the 'DialogChannelEditionComponent'.
+   *
+   */
   channelEdition() {
     this.dialog.open(DialogChannelEditionComponent);
   }
 
+  /**
+   * Opens the 'DialogMembersComponent'.
+   *
+   */
   showMembers() {
     this.dialog.open(DialogMembersComponent);
   }
 
+  /**
+   * Opens the 'DialogAddMembersComponent'.
+   *
+   */
   addMember() {
     this.dialog.open(DialogAddMembersComponent);
   }
-
 }

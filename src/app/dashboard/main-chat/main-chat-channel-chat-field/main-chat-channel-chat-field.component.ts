@@ -3,11 +3,10 @@ import { DashboardComponentsShowHideService } from '../../dashboard-components-s
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 
-
 @Component({
   selector: 'app-main-chat-channel-chat-field',
   templateUrl: './main-chat-channel-chat-field.component.html',
-  styleUrls: ['./main-chat-channel-chat-field.component.scss']
+  styleUrls: ['./main-chat-channel-chat-field.component.scss'],
 })
 export class MainChatChannelChatFieldComponent {
   hoveredMessagesMainChat: boolean = false;
@@ -17,12 +16,22 @@ export class MainChatChannelChatFieldComponent {
     private dialog: Dialog
   ) {}
 
+  /**
+   * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
+   *
+   * This method is responsible for triggering the slide-in animation of the secondary chat.
+   */
   openSecondaryChat() {
     this.dcshService.chatSlideIn();
   }
 
+  /**
+   * Opens the 'DialogProfileViewUsersComponent' dialog to display user profiles.
+   *
+   * This method is responsible for triggering the dialog to show user profiles in a view.
+   * The 'DialogProfileViewUsersComponent' is used for rendering the user profile details.
+   */
   profileViewUsers() {
     this.dialog.open(DialogProfileViewUsersComponent);
   }
-
 }

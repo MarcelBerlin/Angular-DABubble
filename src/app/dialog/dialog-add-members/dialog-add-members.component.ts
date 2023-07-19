@@ -8,6 +8,11 @@ import { Component } from '@angular/core';
 })
 export class DialogAddMembersComponent {
   constructor(private dialogRef: DialogRef) {}
+
+  /**
+   * Closes the current dialog.
+   *
+   */
   close() {
     this.dialogRef.close();
   }

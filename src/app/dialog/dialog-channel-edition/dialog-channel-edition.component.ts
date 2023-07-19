@@ -12,16 +12,26 @@ export class DialogChannelEditionComponent {
   name: boolean = false;
   description: boolean = false;
 
+  constructor(
+    public dialog: MatDialog,
+    private dialogRef: DialogRef,
+    public tBS: TestBastiService
+  ) {}
 
-  constructor(public dialog: MatDialog, private dialogRef: DialogRef,public tBS: TestBastiService) {}
-
+  /**
+   * Closes the current dialog.
+   *
+   */
   closeDialog() {
     this.dialogRef.close();
   }
 
-  editOn(item: string) {    
+  /**
+   * Toggles the edit state of the specified item.
+   *
+   * @param {string} item - The name of the property representing the item to toggle.
+   */
+  editOn(item: string) {
     this[item] = !this[item];
   }
-  
-
 }

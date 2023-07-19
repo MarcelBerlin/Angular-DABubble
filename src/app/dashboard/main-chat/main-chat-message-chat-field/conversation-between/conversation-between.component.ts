@@ -7,7 +7,7 @@ import { VariablesService } from 'src/app/services/variables.service';
 @Component({
   selector: 'app-conversation-between',
   templateUrl: './conversation-between.component.html',
-  styleUrls: ['./conversation-between.component.scss']
+  styleUrls: ['./conversation-between.component.scss'],
 })
 export class ConversationBetweenComponent {
   infoTextNr: number;
@@ -18,7 +18,9 @@ export class ConversationBetweenComponent {
       text2: ` und dir statt.`,
     },
     {
-      text1: `Dieser Raum ist nur für dich da. Mache dir Notizen, liste deine To-dos auf oder bewahre Links und Dateien griffbereit auf. Du kannst hier auch gerne Dinge mit dir selbst besprechen.`,
+      text1: `Dieser Raum ist nur für dich da. Mache dir Notizen, 
+      liste deine To-dos auf oder bewahre Links und Dateien griffbereit auf.
+      Du kannst hier auch gerne Dinge mit dir selbst besprechen.`,
     },
   ];
 
@@ -28,6 +30,11 @@ export class ConversationBetweenComponent {
     private dialog: Dialog
   ) {}
 
+  /**
+   * Opens the profile view for the selected user to message.
+   * Sets the 'selectedUserDetailView' variable in 'varService' to the selected user.
+   * Opens the 'DialogProfileViewUsersComponent' dialog to display the user's profile.
+   */
   profilView() {
     this.varService.setVar(
       'selectedUserDetailView',
@@ -36,6 +43,10 @@ export class ConversationBetweenComponent {
     this.dialog.open(DialogProfileViewUsersComponent);
   }
 
+  /**
+   * Checks if the current user matches the selected user for messaging.
+   * @returns {boolean} True if the current user matches the selected user, otherwise false.
+   */
   currentUser() {
     return (
       this.dataService.loggedInUserData.email ===
@@ -43,8 +54,15 @@ export class ConversationBetweenComponent {
     );
   }
 
+  /**
+   * Returns a number based on the result of the 'currentUser' method.
+   *
+   * If the 'currentUser' method returns true, it returns 1. Otherwise, it returns 0.
+   *
+   * @returns {number} - Either 1 if the current user matches the selected user for messaging,
+   *                    or 0 if they do not match.
+   */
   numberQuery() {
-    return this.currentUser() ? 1 : 0;   
+    return this.currentUser() ? 1 : 0;
   }
-
 }
