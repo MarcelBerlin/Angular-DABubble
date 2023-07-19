@@ -1,7 +1,4 @@
-import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
-import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
-import { DataService } from 'src/app/services/data.service';
 import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
@@ -10,4 +7,10 @@ import { VariablesService } from 'src/app/services/variables.service';
   styleUrls: ['./main-chat-message-chat-field.component.scss'],
 })
 export class MainChatMessageChatFieldComponent {
+
+  constructor(public varService:VariablesService) {
+    setTimeout(() => {
+      this.varService.setVar('conversationBetween', true);
+    },17000)
+  }
 }

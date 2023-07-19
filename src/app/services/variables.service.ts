@@ -7,6 +7,7 @@ export class VariablesService {
   messagePNBox: boolean = false; // Main Chat PN Box
   selectedUserToMessage: number = 0;
   selectedUserDetailView: number = 0;
+  conversationBetween:boolean = false;
 
 
   constructor() {}
