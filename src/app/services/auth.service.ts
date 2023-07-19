@@ -7,7 +7,7 @@ import { DialogInfoService } from './dialog-info.service';
 import { DialogInfoComponent } from '../dialog-info/dialog-info.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
-import { getAuth } from '@angular/fire/auth';
+import { ClearCachService } from './clear-cach.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,7 @@ export class AuthService {
     public dialogInfoService: DialogInfoService,
     public dialog: MatDialog,
     private dataService: DataService,
+    private clearService: ClearCachService,
   ) {
     
   }
@@ -71,6 +72,7 @@ export class AuthService {
     return this.afs.signOut().then(() => {
       this.dataService.loggedInUserData.online = false;
       this.dataService.updateUser();
+      // this.clearService.clearCache();
       localStorage.removeItem('user');
       this.router.navigate(['']);
     });

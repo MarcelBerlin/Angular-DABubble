@@ -26,6 +26,7 @@ export class DataService {
       this.userData = user;
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
+        console.log('user logged in', this.loggedInUserData);
       }
     });
   }
