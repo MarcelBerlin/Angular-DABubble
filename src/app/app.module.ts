@@ -51,7 +51,8 @@ import { MainChatMessageChatFieldComponent } from './dashboard/main-chat/main-ch
 import { ConversationBetweenComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-message-chat-field/conversation-between/conversation-between.component';
 import { MainChatHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-head.component';
 import { MainChatChatfieldComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-chatfield.component';
-
+import { MainChatMultiMessageHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-multi-message-head/main-chat-multi-message-head.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -86,6 +87,7 @@ import { MainChatChatfieldComponent } from './dashboard/main-chat/main-chat-chat
     ConversationBetweenComponent,
     MainChatHeadComponent,
     MainChatChatfieldComponent,
+    MainChatMultiMessageHeadComponent,
 
   ],
   imports: [
@@ -101,6 +103,7 @@ import { MainChatChatfieldComponent } from './dashboard/main-chat/main-chat-chat
     MatMenuModule,
     ReactiveFormsModule,
     MatTreeModule,
+    MatAutocompleteModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

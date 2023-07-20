@@ -208,5 +208,6 @@ export class MenuSidenavComponent implements OnInit {
   openNewMessage() {
     console.log('Button funktioniert. mainChatHead ist auf 2 gesetzt');
     this.varService.setVar('mainChatHead', 2);
+    this.dcshService.chatSlideOut()
   }
 }

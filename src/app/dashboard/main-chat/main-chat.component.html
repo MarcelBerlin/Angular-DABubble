@@ -6,6 +6,9 @@
     <app-main-chat-message-head
       *ngIf="varService.mainChatHead == 1"
     ></app-main-chat-message-head>
+    <app-main-chat-multi-message-head
+      *ngIf="varService.mainChatHead == 2"
+    ></app-main-chat-multi-message-head>
 
     <div class="chatContainer">
       <app-main-chat-channel-chat-field

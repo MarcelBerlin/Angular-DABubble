@@ -2,6 +2,7 @@
   <textarea *ngIf="varService.mainChatHead == 0" type="text" placeholder="Nachricht an #{{ dialogAddService.tagsData[varService.selectedChannel].name }}"></textarea>
   <textarea *ngIf="varService.mainChatHead == 1 && !currentUser()" type="text" placeholder="Nachricht an {{dataService.userData[varService.selectedUserToMessage].name}}"></textarea>
   <textarea *ngIf="varService.mainChatHead == 1 && currentUser()" type="text" placeholder="Nachricht an mich :-)"></textarea>
+  <textarea *ngIf="varService.mainChatHead == 2" type="text" placeholder="Nachricht an"></textarea>
   <div class="iconsContainer">
     <div class="addElements">
       <div class="element">
