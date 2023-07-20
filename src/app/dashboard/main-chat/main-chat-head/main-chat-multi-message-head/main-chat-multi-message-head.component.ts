@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogAddService } from 'src/app/services/dialog-add.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-main-chat-multi-message-head',
@@ -7,5 +7,5 @@ import { DialogAddService } from 'src/app/services/dialog-add.service';
   styleUrls: ['./main-chat-multi-message-head.component.scss']
 })
 export class MainChatMultiMessageHeadComponent {
-  constructor(public dialogAddService:DialogAddService) { }
+  constructor(public dataService: DataService) { }
 }
