@@ -1,6 +1,5 @@
 .user-container {
     position: relative;
-
     .custom-menu {
         position: fixed !important;
         right: 3%;
@@ -13,6 +12,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 370px;
+        height: 470px;
         gap: 14px;
         overflow: hidden;
 
