@@ -1,18 +1,18 @@
 <div class="contentContainer">
   <div class="content">
     <app-main-chat-channel-head
-      *ngIf="!varService.messagePNBox"
+      *ngIf="varService.mainChatHead == 0"
     ></app-main-chat-channel-head>
     <app-main-chat-message-head
-      *ngIf="varService.messagePNBox"
+      *ngIf="varService.mainChatHead == 1"
     ></app-main-chat-message-head>
 
     <div class="chatContainer">
       <app-main-chat-channel-chat-field
-        *ngIf="!varService.messagePNBox"
+        *ngIf="varService.mainChatHead == 0"
       ></app-main-chat-channel-chat-field>
       <app-main-chat-message-chat-field
-        *ngIf="varService.messagePNBox"
+        *ngIf="varService.mainChatHead == 1"
       ></app-main-chat-message-chat-field>
     </div>
   </div>

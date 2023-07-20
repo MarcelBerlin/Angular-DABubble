@@ -33,13 +33,13 @@ export class DialogProfileViewUsersComponent {
    * Handles the action when a user initiates a message.
    *
    * This method is responsible for the necessary actions when a user wants to send a message.
-   * It sets the 'messagePNBox' variable in 'varService' to true to show the message input box.
+   * It sets the 'mainChatHead' variable in 'varService' to true to show the message input box.
    * Then, it closes the current dialog ('dialogRef') before proceeding to handle the message action.
    * The 'selectedUserToMessage' variable in 'varService' is set to the 'selectedUserDetailView' to set the recipient of the message.
    * Finally, it triggers the 'chatSlideOut' method of 'dcshService' to slide out the chat interface.
    */
   message() {
-    this.varService.setVar('messagePNBox', true);
+    this.varService.setVar('mainChatHead', 1);
     this.dialogRef.close();
     this.varService.setVar(
       'selectedUserToMessage',

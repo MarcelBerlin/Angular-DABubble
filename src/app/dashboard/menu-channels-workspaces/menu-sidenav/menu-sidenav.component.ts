@@ -186,7 +186,7 @@ export class MenuSidenavComponent implements OnInit {
   }
 
   messageToUser(arrayId: number) {
-    this.varService.setVar('messagePNBox', true);
+    this.varService.setVar('mainChatHead', 1);
     this.varService.setVar('selectedUserToMessage', arrayId);
     this.dcshService.chatSlideOut()
 
@@ -201,11 +201,12 @@ export class MenuSidenavComponent implements OnInit {
 
 
   openChannel(arrayId: number) {    
-    this.varService.setVar('messagePNBox', false);
+    this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
+  }
 
-  //   // hier wird die Variable 'messagePNBox' auf false gesetzt, um im Mittelteil die Channelbox anzuzeigen.
-  //   // wenn die Variable auf true ist, wird im Mittelteil die Nachrichtenbox angezeigt
-  //   // die funktion für das anzeigen der messagebox ist 'messageToUser()' in Zeile 198
+  openNewMessage() {
+    console.log('Button funktioniert. mainChatHead ist auf 2 gesetzt');
+    this.varService.setVar('mainChatHead', 2);
   }
 }

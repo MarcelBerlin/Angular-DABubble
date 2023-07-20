@@ -3,7 +3,7 @@
         <div class="sidenavHeaderContainer">
             <img src="assets/img/sidenav/sidenavTitle.png">
 
-            <img class="pointer" [src]="newMessagePath"
+            <img class="pointer" [src]="newMessagePath"(click)="openNewMessage()"
                 (mouseenter)="newMessagePath = 'assets/img/sidenav/newMessageHover.png'"
                 (mouseleave)="newMessagePath = 'assets/img/sidenav/newMessage.png'">
 
