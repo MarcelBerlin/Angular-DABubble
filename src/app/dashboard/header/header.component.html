@@ -9,26 +9,19 @@
       mat-icon="search"
       placeholder="Code learning durchsuchen"
     />
-    <div class="search-icon-container">
-      <img src="../../../assets/img/search-icon.png" />
-    </div>
+    <img src="../../../assets/img/search-icon.png" />
   </div>
 
   <div class="header-profile">
-    <div
-      *ngIf="getUserData.loggedInUserData"
-      style="display: flex; align-items: center; flex-direction: row"
-    >
-      <span> {{ getUserData.loggedInUserData.name }} </span>
-      <div>
-        <img src="{{ getUserData.loggedInUserData.img }}" />
-        <div
-          class="activeDot"
-          [style.background-color]="
-            getUserData.loggedInUserData.online ? '#92C83E' : '#686868'
-          "
-        ></div>
-      </div>
+    <span> {{ getUserData.loggedInUserData.name }} </span>
+    <div class="img-container">
+      <img src="{{ getUserData.loggedInUserData.img }}" />
+      <div
+        class="activeDot"
+        [style.background-color]="
+          getUserData.loggedInUserData.online ? '#92C83E' : '#686868'
+        "
+      ></div>
     </div>
     <!-- <span> {{ loggedUserName }} </span>
         <img src="{{ loggedUserImg }}"> -->
