@@ -38,7 +38,12 @@ export class CreateAccountComponent {
     this.router.navigateByUrl('');
   }
 
-  passwordViewToggle():void{
-
+  /**
+   * Toggles the password visibility.
+   */
+  passwordViewToggle(): void {
+    this.passwordView = !this.passwordView;
+    if (this.passwordView == true) this.inputType = 'text';
+    else this.inputType = 'password';
   }
 }

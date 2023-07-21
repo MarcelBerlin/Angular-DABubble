@@ -13,7 +13,12 @@ export class LoginHeaderComponent {
     private router: Router,
   ) { }
 
-
+  
+  /**
+   * Navigates to the 'createAccount' route using the router.
+   * 
+   *  @returns {void}
+   */
   goTocreateAccount(): void {
     this.router.navigateByUrl('createAccount');
   }
