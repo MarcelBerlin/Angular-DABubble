@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { User } from '../models/user.class';
+import { __param } from 'tslib';
 
 
 @Injectable({
@@ -23,11 +24,13 @@ export class DataService {
     const coll = collection(firestore, 'users');
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
-      this.userData = user;
+      this.userData = user;    
+
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
+        
       }
-    });
+    });    
   }
 
 
@@ -64,6 +67,7 @@ export class DataService {
     };
   }
 
+  
 
   /**
    * Returns the logged user id.

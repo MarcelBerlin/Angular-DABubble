@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
@@ -52,7 +52,8 @@ import { ConversationBetweenComponent } from './dashboard/main-chat/main-chat-ch
 import { MainChatHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-head.component';
 import { MainChatChatfieldComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-chatfield.component';
 import { MainChatMultiMessageHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-multi-message-head/main-chat-multi-message-head.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ChannelSelectionComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
 
 
 
@@ -77,7 +78,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     SecondaryChatMessagefieldComponent,
     DialogProfileViewUsersComponent,
     DialogMembersComponent,
-    DialogAddMembersComponent,    
+    DialogAddMembersComponent,
     CreateAccountComponent,
     StartAnimationComponent,
     MainChatChannelHeadComponent,
@@ -88,6 +89,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MainChatHeadComponent,
     MainChatChatfieldComponent,
     MainChatMultiMessageHeadComponent,
+    ChannelSelectionComponent,
 
   ],
   imports: [
