@@ -54,6 +54,7 @@ import { MainChatChatfieldComponent } from './dashboard/main-chat/main-chat-chat
 import { MainChatMultiMessageHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-multi-message-head/main-chat-multi-message-head.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChannelSelectionComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
+import { LoginHeaderComponent } from './login-header/login-header.component';
 
 
 
@@ -90,6 +91,7 @@ import { ChannelSelectionComponent } from './dashboard/main-chat/main-chat-chatf
     MainChatChatfieldComponent,
     MainChatMultiMessageHeadComponent,
     ChannelSelectionComponent,
+    LoginHeaderComponent,
 
   ],
   imports: [

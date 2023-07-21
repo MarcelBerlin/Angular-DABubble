@@ -2,15 +2,8 @@
 <div class="loginContainer" style="position: relative;">
 
     <app-start-animation ></app-start-animation>
-
-    <div class="loginHead">
-        <!-- <img src="../../assets/img/Login/Logo.png"> -->
-        <div class="loginHeadLinks">
-            <span>Neu bei DABubble?</span>
-            <span class="span2" (click)="goTocreateAccount()">Konto erstellen</span>
-        </div>
-    </div>
-
+    <app-login-header></app-login-header>
+    
     <div class="card">
         <form [formGroup]="loginForm" (submit)="loginWithEmailAndPassword()">
             <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->

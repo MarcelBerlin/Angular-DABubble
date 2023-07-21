@@ -1,0 +1,42 @@
+.loginHead {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 75px;
+    padding-right: 75px;
+    padding-left: 75px;
+
+    .loginHeadLinks {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        flex-direction: column;
+
+        span {
+            font-family: 'Nunito Sans';
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 24.55px;
+        }
+
+        .span2 {
+            width: 153px;
+            height: 42px;
+            padding: 0px 15px;
+            margin-right: -55px;
+            border-radius: 25px;
+            border: 1px solid #ECEEFE;
+            display: flex;
+            align-items: center;
+            font-family: 'Figtree';
+            font-weight: 400;
+            font-size: 18px;
+            color: rgba(121, 126, 243, 0.8);
+            cursor: pointer;
+
+            &:hover{
+                border: 1px solid rgba(0, 0, 0, 0.3);
+                color: rgba(121, 126, 243, 1);
+            }
+        }
+    }
+}

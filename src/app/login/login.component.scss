@@ -4,43 +4,6 @@
     overflow: hidden;
     overflow-y: scroll;
 
-    .loginHead {
-        display: flex;
-        justify-content: flex-end;
-        padding-top: 75px;
-        padding-right: 75px;
-        padding-left: 75px;
-
-        img {
-            width: 242.11px;
-            height: 70px;
-        }
-
-        .loginHeadLinks {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            flex-direction: column;
-
-            span {
-                font-family: 'Nunito Sans';
-                font-weight: 400;
-                font-size: 18px;
-                line-height: 24.55px;
-            }
-
-            .span2 {
-                height: 42px;
-                border-radius: 100%;
-                font-family: 'Figtree';
-                font-weight: 400;
-                font-size: 18px;
-                color: #797EF3;
-                cursor: pointer;
-            }
-        }
-    }
-
     .card {
         display: flex;
         justify-content: center;
@@ -54,7 +17,6 @@
             background-color: white;
             align-items: center;
             
-
             mat-card-header {
                 margin-bottom: 46px;
 
@@ -79,7 +41,6 @@
                     letter-spacing: 0em;
                     text-align: center;
                 }
-
             }
 
             .inputContainer{
