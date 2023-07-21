@@ -30,7 +30,9 @@ export class MainChatMultiMessageHeadComponent {
       this.inputValue.charAt(0) === '#'
         ? this.dialogAddService.tagsData
         : this.dataService.userData;
-    this.sign = this.inputValue.charAt(0);
+    if (this.inputValue.charAt(0) === '#' || '@') {
+      this.sign = this.inputValue.charAt(0);
+    }
     return this.selectedArray;
   }
 
