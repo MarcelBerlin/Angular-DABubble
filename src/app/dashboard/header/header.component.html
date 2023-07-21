@@ -12,7 +12,7 @@
     <img src="../../../assets/img/search-icon.png" />
   </div>
 
-  <div class="header-profile">
+  <div class="header-profile" *ngIf="getUserData.loggedInUserData">
     <span> {{ getUserData.loggedInUserData.name }} </span>
     <div class="img-container">
       <img src="{{ getUserData.loggedInUserData.img }}" />
