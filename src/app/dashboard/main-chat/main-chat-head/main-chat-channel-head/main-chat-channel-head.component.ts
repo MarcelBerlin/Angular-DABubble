@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogAddChannelComponent } from 'src/app/dialog-add-channel/dialog-add-channel.component';
+import { DialogAddChannelComponent } from 'src/app/dialog/dialog-add-channel/dialog-add-channel.component';
 import { DialogAddMembersComponent } from 'src/app/dialog/dialog-add-members/dialog-add-members.component';
 import { DialogChannelEditionComponent } from 'src/app/dialog/dialog-channel-edition/dialog-channel-edition.component';
 import { DialogMembersComponent } from 'src/app/dialog/dialog-members/dialog-members.component';

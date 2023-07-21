@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { UsersService } from '../services/users.service';
+import { UsersService } from '../../services/users.service';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { HeaderEditDialogComponent } from '../header-edit-dialog/header-edit-dialog.component';
-import { AuthService } from '../services/auth.service';
-import { DataService } from '../services/data.service';
+import { AuthService } from '../../services/auth.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-header-dialog',

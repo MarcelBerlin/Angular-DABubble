@@ -2,7 +2,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuTrigger, MatMenuModule } from '@angular/material/menu';
-import { HeaderDialogComponent } from 'src/app/header-dialog/header-dialog.component';
+import { HeaderDialogComponent } from 'src/app/dialog/header-dialog/header-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { Observable } from 'rxjs';

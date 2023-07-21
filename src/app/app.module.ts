@@ -28,14 +28,14 @@ import { MatDialogActions, } from '@angular/material/dialog';
 import { MatDialogContent } from '@angular/material/dialog';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeaderDialogComponent } from './header-dialog/header-dialog.component';
+import { HeaderDialogComponent } from './dialog/header-dialog/header-dialog.component';
 import { MenuSidenavComponent } from './dashboard/menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { DialogChannelEditionComponent } from './dialog/dialog-channel-edition/dialog-channel-edition.component';
-import { HeaderEditDialogComponent } from './header-edit-dialog/header-edit-dialog.component';
-import { DialogInfoComponent } from './dialog-info/dialog-info.component';
+import { HeaderEditDialogComponent } from './dialog/header-edit-dialog/header-edit-dialog.component';
+import { DialogInfoComponent } from './dialog/dialog-info/dialog-info.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
+import { DialogAddChannelComponent } from './dialog/dialog-add-channel/dialog-add-channel.component';
 import { SecondaryChatHeadComponent } from './dashboard/secondary-chat/secondary-chat-head/secondary-chat-head.component';
 import { MainChatMessagefieldComponent } from './dashboard/main-chat/main-chat-messagefield/main-chat-messagefield.component';
 import { SecondaryChatMessagefieldComponent } from './dashboard/secondary-chat/secondary-chat-messagefield/secondary-chat-messagefield.component';

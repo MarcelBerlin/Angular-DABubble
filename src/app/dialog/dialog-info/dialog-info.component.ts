@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DialogInfoService } from '../services/dialog-info.service';
+import { DialogInfoService } from '../../services/dialog-info.service';
 
 
 @Component({

@@ -7,7 +7,7 @@ import {
   transition,
 } from '@angular/animations';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogAddChannelComponent } from 'src/app/dialog-add-channel/dialog-add-channel.component';
+import { DialogAddChannelComponent } from 'src/app/dialog/dialog-add-channel/dialog-add-channel.component';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';

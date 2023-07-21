@@ -1,8 +1,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { AuthService } from '../services/auth.service';
-import { DataService } from '../services/data.service';
+import { AuthService } from '../../services/auth.service';
+import { DataService } from '../../services/data.service';
 import { collection, doc, setDoc } from '@angular/fire/firestore';
 
 @Component({

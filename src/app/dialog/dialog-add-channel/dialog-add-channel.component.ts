@@ -1,6 +1,6 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
-import { DialogAddService } from '../services/dialog-add.service';
+import { DialogAddService } from '../../services/dialog-add.service';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 

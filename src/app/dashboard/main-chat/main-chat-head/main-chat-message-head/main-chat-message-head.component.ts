@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
-import { HeaderDialogComponent } from 'src/app/header-dialog/header-dialog.component';
+import { HeaderDialogComponent } from 'src/app/dialog/header-dialog/header-dialog.component';
 import { DataService } from 'src/app/services/data.service';
 import { VariablesService } from 'src/app/services/variables.service';
 

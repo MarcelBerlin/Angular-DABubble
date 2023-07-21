@@ -4,7 +4,7 @@ import { GoogleAuthProvider } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { DialogInfoService } from './dialog-info.service';
-import { DialogInfoComponent } from '../dialog-info/dialog-info.component';
+import { DialogInfoComponent } from '../dialog/dialog-info/dialog-info.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
 import { ClearCachService } from './clear-cach.service';
