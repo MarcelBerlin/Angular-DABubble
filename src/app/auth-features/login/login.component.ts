@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogInfoComponent } from '../dialog/dialog-info/dialog-info.component';
-import { DialogInfoService } from '../services/dialog-info.service';
-import { Login } from '../login';
-import { DataService } from '../services/data.service';
-import { User } from '../models/user.class';
+import { DialogInfoComponent } from '../../dialog/dialog-info/dialog-info.component';
+import { DialogInfoService } from '../../services/dialog-info.service';
+import { Login } from '../../login';
+import { DataService } from '../../services/data.service';
+import { User } from '../../models/user.class';
 
 @Component({
   selector: 'app-login',

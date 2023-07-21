@@ -14,7 +14,7 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth-features/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -34,7 +34,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { DialogChannelEditionComponent } from './dialog/dialog-channel-edition/dialog-channel-edition.component';
 import { HeaderEditDialogComponent } from './dialog/header-edit-dialog/header-edit-dialog.component';
 import { DialogInfoComponent } from './dialog/dialog-info/dialog-info.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ForgotPasswordComponent } from './auth-features/forgot-password/forgot-password.component';
 import { DialogAddChannelComponent } from './dialog/dialog-add-channel/dialog-add-channel.component';
 import { SecondaryChatHeadComponent } from './dashboard/secondary-chat/secondary-chat-head/secondary-chat-head.component';
 import { MainChatMessagefieldComponent } from './dashboard/main-chat/main-chat-messagefield/main-chat-messagefield.component';
@@ -42,8 +42,8 @@ import { SecondaryChatMessagefieldComponent } from './dashboard/secondary-chat/s
 import { DialogProfileViewUsersComponent } from './dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { DialogMembersComponent } from './dialog/dialog-members/dialog-members.component';
 import { DialogAddMembersComponent } from './dialog/dialog-add-members/dialog-add-members.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
-import { StartAnimationComponent } from './start-animation/start-animation.component';
+import { CreateAccountComponent } from './auth-features/create-account/create-account.component';
+import { StartAnimationComponent } from './auth-features/start-animation/start-animation.component';
 import { MainChatChannelHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-channel-head/main-chat-channel-head.component';
 import { MainChatMessageHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-message-head/main-chat-message-head.component';
 import { MainChatChannelChatFieldComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/main-chat-channel-chat-field.component';
@@ -54,7 +54,7 @@ import { MainChatChatfieldComponent } from './dashboard/main-chat/main-chat-chat
 import { MainChatMultiMessageHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-multi-message-head/main-chat-multi-message-head.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChannelSelectionComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
-import { LoginHeaderComponent } from './login-header/login-header.component';
+import { LoginHeaderComponent } from './auth-features/login-header/login-header.component';
 
 
 
