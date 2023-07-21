@@ -5,14 +5,16 @@
       type="text"
       placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
       [matAutocomplete]="auto"
+      [(ngModel)]="inputValue"
     />
     <mat-autocomplete #auto="matAutocomplete">
-        <mat-option
-        *ngFor="let item of dataService.userData" [value]="item.name"
+      <mat-option
+        *ngFor="let item of inputAsValue(); let i = index"
+        [value]="sign + item[setItem]"
+        (click)="indexOfSelection(i)"
       >
-        {{ item.name }}
+        {{ item[setItem] }}
       </mat-option>
     </mat-autocomplete>
   </div>
 </div>
-
