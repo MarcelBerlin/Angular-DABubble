@@ -19,7 +19,7 @@
                 <div class="inputContainer">
                     <div class="inputInner">
                         <input type="email" placeholder="beispielname@email.com" formControlName="email">
-                        <img src="../../assets/img/Login/mail.png" style="position: absolute; left: 85px;">
+                        <img src="../../assets/img/login/mail.png" style="position: absolute; left: 85px;">
                     </div>
                     <div *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].touched"
                         class="warnContainer">
@@ -31,8 +31,8 @@
                 <div class="inputContainer">
                     <div class="inputInner">
                         <input type="password" placeholder="Passwort" formControlName="password" [type]="inputType">
-                        <img src="../../assets/img/Login/lock.png" (click)="passwordViewToggle()" *ngIf="!passwordView">
-                        <img src="../../assets/img/Login/open_lock.png" (click)="passwordViewToggle()"
+                        <img src="../../assets/img/login/lock.png" (click)="passwordViewToggle()" *ngIf="!passwordView">
+                        <img src="../../assets/img/login/open_lock.png" (click)="passwordViewToggle()"
                             *ngIf="passwordView">
                     </div>
                     <div *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].touched"
@@ -51,7 +51,7 @@
                 </div>
 
                 <button [disabled]="loading" class="googleButton" (click)="loginWithGoogle()">
-                    <img src="../../assets/img/Login/Google.png">
+                    <img src="../../assets/img/login/Google.png">
                     <span>Anmelden mit Google</span>
                 </button>
 
