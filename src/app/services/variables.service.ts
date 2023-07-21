@@ -8,8 +8,11 @@ export class VariablesService {
   selectedUserToMessage: number = 0;
   selectedUserDetailView: number = 0;
   selectedChannel: number = 0;
-  conversationBetween:boolean = false;
-
+  conversationBetween: boolean = false;
+  selectedArrayofSearch: string = '';
+  propertyOfSearch: string = '';
+  signOfSearch: string = '';
+  indexOfSearch: number;
 
   constructor() {}
 
