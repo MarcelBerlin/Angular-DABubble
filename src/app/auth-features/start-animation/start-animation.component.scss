@@ -80,7 +80,7 @@
             font-size: 66px;
             color: white;
         }
-        
+
         100% {
             margin-left: 0px;
             font-size: 33px;
@@ -159,35 +159,168 @@
 
 }
 
-@media screen and (max-width: 650px) {
-    .outer {
-        animation: moveOuterMobile;
+// @media screen and (max-width: 650px) {
+//     .outer {
+//         animation: moveOuterMobile;
+//         animation-delay: 500ms;
+//         animation-duration: 2500ms;
+//         animation-fill-mode: forwards;
+//     }
+// }
+
+// @keyframes moveOuterMobile {
+//     0% {
+//         left: calc(50% - 282px);
+//         top: calc(50% - 92px);
+//         opacity: 1;
+//     }
+
+//     20% {
+//         left: calc(50% - 451.07px);
+//         top: calc(50% - 92px);
+//     }
+
+//     51% {
+//         left: calc(50% - 451.07px);
+//         top: calc(50% - 92px);
+//     }
+
+//     100% {
+//         top: 92px;
+//         left: calc(50% - 122.15px);
+//         opacity: 1;
+//     }
+// }
+
+
+.outerMobile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: calc(50% - 231.075px);
+    opacity: 0;
+    z-index: 3;
+    animation: moveOuterMobile;
+    animation-delay: 500ms;
+    animation-duration: 2500ms;
+    animation-fill-mode: forwards;
+
+    .imageMobile {
+        width: 70px;
+        height: 70px;
+        background-color: rgba(49, 58, 229, 1);
+        animation: moveImgMobile;
         animation-delay: 500ms;
         animation-duration: 2500ms;
         animation-fill-mode: forwards;
+        z-index: 4;
+        padding-left: 300px;
+    }
+
+
+    .textMobile {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 33px;
+        color: black;
+        padding-left: 14px;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+        animation: moveRightMobile;
+        animation-delay: 500ms;
+        animation-duration: 2500ms;
+        animation-fill-mode: forwards;
+        z-index: 3;
+    }
+
+    @keyframes moveOuterMobile {
+        0% {
+            left: calc(50% - 282px);
+            top: calc(50% - 92px);
+            opacity: 1;
+        }
+
+        20% {
+            left: calc(50% - 451.07px);
+            top: calc(50% - 92px);
+        }
+
+        51% {
+            left: calc(50% - 451.07px);
+            top: calc(50% - 92px);
+        }
+
+        100% {
+            top: 92px;
+            left: calc(50% - 122.15px);
+            opacity: 1;
+        }
+    }
+
+    @keyframes moveRightMobile {
+        0% {
+            margin-left: -190px;
+            color: white;
+            font-size: 33px;
+        }
+
+        20% {
+            margin-left: -190px;
+            color: white;
+        }
+
+        50% {
+
+            margin-left: 0px;
+            font-size: 33px;
+            color: white;
+        }
+
+        100% {
+            margin-left: 0px;
+            font-size: 23px;
+            color: black;
+        }
+    }
+
+    @keyframes moveImgMobile {
+        0% {
+
+            margin-left: 290px;
+            width: 93.5px;
+            height: 92px;
+        }
+
+        50% {
+            background-color: rgba(49, 58, 229, 1);
+            width: 93.5px;
+            height: 92px;
+        }
+
+        51% {
+            background-color: rgba(49, 58, 229, 0);
+            padding-left: 190px;
+        }
+
+        100% {
+            background-color: rgba(49, 58, 229, 0);
+            width: 70px;
+            height: 70px;
+            padding-left: 0px;
+        }
     }
 }
 
-@keyframes moveOuterMobile {
-    0% {
-        left: calc(50% - 282px);
-        top: calc(50% - 92px);
-        opacity: 1;
-    }
-
-    20% {
-        left: calc(50% - 451.07px);
-        top: calc(50% - 92px);
-    }
-
-    51% {
-        left: calc(50% - 451.07px);
-        top: calc(50% - 92px);
-    }
-
-    100% {
-        top: 92px;
-        left: calc(50% - 122.15px);
-        opacity: 1;
-    }
+.layoverMobile {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(49, 58, 229, 1);
+    z-index: 2;
+    animation: layover;
+    animation-fill-mode: forwards;
+    animation-delay: 500ms;
+    animation-duration: 2500ms;
 }
