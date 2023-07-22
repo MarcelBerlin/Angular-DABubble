@@ -7,6 +7,7 @@
     .card {
         display: flex;
         justify-content: center;
+        align-items: center;
         margin-top: 11px;
         margin-bottom: 11px;
 
@@ -229,3 +230,42 @@
 *::-webkit-scrollbar {
 	display: none;
 }
+
+@media screen and (max-width: 650px){
+    .card{
+        margin-top: 34.85px !important;
+        
+    }
+    mat-card{
+        max-width: 398px !important;
+        margin: 0px 16px !important;
+    }
+    mat-card-header{
+       margin-bottom: 16px !important; 
+    }
+    mat-card-title{
+        font-size: 32px !important;
+        margin-bottom: 15px !important;
+        margin-top: 0px !important;
+    }
+    mat-card-subtitle {
+        padding: 0px 0px !important;
+        font-size: 17px !important;
+        line-height: 20.5px !important;
+    }
+    .inputContainer{
+        height: 80px !important;
+        width: 117% !important;
+    }
+    .orOuterContainer{
+        margin: 30px 0px;
+        width: 90% !important;
+    }
+    .googleButton{
+        width: calc(100% - 40px) !important;
+    }
+    .btnAction{
+        margin: 20px 0px 30px;
+    }
+}
+

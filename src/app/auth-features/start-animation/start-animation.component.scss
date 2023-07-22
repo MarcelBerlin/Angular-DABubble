@@ -1,98 +1,3 @@
-// .outer{
-//     display: flex; 
-//     justify-content: center; 
-//     align-items: center; 
-//     height: 100vh; 
-//     width: 100%;
-//     background-color: rgba(49, 58, 229, 1) ;
-//     background-color: rgba(121, 126, 243, 1);
-// }
-
-// .image{
-//     display: flex;
-//     width: 70px;
-//     height: 70px;
-//     position:absolute;
-//     top: 75px;
-//     left: 75px;
-//     animation-name: moveImg;
-//     animation-delay: 500ms;
-//     animation-duration: 2500ms;
-//     animation: moveImg 2500ms ease-out 2500ms;
-//     top: calc(50% - 92px);
-//     left: calc(50% - 121.5px);
-//     width: 186.98px;
-//     height: 184px;
-//     z-index: 1;
-//     background-color: rgba(49, 58, 229, 1) ;
-
-
-// }
-
-// @keyframes moveImg {
-//     0%{
-//         top: calc(50% - 92px);
-//         left: calc(50% - 121.5px);
-//         width: 186.98px;
-//         height: 184px;
-//     }
-
-//     10%{
-//         left: calc(50% - 281.3px);
-//         width: 186.98px;
-//         height: 184px;
-//     }
-
-//     100%{
-//         top: 75px;
-//         left: 75px;
-//         width: 70px;
-//         height: 70px;
-//     }
-
-// }
-
-// .text{
-//     display: flex;
-//     position: absolute;
-//     top: 93px;
-//     left: 159px;
-//     font-family: 'Inter', sans-serif;
-//     font-weight: 700;
-//     font-size: 33px;
-//     color: black;
-//     animation-name: moveText;
-//     animation-delay: 500ms;
-//     animation-duration: 2500ms;
-//     animation: moveText 2000ms ease-out 2500ms;
-//     top: calc(50% - 16px);
-//     left: calc(50% - 111px);
-// }
-
-// @keyframes moveText{
-//     0%{
-//         top: calc(50% - 16px);
-//         left: calc(50% - 111px);
-//         color: white;
-//     }
-
-//     20%{
-//         top: calc(50% - 16px);
-//         left: calc(50% + 80px);
-//         color: white;
-//     }
-
-//     100%{
-//         top: 93px;
-//         left: 159px;
-//         color: black;
-//     }
-// }
-
-// test{
-//     animation: name duration timing-function delay iteration-count direction fill-mode;
-// }
-
 .outer {
     display: flex;
     flex-direction: row;
@@ -100,23 +5,13 @@
     align-items: center;
     position: absolute;
     opacity: 0;
-
-
-    // top: calc(50% - 92px);
-    // left: calc(50% - 182.65px);
-    // top: 75px;
-    // left: 75px;
-
     z-index: 3;
-
     animation: moveOuter;
     animation-delay: 500ms;
     animation-duration: 2500ms;
     animation-fill-mode: forwards;
 
     .image {
-        // width: 186.98px;
-        // height: 184px;
         width: 70px;
         height: 70px;
         background-color: rgba(49, 58, 229, 1);
@@ -143,7 +38,6 @@
         z-index: 3;
     }
 
-
     @keyframes moveOuter {
         0% {
             left: calc(50% - 282px);
@@ -168,7 +62,6 @@
         }
     }
 
-
     @keyframes moveRight {
         0% {
             margin-left: -390px;
@@ -183,7 +76,7 @@
         }
 
         50% {
-            
+
             margin-left: 0px;
             font-size: 66px;
             color: white;
@@ -200,7 +93,7 @@
 
     @keyframes moveImg {
         0% {
-            
+
             // margin-left: 190px;
             width: 186.98px;
             height: 184px;
@@ -224,9 +117,6 @@
             padding-left: 0px;
         }
     }
-
-
-
 }
 
 .layover {
@@ -241,7 +131,6 @@
     animation-duration: 2500ms;
 }
 
-
 @keyframes layover {
     0% {
         background-color: rgba(49, 58, 229, 1);
@@ -254,21 +143,54 @@
         background-color: rgba(49, 58, 229, 1);
     }
 
-    75%{
+    75% {
         background-color: (121, 126, 243, 1);
     }
 
-    99%{
+    99% {
         z-index: 2;
         height: 100vh;
         width: 100%;
     }
 
-    100%{
+    100% {
         background-color: rgba(121, 126, 243, 0);
         z-index: -1;
         height: 0px;
         width: 0px;
     }
 
+}
+
+@media screen and (max-width: 650px) {
+    .outer {
+        animation: moveOuterMobile;
+        animation-delay: 500ms;
+        animation-duration: 2500ms;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes moveOuterMobile {
+    0% {
+        left: calc(50% - 282px);
+        top: calc(50% - 92px);
+        opacity: 1;
+    }
+
+    20% {
+        left: calc(50% - 451.07px);
+        top: calc(50% - 92px);
+    }
+
+    51% {
+        left: calc(50% - 451.07px);
+        top: calc(50% - 92px);
+    }
+
+    100% {
+        top: 92px;
+        left: calc(50% - 122.15px);
+        opacity: 1;
+    }
 }

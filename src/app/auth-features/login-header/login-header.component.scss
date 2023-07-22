@@ -40,3 +40,31 @@
         }
     }
 }
+
+@media screen and (max-width: 650px){
+    .loginHead{
+        height: 68.15px;
+    }
+
+    .loginHeadLinks {
+        position: absolute;
+        top: 760px;
+        left: calc(50% - 75.65px);
+        align-items: center !important;
+    }
+
+    .span2{
+        margin-right: unset !important;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 380px){
+    .loginHeadLinks {
+        position: absolute;
+        top: 780px;
+        left: calc(50% - 75.65px);
+        align-items: center !important;
+    }
+}
