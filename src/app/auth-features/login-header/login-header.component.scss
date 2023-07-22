@@ -30,12 +30,12 @@
             font-family: 'Figtree';
             font-weight: 400;
             font-size: 18px;
-            color: rgba(121, 126, 243, 0.8);
+            color: rgba(121, 126, 243, 1);
+            transition: 100ms ease-in;
             cursor: pointer;
-
             &:hover{
                 border: 1px solid rgba(0, 0, 0, 0.3);
-                color: rgba(121, 126, 243, 1);
+                color: rgba(68, 77, 242, 1);
             }
         }
     }

@@ -42,6 +42,7 @@ export class LoginComponent {
    */
   loginWithGoogle():void {
     this.loading = true;
+    this.loginForm.disable();
     this.authService.signInWithGoogle().then((res: any) => {
       this.authService.setLocalStorage({ email: res.additionalUserInfo.profile.email, password: '' });
       this.router.navigateByUrl('dashboard');
@@ -51,6 +52,7 @@ export class LoginComponent {
     }).catch((error: any) => {
       this.loading = false;
       console.error(error);
+      this.loginForm.enable();
     });
   }
 

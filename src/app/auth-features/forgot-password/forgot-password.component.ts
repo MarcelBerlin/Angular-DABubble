@@ -31,6 +31,7 @@ export class ForgotPasswordComponent {
     this.forgotPasswordForm.disable();
     this.email = this.forgotPasswordForm.value.email;
     this.authService.forgotPassword(this.email);
+    this.backToLogin();
   }
 
 

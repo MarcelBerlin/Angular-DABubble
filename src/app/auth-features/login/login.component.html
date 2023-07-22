@@ -55,12 +55,21 @@
                     <span>Anmelden mit Google</span>
                 </button>
 
-                <mat-card-actions align="end">
+                <!-- <mat-card-actions align="end">
                     <button mat-raised-button color="secondary" type="submit" [disabled]="!loginForm.valid || loading"
                         class="submitBtn">Anmelden</button>
                     <button mat-raised-button color="secondary" class="guestBtn" (click)="guestLogin()"
                         type="button">Gäste-Login</button>
-                </mat-card-actions>
+                </mat-card-actions> -->
+
+                <div class="btnAction">
+                    <button class="primaryButton" type="submit "[disabled]="!loginForm.valid || loading">
+                        Anmelden
+                    </button>
+                    <button class="secondaryButton" type="button" (click)="guestLogin()">
+                        Gäste-Login
+                    </button>
+                </div>
             </mat-card>
 
         </form>

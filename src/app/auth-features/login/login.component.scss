@@ -12,7 +12,6 @@
 
         mat-card {
             max-width: 606px;
-            // max-height: 769px;
             border-radius: 30px;
             background-color: white;
             align-items: center;
@@ -98,7 +97,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 25px;
+    border-radius: 30px;
     font-family: 'Figtree';
     font-weight: 400;
     font-size: 18px;
@@ -107,10 +106,11 @@
     padding: 5px 15px;
     box-sizing: border-box;
     margin: 0px;
+    transition: 100ms ease-in;
     cursor: pointer;
-
     &:hover {
-        background-color: #ECEEFE;
+        background-color: rgba(236, 238, 254, 1);
+        color: rgba(68, 77, 242, 1);
     }
 }
 
@@ -145,59 +145,86 @@
     border: 1px solid white;
     padding: 11px 32px 11px 32px;
     gap: 10px;
-    background-color: #ECEEFE;
+    background-color: rgba(236, 238, 254, 1);
     box-sizing: border-box;
     cursor: pointer;
     font-family: 'Nunito';
     font-weight: 400;
     font-size: 18px;
-    color: #444DF2;
-
+    line-height: 21.6px;
+    color: rgba(68, 77, 242, 1);
+    transition: 100ms ease-out;
     &:hover {
-        border: 1px solid #7E83F5;
+        border: 1px solid rgba(68, 77, 242, 1);
         font-weight: 700;
+    }
+    &:active,
+    &:focus {
+        background-color: rgba(236, 238, 254, 1);
+        color: rgba(104, 104, 104, 1);
+        border: 1px solid rgba(68, 77, 242, 1);
     }
 }
 
-mat-card-actions {
-    margin: 43px 0px;
+.btnAction{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 46.25px 0px 50px;
     gap: 30px;
 
-    .submitBtn {
-        width: 137px;
+    .primaryButton {
         height: 49px;
+        padding: 12px 25px 12px 25px;
         border-radius: 25px;
-        padding: 12px 8px;
         background-color: rgba(68, 77, 242, 1);
-        color: white;
+        transition: 100ms ease-out;
         font-family: 'Nunito';
         font-weight: 700;
         font-size: 18px;
         line-height: 24.55px;
-        cursor: pointer;
-
-        &:hover {
-            background-color: rgba(68, 77, 242, 0.5);
+        color: white;
+        &:hover{
+            background-color: rgba(121, 126, 243, 1);
+        }
+        &:enabled{
+            cursor: pointer;
+        }
+        &:active,
+        &:focus {
+            background-color: rgba(68, 77, 242, 1);
+        }
+        &:disabled {
+            background-color: rgba(104, 104, 104, 1);
         }
     }
-
-    .guestBtn {
-        width: 153px;
+    
+    .secondaryButton {
         height: 49px;
+        padding: 12px 25px 12px 25px;
+        border: 1px solid rgba(151, 71, 255, 1);
         border-radius: 25px;
-        padding: 12px 8px;
-
-        color: #444DF2;
+        transition: 100ms ease-out;
         font-family: 'Nunito';
         font-weight: 700;
         font-size: 18px;
         line-height: 24.55px;
-        border: 1px solid rgba(121, 126, 243, 1);
+        color: rgba(121, 126, 243, 1);
         cursor: pointer;
-
         &:hover {
-            background-color: #444DF2;
+            background-color: rgba(83, 90, 241, 1);
             color: white;
         }
+        &:active,
+        &:focus {
+            background-color: rgba(68, 77, 242, 1);
+            color: white;
+        }
+        &:disabled {
+            color: rgba(104, 104, 104, 1);
+        }
     }
+}
+*::-webkit-scrollbar {
+	display: none;
 }

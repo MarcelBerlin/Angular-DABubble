@@ -196,6 +196,7 @@ export class AuthService {
     return this.afs
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
+        this.router.navigateByUrl('');
         this.openDialogPasswordResetEmailSend();
       })
       .catch((error) => {
