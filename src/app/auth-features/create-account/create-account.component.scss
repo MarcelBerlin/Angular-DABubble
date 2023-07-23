@@ -1,6 +1,8 @@
 .createAccountContainer {
     height: 100vh;
     background-color: #ECEEFE;
+    overflow: hidden;
+    overflow-y: scroll;
 
     .card {
         display: flex;
