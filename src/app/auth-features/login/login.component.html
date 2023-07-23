@@ -1,11 +1,7 @@
-<div style="display: flex; justify-content: center; align-items: center;  background-color: #ECEEFE;">
-
-
+<div class="pageOuter">
     <div class="loginContainer">
-
         <app-start-animation></app-start-animation>
         <app-login-header></app-login-header>
-
         <div class="card">
             <form [formGroup]="loginForm" (submit)="loginWithEmailAndPassword()">
                 <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
@@ -17,11 +13,10 @@
                             verwendest.
                         </mat-card-subtitle>
                     </mat-card-header>
-
                     <div class="inputContainer">
                         <div class="inputInner">
                             <input type="email" placeholder="beispielname@email.com" formControlName="email">
-                            <img src="../../assets/img/login/mail.png" style="position: absolute; left: 85px;">
+                            <img src="../../../assets/img/login/mail.png" style="position: absolute; left: 85px;">
                         </div>
                         <div *ngIf="loginForm.controls['email'].dirty && loginForm.controls['email'].touched"
                             class="warnContainer">
@@ -29,13 +24,12 @@
                                 ist leider ungültig.</span>
                         </div>
                     </div>
-
                     <div class="inputContainer">
                         <div class="inputInner">
                             <input type="password" placeholder="Passwort" formControlName="password" [type]="inputType">
-                            <img src="../../assets/img/login/lock.png" (click)="passwordViewToggle()"
+                            <img src="../../../assets/img/login/lock.png" (click)="passwordViewToggle()"
                                 *ngIf="!passwordView">
-                            <img src="../../assets/img/login/open_lock.png" (click)="passwordViewToggle()"
+                            <img src="../../../assets/img/login/open_lock.png" (click)="passwordViewToggle()"
                                 *ngIf="passwordView">
                         </div>
                         <div *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].touched"
@@ -44,20 +38,16 @@
                                 versuchen.</span>
                         </div>
                     </div>
-
                     <p class="forgotPassword" [routerLink]="['forgot_password']">Passwort vergessen?</p>
-
                     <div class="orOuterContainer">
                         <div class="line"></div>
                         <span>ODER</span>
                         <div class="line"></div>
                     </div>
-
                     <button [disabled]="loading" class="googleButton" (click)="loginWithGoogle()">
-                        <img src="../../assets/img/login/Google.png">
+                        <img src="../../../assets/img/login/Google.png">
                         <span>Anmelden mit Google</span>
                     </button>
-
                     <div class="btnAction">
                         <button class="primaryButton" type="submit " [disabled]="!loginForm.valid || loading">
                             Anmelden
@@ -67,12 +57,7 @@
                         </button>
                     </div>
                 </mat-card>
-
             </form>
-
         </div>
-
-
     </div>
-
 </div>

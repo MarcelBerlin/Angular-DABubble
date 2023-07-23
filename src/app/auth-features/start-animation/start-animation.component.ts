@@ -31,6 +31,6 @@ export class StartAnimationComponent {
    * @returns {boolean} - `true` if the window width is less than 650 pixels, otherwise `false`. 
    */
   isWindowWidthLessThan650(): boolean {
-    return this.windowWidth < 650;
+    return this.windowWidth < 769;
   }
 }

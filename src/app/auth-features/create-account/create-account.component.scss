@@ -7,7 +7,7 @@
         justify-content: center;
         align-items: center;
         margin-top: 11px;
-        height: calc(100% - 156px);
+        height: 100%;
 
         mat-card {
             max-width: 606px;
@@ -95,44 +95,47 @@
 }
 
 .warnContainer {
-    color: #ED1E79;
-    font-size: 16px;
 
     span {
-        padding: 0px 52px;
+        color: rgba(237, 30, 121, 1) !important;
+        font-family: 'Nunito' !important;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        line-height: 19.1px !important;
+        padding: 0px 52px !important;
     }
 }
 
-.forgotPassword {
-    font-family: 'Figtree';
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21.6px;
-    color: #797EF3;
-    margin: 0px;
-    cursor: pointer;
-}
+// .forgotPassword {
+//     font-family: 'Figtree';
+//     font-weight: 400;
+//     font-size: 18px;
+//     line-height: 21.6px;
+//     color: #797EF3;
+//     margin: 0px;
+//     cursor: pointer;
+// }
 
-.orOuterContainer {
-    display: flex;
-    width: calc(100% - 104px);
-    align-items: center;
-    margin: 65px 0px;
+// .orOuterContainer {
+//     display: flex;
+//     width: calc(100% - 104px);
+//     align-items: center;
+//     margin: 65px 0px;
 
-    .line {
-        border: 1px solid black;
-        width: calc(50% - 41.35px);
-        height: 0px;
-    }
+//     .line {
+//         border: 1px solid black;
+//         width: calc(50% - 41.35px);
+//         height: 0px;
+//     }
 
-    span {
-        font-family: 'Nunito';
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 24.55px;
-        padding: 0px 16px;
-    }
-}
+//     span {
+//         font-family: 'Nunito';
+//         font-weight: 400;
+//         font-size: 18px;
+//         line-height: 24.55px;
+//         padding: 0px 16px;
+//     }
+// }
 
 mat-card-actions {
     margin: 43px 0px;
@@ -149,7 +152,8 @@ mat-card-actions {
         font-size: 18px;
         line-height: 24.55px;
         cursor: pointer;
-        &:hover{
+
+        &:hover {
             background-color: rgba(68, 77, 242, 0.5);
         }
     }
