@@ -20,9 +20,12 @@ export class ForgotPasswordComponent {
   constructor( 
     private authService: AuthService,
     private router: Router,
-    public dataService: DataService,
-    ){}
+    private dataService: DataService,
+    ){
+      this.dataService.forgotPasswordMenu = true;
+    }
 
+    
   /**
    * Sends a password reset request.
    * 
@@ -44,6 +47,6 @@ export class ForgotPasswordComponent {
    */
   backToLogin(): void {
     this.router.navigateByUrl('');
-    this.dataService.forgotPasswordMenu = false;
+    // this.dataService.forgotPasswordMenu = false;
   }
 }

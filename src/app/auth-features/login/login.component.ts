@@ -32,15 +32,17 @@ export class LoginComponent {
     public dialog: MatDialog,
     public dialogInfoService: DialogInfoService,
     private dataService: DataService,
-  ) { }
+  ) {
+    this.dataService.forgotPasswordMenu = false;
+  }
 
-  
+
   /**
    * Logs in the user using the Google authentication provider.
    * 
    * @returns {void}
    */
-  loginWithGoogle():void {
+  loginWithGoogle(): void {
     this.loading = true;
     this.loginForm.disable();
     this.authService.signInWithGoogle().then((res: any) => {
@@ -64,9 +66,9 @@ export class LoginComponent {
    * @returns {void}
    */
   setUserData(googleData: any): void {
-    const email:string = googleData.email;
-    const familyName:string = googleData.family_name;
-    const given_name:string = googleData.given_name;
+    const email: string = googleData.email;
+    const familyName: string = googleData.family_name;
+    const given_name: string = googleData.given_name;
     const userData: User = new User();
     userData.email = email;
     userData.name = given_name + ' ' + familyName;
@@ -96,9 +98,14 @@ export class LoginComponent {
   }
 
 
+  /**
+   * Navigates via router link forgot password page.
+   * 
+   * @returns {void}
+   */
   forgotPassword(): void {
     this.router.navigateByUrl('forgot_password');
-    this.dataService.forgotPasswordMenu = true;
+    // this.dataService.forgotPasswordMenu = true;
   }
 
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-create-account',
@@ -20,8 +21,11 @@ export class CreateAccountComponent {
 
   constructor( 
     private router: Router,
-    private auth: AuthService
-    ){}
+    private auth: AuthService,
+    private dataService: DataService,
+    ){
+      this.dataService.forgotPasswordMenu = true;
+    }
 
   
     createNewAccount(): void{

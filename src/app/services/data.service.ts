@@ -70,7 +70,6 @@ export class DataService {
   }
 
   
-
   /**
    * Returns the logged user id.
    * 
