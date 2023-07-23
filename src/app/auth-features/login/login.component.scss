@@ -273,59 +273,59 @@
     margin: 46.25px 0px 50px;
     gap: 30px;
 
-    .primaryButton {
-        height: 49px;
-        padding: 12px 25px 12px 25px;
-        border-radius: 25px;
-        background-color: rgba(68, 77, 242, 1);
-        transition: 100ms ease-out;
-        font-family: 'Nunito';
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 24.55px;
-        color: white;
-        box-sizing: border-box;
-        &:hover{
-            background-color: rgba(121, 126, 243, 1);
-        }
-        &:enabled{
-            cursor: pointer;
-        }
-        &:active,
-        &:focus {
-            background-color: rgba(68, 77, 242, 1);
-        }
-        &:disabled {
-            background-color: rgba(104, 104, 104, 1);
-        }
-    }
+    // .primaryButton {
+    //     height: 49px;
+    //     padding: 12px 25px 12px 25px;
+    //     border-radius: 25px;
+    //     background-color: rgba(68, 77, 242, 1);
+    //     transition: 100ms ease-out;
+    //     font-family: 'Nunito';
+    //     font-weight: 700;
+    //     font-size: 18px;
+    //     line-height: 24.55px;
+    //     color: white;
+    //     box-sizing: border-box;
+    //     &:hover{
+    //         background-color: rgba(121, 126, 243, 1);
+    //     }
+    //     &:enabled{
+    //         cursor: pointer;
+    //     }
+    //     &:active,
+    //     &:focus {
+    //         background-color: rgba(68, 77, 242, 1);
+    //     }
+    //     &:disabled {
+    //         background-color: rgba(104, 104, 104, 1);
+    //     }
+    // }
     
-    .secondaryButton {
-        height: 49px;
-        padding: 12px 25px 12px 25px;
-        border: 1px solid rgba(151, 71, 255, 1);
-        border-radius: 25px;
-        transition: 100ms ease-out;
-        font-family: 'Nunito';
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 24.55px;
-        color: rgba(121, 126, 243, 1);
-        box-sizing: border-box;
-        cursor: pointer;
-        &:hover {
-            background-color: rgba(83, 90, 241, 1);
-            color: white;
-        }
-        &:active,
-        &:focus {
-            background-color: rgba(68, 77, 242, 1);
-            color: white;
-        }
-        &:disabled {
-            color: rgba(104, 104, 104, 1);
-        }
-    }
+    // .secondaryButton {
+    //     height: 49px;
+    //     padding: 12px 25px 12px 25px;
+    //     border: 1px solid rgba(151, 71, 255, 1);
+    //     border-radius: 25px;
+    //     transition: 100ms ease-out;
+    //     font-family: 'Nunito';
+    //     font-weight: 700;
+    //     font-size: 18px;
+    //     line-height: 24.55px;
+    //     color: rgba(121, 126, 243, 1);
+    //     box-sizing: border-box;
+    //     cursor: pointer;
+    //     &:hover {
+    //         background-color: rgba(83, 90, 241, 1);
+    //         color: white;
+    //     }
+    //     &:active,
+    //     &:focus {
+    //         background-color: rgba(68, 77, 242, 1);
+    //         color: white;
+    //     }
+    //     &:disabled {
+    //         color: rgba(104, 104, 104, 1);
+    //     }
+    // }
 }
 *::-webkit-scrollbar {
 	display: none;

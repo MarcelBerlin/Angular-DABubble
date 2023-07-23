@@ -1,13 +1,53 @@
-.colorCrimson{
-    color:crimson; 
+.colorCrimson {
+    // color:crimson; 
+    color: rgba(237, 30, 121, 1);
     margin: 0px;
 }
 
-.colorGreen{
+.colorGreen {
     color: green;
+    color: #444DF2;
     margin: 0px;
 }
 
-// .mat-mdc-dialog-container .mdc-dialog__surface{
-//     border-radius: 0px !important;
-// }
+
+.dialogBox {
+    display: flex;
+    flex-direction: column;
+    // gap: 20px;
+
+    max-width: 320px;
+    background-color: white;
+
+    h3 {
+        font-family: 'Nunito';
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 33px;
+        background-color: #ECEEFE;
+        width: calc(100% - 40px);
+        text-align: center;
+        padding: 20px 20px 20px 20px;
+    }
+
+    p {
+        font-family: 'Nunito';
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24.55px;
+        font-size: 20px;
+        color: black;
+        text-align: center;
+        padding: 20px 20px 20px 20px;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+    }
+
+    .btnAction {
+        padding: 20px 20px;
+        width: calc(100% - 40px);
+        display: flex;
+        justify-content: flex-end;
+        background-color: #ECEEFE;
+    }
+}

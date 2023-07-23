@@ -8,14 +8,14 @@ export class DialogInfoService {
   dialogTitleClass: string = '';
   dialogInfoSubtitle: string = '';
   dialogInfoArray: any[] = [
-    {title: 'E-Mail bereits registriert !', subtitle: 'Bitte geben Sie eine nicht registrierte E-Mail-Adresse ein.', titleClass: 'colorCrimson'},
-    {title: 'Login fehlgeschlagen !', subtitle: 'Bitte geben Sie eine gültige Email-Adresse ein.', titleClass: 'colorCrimson'},
-    {title: 'Passwort zurücksetzen email gesendet !', subtitle: 'E-Mail zum Zurücksetzen des Passworts gesendet. Überprüfen Sie Ihren Posteingang.', titleClass: 'colorGreen'},
-    {title: 'Password reset failed !', subtitle: 'Your Email Address unknown.', titleClass: 'colorCrimson'},
-    {title: 'Sinup successfully !', subtitle: 'Your are successfully signup.', titleClass: 'colorGreen'},
-    {title: 'System Fehler !', subtitle: 'Bitte versuchen Sie es später nocheinmal.', titleClass: 'colorCrimson'},
-    {title: 'No server connection !', subtitle: 'Please check your internet connection.', titleClass: 'colorCrimson'},
-    {title: 'Login fehlgeschlagen ! !', subtitle: 'Geben Sie das richtige Passwort ein.', titleClass: 'colorCrimson'},
+    {title: 'E-Mail bereits registriert!', subtitle: 'Bitte geben Sie eine nicht registrierte E-Mail-Adresse ein.', titleClass: 'colorCrimson'},
+    {title: 'Login fehlgeschlagen!', subtitle: 'Bitte geben Sie eine gültige Email-Adresse ein.', titleClass: 'colorCrimson'},
+    {title: 'Email gesendet!', subtitle: 'Eine E-Mail zum Zurücksetzen des Passworts wurde gesendet. Bitte überprüfen Sie Ihren Posteingang.', titleClass: 'colorGreen'},
+    {title: 'Zurücksetzen des Passwortes ist fehlgeschlagen!', subtitle: 'Ihre Email-Adresse ist unbekannt.', titleClass: 'colorCrimson'},
+    {title: 'Registrierung erfolgreich!', subtitle: 'Sie haben sich erfolgreich registriert.', titleClass: 'colorGreen'},
+    {title: 'System Fehler!', subtitle: 'Bitte versuchen Sie es später noch einmal.', titleClass: 'colorCrimson'},
+    {title: 'Keine Verbindung zum Server!', subtitle: 'Bitte überprüfen Sie Ihre Internetverbindung.', titleClass: 'colorCrimson'},
+    {title: 'Login fehlgeschlagen!', subtitle: 'Geben Sie das richtige Passwort ein.', titleClass: 'colorCrimson'},
   ];
 
   
