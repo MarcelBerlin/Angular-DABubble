@@ -159,40 +159,6 @@
 
 }
 
-// @media screen and (max-width: 650px) {
-//     .outer {
-//         animation: moveOuterMobile;
-//         animation-delay: 500ms;
-//         animation-duration: 2500ms;
-//         animation-fill-mode: forwards;
-//     }
-// }
-
-// @keyframes moveOuterMobile {
-//     0% {
-//         left: calc(50% - 282px);
-//         top: calc(50% - 92px);
-//         opacity: 1;
-//     }
-
-//     20% {
-//         left: calc(50% - 451.07px);
-//         top: calc(50% - 92px);
-//     }
-
-//     51% {
-//         left: calc(50% - 451.07px);
-//         top: calc(50% - 92px);
-//     }
-
-//     100% {
-//         top: 92px;
-//         left: calc(50% - 122.15px);
-//         opacity: 1;
-//     }
-// }
-
-
 .outerMobile {
     display: flex;
     flex-direction: row;
@@ -243,12 +209,12 @@
         }
 
         20% {
-            left: calc(50% - 451.07px);
+            left: calc(50% - 401.07px);
             top: calc(50% - 92px);
         }
 
         51% {
-            left: calc(50% - 451.07px);
+            left: calc(50% - 401.07px);
             top: calc(50% - 92px);
         }
 
