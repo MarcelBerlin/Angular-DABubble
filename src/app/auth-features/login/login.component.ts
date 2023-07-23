@@ -96,6 +96,12 @@ export class LoginComponent {
   }
 
 
+  forgotPassword(): void {
+    this.router.navigateByUrl('forgot_password');
+    this.dataService.forgotPasswordMenu = true;
+  }
+
+
   /**
    * Opens the dialog to display an info message for an unknown login email.
    * 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -19,6 +20,7 @@ export class ForgotPasswordComponent {
   constructor( 
     private authService: AuthService,
     private router: Router,
+    public dataService: DataService,
     ){}
 
   /**
@@ -42,5 +44,6 @@ export class ForgotPasswordComponent {
    */
   backToLogin(): void {
     this.router.navigateByUrl('');
+    this.dataService.forgotPasswordMenu = false;
   }
 }

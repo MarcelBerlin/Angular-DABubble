@@ -17,6 +17,8 @@ export class DataService {
   loggedInUserData: any;
   loggedInUserId: string = '';
 
+  forgotPasswordMenu: boolean = false;
+
 
   constructor(
     private firestore: Firestore,

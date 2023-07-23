@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-login-header',
@@ -11,6 +12,7 @@ export class LoginHeaderComponent {
   
   constructor(
     private router: Router,
+    public dataService: DataService,
   ) { }
 
   

@@ -1,5 +1,5 @@
 <div class="loginHead">
-    <div class="loginHeadLinks">
+    <div class="loginHeadLinks" *ngIf="!dataService.forgotPasswordMenu">
         <span>Neu bei DABubble?</span>
         <span class="span2" (click)="goTocreateAccount()">Konto erstellen</span>
     </div>
