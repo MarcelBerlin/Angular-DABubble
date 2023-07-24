@@ -5,9 +5,9 @@
         <form [formGroup]="createAccountForm" (submit)="createNewAccount()">
             <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
             <mat-card>
-                <img src="../../../assets/img/login/forgot_password/arrow_back_black.png" class="arrowBlack" (click)="backToLogin()">
+                <img src="../../../assets/img/Login/forgot_password/arrow_back_black.png" class="arrowBlack" (click)="backToLogin()">
                 <div class="arrowBlue">
-                    <img src="../../../assets/img/login/forgot_password/arrow_back_blue.png">
+                    <img src="../../../assets/img/Login/forgot_password/arrow_back_blue.png">
                 </div>
                 <mat-card-header>
                     <mat-card-title>Konto erstellen</mat-card-title>
@@ -18,7 +18,7 @@
                 <div class="inputContainer">
                     <div class="inputInner">
                         <input type="name" placeholder="Name und Nachname" formControlName="name">
-                        <img class="inputLogo" src="../../../assets/img/login/person_filled.png">
+                        <img class="inputLogo" src="../../../assets/img/Login/person_filled.png">
                     </div>
                     <div *ngIf="createAccountForm.controls['name'].dirty && createAccountForm.controls['name'].touched"
                         class="warnContainer">
@@ -28,7 +28,7 @@
                 <div class="inputContainer">
                     <div class="inputInner">
                         <input type="email" placeholder="beispielname@email.com" formControlName="email">
-                        <img class="inputLogo" src="../../../assets/img/login/mail.png" style="position: absolute; left: 85px;">
+                        <img class="inputLogo" src="../../../assets/img/Login/mail.png" style="position: absolute; left: 85px;">
                     </div>
                     <div *ngIf="createAccountForm.controls['email'].dirty && createAccountForm.controls['email'].touched"
                         class="warnContainer">
@@ -39,8 +39,8 @@
                 <div class="inputContainer">
                     <div class="inputInner">
                         <input type="password" placeholder="Passwort" formControlName="password" [type]="inputType">
-                        <img class="inputLogo" src="../../../assets/img/login/lock.png" (click)="passwordViewToggle()" *ngIf="!passwordView">
-                        <img class="inputLogo" src="../../../assets/img/login/open_lock.png" (click)="passwordViewToggle()"
+                        <img class="inputLogo" src="../../../assets/img/Login/lock.png" (click)="passwordViewToggle()" *ngIf="!passwordView">
+                        <img class="inputLogo" src="../../../assets/img/Login/open_lock.png" (click)="passwordViewToggle()"
                             *ngIf="passwordView">
                     </div>
                     <div *ngIf="createAccountForm.controls['password'].dirty && createAccountForm.controls['password'].touched"
