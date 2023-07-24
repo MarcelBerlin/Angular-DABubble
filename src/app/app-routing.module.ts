@@ -4,6 +4,7 @@ import { LoginComponent } from './auth-features/login/login.component';
 import { ForgotPasswordComponent } from './auth-features/forgot-password/forgot-password.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateAccountComponent } from './auth-features/create-account/create-account.component';
+import { AuthGuard } from './guard.guard';
 
 
 const routes: Routes = [
@@ -11,23 +12,24 @@ const routes: Routes = [
   // {path: '', component: },
   {
     path: 'forgot_password',
-    component: ForgotPasswordComponent
+    component: ForgotPasswordComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'createAccount',
-    component: CreateAccountComponent
+    component: CreateAccountComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',
     component: LoginComponent,
     /* dieser Path muss zwingend am ende des routings stehen */
   },
-
- 
 ];
 
 @NgModule({
