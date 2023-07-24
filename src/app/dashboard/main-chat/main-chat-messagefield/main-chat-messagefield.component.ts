@@ -5,6 +5,7 @@ import { DashboardComponentsShowHideService } from '../../dashboard-components-s
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 
+
 @Component({
   selector: 'app-main-chat-messagefield',
   templateUrl: './main-chat-messagefield.component.html',
@@ -20,7 +21,7 @@ export class MainChatMessagefieldComponent {
     public varService: VariablesService,
     public dataService: DataService,
     public dialogAddService: DialogAddService,
-    public messageService: MessageService
+    public messageService: MessageService,    
   ) {}
 
   currentUser() {
@@ -40,5 +41,6 @@ export class MainChatMessagefieldComponent {
     } else {
       this.messageService.addMessage(searchInput);
     }
+    console.log('Diese Nachricht ging an' + channel);
   }
 }

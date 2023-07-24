@@ -39,6 +39,7 @@ export class MenuSidenavComponent implements OnInit {
   tags$: Observable<any[]>;
   user$: Observable<any[]>;
   tags: any;
+  sortedUser: [];
   tagState = 'visible';
 
   newMessagePath: string = 'assets/img/sidenav/newMessage.png';
@@ -64,6 +65,7 @@ export class MenuSidenavComponent implements OnInit {
     private dcshService: DashboardComponentsShowHideService
   ) {
     this.tags = this.getService.tags;
+    this.sortedUser = this.getUserData.userData;
   }
 
   ngOnInit(): void {
@@ -78,6 +80,10 @@ export class MenuSidenavComponent implements OnInit {
       this.tags = data;
     });
   }
+
+  // sortUser() {
+  //   this.sortedUser.sort((, b) => {}
+  // }
 
   toggleChannels() {
     this.channelsVisible = !this.channelsVisible;

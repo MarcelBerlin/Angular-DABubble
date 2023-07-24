@@ -15,19 +15,21 @@ import { Observable } from 'rxjs';
 export class MessageService {
   messages$: any = [];
   messageData: any = [];
+  newMessage: Messages = new Messages();
 
   constructor(private firestore: Firestore) {
     const coll = collection(firestore, 'messages');
     this.messages$ = collectionData(coll, { idField: 'channelId' });
     this.messages$.subscribe((message: any) => {
       this.messageData = message;
+      console.log(this.messageData);
     });
   }
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
-  async addMessage(message: Messages): Promise<void> {
+  addMessage(newMessage) {
     const messagesCollection = collection(this.firestore, 'messages');
-    await addDoc(messagesCollection, message);
+    addDoc(messagesCollection, newMessage.toJSON());
   }
 
   // // Methode zum Abrufen der Nachrichten für einen bestimmten Kanal aus Firebase
