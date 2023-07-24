@@ -1,8 +1,8 @@
 <div class="inputContainer" *ngIf="dialogAddService.tagsData && dataService.userData">
-  <textarea *ngIf="varService.mainChatHead == 0" type="text" placeholder="Nachricht an #{{ dialogAddService.tagsData[varService.selectedChannel].name }}"></textarea>
-  <textarea *ngIf="varService.mainChatHead == 1 && !currentUser()" type="text" placeholder="Nachricht an {{dataService.userData[varService.selectedUserToMessage].name}}"></textarea>
-  <textarea *ngIf="varService.mainChatHead == 1 && currentUser()" type="text" placeholder="Nachricht an mich :-)"></textarea>
-  <textarea *ngIf="varService.mainChatHead == 2" type="text" placeholder="Nachricht an {{varService.signOfSearch}} {{varService.selectedArrayofSearch[varService.indexOfSearch][varService.propertyOfSearch]}}"></textarea>
+  <textarea *ngIf="varService.mainChatHead == 0" type="text" [(ngModel)]="specificChannel" placeholder="Nachricht an #{{ dialogAddService.tagsData[varService.selectedChannel].name }}"></textarea>
+  <textarea *ngIf="varService.mainChatHead == 1 && !currentUser()" [(ngModel)]="selectedUser" type="text" placeholder="Nachricht an {{dataService.userData[varService.selectedUserToMessage].name}}"></textarea>
+  <textarea *ngIf="varService.mainChatHead == 3 && currentUser()" [(ngModel)]="loggedUser" type="text" placeholder="Nachricht an mich :-)"></textarea>
+  <textarea *ngIf="varService.mainChatHead == 2" type="text" [(ngModel)]="searchField" placeholder="Nachricht an {{varService.signOfSearch}} {{varService.selectedArrayofSearch[varService.indexOfSearch][varService.propertyOfSearch]}}"></textarea>
   <div class="iconsContainer">
     <div class="addElements">
       <div class="element">
@@ -16,6 +16,9 @@
         <img src="assets/img/email.png" />
       </div>
     </div>
-    <div class="sendIcon"><img src="assets/img/send_icon.png" /></div>
+    <div class="sendIcon"><img src="assets/img/send_icon.png" (click)="messageSend(specificChannel, selectedUser, loggedUser, searchField)" /></div>
   </div>
 </div>
+
+
+

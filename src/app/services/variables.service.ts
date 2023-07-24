@@ -9,6 +9,7 @@ export class VariablesService {
   selectedUserDetailView: number = 0;
   selectedChannel: number = 0;
   conversationBetween: boolean = false;
+  channelSelection: boolean = false;
   selectedArrayofSearch: string = '';
   propertyOfSearch: string = '';
   signOfSearch: string = '';
