@@ -34,10 +34,6 @@ export class LoginComponent {
     private dataService: DataService,
   ) {
     this.dataService.forgotPasswordMenu = false;
-    this.dialogInfoService.setDialogInfoText(7);
-    this.dialog.open(DialogInfoComponent, {
-      panelClass: 'custom-modalbox'
-  });
   }
 
 
@@ -120,7 +116,9 @@ export class LoginComponent {
    */
   dialogLoginEmailUnknown(): void {
     this.dialogInfoService.setDialogInfoText(1);
-    this.dialog.open(DialogInfoComponent);
+    this.dialog.open(DialogInfoComponent,{
+      panelClass: 'custom-modalbox'
+  });
   }
 
 
@@ -131,7 +129,9 @@ export class LoginComponent {
    */
   dialogLoginPasswordWrong(): void {
     this.dialogInfoService.setDialogInfoText(7);
-    this.dialog.open(DialogInfoComponent);;
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });
   }
 
 
@@ -142,7 +142,9 @@ export class LoginComponent {
    */
   dialogNoServerConnection(): void {
     this.dialogInfoService.setDialogInfoText(6);
-    this.dialog.open(DialogInfoComponent);;
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });;
   }
 
 
@@ -153,7 +155,9 @@ export class LoginComponent {
    */
   dialogSystemError(): void {
     this.dialogInfoService.setDialogInfoText(5);
-    this.dialog.open(DialogInfoComponent);;
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });
   }
 
 

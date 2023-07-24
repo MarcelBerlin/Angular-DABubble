@@ -127,7 +127,9 @@ export class AuthService {
    */
   openDialogEmailAlreadyExist(): void {
     this.dialogInfoService.setDialogInfoText(0);
-    this.dialog.open(DialogInfoComponent);
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });
   }
 
 
@@ -138,7 +140,9 @@ export class AuthService {
    */
   openDialogSuccessfullySignup(): void {
     this.dialogInfoService.setDialogInfoText(4);
-    this.dialog.open(DialogInfoComponent);
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });
   }
 
 
@@ -149,7 +153,9 @@ export class AuthService {
    */
   openDialogNoServerConnection(): void {
     this.dialogInfoService.setDialogInfoText(6);
-    this.dialog.open(DialogInfoComponent);
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });
   }
 
 
@@ -160,7 +166,9 @@ export class AuthService {
    */
   openDialogSystemFailure(): void {
     this.dialogInfoService.setDialogInfoText(5);
-    this.dialog.open(DialogInfoComponent);
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });
   }
 
 
@@ -171,7 +179,9 @@ export class AuthService {
    */
   openDialogPasswordResetEmailUnknown(): void {
     this.dialogInfoService.setDialogInfoText(3);
-    this.dialog.open(DialogInfoComponent);
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });
   }
 
 
@@ -182,7 +192,9 @@ export class AuthService {
    */
   openDialogPasswordResetEmailSend(): void {
     this.dialogInfoService.setDialogInfoText(2);
-    this.dialog.open(DialogInfoComponent);
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });
   }
 
 
