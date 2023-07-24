@@ -11,7 +11,6 @@ import { MessageService } from 'src/app/services/messages.service';
   styleUrls: ['./main-chat-messagefield.component.scss'],
 })
 export class MainChatMessagefieldComponent {
-
   specificChannel: string = '';
   selectedUser: string = '';
   loggedUser: string = '';
@@ -22,7 +21,7 @@ export class MainChatMessagefieldComponent {
     public dataService: DataService,
     public dialogAddService: DialogAddService,
     public messageService: MessageService
-  ) { }
+  ) {}
 
   currentUser() {
     return (
@@ -33,15 +32,13 @@ export class MainChatMessagefieldComponent {
 
   messageSend(channel, specificUser, ownUser, searchInput) {
     if (this.varService.mainChatHead == 0) {
-      this.messageService.addMessage(channel)
+      this.messageService.addMessage(channel);
     } else if (this.varService.mainChatHead == 1) {
-      this.messageService.addMessage(specificUser)
+      this.messageService.addMessage(specificUser);
     } else if (this.varService.mainChatHead == 3) {
-      this.messageService.addMessage(ownUser)
-    }
-    else {
-      this.messageService.addMessage(searchInput)
+      this.messageService.addMessage(ownUser);
+    } else {
+      this.messageService.addMessage(searchInput);
     }
   }
-
 }

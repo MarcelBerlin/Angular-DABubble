@@ -55,7 +55,6 @@ export class MenuSidenavComponent implements OnInit {
   hover: boolean = false;
   directMessageUserVisible: boolean = true;
 
-
   constructor(
     public dialog: MatDialog,
     public getService: DialogAddService,
@@ -65,12 +64,10 @@ export class MenuSidenavComponent implements OnInit {
     private dcshService: DashboardComponentsShowHideService
   ) {
     this.tags = this.getService.tags;
-
   }
 
   ngOnInit(): void {
     this.allTags();
-
   }
 
   allTags() {
@@ -84,48 +81,63 @@ export class MenuSidenavComponent implements OnInit {
 
   toggleChannels() {
     this.channelsVisible = !this.channelsVisible;
-    this.channelsVisible ? this.channelsPath = 'assets/img/sidenav/channel_open.png' : this.channelsPath = 'assets/img/sidenav/channel_closed.png';
-    this.hover ? this.channelsPath += '_hover' : '';    
+    this.channelsPath = this.channelsVisible
+      ? 'assets/img/sidenav/channel_open.png'
+      : 'assets/img/sidenav/channel_closed.png';
+    this.hover ? (this.channelsPath += '_hover') : '';
   }
 
   hoverChannels() {
     this.hover = true;
-    this.channelsVisible ? this.channelsPath = 'assets/img/sidenav/channel_open_hover.png' : this.channelsPath = 'assets/img/sidenav/channel_closed_hover.png';
+    this.channelsPath = this.channelsVisible
+      ? 'assets/img/sidenav/channel_open_hover.png'
+      : 'assets/img/sidenav/channel_closed_hover.png';
   }
 
   unhoverChannels() {
     this.hover = false;
-    this.channelsVisible ? this.channelsPath = 'assets/img/sidenav/channel_open.png' : this.channelsPath = 'assets/img/sidenav/channel_closed.png';
+    this.channelsPath = this.channelsVisible
+      ? 'assets/img/sidenav/channel_open.png'
+      : 'assets/img/sidenav/channel_closed.png';
   }
 
   toggleDirectMessage() {
     this.directMessageUserVisible = !this.directMessageUserVisible;
-    this.directMessageUserVisible ? this.directMessagePath = 'assets/img/sidenav/direct_message_open.png' : this.directMessagePath = 'assets/img/sidenav/direct_message_closed.png';    
-    this.hover ? this.directMessagePath += '_hover' : '';    
+    this.directMessagePath = this.directMessageUserVisible
+      ? 'assets/img/sidenav/direct_message_open.png'
+      : 'assets/img/sidenav/direct_message_closed.png';
+    this.hover ? (this.directMessagePath += '_hover') : '';
   }
 
   hoverDirectMessage() {
     this.hover = true;
-    this.directMessageUserVisible ? this.directMessagePath = 'assets/img/sidenav/direct_message_open_hover.png' : this.directMessagePath = 'assets/img/sidenav/direct_message_closed_hover.png';    
+    this.directMessagePath = this.directMessageUserVisible
+      ? 'assets/img/sidenav/direct_message_open.png'
+      : 'assets/img/sidenav/direct_message_closed_hover.png';
   }
 
   unhoverDirectMessage() {
     this.hover = false;
-    this.directMessageUserVisible ? this.directMessagePath = 'assets/img/sidenav/direct_message_open.png' : this.directMessagePath = 'assets/img/sidenav/direct_message_closed.png';    
+    this.directMessagePath = this.directMessageUserVisible
+      ? 'assets/img/sidenav/direct_message_open.png'
+      : 'assets/img/sidenav/direct_message_closed.png';
   }
 
   onClickChannels() {
-    this.channelsVisible ? this.channelsPath = 'assets/img/sidenav/channel_open_click.png' : this.channelsPath = 'assets/img/sidenav/channel_closed_click.png';    
+    this.channelsPath = this.channelsVisible
+      ? 'assets/img/sidenav/channel_open_click.png'
+      : 'assets/img/sidenav/channel_closed_click.png';
   }
 
   onClickDirectMessage() {
-    this.directMessageUserVisible ? this.directMessagePath = 'assets/img/sidenav/direct_message_open_click.png' : this.directMessagePath = 'assets/img/sidenav/direct_message_closed_click.png';    
+    this.directMessagePath = this.directMessageUserVisible
+      ? 'assets/img/sidenav/direct_message_open_click.png'
+      : 'assets/img/sidenav/direct_message_closed_click.png';
   }
 
   addChannel() {
     this.dialog.open(DialogAddChannelComponent);
   }
-
 
   deleteTag(tag: Tag) {
     // Löschen des Tags aus der HTML-Ansicht
@@ -136,7 +148,9 @@ export class MenuSidenavComponent implements OnInit {
   }
 
   messageToUser(arrayId: number) {
-    this.currentUser() ? this.sendMessageToLoggedUser(arrayId) : this.sendMessageToSpecificUser(arrayId);
+    this.currentUser()
+      ? this.sendMessageToLoggedUser(arrayId)
+      : this.sendMessageToSpecificUser(arrayId);
   }
 
   currentUser() {
@@ -146,7 +160,6 @@ export class MenuSidenavComponent implements OnInit {
     );
   }
 
-
   openChannel(arrayId: number) {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
@@ -155,19 +168,18 @@ export class MenuSidenavComponent implements OnInit {
   openNewMessage() {
     console.log('Button funktioniert. mainChatHead ist auf 2 gesetzt');
     this.varService.setVar('mainChatHead', 2);
-    this.dcshService.chatSlideOut()
+    this.dcshService.chatSlideOut();
   }
 
   sendMessageToLoggedUser(arrayId: number) {
     this.varService.setVar('mainChatHead', 3);
     this.varService.setVar('selectedUserToMessage', arrayId);
-    this.dcshService.chatSlideOut()
+    this.dcshService.chatSlideOut();
   }
 
   sendMessageToSpecificUser(arrayId: number) {
     this.varService.setVar('mainChatHead', 1);
     this.varService.setVar('selectedUserToMessage', arrayId);
-    this.dcshService.chatSlideOut()
+    this.dcshService.chatSlideOut();
   }
-
 }
