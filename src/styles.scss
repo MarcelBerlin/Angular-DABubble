@@ -100,4 +100,17 @@ body {
     color: rgba(104, 104, 104, 1);
   }
 }
+
 // auth-features and dialog-info buttons end
+
+// mat dialog custom settings for dialog info
+.custom-modalbox {
+  mat-dialog-container {
+    .mdc-dialog__container {
+      .mdc-dialog__surface {
+        border-radius: 30px;
+      }
+    }
+  }
+}
+// mat dialog custom settings for dialog info end

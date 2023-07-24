@@ -34,6 +34,10 @@ export class LoginComponent {
     private dataService: DataService,
   ) {
     this.dataService.forgotPasswordMenu = false;
+    this.dialogInfoService.setDialogInfoText(7);
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox'
+  });
   }
 
 
