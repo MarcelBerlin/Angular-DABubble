@@ -42,4 +42,16 @@ export class MainChatMultiMessageHeadComponent {
     this.varService.setVar('signOfSearch', this.sign);
     this.varService.setVar('indexOfSearch', index);
   }
+
+  findSearchOfValue() {
+    for (let i = 0; i < this.selectedArray.length; i++) {
+      if (
+        this.selectedArray[i][this.property].includes(
+          this.inputValue.substring(0)
+        )
+      ) {
+        // return this.selectedArray[i];
+      }
+    }
+  }
 }

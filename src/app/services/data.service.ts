@@ -28,12 +28,24 @@ export class DataService {
     this.users$.subscribe((user: any) => {
       this.userData = user;    
 
+      this.userData.sort((a, b) => { // von Basti eingefügte Sortierfunktion nach eingeloggtem User
+        if (a.email === this.loggedInUserEmail) return -1;
+        if (b.email === this.loggedInUserEmail) return 1;
+        return a.email < b.email ? -1 : 1;
+      });  // ********************************
+
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
         
       }
     });    
   }
+
+  // userData.sort((a, b) => {
+  //   if (a.email === 'guest@guest.de') return -1;
+  //   if (b.email === 'guest@guest.de') return 1;
+  //   return a.email < b.email ? -1 : 1;
+  // });
 
 
   /**

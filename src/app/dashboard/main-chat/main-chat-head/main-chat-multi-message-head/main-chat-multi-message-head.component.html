@@ -12,8 +12,9 @@
         *ngFor="let item of inputAsValue(); let i = index"
         [value]="sign + item[property]"
         (click)="indexOfSelection(i)"
-      >
+      ><span>
         {{ item[property] }}
+        </span>
       </mat-option>
     </mat-autocomplete>
   </div>

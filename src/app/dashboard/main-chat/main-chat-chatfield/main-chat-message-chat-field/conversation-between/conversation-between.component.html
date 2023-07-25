@@ -1,20 +1,19 @@
 <div class="masterContainer">
-    <div class="characterInfo">
-      <img
-        class="character"
-        [src]="dataService.userData[varService.selectedUserToMessage].img"
-      />
-      <span class="user" (click)="profilView()"
-        >{{ dataService.userData[varService.selectedUserToMessage].name }}
-        <span *ngIf="currentUser()">(Du)</span></span
-      >
-    </div>
-    <span class="text"
-      >{{ message[numberQuery()].text1 }}
-      <span *ngIf="!currentUser()" class="button" (click)="profilView()">
-        @ {{ dataService.userData[varService.selectedUserToMessage].name }}
-      </span>
-      <span *ngIf="!currentUser()" class="text">{{ message[0].text2 }}</span>
-    </span>
+  <div class="characterInfo">
+    <img
+      class="character"
+      [src]="dataService.userData[varService.selectedUserToMessage].img"
+    />
+    <span class="user" (click)="profilView()"
+      >{{ dataService.userData[varService.selectedUserToMessage].name }}
+      <span *ngIf="currentUser()">(Du)</span></span
+    >
   </div>
-  
+  <span class="text"
+    >{{ message[numberQuery()].text1 }}
+    <span *ngIf="!currentUser()" class="button" (click)="profilView()">
+      @ {{ dataService.userData[varService.selectedUserToMessage].name }}
+    </span>
+    <span *ngIf="!currentUser()" class="text">{{ message[0].text2 }}</span>
+  </span>
+</div>
