@@ -7,7 +7,7 @@ import { DialogInfoService } from './dialog-info.service';
 import { DialogInfoComponent } from '../dialog/dialog-info/dialog-info.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DataService } from '../services/data.service';
-import { ClearCachService } from './clear-cach.service';
+// import { ClearCachService } from './clear-cach.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class AuthService {
     public dialogInfoService: DialogInfoService,
     public dialog: MatDialog,
     private dataService: DataService,
-    private clearService: ClearCachService,
+    // private clearService: ClearCachService,
   ) {
     
   }
