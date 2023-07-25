@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { TimeStamp } from './interfaces/time-stamp';
-import { DirectChatIndex } from './interfaces/direct-chat-index';
+import { TimeStamp } from './models/time-stamp';
+import { DirectChatIndex } from './models/direct-chat-index';
+import { ChatDataSet } from './models/chat-data-set';
 import { DataService } from '../services/data.service';
+
 
 
 @Injectable({
@@ -10,6 +12,9 @@ import { DataService } from '../services/data.service';
 export class DirectChatService {
   actualChatId: string;
   // directChat: any[] = [];
+  directChatIndex = new DirectChatIndex();
+  timeStamp = new TimeStamp();
+  chatDataSet = new ChatDataSet();
 
 
   constructor(
@@ -22,17 +27,15 @@ export class DirectChatService {
   /**
    * Returns the current timestamp, date string, and clock string.
    * 
-   * @returns {TimeStamp} An object containing the current timestamp, date string, and clock string.
+   * @returns {Object} An object containing the current timestamp, date string, and clock string.
    */
-  getActualTimeStamp(): TimeStamp {
+  getActualTimeStamp(): Object {
     let today: Date = new Date();
-    let dateTimeNumber: number = today.getTime();
-    console.log('Time stamp: ', { dateTimeNumber: dateTimeNumber, dateString: this.createDateString(today), clockString: this.createClockString(today) });
-    return {
-      dateTimeNumber: dateTimeNumber,
-      dateString: this.createDateString(today),
-      clockString: this.createClockString(today)
-    };
+    this.timeStamp.dateTimeNumber = today.getTime();
+    this.timeStamp.dateString = this.createDateString(today);
+    this.timeStamp.clockString = this.createClockString(today);
+    console.log('Time stamp: ', this.timeStamp.toJSON());
+    return this.timeStamp.toJSON();
   }
 
 
@@ -75,32 +78,38 @@ export class DirectChatService {
    * @param {string} clickedUserId - The ID of the user with whom the direct chat is initiated.
    * @returns {DirectChatJson} A DirectChatJson object representing the direct chat details.
    */
-  createDirectChatIndex(clickedUserId: string): DirectChatIndex {
-    let ownId: string = this.dataService.loggedInUserData.UserId;
-    let partnerId: string = clickedUserId;
-    let lastTimeStamp: TimeStamp = this.getActualTimeStamp();
-    let directChatId: string = 'unset';
-    return { ownId: ownId, partnerId: partnerId, lastTimeStamp: lastTimeStamp, directChatId: directChatId };
+  createDirectChatIndex(clickedUserId: string): Object {
+    this.directChatIndex.ownId = this.dataService.loggedInUserData.UserId;
+    this.directChatIndex.partnerId = clickedUserId;
+    this.directChatIndex.lastTimeStamp = this.getActualTimeStamp();
+    this.directChatIndex.directChatId = 'unset';
+    return this.directChatIndex.toJSON();
   }
 
 
   // zum Speichen eines neuen chats in Firbase collection directChats. Hier die Grundstruktur.
-  createNewChatDataSet(clickedUserId: string) {
-    let timeStamp = this.getActualTimeStamp();
-    return {
-      id: 'unknown',
-      firstMember: this.dataService.loggedInUserData.id,
-      secondMember: clickedUserId,
-      lastTimeStamp: timeStamp,
-      chat: [
-        {
-          name: this.dataService.loggedInUserData.name,
-          date: timeStamp[1],
-          time: timeStamp[2],
-          message: 'Message',
-        }
-      ]
-    }
+  /**
+   * Creates a new chat dataset object for a conversation between the logged-in user and a clicked user.
+   * 
+   * @param {string} clickedUserId - The ID of the user that was clicked to initiate the chat dataset creation.
+   * @returns {ChatDataSet} A new chat dataset object with initial values.
+   */
+  createNewChatDataSet(clickedUserId: string): Object {
+    this.chatDataSet.id = 'unknown';
+    this.chatDataSet.lastTimeStamp = this.getActualTimeStamp();
+    this.chatDataSet.firstMember = this.dataService.loggedInUserData.id;
+    this.chatDataSet.secondMember = clickedUserId;
+    this.chatDataSet.chat = [];
+    return this.chatDataSet;
+
+    // chat: [
+    //   {
+    //     name: this.dataService.loggedInUserData.name,
+    //     date: this.getActualTimeStamp()[1],
+    //     time: this.getActualTimeStamp()[2],
+    //     message: 'Message',
+    //   }
+    // ]
   }
 
 
@@ -111,23 +120,33 @@ export class DirectChatService {
    * @param {string} clickedUserId - The ID of the user that was clicked to initiate the chat search.
    * @returns {void}
    */
-  getChatId(clickedUserId): void {
+  getChatId(clickedUserId: string): void {
     this.actualChatId = undefined;
     this.dataService.userData.array.forEach(directChats => {
-      if(directChats.length > 0){
-        if(directChats.firstMember.id == this.dataService.loggedInUserData.id){
-          if (directChats.secondMember.id == clickedUserId){
+      if (directChats.length > 0) {
+        if (directChats.firstMember.id == this.dataService.loggedInUserData.id) {
+          if (directChats.secondMember.id == clickedUserId) {
             this.actualChatId = directChats.chatId;
           }
         }
       }
     });
+    if (this.actualChatId === undefined) this.createNewChatDataSet(clickedUserId);
+    else console.log('chat found') //hier steht die Funktion wenn noch keine ChatId existiert.
   }
 
 
+  // Funktionen wenn actualChatId nicht undefined ist ############
 
-
-
-
+  // loadDirectChat() {
+  //   let activeDirectChat = ladeFunktion Firebase ! Mit der ChatId.chat;
+  //   activeDirectChat.foreach((message) => {
+  //     let name = message.name;
+  //     let date = message.date;
+  //     let time = message.time;
+  //     let message = message.message;
+  //   });
+  // }
 
 }
+
