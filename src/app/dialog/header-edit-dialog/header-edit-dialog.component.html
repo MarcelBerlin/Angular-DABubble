@@ -1,12 +1,12 @@
 <div class="user-overview">
     <mat-dialog-content class="user-profile">
         <div class="profile-overview-head">
-            <span>Dein Profil bearbeiten</span> 
+            <span>Dein Profil bearbeiten</span>
             <img class="close-icon" mat-button mat-dialog-close src="./../../assets/img/close.png">
         </div>
-        
+
         <img class="user-img" src="{{ loggedUserImg }}">
-        
+
         <div class="input-section">
             <div class="edit-description">
                 <img src="./../../assets/img/user-icon.png">
@@ -19,12 +19,17 @@
                 <img src="./../../assets/img/mail-icon.png">
                 <span> E-Mail Adresse </span>
             </div>
-            <input #inputMail [(ngModel)]="newInputMail" class="header-input" placeholder="{{ loggedUserMail }}">
+            <input [formControl]="emailFormControl" #inputMail [(ngModel)]="newInputMail" class="header-input"
+                placeholder="{{ loggedUserMail }}">
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+            </mat-error>
         </div>
 
         <div class="btn-container">
-            <button mat-dialog-close class="cancel-btn">Abbrechen</button>
-            <button (click)="saveUserChanges()" class="save-btn">Speichern</button>
+            <button class="cancel-btn">Abbrechen</button>
+            <button [mat-dialog-close]="newInputMail" [mat-dialog-close]="newInputName"
+                (click)="saveUserChanges()" class="save-btn">Speichern</button>
         </div>
 
     </mat-dialog-content>

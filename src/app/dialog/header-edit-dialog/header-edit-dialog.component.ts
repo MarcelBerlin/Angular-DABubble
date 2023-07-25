@@ -4,6 +4,9 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
 import { collection, doc, setDoc } from '@angular/fire/firestore';
+import {ErrorStateMatcher} from '@angular/material/core';
+import { FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-header-edit-dialog',
@@ -13,15 +16,15 @@ import { collection, doc, setDoc } from '@angular/fire/firestore';
 export class HeaderEditDialogComponent {
 
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
-  @ViewChild('inputName') inputName: ElementRef;
-  @ViewChild('inputMail') inputMail: ElementRef;
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  matcher = new ErrorStateMatcher();
 
   loggedUserName: string = '';
   loggedUserImg: string = '';
   loggedUserMail: string = '';
 
-  newInputName: string = '';
-  newInputMail: string = '';
+  newInputName: string = ''; // [(ngModel)]
+  newInputMail: string = ''; // [(ngModel)]
 
   constructor(
     public dialog: MatDialog,
@@ -36,16 +39,18 @@ export class HeaderEditDialogComponent {
   }
 
   saveUserChanges() {
-    console.log('inputvalue',this.inputMail.nativeElement.value);
-    console.log('inputvalue',this.inputName.nativeElement.value);
+    debugger;
+    console.log('inputvalue name', this.newInputName);
+    console.log('inputvalue mail', this.newInputMail);
 
-    this.inputName.nativeElement.value = this.loggedUserName; // setDoc()
-    this.inputMail.nativeElement.value = this.loggedUserMail; // setDoc()
+    this.loggedUserName = this.newInputName;
+    this.loggedUserMail = this.newInputMail;
+
+    this.getUserData.updateUser();
 
     setTimeout(() => {
-      console.log('DataService value',this.loggedUserName);
-      console.log('DataService value',this.loggedUserMail);
+      console.log('updated Firestore value = ', this.getUserData.loggedInUserData.email);
+      console.log('updated Firestore value = ', this.getUserData.loggedInUserData.name);
     }, 1000)
-  
   }
 }
