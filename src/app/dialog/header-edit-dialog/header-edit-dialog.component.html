@@ -19,8 +19,8 @@
                 <img src="./../../assets/img/mail-icon.png">
                 <span> E-Mail Adresse </span>
             </div>
-            <input [formControl]="emailFormControl" #inputMail [(ngModel)]="newInputMail" class="header-input"
-                placeholder="{{ loggedUserMail }}">
+            <input [formControl]="emailFormControl" #inputMail [(ngModel)]="newInputMail" 
+            class="header-input" placeholder="{{ loggedUserMail }}">
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                 Please enter a valid email address
             </mat-error>

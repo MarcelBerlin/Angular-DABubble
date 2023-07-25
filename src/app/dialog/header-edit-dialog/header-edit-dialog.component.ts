@@ -39,18 +39,17 @@ export class HeaderEditDialogComponent {
   }
 
   saveUserChanges() {
-    debugger;
     console.log('inputvalue name', this.newInputName);
     console.log('inputvalue mail', this.newInputMail);
 
-    this.loggedUserName = this.newInputName;
-    this.loggedUserMail = this.newInputMail;
+    this.getUserData.loggedInUserData.name = this.newInputName;
+    this.getUserData.loggedInUserData.email = this.newInputMail;
 
     this.getUserData.updateUser();
 
-    setTimeout(() => {
-      console.log('updated Firestore value = ', this.getUserData.loggedInUserData.email);
-      console.log('updated Firestore value = ', this.getUserData.loggedInUserData.name);
-    }, 1000)
+    // setTimeout(() => {
+    //   console.log('updated Firestore value = ', this.getUserData.loggedInUserData.email);
+    //   console.log('updated Firestore value = ', this.getUserData.loggedInUserData.name);
+    // }, 1000)
   }
 }
