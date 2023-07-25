@@ -34,13 +34,13 @@ export class MainChatMessagefieldComponent {
   messageSend(channel, specificUser, ownUser, searchInput) {
     if (this.varService.mainChatHead == 0) {
       this.messageService.addMessage(channel);
-    } else if (this.varService.mainChatHead == 1) {
-      this.messageService.addMessage(specificUser);
-    } else if (this.varService.mainChatHead == 3) {
-      this.messageService.addMessage(ownUser);
-    } else {
-      this.messageService.addMessage(searchInput);
-    }
+    // } else if (this.varService.mainChatHead == 1) {
+    //   this.messageService.addMessage(specificUser);
+    // } else if (this.varService.mainChatHead == 3) {
+    //   this.messageService.addMessage(ownUser);
+    // } else {
+    //   this.messageService.addMessage(searchInput);
+   }
     console.log('Diese Nachricht ging an' + channel);
   }
 }

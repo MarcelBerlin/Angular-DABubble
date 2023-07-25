@@ -22,7 +22,7 @@ export class MessageService {
     this.messages$ = collectionData(coll, { idField: 'channelId' });
     this.messages$.subscribe((message: any) => {
       this.messageData = message;
-      console.log(this.messageData);
+      console.log(this.newMessage);
     });
   }
 
