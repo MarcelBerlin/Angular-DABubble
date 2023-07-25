@@ -59,7 +59,7 @@
                         <div>
                             <img class="pointer" [src]="user.img">
                         </div>
-                        <span class="pointer">{{ user.name }} <span *ngIf="currentUser()">(Du)</span></span> 
+                        <span class="pointer">{{ user.name }} <span *ngIf="user.email === getUserData.loggedInUserData.email">(Du)</span></span> 
                         <div class="activeDot" [style.background-color]="user.online ? '#92C83E' : '#686868'"></div>
                     </div>
 
