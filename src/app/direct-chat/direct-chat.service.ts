@@ -132,7 +132,7 @@ export class DirectChatService {
       }
     });
     if (this.actualChatId === undefined) this.createNewChatDataSet(clickedUserId);
-    else console.log('chat found') //hier steht die Funktion wenn noch keine ChatId existiert.
+    else console.log('chat found') //hier steht die Funktion wenn eine ChatId existiert.
   }
 
 
