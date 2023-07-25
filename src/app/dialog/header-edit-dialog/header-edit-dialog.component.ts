@@ -39,12 +39,8 @@ export class HeaderEditDialogComponent {
   }
 
   saveUserChanges() {
-    console.log('inputvalue name', this.newInputName);
-    console.log('inputvalue mail', this.newInputMail);
-
     this.getUserData.loggedInUserData.name = this.newInputName;
     this.getUserData.loggedInUserData.email = this.newInputMail;
-
     this.getUserData.updateUser();
 
     // setTimeout(() => {
