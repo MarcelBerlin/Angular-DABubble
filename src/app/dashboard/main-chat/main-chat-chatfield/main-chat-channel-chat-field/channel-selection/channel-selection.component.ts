@@ -13,6 +13,8 @@ import { VariablesService } from 'src/app/services/variables.service';
 })
 export class ChannelSelectionComponent {
   hoveredMessagesMainChat: boolean = false;
+  emptyChat: boolean = false;
+
   constructor(
     private dcshService: DashboardComponentsShowHideService,
     private dialog: Dialog,
