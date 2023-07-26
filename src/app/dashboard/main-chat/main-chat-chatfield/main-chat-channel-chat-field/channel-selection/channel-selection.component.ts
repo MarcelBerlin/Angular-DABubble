@@ -2,6 +2,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
+import { ChatService } from 'src/app/services/chat.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { VariablesService } from 'src/app/services/variables.service';
@@ -14,13 +15,17 @@ import { VariablesService } from 'src/app/services/variables.service';
 export class ChannelSelectionComponent {
   hoveredMessagesMainChat: boolean = false;
   emptyChat: boolean = false;
+  chatText: string = '';
+
+
 
   constructor(
     private dcshService: DashboardComponentsShowHideService,
     private dialog: Dialog,
     public varService: VariablesService,
     public dialogAdd: DialogAddService,
-    public messageService: MessageService
+    public messageService: MessageService,
+    public chatService: ChatService,
   ) {
     console.log(this.messageService.messageData.channelId);
   }
@@ -42,5 +47,9 @@ export class ChannelSelectionComponent {
    */
   profileViewUsers() {
     this.dialog.open(DialogProfileViewUsersComponent);
+  }
+
+  onChatTextChanged() {
+    this.emptyChat = this.chatText.trim() === '';
   }
 }

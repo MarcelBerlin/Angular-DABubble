@@ -4,6 +4,7 @@ import { VariablesService } from 'src/app/services/variables.service';
 import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
+import { ChatService } from 'src/app/services/chat.service';
 
 
 @Component({
@@ -21,13 +22,26 @@ export class MainChatMessagefieldComponent {
     public varService: VariablesService,
     public dataService: DataService,
     public dialogAddService: DialogAddService,
-    public messageService: MessageService,    
+    public messageService: MessageService,  
+    public chatService: ChatService  
   ) {}
 
   currentUser() {
     return (
       this.dataService.loggedInUserData.email ===
       this.dataService.userData[this.varService.selectedUserToMessage].email
+    );
+  }
+
+  onChatTextChanged() {
+    this.chatService.emptyChat = (
+      this.varService.mainChatHead === 0 && this.specificChannel.trim() === ''
+    ) || (
+      this.varService.mainChatHead === 1 && this.currentUser() && this.loggedUser.trim() === ''
+    ) || (
+      this.varService.mainChatHead === 1 && !this.currentUser() && this.selectedUser.trim() === ''
+    ) || (
+      this.varService.mainChatHead === 2 && this.searchField.trim() === ''
     );
   }
 
