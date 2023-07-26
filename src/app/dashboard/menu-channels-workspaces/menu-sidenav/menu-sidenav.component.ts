@@ -159,7 +159,7 @@ export class MenuSidenavComponent implements OnInit {
     this.currentUser()
       ? this.sendMessageToLoggedUser(arrayId)
       : this.sendMessageToSpecificUser(arrayId);
-      this.test(arrayId);
+      this.getDirectChatData(arrayId);
   }
 
   currentUser() {
@@ -192,7 +192,7 @@ export class MenuSidenavComponent implements OnInit {
   }
 
   // Funktion von Bossi. Verbindung zu directChatService
-  test(arrayId: number): void {
+  getDirectChatData(arrayId: number): void {
     let clickedUserId: string = this.getUserData.userData[arrayId].id;
     this.directChatService.getChatId(clickedUserId);
   }
