@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { User } from '../models/user.class';
 import { __param } from 'tslib';
 
@@ -26,7 +26,7 @@ export class DataService {
     const coll = collection(firestore, 'users');
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
-      this.userData = user;    
+      this.userData = user;
 
       this.userData.sort((a, b) => { // von Basti eingefügte Sortierfunktion nach eingeloggtem User
         if (a.email === this.loggedInUserEmail) return -1;
@@ -36,9 +36,9 @@ export class DataService {
 
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
-        
+
       }
-    });    
+    });
   }
 
   // userData.sort((a, b) => {
@@ -81,7 +81,7 @@ export class DataService {
     };
   }
 
-  
+
   /**
    * Returns the logged user id.
    * 
@@ -116,7 +116,7 @@ export class DataService {
    * @param {User} user - The user object containing the data to be saved.
    * @returns {void}
    */
-  createGoogleUser(user: User): void{
+  createGoogleUser(user: User): void {
     this.signUpUser = user;
     const coll = collection(this.firestore, 'users');
     if (this.loggedInUserData == undefined) {
@@ -133,16 +133,62 @@ export class DataService {
    * Updates the user data in Firestore.
    * 
    * @returns {Promise<void>} A promise that resolves when the update operation is complete.
-   */  
-  updateUser(): void{
+   */
+  updateUser(): void {
     const qData = doc(this.firestore, 'users', this.loggedInUserData.userId);
     const newData = this.loggedInUserData;
     updateDoc(qData, newData).then(() => {
-      
+
     }).catch((error) => {
-      
+
     })
   }
+
+  // funktionen für den direct chat service
+
+  chatDataId: string = 'unknown';
+
+  async saveChatDataSet(chatDataSet) {
+    const coll = collection(this.firestore, 'directChats');
+    try {
+      let docId = await addDoc(coll, chatDataSet.toJSON());
+      this.updateChatDataId(chatDataSet, docId);
+    } catch (error) {
+
+    }
+
+  }
+
+  updateChatDataId(chatDataSet, docId) {
+    if (chatDataSet.id == 'unknown') {
+      const qData = doc(this.firestore, 'directChats', docId.id);
+      const newData = {
+        id: docId.id,
+      };
+      updateDoc(qData, newData).then(() => {
+        this.chatDataId = docId.id;
+        this.getChatDataSets(this.chatDataId);
+      }).catch((error) => {
+        this.chatDataId = undefined;
+      })
+    }
+  }
+
+
+  directChat: any;
+  async getChatDataSets(id: string) {
+    const coll = collection(this.firestore, 'directChats');
+    const qData = doc(coll, id);
+    getDoc(qData).then((chatDataSet) =>{
+        this.directChat = chatDataSet.data();
+        console.log(this.directChat);
+      }).catch((error)=> {
+        console.log('Fehler beim Abrufen des Dokuments:', error.message);
+      });
+  }
 }
+
+
+
 
 

@@ -3,9 +3,6 @@ import { TimeStamp } from './models/time-stamp';
 import { DirectChatIndex } from './models/direct-chat-index';
 import { ChatDataSet } from './models/chat-data-set';
 import { DataService } from '../services/data.service';
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -34,7 +31,6 @@ export class DirectChatService {
     this.timeStamp.dateTimeNumber = today.getTime();
     this.timeStamp.dateString = this.createDateString(today);
     this.timeStamp.clockString = this.createClockString(today);
-    console.log('Time stamp: ', this.timeStamp.toJSON());
     return this.timeStamp.toJSON();
   }
 
@@ -97,9 +93,11 @@ export class DirectChatService {
   createNewChatDataSet(clickedUserId: string): Object {
     this.chatDataSet.id = 'unknown';
     this.chatDataSet.lastTimeStamp = this.getActualTimeStamp();
-    this.chatDataSet.firstMember = this.dataService.loggedInUserData.id;
+    this.chatDataSet.firstMember = this.dataService.loggedInUserData.userId;
     this.chatDataSet.secondMember = clickedUserId;
     this.chatDataSet.chat = [];
+    this.dataService.saveChatDataSet(this.chatDataSet);
+    // console.log('new chat data set', this.chatDataSet);
     return this.chatDataSet;
 
     // chat: [
@@ -112,7 +110,7 @@ export class DirectChatService {
     // ]
   }
 
-
+  //start function
   /**
    * Searches for the chat ID between the logged-in user and the clicked user in the direct chat data array.
    * Sets the 'actualChatId' property to the found chat ID, or undefined if not found.
@@ -122,7 +120,7 @@ export class DirectChatService {
    */
   getChatId(clickedUserId: string): void {
     this.actualChatId = undefined;
-    this.dataService.userData.array.forEach(directChats => {
+    this.dataService.userData.forEach(directChats => {
       if (directChats.length > 0) {
         if (directChats.firstMember.id == this.dataService.loggedInUserData.id) {
           if (directChats.secondMember.id == clickedUserId) {
@@ -147,6 +145,7 @@ export class DirectChatService {
   //     let message = message.message;
   //   });
   // }
+
 
 }
 

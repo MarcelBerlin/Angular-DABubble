@@ -17,4 +17,19 @@ export class ChatDataSet {
         this.chat = obj ? obj.chat : [];
     }
 
+    /**
+     * Converts the object to a JSON representation.
+     * 
+     * @returns {object} - The JSON representation of the object.
+     */
+    public toJSON(): any {
+        return {
+            id: this.id,
+            firstMember: this.firstMember,
+            secondMember: this.secondMember,
+            lastTimeStamp: this.lastTimeStamp,
+            chat: this.chat,
+        }
+    }
+
 }

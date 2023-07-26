@@ -15,6 +15,7 @@ import { DataService } from 'src/app/services/data.service';
 import { User } from 'src/app/models/user.class';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
+import { DirectChatService } from 'src/app/direct-chat/direct-chat.service';
 
 interface Tag {
   id: string;
@@ -62,7 +63,8 @@ export class MenuSidenavComponent implements OnInit {
     private firestore: Firestore,
     public getUserData: DataService,
     public varService: VariablesService,
-    private dcshService: DashboardComponentsShowHideService
+    private dcshService: DashboardComponentsShowHideService,
+    private directChatService: DirectChatService,
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
@@ -157,6 +159,7 @@ export class MenuSidenavComponent implements OnInit {
     this.currentUser()
       ? this.sendMessageToLoggedUser(arrayId)
       : this.sendMessageToSpecificUser(arrayId);
+      this.test(arrayId);
   }
 
   currentUser() {
@@ -186,5 +189,11 @@ export class MenuSidenavComponent implements OnInit {
     this.varService.setVar('mainChatHead', 1);
     this.varService.setVar('selectedUserToMessage', arrayId);
     this.dcshService.chatSlideOut();
+  }
+
+  // Funktion von Bossi. Verbindung zu directChatService
+  test(arrayId: number): void {
+    let clickedUserId: string = this.getUserData.userData[arrayId].id;
+    this.directChatService.getChatId(clickedUserId);
   }
 }
