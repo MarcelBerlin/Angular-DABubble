@@ -10,14 +10,50 @@ export class DirectChatService {
   actualChatId: string;
   // directChat: any[] = [];
   directChatIndex = new DirectChatIndex();
-  timeStamp = new TimeStamp();
-  chatDataSet = new ChatDataSet();
+  timeStamp: TimeStamp = new TimeStamp();
+  chatDataSet: ChatDataSet = new ChatDataSet();
+  directMessage: string = '';
 
 
   constructor(
     private dataService: DataService
   ) {
     this.getActualTimeStamp();
+  }
+
+
+  //start function
+  /**
+   * Searches for the chat ID between the logged-in user and the clicked user in the direct chats array.
+   * If the chat ID is found, it sets the 'actualChatId' property accordingly.
+   * If the chat ID is not found, it creates a new chat dataset for the conversation.
+   * 
+   * @param {string} clickedUserId - The ID of the user that was clicked to initiate the chat search.
+   * @returns {void}
+   */
+  getChatId(clickedUserId: string): void {
+    this.actualChatId = undefined;
+    const directChatArray = this.dataService.loggedInUserData.directChats;
+    if (directChatArray.length != 0) {
+      directChatArray.forEach((directChat: any) => {
+        if (directChat.partnerId == clickedUserId) {
+          this.actualChatId = directChat.directChatId;
+        }
+      });
+    }
+    if (this.actualChatId != undefined){
+      console.log('chat found');
+      this.loadChatDataSet(this.actualChatId);
+    }else{
+      console.log('chat not found');
+      this.createNewChatDataSet(clickedUserId);
+    } 
+  }
+
+
+  loadChatDataSet(chatId): void {
+    this.dataService.chatDataId = chatId;
+    this.dataService.getChatDataSets(chatId);
   }
 
 
@@ -98,7 +134,6 @@ export class DirectChatService {
     this.chatDataSet.firstMember = this.dataService.loggedInUserData.userId;
     this.chatDataSet.secondMember = clickedUserId;
     this.chatDataSet.chat = [];
-    console.log(this.chatDataSet);
     this.dataService.saveChatDataSet(this.chatDataSet).then(() => {
       setTimeout(() => {
         this.chatDataSet.id = this.dataService.directChat.id;
@@ -130,33 +165,6 @@ export class DirectChatService {
     // ]
   }
 
-  //start function
-  /**
-   * Searches for the chat ID between the logged-in user and the clicked user in the direct chats array.
-   * If the chat ID is found, it sets the 'actualChatId' property accordingly.
-   * If the chat ID is not found, it creates a new chat dataset for the conversation.
-   * 
-   * @param {string} clickedUserId - The ID of the user that was clicked to initiate the chat search.
-   * @returns {void}
-   */
-  getChatId(clickedUserId: string): void {
-    this.actualChatId = undefined;
-    const directChatArray = this.dataService.loggedInUserData.directChats;
-    if (directChatArray.length != 0) {
-      directChatArray.forEach((directChat: any) => {
-
-        if (directChat.partnerId == clickedUserId) {
-          this.actualChatId = directChat.directChatId;
-        }
-      });
-    }
-    if (this.actualChatId != undefined){
-      console.log('chat found');
-    }else{
-      console.log('chat not found');
-      
-      this.createNewChatDataSet(clickedUserId);
-    } 
-  }
+  
 }
 

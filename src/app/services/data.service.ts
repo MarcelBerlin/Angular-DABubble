@@ -147,11 +147,24 @@ export class DataService {
     })
   }
 
-  // funktionen für den direct chat service
+  // funktionen für den direct chat service !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+  /**
+   * Firebase collection directChats Id.
+   */
   chatDataId: string = 'unset';
+
+  /**
+   * Data set Firebase colection document.
+   */
   directChat: any;
 
+
+  /**
+   * Saves a chat dataset in the Firestore database by adding a new document to the 'directChats' collection.
+   * @param {Object} chatDataSet - The chat dataset object to save in the Firestore database.
+   * @returns {Promise<void>} A promise that resolves when the chat dataset is saved successfully.
+   */
   async saveChatDataSet(chatDataSet):Promise<void> {
     const coll = collection(this.firestore, 'directChats');
     try {
@@ -160,9 +173,16 @@ export class DataService {
     } catch (error) {
       
     }
-
   }
 
+
+  /**
+   * Updates the chat dataset ID in the Firestore database for a specific chatDataSet object.
+   * 
+  * @param {Object} chatDataSet - The chat dataset object to update.
+  * @param {Object} docId - The document ID object that holds the chat dataset ID.
+  * @returns {void}
+  */
   updateChatDataId(chatDataSet, docId) {
     if (chatDataSet.id == 'unset') {
       const qData = doc(this.firestore, 'directChats', docId.id);
@@ -172,6 +192,7 @@ export class DataService {
       updateDoc(qData, newData).then(() => {
         this.chatDataId = docId.id;
         this.getChatDataSets(this.chatDataId);
+        console.log('chatDataId:', this.chatDataId);
       }).catch((error) => {
         this.chatDataId = 'unset';
       })
@@ -179,12 +200,18 @@ export class DataService {
   }
 
 
-  
+  /**
+  * Fetches chat data from the Firestore database collection 'directChats' for a specific chat dataset.
+  * 
+  * @param {string} id - The ID of the chat dataset to retrieve from the 'directChats' collection.
+  * @returns {void}
+  */
   async getChatDataSets(id: string) {
     const coll = collection(this.firestore, 'directChats');
     const qData = doc(coll, id);
     getDoc(qData).then((chatDataSet) =>{
         this.directChat = chatDataSet.data();
+        console.log(this.directChat);
       }).catch((error)=> {
         console.log('Fehler beim Abrufen des Dokuments:', error.message);
       });

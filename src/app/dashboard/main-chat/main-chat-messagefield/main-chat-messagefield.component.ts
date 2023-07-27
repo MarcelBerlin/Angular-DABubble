@@ -5,6 +5,7 @@ import { DashboardComponentsShowHideService } from '../../dashboard-components-s
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { DirectChatService } from 'src/app/direct-chat/direct-chat.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class MainChatMessagefieldComponent {
   specificChannel: string = '';
-  selectedUser: string = '';
+  directMessage: string = '';
   loggedUser: string = '';
   searchField: string = '';
 
@@ -22,9 +23,10 @@ export class MainChatMessagefieldComponent {
     public varService: VariablesService,
     public dataService: DataService,
     public dialogAddService: DialogAddService,
-    public messageService: MessageService,  
-    public chatService: ChatService  
-  ) {}
+    public messageService: MessageService,
+    public chatService: ChatService,
+    private directChatService: DirectChatService
+  ) { }
 
   currentUser() {
     return (
@@ -37,24 +39,34 @@ export class MainChatMessagefieldComponent {
     this.chatService.emptyChat = (
       this.varService.mainChatHead === 0 && this.specificChannel.trim() === ''
     ) || (
-      this.varService.mainChatHead === 1 && this.currentUser() && this.loggedUser.trim() === ''
-    ) || (
-      this.varService.mainChatHead === 1 && !this.currentUser() && this.selectedUser.trim() === ''
-    ) || (
-      this.varService.mainChatHead === 2 && this.searchField.trim() === ''
-    );
+        this.varService.mainChatHead === 1 && this.currentUser() && this.loggedUser.trim() === ''
+      ) || (
+        this.varService.mainChatHead === 1 && !this.currentUser() && this.directMessage.trim() === ''
+      ) || (
+        this.varService.mainChatHead === 2 && this.searchField.trim() === ''
+      );
   }
 
   messageSend(channel, specificUser, ownUser, searchInput) {
     if (this.varService.mainChatHead == 0) {
       this.messageService.addMessage(channel);
-    // } else if (this.varService.mainChatHead == 1) {
-    //   this.messageService.addMessage(specificUser);
-    // } else if (this.varService.mainChatHead == 3) {
-    //   this.messageService.addMessage(ownUser);
-    // } else {
-    //   this.messageService.addMessage(searchInput);
-   }
-    console.log('Diese Nachricht ging an' + channel);
+      console.log('Diese Nachricht ging an' + channel);
+    }
+    // add by Bossi
+    if (this.varService.mainChatHead === 1) {
+      this.getDirectChatMessage();
+    }
   }
+
+
+  // add by Bossi for directChatService
+  getDirectChatMessage():void {
+    console.log('Funktionsaufruf für direkt chat', this.directMessage);
+    this.directChatService.directMessage = this.directMessage;
+    this.directMessage = '';
+  }
+
+
+
 }
+
