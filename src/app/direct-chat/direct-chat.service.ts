@@ -165,6 +165,11 @@ export class DirectChatService {
     // ]
   }
 
+  saveMessage(): void {
+      console.log(this.directMessage);
+    
+  }
+
   
 }
 

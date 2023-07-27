@@ -25,7 +25,7 @@ export class MainChatMessagefieldComponent {
     public dialogAddService: DialogAddService,
     public messageService: MessageService,
     public chatService: ChatService,
-    private directChatService: DirectChatService
+    public directChatService: DirectChatService
   ) { }
 
   currentUser() {
@@ -52,19 +52,12 @@ export class MainChatMessagefieldComponent {
       this.messageService.addMessage(channel);
       console.log('Diese Nachricht ging an' + channel);
     }
-    // add by Bossi
+    // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1) {
-      this.getDirectChatMessage();
+      this.directChatService.saveMessage();
     }
   }
 
-
-  // add by Bossi for directChatService
-  getDirectChatMessage():void {
-    console.log('Funktionsaufruf für direkt chat', this.directMessage);
-    this.directChatService.directMessage = this.directMessage;
-    this.directMessage = '';
-  }
 
 
 
