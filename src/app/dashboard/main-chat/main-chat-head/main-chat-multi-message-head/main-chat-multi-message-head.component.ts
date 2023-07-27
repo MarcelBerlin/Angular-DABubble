@@ -67,13 +67,28 @@ import { VariablesService } from 'src/app/services/variables.service';
   styleUrls: ['./main-chat-multi-message-head.component.scss'],
 })
 export class MainChatMultiMessageHeadComponent {
-  inputControl = new FormControl('');
-  filteredInputValue: Observable<string[]>;
-// funktioniert noch nicht
+  selectedArray: string = '';
+  property: string = '';
+
   constructor(
     public dataService: DataService,
     private dialogAddService: DialogAddService,
     private varService: VariablesService
   ) {}
+
+  valueAsInput() {
+    const inputElement = document.querySelector('.form-control') as HTMLInputElement;
+    const value = inputElement.value;
+    if (value[0] == '@') {
+      this.property = 'email';
+    } else {
+      this.property = 'name';
+    }
+    this.selectedArray = 'dataService.userData';
+  }
+
+  selectedArrayAsValue() {
+    return this.selectedArray;
+  }
 
 }

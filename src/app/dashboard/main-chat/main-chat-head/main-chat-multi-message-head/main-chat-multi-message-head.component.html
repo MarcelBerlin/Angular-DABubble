@@ -5,9 +5,10 @@
       class="form-control"
       list="datalistOptions"
       placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
+      (keyup)="valueAsInput()"
     />
     <datalist id="datalistOptions">
-      <option *ngFor="let data of dataService.userData" value={{data.name}}></option>
+      <option *ngFor="let data of selectedArrayAsValue()" value={{data[property]}}></option>
     </datalist>
   </div>
 </div>
