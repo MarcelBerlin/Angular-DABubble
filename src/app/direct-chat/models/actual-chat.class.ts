@@ -7,7 +7,7 @@ export class ActualChat {
     constructer(obj?: any) {
         this.name = obj ? obj.name : 'unset';
         this.date = obj ? obj.date : 'unset';
-        this.time = obj ? obj.time : {};
+        this.time = obj ? obj.time : 'unset';
         this.message = obj ? obj.message : false;
     }
 

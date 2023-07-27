@@ -158,7 +158,7 @@ export class DataService {
   /**
    * Data set Firebase colection document.
    */
-  directChat: any;
+  directChat: any = [];
 
 
   /**
@@ -226,7 +226,7 @@ export class DataService {
       chat: message,
     };
     updateDoc(qData, newData).then(() => {
-
+      this.getChatDataSets(this.chatDataId);
     }).catch((error) => {
       this.chatDataId = this.chatDataId;
       console.log('Fehler beim Abrufen des Dokuments:');

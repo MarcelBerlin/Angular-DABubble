@@ -176,16 +176,27 @@ export class DirectChatService {
   actualChat: ActualChat = new ActualChat();
   saveMessage(): void {
       console.log(this.directMessage);
+      // let timeStamp = this.getActualTimeStamp();
+      // let date = timeStamp;
+      // let time = timeStamp[2].toString();
+      // console.log(timeStamp);
       let newMessage = this.directMessage;
       this.actualChat.message = newMessage;
       this.actualChat.name = this.dataService.loggedInUserData.name;
-      this.actualChat.date = this.getActualTimeStamp()[1];
-      this.actualChat.time = this.getActualTimeStamp()[2];
+      this.actualChat.date = '';
+      this.actualChat.time = '';
       console.log(this.actualChat);
-      this.dataService.directChat.chat.push(this.actualChat.toJSON());
+      // this.dataService.directChat.chat.push(this.actualChat.toJSON());
+      if (Array.isArray(this.dataService.directChat.chat)) {
+        this.dataService.directChat.chat.push(this.actualChat.toJSON());
+      } else {
+        // console.error('this.dataService.directChat.chat ist kein Array.');
+        // console.log(this.dataService.directChat.chat);
+      }
       // funktion update direct chat in firebase server
+      // console.log(this.dataService.directChat);
       this.directMessage = '';
-      this.dataService.updateChatDataChat(this.actualChat.toJSON());
+      // this.dataService.updateChatDataChat(this.actualChat.toJSON());
   }
 }
 
