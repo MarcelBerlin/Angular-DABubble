@@ -15,15 +15,13 @@
 
     span {
       font-size: 16px;
-
-      a {
-        cursor: pointer;
-        color: #535af1;
-        font-weight: 500;
-      }
+    }
+    a {
+      cursor: pointer;
+      color: #535af1;
+      font-weight: 500;
     }
   }
-
 
   .timeLine {
     position: relative;
@@ -126,5 +124,3 @@
     }
   }
 }
-
-

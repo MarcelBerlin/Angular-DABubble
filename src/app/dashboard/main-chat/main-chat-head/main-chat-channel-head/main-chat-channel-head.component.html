@@ -1,7 +1,11 @@
 <div class="headMembers">
   <div class="head" (click)="channelEdition()" *ngIf="tagChannel.tagsData">
-    <div>#</div>
-    <span>{{ tagChannel.tagsData[variableService.selectedChannel].name }}</span>
+    <span
+      >{{ tagChannel.tagsData[variableService.selectedChannel].name[0]
+      }}{{
+        tagChannel.tagsData[variableService.selectedChannel].name.slice(1)
+      }}</span
+    >
     <mat-icon>keyboard_arrow_down</mat-icon>
   </div>
   <div class="membersAndAdd">
