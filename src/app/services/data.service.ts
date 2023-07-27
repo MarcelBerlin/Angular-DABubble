@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { User } from '../models/user.class';
 import { __param } from 'tslib';
+import { ActualChat } from '../direct-chat/models/actual-chat.class';
 
 
 
@@ -218,7 +219,8 @@ export class DataService {
   }
 
 
-  updateChatDataChat(message: string) {
+  updateChatDataChat(message) {
+    debugger;
     const qData = doc(this.firestore, 'directChats', this.chatDataId);
     const newData = {
       chat: message,
@@ -227,6 +229,7 @@ export class DataService {
 
     }).catch((error) => {
       this.chatDataId = this.chatDataId;
+      console.log('Fehler beim Abrufen des Dokuments:');
     })
   }
 

@@ -185,6 +185,7 @@ export class DirectChatService {
       this.dataService.directChat.chat.push(this.actualChat.toJSON());
       // funktion update direct chat in firebase server
       this.directMessage = '';
+      this.dataService.updateChatDataChat(this.actualChat.toJSON());
   }
 }
 
