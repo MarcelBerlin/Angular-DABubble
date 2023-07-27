@@ -98,11 +98,19 @@ export class DirectChatService {
     this.chatDataSet.firstMember = this.dataService.loggedInUserData.userId;
     this.chatDataSet.secondMember = clickedUserId;
     this.chatDataSet.chat = [];
+    console.log(this.chatDataSet);
     this.dataService.saveChatDataSet(this.chatDataSet).then(() => {
-      this.chatDataSet.id = this.dataService.directChat.id;
-      this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
-      this.dataService.updateUser();
-    }).catch(() =>{});
+      setTimeout(() => {
+        this.chatDataSet.id = this.dataService.directChat.id;
+        this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
+        this.dataService.updateUser();
+      }, 2000);
+      // this.chatDataSet.id = this.dataService.directChat.id;
+      // this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
+      // this.dataService.updateUser();
+    }).catch(() =>{
+      console.log('Error saving chat data');
+    });
     // setTimeout(() => {
     //   this.chatDataSet.id = this.dataService.directChat.id;
     //   this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
@@ -135,16 +143,18 @@ export class DirectChatService {
     this.actualChatId = undefined;
     const directChatArray = this.dataService.loggedInUserData.directChats;
     if (directChatArray.length != 0) {
-      directChatArray.forEach(directChat => {
+      directChatArray.forEach((directChat: any) => {
+
         if (directChat.partnerId == clickedUserId) {
           this.actualChatId = directChat.directChatId;
-        }else console.log('chat not found');
+        }
       });
     }
     if (this.actualChatId != undefined){
       console.log('chat found');
     }else{
       console.log('chat not found');
+      
       this.createNewChatDataSet(clickedUserId);
     } 
   }
