@@ -66,7 +66,7 @@ import { VariablesService } from 'src/app/services/variables.service';
   templateUrl: './main-chat-multi-message-head.component.html',
   styleUrls: ['./main-chat-multi-message-head.component.scss'],
 })
-export class MainChatMultiMessageHeadComponent implements OnInit {
+export class MainChatMultiMessageHeadComponent {
   inputControl = new FormControl('');
   filteredInputValue: Observable<string[]>;
 // funktioniert noch nicht
@@ -76,29 +76,4 @@ export class MainChatMultiMessageHeadComponent implements OnInit {
     private varService: VariablesService
   ) {}
 
-  ngOnInit() {
-    this.filteredInputValue = this.inputControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value))
-    );
-  }
-
-  private _filter(value: string): string[] {
-    const filterValue = this._normalizeValue(value);
-    const filterData: string[] = [];
-    
-    for (const userData of this.dataService.userData) {
-      for (const name of userData.name) {
-        if (this._normalizeValue(name).includes(filterValue)) {
-          filterData.push(name);
-        }
-      }
-    }
-
-    return filterData;
-  }
-
-  private _normalizeValue(value: string): string {
-    return value.toLowerCase().replace(/\s/g, '');
-  }
 }

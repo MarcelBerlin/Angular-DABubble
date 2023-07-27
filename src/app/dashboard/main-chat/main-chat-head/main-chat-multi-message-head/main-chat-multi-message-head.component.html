@@ -1,22 +1,14 @@
 <div class="headMembers">
   <span>Neue Nachricht</span>
   <div class="inputContainer">
-    <form class="example-form">
-      <input
-        type="text"
-        placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
-        [matAutocomplete]="auto"
-        class="example-input"
-      />
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option
-          *ngFor="let select of dataService.userData | async"
-          [value]="select.name"
-        >
-          {{ select.name }}
-        </mat-option>
-      </mat-autocomplete>
-    </form>
+    <input
+      class="form-control"
+      list="datalistOptions"
+      placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
+    />
+    <datalist id="datalistOptions">
+      <option *ngFor="let data of dataService.userData" value={{data.name}}></option>
+    </datalist>
   </div>
 </div>
 <!-- funktioniert noch nicht -->
