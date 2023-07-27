@@ -13,7 +13,6 @@ const routes: Routes = [
   {
     path: 'forgot_password',
     component: ForgotPasswordComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
@@ -23,7 +22,6 @@ const routes: Routes = [
   {
     path: 'createAccount',
     component: CreateAccountComponent,
-    canActivate: [AuthGuard]
   },
   {
     path: '**',
