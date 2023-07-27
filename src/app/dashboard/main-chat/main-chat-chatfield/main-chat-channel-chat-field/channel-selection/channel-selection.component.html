@@ -29,18 +29,19 @@
         <div class="timeLineHead">Heute</div>
     </div> -->
     <div class="empty-chat-message" *ngIf="chatService.emptyChat">
-        <h2>
-            # {{ dialogAdd.tagsData[varService.selectedChannel].name }}
-        </h2>
-        <span>Du hast diesen Channel heute erstellt. Das ist der Anfang des Channels
-            <span>
+        <ng-container *ngIf="dialogAdd.tagsData && dialogAdd.tagsData[varService.selectedChannel]">
+            <h2>
+                # {{ dialogAdd.tagsData[varService.selectedChannel].name }}
+            </h2>
+            <span>Du hast diesen Channel heute erstellt. Das ist der Anfang des Channels</span>
+            <ng-container>
                 <a>
                     # {{ dialogAdd.tagsData[varService.selectedChannel].name }}
                 </a>
-            </span>
-        </span>
+            </ng-container>
+        </ng-container>
     </div>
-    
+        
 
 
 </div>

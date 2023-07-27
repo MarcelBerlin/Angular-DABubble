@@ -18,9 +18,14 @@
         <img src="assets/img/email.png" />
       </div>
     </div>
-    <div class="sendIcon"><img src="assets/img/send_icon.png" (click)="messageSend(specificChannel, directMessage, loggedUser, searchField); onChatTextChanged()" /></div>
+    <div class="sendIcon">
+      <img
+        src="assets/img/send_icon.png"
+        (click)="
+          messageSend(specificChannel, directMessage, loggedUser, searchField);
+          onChatTextChanged()
+        "
+      />
+    </div>
   </div>
 </div>
-
-
-

@@ -27,7 +27,7 @@ export class ChannelSelectionComponent {
     public messageService: MessageService,
     public chatService: ChatService,
   ) {
-    console.log(this.messageService.messageData.channelId);
+    // console.log(this.messageService.messageData.channelId);
   }
 
   /**
