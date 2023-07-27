@@ -1,35 +1,22 @@
 <div class="headMembers">
   <span>Neue Nachricht</span>
   <div class="inputContainer">
-    <!-- <input
-      type="text"
-      placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
-      [matAutocomplete]="auto"
-      [(ngModel)]="inputValue"
-    />
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-option
-        *ngFor="let item of inputAsValue(); let i = index"
-        [value]="sign + item[property]"
-        (click)="indexOfSelection(i)"
-      ><span>
-        {{ item[property] }}
-        </span>
-      </mat-option>
-    </mat-autocomplete> -->
-
-
-    <!-- <form class="example-form">
-      <input type="text"
-             placeholder="Search for a street"
-             [formControl]="control"
-             [matAutocomplete]="auto"
-             class="example-input">
+    <form class="example-form">
+      <input
+        type="text"
+        placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
+        [matAutocomplete]="auto"
+        class="example-input"
+      />
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
-          {{street}}
+        <mat-option
+          *ngFor="let select of dataService.userData | async"
+          [value]="select.name"
+        >
+          {{ select.name }}
         </mat-option>
       </mat-autocomplete>
-    </form> -->
+    </form>
   </div>
 </div>
+<!-- funktioniert noch nicht -->

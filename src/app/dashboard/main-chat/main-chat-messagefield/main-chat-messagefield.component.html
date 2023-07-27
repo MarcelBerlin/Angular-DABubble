@@ -1,9 +1,9 @@
 <div
   class="inputContainer"
-  *ngIf="dialogAddService.tagsData && dataService.userData"
+  *ngIf="dialogAddService.tagsData"
 >
   <textarea
-    *ngIf="varService.mainChatHead == 0"
+    *ngIf="varService.mainChatHead == 0 && dataService.userData"
     type="text"
     [(ngModel)]="specificChannel"
     placeholder="Nachricht an {{
@@ -27,7 +27,7 @@
   ></textarea>
 
   <textarea
-    *ngIf="varService.mainChatHead == 2"
+    *ngIf="varService.mainChatHead == 2 && dataService.userData"
     type="text"
     [(ngModel)]="searchField"
     placeholder="Nachricht an {{ varService.signOfSearch }} {{
@@ -60,3 +60,6 @@
     </div>
   </div>
 </div>
+
+
+
