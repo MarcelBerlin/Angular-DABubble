@@ -4,6 +4,7 @@ import { User } from '../models/user.class';
 import { __param } from 'tslib';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +37,7 @@ export class DataService {
 
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
-
+        // console.log('logged in userData',this.loggedInUserData);
       }
     });
   }
@@ -62,6 +63,7 @@ export class DataService {
         this.updateUser();
       }
     });
+
   }
 
 
@@ -78,6 +80,7 @@ export class DataService {
       img: user.img,
       online: true,
       userId: user.id,
+      directChats: user.directChats,
     };
   }
 
@@ -88,7 +91,7 @@ export class DataService {
    * @returns {string} - The logged user id.
    */
   getUserID(): string {
-    return this.loggedInUserData.id;
+    return this.loggedInUserData.userId;
   }
 
 
@@ -146,21 +149,22 @@ export class DataService {
 
   // funktionen für den direct chat service
 
-  chatDataId: string = 'unknown';
+  chatDataId: string = 'unset';
+  directChat: any;
 
-  async saveChatDataSet(chatDataSet) {
+  async saveChatDataSet(chatDataSet):Promise<void> {
     const coll = collection(this.firestore, 'directChats');
     try {
       let docId = await addDoc(coll, chatDataSet.toJSON());
       this.updateChatDataId(chatDataSet, docId);
     } catch (error) {
-
+      
     }
 
   }
 
   updateChatDataId(chatDataSet, docId) {
-    if (chatDataSet.id == 'unknown') {
+    if (chatDataSet.id == 'unset') {
       const qData = doc(this.firestore, 'directChats', docId.id);
       const newData = {
         id: docId.id,
@@ -169,19 +173,18 @@ export class DataService {
         this.chatDataId = docId.id;
         this.getChatDataSets(this.chatDataId);
       }).catch((error) => {
-        this.chatDataId = undefined;
+        this.chatDataId = 'unset';
       })
     }
   }
 
 
-  directChat: any;
+  
   async getChatDataSets(id: string) {
     const coll = collection(this.firestore, 'directChats');
     const qData = doc(coll, id);
     getDoc(qData).then((chatDataSet) =>{
         this.directChat = chatDataSet.data();
-        console.log(this.directChat);
       }).catch((error)=> {
         console.log('Fehler beim Abrufen des Dokuments:', error.message);
       });

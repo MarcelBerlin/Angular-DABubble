@@ -75,30 +75,42 @@ export class DirectChatService {
    * @returns {DirectChatJson} A DirectChatJson object representing the direct chat details.
    */
   createDirectChatIndex(clickedUserId: string): Object {
-    this.directChatIndex.ownId = this.dataService.loggedInUserData.UserId;
+    this.directChatIndex.ownId = this.dataService.getUserID();
     this.directChatIndex.partnerId = clickedUserId;
     this.directChatIndex.lastTimeStamp = this.getActualTimeStamp();
-    this.directChatIndex.directChatId = 'unset';
+    this.directChatIndex.directChatId = this.dataService.directChat.id;
     return this.directChatIndex.toJSON();
   }
 
 
   // zum Speichen eines neuen chats in Firbase collection directChats. Hier die Grundstruktur.
+  // newChatDataSet: Object;
+
   /**
    * Creates a new chat dataset object for a conversation between the logged-in user and a clicked user.
    * 
    * @param {string} clickedUserId - The ID of the user that was clicked to initiate the chat dataset creation.
-   * @returns {ChatDataSet} A new chat dataset object with initial values.
+   * @returns {void} 
    */
-  createNewChatDataSet(clickedUserId: string): Object {
-    this.chatDataSet.id = 'unknown';
+  createNewChatDataSet(clickedUserId: string): void {
+    // this.chatDataSet.id = 'unknown';
     this.chatDataSet.lastTimeStamp = this.getActualTimeStamp();
     this.chatDataSet.firstMember = this.dataService.loggedInUserData.userId;
     this.chatDataSet.secondMember = clickedUserId;
     this.chatDataSet.chat = [];
-    this.dataService.saveChatDataSet(this.chatDataSet);
-    // console.log('new chat data set', this.chatDataSet);
-    return this.chatDataSet;
+    this.dataService.saveChatDataSet(this.chatDataSet).then(() => {
+      this.chatDataSet.id = this.dataService.directChat.id;
+      this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
+      this.dataService.updateUser();
+    }).catch(() =>{});
+    // setTimeout(() => {
+    //   this.chatDataSet.id = this.dataService.directChat.id;
+    //   this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
+    //   this.dataService.updateUser();
+    // }, 5000);
+
+
+    // return this.chatDataSet;
 
     // chat: [
     //   {
@@ -112,40 +124,29 @@ export class DirectChatService {
 
   //start function
   /**
-   * Searches for the chat ID between the logged-in user and the clicked user in the direct chat data array.
-   * Sets the 'actualChatId' property to the found chat ID, or undefined if not found.
+   * Searches for the chat ID between the logged-in user and the clicked user in the direct chats array.
+   * If the chat ID is found, it sets the 'actualChatId' property accordingly.
+   * If the chat ID is not found, it creates a new chat dataset for the conversation.
    * 
    * @param {string} clickedUserId - The ID of the user that was clicked to initiate the chat search.
    * @returns {void}
    */
   getChatId(clickedUserId: string): void {
     this.actualChatId = undefined;
-    this.dataService.userData.forEach(directChats => {
-      if (directChats.length > 0) {
-        if (directChats.firstMember.id == this.dataService.loggedInUserData.id) {
-          if (directChats.secondMember.id == clickedUserId) {
-            this.actualChatId = directChats.chatId;
-          }
-        }
-      }
-    });
-    if (this.actualChatId === undefined) this.createNewChatDataSet(clickedUserId);
-    else console.log('chat found') //hier steht die Funktion wenn eine ChatId existiert.
+    const directChatArray = this.dataService.loggedInUserData.directChats;
+    if (directChatArray.length != 0) {
+      directChatArray.forEach(directChat => {
+        if (directChat.partnerId == clickedUserId) {
+          this.actualChatId = directChat.directChatId;
+        }else console.log('chat not found');
+      });
+    }
+    if (this.actualChatId != undefined){
+      console.log('chat found');
+    }else{
+      console.log('chat not found');
+      this.createNewChatDataSet(clickedUserId);
+    } 
   }
-
-
-  // Funktionen wenn actualChatId nicht undefined ist ############
-
-  // loadDirectChat() {
-  //   let activeDirectChat = ladeFunktion Firebase ! Mit der ChatId.chat;
-  //   activeDirectChat.foreach((message) => {
-  //     let name = message.name;
-  //     let date = message.date;
-  //     let time = message.time;
-  //     let message = message.message;
-  //   });
-  // }
-
-
 }
 
