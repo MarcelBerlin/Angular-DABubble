@@ -165,13 +165,13 @@ export class DataService {
    * @param {Object} chatDataSet - The chat dataset object to save in the Firestore database.
    * @returns {Promise<void>} A promise that resolves when the chat dataset is saved successfully.
    */
-  async saveChatDataSet(chatDataSet):Promise<void> {
+  async saveChatDataSet(chatDataSet): Promise<void> {
     const coll = collection(this.firestore, 'directChats');
     try {
       let docId = await addDoc(coll, chatDataSet.toJSON());
       this.updateChatDataId(chatDataSet, docId);
     } catch (error) {
-      
+
     }
   }
 
@@ -209,14 +209,30 @@ export class DataService {
   async getChatDataSets(id: string) {
     const coll = collection(this.firestore, 'directChats');
     const qData = doc(coll, id);
-    getDoc(qData).then((chatDataSet) =>{
-        this.directChat = chatDataSet.data();
-        console.log(this.directChat);
-      }).catch((error)=> {
-        console.log('Fehler beim Abrufen des Dokuments:', error.message);
-      });
+    getDoc(qData).then((chatDataSet) => {
+      this.directChat = chatDataSet.data();
+      console.log(this.directChat);
+    }).catch((error) => {
+      console.log('Fehler beim Abrufen des Dokuments:', error.message);
+    });
   }
+
+
+  updateChatDataChat(message: string) {
+    const qData = doc(this.firestore, 'directChats', this.chatDataId);
+    const newData = {
+      chat: message,
+    };
+    updateDoc(qData, newData).then(() => {
+
+    }).catch((error) => {
+      this.chatDataId = this.chatDataId;
+    })
+  }
+
+
 }
+
 
 
 

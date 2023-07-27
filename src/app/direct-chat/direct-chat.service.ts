@@ -3,6 +3,7 @@ import { TimeStamp } from './models/time-stamp';
 import { DirectChatIndex } from './models/direct-chat-index';
 import { ChatDataSet } from './models/chat-data-set';
 import { DataService } from '../services/data.service';
+import { ActualChat } from './models/actual-chat.class';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +17,7 @@ export class DirectChatService {
 
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.getActualTimeStamp();
   }
@@ -165,11 +166,25 @@ export class DirectChatService {
     // ]
   }
 
+  // actualChat: any = {
+  //   name: this.dataService.loggedInUserData.name,
+  //   date: this.getActualTimeStamp()[1],
+  //   time: this.getActualTimeStamp()[2],
+  //   message: 'Message',
+  // }
+
+  actualChat: ActualChat = new ActualChat();
   saveMessage(): void {
       console.log(this.directMessage);
-    
+      let newMessage = this.directMessage;
+      this.actualChat.message = newMessage;
+      this.actualChat.name = this.dataService.loggedInUserData.name;
+      this.actualChat.date = this.getActualTimeStamp()[1];
+      this.actualChat.time = this.getActualTimeStamp()[2];
+      console.log(this.actualChat);
+      this.dataService.directChat.chat.push(this.actualChat.toJSON());
+      // funktion update direct chat in firebase server
+      this.directMessage = '';
   }
-
-  
 }
 
