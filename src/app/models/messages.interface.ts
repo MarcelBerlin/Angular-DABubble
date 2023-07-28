@@ -3,7 +3,7 @@ export class Messages {
     channelId: string; 
     userId: string; 
     content: string; 
-    timestamp: number; 
+    timestamp: any;  
    
     constructor(obj?:any) {
         this.channelId = obj ? obj.channelId : '';

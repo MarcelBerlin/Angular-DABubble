@@ -9,7 +9,7 @@
       varService.selectedChannel !== undefined
     "
     type="text"
-    [(ngModel)]="specificChannel"
+    [(ngModel)]="messageService.messageText"
     placeholder="Nachricht an   {{
       dialogAddService.tagsData[varService.selectedChannel]?.name?.charAt(0) ||
         ''
@@ -67,7 +67,7 @@
       <img
         src="assets/img/send_icon.png"
         (click)="
-          messageSend(specificChannel, directMessage, loggedUser, searchField);
+          messageSend();
           onChatTextChanged()
         "
       />

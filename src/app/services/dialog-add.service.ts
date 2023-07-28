@@ -18,6 +18,7 @@ interface Tag {
 export class DialogAddService {
   newTags$: any;
   tagsData: any=[];
+  channelIndex: number;
 
 
 
@@ -28,8 +29,9 @@ export class DialogAddService {
     this.newTags$ = collectionData(coll, { idField: 'id' });
     this.newTags$.subscribe((tag: any) => {
       this.tagsData = tag;
-
+      console.log(this.tagsData);
     });
+
   }
 
   tags: Tag[] = []; // neue Tags werden als JSON hinzugefügt

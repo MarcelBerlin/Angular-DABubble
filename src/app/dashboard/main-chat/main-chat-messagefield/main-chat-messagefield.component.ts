@@ -47,10 +47,9 @@ export class MainChatMessagefieldComponent {
       );
   }
 
-  messageSend(channel, specificUser, ownUser, searchInput) {
+  messageSend() {
     if (this.varService.mainChatHead == 0) {
-      this.messageService.addMessage(channel);
-      console.log('Diese Nachricht ging an' + channel);
+      this.messageService.addMessage();      
     }
     // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1) {
