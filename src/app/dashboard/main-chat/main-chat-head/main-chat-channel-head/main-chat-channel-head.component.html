@@ -1,11 +1,15 @@
 <div class="headMembers">
-  <div class="head" (click)="channelEdition()" *ngIf="tagChannel.tagsData">
-    <span
-      >{{ tagChannel.tagsData[variableService.selectedChannel].name[0]
-      }}{{
-        tagChannel.tagsData[variableService.selectedChannel].name.slice(1)
-      }}</span
-    >
+  <div
+    class="head"
+    (click)="channelEdition()"
+    *ngIf="
+      tagChannel?.tagsData && variableService?.selectedChannel !== undefined
+    "
+  >
+    <span>
+      {{ tagChannel.tagsData[variableService.selectedChannel]?.name[0] }}
+      {{ tagChannel.tagsData[variableService.selectedChannel]?.name.slice(1) }}
+    </span>
     <mat-icon>keyboard_arrow_down</mat-icon>
   </div>
   <div class="membersAndAdd">
