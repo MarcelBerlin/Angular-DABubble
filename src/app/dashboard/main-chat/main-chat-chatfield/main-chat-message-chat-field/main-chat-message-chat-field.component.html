@@ -1,1 +1,71 @@
-<app-conversation-between *ngIf="!varService.conversationBetween"></app-conversation-between>
+<div class="container">
+  <div class="timeLine">
+    <div class="timeLineHead">Dienstag, 14 Januar</div>
+  </div>
+
+
+  <!-- Left Site -->
+  <div
+    class="messagesMainChatLeft"
+    (mouseenter)="hoveredMessagesMainChat = true"
+    (mouseleave)="hoveredMessagesMainChat = false"
+    [ngStyle]="{
+      'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',
+      transition: 'background-color 400ms'
+    }"
+  >
+    <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
+    <div class="messageContent">
+      <div class="nameTime">
+        <span class="name" (click)="profileViewUsers()">Noah Braun</span>
+        <span class="time">16:14</span>
+      </div>
+      <div
+        class="messageBox"
+        [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'"
+      >
+        <span class="message">Welche Version ist aktuell von Angular?</span>
+      </div>
+      <div class="labelAnswersAndTime">
+        <div class="time">Letzte Antwort 14:56</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="timeLine">
+    <div class="timeLineHead">Heute</div>
+  </div>
+
+
+  <!-- Right Site -->
+  <div
+    class="messagesMainChatRight"
+    (mouseenter)="hoveredMessagesMainChat = true"
+    (mouseleave)="hoveredMessagesMainChat = false"
+    [ngStyle]="{
+      'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',
+      transition: 'background-color 400ms'
+    }"
+  >
+    <div class="messageContent">
+      <div class="nameTime">
+        <span class="name" (click)="profileViewUsers()">Noah Braun</span>
+        <span class="time">16:14</span>
+      </div>
+      <div
+        class="messageBox"
+        [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'"
+      >
+        <span class="message">Welche Version ist aktuell von Angular?</span>
+      </div>
+      <div class="labelAnswersAndTime">
+        <div class="time">Letzte Antwort 14:56</div>
+      </div>
+    </div>
+    <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
+  </div>
+
+  <app-conversation-between
+    *ngIf="!varService.conversationBetween"
+  ></app-conversation-between>
+</div>
