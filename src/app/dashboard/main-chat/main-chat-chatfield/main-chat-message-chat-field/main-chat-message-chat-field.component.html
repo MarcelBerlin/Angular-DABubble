@@ -38,7 +38,7 @@
 
 
   <!-- Right Site you -->
-  <div *ngFor="let message of dataService.directChat.chat"
+  <div ngIf="dataService.directChat" *ngFor="let message of dataService.directChat.chat"
     class="messagesMainChatRight"
     (mouseenter)="hoveredMessagesMainChat = true"
     (mouseleave)="hoveredMessagesMainChat = false"
