@@ -44,6 +44,7 @@ export class DirectChatService {
       });
     }
     if (this.actualChatId != undefined) {
+      this.dataService.directChat = [];
       console.log('chat found');
       this.loadChatDataSet(this.actualChatId);
     } else {
@@ -60,6 +61,7 @@ export class DirectChatService {
    * @returns {void}
   */
   loadChatDataSet(chatId): void {
+    this.dataService.directChat = [];
     this.dataService.chatDataId = chatId;
     this.dataService.getChatDataSets(chatId);
     // this.dataService.subcribeDirectChatData();

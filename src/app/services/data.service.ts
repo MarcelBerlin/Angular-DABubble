@@ -27,7 +27,7 @@ export class DataService {
   ) {
     this.subcribeUserData();
     if (this.chatDataId != 'unset'){
-      this.subcribeDirectChatData();
+      // this.subcribeDirectChatData();
     }
   }
 

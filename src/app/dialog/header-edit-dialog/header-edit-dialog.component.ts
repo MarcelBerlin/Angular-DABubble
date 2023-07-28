@@ -36,6 +36,7 @@ export class HeaderEditDialogComponent {
       this.loggedUserName = getUserData.loggedInUserData.name;
       this.loggedUserMail = getUserData.loggedInUserData.email;
     }, 1000);
+    console.log(this.getUserData);
   }
 
   saveUserChanges() {
