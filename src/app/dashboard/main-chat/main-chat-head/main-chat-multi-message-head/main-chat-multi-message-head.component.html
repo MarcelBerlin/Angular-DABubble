@@ -10,7 +10,7 @@
         [matAutocomplete]="auto"
         class="example-input"
       />
-      <mat-autocomplete #auto="matAutocomplete">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
         <mat-option
           *ngFor="let element of filteredArrays | async"
           [value]="element[property]"
