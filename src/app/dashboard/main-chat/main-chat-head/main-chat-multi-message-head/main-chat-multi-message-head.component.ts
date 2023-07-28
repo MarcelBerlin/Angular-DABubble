@@ -60,11 +60,14 @@ export class MainChatMultiMessageHeadComponent {
   onOptionSelected(event: any) {
     const selectedOption = event.option.value;
     this.selectedArray.forEach((element, index) => {
-      if (element[this.property] == selectedOption) {
-        this.varService.setVar('propertyOfSearch', this.property)
-        this.varService.setVar('indexOfSearch', index)
-        this.varService.setVar('selectedArrayofSearch', this.selectedArray)
+      if (element.name === selectedOption) {
+        this.varService.setVar('indexOfSearch', index);
+        this.varService.setVar('selectedArrayofSearch', this.selectedArray);
+      } else if (element.email === selectedOption) {
+        this.varService.setVar('indexOfSearch', index);
+        this.varService.setVar('selectedArrayofSearch', this.selectedArray);
       }
+      this.varService.setVar('propertyOfSearch', 'name');
     });
   }
 }
