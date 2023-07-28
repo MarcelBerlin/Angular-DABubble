@@ -1,15 +1,33 @@
 <div class="headMembers">
   <span>Neue Nachricht</span>
   <div class="inputContainer">
-    <input
+    <!-- <input
       class="form-control"
       list="datalistOptions"
       placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
-      (keyup)="valueAsInput()"
+      (input)="selectedArrayAsValue()"
     />
-    <datalist id="datalistOptions">
-      <option *ngFor="let data of selectedArrayAsValue()" value={{data[property]}}></option>
-    </datalist>
+    <datalist id="datalistOptions" *ngIf="sign == '@'">
+      <option *ngFor="let data of dataService.userData" value={{data.email}}></option>
+    </datalist> -->
+
+    <form class="example-form">
+      <input
+        type="text"
+        placeholder="Search for a street"
+        [formControl]="control"
+        [matAutocomplete]="auto"
+        class="example-input"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let element of filteredArrays | async"
+          [value]="element[sign]"
+        >
+          {{ element[sign] }}
+        </mat-option>
+      </mat-autocomplete>
+    </form>
   </div>
 </div>
 <!-- funktioniert noch nicht -->

@@ -52,7 +52,6 @@
 //   }
 // }
 
-
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -67,8 +66,15 @@ import { VariablesService } from 'src/app/services/variables.service';
   styleUrls: ['./main-chat-multi-message-head.component.scss'],
 })
 export class MainChatMultiMessageHeadComponent {
-  selectedArray: string = '';
-  property: string = '';
+  control = new FormControl('');
+  streets: string[] = [
+    'Champs-Élysées',
+    'Lombard Street',
+    'Abbey Road',
+    'Fifth Avenue',
+  ];
+  filteredArrays: Observable<string[]>;
+  sign: string = '';
 
   constructor(
     public dataService: DataService,
@@ -76,19 +82,34 @@ export class MainChatMultiMessageHeadComponent {
     private varService: VariablesService
   ) {}
 
-  valueAsInput() {
-    const inputElement = document.querySelector('.form-control') as HTMLInputElement;
-    const value = inputElement.value;
-    if (value[0] == '@') {
-      this.property = 'email';
-    } else {
-      this.property = 'name';
+  ngOnInit() {
+    this.filteredArrays = this.control.valueChanges.pipe(
+      map((value) => this._filter(value || ''))
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = this._normalizeValue(value);
+    if (filterValue.startsWith('#')) {
+      this.sign = 'name';
+      return this.dialogAddService.tagsData.filter((element) =>
+        this._normalizeValue(element.name).includes(filterValue)
+      );
+    } else if (filterValue.startsWith('@')) {
+      this.sign = 'email';
+      return this.dataService.userData.filter((element) =>
+        this._normalizeValue(element.email).includes(filterValue)
+      );
+    } else if (filterValue.startsWith('')) {
+      this.sign = 'name';
+      return this.dataService.userData.filter((element) =>
+        this._normalizeValue(element.name).includes(filterValue)
+      );
     }
-    this.selectedArray = 'dataService.userData';
+    return [];
   }
 
-  selectedArrayAsValue() {
-    return this.selectedArray;
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
   }
-
 }

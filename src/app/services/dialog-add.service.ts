@@ -17,7 +17,7 @@ interface Tag {
 
 export class DialogAddService {
   newTags$: any;
-  tagsData: any[];
+  tagsData: any=[];
 
 
 
