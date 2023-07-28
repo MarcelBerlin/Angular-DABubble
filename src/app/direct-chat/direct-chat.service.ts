@@ -14,6 +14,7 @@ export class DirectChatService {
   timeStamp: TimeStamp = new TimeStamp();
   chatDataSet: ChatDataSet = new ChatDataSet();
   directMessage: string = '';
+  actualChat: ActualChat = new ActualChat();
 
 
   constructor(
@@ -42,16 +43,22 @@ export class DirectChatService {
         }
       });
     }
-    if (this.actualChatId != undefined){
+    if (this.actualChatId != undefined) {
       console.log('chat found');
       this.loadChatDataSet(this.actualChatId);
-    }else{
+    } else {
       console.log('chat not found');
       this.createNewChatDataSet(clickedUserId);
-    } 
+    }
   }
 
 
+  /**
+   * Loads a specific chat dataset based on the provided chatId using the dataService methods.
+   * 
+   * @param {string} chatId - The ID of the chat dataset to load.
+   * @returns {void}
+  */
   loadChatDataSet(chatId): void {
     this.dataService.chatDataId = chatId;
     this.dataService.getChatDataSets(chatId);
@@ -120,9 +127,6 @@ export class DirectChatService {
   }
 
 
-  // zum Speichen eines neuen chats in Firbase collection directChats. Hier die Grundstruktur.
-  // newChatDataSet: Object;
-
   /**
    * Creates a new chat dataset object for a conversation between the logged-in user and a clicked user.
    * 
@@ -141,62 +145,32 @@ export class DirectChatService {
         this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
         this.dataService.updateUser();
       }, 2000);
-      // this.chatDataSet.id = this.dataService.directChat.id;
-      // this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
-      // this.dataService.updateUser();
-    }).catch(() =>{
+    }).catch(() => {
       console.log('Error saving chat data');
     });
-    // setTimeout(() => {
-    //   this.chatDataSet.id = this.dataService.directChat.id;
-    //   this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
-    //   this.dataService.updateUser();
-    // }, 5000);
-
-
-    // return this.chatDataSet;
-
-    // chat: [
-    //   {
-    //     name: this.dataService.loggedInUserData.name,
-    //     date: this.getActualTimeStamp()[1],
-    //     time: this.getActualTimeStamp()[2],
-    //     message: 'Message',
-    //   }
-    // ]
   }
 
-  // actualChat: any = {
-  //   name: this.dataService.loggedInUserData.name,
-  //   date: this.getActualTimeStamp()[1],
-  //   time: this.getActualTimeStamp()[2],
-  //   message: 'Message',
-  // }
 
-  actualChat: ActualChat = new ActualChat();
+  /**
+   * Saves a new message to the current chat in the dataService and updates 
+   * the chat data in Firestore.
+   * 
+   * @returns {void}
+   */
   saveMessage(): void {
-      console.log(this.directMessage);
-      // let timeStamp = this.getActualTimeStamp();
-      // let date = timeStamp;
-      // let time = timeStamp[2].toString();
-      // console.log(timeStamp);
-      let newMessage = this.directMessage;
-      this.actualChat.message = newMessage;
-      this.actualChat.name = this.dataService.loggedInUserData.name;
-      this.actualChat.date = '';
-      this.actualChat.time = '';
-      console.log(this.actualChat);
-      // this.dataService.directChat.chat.push(this.actualChat.toJSON());
-      if (Array.isArray(this.dataService.directChat.chat)) {
-        this.dataService.directChat.chat.push(this.actualChat.toJSON());
-      } else {
-        // console.error('this.dataService.directChat.chat ist kein Array.');
-        // console.log(this.dataService.directChat.chat);
-      }
-      // funktion update direct chat in firebase server
-      // console.log(this.dataService.directChat);
-      this.directMessage = '';
-      // this.dataService.updateChatDataChat(this.actualChat.toJSON());
+    let today: Date = new Date();
+    // console.log(this.directMessage);
+    let newMessage = this.directMessage;
+    this.actualChat.message = newMessage;
+    this.actualChat.name = this.dataService.loggedInUserData.name;
+    this.actualChat.date = this.createDateString(today);
+    this.actualChat.time = this.createClockString(today);
+    // console.log('neues ChatElement: ',this.actualChat);
+    // console.log('chatElement in dataService DirectChat vor Speichern:', this.dataService.directChat.chat);
+    this.dataService.directChat.chat.push(this.actualChat.toJSON());
+    // console.log('directChat nach hinzufügen von new Chat', this.dataService.directChat);
+    this.directMessage = '';
+    this.dataService.updateChatDataChat();
   }
 }
 

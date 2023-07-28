@@ -217,19 +217,23 @@ export class DataService {
       console.log('Fehler beim Abrufen des Dokuments:', error.message);
     });
   }
+  
 
-
-  updateChatDataChat(message) {
-    debugger;
+  /**
+   * Updates the 'chat' field in a specific chat dataset document within the 'directChats' collection.
+   * 
+   * @returns {void}
+  */
+  updateChatDataChat():void {
     const qData = doc(this.firestore, 'directChats', this.chatDataId);
     const newData = {
-      chat: message,
+      chat: this.directChat.chat
     };
     updateDoc(qData, newData).then(() => {
       this.getChatDataSets(this.chatDataId);
     }).catch((error) => {
       this.chatDataId = this.chatDataId;
-      console.log('Fehler beim Abrufen des Dokuments:');
+      console.log('Fehler beim Speichern, UpdateChatData');
     })
   }
 

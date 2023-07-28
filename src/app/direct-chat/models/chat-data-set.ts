@@ -3,7 +3,7 @@ export class ChatDataSet {
     firstMember: string;
     secondMember: string;
     lastTimeStamp: any;
-    chat: any[];
+    chat: [];
 
     constructor(obj?:any) {
         this.id = obj ? obj.id : 'unset';
