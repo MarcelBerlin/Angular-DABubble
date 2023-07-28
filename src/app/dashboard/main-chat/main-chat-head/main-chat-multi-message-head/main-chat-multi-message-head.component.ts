@@ -15,7 +15,7 @@ import { VariablesService } from 'src/app/services/variables.service';
 export class MainChatMultiMessageHeadComponent {
   control = new FormControl('');
   filteredArrays: Observable<string[]>;
-  sign: string = '';
+  property: string = '';
 
   constructor(
     public dataService: DataService,
@@ -32,17 +32,17 @@ export class MainChatMultiMessageHeadComponent {
   private _filter(value: string): string[] {
     const filterValue = this._normalizeValue(value);
     if (filterValue.startsWith('#')) {
-      this.sign = 'name';
+      this.property = 'name';
       return this.dialogAddService.tagsData.filter((element) =>
         this._normalizeValue(element.name).includes(filterValue)
       );
     } else if (filterValue.startsWith('@')) {
-      this.sign = 'email';
+      this.property = 'email';
       return this.dataService.userData.filter((element) =>
         this._normalizeValue(element.email).includes(filterValue)
       );
     } else if (filterValue.startsWith('')) {
-      this.sign = 'name';
+      this.property = 'name';
       return this.dataService.userData.filter((element) =>
         this._normalizeValue(element.name).includes(filterValue)
       );
