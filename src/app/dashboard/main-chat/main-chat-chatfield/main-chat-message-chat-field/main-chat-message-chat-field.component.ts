@@ -6,6 +6,7 @@ import { ChatService } from 'src/app/services/chat.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { VariablesService } from 'src/app/services/variables.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-main-chat-message-chat-field',
@@ -26,6 +27,7 @@ export class MainChatMessageChatFieldComponent {
     public dialogAdd: DialogAddService,
     public messageService: MessageService,
     public chatService: ChatService,
+    public dataService: DataService,
   ) {
     // console.log(this.messageService.messageData.channelId);
   }

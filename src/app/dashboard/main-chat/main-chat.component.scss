@@ -10,9 +10,15 @@
     flex-direction: column;
     align-items: center;
     // justify-content: center;
+    overflow-y: scroll;
     app-main-chat-message-chat-field,
     app-main-chat-channel-chat-field {
       width: 100%;
     }
+
   }
+}
+
+::-webkit-scrollbar{
+  width: 0px !important;
 }

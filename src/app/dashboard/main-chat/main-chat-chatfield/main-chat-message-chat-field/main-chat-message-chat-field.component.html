@@ -4,8 +4,8 @@
   </div>
 
 
-  <!-- Left Site -->
-  <div
+  <!-- Left Site chat partner -->
+  <!-- <div
     class="messagesMainChatLeft"
     (mouseenter)="hoveredMessagesMainChat = true"
     (mouseleave)="hoveredMessagesMainChat = false"
@@ -34,29 +34,29 @@
 
   <div class="timeLine">
     <div class="timeLineHead">Heute</div>
-  </div>
+  </div> -->
 
 
-  <!-- Right Site -->
-  <div
+  <!-- Right Site you -->
+  <div *ngFor="let message of dataService.directChat.chat"
     class="messagesMainChatRight"
     (mouseenter)="hoveredMessagesMainChat = true"
     (mouseleave)="hoveredMessagesMainChat = false"
     [ngStyle]="{
       'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',
-      transition: 'background-color 400ms'
+      transition: 'background-color 400ms', 
     }"
   >
     <div class="messageContent">
       <div class="nameTime">
-        <span class="name" (click)="profileViewUsers()">Noah Braun</span>
-        <span class="time">16:14</span>
+        <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
+        <span class="time">{{message.date}} {{message.time}} Uhr</span>
       </div>
       <div
         class="messageBox"
         [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'"
       >
-        <span class="message">Welche Version ist aktuell von Angular?</span>
+        <span class="message">{{message.message}}</span>
       </div>
       <div class="labelAnswersAndTime">
         <div class="time">Letzte Antwort 14:56</div>
@@ -65,7 +65,7 @@
     <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
   </div>
 
-  <app-conversation-between
+  <!-- <app-conversation-between
     *ngIf="!varService.conversationBetween"
-  ></app-conversation-between>
+  ></app-conversation-between> -->
 </div>
