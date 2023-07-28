@@ -62,6 +62,7 @@ export class DirectChatService {
   loadChatDataSet(chatId): void {
     this.dataService.chatDataId = chatId;
     this.dataService.getChatDataSets(chatId);
+    // this.dataService.subcribeDirectChatData();
   }
 
 

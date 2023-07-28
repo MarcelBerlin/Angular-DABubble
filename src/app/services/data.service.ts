@@ -25,7 +25,14 @@ export class DataService {
   constructor(
     private firestore: Firestore,
   ) {
-    const coll = collection(firestore, 'users');
+    this.subcribeUserData();
+    if (this.chatDataId != 'unset'){
+      this.subcribeDirectChatData();
+    }
+  }
+
+  subcribeUserData(): void {
+    const coll = collection(this.firestore, 'users');
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
       this.userData = user;
@@ -34,8 +41,7 @@ export class DataService {
         if (a.email === this.loggedInUserEmail) return -1;
         if (b.email === this.loggedInUserEmail) return 1;
         return a.email < b.email ? -1 : 1;
-      });  // ********************************
-
+      });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
         // console.log('logged in userData',this.loggedInUserData);
@@ -43,11 +49,27 @@ export class DataService {
     });
   }
 
-  // userData.sort((a, b) => {
-  //   if (a.email === 'guest@guest.de') return -1;
-  //   if (b.email === 'guest@guest.de') return 1;
-  //   return a.email < b.email ? -1 : 1;
-  // });
+  /**
+   * Firebase collection directChats Id.
+   */
+  chatDataId: string = 'unset';
+
+  /**
+   * Data set Firebase colection document.
+   */
+  directChat: any = [];
+
+
+  subcribeDirectChatData(){
+    const coll = collection(this.firestore, 'directChats');
+    const qData = doc(coll, this.chatDataId);
+    this.directChat.subscribe((chat) => {
+      this.directChat = chat;
+      console.log('directChat update',this.directChat);
+    }).error(err =>{
+      console.log('direct Chat subscription error');
+    });
+  }
 
 
   /**
@@ -150,15 +172,7 @@ export class DataService {
 
   // funktionen für den direct chat service !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  /**
-   * Firebase collection directChats Id.
-   */
-  chatDataId: string = 'unset';
-
-  /**
-   * Data set Firebase colection document.
-   */
-  directChat: any = [];
+  
 
 
   /**
@@ -234,6 +248,23 @@ export class DataService {
     }).catch((error) => {
       this.chatDataId = this.chatDataId;
       console.log('Fehler beim Speichern, UpdateChatData');
+    })
+  }
+
+
+  // ##################################################################
+  /**
+   * Updates the clicked user data in Firestore.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the update operation is complete.
+   */
+  updateClickedUser(): void {
+    const qData = doc(this.firestore, 'users', this.loggedInUserData.userId);
+    const newData = this.loggedInUserData;
+    updateDoc(qData, newData).then(() => {
+
+    }).catch((error) => {
+
     })
   }
 
