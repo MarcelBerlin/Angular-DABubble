@@ -12,7 +12,6 @@ export class VariablesService {
   channelSelection: boolean = false;
   selectedArrayofSearch: string = '';
   propertyOfSearch: string = '';
-  signOfSearch: string = '';
   indexOfSearch: number;
 
   constructor() {}

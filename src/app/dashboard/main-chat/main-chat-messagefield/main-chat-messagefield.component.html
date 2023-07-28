@@ -48,9 +48,7 @@
     "
     type="text"
     [(ngModel)]="searchField"
-    placeholder="Nachricht an {{
-      varService.signOfSearch
-    }} {{ varService.selectedArrayofSearch[varService.indexOfSearch]?.[varService.propertyOfSearch] || '' }}"
+    placeholder="Nachricht an {{ varService.selectedArrayofSearch[varService.indexOfSearch]?.[varService.propertyOfSearch] || '' }}"
   ></textarea>
   <div class="iconsContainer">
     <div class="addElements">

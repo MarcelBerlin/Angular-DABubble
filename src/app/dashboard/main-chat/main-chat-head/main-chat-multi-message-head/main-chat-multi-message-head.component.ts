@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -34,19 +33,19 @@ export class MainChatMultiMessageHeadComponent {
     const filterValue = this._normalizeValue(value);
     if (filterValue.startsWith('#')) {
       this.property = 'name';
-      this.selectedArray = 'dialogAddService.tagsData';
+      this.selectedArray = this.dialogAddService.tagsData;
       return this.dialogAddService.tagsData.filter((element) =>
         this._normalizeValue(element.name).includes(filterValue)
       );
     } else if (filterValue.startsWith('@')) {
       this.property = 'email';
-      this.selectedArray = 'dataService.userData';
+      this.selectedArray = this.dataService.userData;
       return this.dataService.userData.filter((element) =>
         this._normalizeValue(element.email).includes(filterValue)
       );
     } else if (filterValue.startsWith('')) {
       this.property = 'name';
-      this.selectedArray = 'dataService.userData';      
+      this.selectedArray = this.dataService.userData;
       return this.dataService.userData.filter((element) =>
         this._normalizeValue(element.name).includes(filterValue)
       );
@@ -60,7 +59,12 @@ export class MainChatMultiMessageHeadComponent {
 
   onOptionSelected(event: any) {
     const selectedOption = event.option.value;
-    console.log(this.selectedArray);
-
+    this.selectedArray.forEach((element, index) => {
+      if (element[this.property] == selectedOption) {
+        this.varService.setVar('propertyOfSearch', this.property)
+        this.varService.setVar('indexOfSearch', index)
+        this.varService.setVar('selectedArrayofSearch', this.selectedArray)
+      }
+    });
   }
 }
