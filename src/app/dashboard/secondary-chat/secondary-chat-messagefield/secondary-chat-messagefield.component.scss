@@ -1,158 +1,178 @@
-.full-message-left {
-    width: calc(100% - 50px);
-    position: relative;
-    border-bottom: 1px solid #eeebeb;
+.thread-content {
+    height: 78%; // SPÄTER ÄNDERN
 
-    .avatar-left {
-        position: absolute;
-        left: 40px;
-        top: 25px;
-        width: 70px;
-        height: 70px;
+    .full-message-left {
+        width: calc(100% - 50px);
+        height: 200px;
+        position: relative;
+        border-bottom: 1px solid #eeebeb;
 
-        img {
+        .avatar-left {
+            position: absolute;
+            left: 40px;
+            top: 25px;
             width: 70px;
             height: 70px;
-            border-radius: 50%;
-        }
-    }
 
-    .message-details-left {
-        position: absolute;
-        top: 20px;
-        left: 120px;
-        width: 50%;
-        display: flex;
-
-        .name {
-            font-family: "nunito";
-            font-size: 18px;
-            font-weight: 700;
-            padding-right: 20px;
+            img {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+            }
         }
 
-        .time {
-            color: #686868;
-            font-family: "nunito";
-            font-size: 14px;
-        }
-
-        .message-content-left {
+        .message-details-left {
             position: absolute;
-            background-color: #eceefe;
-            top: 50px;
-            border-radius: 0 20px 20px 20px;
-            width: auto;
-            padding: 16px;
-            font-size: 18px;
+            top: 20px;
+            left: 120px;
+            width: 70%;
+            display: flex;
+
+            .name {
+                font-family: "nunito";
+                font-size: 18px;
+                font-weight: 700;
+                padding-right: 20px;
+            }
+
+            .time {
+                color: #686868;
+                font-family: "nunito";
+                font-size: 14px;
+            }
+
+            .message-content-left {
+                position: absolute;
+                background-color: #eceefe;
+                top: 50px;
+                border-radius: 0 20px 20px 20px;
+                width: auto;
+                padding: 16px;
+                font-size: 18px;
+            }
         }
-    }
 
-    .reaction-bar-left {
-        position: absolute;
-        top: 150px;
-        left: 100px;
+        .reaction-bar-left {
+            position: absolute;
+            top: 110px;
+            left: 100px;
 
-        img {
-            cursor: pointer;
-            padding: 5px;
+            img {
+                cursor: pointer;
+                padding: 5px;
 
-            &:hover {
-                background-color: #eeebeb;
-                border-radius: 10px;
+                &:hover {
+                    background-color: #eeebeb;
+                    border-radius: 10px;
+                }
             }
         }
     }
-}
 
 
-.new-answers {
-    color: #ADB0D9;
-    position: absolute;
-    top: 220px;
-    left: 50px;
-    display: flex;
-    align-items: center;
-
-    p {
-        font-size: 18px;
-        margin-bottom: 0;
-        padding-right: 10px;
-    }
-
-    img {
-        height: 2px;
-        width: 250px;
-    }
-}
-
-
-// USER MESSAGE
-
-.full-message-right {
-    width: calc(100% - 20px);
-    height: auto;
-    position: relative;
-    top: 200px;
-    border-bottom: 1px solid #eeebeb;
-
-    .avatar-right {
+    .new-answers {
+        color: #ADB0D9;
         position: absolute;
-        right: 40px;
-        top: 25px;
-        width: 70px;
-        height: 70px;
+        top: 500px;
+        left: 50px;
+        display: flex;
+        align-items: center;
+
+        p {
+            font-size: 18px;
+            margin-bottom: 0;
+            padding-right: 10px;
+        }
 
         img {
+            height: 2px;
+            width: 250px;
+        }
+    }
+
+
+    // USER MESSAGE
+
+    .full-message-right {
+        width: calc(100% - 20px);
+        height: 200px;
+        position: relative;
+        // border-bottom: 1px solid #eeebeb;
+
+        .avatar-right {
+            position: absolute;
+            right: 40px;
+            top: 25px;
             width: 70px;
             height: 70px;
-            border-radius: 50%;
-        }
-    }
 
-    .message-details-right {
-        position: absolute;
-        top: 30px;
-        right: 120px;
-        width: 50%;
-        display: flex;
-
-        .name {
-            font-family: "nunito";
-            font-size: 18px;
-            font-weight: 700;
-            padding-right: 20px;
+            img {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+            }
         }
 
-        .time {
-            color: #686868;
-            font-family: "nunito";
-            font-size: 14px;
-        }
-
-        .message-content-right {
+        .message-details-right {
             position: absolute;
-            background-color: #eceefe;
-            top: 50px;
-            border-radius: 20px 0 20px 20px;
-            width: auto;
-            padding: 16px;
-            font-size: 18px;
+            top: 30px;
+            right: 120px;
+            width: 70%;
+            display: flex;
+            justify-content: flex-end;
+            // flex-direction: row-reverse;
+
+            .name {
+                font-family: "nunito";
+                font-size: 18px;
+                font-weight: 700;
+                padding-right: 20px;
+            }
+
+            .time {
+                color: #686868;
+                font-family: "nunito";
+                font-size: 14px;
+                padding-right: 20px;
+            }
+
+            .message-content-right {
+                position: absolute;
+                color: white;
+                background-color: #797EF3;
+                top: 50px;
+                border-radius: 20px 0 20px 20px;
+                width: auto;
+                padding: 16px;
+                font-size: 18px;
+            }
         }
-    }
 
-    .reaction-bar-right {
-        position: absolute;
-        top: 170px; // Lösung für automatische Höhe finden
-        right: 100px;
+        .reaction-bar-right {
+            position: absolute;
+            top: 130px;
+            right: 100px;
+            
+            display: grid;
+            grid-template-columns: 100% 0%;
+            width: 36%;
 
-        img {
-            cursor: pointer;
-            padding: 5px;
+            img {
+                cursor: pointer;
+                padding: 5px;
+                background: transparent;
+                border: 0;
+                transform: translateX(-40px);
+                cursor: pointer;
 
-            &:hover {
-                background-color: #eeebeb;
-                border-radius: 10px;
+                &:focus {
+                    outline: 0;
+                }
+
+                &:hover {
+                    background-color: #eeebeb;
+                    border-radius: 10px;
+                }
             }
         }
     }

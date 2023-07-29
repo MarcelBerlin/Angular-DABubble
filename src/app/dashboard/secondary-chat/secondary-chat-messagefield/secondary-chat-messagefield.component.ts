@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class SecondaryChatMessagefieldComponent {
 
+  public emoji: string = "";
+
+  public isEmojiPickerVisible: boolean;
+
+  public addEmoji(event) {
+    this.emoji = `${this.emoji}${event.emoji.native}`;
+    this.isEmojiPickerVisible = false;
+    console.log(this.emoji);
+  }
+
+  constructor() { }
+
 }
