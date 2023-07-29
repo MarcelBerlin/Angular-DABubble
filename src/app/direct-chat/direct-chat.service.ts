@@ -147,10 +147,12 @@ export class DirectChatService {
         this.chatDataSet.id = this.dataService.directChat.id;
         this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
         this.dataService.updateUser();
+        console.log(this.dataService.directChat);
       }, 2000);
     }).catch(() => {
       console.log('Error saving chat data');
     });
+    console.log(this.dataService.directChat);
   }
 
 
@@ -174,6 +176,19 @@ export class DirectChatService {
     // console.log('directChat nach hinzufügen von new Chat', this.dataService.directChat);
     this.directMessage = '';
     this.dataService.updateChatDataChat();
+  }
+
+
+  partnerIndex = new DirectChatIndex();
+
+  ChatPartnerUpdate(){
+    let firstmember = this.chatDataSet.secondMember;
+    let secondMember = this.chatDataSet.firstMember;
+    // ownId: string; //Own user id
+    // partnerId: string; //User ID of chat partner
+    // lastTimeStamp: any; //last update of the chat
+    // directChatId: string; // ID of the Chat.
+    
   }
 }
 

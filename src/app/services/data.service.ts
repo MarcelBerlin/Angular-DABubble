@@ -44,7 +44,7 @@ export class DataService {
       });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
-        // console.log('logged in userData',this.loggedInUserData);
+        console.log('logged in userData',this.loggedInUserData);
       }
     });
   }
