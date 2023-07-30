@@ -1,11 +1,13 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { ChatService } from 'src/app/services/chat.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { VariablesService } from 'src/app/services/variables.service';
+
 
 @Component({
   selector: 'app-channel-selection',
@@ -16,10 +18,11 @@ export class ChannelSelectionComponent {
   hoveredMessagesMainChat: boolean = false;
   emptyChat: boolean = false;
   chatText: string = '';
-
-
+  messages$: any = []; 
+  messageData: any = [];  
 
   constructor(
+    private firestore: Firestore,
     private dcshService: DashboardComponentsShowHideService,
     private dialog: Dialog,
     public varService: VariablesService,
@@ -27,8 +30,21 @@ export class ChannelSelectionComponent {
     public messageService: MessageService,
     public chatService: ChatService,
   ) {
+    this.allMessages();
     // console.log(this.messageService.messageData.channelId);
   }
+
+ 
+  allMessages() {
+    const coll = collection(this.firestore, 'messages');
+    this.messages$ = collectionData(coll, { idField: 'id' });
+    this.messages$.subscribe((message: any) => {
+      this.messageData = message; 
+      console.log(this.messageData);   
+    });    
+  }
+ 
+
 
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.

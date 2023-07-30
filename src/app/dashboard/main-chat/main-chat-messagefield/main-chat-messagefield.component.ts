@@ -49,7 +49,8 @@ export class MainChatMessagefieldComponent {
 
   messageSend() {
     if (this.varService.mainChatHead == 0) {
-      this.messageService.addMessage();      
+      this.messageService.addMessage();   
+      this.messageService.messageText = '';
     }
     // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1) {

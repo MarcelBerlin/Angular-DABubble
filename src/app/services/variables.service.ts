@@ -6,8 +6,9 @@ import { Injectable } from '@angular/core';
 export class VariablesService {
   mainChatHead: number = 0;
   selectedUserToMessage: number = 0;
-  selectedUserDetailView: number = 0;
+  selectedUserDetailView: number = 0;  
   selectedChannel: number = 0;
+  selectedChannelId: string = '';
   conversationBetween: boolean = false;
   channelSelection: boolean = false;
   selectedArrayofSearch: string = '';
@@ -46,4 +47,6 @@ export class VariablesService {
   setVar(variableValue: string, newValue: number | string | boolean) {
     this[variableValue] = newValue;
   }
+
+  
 }

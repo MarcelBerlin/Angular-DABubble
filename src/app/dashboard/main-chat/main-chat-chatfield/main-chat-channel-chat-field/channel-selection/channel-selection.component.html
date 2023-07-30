@@ -28,19 +28,15 @@
         <div class="timeLineHead">Heute</div>
     </div> -->
   <div class="empty-chat-message" *ngIf="chatService.emptyChat">
-    <ng-container
-      *ngIf="
+    <ng-container *ngIf="
         dialogAdd.tagsData && dialogAdd.tagsData[varService.selectedChannel]
-      "
-    >
+      ">
       <h2>
         {{ dialogAdd.tagsData[varService.selectedChannel].name[0] }}
         {{ dialogAdd.tagsData[varService.selectedChannel].name.slice(1) }}
       </h2>
-      <span
-        >Du hast diesen Channel heute erstellt. Das ist der Anfang des
-        Channels</span
-      >
+      <span>Du hast diesen Channel heute erstellt. Das ist der Anfang des
+        Channels</span>
       <ng-container>
         <a>
           {{ dialogAdd.tagsData[varService.selectedChannel].name[0]
@@ -49,4 +45,16 @@
       </ng-container>
     </ng-container>
   </div>
+
+
+  <div class="message">
+    <!-- Zeige Nachrichten des ausgewählten Kanals an -->
+    <div *ngFor="let message of messageData">
+      <div *ngIf="message.channelId === this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
+        {{ message.content }}
+      </div>
+    </div>
+  </div>
+
+
 </div>

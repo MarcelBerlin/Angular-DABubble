@@ -3,7 +3,6 @@ import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDo
 import 'firebase/compat/firestore';
 
 
-
 interface Tag {
   id: string;
   name: string;
@@ -17,9 +16,8 @@ interface Tag {
 
 export class DialogAddService {
   newTags$: any;
-  tagsData: any=[];
+  tagsData: any = [];
   channelIndex: number;
-
 
 
   constructor(
@@ -31,7 +29,6 @@ export class DialogAddService {
       this.tagsData = tag;
       console.log(this.tagsData);
     });
-
   }
 
   tags: Tag[] = []; // neue Tags werden als JSON hinzugefügt
