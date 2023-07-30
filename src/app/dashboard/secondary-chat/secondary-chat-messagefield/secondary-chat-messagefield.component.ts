@@ -13,10 +13,11 @@ export class SecondaryChatMessagefieldComponent {
   public emoji: string = '';
   public chatMessages: any = [];
   public isEmojiPickerVisible: boolean;
-  public message: any = {};   // later ngModel
-  public content: any = '';
-  public actualTime: any = this.time.transform((new Date), 'dd.MM.yyyy hh:mm:ss');
-  public sentTime: string = this.actualTime // change in time of sending message
+  public content: any = 'MUSTERNACHRICHT';
+  public actualTime: any = this.time.transform((new Date), 'HH:mm:ss');
+  public sentTime: string = this.actualTime // change later to sending message time
+  public message: any = {};
+  public newMessages: number = 0;
 
   constructor(public getUser: DataService, public getMessage: MessageService, public time: DatePipe) {
     setTimeout(() => this.getMessages(), 500);
@@ -30,17 +31,16 @@ export class SecondaryChatMessagefieldComponent {
   }
 
   async getMessages() {
+      // *ngFor all messages from channel
     this.message = 
     {
-      name: this.getUser.loggedInUserData.name,
-      time: this.sentTime,
-      message: this.content,
-      img: this.getUser.loggedInUserData.img,
-      emoji: this.emoji
+      name: this.getUser.loggedInUserData.name, // user from channel
+      time: this.sentTime,                      // time from channel
+      message: this.content,                    // message from channel
+      img: this.getUser.loggedInUserData.img,   //  user-img from channel
+      emoji: this.emoji                         // reaction bar from channel
     };
+
     console.log('thread-mesage',this.message);
   };
-
-
-
 }
