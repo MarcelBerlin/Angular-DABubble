@@ -53,12 +53,13 @@
       </div>
 
       <div class="reaction-bar-left">
-        <img ngDefaultControl [(ngModel)]="emoji" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;"
+        <img ngDefaultControl [(ngModel)]="emoji" 
+          (click)="isEmojiPickerVisible = !isEmojiPickerVisible;"
           src="./../../../../assets/img/reaction.png">
-          <br/>
-          <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="isEmojiPickerVisible" 
+        <br/>
+        <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="isEmojiPickerVisible" 
           (emojiSelect)="addEmoji($event)" title="Choose your emoji">
-          </emoji-mart>
+        </emoji-mart>
       </div>
     </div>
   </div>
