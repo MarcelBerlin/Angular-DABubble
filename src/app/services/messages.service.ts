@@ -40,11 +40,10 @@ export class MessageService {
       this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
     this.varService.selectedChannelId = this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id;
     this.newMessage.userId = this.dataService.loggedInUserData.userId;
+    this.newMessage.userName = this.dataService.loggedInUserData.name;
+    this.newMessage.userImg = this.dataService.loggedInUserData.img;
     this.newMessage.content = this.messageText;
-    this.newMessage.timestamp = this.direktChatService.getActualTimeStamp();
-    console.log(
-      this.dialogAddService.tagsData[this.dialogAddService.channelIndex]
-    );
+    this.newMessage.timestamp = this.direktChatService.getActualTimeStamp();   
 
     const coll = collection(this.firestore, 'messages'); // definiert die Collection, worauf man zugreifen möchte
     await addDoc(coll, this.newMessage.toJSON()); // fügt eine neue Nachricht aus dem Textfeld in die Firebase Collection hinzu bzw. returned die Message in docId
@@ -52,9 +51,9 @@ export class MessageService {
     
   }
 
-  setSelectedChannel(channelId: string) {
-    // Suche nach dem Index des Kanals basierend auf der übergebenen channelId
-    this.dialogAddService.channelIndex = this.dialogAddService.tags.findIndex(tag => tag.id === channelId);
-  }
+  // setSelectedChannel(channelId: string) {
+  //   // Suche nach dem Index des Kanals basierend auf der übergebenen channelId
+  //   this.dialogAddService.channelIndex = this.dialogAddService.tags.findIndex(tag => tag.id === channelId);
+  // }
 
 }
