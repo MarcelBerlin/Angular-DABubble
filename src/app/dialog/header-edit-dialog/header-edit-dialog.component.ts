@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
-import { collection, doc, setDoc } from '@angular/fire/firestore';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -36,7 +35,6 @@ export class HeaderEditDialogComponent {
       this.loggedUserName = getUserData.loggedInUserData.name;
       this.loggedUserMail = getUserData.loggedInUserData.email;
     }, 1000);
-    console.log(this.getUserData);
   }
 
   saveUserChanges() {
@@ -44,10 +42,5 @@ export class HeaderEditDialogComponent {
     this.getUserData.loggedInUserData.email = this.newInputMail;
     this.getUserData.loggedInUserEmail = this.newInputMail;
     this.getUserData.updateUser();
-
-    // setTimeout(() => {
-    //   console.log('updated Firestore value = ', this.getUserData.loggedInUserData.email);
-    //   console.log('updated Firestore value = ', this.getUserData.loggedInUserData.name);
-    // }, 1000)
   }
 }
