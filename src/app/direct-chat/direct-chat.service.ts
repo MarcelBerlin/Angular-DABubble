@@ -24,6 +24,8 @@ export class DirectChatService {
   }
 
 
+
+  
   //start function
   /**
    * Searches for the chat ID between the logged-in user and the clicked user in the direct chats array.
@@ -38,16 +40,17 @@ export class DirectChatService {
     this.actualChatId = undefined;
     const directChatArray = this.dataService.loggedInUserData.directChats;
     if (directChatArray.length != 0) {
-      directChatArray.forEach((directChat: any) => {
+      directChatArray.forEach((directChat: DirectChatIndex) => {
         if (directChat.partnerId == clickedUserId) {
           this.actualChatId = directChat.directChatId;
           this.dataService.chatDataId = directChat.directChatId;
+          this.directChatIndex = directChat;
         }
       });
       
     }
     if (this.actualChatId != undefined) {
-      this.dataService.directChat = [];
+      // this.dataService.directChat = [];
       // console.log('chat found');
       this.loadChatDataSet(this.actualChatId);
     } else {
@@ -153,6 +156,7 @@ export class DirectChatService {
         this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
         this.dataService.updateUser();
         // console.log(this.dataService.directChat);
+        this.createNewDirectChatPartnerIndex();
       }, 2000);
     }).catch(() => {
       console.log('Error saving chat data');
@@ -182,17 +186,17 @@ export class DirectChatService {
     this.dataService.updateChatDataChat();
   }
 
-
+  //############################################################
   partnerIndex = new DirectChatIndex();
-
-  ChatPartnerUpdate(){
-    let firstmember = this.chatDataSet.secondMember;
-    let secondMember = this.chatDataSet.firstMember;
-    // ownId: string; //Own user id
-    // partnerId: string; //User ID of chat partner
-    // lastTimeStamp: any; //last update of the chat
-    // directChatId: string; // ID of the Chat.
-    
+// Update the partner user data with in the direct chats index.
+  createNewDirectChatPartnerIndex(){
+    this.partnerIndex.ownId = this.chatDataSet.secondMember;
+    this.partnerIndex.partnerId =  this.chatDataSet.firstMember;
+    this.partnerIndex.lastTimeStamp = this.directChatIndex.lastTimeStamp;
+    this.partnerIndex.directChatId = this.directChatIndex.directChatId;
+    let partnerDirectChatIndex = this.partnerIndex.toJSON();
+    console.log(partnerDirectChatIndex);
+    this.dataService.saveNewChatPartnerChatsIndex(partnerDirectChatIndex);
   }
 }
 

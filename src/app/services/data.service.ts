@@ -26,7 +26,7 @@ export class DataService {
     private firestore: Firestore,
   ) {
     this.subcribeUserData();
-    if (this.chatDataId != 'unset'){
+    if (this.chatDataId != 'unset') {
       // this.subcribeDirectChatData();
     }
   }
@@ -60,13 +60,13 @@ export class DataService {
   directChat: any = [];
 
 
-  subcribeDirectChatData(){
+  subcribeDirectChatData() {
     const coll = collection(this.firestore, 'directChats');
     const qData = doc(coll, this.chatDataId);
     this.directChat.subscribe((chat) => {
       this.directChat = chat;
-      console.log('directChat update',this.directChat);
-    }).error(err =>{
+      console.log('directChat update', this.directChat);
+    }).error(err => {
       console.log('direct Chat subscription error');
     });
   }
@@ -172,7 +172,7 @@ export class DataService {
 
   // funktionen für den direct chat service !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-  
+
 
 
   /**
@@ -233,14 +233,14 @@ export class DataService {
       console.log('Fehler beim Abrufen des Dokuments:', error.message);
     });
   }
-  
+
 
   /**
    * Updates the 'chat' field in a specific chat dataset document within the 'directChats' collection.
    * 
    * @returns {void}
   */
-  updateChatDataChat():void {
+  updateChatDataChat(): void {
     const qData = doc(this.firestore, 'directChats', this.chatDataId);
     const newData = {
       chat: this.directChat.chat
@@ -271,7 +271,37 @@ export class DataService {
   }
 
 
+  //#####################################################################
+  // save the chatPartner directChat index to the partner user.
+
+  saveNewChatPartnerChatsIndex(partnerChatIndex): void {
+    this.userData.forEach(user => {
+      if (user.userId === partnerChatIndex.ownId) {
+        user.directChats.push(partnerChatIndex);
+        const qData = doc(this.firestore, 'users', user.userId);
+        const newData = {
+          directChats: user.directChats,
+        };
+        updateDoc(qData, newData).then(() => {
+          console.log('partner chatIndex set');
+        }).catch((error) => {
+          
+        })
+      }
+      
+    });
+    
+    
+  }
+
+
+
+
+
+
 }
+
+
 
 
 
