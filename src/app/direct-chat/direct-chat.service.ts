@@ -20,7 +20,7 @@ export class DirectChatService {
   constructor(
     private dataService: DataService,
   ) {
-    this.getActualTimeStamp();
+    this.actualChatId = undefined;
   }
 
 
@@ -34,21 +34,25 @@ export class DirectChatService {
    * @returns {void}
    */
   getChatId(clickedUserId: string): void {
+    // console.log('clickedUserId: ',clickedUserId);
     this.actualChatId = undefined;
     const directChatArray = this.dataService.loggedInUserData.directChats;
     if (directChatArray.length != 0) {
       directChatArray.forEach((directChat: any) => {
         if (directChat.partnerId == clickedUserId) {
           this.actualChatId = directChat.directChatId;
+          this.dataService.chatDataId = directChat.directChatId;
         }
       });
+      
     }
     if (this.actualChatId != undefined) {
       this.dataService.directChat = [];
-      console.log('chat found');
+      // console.log('chat found');
       this.loadChatDataSet(this.actualChatId);
     } else {
-      console.log('chat not found');
+      // console.log('chat not found');
+      this.actualChatId = undefined;
       this.createNewChatDataSet(clickedUserId);
     }
   }
@@ -62,7 +66,7 @@ export class DirectChatService {
   */
   loadChatDataSet(chatId): void {
     this.dataService.directChat = [];
-    this.dataService.chatDataId = chatId;
+    // this.dataService.chatDataId = chatId;
     this.dataService.getChatDataSets(chatId);
     // this.dataService.subcribeDirectChatData();
   }
@@ -145,14 +149,14 @@ export class DirectChatService {
     this.dataService.saveChatDataSet(this.chatDataSet).then(() => {
       setTimeout(() => {
         this.chatDataSet.id = this.dataService.directChat.id;
+        this.dataService.chatDataId = this.dataService.directChat.id;
         this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
         this.dataService.updateUser();
-        console.log(this.dataService.directChat);
+        // console.log(this.dataService.directChat);
       }, 2000);
     }).catch(() => {
       console.log('Error saving chat data');
     });
-    console.log(this.dataService.directChat);
   }
 
 

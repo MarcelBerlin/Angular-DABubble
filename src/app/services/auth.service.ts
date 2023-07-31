@@ -72,6 +72,7 @@ export class AuthService {
     return this.afs.signOut().then(() => {
       this.dataService.loggedInUserData.online = false;
       this.dataService.updateUser();
+      this.dataService.directChat = [];
       // this.clearService.clearCache();
       localStorage.removeItem('user');
       this.router.navigate(['']);

@@ -44,7 +44,7 @@ export class DataService {
       });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
-        console.log('logged in userData',this.loggedInUserData);
+        // console.log('logged in userData',this.loggedInUserData);
       }
     });
   }
@@ -181,6 +181,7 @@ export class DataService {
    * @returns {Promise<void>} A promise that resolves when the chat dataset is saved successfully.
    */
   async saveChatDataSet(chatDataSet): Promise<void> {
+    // console.log('Saving chat dataset: ', chatDataSet);
     const coll = collection(this.firestore, 'directChats');
     try {
       let docId = await addDoc(coll, chatDataSet.toJSON());
@@ -199,6 +200,7 @@ export class DataService {
   * @returns {void}
   */
   updateChatDataId(chatDataSet, docId) {
+    // console.log('updated chat id: ',docId.id);
     if (chatDataSet.id == 'unset') {
       const qData = doc(this.firestore, 'directChats', docId.id);
       const newData = {
@@ -207,7 +209,7 @@ export class DataService {
       updateDoc(qData, newData).then(() => {
         this.chatDataId = docId.id;
         this.getChatDataSets(this.chatDataId);
-        console.log('chatDataId:', this.chatDataId);
+        // console.log('chatDataId:', this.chatDataId);
       }).catch((error) => {
         this.chatDataId = 'unset';
       })
@@ -226,7 +228,7 @@ export class DataService {
     const qData = doc(coll, id);
     getDoc(qData).then((chatDataSet) => {
       this.directChat = chatDataSet.data();
-      console.log(this.directChat);
+      // console.log(this.directChat);
     }).catch((error) => {
       console.log('Fehler beim Abrufen des Dokuments:', error.message);
     });
