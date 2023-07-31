@@ -56,7 +56,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ChannelSelectionComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
 import { LoginHeaderComponent } from './auth-features/login-header/login-header.component';
 import { SecondaryChatInputfieldComponent } from './dashboard/secondary-chat/secondary-chat-inputfield/secondary-chat-inputfield.component';
-import { PickerModule } from '@ctrl/ngx-emoji-mart';
+// import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { DatePipe } from '@angular/common';
 
 
@@ -111,7 +111,7 @@ import { DatePipe } from '@angular/common';
     ReactiveFormsModule,
     MatTreeModule,
     MatAutocompleteModule,
-    PickerModule,
+    // PickerModule,
     // DatePipe,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
