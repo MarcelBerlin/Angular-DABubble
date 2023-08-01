@@ -13,10 +13,13 @@
       <div class="time">{{ message.time }} </div>
 
       <div class="message-content-left">
-        {{ message.message }}
+         <span> {{ message.message }} </span>
       </div>
 
       <div class="reaction-bar-left">
+        <div *ngIf="reaction" class="reactions">
+          <span>{{ newReaction }} {{ reactionNumber }}</span>
+        </div> 
         <img ngDefaultControl name="emoji" [(ngModel)]="emoji" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;"
           src="./../../../../assets/img/reaction.png">
         <br />
@@ -28,7 +31,7 @@
   </div>
 
   <div class="new-answers">
-    <p> {{ newMessages }} Antwort(en)</p>   
+    <p> {{ newMessages }} Antwort(en)</p>
     <img src="./../../../../assets/img/line.png">
   </div>
 

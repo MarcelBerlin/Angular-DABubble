@@ -48,14 +48,20 @@
                 border-radius: 0 20px 20px 20px;
                 width: auto;
                 padding: 16px;
-                font-size: 18px;
+                
+                span {
+                    font-size: 16px;
+                }
             }
         }
 
         .reaction-bar-left {
             position: absolute;
             top: 110px;
-            left: 100px;
+            // left: 40px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
 
             img {
                 cursor: pointer;
@@ -66,9 +72,17 @@
                     border-radius: 10px;
                 }
             }
+
+            .reactions {
+                margin-right: 20px;
+                border: 1px solid #adb0d9;
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                padding: 3px 15px;
+            }
         }
     }
-
 
     .new-answers {
         color: #ADB0D9;
