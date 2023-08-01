@@ -20,7 +20,7 @@ export class ChannelSelectionComponent {
   chatText: string = '';
   messages$: any = []; 
   messageData: any = [];  
-
+ 
   constructor(
     private firestore: Firestore,
     private dcshService: DashboardComponentsShowHideService,
@@ -31,7 +31,7 @@ export class ChannelSelectionComponent {
     public chatService: ChatService,
   ) {
     this.allMessages();
-    // console.log(this.messageService.messageData.channelId);
+    
   }
 
  

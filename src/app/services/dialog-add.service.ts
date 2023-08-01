@@ -17,7 +17,7 @@ interface Tag {
 export class DialogAddService {
   newTags$: any;
   tagsData: any = [];
-  channelIndex: number;
+  channelIndex: number = 0;
 
 
   constructor(
@@ -29,6 +29,7 @@ export class DialogAddService {
       this.tagsData = tag;
       console.log(this.tagsData);
     });
+
   }
 
   tags: Tag[] = []; // neue Tags werden als JSON hinzugefügt
@@ -69,6 +70,7 @@ export class DialogAddService {
     }
   }
   
+ 
 
   
 
