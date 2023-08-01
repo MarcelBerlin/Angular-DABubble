@@ -1,7 +1,9 @@
 import { Component, ElementRef } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { MessageService } from 'src/app/services/messages.service';
-import { DatePipe, getLocaleExtraDayPeriodRules } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { DialogUserReactionsComponent } from 'src/app/dialog/dialog-user-reactions/dialog-user-reactions.component';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-secondary-chat-messagefield',
@@ -23,8 +25,11 @@ export class SecondaryChatMessagefieldComponent {
   public reactionNumber: any = 0;
 
 
-  constructor(public getUser: DataService, public getMessage: MessageService, public time: DatePipe) {
-    setTimeout(() => this.getMessages(), 800);
+  constructor(public getUser: DataService,
+    public getMessage: MessageService,
+    public time: DatePipe,
+    public dialog: MatDialog) {
+    setTimeout(() => this.getMessages(), 1000);
   }
 
 
@@ -48,6 +53,15 @@ export class SecondaryChatMessagefieldComponent {
   //   }
   // }
 
+  userReaction() {
+    this.dialog.open(DialogUserReactionsComponent, {
+      // data: {
+      //   this.getUser.loggedInUserData.name: this.emoji,  // Variable für emoji gekoppelt mit user
+      //   this.getUser.loggedInUserData.name: this.emoji,  // Variable für emoji gekoppelt mit user
+      //   this.getUser.loggedInUserData.name: this.emoji   // Variable für emoji gekoppelt mit user
+      // },
+    });
+  }
 
   async getMessages() {
     // *ngFor all messages from channel
@@ -60,6 +74,6 @@ export class SecondaryChatMessagefieldComponent {
       emoji: this.emoji                         // reaction bar from channel
     };
 
-    console.log('thread-mesage', this.message);
+    // console.log('thread-mesage', this.message);
   };
 }

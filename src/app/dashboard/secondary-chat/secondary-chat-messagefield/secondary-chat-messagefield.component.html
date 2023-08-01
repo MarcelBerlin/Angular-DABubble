@@ -17,9 +17,10 @@
       </div>
 
       <div class="reaction-bar-left">
-        <div *ngIf="reaction" class="reactions">
-          <span>{{ newReaction }} {{ reactionNumber }}</span>
-        </div> 
+        <div *ngIf="reaction" mat-button (click)="userReaction()" class="reactions">
+          <span>{{ newReaction }}</span>
+          <span>{{ reactionNumber }}</span>
+        </div>
         <img ngDefaultControl name="emoji" [(ngModel)]="emoji" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;"
           src="./../../../../assets/img/reaction.png">
         <br />

@@ -58,6 +58,7 @@ import { LoginHeaderComponent } from './auth-features/login-header/login-header.
 import { SecondaryChatInputfieldComponent } from './dashboard/secondary-chat/secondary-chat-inputfield/secondary-chat-inputfield.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { DatePipe } from '@angular/common';
+import { DialogUserReactionsComponent } from './dialog/dialog-user-reactions/dialog-user-reactions.component';
 
 
 @NgModule({
@@ -95,6 +96,7 @@ import { DatePipe } from '@angular/common';
     ChannelSelectionComponent,
     LoginHeaderComponent,
     SecondaryChatInputfieldComponent,
+    DialogUserReactionsComponent,
 
   ],
   imports: [

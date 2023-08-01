@@ -62,6 +62,7 @@
             display: flex;
             align-items: center;
             padding-left: 10px;
+            gap: 5px;
 
             img {
                 cursor: pointer;
@@ -80,6 +81,14 @@
                 display: flex;
                 justify-content: center;
                 padding: 3px 15px;
+                cursor: pointer;
+            }
+
+            .emoji-mart {
+                z-index: 1;
+                position: absolute;
+                left: -145px;
+                top: 35px;
             }
         }
     }
