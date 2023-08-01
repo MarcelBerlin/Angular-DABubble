@@ -21,6 +21,8 @@ export class DataService {
 
   forgotPasswordMenu: boolean = false;
 
+  directChatActive: boolean = false;
+
 
   constructor(
     private firestore: Firestore,
@@ -45,6 +47,10 @@ export class DataService {
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
         // console.log('logged in userData',this.loggedInUserData);
+      }
+      if (this.directChatActive){
+        console.log('reload chatdataSets');
+        this.getChatDataSets(this.chatDataId);
       }
     });
   }
@@ -293,6 +299,20 @@ export class DataService {
     
     
   }
+
+
+  // updateDirectChatIndex(newDirectChatIndex): void {
+  //   const qData = doc(this.firestore, 'user', this.loggedInUserData.userId);
+  //   const newData = {
+  //     directChats: this.directChat.chat
+  //   };
+  //   updateDoc(qData, newData).then(() => {
+  //     this.getChatDataSets(this.chatDataId);
+  //   }).catch((error) => {
+  //     this.chatDataId = this.chatDataId;
+  //     console.log('Fehler beim Speichern, UpdateChatData');
+  //   })
+  // }
 
 
 

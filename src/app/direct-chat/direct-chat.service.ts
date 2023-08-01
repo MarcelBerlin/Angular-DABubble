@@ -4,10 +4,18 @@ import { DirectChatIndex } from './models/direct-chat-index';
 import { ChatDataSet } from './models/chat-data-set';
 import { DataService } from '../services/data.service';
 import { ActualChat } from './models/actual-chat.class';
+import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
+import { Subscription } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
 export class DirectChatService {
+  private documentSubscription: Subscription | null = null;
+  private docRef;
+  subscibeSet = false;
+
+
   actualChatId: string;
   // directChat: any[] = [];
   directChatIndex = new DirectChatIndex();
@@ -19,13 +27,34 @@ export class DirectChatService {
 
   constructor(
     private dataService: DataService,
+    private firestore: Firestore
   ) {
     this.actualChatId = undefined;
   }
 
+  // private subscribeToDocumentChanges() {
+  //   this.subscibeSet = true;
+  //   const coll = collection(this.firestore, 'users');
+  //   this.docRef = doc(coll, this.dataService.loggedInUserData.userId);
+  //   this.subscribeToDocumentChanges();
+  //   this.documentSubscription = this.docRef.valueChanges().subscribe(
+  //     (data) => {
+  //       // Hier kannst du auf Änderungen der Dokumentvariablen reagieren
+  //       // 'data' enthält die aktuellen Daten des Dokuments
+  //       this.loadChatDataSet(this.actualChatId);
+  //       console.log('user Data Changed');
+  //       console.log(data);
+  //     },
+  //     (error) => {
+  //       console.error('Fehler beim Abonnieren des Dokuments:', error);
+  //     }
+  //   );
+  // }
 
 
-  
+
+
+
   //start function
   /**
    * Searches for the chat ID between the logged-in user and the clicked user in the direct chats array.
@@ -47,7 +76,7 @@ export class DirectChatService {
           this.directChatIndex = directChat;
         }
       });
-      
+
     }
     if (this.actualChatId != undefined) {
       // this.dataService.directChat = [];
@@ -72,6 +101,8 @@ export class DirectChatService {
     // this.dataService.chatDataId = chatId;
     this.dataService.getChatDataSets(chatId);
     // this.dataService.subcribeDirectChatData();
+    // if(!this.subscibeSet) this.subscribeToDocumentChanges();
+    this.dataService.directChatActive = true;
   }
 
 
@@ -157,6 +188,7 @@ export class DirectChatService {
         this.dataService.updateUser();
         // console.log(this.dataService.directChat);
         this.createNewDirectChatPartnerIndex();
+        this.dataService.directChatActive = true;
       }, 2000);
     }).catch(() => {
       console.log('Error saving chat data');
@@ -184,19 +216,36 @@ export class DirectChatService {
     // console.log('directChat nach hinzufügen von new Chat', this.dataService.directChat);
     this.directMessage = '';
     this.dataService.updateChatDataChat();
+
+    this.dataService.directChatActive = true;
+    this.updateDirectChatIndex();
+    
+  }
+
+  updateDirectChatIndex(){
+    this.dataService.directChat.timeStamp = this.getActualTimeStamp();
+    // this.dataService.loggedInUserData.directChats.
+    this.dataService.loggedInUserData.directChats.forEach(element => {
+      if(element.directChatId == this.actualChatId){
+        element.lastTimeStamp = this.getActualTimeStamp();
+      }
+    });
+    this.dataService.updateUser();
   }
 
   //############################################################
   partnerIndex = new DirectChatIndex();
-// Update the partner user data with in the direct chats index.
-  createNewDirectChatPartnerIndex(){
+  // Update the partner user data with in the direct chats index.
+  createNewDirectChatPartnerIndex() {
     this.partnerIndex.ownId = this.chatDataSet.secondMember;
-    this.partnerIndex.partnerId =  this.chatDataSet.firstMember;
+    this.partnerIndex.partnerId = this.chatDataSet.firstMember;
     this.partnerIndex.lastTimeStamp = this.directChatIndex.lastTimeStamp;
     this.partnerIndex.directChatId = this.directChatIndex.directChatId;
     let partnerDirectChatIndex = this.partnerIndex.toJSON();
     console.log(partnerDirectChatIndex);
     this.dataService.saveNewChatPartnerChatsIndex(partnerDirectChatIndex);
+
+    // if(!this.subscibeSet) this.subscribeToDocumentChanges();
   }
 }
 
