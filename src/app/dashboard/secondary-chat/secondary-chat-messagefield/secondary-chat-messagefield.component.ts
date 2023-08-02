@@ -6,7 +6,6 @@ import { DialogUserReactionsComponent } from 'src/app/dialog/dialog-user-reactio
 import { MatDialog, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ChatService } from 'src/app/services/chat.service';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-import { Observable, Subscription } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
 
 @Component({
@@ -33,6 +32,7 @@ export class SecondaryChatMessagefieldComponent {
     public messageService: MessageService,
     public chatService: ChatService,
     public dialog: MatDialog) {
+
     setTimeout(() => {
       this.getMessages()
     }, 1000);
@@ -47,8 +47,9 @@ export class SecondaryChatMessagefieldComponent {
   //   }
   // }
 
-  userReaction() {
-    this.dialog.open(DialogUserReactionsComponent, { //dialog für user, die mit emojis reagiert haben
+
+  userReaction() { 
+    this.dialog.open(DialogUserReactionsComponent, { // dialog für user, die mit emojis reagiert haben
       // data: {
       //   this.getUser.loggedInUserData.name: this.emoji,  // Variable für emoji gekoppelt mit user
       //   this.getUser.loggedInUserData.name: this.emoji,  // Variable für emoji gekoppelt mit user
@@ -58,35 +59,46 @@ export class SecondaryChatMessagefieldComponent {
   }
 
 
+  /**
+   * subscribes messages from firebase from channel
+   */
   getMessages() {
-    //   const coll = collection(this.firestore, 'messages');
-    //   this.subbedMessages$ = collectionData(coll, { idField: 'id' });
-    //   this.subbedMessages$.subscribe((newMessage: any) => {
-    //     this.getMessageDatas(newMessage);
-
-    //   });
+    const coll = collection(this.firestore, 'messages');
+    this.subbedMessages$ = collectionData(coll, { idField: 'id' });
+    this.subbedMessages$.subscribe((newMessage: any) => {
+      this.getMessageDatas(newMessage);
+    });
   }
 
 
-  // messageJson() {
-  //   return this.message =
+  // messageJson() {  
+  //   this.message =
   //   {
   //     name: this.userName,
   //     time: this.sentTime,
   //     message: this.content,
   //     img: this.userImg,
-  //     emoji: this.emoji
+  //     emoji: this.app.emoji
   //   };
   // }
 
 
+  /**
+   * get messages from channel with for-loop for hmtl code
+   * 
+   * @param newMessage subscribed messages from channel
+   */
   getMessageDatas(newMessage) {
-    //   for (let i = 0; i < newMessage.length; i++) {
-    //     const forMessages = newMessage[i];
-    //     this.sentTime = forMessages.timestamp.clockString;
-    //     this.content = forMessages.content;
-    //     this.userName = forMessages.userName;
-    //     this.userImg = forMessages.userImg;
-    //   }
+    for (let i = 0; i < newMessage.length; i++) {
+      const forMessages = newMessage[i];
+      // this.sentTime = forMessages.timestamp.clockString;
+      this.content = forMessages.content;
+      // this.userName = forMessages.userName;
+      // this.userImg = forMessages.userImg;
+
+      // setTimeout(() => {
+      //   console.log('messagecontent in thread = ',forMessages.content);
+      // }, 1500);
+    }
   }
 }

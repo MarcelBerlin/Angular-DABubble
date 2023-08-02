@@ -4,21 +4,21 @@
   <div class="full-message-left"> <!-- ngIf letzte nachricht, dann kein border-bottom-->
 
     <div class="avatar-left">
-      <img src="{{ message.img }}">
+      <img src="{{ this.userImg }}">
     </div>
 
     <div class="message-details-left">
 
-      <div class="name"> {{ message.name }} </div>
-      <div class="time">{{ message.time }} </div>
+      <div class="name"> {{ this.userName }} </div>
+      <div class="time">{{ this.sentTime }} </div>
 
-      <div class="message-content-left">
-        <span> {{ message.content }} </span>
+      <div class="message-content-left" > <!-- *ngFor="let messages of this.content" -->
+        <span> {{ this.content }} </span>
       </div>
 
-      <div class="reaction-bar-left">
+      <div  class="reaction-bar-left"> <!-- ngFor-->
         <div *ngIf="app.reactionBoo" mat-button (click)="userReaction()" class="reactions">
-          <span>{{ app.newReaction }}</span>
+          <span>{{ app.newReaction }}</span>  <!-- emoji -->
           <span>{{ app.reactionNumber }}</span>
         </div>
         <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"

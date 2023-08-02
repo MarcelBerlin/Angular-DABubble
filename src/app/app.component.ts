@@ -24,9 +24,10 @@ export class AppComponent {
 
   public addEmoji(event) {
     this.reactionBoo = true;
-    this.newReaction += `${this.emoji}${event.emoji.native}`;
+    this.newReaction +=`${this.emoji}${event.emoji.native}`;
     this.isEmojiPickerVisible = false;
     this.reactionNumber++;
+    console.log(this.newReaction);
     
     // Emoji dem User zuordnen.
     // if (this.reactionNumber > 1) {
