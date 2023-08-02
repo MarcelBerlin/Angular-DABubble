@@ -2,7 +2,7 @@ export class Messages {
 
     channelId: string; 
     userName: string; 
-    userImg: string; 
+    userImg: any; 
     userId: string; 
     content: string; 
     timestamp: any;  

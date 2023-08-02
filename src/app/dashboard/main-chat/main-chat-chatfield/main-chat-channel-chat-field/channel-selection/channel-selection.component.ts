@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
+import { DirectChatService } from 'src/app/direct-chat/direct-chat.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
@@ -26,7 +27,8 @@ export class ChannelSelectionComponent {
     private dcshService: DashboardComponentsShowHideService,
     private dialog: Dialog,
     public varService: VariablesService,
-    public dialogAdd: DialogAddService,
+    public dialogAdd: DialogAddService,   
+    public directChatService: DirectChatService,
     public messageService: MessageService,
     public chatService: ChatService,
   ) {

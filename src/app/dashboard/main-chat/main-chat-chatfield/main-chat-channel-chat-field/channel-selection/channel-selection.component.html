@@ -50,11 +50,11 @@
   <div class="message">
     <!-- Zeige Nachrichten des ausgewählten Kanals an -->
     <div *ngFor="let message of messageData">
-      <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">                 
+      <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
         <b>{{ message.userName }}</b><br>
         {{ message.content }}
       </div>
     </div>
   </div>
-  <!-- *ngIf="messageData.channelId" -->
+
 </div>
