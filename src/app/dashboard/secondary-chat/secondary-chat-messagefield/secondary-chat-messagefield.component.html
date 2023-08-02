@@ -13,19 +13,19 @@
       <div class="time">{{ message.time }} </div>
 
       <div class="message-content-left">
-         <span> {{ message.content }} </span>
+        <span> {{ message.content }} </span>
       </div>
 
       <div class="reaction-bar-left">
-        <div *ngIf="app.reaction" mat-button (click)="userReaction()" class="reactions">
+        <div *ngIf="app.reactionBoo" mat-button (click)="userReaction()" class="reactions">
           <span>{{ app.newReaction }}</span>
           <span>{{ app.reactionNumber }}</span>
         </div>
-        <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji" (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;"
-          src="./../../../../assets/img/reaction.png">
+        <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
+          (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;" src="./../../../../assets/img/reaction.png">
         <br />
-        <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible" (emojiSelect)="app.addEmoji($event)"
-          title="Choose your emoji">
+        <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
+          (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
         </emoji-mart>
       </div>
     </div>

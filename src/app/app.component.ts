@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-root',
@@ -8,7 +13,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Angular-DABubble';
 
-  public reaction: boolean = false;
+  public reactionBoo: boolean = false;
   public reactionNumber: any = 0;
   public emoji: string = '';
   public isEmojiPickerVisible: boolean;
@@ -18,10 +23,11 @@ export class AppComponent {
   constructor() { }
 
   public addEmoji(event) {
-    this.reaction = true;
+    this.reactionBoo = true;
     this.newReaction += `${this.emoji}${event.emoji.native}`;
     this.isEmojiPickerVisible = false;
     this.reactionNumber++;
+    
     // Emoji dem User zuordnen.
     // if (this.reactionNumber > 1) {
     //   this.deleteDoubledEmojis(this.newReaction);

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { SecondaryChatMessagefieldComponent } from 'src/app/dashboard/secondary-chat/secondary-chat-messagefield/secondary-chat-messagefield.component';
 import { DataService } from 'src/app/services/data.service';
 
@@ -9,5 +10,5 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class DialogUserReactionsComponent {
 
-  constructor(public getUser: DataService) { }
+  constructor(public getUser: DataService, public app: AppComponent) { }
 }
