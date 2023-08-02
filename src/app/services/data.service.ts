@@ -51,7 +51,7 @@ export class DataService {
       if (this.directChatActive){
         console.log('reload chatdataSets');
         this.getChatDataSets(this.chatDataId);
-        this.directChatActive = false;
+        // this.directChatActive = false;
       }
     });
   }
@@ -237,6 +237,7 @@ export class DataService {
     getDoc(qData).then((chatDataSet) => {
       this.directChat = chatDataSet.data();
       // console.log(this.directChat);
+      this.directChatActive = true;
     }).catch((error) => {
       console.log('Fehler beim Abrufen des Dokuments:');
     });

@@ -38,6 +38,7 @@ export class DirectChatService {
    */
   getChatId(clickedUserId: string): void {
     // console.log('clickedUserId: ',clickedUserId);
+    this.dataService.directChatActive = false;
     this.actualChatId = undefined;
     const directChatArray = this.dataService.loggedInUserData.directChats;
     if (directChatArray.length != 0) {
