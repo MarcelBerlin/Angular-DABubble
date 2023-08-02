@@ -3,7 +3,10 @@ import { DataService } from 'src/app/services/data.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { DatePipe } from '@angular/common';
 import { DialogUserReactionsComponent } from 'src/app/dialog/dialog-user-reactions/dialog-user-reactions.component';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { ChatService } from 'src/app/services/chat.service';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-secondary-chat-messagefield',
@@ -13,23 +16,29 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dia
 export class SecondaryChatMessagefieldComponent {
 
   public emoji: string = '';
-  public chatMessages: any = [];
   public isEmojiPickerVisible: boolean;
   public content: any = 'MUSTERNACHRICHT';
-  public actualTime: any = this.time.transform((new Date), 'HH:mm:ss');
-  public sentTime: any = 13 + '.' + 12 + 'Uhr' // change later to sending message time
+  public sentTime: any = '';
   public message: any = {};
+  public userName: string = '';
+  public userImg: string = '';
   public newMessages: number = 0;
   public newReaction: any = [];
   public reaction: boolean = false;
   public reactionNumber: any = 0;
+  private subbedMessages$: any = [];
 
 
   constructor(public getUser: DataService,
+    public firestore: Firestore,
     public getMessage: MessageService,
     public time: DatePipe,
+    public messageService: MessageService,
+    public chatService: ChatService,
     public dialog: MatDialog) {
-    setTimeout(() => this.getMessages(), 1000);
+    setTimeout(() => {
+      this.getMessages()
+    }, 1000);
   }
 
 
@@ -37,7 +46,7 @@ export class SecondaryChatMessagefieldComponent {
     this.reaction = true;
     this.newReaction += `${this.emoji}${event.emoji.native}`;
     this.isEmojiPickerVisible = false;
-    this.reactionNumber ++;
+    this.reactionNumber++;
     // Emoji dem User zuordnen.
     // if (this.reactionNumber > 1) {
     //   this.deleteDoubledEmojis(this.newReaction);
@@ -54,7 +63,7 @@ export class SecondaryChatMessagefieldComponent {
   // }
 
   userReaction() {
-    this.dialog.open(DialogUserReactionsComponent, {
+    this.dialog.open(DialogUserReactionsComponent, { //dialog für user, die mit emojis reagiert haben
       // data: {
       //   this.getUser.loggedInUserData.name: this.emoji,  // Variable für emoji gekoppelt mit user
       //   this.getUser.loggedInUserData.name: this.emoji,  // Variable für emoji gekoppelt mit user
@@ -63,17 +72,36 @@ export class SecondaryChatMessagefieldComponent {
     });
   }
 
-  async getMessages() {
-    // *ngFor all messages from channel
-    this.message =
-    {
-      name: this.getUser.loggedInUserData.name, // user from channel
-      time: this.sentTime,                      // time from channel
-      message: this.content,                    // message from channel
-      img: this.getUser.loggedInUserData.img,   //  user-img from channel
-      emoji: this.emoji                         // reaction bar from channel
-    };
 
-    // console.log('thread-mesage', this.message);
-  };
+  getMessages() {
+    //   const coll = collection(this.firestore, 'messages');
+    //   this.subbedMessages$ = collectionData(coll, { idField: 'id' });
+    //   this.subbedMessages$.subscribe((newMessage: any) => {
+    //     this.getMessageDatas(newMessage);
+
+    //   });
+  }
+
+
+  // messageJson() {
+  //   return this.message =
+  //   {
+  //     name: this.userName,
+  //     time: this.sentTime,
+  //     message: this.content,
+  //     img: this.userImg,
+  //     emoji: this.emoji
+  //   };
+  // }
+
+
+  getMessageDatas(newMessage) {
+    //   for (let i = 0; i < newMessage.length; i++) {
+    //     const forMessages = newMessage[i];
+    //     this.sentTime = forMessages.timestamp.clockString;
+    //     this.content = forMessages.content;
+    //     this.userName = forMessages.userName;
+    //     this.userImg = forMessages.userImg;
+    //   }
+  }
 }
