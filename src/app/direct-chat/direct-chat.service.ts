@@ -11,13 +11,7 @@ import { Subscription } from 'rxjs';
   providedIn: 'root'
 })
 export class DirectChatService {
-  private documentSubscription: Subscription | null = null;
-  private docRef;
-  subscibeSet = false;
-
-
   actualChatId: string;
-  // directChat: any[] = [];
   directChatIndex = new DirectChatIndex();
   timeStamp: TimeStamp = new TimeStamp();
   chatDataSet: ChatDataSet = new ChatDataSet();
@@ -32,29 +26,7 @@ export class DirectChatService {
     this.actualChatId = undefined;
   }
 
-  // private subscribeToDocumentChanges() {
-  //   this.subscibeSet = true;
-  //   const coll = collection(this.firestore, 'users');
-  //   this.docRef = doc(coll, this.dataService.loggedInUserData.userId);
-  //   this.subscribeToDocumentChanges();
-  //   this.documentSubscription = this.docRef.valueChanges().subscribe(
-  //     (data) => {
-  //       // Hier kannst du auf Änderungen der Dokumentvariablen reagieren
-  //       // 'data' enthält die aktuellen Daten des Dokuments
-  //       this.loadChatDataSet(this.actualChatId);
-  //       console.log('user Data Changed');
-  //       console.log(data);
-  //     },
-  //     (error) => {
-  //       console.error('Fehler beim Abonnieren des Dokuments:', error);
-  //     }
-  //   );
-  // }
-
-
-
-
-
+  
   //start function
   /**
    * Searches for the chat ID between the logged-in user and the clicked user in the direct chats array.
@@ -80,10 +52,12 @@ export class DirectChatService {
     }
     if (this.actualChatId != undefined) {
       // this.dataService.directChat = [];
-      // console.log('chat found');
+      console.log('chat found');
       this.loadChatDataSet(this.actualChatId);
+      console.log('load directChat: ', this.actualChatId);
     } else {
-      // console.log('chat not found');
+      console.log('chat not found');
+      // this.directChatIndex = new DirectChatIndex();// hinzugefügt
       this.actualChatId = undefined;
       this.createNewChatDataSet(clickedUserId);
     }
@@ -98,11 +72,11 @@ export class DirectChatService {
   */
   loadChatDataSet(chatId): void {
     this.dataService.directChat = [];
-    // this.dataService.chatDataId = chatId;
+    // this.dataService.chatDataId = chatId; // wieder aktiviert
     this.dataService.getChatDataSets(chatId);
     // this.dataService.subcribeDirectChatData();
     // if(!this.subscibeSet) this.subscribeToDocumentChanges();
-    this.dataService.directChatActive = true;
+    // this.dataService.directChatActive = true;
   }
 
 
@@ -160,6 +134,7 @@ export class DirectChatService {
    * @returns {DirectChatJson} A DirectChatJson object representing the direct chat details.
    */
   createDirectChatIndex(clickedUserId: string): Object {
+    this.directChatIndex = new DirectChatIndex();
     this.directChatIndex.ownId = this.dataService.getUserID();
     this.directChatIndex.partnerId = clickedUserId;
     this.directChatIndex.lastTimeStamp = this.getActualTimeStamp();
@@ -175,20 +150,18 @@ export class DirectChatService {
    * @returns {void} 
    */
   createNewChatDataSet(clickedUserId: string): void {
-    // this.chatDataSet.id = 'unknown';
     this.chatDataSet.lastTimeStamp = this.getActualTimeStamp();
     this.chatDataSet.firstMember = this.dataService.loggedInUserData.userId;
     this.chatDataSet.secondMember = clickedUserId;
     this.chatDataSet.chat = [];
+    this.chatDataSet.id = 'unset';//hinzugefügt wichtig, da sonst nicht die Id aktualisiert wird.
     this.dataService.saveChatDataSet(this.chatDataSet).then(() => {
       setTimeout(() => {
         this.chatDataSet.id = this.dataService.directChat.id;
         this.dataService.chatDataId = this.dataService.directChat.id;
-        this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(clickedUserId));
+        this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(this.chatDataSet.secondMember));
         this.dataService.updateUser();
-        // console.log(this.dataService.directChat);
-        this.createNewDirectChatPartnerIndex();
-        this.dataService.directChatActive = true;
+        this.createNewDirectChatPartnerIndex(); 
       }, 2000);
     }).catch(() => {
       console.log('Error saving chat data');
@@ -217,19 +190,20 @@ export class DirectChatService {
     this.directMessage = '';
     this.dataService.updateChatDataChat();
 
-    this.dataService.directChatActive = true;
+    // this.dataService.directChatActive = true;
     this.updateDirectChatIndex();
-    
+
   }
 
-  updateDirectChatIndex(){
+  updateDirectChatIndex() {
     this.dataService.directChat.timeStamp = this.getActualTimeStamp();
     // this.dataService.loggedInUserData.directChats.
     this.dataService.loggedInUserData.directChats.forEach(element => {
-      if(element.directChatId == this.actualChatId){
+      if (element.directChatId == this.actualChatId) {
         element.lastTimeStamp = this.getActualTimeStamp();
       }
     });
+    this.dataService.directChatActive = true;
     this.dataService.updateUser();
   }
 
@@ -242,7 +216,7 @@ export class DirectChatService {
     this.partnerIndex.lastTimeStamp = this.directChatIndex.lastTimeStamp;
     this.partnerIndex.directChatId = this.directChatIndex.directChatId;
     let partnerDirectChatIndex = this.partnerIndex.toJSON();
-    console.log(partnerDirectChatIndex);
+    // console.log('Chat partner Index: ', partnerDirectChatIndex);
     this.dataService.saveNewChatPartnerChatsIndex(partnerDirectChatIndex);
 
     // if(!this.subscibeSet) this.subscribeToDocumentChanges();

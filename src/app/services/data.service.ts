@@ -51,6 +51,7 @@ export class DataService {
       if (this.directChatActive){
         console.log('reload chatdataSets');
         this.getChatDataSets(this.chatDataId);
+        this.directChatActive = false;
       }
     });
   }
@@ -66,16 +67,16 @@ export class DataService {
   directChat: any = [];
 
 
-  subcribeDirectChatData() {
-    const coll = collection(this.firestore, 'directChats');
-    const qData = doc(coll, this.chatDataId);
-    this.directChat.subscribe((chat) => {
-      this.directChat = chat;
-      console.log('directChat update', this.directChat);
-    }).error(err => {
-      console.log('direct Chat subscription error');
-    });
-  }
+  // subcribeDirectChatData() {
+  //   const coll = collection(this.firestore, 'directChats');
+  //   const qData = doc(coll, this.chatDataId);
+  //   this.directChat.subscribe((chat) => {
+  //     this.directChat = chat;
+  //     console.log('directChat update', this.directChat);
+  //   }).error(err => {
+  //     console.log('direct Chat subscription error');
+  //   });
+  // }
 
 
   /**
@@ -166,7 +167,7 @@ export class DataService {
    * 
    * @returns {Promise<void>} A promise that resolves when the update operation is complete.
    */
-  updateUser(): void {
+  async updateUser(): Promise<void> {
     const qData = doc(this.firestore, 'users', this.loggedInUserData.userId);
     const newData = this.loggedInUserData;
     updateDoc(qData, newData).then(() => {
@@ -193,10 +194,10 @@ export class DataService {
       let docId = await addDoc(coll, chatDataSet.toJSON());
       this.updateChatDataId(chatDataSet, docId);
     } catch (error) {
-
+      console.log('Saved chat dataset failed');
     }
   }
-
+  
 
   /**
    * Updates the chat dataset ID in the Firestore database for a specific chatDataSet object.
@@ -215,14 +216,15 @@ export class DataService {
       updateDoc(qData, newData).then(() => {
         this.chatDataId = docId.id;
         this.getChatDataSets(this.chatDataId);
-        // console.log('chatDataId:', this.chatDataId);
+        // console.log('chatDataId Update:', this.chatDataId);
       }).catch((error) => {
         this.chatDataId = 'unset';
+        console.log('chatDataId Update Failed');
       })
     }
   }
 
-
+  
   /**
   * Fetches chat data from the Firestore database collection 'directChats' for a specific chat dataset.
   * 
@@ -236,7 +238,7 @@ export class DataService {
       this.directChat = chatDataSet.data();
       // console.log(this.directChat);
     }).catch((error) => {
-      console.log('Fehler beim Abrufen des Dokuments:', error.message);
+      console.log('Fehler beim Abrufen des Dokuments:');
     });
   }
 
@@ -294,10 +296,7 @@ export class DataService {
           
         })
       }
-      
     });
-    
-    
   }
 
 
@@ -313,11 +312,6 @@ export class DataService {
   //     console.log('Fehler beim Speichern, UpdateChatData');
   //   })
   // }
-
-
-
-
-
 
 }
 
