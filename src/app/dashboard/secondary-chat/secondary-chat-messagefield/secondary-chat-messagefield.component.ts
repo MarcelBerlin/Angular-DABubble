@@ -7,6 +7,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/d
 import { ChatService } from 'src/app/services/chat.service';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable, Subscription } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-secondary-chat-messagefield',
@@ -15,21 +16,17 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class SecondaryChatMessagefieldComponent {
 
-  public emoji: string = '';
-  public isEmojiPickerVisible: boolean;
   public content: any = 'MUSTERNACHRICHT';
   public sentTime: any = '';
   public message: any = {};
   public userName: string = '';
   public userImg: string = '';
   public newMessages: number = 0;
-  public newReaction: any = [];
-  public reaction: boolean = false;
-  public reactionNumber: any = 0;
   private subbedMessages$: any = [];
 
 
   constructor(public getUser: DataService,
+    public app: AppComponent,
     public firestore: Firestore,
     public getMessage: MessageService,
     public time: DatePipe,
@@ -39,18 +36,6 @@ export class SecondaryChatMessagefieldComponent {
     setTimeout(() => {
       this.getMessages()
     }, 1000);
-  }
-
-
-  public addEmoji(event) {
-    this.reaction = true;
-    this.newReaction += `${this.emoji}${event.emoji.native}`;
-    this.isEmojiPickerVisible = false;
-    this.reactionNumber++;
-    // Emoji dem User zuordnen.
-    // if (this.reactionNumber > 1) {
-    //   this.deleteDoubledEmojis(this.newReaction);
-    // }
   }
 
   // deleteDoubledEmojis(doubledEmoji) {
