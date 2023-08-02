@@ -29,7 +29,6 @@ export class MainChatMessageChatFieldComponent {
     public chatService: ChatService,
     public dataService: DataService,
   ) {
-    // console.log(this.messageService.messageData.channelId);
   }
 
   /**

@@ -11,5 +11,9 @@ import { VariablesService } from 'src/app/services/variables.service';
   styleUrls: ['./main-chat.component.scss'],
 })
 export class MainChatComponent {
-  constructor(public varService: VariablesService) {}
+
+
+  constructor(public varService: VariablesService) {
+  }
+
 }

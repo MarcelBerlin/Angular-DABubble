@@ -26,7 +26,7 @@ export class DirectChatService {
     this.actualChatId = undefined;
   }
 
-  
+
   //start function
   /**
    * Searches for the chat ID between the logged-in user and the clicked user in the direct chats array.
@@ -55,7 +55,7 @@ export class DirectChatService {
       // this.dataService.directChat = [];
       console.log('chat found');
       this.loadChatDataSet(this.actualChatId);
-      console.log('load directChat: ', this.actualChatId);
+      // console.log('load directChat: ', this.actualChatId);
     } else {
       console.log('chat not found');
       // this.directChatIndex = new DirectChatIndex();// hinzugefügt
@@ -162,7 +162,7 @@ export class DirectChatService {
         this.dataService.chatDataId = this.dataService.directChat.id;
         this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(this.chatDataSet.secondMember));
         this.dataService.updateUser();
-        this.createNewDirectChatPartnerIndex(); 
+        this.createNewDirectChatPartnerIndex();
       }, 2000);
     }).catch(() => {
       console.log('Error saving chat data');
@@ -222,5 +222,9 @@ export class DirectChatService {
 
     // if(!this.subscibeSet) this.subscribeToDocumentChanges();
   }
+
+
+
+  
 }
 

@@ -1,4 +1,4 @@
-<div class="container" *ngFor="let message of dataService.directChat.chat" style="height: unset;">
+<div class="container"  *ngFor="let message of dataService.directChat.chat" style="height: unset;">
   <!-- <div class="timeLine">
     <div class="timeLineHead">Dienstag, 14 Januar</div>
   </div> -->
@@ -12,7 +12,7 @@
     [ngStyle]="{
       'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',
       transition: 'background-color 400ms'
-    }"
+    }" 
   >
     <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
     <div class="messageContent">
