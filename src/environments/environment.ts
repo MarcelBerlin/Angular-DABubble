@@ -1,10 +1,10 @@
 export const environment = {
   firebase: {
-    projectId: 'angular-dabubble',
-    appId: '1:139418323705:web:bcbfaffcbfaf6e117b3028',
-    storageBucket: 'angular-dabubble.appspot.com',
-    apiKey: 'AIzaSyB3Czz1-Y7cwx5lR_p-Pp86JwLQkDVYx-Q',
-    authDomain: 'angular-dabubble.firebaseapp.com',
-    messagingSenderId: '139418323705',
+    projectId: 'daangularbubble2',
+    appId: '1:703399600370:web:3ac47389047681b972b06b',
+    storageBucket: 'daangularbubble2.appspot.com',
+    apiKey: 'AIzaSyD4Ky-SbYUpNXKn38ZUmIu8PBn1wHzwxKg',
+    authDomain: 'daangularbubble2.firebaseapp.com',
+    messagingSenderId: '703399600370',
   },
 };

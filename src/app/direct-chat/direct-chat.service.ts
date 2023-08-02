@@ -59,6 +59,7 @@ export class DirectChatService {
     } else {
       console.log('chat not found');
       // this.directChatIndex = new DirectChatIndex();// hinzugefügt
+      // value setzen um das anclicken anderer User zu verhindern.
       this.actualChatId = undefined;
       this.createNewChatDataSet(clickedUserId);
     }
@@ -163,6 +164,7 @@ export class DirectChatService {
         this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(this.chatDataSet.secondMember));
         this.dataService.updateUser();
         this.createNewDirectChatPartnerIndex();
+        // value setzen um das anclicken anderer User zu verhindern aufheben.
       }, 2000);
     }).catch(() => {
       console.log('Error saving chat data');
