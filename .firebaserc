@@ -6,9 +6,16 @@
           "angular-dabubble"
         ]
       }
+    },
+    "daangularbubble2": {
+      "hosting": {
+        "Angular-DABubble": [
+          "daangularbubble2"
+        ]
+      }
     }
   },
   "projects": {
-    "default": "angular-dabubble"
+    "default": "daangularbubble2"
   }
 }

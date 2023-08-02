@@ -10,7 +10,7 @@
       *ngIf="varService.mainChatHead == 2"
     ></app-main-chat-multi-message-head>
 
-    <div class="chatContainer" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+    <div class="chatContainer" #scrollMe >
       <app-main-chat-channel-chat-field
         *ngIf="varService.mainChatHead == 0"
       ></app-main-chat-channel-chat-field>

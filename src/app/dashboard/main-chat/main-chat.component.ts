@@ -1,5 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { TestBastiService } from 'src/app/services/test-basti.service';
 import { DashboardComponentsShowHideService } from '../dashboard-components-show-hide.service';
@@ -14,6 +14,24 @@ export class MainChatComponent {
 
 
   constructor(public varService: VariablesService) {
+  }
+
+  @ViewChild('scrollMe') scrollMe: ElementRef;
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+
+
+
+  scrollToBottom(): void {
+    try {
+      // Verzögern Sie die Änderung des Scrolltops mit setTimeout
+      // setTimeout(() => {
+        this.scrollMe.nativeElement.scrollTop = this.scrollMe.nativeElement.scrollHeight;
+      // }, 1000);
+    } catch (err) {}
   }
 
 }
