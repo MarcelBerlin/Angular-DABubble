@@ -258,7 +258,9 @@ export class DirectChatService {
       this.directChat = chatDataSet.data();
       this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex());
       this.updateUser();
-      this.createNewDirectChatPartnerIndex();
+      if (this.chatDataSet.firstMember != this.chatDataSet.secondMember){
+        this.createNewDirectChatPartnerIndex();
+      }
     }).catch((error) => {
       console.log('Fehler beim Abrufen des Dokuments:');
     });
@@ -336,6 +338,7 @@ export class DirectChatService {
     this.actualChat.name = this.dataService.loggedInUserData.name;
     this.actualChat.date = this.createDateString(today);
     this.actualChat.time = this.createClockString(today);
+    debugger;
     this.directChat.chat.push(this.actualChat.toJSON());
     this.directMessage = '';
     this.updateFirestoreChat();

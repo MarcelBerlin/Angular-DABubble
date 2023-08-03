@@ -35,7 +35,7 @@
     *ngIf="
       varService.mainChatHead == 1 && currentUser() && dataService.userData
     "
-    [(ngModel)]="loggedUser"
+    [(ngModel)]="loggedUser" [(ngModel)]="directChatService.directMessage"
     placeholder="Nachricht an mich :-)"
   ></textarea>
 

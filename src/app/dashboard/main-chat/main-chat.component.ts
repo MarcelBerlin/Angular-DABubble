@@ -22,9 +22,7 @@ export class MainChatComponent {
     this.scrollToBottom();
   }
 
-
-
-
+  
   scrollToBottom(): void {
     try {
       // Verzögern Sie die Änderung des Scrolltops mit setTimeout
