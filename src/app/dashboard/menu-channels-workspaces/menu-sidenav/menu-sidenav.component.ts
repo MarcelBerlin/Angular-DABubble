@@ -195,7 +195,9 @@ export class MenuSidenavComponent implements OnInit {
 
   // Funktion von Bossi. Verbindung zu directChatService
   getDirectChatData(arrayId: number): void {
-    let clickedUserId: string = this.getUserData.userData[arrayId].id;
-    this.directChatService.getChatId(clickedUserId);
+    if(this.directChatService.directChatActive){
+      let clickedUserId: string = this.getUserData.userData[arrayId].id;
+      this.directChatService.getChatId(clickedUserId);
+    }
   }
 }
