@@ -334,11 +334,10 @@ export class DirectChatService {
   saveMessage(): void {
     this.directChatActive = false;
     let today: Date = new Date();
-    this.actualChat.message = this.directMessage;
+    this.actualChat.message = this.directMessage.trim();
     this.actualChat.name = this.dataService.loggedInUserData.name;
     this.actualChat.date = this.createDateString(today);
     this.actualChat.time = this.createClockString(today);
-    debugger;
     this.directChat.chat.push(this.actualChat.toJSON());
     this.directMessage = '';
     this.updateFirestoreChat();

@@ -25,11 +25,10 @@ export class MainChatComponent {
   
   scrollToBottom(): void {
     try {
-      // Verzögern Sie die Änderung des Scrolltops mit setTimeout
-      // setTimeout(() => {
         this.scrollMe.nativeElement.scrollTop = this.scrollMe.nativeElement.scrollHeight;
-      // }, 1000);
-    } catch (err) {}
+    } catch (err) {
+      console.log('autoscroll error');
+    }
   }
 
 }
