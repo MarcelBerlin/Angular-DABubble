@@ -37,12 +37,12 @@ export class DirectChatService {
    */
   getChanges() {
     this.dataService.users$.subscribe(() => {
-      if(this.dataService.loggedInUserData.online == true){
-        setTimeout(() => {
-          console.log('setNewMessageBage started');
-          this.setNewMessageBage();
-        }, 5000);
-      }
+      // if(this.dataService.loggedInUserData.online == true){
+      //   setTimeout(() => {
+      //     console.log('setNewMessageBage started');
+      //     this.setNewMessageBage();
+      //   }, 5000);
+      // }
       
       if (this.directChatActive && this.directChatIndex.directChatId) {
         this.loadChatDataSets(this.directChatIndex.directChatId);
