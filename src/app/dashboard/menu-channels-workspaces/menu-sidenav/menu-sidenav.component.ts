@@ -80,6 +80,7 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
+      
     });
   }
 
