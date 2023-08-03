@@ -30,6 +30,7 @@
     placeholder="Nachricht an {{
       dataService.userData[varService.selectedUserToMessage]?.name || ''
     }}"
+    [disabled]="!directChatService.directChatActive"
   ></textarea>
   <textarea
     *ngIf="
@@ -37,6 +38,7 @@
     "
     [(ngModel)]="loggedUser" [(ngModel)]="directChatService.directMessage"
     placeholder="Nachricht an mich :-)"
+    [disabled]="!directChatService.directChatActive"
   ></textarea>
 
   <textarea

@@ -53,7 +53,7 @@ export class MainChatMessagefieldComponent {
       this.messageService.messageText = '';
     }
     // add by Bossi for directChatService
-    if (this.varService.mainChatHead === 1) {
+    if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive) {
       this.directChatService.saveMessage();
     }
   }
