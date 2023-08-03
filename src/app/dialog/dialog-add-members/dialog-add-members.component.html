@@ -5,13 +5,38 @@
   </mat-card-title>
   <mat-card-content>
     <div class="headContainer">
-      <img src="assets/img/hashtag_blue.png" />
-      <span> Entwicklerteam</span>
-    </div>
+      <span>
+        {{ tagChannel.tagsData[variableService.selectedChannel]?.name[0] }}
+        {{ tagChannel.tagsData[variableService.selectedChannel]?.name.slice(1) }}
+      </span>
+      </div>
+  <div class="inputContainer">
 
-    <div class="inputContainer">
+    <form class="example-form">
+      <input
+        type="text"
+        placeholder="Name eingeben"
+        [formControl]="control"
+        [matAutocomplete]="auto"
+        class="example-input"
+      />
+      <mat-autocomplete #auto="matAutocomplete" >
+        <mat-option
+          *ngFor="let element of filteredArrays | async"
+          [value]="element[property]"
+        >
+          {{ element[property] }}
+        </mat-option>
+      </mat-autocomplete>
+    </form>
+  </div>
+
+
+
+
+    <!-- <div class="inputContainer">
       <input type="text" placeholder="Name eingeben" />
-    </div>
+    </div> -->
     <div class="buttonContainer">
         <button mat-button>Hinzufügen</button>
     </div>

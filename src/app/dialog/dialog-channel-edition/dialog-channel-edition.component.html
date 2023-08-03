@@ -2,8 +2,16 @@
   <div class="contentContainer">
     <div class="head">
       <div class="chanel">
-        <div>#</div>
-        <span class="nunito-700-18">{{tBS.channelName}}</span>
+        <span class="nunito-700-18">
+          <span>
+            {{ tagChannel.tagsData[variableService.selectedChannel]?.name[0] }}
+            {{
+              tagChannel.tagsData[variableService.selectedChannel]?.name.slice(
+                1
+              )
+            }}
+          </span>
+        </span>
       </div>
       <!-- <div class="close"><img src="assets/img/close.png" alt="" /></div> -->
       <div class="close" (click)="closeDialog()">X</div>
@@ -32,8 +40,17 @@
         [class.editName]="name"
         [style.width]="name ? '100%' : '90%'"
       >
-        <div [style.margin-left]="name ? '40px' : '0'">#</div>
-        <span *ngIf="!name" class="nunito-400-18">{{tBS.channelName}}</span>
+        <div [style.margin-left]="name ? '40px' : '0'"></div>
+        <span *ngIf="!name" class="nunito-400-18">
+          <span>
+            {{ tagChannel.tagsData[variableService.selectedChannel]?.name[0] }}
+            {{
+              tagChannel.tagsData[variableService.selectedChannel]?.name.slice(
+                1
+              )
+            }}
+          </span>
+        </span>
         <input
           *ngIf="name"
           [(ngModel)]="tBS.channelName"
