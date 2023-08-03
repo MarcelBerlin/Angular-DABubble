@@ -5,80 +5,42 @@ import { ChatDataSet } from './models/chat-data-set';
 import { DataService } from '../services/data.service';
 import { ActualChat } from './models/actual-chat.class';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
-import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DirectChatService {
-  actualChatId: string;
   directChatIndex = new DirectChatIndex();
+  partnerIndex = new DirectChatIndex();
   timeStamp: TimeStamp = new TimeStamp();
-  chatDataSet: ChatDataSet = new ChatDataSet();
-  directMessage: string = '';
-  actualChat: ActualChat = new ActualChat();
+  chatDataSet: ChatDataSet = new ChatDataSet(); // chat in direct chats
+  directMessage: string = ''; // two way binding with the entered text in the message field.
+  actualChat: ActualChat = new ActualChat(); // for saving purposes, object to save new Chat message.
+  directChat: any = []; // array with the direct chat content.
+  directChatActive: boolean = true;
 
 
   constructor(
     private dataService: DataService,
     private firestore: Firestore
   ) {
-    this.actualChatId = undefined;
+    this.getChanges();
   }
 
 
-  //start function
   /**
-   * Searches for the chat ID between the logged-in user and the clicked user in the direct chats array.
-   * If the chat ID is found, it sets the 'actualChatId' property accordingly.
-   * If the chat ID is not found, it creates a new chat dataset for the conversation.
+   * Subscribes to changes in the users$ observable of dataService. If directChatActive is true 
+   * and a directChatIndex.directChatId is available, it reloads the chat data sets in directChatService.
    * 
-   * @param {string} clickedUserId - The ID of the user that was clicked to initiate the chat search.
    * @returns {void}
    */
-  getChatId(clickedUserId: string): void {
-    // console.log('clickedUserId: ',clickedUserId);
-    this.dataService.directChatActive = false;
-    this.actualChatId = undefined;
-    const directChatArray = this.dataService.loggedInUserData.directChats;
-    if (directChatArray.length != 0) {
-      directChatArray.forEach((directChat: DirectChatIndex) => {
-        if (directChat.partnerId == clickedUserId) {
-          this.actualChatId = directChat.directChatId;
-          this.dataService.chatDataId = directChat.directChatId;
-          this.directChatIndex = directChat;
-        }
-      });
-
-    }
-    if (this.actualChatId != undefined) {
-      // this.dataService.directChat = [];
-      console.log('chat found');
-      this.loadChatDataSet(this.actualChatId);
-      // console.log('load directChat: ', this.actualChatId);
-    } else {
-      console.log('chat not found');
-      // this.directChatIndex = new DirectChatIndex();// hinzugefügt
-      // value setzen um das anclicken anderer User zu verhindern.
-      this.actualChatId = undefined;
-      this.createNewChatDataSet(clickedUserId);
-    }
-  }
-
-
-  /**
-   * Loads a specific chat dataset based on the provided chatId using the dataService methods.
-   * 
-   * @param {string} chatId - The ID of the chat dataset to load.
-   * @returns {void}
-  */
-  loadChatDataSet(chatId): void {
-    this.dataService.directChat = [];
-    // this.dataService.chatDataId = chatId; // wieder aktiviert
-    this.dataService.getChatDataSets(chatId);
-    // this.dataService.subcribeDirectChatData();
-    // if(!this.subscibeSet) this.subscribeToDocumentChanges();
-    // this.dataService.directChatActive = true;
+  getChanges() {
+    this.dataService.users$.subscribe(() => {
+      if (this.directChatActive && this.directChatIndex.directChatId) {
+        console.log('reload chatdataSets in directChatService');
+        this.loadChatDataSets(this.directChatIndex.directChatId);
+      }
+    });
   }
 
 
@@ -130,18 +92,95 @@ export class DirectChatService {
 
 
   /**
-   * Creates a DirectChatJson object to manage a direct chat between two users.
-   * 
-   * @param {string} clickedUserId - The ID of the user with whom the direct chat is initiated.
-   * @returns {DirectChatJson} A DirectChatJson object representing the direct chat details.
+   * Retrieves the chat ID for a specific user from the dataService and initiates a search for a direct chat.
+   * @param {string} clickedUserId - The ID of the user that was clicked to initiate the chat search.
+   * @returns {void}
    */
-  createDirectChatIndex(clickedUserId: string): Object {
-    this.directChatIndex = new DirectChatIndex();
-    this.directChatIndex.ownId = this.dataService.getUserID();
-    this.directChatIndex.partnerId = clickedUserId;
-    this.directChatIndex.lastTimeStamp = this.getActualTimeStamp();
-    this.directChatIndex.directChatId = this.dataService.directChat.id;
-    return this.directChatIndex.toJSON();
+  getChatId(clickedUserId: string): void {
+    this.directChatActive = false; // automatic reload disabled
+    this.directChatIndex = new DirectChatIndex(); // actualChatId replaced, could be deleted ?!
+    this.searchUserDirectChat(clickedUserId);
+  }
+
+
+  /**
+   * Searches for a direct chat between the logged-in user and a clicked user within the directChatArray.
+   * If the chat is found, it sets the chatDataId in dataService and loads the chat dataset.
+   * If the chat is not found, it creates a new chat dataset.
+   * 
+   * @param {string} clickedUserId - The ID of the user that was clicked to initiate the chat search.
+   * @returns {void}
+   */
+  searchUserDirectChat(clickedUserId: string): void {
+    const directChatArray: [] = this.dataService.loggedInUserData.directChats;
+    if (this.userHasDirectChats(directChatArray)) {
+      directChatArray.forEach((userDirectChatIndex: DirectChatIndex) => {
+        if (userDirectChatIndex.partnerId == clickedUserId) this.directChatIndex = userDirectChatIndex;
+      });
+    }
+    if (this.directChatFound()) this.loadChatDataSet(this.directChatIndex.directChatId);
+    else if (this.directChatNotFound()) this.createNewChatDataSet(clickedUserId);
+  }
+
+
+  /**
+   * Checks if a user has any direct chats by evaluating the length of the directChatArray.
+   * 
+   * @param {Array} directChatArray - The array containing direct chat data for the user.
+   * @returns {boolean} - Returns true if the directChatArray is not empty, otherwise returns false.
+   */
+  userHasDirectChats(directChatArray: []): boolean {
+    return directChatArray.length != 0;
+  }
+
+
+  /**
+   * Checks if a direct chat is found by evaluating whether the directChatId property in the directChatIndex object is defined.
+   * @returns {boolean} - Returns true if the directChatId is defined (direct chat is found), otherwise returns false.
+   */
+  directChatFound(): boolean {
+    return this.directChatIndex.directChatId != undefined;
+  }
+
+
+  /**
+   * Checks if a direct chat is not found by evaluating whether the directChatId property in the directChatIndex object is undefined.
+   * @returns {boolean} - Returns true if the directChatId is undefined (direct chat is not found), otherwise returns false.
+   */
+  directChatNotFound(): boolean {
+    return this.directChatIndex.directChatId == undefined;
+  }
+
+
+  /**
+   * Clear the direct chat array and initialize load of the selected direct chat.
+   * 
+   * @param {string} chatId - The ID of the chat dataset to load.
+   * @returns {void}
+  */
+  loadChatDataSet(chatId: string): void {
+    this.directChat = [];
+    this.loadChatDataSets(chatId);
+  }
+
+
+  /**
+   * Fetches the chat dataset from the "directChats" collection in Firestore based on the provided id.
+   * Updates the directChat object with the retrieved data and sets the directChatActive flag to true.
+   * 
+   * @param {string} id - The ID of the chat dataset to be fetched.
+   * @returns {Promise<void>} - A Promise that resolves when the chat dataset is successfully loaded 
+   * or rejects if there is an error.
+   */
+  async loadChatDataSets(id: string) {
+    const coll = collection(this.firestore, 'directChats');
+    const qData = doc(coll, id);
+    getDoc(qData).then((chat) => {
+      this.directChat = chat.data();
+      this.directChatActive = true;
+    }).catch((error) => {
+      console.log('Failure during load of the Document');
+    });
   }
 
 
@@ -157,17 +196,129 @@ export class DirectChatService {
     this.chatDataSet.secondMember = clickedUserId;
     this.chatDataSet.chat = [];
     this.chatDataSet.id = 'unset';//hinzugefügt wichtig, da sonst nicht die Id aktualisiert wird.
-    this.dataService.saveChatDataSet(this.chatDataSet).then(() => {
-      setTimeout(() => {
-        this.chatDataSet.id = this.dataService.directChat.id;
-        this.dataService.chatDataId = this.dataService.directChat.id;
-        this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex(this.chatDataSet.secondMember));
-        this.dataService.updateUser();
-        this.createNewDirectChatPartnerIndex();
-        // value setzen um das anclicken anderer User zu verhindern aufheben.
-      }, 2000);
+    this.saveChatDataSet().then(() => {
+      console.log('saveChatDataSet called');
     }).catch(() => {
       console.log('Error saving chat data');
+    });
+  }
+
+
+  /**
+   * Saves a new chat dataset to the "directChats" collection in the Firestore database.
+   * After saving the dataset, updates the chatDataSet object with the new document ID and 
+   * calls the updateChatDataId method.
+   * 
+   * @returns {Promise<void>} - A Promise that resolves when the chat dataset is successfully 
+   * saved or rejects if there is an error.
+   */
+  async saveChatDataSet(): Promise<void> {
+    const coll = collection(this.firestore, 'directChats');
+    try {
+      let docId = await addDoc(coll, this.chatDataSet.toJSON());
+      this.chatDataSet.id = docId.id;
+      this.updateChatDataId();
+    } catch (error) {
+      console.log('Saved chat dataset failed');
+    }
+  }
+
+
+  /**
+   * Updates the chat dataset ID in the Firestore database for a specific chatDataSet object.
+   * 
+   * @param {Object} chatDataSet - The chat dataset object to update.
+   * @param {Object} docId - The document ID object that holds the chat dataset ID.
+   * @returns {void}
+   */
+  updateChatDataId(): void {
+    const qData = doc(this.firestore, 'directChats', this.chatDataSet.id);
+    const newData = { id: this.chatDataSet.id, };
+    updateDoc(qData, newData).then(() => {
+      this.getChatDataSets();
+    }).catch((error) => {
+      this.chatDataSet.id = 'unset';
+      console.log('chatDataId Update Failed');
+    })
+  }
+
+
+  /**
+   * Fetches the chat dataset from the "directChats" collection in Firestore based on chatDataSet.id.
+   * Updates the directChat object with the retrieved data.Creates a new DirectChatIndex object and 
+   * adds it to the directChats array in the loggedInUserData of the dataService.Finally, updates 
+   * the user's data in Firestore and creates a new direct chat partner index.
+   * 
+   * @returns {void}
+   */
+  getChatDataSets():void {
+    const coll = collection(this.firestore, 'directChats');
+    const qData = doc(coll, this.chatDataSet.id);
+    getDoc(qData).then((chatDataSet) => {
+      this.directChat = chatDataSet.data();
+      this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex());
+      this.updateUser();
+      this.createNewDirectChatPartnerIndex();
+    }).catch((error) => {
+      console.log('Fehler beim Abrufen des Dokuments:');
+    });
+  }
+
+
+  /**
+   * Creates a DirectChatJson object to manage a direct chat between two users.
+   * 
+   * @param {string} clickedUserId - The ID of the user with whom the direct chat is initiated.
+   * @returns {DirectChatJson} A DirectChatJson object representing the direct chat details.
+   */
+  createDirectChatIndex(): Object {
+    this.directChatIndex = new DirectChatIndex();
+    this.directChatIndex.ownId = this.dataService.getUserID();
+    this.directChatIndex.partnerId = this.chatDataSet.secondMember;
+    this.directChatIndex.lastTimeStamp = this.getActualTimeStamp();
+    this.directChatIndex.directChatId = this.chatDataSet.id;
+    return this.directChatIndex.toJSON();
+  }
+
+
+  /**
+   * Creates a new DirectChatIndex object for a direct chat with a partner based on chatDataSet and directChatIndex.
+   * The new partner chat index is then saved to the data source.
+   * 
+   * @returns {void}
+   */
+  createNewDirectChatPartnerIndex(): void {
+    this.partnerIndex = new DirectChatIndex();
+    this.partnerIndex.ownId = this.chatDataSet.secondMember;
+    this.partnerIndex.partnerId = this.chatDataSet.firstMember;
+    this.partnerIndex.lastTimeStamp = this.directChatIndex.lastTimeStamp;
+    this.partnerIndex.directChatId = this.directChatIndex.directChatId;
+    let partnerDirectChatIndex = this.partnerIndex.toJSON();
+    this.saveNewChatPartnerChatsIndex(partnerDirectChatIndex);
+  }
+
+
+  /**
+   * Saves a new partner chat index to the directChats array of a specific user in the userData array within the dataService.
+   * The user's document in the Firestore database is then updated with the new directChats array.
+   * 
+   * @param {Object} partnerChatIndex - The new partner chat index to save.
+   * @returns {void}
+   */
+  saveNewChatPartnerChatsIndex(partnerChatIndex): void {
+    this.dataService.userData.forEach(user => {
+      if (user.userId === partnerChatIndex.ownId) {
+        user.directChats.push(partnerChatIndex);
+        const qData = doc(this.firestore, 'users', user.userId);
+        const newData = {
+          directChats: user.directChats,
+        };
+        updateDoc(qData, newData).then(() => {
+          console.log('partner chatIndex set');
+        }).catch((error) => {
+
+        })
+      }
     });
   }
 
@@ -179,54 +330,98 @@ export class DirectChatService {
    * @returns {void}
    */
   saveMessage(): void {
+    this.directChatActive = false;
     let today: Date = new Date();
-    // console.log(this.directMessage);
-    let newMessage = this.directMessage;
-    this.actualChat.message = newMessage;
+    this.actualChat.message = this.directMessage;
     this.actualChat.name = this.dataService.loggedInUserData.name;
     this.actualChat.date = this.createDateString(today);
     this.actualChat.time = this.createClockString(today);
-    // console.log('neues ChatElement: ',this.actualChat);
-    // console.log('chatElement in dataService DirectChat vor Speichern:', this.dataService.directChat.chat);
-    this.dataService.directChat.chat.push(this.actualChat.toJSON());
-    // console.log('directChat nach hinzufügen von new Chat', this.dataService.directChat);
+    this.directChat.chat.push(this.actualChat.toJSON());
     this.directMessage = '';
-    this.dataService.updateChatDataChat();
-
-    // this.dataService.directChatActive = true;
-    this.updateDirectChatIndex();
-
+    this.updateFirestoreChat();
+    this.updateFirestoreDirectChatIndex();
   }
 
-  updateDirectChatIndex() {
-    this.dataService.directChat.timeStamp = this.getActualTimeStamp();
-    // this.dataService.loggedInUserData.directChats.
-    this.dataService.loggedInUserData.directChats.forEach(element => {
-      if (element.directChatId == this.actualChatId) {
-        element.lastTimeStamp = this.getActualTimeStamp();
+
+  /**
+   * Updates the lastTimeStamp property of a specific direct chat in the directChats array of the logged-in user's data.
+   * Also updates the timeStamp property of the current directChat object.
+   * Finally, updates the logged-in user's data in Firestore.
+   * 
+   * @returns {void}
+   */
+  updateFirestoreDirectChatIndex() {
+    this.directChat.timeStamp = this.getActualTimeStamp();
+    this.dataService.loggedInUserData.directChats.forEach(chat => {
+      if (chat.directChatId == this.directChat.id) {
+        chat.lastTimeStamp = this.getActualTimeStamp();
       }
     });
-    this.dataService.directChatActive = true;
-    this.dataService.updateUser();
-  }
-
-  //############################################################
-  partnerIndex = new DirectChatIndex();
-  // Update the partner user data with in the direct chats index.
-  createNewDirectChatPartnerIndex() {
-    this.partnerIndex.ownId = this.chatDataSet.secondMember;
-    this.partnerIndex.partnerId = this.chatDataSet.firstMember;
-    this.partnerIndex.lastTimeStamp = this.directChatIndex.lastTimeStamp;
-    this.partnerIndex.directChatId = this.directChatIndex.directChatId;
-    let partnerDirectChatIndex = this.partnerIndex.toJSON();
-    // console.log('Chat partner Index: ', partnerDirectChatIndex);
-    this.dataService.saveNewChatPartnerChatsIndex(partnerDirectChatIndex);
-
-    // if(!this.subscibeSet) this.subscribeToDocumentChanges();
+    this.updateUser();
   }
 
 
+  /**
+   * Updates the chat data (messages) in Firestore for a specific direct chat.
+   * Updates the chat property of the Firestore document with the latest chat messages from the directChat object.
+   * After updating the data, fetches the updated chat data from Firestore.
+   * 
+   * @returns {void}
+   */
+  updateFirestoreChat(): void {
+    const qData = doc(this.firestore, 'directChats', this.directChatIndex.directChatId);
+    const newData = {
+      chat: this.directChat.chat // holt von Firestore den bisherigen chatverlauf
+    };
+    updateDoc(qData, newData).then(() => {
+      this.getFirestoreChat();
+    }).catch((error) => {
+      console.log('Fehler beim Speichern, UpdateChatData');
+    })
+  }
 
-  
-}
+
+  /**
+   * Fetches the chat data from Firestore for a specific direct chat identified by directChatIndex.directChatId.
+   * Queries the Firestore document, retrieves the data, and assigns it to the directChat object.
+   * 
+   * @returns {Promise<void>}
+   */
+  async getFirestoreChat(): Promise<void> {
+    const coll = collection(this.firestore, 'directChats');
+    const qData = doc(coll, this.directChatIndex.directChatId);
+    getDoc(qData).then((chatDataSet) => {
+      this.directChat = chatDataSet.data();
+    }).catch((error) => {
+      console.log('Fehler beim Abrufen des Dokuments:');
+    });
+  }
+
+
+  /**
+   * Updates the user data in Firestore.
+   * 
+   * @returns {Promise<void>} A promise that resolves when the update operation is complete.
+   */
+  async updateUser(): Promise<void> {
+    const qData = doc(this.firestore, 'users', this.dataService.loggedInUserData.userId);
+    const newData = this.dataService.loggedInUserData;
+    updateDoc(qData, newData).then(() => {
+      this.directChatActive = true;
+    }).catch((error) => {
+      console.log('update user failed');
+    })
+  }
+
+}//ende
+
+
+
+
+
+
+
+
+
+
 

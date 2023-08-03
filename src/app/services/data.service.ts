@@ -2,10 +2,6 @@ import { Injectable } from '@angular/core';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { User } from '../models/user.class';
 import { __param } from 'tslib';
-import { ActualChat } from '../direct-chat/models/actual-chat.class';
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -18,20 +14,15 @@ export class DataService {
   loggedInUserEmail: string = '';
   loggedInUserData: any;
   loggedInUserId: string = '';
-
   forgotPasswordMenu: boolean = false;
-
-  directChatActive: boolean = false;
 
 
   constructor(
     private firestore: Firestore,
   ) {
     this.subcribeUserData();
-    if (this.chatDataId != 'unset') {
-      // this.subcribeDirectChatData();
-    }
   }
+
 
   subcribeUserData(): void {
     const coll = collection(this.firestore, 'users');
@@ -48,35 +39,8 @@ export class DataService {
         this.getLoggedInUserData();
         // console.log('logged in userData',this.loggedInUserData);
       }
-      if (this.directChatActive){
-        console.log('reload chatdataSets');
-        this.getChatDataSets(this.chatDataId);
-        // this.directChatActive = false;
-      }
     });
   }
-
-  /**
-   * Firebase collection directChats Id.
-   */
-  chatDataId: string = 'unset';
-
-  /**
-   * Data set Firebase colection document.
-   */
-  directChat: any = [];
-
-
-  // subcribeDirectChatData() {
-  //   const coll = collection(this.firestore, 'directChats');
-  //   const qData = doc(coll, this.chatDataId);
-  //   this.directChat.subscribe((chat) => {
-  //     this.directChat = chat;
-  //     console.log('directChat update', this.directChat);
-  //   }).error(err => {
-  //     console.log('direct Chat subscription error');
-  //   });
-  // }
 
 
   /**
@@ -171,148 +135,11 @@ export class DataService {
     const qData = doc(this.firestore, 'users', this.loggedInUserData.userId);
     const newData = this.loggedInUserData;
     updateDoc(qData, newData).then(() => {
-
+      // this.directChatActive = true;
     }).catch((error) => {
-
+      console.log('update user failed');
     })
   }
-
-  // funktionen für den direct chat service !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-
-
-  /**
-   * Saves a chat dataset in the Firestore database by adding a new document to the 'directChats' collection.
-   * @param {Object} chatDataSet - The chat dataset object to save in the Firestore database.
-   * @returns {Promise<void>} A promise that resolves when the chat dataset is saved successfully.
-   */
-  async saveChatDataSet(chatDataSet): Promise<void> {
-    // console.log('Saving chat dataset: ', chatDataSet);
-    const coll = collection(this.firestore, 'directChats');
-    try {
-      let docId = await addDoc(coll, chatDataSet.toJSON());
-      this.updateChatDataId(chatDataSet, docId);
-    } catch (error) {
-      console.log('Saved chat dataset failed');
-    }
-  }
-  
-
-  /**
-   * Updates the chat dataset ID in the Firestore database for a specific chatDataSet object.
-   * 
-  * @param {Object} chatDataSet - The chat dataset object to update.
-  * @param {Object} docId - The document ID object that holds the chat dataset ID.
-  * @returns {void}
-  */
-  updateChatDataId(chatDataSet, docId) {
-    // console.log('updated chat id: ',docId.id);
-    if (chatDataSet.id == 'unset') {
-      const qData = doc(this.firestore, 'directChats', docId.id);
-      const newData = {
-        id: docId.id,
-      };
-      updateDoc(qData, newData).then(() => {
-        this.chatDataId = docId.id;
-        this.getChatDataSets(this.chatDataId);
-        // console.log('chatDataId Update:', this.chatDataId);
-      }).catch((error) => {
-        this.chatDataId = 'unset';
-        console.log('chatDataId Update Failed');
-      })
-    }
-  }
-
-  
-  /**
-  * Fetches chat data from the Firestore database collection 'directChats' for a specific chat dataset.
-  * 
-  * @param {string} id - The ID of the chat dataset to retrieve from the 'directChats' collection.
-  * @returns {void}
-  */
-  async getChatDataSets(id: string) {
-    const coll = collection(this.firestore, 'directChats');
-    const qData = doc(coll, id);
-    getDoc(qData).then((chatDataSet) => {
-      this.directChat = chatDataSet.data();
-      // console.log(this.directChat);
-      this.directChatActive = true;
-    }).catch((error) => {
-      console.log('Fehler beim Abrufen des Dokuments:');
-    });
-  }
-
-
-  /**
-   * Updates the 'chat' field in a specific chat dataset document within the 'directChats' collection.
-   * 
-   * @returns {void}
-  */
-  updateChatDataChat(): void {
-    const qData = doc(this.firestore, 'directChats', this.chatDataId);
-    const newData = {
-      chat: this.directChat.chat
-    };
-    updateDoc(qData, newData).then(() => {
-      this.getChatDataSets(this.chatDataId);
-    }).catch((error) => {
-      this.chatDataId = this.chatDataId;
-      console.log('Fehler beim Speichern, UpdateChatData');
-    })
-  }
-
-
-  // ##################################################################
-  /**
-   * Updates the clicked user data in Firestore.
-   * 
-   * @returns {Promise<void>} A promise that resolves when the update operation is complete.
-   */
-  updateClickedUser(): void {
-    const qData = doc(this.firestore, 'users', this.loggedInUserData.userId);
-    const newData = this.loggedInUserData;
-    updateDoc(qData, newData).then(() => {
-
-    }).catch((error) => {
-
-    })
-  }
-
-
-  //#####################################################################
-  // save the chatPartner directChat index to the partner user.
-
-  saveNewChatPartnerChatsIndex(partnerChatIndex): void {
-    this.userData.forEach(user => {
-      if (user.userId === partnerChatIndex.ownId) {
-        user.directChats.push(partnerChatIndex);
-        const qData = doc(this.firestore, 'users', user.userId);
-        const newData = {
-          directChats: user.directChats,
-        };
-        updateDoc(qData, newData).then(() => {
-          console.log('partner chatIndex set');
-        }).catch((error) => {
-          
-        })
-      }
-    });
-  }
-
-
-  // updateDirectChatIndex(newDirectChatIndex): void {
-  //   const qData = doc(this.firestore, 'user', this.loggedInUserData.userId);
-  //   const newData = {
-  //     directChats: this.directChat.chat
-  //   };
-  //   updateDoc(qData, newData).then(() => {
-  //     this.getChatDataSets(this.chatDataId);
-  //   }).catch((error) => {
-  //     this.chatDataId = this.chatDataId;
-  //     console.log('Fehler beim Speichern, UpdateChatData');
-  //   })
-  // }
 
 }
 

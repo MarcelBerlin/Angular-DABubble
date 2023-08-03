@@ -9,7 +9,7 @@ export class DirectChatIndex{
         this.ownId = obj ? obj.ownId : 'unset';
         this.partnerId = obj ? obj.partnerId : 'unset';
         this.lastTimeStamp = obj ? obj.lastTimeStamp : {};
-        this.directChatId = obj ? obj.directChatId : false;
+        this.directChatId = obj ? obj.directChatId : undefined; // changed from false to undefine
     }
 
     
