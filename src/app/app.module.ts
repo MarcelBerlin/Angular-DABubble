@@ -57,7 +57,6 @@ import { ChannelSelectionComponent } from './dashboard/main-chat/main-chat-chatf
 import { LoginHeaderComponent } from './auth-features/login-header/login-header.component';
 import { SecondaryChatInputfieldComponent } from './dashboard/secondary-chat/secondary-chat-inputfield/secondary-chat-inputfield.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
-import { DatePipe } from '@angular/common';
 import { DialogUserReactionsComponent } from './dialog/dialog-user-reactions/dialog-user-reactions.component';
 
 
@@ -114,12 +113,11 @@ import { DialogUserReactionsComponent } from './dialog/dialog-user-reactions/dia
     MatTreeModule,
     MatAutocompleteModule,
     PickerModule,
-    DatePipe,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }, DatePipe],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent]
 })
 

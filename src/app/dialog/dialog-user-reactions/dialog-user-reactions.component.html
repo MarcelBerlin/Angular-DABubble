@@ -2,10 +2,10 @@
 <div mat-dialog-content>
     <ul>
         <!-- *ngFor  user, die reagiert haben-->
-        <li>
+        <li *ngFor="let emoji of dialogEmoji" >
             <div class="user-list">
-                <span> Felix Röder </span> <!-- jeweiliger user -->
-                <span> {{ app.newReaction }} </span> <!-- emojis von usern -->
+                <span> {{ this.getUser.loggedInUserData.name }} </span> <!-- jeweiliger user -->
+                <span> {{ emoji }} </span> <!-- emojis von usern -->
             </div>
         </li>
     </ul>
