@@ -37,7 +37,6 @@ export class DirectChatService {
   getChanges() {
     this.dataService.users$.subscribe(() => {
       if (this.directChatActive && this.directChatIndex.directChatId) {
-        console.log('reload chatdataSets in directChatService');
         this.loadChatDataSets(this.directChatIndex.directChatId);
       }
     });
