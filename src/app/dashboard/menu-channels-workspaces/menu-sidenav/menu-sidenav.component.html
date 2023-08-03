@@ -11,7 +11,16 @@
       />
     </div>
     <div class="channelAndMessage">
-      <div class="channels-container">
+      <div
+        class="channels-container"
+        [style.height]="
+          !channelsVisible
+            ? '0'
+            : directMessageUserVisible
+            ? '50%'
+            : 'calc(100% - 78px)'
+        "
+      >
         <div class="channels-headline pd-left pd-right">
           <img
             class="pointer"
@@ -56,7 +65,10 @@
         </div>
       </div>
 
-      <div class="direct-messages">
+      <div
+        class="direct-messages"
+        [style.height]="channelsVisible ? '50%' : 'calc(100% - 68px)'"
+      >
         <div class="direct-messages-headline pd-left pd-right pd-top">
           <img
             class="pointer"
