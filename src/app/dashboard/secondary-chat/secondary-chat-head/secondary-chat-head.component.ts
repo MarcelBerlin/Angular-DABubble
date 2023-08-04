@@ -3,6 +3,7 @@ import { DashboardComponentsShowHideService } from '../../dashboard-components-s
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { DialogMembersComponent } from 'src/app/dialog/dialog-members/dialog-members.component';
 import { MatDialog } from '@angular/material/dialog';
+import { VariablesService } from 'src/app/services/variables.service';
 
 
 @Component({
@@ -16,16 +17,18 @@ export class SecondaryChatHeadComponent {
 
   channelThread: any = {};
   channels: any = [];
-
+  channelName: any = '';
 
   constructor(
     private dcshService: DashboardComponentsShowHideService,
-    public channelService: DialogAddService,
-    public dialog: MatDialog
-  ) {
+    public addService: DialogAddService,
+    public varService: VariablesService,
+    public dialog: MatDialog) {
 
     setTimeout(() => {
-      this.channels = this.channelService.tagsData;
+      setInterval(() => {
+        this.channelName = this.addService.tagsData[this.varService.selectedChannel].name;
+      }, 500);
     }, 1000);
 
   }

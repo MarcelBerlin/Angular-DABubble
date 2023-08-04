@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { DialogUserReactionsComponent } from 'src/app/dialog/dialog-user-reactions/dialog-user-reactions.component';
@@ -6,7 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ChatService } from 'src/app/services/chat.service';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AppComponent } from 'src/app/app.component';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { VariablesService } from 'src/app/services/variables.service';
+import { DialogAddService } from 'src/app/services/dialog-add.service';
 
 @Component({
   selector: 'app-secondary-chat-messagefield',
@@ -29,7 +30,9 @@ export class SecondaryChatMessagefieldComponent {
 
   constructor(public getUser: DataService,
     public app: AppComponent,
-    public firestore: Firestore,
+    public addService: DialogAddService,
+    // public firestore: Firestore,
+    public varService: VariablesService,
     public getMessage: MessageService,
     public chatService: ChatService,
     private dialog: MatDialog) {
@@ -63,12 +66,16 @@ export class SecondaryChatMessagefieldComponent {
    * subscribes messages from firebase from channel
    */
   getMessages() {
-    const coll = collection(this.firestore, 'messages');
-    this.subbedMessages$ = collectionData(coll, { idField: 'id' });
-    this.subbedMessages$.subscribe((newMessage: any) => { // einzelnen Channel subscriben
-      this.allMessages = newMessage;
+    
 
-      console.log('thread = ', this.allMessages);
-    });
+
+
+    // const coll = collection(this.firestore, 'messages');
+    // this.subbedMessages$ = collectionData(coll, { idField: 'id' });
+    // this.subbedMessages$.subscribe((newMessage: any) => { // einzelnen Channel subscriben
+    //   this.allMessages = newMessage;
+
+    //   console.log('thread = ', this.varService);
+    // });
   }
 }
