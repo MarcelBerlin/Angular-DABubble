@@ -15,7 +15,7 @@ import { AppComponent } from 'src/app/app.component';
 
 export class SecondaryChatMessagefieldComponent {
 
-  public content: any = 'MUSTERNACHRICHT';
+  public content: any = '';
   public sentTime: any = '';
   public message: any = {};
   public userName: string = '';
@@ -63,7 +63,7 @@ export class SecondaryChatMessagefieldComponent {
   getMessages() {
     const coll = collection(this.firestore, 'messages');
     this.subbedMessages$ = collectionData(coll, { idField: 'id' });
-    this.subbedMessages$.subscribe((newMessage: any) => {
+    this.subbedMessages$.subscribe((newMessage: any) => { // einzelnen Channel subscriben
       this.allMessages = newMessage;
       this.getMessageDatas(this.allMessages);
 
