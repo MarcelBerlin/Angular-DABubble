@@ -174,6 +174,7 @@ export class MenuSidenavComponent implements OnInit {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
     this.getService.channelIndex = arrayId;
+    this.dcshService.chatSlideIn();
   }
 
   openNewMessage() {
