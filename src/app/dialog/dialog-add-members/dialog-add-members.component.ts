@@ -14,7 +14,9 @@ import { VariablesService } from 'src/app/services/variables.service';
 export class DialogAddMembersComponent {
   control = new FormControl('');
   filteredArrays: Observable<string[]>;
-  property: string = 'name';
+  name: string = 'name';
+  img: string = 'img';
+  online: string = 'online';
 
   constructor(
     private dialogRef: DialogRef,
