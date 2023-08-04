@@ -18,7 +18,7 @@ interface Tag {
   imagePath: string;
   description: string;
   channelCreator: string;
-
+  membersToChannelArray:any [];
 }
 
 @Injectable({
@@ -34,7 +34,7 @@ export class DialogAddService {
     this.newTags$ = collectionData(coll, { idField: 'id' });
     this.newTags$.subscribe((tag: any) => {
       this.tagsData = tag;
-      console.log(this.tagsData);
+      // console.log(this.tagsData);
     });
   }
 
@@ -43,11 +43,15 @@ export class DialogAddService {
   newTag: string = '';
   description: string = '';
   channelCreator: string = '';
-  
+  membersToChannelArray:any = [];
 
-  async addTag(generatedTag: string, description: string, channelCreator:string) {
+  async addTag(
+    generatedTag: string,
+    description: string,
+    channelCreator: string
+  ) {
     this.description = description;
-    this.newTag = generatedTag;    
+    this.newTag = generatedTag;
     this.channelCreator = channelCreator;
     if (this.newTag) {
       const tag: Tag = {
@@ -56,6 +60,7 @@ export class DialogAddService {
         imagePath: 'assets/img/sidenav/tag.png',
         description: this.description,
         channelCreator: this.channelCreator,
+        membersToChannelArray: this.membersToChannelArray,
       };
 
       // Firestore-Dokument erstellen und Tag speichern
@@ -81,5 +86,20 @@ export class DialogAddService {
     } catch (error) {
       console.error('Fehler beim Löschen des Tags:', error);
     }
+  }
+
+  addUserToChannel(channelId: string, addedUserToChannel: string) {
+    if (this.membersToChannelArray.indexOf(addedUserToChannel) === -1) {
+      this.membersToChannelArray.push(addedUserToChannel);
+    }
+    console.log(this.membersToChannelArray);
+    console.log(channelId, addedUserToChannel);
+
+    // this.membersToChannel.push(addedUserToChannel);
+    // console.log(this.membersToChannel);
+    
+    // const document = doc(this.firestore, 'tags', channelId);
+    // const newData = this.membersToChannel;
+    // updateDoc(document, newData);
   }
 }

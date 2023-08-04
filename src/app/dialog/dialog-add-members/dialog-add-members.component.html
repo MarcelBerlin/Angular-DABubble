@@ -21,7 +21,7 @@
           [matAutocomplete]="auto"
           class="example-input"
         />
-        <mat-autocomplete #auto="matAutocomplete">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
           <mat-option
             *ngFor="let element of filteredArrays | async"
             [value]="element[name]"
@@ -47,7 +47,7 @@
       <input type="text" placeholder="Name eingeben" />
     </div> -->
     <div class="buttonContainer">
-      <button mat-button>Hinzufügen</button>
+      <button mat-button (click)="addUser()">Hinzufügen</button>
     </div>
   </mat-card-content>
 </mat-card>

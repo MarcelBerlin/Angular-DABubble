@@ -17,6 +17,8 @@ export class DialogAddMembersComponent {
   name: string = 'name';
   img: string = 'img';
   online: string = 'online';
+  idAsSelectedChannel: string = '';
+  selectedUserIndex: number;
 
   constructor(
     private dialogRef: DialogRef,
@@ -68,5 +70,24 @@ export class DialogAddMembersComponent {
    */
   close() {
     this.dialogRef.close();
+  }
+
+  onOptionSelected(event: any) {
+    const selectedOption = event.option.value;
+    this.idAsSelectedChannel =  this.tagChannel.tagsData[this.variableService.selectedChannel].id
+    this.dataService.userData.forEach((element, index) => {
+      if (element.name === selectedOption) {
+        this.selectedUserIndex = index;
+      }
+    });
+  }
+
+  addUser() {
+    this.tagChannel.addUserToChannel(this.idAsSelectedChannel, this.resultEmail(this.selectedUserIndex))
+
+  }
+
+  resultEmail(index:number) {
+    return this.dataService.userData[index].email;
   }
 }
