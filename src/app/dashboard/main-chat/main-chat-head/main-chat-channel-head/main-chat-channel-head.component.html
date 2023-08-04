@@ -6,9 +6,17 @@
       tagChannel?.tagsData && variableService?.selectedChannel !== undefined
     "
   >
-    <span>
-      {{ tagChannel.tagsData[variableService.selectedChannel]?.name[0] }}
-      {{ tagChannel.tagsData[variableService.selectedChannel]?.name.slice(1) }}
+    <span class="nameContainer">
+      <span class="hashtag">
+        {{
+          tagChannel.tagsData[variableService.selectedChannel]?.name[0]
+        }}</span
+      >
+      <span class="afterHashtag">
+        {{
+          tagChannel.tagsData[variableService.selectedChannel]?.name.slice(1)
+        }}</span
+      >
     </span>
     <mat-icon>keyboard_arrow_down</mat-icon>
   </div>
