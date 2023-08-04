@@ -1,19 +1,26 @@
 .header-body {
   position: relative;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-around;
+  justify-content: center;
   background-color: #eceefe;
   margin-left: 22px;
+  width: 100%;
 
   .header-logo {
     display: flex;
     align-items: center;
+
+    img {
+      position: fixed;
+      top: 20px;
+      left: 40px;
+    }
   }
 
   .header-searchbar {
     display: flex;
     align-items: center;
+    width: 30%;
     padding-inline-start: 15px;
     padding-inline-end: 15px;
     margin: 0 8px;
@@ -21,7 +28,7 @@
     background-color: white;
 
     .input-searchbar {
-      min-width: 300px;
+      width: 100%;
       height: 70px;
       border: none;
       outline: none;
@@ -40,6 +47,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    position: fixed;
+    top: 20px;
+    right: 40px;
 
     span {
       font-family: "Nunito";

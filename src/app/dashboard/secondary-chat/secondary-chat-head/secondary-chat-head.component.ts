@@ -21,7 +21,6 @@ export class SecondaryChatHeadComponent {
   constructor(
     private dcshService: DashboardComponentsShowHideService,
     public channelService: DialogAddService,
-    public memberDialog: DialogMembersComponent,
     public dialog: MatDialog
   ) {
 

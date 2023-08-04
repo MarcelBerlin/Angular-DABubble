@@ -18,7 +18,6 @@ export class DialogUserReactionsComponent {
 
   constructor(public getUser: DataService,
     public messages: MessageService,
-    public thread: SecondaryChatMessagefieldComponent,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     // debugger;
     // console.log(this.dialogEmoji);
