@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ChatService } from 'src/app/services/chat.service';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AppComponent } from 'src/app/app.component';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-secondary-chat-messagefield',
@@ -23,19 +24,20 @@ export class SecondaryChatMessagefieldComponent {
   public newMessages: number = 0;
   private subbedMessages$: any = [];
   public allMessages: any = [];
+  // public allEmojis: any = [];
 
 
   constructor(public getUser: DataService,
     public app: AppComponent,
     public firestore: Firestore,
     public getMessage: MessageService,
-    public messageService: MessageService,
     public chatService: ChatService,
     private dialog: MatDialog) {
 
     setTimeout(() => {
       this.getMessages()
     }, 1000);
+
   }
 
   // deleteDoubledEmojis(doubledEmoji) {
@@ -65,37 +67,8 @@ export class SecondaryChatMessagefieldComponent {
     this.subbedMessages$ = collectionData(coll, { idField: 'id' });
     this.subbedMessages$.subscribe((newMessage: any) => { // einzelnen Channel subscriben
       this.allMessages = newMessage;
-      this.getMessageDatas(this.allMessages);
 
-      // console.log('thread = ', this.allMessages);
+      console.log('thread = ', this.allMessages);
     });
-  }
-
-
-  // messageJson() {  
-  //   this.message =
-  //   {
-  //     name: this.userName,
-  //     time: this.sentTime,
-  //     message: this.content,
-  //     img: this.userImg,
-  //     emoji: this.app.emoji
-  //   };
-  // }
-
-
-  /**
-   * get messages from channel with for-loop for hmtl code
-   * 
-   * @param newMessage subscribed messages from channel
-   */
-  getMessageDatas(newMessage) {
-    for (let i = 0; i < newMessage.length; i++) {
-      this.message = newMessage[i];
-      this.sentTime = this.message.timestamp.clockString;
-      this.content = this.message.content;
-      this.userName = this.message.userName;
-      this.userImg = this.message.userImg;
-    }
   }
 }

@@ -14,12 +14,11 @@ import { MessageService } from 'src/app/services/messages.service';
 
 export class DialogUserReactionsComponent {
 
-   @Input() dialogEmoji: any[];
+  // dialogEmoji: any[];
 
   constructor(public getUser: DataService,
     public messages: MessageService,
+    public app: AppComponent,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    // debugger;
-    // console.log(this.dialogEmoji);
   }
 }

@@ -1,11 +1,11 @@
 <h1 tabindex= mat-dialog-title>User</h1>
 <div mat-dialog-content>
     <ul>
-        <!-- *ngFor  user, die reagiert haben-->
-        <li *ngFor="let emoji of dialogEmoji" >
+        <!-- *ngFor user, die reagiert haben-->
+        <li >
             <div class="user-list">
                 <span> {{ this.getUser.loggedInUserData.name }} </span> <!-- jeweiliger user -->
-                <span> {{ emoji }} </span> <!-- emojis von usern -->
+                <span> {{ data.dialogEmoji }} </span> <!-- emojis von usern -->
             </div>
         </li>
     </ul>

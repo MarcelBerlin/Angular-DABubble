@@ -32,7 +32,7 @@ export class SecondaryChatHeadComponent {
 
 
   slideOut() {
-    this.dcshService.chatSlideOut()
+    this.dcshService.chatSlideOut();
   }
 
 
