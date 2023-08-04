@@ -43,7 +43,7 @@ export class DirectChatService {
       //     this.setNewMessageBage();
       //   }, 5000);
       // }
-      
+
       if (this.directChatActive && this.directChatIndex.directChatId) {
         this.loadChatDataSets(this.directChatIndex.directChatId);
       }
@@ -185,6 +185,7 @@ export class DirectChatService {
     getDoc(qData).then((chat) => {
       this.directChat = chat.data();
       this.directChatActive = true;
+      this.createTimlines();
     }).catch((error) => {
       console.log('Failure during load of the Document');
     });
@@ -258,14 +259,14 @@ export class DirectChatService {
    * 
    * @returns {void}
    */
-  getChatDataSets():void {
+  getChatDataSets(): void {
     const coll = collection(this.firestore, 'directChats');
     const qData = doc(coll, this.chatDataSet.id);
     getDoc(qData).then((chatDataSet) => {
       this.directChat = chatDataSet.data();
       this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex());
       this.updateUser();
-      if (this.chatDataSet.firstMember != this.chatDataSet.secondMember){
+      if (this.chatDataSet.firstMember != this.chatDataSet.secondMember) {
         this.createNewDirectChatPartnerIndex();
       }
     }).catch((error) => {
@@ -430,7 +431,7 @@ export class DirectChatService {
   bagesPartnerId: string;
   bagesPartnerUser: string;
 
-  setNewMessageBage(){
+  setNewMessageBage() {
     const loggedUserChats = this.dataService.loggedInUserData.directChats;
     // console.log(loggedUserChats);
     loggedUserChats.forEach((chat) => {
@@ -439,11 +440,11 @@ export class DirectChatService {
       this.bagesPartnerId = chat.partnerId;
       this.dataService.userData.forEach((user) => {
         this.bagesPartnerUser = user;
-        if (user.id == this.bagesPartnerId){
+        if (user.id == this.bagesPartnerId) {
           // console.log('partner found: ', user.id, this.dataService.userData);
           user.directChats.forEach((aChat) => {
             // console.log(aChat.directChatId, this.bagesUserChatId);
-            if (aChat.directChatId == this.bagesUserChatId ){
+            if (aChat.directChatId == this.bagesUserChatId) {
               // console.log(this.bagesLoggedUserTimeStamp, aChat.lastTimeStamp.dateTimeNumber);
               if (this.bagesLoggedUserTimeStamp < aChat.lastTimeStamp.dateTimeNumber) {
                 // console.log('new Chat Data found, chatpartner id:', user.userId );
@@ -458,8 +459,25 @@ export class DirectChatService {
     })
   }
 
+  timeline: string[] = [];
 
-  }//ende
+  createTimlines() {
+      this.timeline = [];
+      for (let i = 0; i < this.directChat.chat.length; i++) {
+        // console.log(this.directChat.chat[i]);
+        if (i == 0) {
+          this.timeline.push(this.directChat.chat[i].date);
+        } else if (this.directChat.chat[i].date == this.directChat.chat[i - 1].date){
+          this.timeline.push(undefined);
+        } else if (this.directChat.chat[i].date != this.directChat.chat[i - 1].date){
+          this.timeline.push(this.directChat.chat[i].date);
+        } 
+      }
+      // console.log('timeline created: ', this.timeline);
+  }
+
+
+}//ende
 
 
 
