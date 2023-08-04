@@ -25,12 +25,25 @@ export class DialogAddMembersComponent {
     public dataService: DataService
   ) {}
 
+  /**
+   * Lifecycle hook called after the component is initialized.
+   * Sets up the filteredArrays property based on changes in the control's value.
+   * The filtering is performed using the _filter method.
+   *
+   */
   ngOnInit() {
     this.filteredArrays = this.control.valueChanges.pipe(
       map((value) => this._filter(value || ''))
     );
   }
 
+  /**
+   * Filters an array of strings based on the provided value.
+   *
+   * @param {string} value - The value to be used for filtering.
+   * @returns {string[]} - An array of strings that match the filtering criteria.
+   *
+   */
   private _filter(value: string): string[] {
     const filterValue = this._normalizeValue(value);
     return this.dataService.userData.filter((element) =>
@@ -38,6 +51,13 @@ export class DialogAddMembersComponent {
     );
   }
 
+  /**
+   * Normalizes a given string by converting it to lowercase and removing whitespace.
+   *
+   * @param {string} value - The string to be normalized.
+   * @returns {string} - The normalized string without uppercase characters and whitespace.
+   *
+   */
   private _normalizeValue(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
   }
