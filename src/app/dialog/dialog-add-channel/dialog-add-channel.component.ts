@@ -38,7 +38,7 @@ export class DialogAddChannelComponent {
   
 
   generateTag() {
-    this.getService.addTag('# '+this.newTag);
+    this.getService.addTag('# '+this.newTag, this.description);
     this.newTag = ''; // Zurücksetzen des Inputfelds nach dem Hinzufügen
     setTimeout(() => {
       this.closeDialog();

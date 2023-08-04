@@ -86,9 +86,7 @@
           </div>
         </div>
         <span *ngIf="!description" class="nunito-400-18"
-          >Dieser Channel ist für alles rund um #dfsdf vorgesehen. Hier kannst
-          du zusammen mit deinem Team Meetings abhalten, Dokumente teilen und
-          Entscheidungen treffen.</span
+          >{{ tagChannel.tagsData[variableService.selectedChannel]?.description }}</span
         >
         <div class="textareaContainer" *ngIf="description">
           <textarea

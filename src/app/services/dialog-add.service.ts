@@ -1,7 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collectionData,
+  collection,
+  setDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+  addDoc,
+  getDoc,
+} from '@angular/fire/firestore';
 import 'firebase/compat/firestore';
-
 
 interface Tag {
   id: string;
@@ -11,25 +20,20 @@ interface Tag {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class DialogAddService {
   newTags$: any;
   tagsData: any = [];
   channelIndex: number = 0;
 
-
-  constructor(
-    private firestore: Firestore,
-  ) {
+  constructor(private firestore: Firestore) {
     const coll = collection(firestore, 'tags');
     this.newTags$ = collectionData(coll, { idField: 'id' });
     this.newTags$.subscribe((tag: any) => {
       this.tagsData = tag;
       console.log(this.tagsData);
     });
-
   }
 
   tags: Tag[] = []; // neue Tags werden als JSON hinzugefügt
@@ -37,11 +41,16 @@ export class DialogAddService {
   newTag: string = '';
   description: string = '';
 
-
-  async addTag(generatedTag: string) {
-    this.newTag = generatedTag;
+  async addTag(generatedTag: string, description: string) {
+    this.description = description;
+    this.newTag = generatedTag;    
     if (this.newTag) {
-      const tag: Tag = { id: '', name: this.newTag, imagePath: 'assets/img/sidenav/tag.png', description: this.description };
+      const tag: Tag = {
+        id: '',
+        name: this.newTag,
+        imagePath: 'assets/img/sidenav/tag.png',
+        description: this.description,
+      };
 
       // Firestore-Dokument erstellen und Tag speichern
       const docRef = await addDoc(collection(this.firestore, 'tags'), tag);
@@ -56,23 +65,15 @@ export class DialogAddService {
     }
   }
 
-
   async deleteFromFirebase(tagId: string) {
-    try {      
-      
-      await deleteDoc(doc(this.firestore, 'tags', tagId));  
+    try {
+      await deleteDoc(doc(this.firestore, 'tags', tagId));
       // Das Tag-Objekt aus dem lokalen Array entfernen
-      this.tags = this.tags.filter(tag => tag.id !== tagId);
+      this.tags = this.tags.filter((tag) => tag.id !== tagId);
 
       console.log('Tag erfolgreich gelöscht.');
     } catch (error) {
       console.error('Fehler beim Löschen des Tags:', error);
     }
   }
-  
- 
-
-  
-
-
 }
