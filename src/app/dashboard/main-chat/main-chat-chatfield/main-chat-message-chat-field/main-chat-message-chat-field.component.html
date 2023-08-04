@@ -1,6 +1,6 @@
-<div class="container"  *ngFor="let message of directChatService.directChat.chat; let i=index" style="height: unset;">
-  <div class="timeLine" *ngIf="directChatService.timeline[i]">
-    <div class="timeLineHead">{{directChatService.timeline[i]}}</div>
+<div class="container"  *ngFor="let message of directChatService.directChat.chat; let i=index" >
+  <div class="timeLine" *ngIf="timelinesService.timeline[i]">
+    <div class="timeLineHead">{{timelinesService.timeline[i]}}</div>
   </div>
 
 

@@ -5,7 +5,7 @@ import { ChatDataSet } from './models/chat-data-set';
 import { DataService } from '../services/data.service';
 import { ActualChat } from './models/actual-chat.class';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
-
+import { TimelinesService } from './timelines.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,7 +22,8 @@ export class DirectChatService {
 
   constructor(
     private dataService: DataService,
-    private firestore: Firestore
+    private firestore: Firestore,
+    private timelineService: TimelinesService
   ) {
     this.getChanges();
 
@@ -185,7 +186,7 @@ export class DirectChatService {
     getDoc(qData).then((chat) => {
       this.directChat = chat.data();
       this.directChatActive = true;
-      this.createTimlines();
+      this.timelineService.createTimlines(this.directChat.chat);
     }).catch((error) => {
       console.log('Failure during load of the Document');
     });
@@ -458,24 +459,6 @@ export class DirectChatService {
       })
     })
   }
-
-  timeline: string[] = [];
-
-  createTimlines() {
-      this.timeline = [];
-      for (let i = 0; i < this.directChat.chat.length; i++) {
-        // console.log(this.directChat.chat[i]);
-        if (i == 0) {
-          this.timeline.push(this.directChat.chat[i].date);
-        } else if (this.directChat.chat[i].date == this.directChat.chat[i - 1].date){
-          this.timeline.push(undefined);
-        } else if (this.directChat.chat[i].date != this.directChat.chat[i - 1].date){
-          this.timeline.push(this.directChat.chat[i].date);
-        } 
-      }
-      // console.log('timeline created: ', this.timeline);
-  }
-
 
 }//ende
 
