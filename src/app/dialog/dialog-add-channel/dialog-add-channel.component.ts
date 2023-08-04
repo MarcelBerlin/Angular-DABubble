@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { DialogAddService } from '../../services/dialog-add.service';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
+import { DataService } from 'src/app/services/data.service';
 
 interface Tag {
   name: string;
@@ -18,8 +19,9 @@ export class DialogAddChannelComponent {
 
   newTag: string = '';
   description: string = '';
+  channelCreator = this.dataService.loggedInUserEmail;
 
-  constructor(private dialogRef : DialogRef, public getService: DialogAddService) {
+  constructor(private dialogRef : DialogRef, public getService: DialogAddService, private dataService: DataService) {
 
   }
 
@@ -38,7 +40,7 @@ export class DialogAddChannelComponent {
   
 
   generateTag() {
-    this.getService.addTag('# '+this.newTag, this.description);
+    this.getService.addTag('# '+this.newTag, this.description, this.channelCreator);
     this.newTag = ''; // Zurücksetzen des Inputfelds nach dem Hinzufügen
     setTimeout(() => {
       this.closeDialog();

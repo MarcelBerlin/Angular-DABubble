@@ -17,6 +17,8 @@ interface Tag {
   name: string;
   imagePath: string;
   description: string;
+  channelCreator: string;
+
 }
 
 @Injectable({
@@ -40,16 +42,20 @@ export class DialogAddService {
 
   newTag: string = '';
   description: string = '';
+  channelCreator: string = '';
+  
 
-  async addTag(generatedTag: string, description: string) {
+  async addTag(generatedTag: string, description: string, channelCreator:string) {
     this.description = description;
     this.newTag = generatedTag;    
+    this.channelCreator = channelCreator;
     if (this.newTag) {
       const tag: Tag = {
         id: '',
         name: this.newTag,
         imagePath: 'assets/img/sidenav/tag.png',
         description: this.description,
+        channelCreator: this.channelCreator,
       };
 
       // Firestore-Dokument erstellen und Tag speichern
