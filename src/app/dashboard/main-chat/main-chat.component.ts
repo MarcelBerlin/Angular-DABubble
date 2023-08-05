@@ -1,62 +1,68 @@
-import { Dialog } from '@angular/cdk/dialog';
-import { AfterViewChecked, Component, ElementRef, ViewChild } from '@angular/core';
-import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
-import { TestBastiService } from 'src/app/services/test-basti.service';
-import { DashboardComponentsShowHideService } from '../dashboard-components-show-hide.service';
+import { Component } from '@angular/core';
 import { VariablesService } from 'src/app/services/variables.service';
-
 @Component({
   selector: 'app-main-chat',
   templateUrl: './main-chat.component.html',
   styleUrls: ['./main-chat.component.scss'],
 })
 export class MainChatComponent {
+  previousScrollTop: number = 0;
+  autoscroll: boolean = true;
 
 
-  constructor(public varService: VariablesService) {
+  constructor(
+    public varService: VariablesService
+  ) { }
 
+
+  /**
+   * Lifecycle hook that executes after Angular has checked the component's view.
+   * If autoscroll is enabled (true), it calls the 'scrollToBottom' method to scroll 
+   * the chat container to the bottom.
+   * 
+   * @returns {void}
+   */
+  ngAfterViewChecked(): void {
+    if (this.autoscroll == true) this.scrollToBottom();
   }
 
-  @ViewChild('scrollMe') scrollMe: ElementRef;
-  ngAfterViewChecked() {
-      this.scrollToBottom();
-  }
 
-  isAutoScrolling = true;
-  
-  
-  // onScroll() {
-  //   this.deactivateAutoScroll();
-  //   const element = this.scrollMe.nativeElement;
-  //   // Überprüfen, ob der Benutzer manuell nach unten gescrollt hat
-  //   this.isAutoScrolling = element.scrollTop + element.clientHeight === element.scrollHeight;
-  // }
-  
-  // scrollToBottom(): void {
-  //   try {
-  //     const element = this.scrollMe.nativeElement;
-  //     // Wenn das Element bereits am unteren Ende war, automatisch zum unteren Ende scrollen
-  //     if (this.isAutoScrolling) {
-  //       element.scrollTop = element.scrollHeight;
-        
-  //     }
-  //   } catch (err) {
-  //     console.log('autoscroll error');
-  //   }
-  // }
-  
-  // // Funktion zum Deaktivieren des automatischen Scrollens
-  // deactivateAutoScroll() {
-  //   this.isAutoScrolling = false;
-  // }
-
-  
+  /**
+   * Scrolls the chat container to the bottom.
+   * 
+   * @returns {void}
+   */
   scrollToBottom(): void {
-    try {
-        this.scrollMe.nativeElement.scrollTop = this.scrollMe.nativeElement.scrollHeight;
-    } catch (err) {
-      console.log('autoscroll error');
-    }
+    // console.log('scrollToBottom');
+    const container = document.getElementById('autoscrollContainer');
+    container.scrollTop = container.scrollHeight;
   }
 
+
+  /**
+   * Handles the 'scroll' event of the chat container.
+   * Determines whether the user is manually scrolling up or reaching the bottom of the chat.
+   * Updates the 'autoscroll' flag accordingly to enable or disable autoscroll behavior.
+   * 
+   * @param {Event} event - The 'scroll' event object.
+   * @returns {void}
+   */
+  handleScroll(event: Event): void {
+    const container = event.target as HTMLElement;
+    const currentScrollTop = container.scrollTop;
+    const isScrollingUp = this.previousScrollTop > currentScrollTop;
+    if (isScrollingUp) {
+      this.autoscroll = false;
+      // console.log('Scroll Up erkannt!');
+    } else {
+      const scrollOffset = container.scrollHeight - container.clientHeight;
+      if (currentScrollTop >= scrollOffset) {
+        // console.log('Bottom erreicht!');
+        this.autoscroll = true;
+      }
+    }
+    this.previousScrollTop = currentScrollTop;
+  }
 }
+
+
