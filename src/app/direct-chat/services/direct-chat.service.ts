@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { TimeStamp } from './models/time-stamp';
-import { DirectChatIndex } from './models/direct-chat-index';
-import { ChatDataSet } from './models/chat-data-set';
-import { DataService } from '../services/data.service';
-import { ActualChat } from './models/actual-chat.class';
+import { TimeStamp } from '../models/time-stamp.class';
+import { DirectChatIndex } from '../models/direct-chat-index.class';
+import { ChatDataSet } from '../models/chat-data-set.class';
+import { DataService } from '../../services/data.service';
+import { ActualChat } from '../models/actual-chat.class';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { TimelinesService } from './timelines.service';
 @Injectable({
@@ -24,32 +24,7 @@ export class DirectChatService {
     private dataService: DataService,
     private firestore: Firestore,
     private timelineService: TimelinesService
-  ) {
-    this.getChanges();
-
-  }
-
-
-  /**
-   * Subscribes to changes in the users$ observable of dataService. If directChatActive is true 
-   * and a directChatIndex.directChatId is available, it reloads the chat data sets in directChatService.
-   * 
-   * @returns {void}
-   */
-  getChanges() {
-    this.dataService.users$.subscribe(() => {
-      // if(this.dataService.loggedInUserData.online == true){
-      //   setTimeout(() => {
-      //     console.log('setNewMessageBage started');
-      //     this.setNewMessageBage();
-      //   }, 5000);
-      // }
-
-      if (this.directChatActive && this.directChatIndex.directChatId) {
-        this.loadChatDataSets(this.directChatIndex.directChatId);
-      }
-    })
-  }
+  ) {}
 
 
   /**
@@ -303,7 +278,6 @@ export class DirectChatService {
     this.partnerIndex.ownId = this.chatDataSet.secondMember;
     this.partnerIndex.partnerId = this.chatDataSet.firstMember;
     this.partnerIndex.lastTimeStamp = this.directChatIndex.lastTimeStamp;
-    // this.partnerIndex.lastTimeStamp.dateTimeNumber -= 1;
     this.partnerIndex.directChatId = this.directChatIndex.directChatId;
     let partnerDirectChatIndex = this.partnerIndex.toJSON();
     this.saveNewChatPartnerChatsIndex(partnerDirectChatIndex);
@@ -322,13 +296,11 @@ export class DirectChatService {
       if (user.userId === partnerChatIndex.ownId) {
         user.directChats.push(partnerChatIndex);
         const qData = doc(this.firestore, 'users', user.userId);
-        const newData = {
-          directChats: user.directChats,
-        };
+        const newData = {directChats: user.directChats,};
         updateDoc(qData, newData).then(() => {
-          console.log('partner chatIndex set');
+          
         }).catch((error) => {
-
+          console.log('partner chatIndex set failed');
         })
       }
     });
@@ -424,43 +396,7 @@ export class DirectChatService {
       console.log('update user failed');
     })
   }
-
-  // New Testarea for message bages ######################
-
-  bagesUserChatId: string;
-  bagesLoggedUserTimeStamp: number;
-  bagesPartnerId: string;
-  bagesPartnerUser: string;
-
-  setNewMessageBage() {
-    const loggedUserChats = this.dataService.loggedInUserData.directChats;
-    // console.log(loggedUserChats);
-    loggedUserChats.forEach((chat) => {
-      this.bagesUserChatId = chat.directChatId;
-      this.bagesLoggedUserTimeStamp = chat.lastTimeStamp.dateTimeNumber;
-      this.bagesPartnerId = chat.partnerId;
-      this.dataService.userData.forEach((user) => {
-        this.bagesPartnerUser = user;
-        if (user.id == this.bagesPartnerId) {
-          // console.log('partner found: ', user.id, this.dataService.userData);
-          user.directChats.forEach((aChat) => {
-            // console.log(aChat.directChatId, this.bagesUserChatId);
-            if (aChat.directChatId == this.bagesUserChatId) {
-              // console.log(this.bagesLoggedUserTimeStamp, aChat.lastTimeStamp.dateTimeNumber);
-              if (this.bagesLoggedUserTimeStamp < aChat.lastTimeStamp.dateTimeNumber) {
-                // console.log('new Chat Data found, chatpartner id:', user.userId );
-                // console.log('directChatId: ', aChat.directChatId);
-                // console.log('timeStamp logged: ', this.bagesLoggedUserTimeStamp);
-                // console.log('timeStamp partner: ', aChat.lastTimeStamp.dateTimeNumber);
-              }
-            }
-          })
-        }
-      })
-    })
-  }
-
-}//ende
+}//end
 
 
 

@@ -15,7 +15,7 @@ import { DataService } from 'src/app/services/data.service';
 import { User } from 'src/app/models/user.class';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
-import { DirectChatService } from 'src/app/direct-chat/direct-chat.service';
+import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
 
 interface Tag {
   id: string;

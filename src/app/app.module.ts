@@ -47,7 +47,6 @@ import { StartAnimationComponent } from './auth-features/start-animation/start-a
 import { MainChatChannelHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-channel-head/main-chat-channel-head.component';
 import { MainChatMessageHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-message-head/main-chat-message-head.component';
 import { MainChatChannelChatFieldComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/main-chat-channel-chat-field.component';
-import { MainChatMessageChatFieldComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-message-chat-field/main-chat-message-chat-field.component';
 import { ConversationBetweenComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-message-chat-field/conversation-between/conversation-between.component';
 import { MainChatHeadComponent } from './dashboard/main-chat/main-chat-head/main-chat-head.component';
 import { MainChatChatfieldComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-chatfield.component';
@@ -58,6 +57,7 @@ import { LoginHeaderComponent } from './auth-features/login-header/login-header.
 import { SecondaryChatInputfieldComponent } from './dashboard/secondary-chat/secondary-chat-inputfield/secondary-chat-inputfield.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { DialogUserReactionsComponent } from './dialog/dialog-user-reactions/dialog-user-reactions.component';
+import { DirectChatComponent } from './direct-chat/direct-chat.component';
 
 
 @NgModule({
@@ -87,7 +87,6 @@ import { DialogUserReactionsComponent } from './dialog/dialog-user-reactions/dia
     MainChatChannelHeadComponent,
     MainChatMessageHeadComponent,
     MainChatChannelChatFieldComponent,
-    MainChatMessageChatFieldComponent,
     ConversationBetweenComponent,
     MainChatHeadComponent,
     MainChatChatfieldComponent,
@@ -96,6 +95,7 @@ import { DialogUserReactionsComponent } from './dialog/dialog-user-reactions/dia
     LoginHeaderComponent,
     SecondaryChatInputfieldComponent,
     DialogUserReactionsComponent,
+    DirectChatComponent,
 
   ],
   imports: [

@@ -5,7 +5,7 @@ import { DashboardComponentsShowHideService } from '../../dashboard-components-s
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { ChatService } from 'src/app/services/chat.service';
-import { DirectChatService } from 'src/app/direct-chat/direct-chat.service';
+import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
 
 
 @Component({

@@ -1,0 +1,72 @@
+<div class="container"  *ngFor="let message of directChatService.directChat.chat; let i=index" >
+    <div class="timeLine" *ngIf="timelinesService.timeline[i]">
+      <div class="timeLineHead">{{timelinesService.timeline[i]}}</div>
+    </div>
+  
+  
+    <!-- Left Site chat partner -->
+    <div *ngIf="message.name != this.dataService.loggedInUserData.name"
+      class="messagesMainChatLeft"
+      (mouseenter)="hoveredMessagesMainChat = true"
+      (mouseleave)="hoveredMessagesMainChat = false"
+      [ngStyle]="{
+        'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',
+        transition: 'background-color 400ms'
+      }" 
+    >
+      <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
+      <div class="messageContent">
+        <div class="nameTime">
+          <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
+          <span class="time">{{message.date}} {{message.time}} Uhr</span>
+        </div>
+        <div
+          class="messageBox"
+          [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'"
+        >
+          <span class="message">{{message.message}}</span>
+        </div>
+        <div class="labelAnswersAndTime">
+          <div class="time">Letzte Antwort 14:56</div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- <div class="timeLine">
+      <div class="timeLineHead">Heute</div>
+    </div> -->
+  
+  
+    <!-- Right Site you -->
+    <div   *ngIf="message.name == this.dataService.loggedInUserData.name"
+      class="messagesMainChatRight"
+      (mouseenter)="hoveredMessagesMainChat = true"
+      (mouseleave)="hoveredMessagesMainChat = false"
+      [ngStyle]="{
+        'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',
+        transition: 'background-color 400ms', 
+      }"
+    >
+      <div class="messageContent">
+        <div class="nameTime">
+          <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
+          <span class="time">{{message.date}} {{message.time}} Uhr</span>
+        </div>
+        <div
+          class="messageBox"
+          [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'"
+        >
+          <span class="message">{{message.message}}</span>
+        </div>
+        <div class="labelAnswersAndTime">
+          <div class="time">Letzte Antwort 14:56</div>
+        </div>
+      </div>
+      <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
+    </div>
+  
+    <!-- <app-conversation-between
+      *ngIf="!varService.conversationBetween"
+    ></app-conversation-between> -->
+  </div>
+  
