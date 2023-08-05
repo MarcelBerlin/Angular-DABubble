@@ -33,7 +33,6 @@ export class MainChatComponent {
    * @returns {void}
    */
   scrollToBottom(): void {
-    // console.log('scrollToBottom');
     const container = document.getElementById('autoscrollContainer');
     container.scrollTop = container.scrollHeight;
   }
@@ -51,15 +50,10 @@ export class MainChatComponent {
     const container = event.target as HTMLElement;
     const currentScrollTop = container.scrollTop;
     const isScrollingUp = this.previousScrollTop > currentScrollTop;
-    if (isScrollingUp) {
-      this.autoscroll = false;
-      // console.log('Scroll Up erkannt!');
-    } else {
+    if (isScrollingUp) this.autoscroll = false;
+    else {
       const scrollOffset = container.scrollHeight - container.clientHeight;
-      if (currentScrollTop >= scrollOffset) {
-        // console.log('Bottom erreicht!');
-        this.autoscroll = true;
-      }
+      if (currentScrollTop >= scrollOffset) this.autoscroll = true;
     }
     this.previousScrollTop = currentScrollTop;
   }
