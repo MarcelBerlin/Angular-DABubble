@@ -32,12 +32,8 @@
       </div>
     </div>
   
-    <!-- <div class="timeLine">
-      <div class="timeLineHead">Heute</div>
-    </div> -->
   
-  
-    <!-- Right Site you -->
+    <!-- Right Site logged User -->
     <div   *ngIf="message.name == this.dataService.loggedInUserData.name"
       class="messagesMainChatRight"
       (mouseenter)="hoveredMessagesMainChat = true"
@@ -65,8 +61,8 @@
       <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
     </div>
   
-    <!-- <app-conversation-between
+    <app-conversation-between
       *ngIf="!varService.conversationBetween"
-    ></app-conversation-between> -->
+    ></app-conversation-between>
   </div>
   
