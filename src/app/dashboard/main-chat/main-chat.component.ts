@@ -23,7 +23,9 @@ export class MainChatComponent {
    * @returns {void}
    */
   ngAfterViewChecked(): void {
-    if (this.autoscroll == true) this.scrollToBottom();
+    if (this.autoscroll == true){
+      this.scrollToBottom();
+    } 
   }
 
 

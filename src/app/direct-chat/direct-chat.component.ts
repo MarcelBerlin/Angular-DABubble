@@ -19,6 +19,7 @@ export class DirectChatComponent {
   hoveredMessagesMainChat: boolean = false;
   emptyChat: boolean = false;
   chatText: string = '';
+  
 
   constructor(
     private dcshService: DashboardComponentsShowHideService,
@@ -29,20 +30,10 @@ export class DirectChatComponent {
     public chatService: ChatService,
     public dataService: DataService,
     public directChatService: DirectChatService,
-    public timelinesService: TimelinesService
+    public timelinesService: TimelinesService,
     ) {
       this.getChanges();
     }
-
-
-  /**
-   * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
-   *
-   * This method is responsible for triggering the slide-in animation of the secondary chat.
-   */
-  // openSecondaryChat() {
-  //   this.dcshService.chatSlideIn();
-  // }
 
 
   /**
@@ -53,11 +44,6 @@ export class DirectChatComponent {
   profileViewUsers(): void {
     this.dialog.open(DialogProfileViewUsersComponent);
   }
-
-
-  // onChatTextChanged(): void{
-  //   this.emptyChat = this.chatText.trim() === '';
-  // }
 
 
   /**
@@ -73,5 +59,4 @@ export class DirectChatComponent {
       }
     })
   }
-
 }

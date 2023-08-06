@@ -58,6 +58,7 @@ import { SecondaryChatInputfieldComponent } from './dashboard/secondary-chat/sec
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { DialogUserReactionsComponent } from './dialog/dialog-user-reactions/dialog-user-reactions.component';
 import { DirectChatComponent } from './direct-chat/direct-chat.component';
+import { EmojiMenuComponent } from './dashboard/main-chat/main-chat-messagefield/emoji-menu/emoji-menu.component';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { DirectChatComponent } from './direct-chat/direct-chat.component';
     SecondaryChatInputfieldComponent,
     DialogUserReactionsComponent,
     DirectChatComponent,
+    EmojiMenuComponent,
 
   ],
   imports: [
