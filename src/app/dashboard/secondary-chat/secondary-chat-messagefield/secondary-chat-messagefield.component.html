@@ -1,8 +1,8 @@
 <div class="thread-content">
 
-  <!-- css klassen left bei anderen usern & right bei eigener nachricht mit ngIf realisieren -->
+
+
   <div *ngFor="let messages of this.allMessages" class="full-message-left">
-    <!-- ngIf letzte nachricht, dann kein border-bottom-->
 
     <div class="avatar-left">
       <img src="{{ messages.userImg }}">
@@ -21,9 +21,9 @@
         <div *ngIf="app.reactionBoo">
           <div mat-button (click)="userReaction()" class="reactions">
             <span>{{ app.newReaction }}</span> <!-- emoji -->
-            <!-- <span>{{ app.reactionNumber }}</span> each emoji own counter -->
+            <span>{{ app.reactionNumber }}</span> <!--- each emoji own counter -->
           </div>
-        </div>
+        </div> 
 
         <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
           (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;" src="./../../../../assets/img/reaction.png">
@@ -33,10 +33,10 @@
         </emoji-mart>
       </div>
     </div>
-  </div>
+  </div> 
 
-  <div class="new-answers">
-    <p> {{ newMessages }} Antwort(en)</p>
+  <div *ngIf="this.newContent" class="new-answers">
+    <p> {{ this.newMessages }} Antwort(en)</p>
     <img src="./../../../../assets/img/line.png">
   </div>
 
