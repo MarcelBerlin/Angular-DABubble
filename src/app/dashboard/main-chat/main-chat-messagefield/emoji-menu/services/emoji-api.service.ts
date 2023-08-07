@@ -52,7 +52,6 @@ export class EmojiApiService {
   createEmojiGroups(): void {
     let i: number = 0;
     emoji.all().forEach((ele: any) => {
-      console.log(emoji.get(ele.emoji).group);
       let myEmoji = emoji.get(ele.emoji);
       this.myEmojiArray.push(myEmoji);
     });
@@ -63,7 +62,6 @@ export class EmojiApiService {
   /**
    * Creates a list of unique emoji groups from 'myEmojiArray'.
    * Checks if an emoji group is not already in 'emojiGroupList', and adds it if not present.
-   * Logs the 'emojiGroupList' to the console (for demonstration purposes).
    * Calls the 'fillEmojisGroups()' function to handle further emoji grouping logic based on the 
    * obtained emoji groups.
    * 
@@ -76,7 +74,6 @@ export class EmojiApiService {
         this.emojiGroupList.push(groupName);
       }
     });
-    console.log(this.emojiGroupList);
     this.fillEmojisGroups();
   }
 
