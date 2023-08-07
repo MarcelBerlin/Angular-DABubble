@@ -26,11 +26,8 @@ export class SecondaryChatHeadComponent {
     public dialog: MatDialog) {
 
     setTimeout(() => {
-      setInterval(() => {
-        this.channelName = this.addService.tagsData[this.varService.selectedChannel].name;
-      }, 500);
-    }, 1000);
-
+      this.channelName = this.addService.tagsData[this.varService.selectedChannel]?.name;
+    }, 500);
   }
 
 

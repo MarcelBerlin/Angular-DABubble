@@ -14,6 +14,7 @@ export class EmojiApiService {
     private varService: VariablesService
   ) { 
     this.emojiDatabase = emoji.all();
+    // console.log(this.emojiDatabase);
   }
 
 
