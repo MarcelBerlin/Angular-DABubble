@@ -28,25 +28,25 @@
 
             .name-time {
                 display: flex;
-            }
 
-            .name {
-                font-family: "nunito";
-                font-size: 18px;
-                font-weight: 700;
-                padding-right: 20px;
-            }
+                .name {
+                    font-family: "nunito";
+                    font-size: 18px;
+                    font-weight: 700;
+                    padding-right: 20px;
+                }
 
-            .time {
-                color: #686868;
-                font-family: "nunito";
-                font-size: 14px;
+                .time {
+                    color: #686868;
+                    font-family: "nunito";
+                    font-size: 14px;
+                }
             }
 
             .message-content-left {
                 background-color: #eceefe;
                 border-radius: 0 20px 20px 20px;
-                width: auto;
+                width: fit-content;
                 padding: 16px;
 
                 span {
