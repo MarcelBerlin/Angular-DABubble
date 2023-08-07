@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
+import { MessageService } from './services/messages.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,16 @@ export class AppComponent {
   public newReaction: any = [];
 
 
-  constructor() { }
+  constructor( private getMessage: MessageService) { }
 
   public addEmoji(event) {
     this.reactionBoo = true;
     this.newReaction +=`${this.emoji}${event.emoji.native}`;
     this.isEmojiPickerVisible = false;
     this.reactionNumber++;
+    this.getMessage.emojis.push(this.newReaction)
+    console.log('emoji array =',this.getMessage.emojis);
+    
     
     // Emoji dem User zuordnen.
     // if (this.reactionNumber > 1) {

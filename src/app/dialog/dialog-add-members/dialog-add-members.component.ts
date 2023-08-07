@@ -25,7 +25,12 @@ export class DialogAddMembersComponent {
     public tagChannel: DialogAddService,
     public variableService: VariablesService,
     public dataService: DataService
-  ) {}
+  ) {
+    console.log(
+      '%c  Finger weg!!!',
+      'font-size:20px; font-weight:800; color:red; text-shadow: 5px 5px 10px green'
+    );
+  }
 
   /**
    * Lifecycle hook called after the component is initialized.
@@ -74,7 +79,8 @@ export class DialogAddMembersComponent {
 
   onOptionSelected(event: any) {
     const selectedOption = event.option.value;
-    this.idAsSelectedChannel =  this.tagChannel.tagsData[this.variableService.selectedChannel].id
+    this.idAsSelectedChannel =
+      this.tagChannel.tagsData[this.variableService.selectedChannel].id;
     this.dataService.userData.forEach((element, index) => {
       if (element.name === selectedOption) {
         this.selectedUserIndex = index;
@@ -83,11 +89,13 @@ export class DialogAddMembersComponent {
   }
 
   addUser() {
-    this.tagChannel.addUserToChannel(this.idAsSelectedChannel, this.resultEmail(this.selectedUserIndex))
-
+    this.tagChannel.addUserToChannel(
+      this.idAsSelectedChannel,
+      this.resultEmail(this.selectedUserIndex)
+    );
   }
 
-  resultEmail(index:number) {
+  resultEmail(index: number) {
     return this.dataService.userData[index].email;
   }
 }

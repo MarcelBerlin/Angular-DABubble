@@ -27,6 +27,8 @@
 
 <div class="thread-content">
 
+  
+
   <div class="empty-chat-message" *ngIf="!emptyChat">
     <ng-container *ngIf="
           dialogAdd.tagsData && dialogAdd.tagsData[varService.selectedChannel]
@@ -58,21 +60,30 @@
           </div>
 
           <div class="message-details-left">
-            <div class="name">{{ message.userName }}</div>
-            <div class="time"> {{ message.timestamp.clockString }}</div>
+            <div class="name-time">
+              <div class="name">{{ message.userName }}</div>
+              <div class="time"> {{ message.timestamp.clockString }}</div>
+            </div>
 
             <div class="message-content-left">
               {{ message.content }}
             </div>
 
             <div class="reaction-bar-left">
-              <img ngDefaultControl [(ngModel)]="app.emoji"
-                (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;"
-                src="./../../../../assets/img/reaction.png">
-              <br />
-              <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
-                (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
-              </emoji-mart>
+              <div *ngIf="app.reactionBoo">
+                <div matTooltip='{{this.dataService.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
+                  <span>{{ messageService.emojis }}</span>
+                  <!-- <span>{{ app.reactionNumber }}</span> -->
+                </div>
+              </div>
+              <div class="reaction-column">
+                <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
+                  (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;"
+                  src="./../../../../assets/img/reaction.png">
+                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
+                  (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
+                </emoji-mart>
+              </div>
             </div>
           </div>
         </div>
@@ -84,7 +95,7 @@
       <p> 1 Antwort(en)</p>
       <img src="./../../../../assets/img/line.png">
     </div> -->
-  
+
   <div class="full-message-right">
     <div *ngFor="let message of messageData">
       <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
@@ -95,21 +106,29 @@
 
           <div class="message-details-right">
 
-            <div class="name"> {{ message.userName }} </div>
-            <div class="time"> {{ message.timestamp.clockString }}</div>
+            <div class="name-time">
+              <div class="name"> {{ message.userName }} </div>
+              <div class="time"> {{ message.timestamp.clockString }}</div>
+            </div>
 
             <div class="message-content-right">
               {{ message.content }}
             </div>
 
             <div class="reaction-bar-right">
-              <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
-                (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;"
-                src="./../../../../assets/img/reaction.png">
-              <br />
-              <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
-                (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
-              </emoji-mart>
+              <div *ngIf="app.reactionBoo">
+                <div matTooltip='{{this.dataService.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
+                  <span>{{ messageService.emojis }}</span>
+                  <!-- <span>{{ app.reactionNumber }}</span> -->
+                </div>
+              </div>
+              <div class="reaction-column">
+                <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
+                  (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;" src="./../../../../assets/img/reaction.png">
+                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
+                  (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
+                </emoji-mart>
+              </div>
             </div>
           </div>
         </div>
