@@ -1,5 +1,18 @@
-<!-- <div class="emojiContainer" *ngFor="let x of emojiService.emojiDatabase; let i=index;"> -->
-<div class="emojiContainer" *ngFor="let x of emojiService.emojiDatabase.slice(0, 100); let i=index;">
+<header>
+    <nav>
+        <span (click)="showGroup(0)">{{this.emojiService.emojisGroup0[0]}}</span>
+        <span (click)="showGroup(1)">{{this.emojiService.emojisGroup1[0]}}</span>
+        <span (click)="showGroup(2)">{{this.emojiService.emojisGroup2[0]}}</span>
+        <span (click)="showGroup(3)">{{this.emojiService.emojisGroup3[0]}}</span>
+        <span (click)="showGroup(4)">{{this.emojiService.emojisGroup4[0]}}</span>
+        <span (click)="showGroup(5)">{{this.emojiService.emojisGroup5[0]}}</span>
+        <span (click)="showGroup(6)">{{this.emojiService.emojisGroup6[0]}}</span>
+        <span (click)="showGroup(7)">{{this.emojiService.emojisGroup7[0]}}</span>
+        <span (click)="showGroup(8)">{{this.emojiService.emojisGroup8[0]}}</span>
+    </nav>
+</header>
+
+<div class="emojiContainer" *ngFor="let x of emojiService.emojiDatabase; let i=index;">
     <div (click)="insertEmojiDirectChat(i)">
         <span>{{x}}</span>
     </div>

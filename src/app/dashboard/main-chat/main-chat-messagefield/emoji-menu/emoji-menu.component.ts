@@ -23,7 +23,12 @@ export class EmojiMenuComponent {
      * @returns {void}
      */
     insertEmojiDirectChat(i: number):void {
-      this.directChatService.directMessage += this.emojiService.emojiDatabase[i].emoji;
+      this.directChatService.directMessage += this.emojiService.emojiDatabase[i];
       this.emojiService.toggleEmojiSelector();
     }
+
+
+    showGroup(index: number): void {
+      this.emojiService.emojiDatabase = this.emojiService.allEmojisGroups[index];
+    };
 }
