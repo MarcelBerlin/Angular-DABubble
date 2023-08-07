@@ -1,5 +1,6 @@
-<div class="emojiContainer" *ngFor="let x of emojiService.emojiDatabase; let i=index;">
+<!-- <div class="emojiContainer" *ngFor="let x of emojiService.emojiDatabase; let i=index;"> -->
+<div class="emojiContainer" *ngFor="let x of emojiService.emojiDatabase.slice(0, 100); let i=index;">
     <div (click)="insertEmojiDirectChat(i)">
-        {{x}}
+        <span>{{x}}</span>
     </div>
 </div>
