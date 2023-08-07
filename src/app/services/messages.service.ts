@@ -12,7 +12,7 @@ import { Messages } from '../models/messages.interface';
 import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 import { DialogAddService } from './dialog-add.service';
-import { DirectChatService } from '../direct-chat/direct-chat.service';
+import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 import { VariablesService } from './variables.service';
 
 @Injectable({

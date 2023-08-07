@@ -5,6 +5,7 @@ export class ChatDataSet {
     lastTimeStamp: any;
     chat: [];
 
+
     constructor(obj?:any) {
         this.id = obj ? obj.id : 'unset';
         this.firstMember = obj ? obj.firstMember : 'unset';
@@ -17,6 +18,7 @@ export class ChatDataSet {
         this.chat = obj ? obj.chat : [];
     }
 
+    
     /**
      * Converts the object to a JSON representation.
      * 
@@ -31,5 +33,4 @@ export class ChatDataSet {
             chat: this.chat,
         }
     }
-
 }

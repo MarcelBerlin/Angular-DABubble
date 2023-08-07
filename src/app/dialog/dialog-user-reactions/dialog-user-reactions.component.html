@@ -1,11 +1,11 @@
 <h1 tabindex= mat-dialog-title>User</h1>
 <div mat-dialog-content>
     <ul>
-        <!-- *ngFor  user, die reagiert haben-->
-        <li>
+        <!-- *ngFor user, die reagiert haben-->
+        <li class="list">
             <div class="user-list">
-                <span> Felix Röder </span> <!-- jeweiliger user -->
-                <span> {{ app.newReaction }} </span> <!-- emojis von usern -->
+                <span> {{ this.getUser.loggedInUserData.name }} </span> <!-- jeweiliger user -->
+                <span> {{ data.dialogEmoji }} </span> <!-- emojis von usern -->
             </div>
         </li>
     </ul>

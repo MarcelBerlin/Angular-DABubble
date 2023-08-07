@@ -9,7 +9,7 @@ import { Login } from '../../login';
 import { DataService } from '../../services/data.service';
 import { User } from '../../models/user.class';
 // directChatService wird aktuell nur für Testzwecke importiert !
-import { DirectChatService } from 'src/app/direct-chat/direct-chat.service';
+import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
 
 @Component({
   selector: 'app-login',

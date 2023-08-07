@@ -1,7 +1,9 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { TestBastiService } from 'src/app/services/test-basti.service';
+import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
   selector: 'app-dialog-channel-edition',
@@ -15,7 +17,9 @@ export class DialogChannelEditionComponent {
   constructor(
     public dialog: MatDialog,
     private dialogRef: DialogRef,
-    public tBS: TestBastiService
+    public tBS: TestBastiService,
+    public variableService: VariablesService,
+    public tagChannel: DialogAddService,
   ) {}
 
   /**

@@ -65,6 +65,7 @@
   border-bottom-right-radius: 30px;
   rotate: -90deg;
   cursor: pointer;
+  z-index: 2;
   &:hover {
     span {
       color: #535af1;

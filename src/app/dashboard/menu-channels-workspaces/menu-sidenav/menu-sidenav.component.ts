@@ -15,7 +15,7 @@ import { DataService } from 'src/app/services/data.service';
 import { User } from 'src/app/models/user.class';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
-import { DirectChatService } from 'src/app/direct-chat/direct-chat.service';
+import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
 
 interface Tag {
   id: string;
@@ -80,6 +80,7 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
+      
     });
   }
 
@@ -173,6 +174,7 @@ export class MenuSidenavComponent implements OnInit {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
     this.getService.channelIndex = arrayId;
+    this.dcshService.chatSlideIn();
   }
 
   openNewMessage() {
@@ -194,7 +196,9 @@ export class MenuSidenavComponent implements OnInit {
 
   // Funktion von Bossi. Verbindung zu directChatService
   getDirectChatData(arrayId: number): void {
-    let clickedUserId: string = this.getUserData.userData[arrayId].id;
-    this.directChatService.getChatId(clickedUserId);
+    if(this.directChatService.directChatActive){
+      let clickedUserId: string = this.getUserData.userData[arrayId].id;
+      this.directChatService.getChatId(clickedUserId);
+    }
   }
 }

@@ -2,7 +2,6 @@
   <div class="content">
     <div class="sidenavHeaderContainer">
       <img src="assets/img/sidenav/sidenavTitle.png" />
-
       <img
         class="pointer"
         [src]="newMessagePath"
@@ -11,104 +10,105 @@
         (mouseleave)="newMessagePath = 'assets/img/sidenav/newMessage.png'"
       />
     </div>
-
-    <div class="channels-container">
-      <div class="channels-headline pd-left pd-right">
-        <img
-          class="pointer"
-          [src]="channelsPath"
-          (mouseenter)="hoverChannels()"
-          (mouseleave)="unhoverChannels()"
-          (click)="toggleChannels(); onClickChannels()"
-        />
-
-        <img
-          class="pointer"
-          [src]="addPathChannel"
-          (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
-          (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'"
-          (click)="addChannel()"
-        />
-      </div>
-
+    <div class="channelAndMessage">
       <div
-        class="channels-content"
-        [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'"
+        class="channels-container"
+        [style.height]="
+          !channelsVisible
+            ? '0'
+            : directMessageUserVisible
+            ? '50%'
+            : 'calc(100% - 78px)'
+        "
       >
-        <div class="channels-line" *ngFor="let tag of tags; let i = index">
-          <div class="channel-name" (click)="openChannel(i)">
-            <span class="pointer"
-              ><span class="hashtag">{{ tag.name[0] }}</span
-              ><span class="afterHashtag"> {{ tag.name.slice(1) }}</span></span
-            >
-          </div>
+        <div class="channels-headline pd-left pd-right">
+          <img
+            class="pointer"
+            [src]="channelsPath"
+            (mouseenter)="hoverChannels()"
+            (mouseleave)="unhoverChannels()"
+            (click)="toggleChannels(); onClickChannels()"
+          />
+
+          <img
+            class="pointer"
+            [src]="addPathChannel"
+            (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
+            (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'"
+            (click)="addChannel()"
+          />
         </div>
-        <!-- <div class="channels-line" *ngFor="let tag of tags; let i = index" 
-                    (mouseenter)="tag.imagePath = 'assets/img/sidenav/tag_hover.png'"
-                    (mouseleave)="tag.imagePath = 'assets/img/sidenav/tag.png'"
-                    (click)="tag.imagePath = 'assets/img/sidenav/tag_click.png'">
 
-                    <div class="channel-name" (click)="openChannel(i)">
-                        <img class="pointer" [src]="tag.imagePath">
-                        <span class="pointer">{{ tag.name }}</span>
-                    </div>
-
-                    <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon>
-                </div> -->
-
-        <img
-          class="pointer channel-add"
-          [src]="addNewChannel"
-          (mouseenter)="
-            addNewChannel = 'assets/img/sidenav/add_channel_hover.png'
-          "
-          (mouseleave)="addNewChannel = 'assets/img/sidenav/add_Channel.png'"
-          (click)="addChannel()"
-        />
-      </div>
-    </div>
-
-    <div class="direct-messages">
-      <div class="direct-messages-headline pd-left pd-right pd-top">
-        <img
-          class="pointer"
-          [src]="directMessagePath"
-          (mouseenter)="hoverDirectMessage()"
-          (mouseleave)="unhoverDirectMessage()"
-          (click)="toggleDirectMessage(); onClickDirectMessage()"
-        />
-
-        <img
-          class="pointer"
-          [src]="addPathMessage"
-          (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
-          (mouseleave)="addPathMessage = 'assets/img/sidenav/add.png'"
-          (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'"
-        />
+        <div
+          class="channels-content"
+          [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'"
+        >
+          <div class="channels-line" *ngFor="let tag of tags; let i = index">
+            <div class="channel-name" (click)="openChannel(i)">
+              <span class="pointer"
+                ><span class="hashtag">{{ tag.name[0] }}</span
+                ><span class="afterHashtag">
+                  {{ tag.name.slice(1) }}</span
+                ></span
+              >
+            </div>
+          </div>
+          <img
+            class="pointer channel-add"
+            [src]="addNewChannel"
+            (mouseenter)="
+              addNewChannel = 'assets/img/sidenav/add_channel_hover.png'
+            "
+            (mouseleave)="addNewChannel = 'assets/img/sidenav/add_Channel.png'"
+            (click)="addChannel()"
+          />
+        </div>
       </div>
 
       <div
-        class="direct-message-content"
-        [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'"
+        class="direct-messages"
+        [style.height]="channelsVisible ? '50%' : 'calc(100% - 68px)'"
       >
-        <div *ngFor="let user of getUserData.userData; let i = index">
-          <div class="direct-message-user" (click)="messageToUser(i)">
-            <div>
-              <img class="pointer" [src]="user.img" />
-            </div>
-            <span class="pointer"
-              >{{ user.name }}
-              <span *ngIf="user.email === getUserData.loggedInUserData.email"
-                >(Du)</span
-              ></span
-            >
-            <div
-              class="activeDot"
-              [style.background-color]="user.online ? '#92C83E' : '#686868'"
-            ></div>
-          </div>
+        <div class="direct-messages-headline pd-left pd-right pd-top">
+          <img
+            class="pointer"
+            [src]="directMessagePath"
+            (mouseenter)="hoverDirectMessage()"
+            (mouseleave)="unhoverDirectMessage()"
+            (click)="toggleDirectMessage(); onClickDirectMessage()"
+          />
 
-          <!-- <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon> -->
+          <img
+            class="pointer"
+            [src]="addPathMessage"
+            (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
+            (mouseleave)="addPathMessage = 'assets/img/sidenav/add.png'"
+            (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'"
+          />
+        </div>
+        <div
+          class="direct-message-content"
+          [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'"
+        >
+          <div *ngFor="let user of getUserData.userData; let i = index">
+            <div class="direct-message-user" (click)="messageToUser(i)">
+              <div>
+                <img class="pointer" [src]="user.img" />
+              </div>
+              <span class="pointer"
+                >{{ user.name }}
+                <span *ngIf="user.email === getUserData.loggedInUserData.email"
+                  >(Du)</span
+                ></span
+              >
+              <div
+                class="activeDot"
+                [style.background-color]="user.online ? '#92C83E' : '#686868'"
+              ></div>
+            </div>
+
+            <!-- <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon> -->
+          </div>
         </div>
       </div>
     </div>

@@ -30,6 +30,19 @@
       align-items: center;
       width: 90%;
       margin-bottom: 8px;
+      app-emoji-menu{
+        display:flex; 
+        justify-content: flex-start; 
+        height: 100px; 
+        position: absolute; 
+        top: -90px; 
+        border: 1px dashed rgba(0, 0, 0, 0.2); 
+        border-radius: 20px; 
+        overflow: hidden; 
+        overflow-y: scroll; 
+        flex-wrap: wrap; 
+        background-color: #ECEEFE;
+      }
       .addElements {
         display: flex;
         align-items: center;
