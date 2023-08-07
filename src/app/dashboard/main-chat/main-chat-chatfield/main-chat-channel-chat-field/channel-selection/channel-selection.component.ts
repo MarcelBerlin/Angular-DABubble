@@ -71,6 +71,6 @@ export class ChannelSelectionComponent implements OnInit {
   }
 
   checkIfMessageDataIsEmpty() {
-    this.emptyChat = this.messageService.messageData.length === 0;
+    this.emptyChat = this.messageData.length < 1;
   }
 }
