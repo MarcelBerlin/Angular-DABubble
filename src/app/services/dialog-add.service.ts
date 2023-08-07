@@ -18,7 +18,7 @@ interface Tag {
   imagePath: string;
   description: string;
   channelCreator: string;
-  membersToChannelArray:any [];
+  membersToChannelArray: { member: '' };
 }
 
 @Injectable({
@@ -43,7 +43,7 @@ export class DialogAddService {
   newTag: string = '';
   description: string = '';
   channelCreator: string = '';
-  membersToChannelArray:any = [];
+  membersToChannelArray: any = {};
 
   async addTag(
     generatedTag: string,
@@ -70,9 +70,9 @@ export class DialogAddService {
       const tagWithId = { ...tag, id: docRef.id };
       this.tags.push(tagWithId);
 
-      setTimeout(() => {
-        console.log(this.tags);
-      }, 1000);
+      // setTimeout(() => {
+      //   console.log(this.tags);
+      // }, 1000);
     }
   }
 
@@ -89,15 +89,13 @@ export class DialogAddService {
   }
 
   addUserToChannel(channelId: string, addedUserToChannel: string) {
-    if (this.membersToChannelArray.indexOf(addedUserToChannel) === -1) {
-      this.membersToChannelArray.push(addedUserToChannel);
-    }
-    console.log(this.membersToChannelArray);
-    console.log(channelId, addedUserToChannel);
-
+    // if (this.membersToChannelArray.indexOf(addedUserToChannel) === -1) {
+    //   this.membersToChannelArray.push(addedUserToChannel);
+    // }
+    // console.log(this.membersToChannelArray);
+    // console.log(channelId, addedUserToChannel);
     // this.membersToChannel.push(addedUserToChannel);
     // console.log(this.membersToChannel);
-    
     // const document = doc(this.firestore, 'tags', channelId);
     // const newData = this.membersToChannel;
     // updateDoc(document, newData);
