@@ -26,6 +26,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatDialogActions, } from '@angular/material/dialog';
 import { MatDialogContent } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderDialogComponent } from './dialog/header-dialog/header-dialog.component';
@@ -111,6 +113,7 @@ import { EmojiMenuComponent } from './dashboard/main-chat/main-chat-messagefield
     MatInputModule,
     FormsModule,
     MatMenuModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     MatTreeModule,
     MatAutocompleteModule,

@@ -1,12 +1,11 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { MessageService } from 'src/app/services/messages.service';
-import { DialogUserReactionsComponent } from 'src/app/dialog/dialog-user-reactions/dialog-user-reactions.component';
-import { MatDialog } from '@angular/material/dialog';
 import { ChatService } from 'src/app/services/chat.service';
 import { AppComponent } from 'src/app/app.component';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
+import {MatTooltip, MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-secondary-chat-messagefield',
@@ -16,48 +15,34 @@ import { DialogAddService } from 'src/app/services/dialog-add.service';
 
 export class SecondaryChatMessagefieldComponent {
 
-  public content: any = '';
-  public sentTime: any = '';
-  public message: any = {};
-  public userName: string = '';
-  public userImg: string = '';
-  public allMessages: any = [];
-  public allEmojis: any = [];
+  // public content: any = '';
+  // public sentTime: any = '';
+  // public message: any = {};
+  // public userName: string = '';
+  // public userImg: string = '';
+  // public allMessages: any = [];
 
   public newAnswer: number = 0; // menge der neuen antworten
   public newContent = false; // ngIf html code anzeigen || nicht
 
-  @Input() newMessages: any;  
-  
+  @Input() newMessages: any;
+
 
   constructor(public getUser: DataService,
     public app: AppComponent,
     public addService: DialogAddService,
     public varService: VariablesService,
     public getMessage: MessageService,
-    public chatService: ChatService,
-    private dialog: MatDialog) {
-
+    public chatService: ChatService) {
   }
 
-  // ngOnChanges( changes: SimpleChanges ) {
-
-  //   if (changes.newMessages && changes.newMessages.currentValue) {  // wenn jemand im channel antwortet, dann counter ++:
-  //     this.newAnswer += 1 ;
-
-  //   console.log(changes);
-  //   }
+  // userReaction() {
+  //   this.dialog.open(DialogUserReactionsComponent, {
+  //     data: {
+  //       dialogEmoji: this.app.newReaction
+  //     },
+  //   });
   // }
-  
-
-
-  userReaction() {
-    this.dialog.open(DialogUserReactionsComponent, {
-      data: {
-        dialogEmoji: this.app.newReaction
-      },
-    });
-  }
 
 
   /**

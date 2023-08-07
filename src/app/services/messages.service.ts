@@ -25,6 +25,7 @@ export class MessageService {
   messageText: string = '';
   messageId: string = 'unset';
   selectedChannel: string = '';
+  emojis: any = [];
 
   constructor(
     private firestore: Firestore,

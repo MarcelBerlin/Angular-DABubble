@@ -3,14 +3,12 @@
 
     .full-message-left {
         width: calc(100% - 50px);
-        height: 200px;
         position: relative;
         border-bottom: 1px solid #eeebeb;
 
         .avatar-left {
-            position: absolute;
-            left: 20px;
-            top: 25px;
+            margin-left: 16px;
+            padding-top: 16px;
             width: 70px;
             height: 70px;
 
@@ -22,11 +20,15 @@
         }
 
         .message-details-left {
-            position: absolute;
-            top: 20px;
-            left: 100px;
+            margin-top: -70px;
+            margin-left: 100px;
             width: 70%;
             display: flex;
+            flex-direction: column;
+
+            .name-time {
+                display: flex;
+            }
 
             .name {
                 font-family: "nunito";
@@ -42,13 +44,11 @@
             }
 
             .message-content-left {
-                position: absolute;
                 background-color: #eceefe;
-                top: 50px;
                 border-radius: 0 20px 20px 20px;
                 width: auto;
                 padding: 16px;
-                
+
                 span {
                     font-size: 16px;
                 }
@@ -56,13 +56,12 @@
         }
 
         .reaction-bar-left {
-            position: absolute;
-            top: 110px;
-            // left: 40px;
             display: flex;
             align-items: center;
             padding-left: 10px;
+            padding-bottom: 12px;
             gap: 5px;
+            margin-top: 6px;
 
             img {
                 cursor: pointer;
@@ -83,12 +82,18 @@
                 padding: 3px 15px;
                 cursor: pointer;
             }
+        }
+
+        .reaction-column {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+
 
             .emoji-mart {
                 z-index: 1;
-                position: absolute;
-                left: -50px;
-                top: 35px;
+                position: relative;
+                right: 100px;
             }
         }
     }
@@ -174,7 +179,7 @@
             position: absolute;
             top: 130px;
             right: 100px;
-            
+
             display: grid;
             grid-template-columns: 100% 0%;
             width: 36%;

@@ -2,7 +2,7 @@
 
 
 
-  <div *ngFor="let messages of this.allMessages" class="full-message-left">
+  <!-- <div *ngFor="let messages of this.allMessages" class="full-message-left">
 
     <div class="avatar-left">
       <img src="{{ messages.userImg }}">
@@ -20,10 +20,10 @@
       <div class="reaction-bar-left">
         <div *ngIf="app.reactionBoo">
           <div mat-button (click)="userReaction()" class="reactions">
-            <span>{{ app.newReaction }}</span> <!-- emoji -->
-            <span>{{ app.reactionNumber }}</span> <!--- each emoji own counter -->
+            <span>{{ app.newReaction }}</span> 
+            <span>{{ app.reactionNumber }}</span>
           </div>
-        </div> 
+        </div>
 
         <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
           (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;" src="./../../../../assets/img/reaction.png">
@@ -33,103 +33,45 @@
         </emoji-mart>
       </div>
     </div>
-  </div> 
-
-  <div *ngIf="this.newContent" class="new-answers">
-    <p> {{ this.newMessages }} Antwort(en)</p>
-    <img src="./../../../../assets/img/line.png">
-  </div>
-
-</div>
-
-
-
-
-<!-- <div style="display: none;" class="thread-content">
+  </div> -->
 
   <div class="full-message-left">
 
     <div class="avatar-left">
-      <img src="./../../../../assets/img/members/avatar2.png">
+      <img src="./../../../../assets/img/members/avatar5.png">
     </div>
 
     <div class="message-details-left">
+      <div class="name-time">
 
-      <div class="name"> Rembrandt van Rijn </div>
-      <div class="time">14:25 Uhr </div>
+        <div class="name"> Peter Maffay </div>
+        <div class="time"> 13:12 </div>
+      </div>
 
       <div class="message-content-left">
-        Ist das Hard gecodet?
+        <span> Hallo, i bim's. Der Peter </span>
       </div>
 
       <div class="reaction-bar-left">
-        <img ngDefaultControl [(ngModel)]="emoji" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;"
-          src="./../../../../assets/img/reaction.png">
-        <br />
-        <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
-          title="Choose your emoji">
-        </emoji-mart>
+        <div *ngIf="app.reactionBoo">
+          <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
+            <span >{{ app.newReaction }}</span>
+            <!-- <span>{{ app.reactionNumber }}</span> -->
+          </div>
+        </div>
+        <div class="reaction-column">
+          <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
+            (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;" src="./../../../../assets/img/reaction.png">
+          <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
+            (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
+          </emoji-mart>
+        </div>
       </div>
-
     </div>
 
-    <div style="display:none;" class="new-answers">
-      <p> 1 Antwort(en)</p>
+    <div *ngIf="getMessage.emojis.length > 0" class="new-answers">
+      <p> {{ getMessage.emojis.length }} Antwort(en)</p>
       <img src="./../../../../assets/img/line.png">
     </div>
 
   </div>
-
-  <div class="full-message-left">
-
-    <div class="avatar-left">
-      <img src="./../../../../assets/img/members/avatar1.png">
-    </div>
-
-    <div class="message-details-left">
-
-      <div class="name"> Leonardo DaVinci </div>
-      <div class="time">14:35 Uhr </div>
-
-      <div class="message-content-left">
-        Denke schon 😤
-      </div>
-
-      <div class="reaction-bar-left">
-        <img ngDefaultControl [(ngModel)]="emoji" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;"
-          src="./../../../../assets/img/reaction.png">
-        <br />
-        <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
-          title="Choose your emoji">
-        </emoji-mart>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="full-message-right">
-
-    <div class="avatar-right">
-      <img src="./../../../../assets/img/members/avatar3.png">
-    </div>
-
-    <div class="message-details-right">
-
-      <div class="name"> Salvador Dali </div>
-      <div class="time">15:05 Uhr </div>
-
-      <div class="message-content-right">
-        Nur für CSS und HTML! Bleibt cool, jungs.
-      </div>
-
-      <div class="reaction-bar-right">
-        <img ngDefaultControl name="emoji" [(ngModel)]="emoji" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;"
-          src="./../../../../assets/img/reaction.png">
-        <br />
-        <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
-          title="Choose your emoji">
-        </emoji-mart>
-      </div>
-    </div>
-  </div>
-</div> -->
