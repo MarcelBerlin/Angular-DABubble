@@ -1,32 +1,7 @@
-<div class="container">
-  <!-- <div class="timeLine">
-        <div class="timeLineHead">Dienstag, 14 Januar</div>
-    </div>
+<!-- <div class="container"> -->
 
-    <div class="messagesMainChat" (mouseenter)="hoveredMessagesMainChat = true"
-        (mouseleave)="hoveredMessagesMainChat = false" [ngStyle]="{
-        'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',
-        transition: 'background-color 400ms'
-      }">
-        <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
-        <div class="messageContent">
-            <div class="nameTime">
-                <span class="name" (click)="profileViewUsers()">Noah Braun</span>
-                <span class="time">16:14</span>
-            </div>
-            <div class="messageBox" [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'">
-                <span class="message">Welche Version ist aktuell von Angular?</span>
-            </div>
-            <div class="labelAnswersAndTime">
-                <div class="label" (click)="openSecondaryChat()">2 Antwort/en</div>
-                <div class="time">Letzte Antwort 14:56</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="timeLine">
-        <div class="timeLineHead">Heute</div>
-    </div> -->
+<!-- vorheriges Design ######################### -->
+<!-- 
   <div class="empty-chat-message" *ngIf="chatService.emptyChat">
     <ng-container *ngIf="
         dialogAdd.tagsData && dialogAdd.tagsData[varService.selectedChannel]
@@ -44,17 +19,106 @@
         </a>
       </ng-container>
     </ng-container>
+  </div> -->
+
+
+
+
+<!-- vorheriges Design ########################### -->
+
+
+
+<div class="thread-content">
+
+  <div class="empty-chat-message" *ngIf="!emptyChat">
+    <ng-container *ngIf="
+          dialogAdd.tagsData && dialogAdd.tagsData[varService.selectedChannel]
+        ">
+      <h2>
+        {{ dialogAdd.tagsData[varService.selectedChannel].name[0] }}
+        {{ dialogAdd.tagsData[varService.selectedChannel].name.slice(1) }}
+      </h2>
+      <span>Du hast diesen Channel heute erstellt. Das ist der Anfang des
+        Channels</span>
+      <ng-container>
+        <a>
+          {{ dialogAdd.tagsData[varService.selectedChannel].name[0]
+          }}{{ dialogAdd.tagsData[varService.selectedChannel].name.slice(2) }}
+        </a>
+      </ng-container>
+    </ng-container>
   </div>
 
+  <div class="full-message-left">
 
-  <div class="message">
+
     <!-- Zeige Nachrichten des ausgewählten Kanals an -->
     <div *ngFor="let message of messageData">
       <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
-        <b>{{ message.userName }}</b><br>
-        {{ message.content }}
+        <div *ngIf="message.userName != this.dataService.loggedInUserData.name">
+          <div class="avatar-left">
+            <img src="assets/img/members/avatar1.png" />
+          </div>
+
+          <div class="message-details-left">
+            <div class="name">{{ message.userName }}</div>
+            <div class="time">14:35 Uhr </div>
+
+            <div class="message-content-left">
+              {{ message.content }}
+            </div>
+
+            <div class="reaction-bar-left">
+              <img ngDefaultControl [(ngModel)]="app.emoji"
+                (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;"
+                src="./../../../../assets/img/reaction.png">
+              <br />
+              <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
+                (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
+              </emoji-mart>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="new-answers">
+    <p> 1 Antwort(en)</p>
+    <img src="./../../../../assets/img/line.png">
+  </div>
+
+
+
+  <div class="full-message-right">
+    <div *ngFor="let message of messageData">
+      <div *ngIf="message.userName == this.dataService.loggedInUserData.name">
+        <div class="avatar-right">
+          <img src="./../../../../assets/img/members/avatar3.png">
+        </div>
+
+        <div class="message-details-right">
+
+          <div class="name"> {{ message.userName }} </div>
+          <div class="time">15:05 Uhr </div>
+
+          <div class="message-content-right">
+            Nur für CSS und HTML! Bleibt cool, jungs.
+          </div>
+
+          <div class="reaction-bar-right">
+            <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
+              (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;"
+              src="./../../../../assets/img/reaction.png">
+            <br />
+            <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
+              (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
+            </emoji-mart>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
 </div>

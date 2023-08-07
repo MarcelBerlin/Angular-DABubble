@@ -1,124 +1,326 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+// .container {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 100%;
 
-  .empty-chat-message {
-    position: absolute;
-    bottom: 22px;
-    left: 22px;
+//   .empty-chat-message {
+//     position: absolute;
+//     bottom: 22px;
+//     left: 22px;
 
-    h2 {
-      font-size: 28px;
-    }
+//     h2 {
+//       font-size: 28px;
+//     }
 
-    span {
-      font-size: 16px;
-    }
-    a {
-      cursor: pointer;
-      color: #535af1;
-      font-weight: 500;
-    }
-  }
+//     span {
+//       font-size: 16px;
+//     }
+//     a {
+//       cursor: pointer;
+//       color: #535af1;
+//       font-weight: 500;
+//     }
+//   }
 
-  .timeLine {
+//   .timeLine {
+//     position: relative;
+//     display: flex;
+//     justify-content: center;
+//     width: 90%;
+//     height: 2px;
+//     background-color: lightgray;
+//     .timeLineHead {
+//       position: absolute;
+//       top: -20px;
+//       display: flex;
+//       align-items: center;
+//       width: auto;
+//       height: 40px;
+//       padding: 0 16px;
+//       border: 1px solid lightgray;
+//       border-radius: 30px;
+//       background-color: white;
+//       font-family: "Nunito";
+//       font-weight: 400;
+//       font-size: 18px;
+//     }
+//   }
+
+//   .messagesMainChat {
+//     display: flex;
+//     width: 100%;
+//     margin: 48px 0;
+//     padding: 16px 0;
+//     .avatar {
+//       display: flex;
+//       justify-content: center;
+//       width: 120px;
+//       height: 70px;
+//       img {
+//         width: 70px;
+//         height: 70px;
+//         border-radius: 40px;
+//       }
+//     }
+//     .messageContent {
+//       display: flex;
+//       flex-direction: column;
+//       gap: 8px;
+//       .nameTime {
+//         display: flex;
+//         height: 25px;
+//         gap: 20px;
+//         .name {
+//           font-family: "Nunito";
+//           font-weight: 700;
+//           font-size: 18px;
+//           cursor: pointer;
+//           &:hover {
+//             color: #535af1;
+//           }
+//         }
+//         .time {
+//           font-family: "Nunito";
+//           font-weight: 400;
+//           font-size: 14px;
+//           color: #686868;
+//         }
+//       }
+//       .messageBox {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//         width: fit-content;
+//         min-height: 55px;
+//         border-top-right-radius: 30px;
+//         border-bottom-right-radius: 30px;
+//         border-bottom-left-radius: 30px;
+//         padding: 0 24px;
+
+//         .message {
+//           font-family: "Nunito";
+//           font-weight: 400;
+//           font-size: 18px;
+//         }
+//       }
+//       .labelAnswersAndTime {
+//         display: flex;
+//         align-items: center;
+//         gap: 20px;
+//         .label {
+//           font-family: "Nunito";
+//           font-weight: 400;
+//           font-size: 18px;
+//           color: #535af1;
+//           cursor: pointer;
+//         }
+//         .time {
+//           font-family: "Nunito";
+//           font-weight: 400;
+//           font-size: 14px;
+//         }
+//       }
+//     }
+//   }
+
+.thread-content {
+  height: 50%; // SPÄTER ÄNDERN
+  overflow-y: scroll;
+
+  .full-message-left {
+    width: calc(100% - 50px);
+    height: 200px;
     position: relative;
-    display: flex;
-    justify-content: center;
-    width: 90%;
-    height: 2px;
-    background-color: lightgray;
-    .timeLineHead {
-      position: absolute;
-      top: -20px;
-      display: flex;
-      align-items: center;
-      width: auto;
-      height: 40px;
-      padding: 0 16px;
-      border: 1px solid lightgray;
-      border-radius: 30px;
-      background-color: white;
-      font-family: "Nunito";
-      font-weight: 400;
-      font-size: 18px;
-    }
-  }
+    border-bottom: 1px solid #eeebeb;
 
-  .messagesMainChat {
-    display: flex;
-    width: 100%;
-    margin: 48px 0;
-    padding: 16px 0;
-    .avatar {
-      display: flex;
-      justify-content: center;
-      width: 120px;
+    .avatar-left {
+      position: absolute;
+      left: 20px;
+      top: 25px;
+      width: 70px;
       height: 70px;
+
       img {
         width: 70px;
         height: 70px;
-        border-radius: 40px;
+        border-radius: 50%;
       }
     }
-    .messageContent {
+
+    .message-details-left {
+      position: absolute;
+      top: 20px;
+      left: 100px;
+      width: 70%;
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      .nameTime {
-        display: flex;
-        height: 25px;
-        gap: 20px;
-        .name {
-          font-family: "Nunito";
-          font-weight: 700;
-          font-size: 18px;
-          cursor: pointer;
-          &:hover {
-            color: #535af1;
-          }
-        }
-        .time {
-          font-family: "Nunito";
-          font-weight: 400;
-          font-size: 14px;
-          color: #686868;
+
+      .name {
+        font-family: "nunito";
+        font-size: 18px;
+        font-weight: 700;
+        padding-right: 20px;
+      }
+
+      .time {
+        color: #686868;
+        font-family: "nunito";
+        font-size: 14px;
+      }
+
+      .message-content-left {
+        position: absolute;
+        background-color: #eceefe;
+        top: 50px;
+        border-radius: 0 20px 20px 20px;
+        width: auto;
+        padding: 16px;
+
+        span {
+          font-size: 16px;
         }
       }
-      .messageBox {
+    }
+
+    .reaction-bar-left {
+      position: absolute;
+      top: 110px;
+      // left: 40px;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      gap: 5px;
+
+      img {
+        cursor: pointer;
+        padding: 5px;
+
+        &:hover {
+          background-color: #eeebeb;
+          border-radius: 10px;
+        }
+      }
+
+      .reactions {
+        margin-right: 20px;
+        border: 1px solid #adb0d9;
+        border-radius: 20px;
         display: flex;
         justify-content: center;
-        align-items: center;
-        width: fit-content;
-        min-height: 55px;
-        border-top-right-radius: 30px;
-        border-bottom-right-radius: 30px;
-        border-bottom-left-radius: 30px;
-        padding: 0 24px;
-
-        .message {
-          font-family: "Nunito";
-          font-weight: 400;
-          font-size: 18px;
-        }
+        padding: 3px 15px;
+        cursor: pointer;
       }
-      .labelAnswersAndTime {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        .label {
-          font-family: "Nunito";
-          font-weight: 400;
-          font-size: 18px;
-          color: #535af1;
-          cursor: pointer;
+
+      .emoji-mart {
+        z-index: 1;
+        position: absolute;
+        left: -50px;
+        top: 35px;
+      }
+    }
+  }
+
+  .new-answers {
+    color: #adb0d9;
+    position: absolute;
+    left: 10%;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+
+    p {
+      font-size: 18px;
+      margin-bottom: 0;
+      padding-right: 10px;
+    }
+
+    img {
+      height: 2px;
+      width: 50%;
+    }
+  }
+
+  // USER MESSAGE
+
+  .full-message-right {
+    width: calc(100% - 20px);
+    height: 200px;
+    position: relative;
+    // border-bottom: 1px solid #eeebeb;
+
+    .avatar-right {
+      position: absolute;
+      right: 40px;
+      top: 25px;
+      width: 70px;
+      height: 70px;
+
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+      }
+    }
+
+    .message-details-right {
+      position: absolute;
+      top: 30px;
+      right: 120px;
+      width: 70%;
+      display: flex;
+      justify-content: flex-end;
+      // flex-direction: row-reverse;
+
+      .name {
+        font-family: "nunito";
+        font-size: 18px;
+        font-weight: 700;
+        padding-right: 20px;
+      }
+
+      .time {
+        color: #686868;
+        font-family: "nunito";
+        font-size: 14px;
+        padding-right: 20px;
+      }
+
+      .message-content-right {
+        position: absolute;
+        color: white;
+        background-color: #797ef3;
+        top: 50px;
+        border-radius: 20px 0 20px 20px;
+        width: auto;
+        padding: 16px;
+        font-size: 18px;
+      }
+    }
+
+    .reaction-bar-right {
+      position: absolute;
+      top: 130px;
+      right: 100px;
+
+      display: grid;
+      grid-template-columns: 100% 0%;
+      width: 36%;
+
+      img {
+        cursor: pointer;
+        padding: 5px;
+        background: transparent;
+        border: 0;
+        transform: translateX(-40px);
+        cursor: pointer;
+
+        &:focus {
+          outline: 0;
         }
-        .time {
-          font-family: "Nunito";
-          font-weight: 400;
-          font-size: 14px;
+
+        &:hover {
+          background-color: #eeebeb;
+          border-radius: 10px;
         }
       }
     }
