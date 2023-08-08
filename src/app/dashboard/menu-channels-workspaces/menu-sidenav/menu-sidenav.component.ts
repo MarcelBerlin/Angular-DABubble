@@ -64,7 +64,7 @@ export class MenuSidenavComponent implements OnInit {
     public getUserData: DataService,
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService,
-    private directChatService: DirectChatService,
+    private directChatService: DirectChatService
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
@@ -72,7 +72,6 @@ export class MenuSidenavComponent implements OnInit {
       '%c  Basti arbeitet in dem linken Element an Channels.',
       'font-size:20px; font-weight:800; color:red; text-shadow: 5px 5px 10px green'
     );
-
   }
 
   ngOnInit(): void {
@@ -85,7 +84,6 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
-      
     });
   }
 
@@ -165,7 +163,7 @@ export class MenuSidenavComponent implements OnInit {
     this.currentUser()
       ? this.sendMessageToLoggedUser(arrayId)
       : this.sendMessageToSpecificUser(arrayId);
-      this.getDirectChatData(arrayId);
+    this.getDirectChatData(arrayId);
   }
 
   currentUser() {
@@ -201,9 +199,18 @@ export class MenuSidenavComponent implements OnInit {
 
   // Funktion von Bossi. Verbindung zu directChatService
   getDirectChatData(arrayId: number): void {
-    if(this.directChatService.directChatActive){
+    if (this.directChatService.directChatActive) {
       let clickedUserId: string = this.getUserData.userData[arrayId].id;
       this.directChatService.getChatId(clickedUserId);
     }
+  }
+
+  authorizationShowChannel(index: number) {
+    array: [] = []
+    
+    if (this.getService.tagsData[index].channelCreator === this.getUserData.loggedInUserEmail) {
+     return true
+    }
+    return false
   }
 }
