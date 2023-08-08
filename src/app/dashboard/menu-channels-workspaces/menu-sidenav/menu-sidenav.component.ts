@@ -68,10 +68,6 @@ export class MenuSidenavComponent implements OnInit {
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
-    console.log(
-      '%c  Basti arbeitet in dem linken Element an Channels.',
-      'font-size:20px; font-weight:800; color:red; text-shadow: 5px 5px 10px green'
-    );
   }
 
   ngOnInit(): void {
@@ -205,12 +201,17 @@ export class MenuSidenavComponent implements OnInit {
     }
   }
 
-  authorizationShowChannel(index: number) {
-    array: [] = []
-    
-    if (this.getService.tagsData[index].channelCreator === this.getUserData.loggedInUserEmail) {
-     return true
-    }
-    return false
+  /**
+   * Checks user authorization to display a channel.
+   * @param {number} index - The index of the channel in the Service Tags Data list.
+   * @returns {boolean} - Returns true if the user is authorized to view the channel, otherwise false.
+   */
+  authorizationShowChannel(index: number): boolean {
+    const loggedUser = this.getUserData.loggedInUserEmail;
+    const channel = this.getService.tagsData[index];
+    return (
+      channel.members.includes(loggedUser) ||
+      channel.channelCreator === loggedUser
+    );
   }
 }
