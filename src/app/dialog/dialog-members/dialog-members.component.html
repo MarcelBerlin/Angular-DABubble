@@ -4,11 +4,8 @@
     <div class="close" (click)="close()">X</div></mat-card-title
   >
   <mat-card-content>
-    <div
-      class="userMenu"
-      *ngFor="let member of dataService.userData;let i=index"
-    >
-      <span (click)="openMember(i)"
+    <div class="userMenu" *ngFor="let member of members; let i = index">
+      <span (click)="openMember(member.dataIndex)"
         ><img [src]="member.img" /> {{ member.name }}</span
       >
       <div

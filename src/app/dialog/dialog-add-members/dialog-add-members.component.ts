@@ -102,11 +102,11 @@ export class DialogAddMembersComponent {
       ) === -1
     ) {
       this.membersCache.push(this.resultSelectedEmail(this.selectedUserIndex));
-      console.log(this.membersCache);
       this.tagChannel.addUserToChannel(
         this.selectedChannel.id,
         this.membersCache
       );
+      this.close();
     }
   }
 

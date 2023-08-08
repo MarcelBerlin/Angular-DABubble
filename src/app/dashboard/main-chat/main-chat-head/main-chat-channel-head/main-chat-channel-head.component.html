@@ -23,7 +23,9 @@
   <div class="membersAndAdd">
     <div class="members" (click)="showMembers()">
       <img src="assets/img/members/MembersPreviewTest.png" />
-      <span>3</span>
+      <span>{{
+        tagChannel.tagsData[variableService.selectedChannel]?.members?.length
+      }}</span>
     </div>
     <div
       class="add"

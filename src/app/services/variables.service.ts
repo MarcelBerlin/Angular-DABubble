@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class VariablesService {
   propertyOfSearch: string = '';
   indexOfSearch: number;
 
-  constructor() {}
+  constructor(private dataService:DataService) {}
 
   [key: string]: any; // Index-Signatur für beliebige Eigenschaften
 
@@ -48,5 +49,5 @@ export class VariablesService {
     this[variableValue] = newValue;
   }
 
-  
+
 }
