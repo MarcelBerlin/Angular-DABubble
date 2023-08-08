@@ -68,6 +68,11 @@ export class MenuSidenavComponent implements OnInit {
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
+    console.log(
+      '%c  Basti arbeitet in dem linken Element an Channels.',
+      'font-size:20px; font-weight:800; color:red; text-shadow: 5px 5px 10px green'
+    );
+
   }
 
   ngOnInit(): void {

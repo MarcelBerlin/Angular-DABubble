@@ -25,10 +25,6 @@ export class DialogMembersComponent {
     public varService: VariablesService,
     public tagService: DialogAddService
   ) {
-    console.log(
-      '%c  Basti arbeitet hier!',
-      'font-size:20px; font-weight:800; color:red; text-shadow: 5px 5px 10px green'
-    );
     this.showMembers();
   }
 
