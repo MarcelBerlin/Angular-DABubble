@@ -20,7 +20,13 @@ export class DialogChannelEditionComponent {
     public tBS: TestBastiService,
     public variableService: VariablesService,
     public tagChannel: DialogAddService,
-  ) {}
+  ) {
+    console.log(
+      '%c  Basti arbeitet hier!',
+      'font-size:20px; font-weight:800; color:red; text-shadow: 5px 5px 10px green'
+    );
+
+  }
 
   /**
    * Closes the current dialog.

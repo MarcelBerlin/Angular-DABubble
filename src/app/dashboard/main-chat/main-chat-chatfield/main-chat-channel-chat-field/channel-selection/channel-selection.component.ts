@@ -49,7 +49,7 @@ export class ChannelSelectionComponent implements OnInit {
     this.messages$ = collectionData(coll, { idField: 'id' });
     this.messages$.subscribe((message: any) => {
       this.messageData = message;
-      console.log(this.messageData);
+      // console.log(this.messageData);
     });
   }
 
