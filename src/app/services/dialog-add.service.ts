@@ -18,7 +18,7 @@ interface Tag {
   imagePath: string;
   description: string;
   channelCreator: string;
-  membersToChannelArray: { member: '' };
+  members: any[];
 }
 
 @Injectable({
@@ -43,7 +43,7 @@ export class DialogAddService {
   newTag: string = '';
   description: string = '';
   channelCreator: string = '';
-  membersToChannelArray: any = {};
+  members: any = [];
 
   async addTag(
     generatedTag: string,
@@ -60,7 +60,7 @@ export class DialogAddService {
         imagePath: 'assets/img/sidenav/tag.png',
         description: this.description,
         channelCreator: this.channelCreator,
-        membersToChannelArray: this.membersToChannelArray,
+        members: this.members,
       };
 
       // Firestore-Dokument erstellen und Tag speichern
@@ -69,10 +69,6 @@ export class DialogAddService {
       // Tag mit generierter ID aus Firestore abrufen und dem lokalen Array hinzufügen
       const tagWithId = { ...tag, id: docRef.id };
       this.tags.push(tagWithId);
-
-      // setTimeout(() => {
-      //   console.log(this.tags);
-      // }, 1000);
     }
   }
 
@@ -88,16 +84,22 @@ export class DialogAddService {
     }
   }
 
-  addUserToChannel(channelId: string, addedUserToChannel: string) {
-    // if (this.membersToChannelArray.indexOf(addedUserToChannel) === -1) {
-    //   this.membersToChannelArray.push(addedUserToChannel);
-    // }
-    // console.log(this.membersToChannelArray);
-    // console.log(channelId, addedUserToChannel);
-    // this.membersToChannel.push(addedUserToChannel);
-    // console.log(this.membersToChannel);
-    // const document = doc(this.firestore, 'tags', channelId);
-    // const newData = this.membersToChannel;
-    // updateDoc(document, newData);
+  /**
+   * Add members to a channel in the Firestore database.
+   *
+   * @param {string} channelId - The ID of the channel to which members will be added.
+   * @param {Array} membersCache - An array containing the members to be added.
+   */
+  addUserToChannel(channelId, membersCache) {
+    // Get the Firestore document reference for the specified channel.
+    const document = doc(this.firestore, 'tags', channelId);
+
+    // Prepare the data to update in the document.
+    const newData = {
+      members: membersCache,
+    };
+
+    // Update the Firestore document with the new data.
+    updateDoc(document, newData);
   }
 }
