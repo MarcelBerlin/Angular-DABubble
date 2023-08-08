@@ -19,7 +19,7 @@
 
       <div class="reaction-bar-left">
         <div *ngIf="app.reactionBoo">
-          <div mat-button (click)="userReaction()" class="reactions">
+          <div class="reactions">
             <span>{{ app.newReaction }}</span> 
             <span>{{ app.reactionNumber }}</span>
           </div>
@@ -54,14 +54,14 @@
       <div class="reaction-bar-left">
         <div *ngIf="app.reactionBoo">
           <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-            <span >{{ app.newReaction }}</span>
+            <span name="threadReaction">{{ app.newReaction }}</span>
             <!-- <span>{{ app.reactionNumber }}</span> -->
           </div>
         </div>
         <div class="reaction-column">
-          <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
-            (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;" src="./../../../../assets/img/reaction.png">
-          <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
+          <img ngDefaultControl (click)="this.threadEmoji = !this.threadEmoji;"
+            src="./../../../../assets/img/reaction.png">
+          <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="this.threadEmoji"
             (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
           </emoji-mart>
         </div>

@@ -80,13 +80,12 @@
                 display: flex;
                 justify-content: center;
                 padding: 3px 15px;
-                cursor: pointer;
             }
         }
 
         .reaction-column {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             flex-direction: column;
 
 

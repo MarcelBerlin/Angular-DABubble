@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { ChatService } from 'src/app/services/chat.service';
@@ -15,17 +15,18 @@ import {MatTooltip, MatTooltipModule} from '@angular/material/tooltip';
 
 export class SecondaryChatMessagefieldComponent {
 
-  // public content: any = '';
-  // public sentTime: any = '';
-  // public message: any = {};
-  // public userName: string = '';
-  // public userImg: string = '';
-  // public allMessages: any = [];
+  @ViewChild('threadReaction') threadReaction: any;
 
-  public newAnswer: number = 0; // menge der neuen antworten
-  public newContent = false; // ngIf html code anzeigen || nicht
+  public content: any = '';
+  public sentTime: any = '';
+  public message: any = {};
+  public userName: string = '';
+  public userImg: string = '';
+  public allMessages: any = [];
+  public threadEmoji: boolean = false;
 
-  @Input() newMessages: any;
+  // public newAnswer: number = 0; // menge der neuen antworten
+  // public newContent = false; // ngIf html code anzeigen || nicht
 
 
   constructor(public getUser: DataService,
@@ -33,16 +34,12 @@ export class SecondaryChatMessagefieldComponent {
     public addService: DialogAddService,
     public varService: VariablesService,
     public getMessage: MessageService,
-    public chatService: ChatService) {
-  }
+    public chatService: ChatService) 
+    {
 
-  // userReaction() {
-  //   this.dialog.open(DialogUserReactionsComponent, {
-  //     data: {
-  //       dialogEmoji: this.app.newReaction
-  //     },
-  //   });
-  // }
+    }
+
+  
 
 
   /**

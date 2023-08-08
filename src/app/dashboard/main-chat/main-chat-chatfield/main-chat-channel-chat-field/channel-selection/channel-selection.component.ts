@@ -22,6 +22,8 @@ export class ChannelSelectionComponent implements OnInit {
   chatText: string = '';
   messages$: any = [];
   messageData: any = [];
+  chatEmojiLeft: boolean = false;
+  chatEmojiRight: boolean = false;
 
   constructor(
     private firestore: Firestore,
