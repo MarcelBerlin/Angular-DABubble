@@ -73,7 +73,7 @@
     <div class="sendIcon">
       <img
         src="assets/img/send_icon.png"
-        (click)="varService.selectedChannel ? send() : null"
+        (click)="varService.selectedChannel === undefined ? send() : null"
       />
     </div>
   </div>

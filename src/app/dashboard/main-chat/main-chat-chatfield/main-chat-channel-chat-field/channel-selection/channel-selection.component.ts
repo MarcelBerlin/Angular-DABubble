@@ -43,6 +43,8 @@ export class ChannelSelectionComponent implements OnInit {
     public chatService: ChatService,
     public app: AppComponent
   ) {
+    console.log(this.messageData);
+    
     this.allMessages();    
   }
 

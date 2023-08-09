@@ -31,7 +31,7 @@
 
   <div class="empty-chat-message" *ngIf="!emptyChat">
     <ng-container *ngIf="
-          dialogAdd.tagsData && dialogAdd.tagsData[varService.selectedChannel]
+          dialogAdd.tagsData && varService.selectedChannel
         ">
       <h2>
         {{ dialogAdd.tagsData[varService.selectedChannel].name[0] }}
