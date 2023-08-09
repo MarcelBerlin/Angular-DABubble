@@ -96,9 +96,13 @@ export class EmojiApiService {
       if (element.group == this.emojiGroupList[7]) this.emojisGroup7.push(element.emoji);
       if (element.group == this.emojiGroupList[8]) this.emojisGroup8.push(element.emoji);
     });
+    // console.log(this.myEmojiArray);
     this.collectAllEmojisGroups();
+    // const arrayString = JSON.stringify(this.myEmojiArray);
+    // localStorage.setItem('emojis', arrayString);
   }
 
+  
 
   /**
    * Collects and organizes multiple emoji groups into a single array.

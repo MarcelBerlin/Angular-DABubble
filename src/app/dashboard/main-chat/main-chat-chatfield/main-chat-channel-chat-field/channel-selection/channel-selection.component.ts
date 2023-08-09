@@ -22,6 +22,14 @@ export class ChannelSelectionComponent implements OnInit {
   chatText: string = '';
   messages$: any = [];
   messageData: any = [];
+  public chatEmojiLeft: boolean = false;
+  public chatEmojiRight: boolean = false;
+
+  public chatEmoji: boolean = false;
+  public emojiPicker: boolean = false;
+  public emoji: string = '';
+  public reactionArr: any = [];
+  public emojiCounter: number = 0;
 
   constructor(
     private firestore: Firestore,
@@ -35,6 +43,8 @@ export class ChannelSelectionComponent implements OnInit {
     public chatService: ChatService,
     public app: AppComponent
   ) {
+    console.log(this.messageData);
+    
     this.allMessages();    
   }
 
@@ -47,7 +57,7 @@ export class ChannelSelectionComponent implements OnInit {
     this.messages$ = collectionData(coll, { idField: 'id' });
     this.messages$.subscribe((message: any) => {
       this.messageData = message;
-      console.log(this.messageData);
+      // console.log(this.messageData);
     });
   }
 
@@ -72,5 +82,13 @@ export class ChannelSelectionComponent implements OnInit {
 
   checkIfMessageDataIsEmpty() {
     this.emptyChat = this.messageData.length < 1;
+  }
+
+  public addEmoji(event) {
+    this.chatEmoji = true;
+    this.reactionArr += `${this.emoji }${event.emoji.native}`;
+    // this.emojiCounter++; bei selben emoji = anzahl dahinter
+    this.messageService.emojis.push(this.reactionArr);
+    this.emojiPicker = false;
   }
 }

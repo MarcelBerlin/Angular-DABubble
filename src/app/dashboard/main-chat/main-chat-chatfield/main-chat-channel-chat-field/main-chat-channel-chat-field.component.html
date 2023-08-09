@@ -1,1 +1,9 @@
-<app-channel-selection></app-channel-selection>
+<app-channel-selection
+  *ngIf="varService.selectedChannel !== -1"
+></app-channel-selection>
+<div
+  class="promotionLogo"
+  *ngIf="varService.selectedChannel === -1"
+>
+  <img src="assets/img/DABubble.png" alt="" />
+</div>

@@ -87,4 +87,16 @@
       }
     }
   }
+  .marqueeHead {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    marquee {
+      margin: 0 16px;
+      font-size: 20px;
+      font-weight: 800;
+      color: red;
+      text-shadow: 5px 5px 10px green;
+    }
+  }
 }

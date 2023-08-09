@@ -64,7 +64,7 @@ export class MenuSidenavComponent implements OnInit {
     public getUserData: DataService,
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService,
-    private directChatService: DirectChatService,
+    private directChatService: DirectChatService
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
@@ -80,7 +80,6 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
-      
     });
   }
 
@@ -160,7 +159,7 @@ export class MenuSidenavComponent implements OnInit {
     this.currentUser()
       ? this.sendMessageToLoggedUser(arrayId)
       : this.sendMessageToSpecificUser(arrayId);
-      this.getDirectChatData(arrayId);
+    this.getDirectChatData(arrayId);
   }
 
   currentUser() {
@@ -196,9 +195,23 @@ export class MenuSidenavComponent implements OnInit {
 
   // Funktion von Bossi. Verbindung zu directChatService
   getDirectChatData(arrayId: number): void {
-    if(this.directChatService.directChatActive){
+    if (this.directChatService.directChatActive) {
       let clickedUserId: string = this.getUserData.userData[arrayId].id;
       this.directChatService.getChatId(clickedUserId);
     }
+  }
+
+  /**
+   * Checks user authorization to display a channel.
+   * @param {number} index - The index of the channel in the Service Tags Data list.
+   * @returns {boolean} - Returns true if the user is authorized to view the channel, otherwise false.
+   */
+  authorizationShowChannel(index: number): boolean {
+    const loggedUser = this.getUserData.loggedInUserEmail;
+    const channel = this.getService.tagsData[index];
+    return (
+      channel.members.includes(loggedUser) ||
+      channel.channelCreator === loggedUser
+    );
   }
 }

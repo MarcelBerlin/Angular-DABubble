@@ -20,9 +20,8 @@ export class MainChatChannelHeadComponent {
     public dialog: MatDialog,
     public tBS: TestBastiService,
     public tagChannel: DialogAddService,
-    public variableService: VariablesService
-
-  ) { }
+    public variableService: VariablesService,
+  ) {}
 
   /**
    * Opens the 'DialogChannelEditionComponent'.

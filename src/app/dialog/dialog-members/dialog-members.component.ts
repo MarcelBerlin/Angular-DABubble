@@ -6,6 +6,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { DialogProfileViewUsersComponent } from '../dialog-profile-view-users/dialog-profile-view-users.component';
 import { DialogAddMembersComponent } from '../dialog-add-members/dialog-add-members.component';
 import { VariablesService } from 'src/app/services/variables.service';
+import { DialogAddService } from 'src/app/services/dialog-add.service';
 
 @Component({
   selector: 'app-dialog-members',
@@ -15,14 +16,34 @@ import { VariablesService } from 'src/app/services/variables.service';
 export class DialogMembersComponent {
   online: boolean = false;
   imgUrl: string = 'assets/img/person_add.png';
+  members: any[] = [];
 
   constructor(
     public dataService: DataService,
     private dialog: MatDialog,
     private dialogRef: DialogRef,
-    private varService: VariablesService
+    public varService: VariablesService,
+    public tagService: DialogAddService
   ) {
-    console.warn('log von Basti aus: "dialog-members"', dataService);
+    this.showMembers();
+  }
+
+  showMembers() {
+    const userDatas = this.dataService.userData;
+    const members =
+      this.tagService.tagsData[this.varService.selectedChannel].members;
+    members.forEach((element) => {
+      userDatas.forEach((item, index) => {
+        if (item.email === element) {
+          this.members.push({
+            name: userDatas[index].name,
+            img: userDatas[index].img,
+            online: userDatas[index].online,
+            dataIndex: index,
+          });
+        }
+      });
+    });
   }
 
   /**

@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
 import { Injectable } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MessageService } from './services/messages.service';
+import { SecondaryChatMessagefieldComponent } from './dashboard/secondary-chat/secondary-chat-messagefield/secondary-chat-messagefield.component';
+import { ChannelSelectionComponent } from './dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,37 +16,6 @@ import { MessageService } from './services/messages.service';
 export class AppComponent {
   title = 'Angular-DABubble';
 
-  public reactionBoo: boolean = false;
-  public reactionNumber: any = 0;
-  public emoji: string = '';
-  public isEmojiPickerVisible: boolean;
-  public newReaction: any = [];
+  constructor() { }
 
-
-  constructor( private getMessage: MessageService) { }
-
-  public addEmoji(event) {
-    this.reactionBoo = true;
-    this.newReaction +=`${this.emoji}${event.emoji.native}`;
-    this.isEmojiPickerVisible = false;
-    this.reactionNumber++;
-    this.getMessage.emojis.push(this.newReaction)
-    console.log('emoji array =',this.getMessage.emojis);
-    
-    
-    // Emoji dem User zuordnen.
-    // if (this.reactionNumber > 1) {
-    //   this.deleteDoubledEmojis(this.newReaction);
-    // }
-  }
-
-
-  // ##### EMOJI HTML #####
-
-//   <img ngDefaultControl name="emoji" [(ngModel)]="emoji" (click)="isEmojiPickerVisible = !isEmojiPickerVisible;"
-//   src="./../../../../assets/img/reaction.png">
-// <br />
-// <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="isEmojiPickerVisible" (emojiSelect)="addEmoji($event)"
-//   title="Choose your emoji">
-// </emoji-mart>
 }

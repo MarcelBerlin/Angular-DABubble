@@ -3,6 +3,7 @@ import { DashboardComponentsShowHideService } from '../../../dashboard-component
 import { Dialog } from '@angular/cdk/dialog';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { VariablesService } from 'src/app/services/variables.service';
+import { DialogAddService } from 'src/app/services/dialog-add.service';
 
 @Component({
   selector: 'app-main-chat-channel-chat-field',
@@ -15,7 +16,7 @@ export class MainChatChannelChatFieldComponent {
   constructor(
     private dcshService: DashboardComponentsShowHideService,
     private dialog: Dialog,
-    public varService: VariablesService
+    public varService: VariablesService,
   ) {}
 
   /**

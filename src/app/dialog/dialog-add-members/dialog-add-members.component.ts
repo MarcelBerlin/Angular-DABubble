@@ -19,18 +19,16 @@ export class DialogAddMembersComponent {
   online: string = 'online';
   idAsSelectedChannel: string = '';
   selectedUserIndex: number;
+  selectedChannel =
+    this.tagChannel.tagsData[this.variableService.selectedChannel];
+  membersCache = this.selectedChannel.members;
 
   constructor(
     private dialogRef: DialogRef,
     public tagChannel: DialogAddService,
     public variableService: VariablesService,
     public dataService: DataService
-  ) {
-    console.log(
-      '%c  Finger weg!!!',
-      'font-size:20px; font-weight:800; color:red; text-shadow: 5px 5px 10px green'
-    );
-  }
+  ) {}
 
   /**
    * Lifecycle hook called after the component is initialized.
@@ -77,10 +75,16 @@ export class DialogAddMembersComponent {
     this.dialogRef.close();
   }
 
-  onOptionSelected(event: any) {
+  /**
+   * Handle the selection of an option.
+   *
+   * @param {any} event - The event object representing the option selection.
+   */
+  onOptionSelected(event) {
+    // Get the value of the selected option.
     const selectedOption = event.option.value;
-    this.idAsSelectedChannel =
-      this.tagChannel.tagsData[this.variableService.selectedChannel].id;
+
+    // Find the index of the user with the selected name and store it.
     this.dataService.userData.forEach((element, index) => {
       if (element.name === selectedOption) {
         this.selectedUserIndex = index;
@@ -88,14 +92,31 @@ export class DialogAddMembersComponent {
     });
   }
 
+  /**
+   * Add a selected user to the channel's member list if not already added.
+   */
   addUser() {
-    this.tagChannel.addUserToChannel(
-      this.idAsSelectedChannel,
-      this.resultEmail(this.selectedUserIndex)
-    );
+    if (
+      this.membersCache.indexOf(
+        this.resultSelectedEmail(this.selectedUserIndex)
+      ) === -1
+    ) {
+      this.membersCache.push(this.resultSelectedEmail(this.selectedUserIndex));
+      this.tagChannel.addUserToChannel(
+        this.selectedChannel.id,
+        this.membersCache
+      );
+      this.close();
+    }
   }
 
-  resultEmail(index: number) {
+  /**
+   * Get the email address of a selected user based on the index.
+   *
+   * @param {number} index - The index of the user in the userData array.
+   * @returns {string} The email address of the selected user.
+   */
+  resultSelectedEmail(index: number) {
     return this.dataService.userData[index].email;
   }
 }

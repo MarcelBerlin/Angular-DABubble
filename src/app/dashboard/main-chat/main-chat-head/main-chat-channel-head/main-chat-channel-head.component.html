@@ -3,7 +3,7 @@
     class="head"
     (click)="channelEdition()"
     *ngIf="
-      tagChannel?.tagsData && variableService?.selectedChannel !== undefined
+      tagChannel?.tagsData && variableService?.selectedChannel !== -1
     "
   >
     <span class="nameContainer">
@@ -20,10 +20,24 @@
     </span>
     <mat-icon>keyboard_arrow_down</mat-icon>
   </div>
+  <div
+    class="marqueeHead"
+    (click)="channelEdition()"
+    *ngIf="
+      variableService.selectedChannel == -1
+    "
+  >
+    <marquee><h3>Hier könnte Ihr Slogan stehen!</h3></marquee>
+  </div>
   <div class="membersAndAdd">
-    <div class="members" (click)="showMembers()">
+    <div
+      class="members"
+      (click)="variableService.selectedChannel ? showMembers() : null"
+    >
       <img src="assets/img/members/MembersPreviewTest.png" />
-      <span>3</span>
+      <span>{{
+        tagChannel.tagsData[variableService.selectedChannel]?.members?.length
+      }}</span>
     </div>
     <div
       class="add"

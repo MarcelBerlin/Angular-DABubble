@@ -1,6 +1,5 @@
 .thread-content {
   height: 100%; // SPÄTER ÄNDERN
-  overflow-y: scroll;
 
   .full-message-left {
     width: calc(100% - 50px);
@@ -94,13 +93,14 @@
         display: flex;
         justify-content: center;
         padding: 3px 15px;
-        cursor: pointer;
+        width: fit-content;
+        // cursor: pointer;
       }
     }
 
     .reaction-column {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       flex-direction: column;
 
 
@@ -132,46 +132,52 @@
     }
   }
 
-  // USER MESSAGE
+  // ######  USER MESSAGE  ######
 
   .full-message-right {
     width: calc(100% - 20px);
-    // height: 200px;
     position: relative;
-    // border-bottom: 1px solid #eeebeb;
-    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #eeebeb;
 
     .avatar-right {
-      position: absolute;
-      right: 40px;
-      top: 25px;
-      width: 70px;
+      // position: absolute;
+      // right: 40px;
+      // top: 25px;
+      width: 100%;
       height: 70px;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 16px;
 
       img {
         width: 70px;
         height: 70px;
         border-radius: 50%;
+        margin-right: 10px;
       }
     }
 
     .message-details-right {
-      position: absolute;
-      top: 30px;
-      right: 120px;
-      width: 70%;
+      // position: absolute;
+      // top: 30px;
+      // right: 120px;
+      margin-top: -60px;
+      margin-left: -100px;
+      width: 100%;
       display: flex;
-      justify-content: flex-end;
-      // flex-direction: row-reverse;
+      flex-direction: column;
+      align-items: flex-end;
 
       .name-time {
         display: flex;
+        flex-direction: row-reverse;
 
         .name {
           font-family: "nunito";
           font-size: 18px;
           font-weight: 700;
-          padding-right: 20px;
         }
 
         .time {
@@ -183,10 +189,10 @@
       }
 
       .message-content-right {
-        position: absolute;
+        // position: absolute;
+        // top: 50px;
         color: white;
         background-color: #797ef3;
-        top: 50px;
         border-radius: 20px 0 20px 20px;
         width: auto;
         padding: 16px;
@@ -195,12 +201,14 @@
     }
 
     .reaction-bar-right {
-      position: absolute;
-      top: 130px;
+      // position: absolute;
+      // top: 130px;
       // right: 100px;
-      display: grid;
-      grid-template-columns: 100% 0%;
-      // width: 36%;
+      display: flex;
+      padding-right: 10px;
+      padding-top: 12px;
+      gap: 5px;
+      margin-bottom: 6px;
 
       img {
         cursor: pointer;
@@ -225,23 +233,25 @@
         border: 1px solid #adb0d9;
         border-radius: 20px;
         display: flex;
-        justify-content: center;
-        padding: 3px 1px;
-        cursor: pointer;
+        justify-content: flex-end;
+        padding: 3px 15px;
+        width: fit-content;
       }
     }
 
     .reaction-column {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       flex-direction: column;
+      width: 10px;
 
 
       .emoji-mart {
         z-index: 1;
         position: relative;
-        right: 100px;
+        left: 100px;
       }
     }
   }
 }
+
