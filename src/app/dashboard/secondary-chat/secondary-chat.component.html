@@ -1,7 +1,7 @@
 <div class="contentContainer">
   <div class="content">
     <app-secondary-chat-head></app-secondary-chat-head>
-    <app-secondary-chat-messagefield></app-secondary-chat-messagefield>
-    <app-secondary-chat-inputfield></app-secondary-chat-inputfield>
+    <app-secondary-chat-messagefield *ngIf="varService.selectedChannel"></app-secondary-chat-messagefield>
+    <app-secondary-chat-inputfield *ngIf="varService.selectedChannel"></app-secondary-chat-inputfield>
   </div>
 </div>

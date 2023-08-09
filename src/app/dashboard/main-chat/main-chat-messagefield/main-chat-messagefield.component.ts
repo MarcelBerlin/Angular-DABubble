@@ -37,6 +37,11 @@ export class MainChatMessagefieldComponent {
     );
   }
 
+  send() {
+    this.onChatTextChanged();
+    this.messageSend();
+  }
+
   onChatTextChanged() {
     this.chatService.emptyChat = (
       this.varService.mainChatHead === 0 && this.specificChannel.trim() === ''

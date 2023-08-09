@@ -1,37 +1,59 @@
-<div class="inputContainer" *ngIf="dialogAddService.tagsData && dataService.userData">
-  <textarea *ngIf="
+<div
+  class="inputContainer"
+  *ngIf="dialogAddService.tagsData && dataService.userData"
+>
+  <textarea
+    *ngIf="
       varService.mainChatHead == 0 &&
       dialogAddService.tagsData &&
       varService.selectedChannel !== undefined
-    " type="text" [(ngModel)]="messageService.messageText" placeholder="Nachricht an   {{
+    "
+    type="text"
+    [(ngModel)]="messageService.messageText"
+    placeholder="Nachricht an   {{
       dialogAddService.tagsData[varService.selectedChannel]?.name?.charAt(0) ||
         ''
     }} {{
       dialogAddService.tagsData[varService.selectedChannel]?.name?.slice(1) ||
         ''
-    }}"></textarea>
+    }}"
+  ></textarea>
 
-  <textarea *ngIf="
+  <textarea
+    *ngIf="
       varService.mainChatHead == 1 &&
       !currentUser() &&
       dataService.userData &&
       varService.selectedUserToMessage !== undefined
-    " [(ngModel)]="directChatService.directMessage" placeholder="Nachricht an {{
+    "
+    [(ngModel)]="directChatService.directMessage"
+    placeholder="Nachricht an {{
       dataService.userData[varService.selectedUserToMessage]?.name || ''
-    }}" [disabled]="!directChatService.directChatActive"></textarea>
-  <textarea *ngIf="
+    }}"
+    [disabled]="!directChatService.directChatActive"
+  ></textarea>
+  <textarea
+    *ngIf="
       varService.mainChatHead == 1 && currentUser() && dataService.userData
-    " [(ngModel)]="loggedUser" [(ngModel)]="directChatService.directMessage" placeholder="Nachricht an mich :-)"
-    [disabled]="!directChatService.directChatActive"></textarea>
+    "
+    [(ngModel)]="loggedUser"
+    [(ngModel)]="directChatService.directMessage"
+    placeholder="Nachricht an mich :-)"
+    [disabled]="!directChatService.directChatActive"
+  ></textarea>
 
-  <textarea *ngIf="
+  <textarea
+    *ngIf="
       varService.mainChatHead == 2 &&
       dataService.userData &&
       varService.indexOfSearch !== undefined &&
       varService.propertyOfSearch
-    " type="text" [(ngModel)]="searchField"
-    placeholder="Nachricht an {{ varService.selectedArrayofSearch[varService.indexOfSearch]?.[varService.propertyOfSearch] || '' }}"></textarea>
-  <div class="iconsContainer" style="position: relative;">
+    "
+    type="text"
+    [(ngModel)]="searchField"
+    placeholder="Nachricht an {{ varService.selectedArrayofSearch[varService.indexOfSearch]?.[varService.propertyOfSearch] || '' }}"
+  ></textarea>
+  <div class="iconsContainer" style="position: relative">
     <app-emoji-menu *ngIf="emojiService.emojiSelectorActive"></app-emoji-menu>
     <div class="addElements">
       <div class="element">
@@ -39,17 +61,20 @@
       </div>
       <div class="vector"></div>
       <div class="element">
-        <img src="assets/img/satisfied.png" (click)="emojiService.toggleEmojiSelector()"/>
+        <img
+          src="assets/img/satisfied.png"
+          (click)="emojiService.toggleEmojiSelector()"
+        />
       </div>
       <div class="element">
         <img src="assets/img/email.png" />
       </div>
     </div>
     <div class="sendIcon">
-      <img src="assets/img/send_icon.png" (click)="
-          messageSend();
-          onChatTextChanged()
-        " />
+      <img
+        src="assets/img/send_icon.png"
+        (click)="varService.selectedChannel ? send() : null"
+      />
     </div>
   </div>
 </div>
