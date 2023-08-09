@@ -27,14 +27,13 @@
       tagChannel?.tagsData && variableService?.selectedChannel == undefined
     "
   >
-    <marquee
-      ><h3>
-        Hier könnte Ihr Slogan stehen!
-      </h3></marquee
-    >
+    <marquee><h3>Hier könnte Ihr Slogan stehen!</h3></marquee>
   </div>
   <div class="membersAndAdd">
-    <div class="members" (click)="showMembers()">
+    <div
+      class="members"
+      (click)="variableService.selectedChannel ? showMembers() : null"
+    >
       <img src="assets/img/members/MembersPreviewTest.png" />
       <span>{{
         tagChannel.tagsData[variableService.selectedChannel]?.members?.length

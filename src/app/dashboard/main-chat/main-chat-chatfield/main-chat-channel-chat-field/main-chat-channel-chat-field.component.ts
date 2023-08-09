@@ -17,7 +17,6 @@ export class MainChatChannelChatFieldComponent {
     private dcshService: DashboardComponentsShowHideService,
     private dialog: Dialog,
     public varService: VariablesService,
-    public dialogAdd:DialogAddService
   ) {}
 
   /**
