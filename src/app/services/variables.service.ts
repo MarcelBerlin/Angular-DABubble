@@ -8,7 +8,7 @@ export class VariablesService {
   mainChatHead: number = 0;
   selectedUserToMessage: number = 0;
   selectedUserDetailView: number = 0;
-  selectedChannel: number | undefined = undefined;
+  selectedChannel: number = -1;
   selectedChannelId: string = '';
   conversationBetween: boolean = false;
   channelSelection: boolean = false;

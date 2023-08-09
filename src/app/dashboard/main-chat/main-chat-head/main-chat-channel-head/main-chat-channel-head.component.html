@@ -3,7 +3,7 @@
     class="head"
     (click)="channelEdition()"
     *ngIf="
-      tagChannel?.tagsData && variableService?.selectedChannel !== undefined
+      tagChannel?.tagsData && variableService?.selectedChannel !== -1
     "
   >
     <span class="nameContainer">
@@ -24,7 +24,7 @@
     class="marqueeHead"
     (click)="channelEdition()"
     *ngIf="
-      tagChannel?.tagsData && variableService?.selectedChannel == undefined
+      variableService.selectedChannel == -1
     "
   >
     <marquee><h3>Hier könnte Ihr Slogan stehen!</h3></marquee>
