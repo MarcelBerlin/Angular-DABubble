@@ -1,1 +1,9 @@
-<app-channel-selection></app-channel-selection>
+<app-channel-selection
+  *ngIf="dialogAdd.tagsData[varService.selectedChannel]"
+></app-channel-selection>
+<div
+  class="promotionLogo"
+  *ngIf="!dialogAdd.tagsData[varService.selectedChannel]"
+>
+  <img src="assets/img/DABubble.png" alt="" />
+</div>

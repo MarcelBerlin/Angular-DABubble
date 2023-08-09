@@ -7,8 +7,8 @@ import { DataService } from './data.service';
 export class VariablesService {
   mainChatHead: number = 0;
   selectedUserToMessage: number = 0;
-  selectedUserDetailView: number = 0;  
-  selectedChannel: number = 0;
+  selectedUserDetailView: number = 0;
+  selectedChannel: number;
   selectedChannelId: string = '';
   conversationBetween: boolean = false;
   channelSelection: boolean = false;
@@ -16,7 +16,7 @@ export class VariablesService {
   propertyOfSearch: string = '';
   indexOfSearch: number;
 
-  constructor(private dataService:DataService) {}
+  constructor() {}
 
   [key: string]: any; // Index-Signatur für beliebige Eigenschaften
 
@@ -48,6 +48,4 @@ export class VariablesService {
   setVar(variableValue: string, newValue: number | string | boolean) {
     this[variableValue] = newValue;
   }
-
-
 }

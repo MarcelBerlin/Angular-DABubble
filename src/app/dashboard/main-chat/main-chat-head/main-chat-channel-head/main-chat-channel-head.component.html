@@ -20,6 +20,19 @@
     </span>
     <mat-icon>keyboard_arrow_down</mat-icon>
   </div>
+  <div
+    class="marqueeHead"
+    (click)="channelEdition()"
+    *ngIf="
+      tagChannel?.tagsData && variableService?.selectedChannel == undefined
+    "
+  >
+    <marquee
+      ><h3>
+        Hier könnte Ihr Slogan stehen!
+      </h3></marquee
+    >
+  </div>
   <div class="membersAndAdd">
     <div class="members" (click)="showMembers()">
       <img src="assets/img/members/MembersPreviewTest.png" />
