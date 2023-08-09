@@ -21,8 +21,7 @@
 
         .message-details-left {
             margin-top: -70px;
-            margin-left: 100px;
-            width: 70%;
+            padding-left: 100px;
             display: flex;
             flex-direction: column;
 
@@ -142,8 +141,7 @@
 
         .message-details-right {
             margin-top: -60px;
-            margin-left: -100px;
-            width: 100%;
+            padding-right: 100px;
             display: flex;
             flex-direction: column;
             align-items: flex-end;

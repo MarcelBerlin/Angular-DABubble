@@ -51,10 +51,10 @@
         <span> Hallo, i bim's. Der Peter </span>
       </div>
 
-      <div class="reaction-bar-left">
-        <div *ngIf="threadEmoji">
+      <div id="reactionBarLeft" class="reaction-bar-left">
+        <div *ngIf="threadEmojiLeft">
           <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-            <span name="threadReaction">{{ reactionArr }}</span>
+            <span id="reactionsLeft"> {{ reactionArrLeft }} </span>
             <!-- <span>{{ app.reactionNumber }}</span> -->
           </div>
         </div>
@@ -62,7 +62,7 @@
           <img ngDefaultControl (click)="emojiPickerLeft = !emojiPickerLeft;"
             src="./../../../../assets/img/reaction.png">
           <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft"
-            (emojiSelect)="addEmoji($event)" title="Choose your emoji">
+            (emojiSelect)="addEmojiLeft($event)" title="Choose your emoji">
           </emoji-mart>
         </div>
       </div>
@@ -91,10 +91,10 @@
         <span> Hallo, ich bin's. Der Max </span>
       </div>
 
-      <div class="reaction-bar-right">
-        <div *ngIf="threadEmoji">
+      <div id="ReactionBarRight" class="reaction-bar-right">
+        <div *ngIf="threadEmojiRight">
           <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-            <span name="threadReaction">{{ reactionArr }}</span>
+            <span id="reactionsRight"> {{ reactionArrRight }} </span>
             <!-- <span>{{ app.reactionNumber }}</span> -->
           </div>
         </div>
@@ -102,7 +102,7 @@
           <img ngDefaultControl (click)="emojiPickerRight = !emojiPickerRight;"
             src="./../../../../assets/img/reaction.png">
           <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerRight"
-            (emojiSelect)="addEmoji($event)" title="Choose your emoji">
+            (emojiSelect)="addEmojiRight($event)" title="Choose your emoji">
           </emoji-mart>
         </div>
       </div>
