@@ -17,16 +17,20 @@ export class SecondaryChatMessagefieldComponent {
 
   @ViewChild('threadReaction') threadReaction: any;
 
-  public content: any = '';
-  public sentTime: any = '';
-  public message: any = {};
-  public userName: string = '';
-  public userImg: string = '';
-  public allMessages: any = [];
-  public threadEmoji: boolean = false;
+  public content: any = '';       // wieder loeschen, wenn main chat fertig ist
+  public sentTime: any = '';      // wieder loeschen, wenn main chat fertig ist
+  public message: any = {};       // wieder loeschen, wenn main chat fertig ist
+  public userName: string = '';   // wieder loeschen, wenn main chat fertig ist
+  public userImg: string = '';    // wieder loeschen, wenn main chat fertig ist
+  public allMessages: any = [];   // wieder loeschen, wenn main chat fertig ist
 
-  // public newAnswer: number = 0; // menge der neuen antworten
-  // public newContent = false; // ngIf html code anzeigen || nicht
+  public threadEmoji: boolean = false;
+  public emojiPickerRight: boolean = false;
+  public emojiPickerLeft: boolean = false;
+  public emoji: string = '';
+  public reactionArr: any = [];
+  public emojiCounter: number = 0;
+
 
 
   constructor(public getUser: DataService,
@@ -36,6 +40,16 @@ export class SecondaryChatMessagefieldComponent {
     public getMessage: MessageService,
     public chatService: ChatService) 
     {
+      console.log(this.addService.tagsData);
+    }
+
+    public addEmoji(event) {
+      this.threadEmoji = true;
+      this.reactionArr += `${this.emoji }${event.emoji.native}`;
+      // this.emojiCounter++; bei selben emoji = anzahl dahinter
+      this.getMessage.emojis.push(this.reactionArr);
+      if(this.emojiPickerLeft) { this.emojiPickerLeft = false}
+      if(this.emojiPickerRight) { this.emojiPickerRight = false}
 
     }
 

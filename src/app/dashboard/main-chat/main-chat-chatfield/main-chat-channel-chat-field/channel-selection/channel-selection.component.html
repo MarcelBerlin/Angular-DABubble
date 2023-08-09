@@ -70,18 +70,17 @@
             </div>
 
             <div class="reaction-bar-left">
-              <div *ngIf="app.reactionBoo">
-                <div matTooltip='{{this.dataService.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-                  <span>{{ app.newReaction }}</span>
+              <div *ngIf="chatEmoji">
+                <div matTooltip='{{ dataService.loggedInUserData.name }}' class="reactions"> <!--  reagierter User-->
+                  <span>{{ reactionArr }}</span>
                   <!-- <span>{{ app.reactionNumber }}</span> -->
                 </div>
               </div>
               <div class="reaction-column">
-                <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
-                  (click)="this.chatEmojiLeft= !this.chatEmojiLeft;"
-                  src="./../../../../assets/img/reaction.png">
-                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="this.chatEmojiLeft"
-                  (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
+                <img ngDefaultControl (click)="emojiPicker= !emojiPicker;"
+                 src="./../../../../assets/img/reaction.png">
+                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPicker"
+                  (emojiSelect)="addEmoji($event)" title="Choose your emoji">
                 </emoji-mart>
               </div>
             </div>
@@ -116,17 +115,17 @@
             </div>
 
             <div class="reaction-bar-right">
-              <div *ngIf="app.reactionBoo">
+              <div *ngIf="chatEmoji">
                 <div matTooltip='{{this.dataService.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-                  <span>{{ app.newReaction }}</span>
+                  <span>{{ reactionArr }}</span>
                   <!-- <span>{{ app.reactionNumber }}</span> -->
                 </div>
               </div>
               <div class="reaction-column">
-                <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
-                  (click)="this.chatEmojiRight= !this.chatEmojiRight;" src="./../../../../assets/img/reaction.png">
-                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="this.chatEmojiRight"
-                  (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
+                <img ngDefaultControl (click)="emojiPicker= !emojiPicker;"
+                 src="./../../../../assets/img/reaction.png">
+                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPicker"
+                  (emojiSelect)="addEmoji($event)" title="Choose your emoji">
                 </emoji-mart>
               </div>
             </div>

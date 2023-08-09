@@ -52,25 +52,60 @@
       </div>
 
       <div class="reaction-bar-left">
-        <div *ngIf="app.reactionBoo">
+        <div *ngIf="threadEmoji">
           <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-            <span name="threadReaction">{{ app.newReaction }}</span>
+            <span name="threadReaction">{{ reactionArr }}</span>
             <!-- <span>{{ app.reactionNumber }}</span> -->
           </div>
         </div>
         <div class="reaction-column">
-          <img ngDefaultControl (click)="this.threadEmoji = !this.threadEmoji;"
+          <img ngDefaultControl (click)="emojiPickerLeft = !emojiPickerLeft;"
             src="./../../../../assets/img/reaction.png">
-          <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="this.threadEmoji"
-            (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
+          <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft"
+            (emojiSelect)="addEmoji($event)" title="Choose your emoji">
           </emoji-mart>
         </div>
       </div>
     </div>
 
-    <div *ngIf="getMessage.emojis.length > 0" class="new-answers">
+    <div *ngIf="getMessage.emojis.length > 0" class="new-answers"> 
       <p> {{ getMessage.emojis.length }} Antwort(en)</p>
       <img src="./../../../../assets/img/line.png">
     </div>
 
   </div>
+
+  <div class="full-message-right">
+
+    <div class="avatar-right">
+      <img src="./../../../../assets/img/members/avatar5.png">
+    </div>
+
+    <div class="message-details-right">
+      <div class="name-time">
+        <div class="name"> Max Mustermann </div>
+        <div class="time"> 13:12 </div>
+      </div>
+
+      <div class="message-content-right">
+        <span> Hallo, ich bin's. Der Max </span>
+      </div>
+
+      <div class="reaction-bar-right">
+        <div *ngIf="threadEmoji">
+          <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
+            <span name="threadReaction">{{ reactionArr }}</span>
+            <!-- <span>{{ app.reactionNumber }}</span> -->
+          </div>
+        </div>
+        <div class="reaction-column">
+          <img ngDefaultControl (click)="emojiPickerRight = !emojiPickerRight;"
+            src="./../../../../assets/img/reaction.png">
+          <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerRight"
+            (emojiSelect)="addEmoji($event)" title="Choose your emoji">
+          </emoji-mart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

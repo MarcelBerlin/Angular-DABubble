@@ -22,8 +22,14 @@ export class ChannelSelectionComponent implements OnInit {
   chatText: string = '';
   messages$: any = [];
   messageData: any = [];
-  chatEmojiLeft: boolean = false;
-  chatEmojiRight: boolean = false;
+  public chatEmojiLeft: boolean = false;
+  public chatEmojiRight: boolean = false;
+
+  public chatEmoji: boolean = false;
+  public emojiPicker: boolean = false;
+  public emoji: string = '';
+  public reactionArr: any = [];
+  public emojiCounter: number = 0;
 
   constructor(
     private firestore: Firestore,
@@ -74,5 +80,13 @@ export class ChannelSelectionComponent implements OnInit {
 
   checkIfMessageDataIsEmpty() {
     this.emptyChat = this.messageData.length < 1;
+  }
+
+  public addEmoji(event) {
+    this.chatEmoji = true;
+    this.reactionArr += `${this.emoji }${event.emoji.native}`;
+    // this.emojiCounter++; bei selben emoji = anzahl dahinter
+    this.messageService.emojis.push(this.reactionArr);
+    this.emojiPicker = false;
   }
 }
