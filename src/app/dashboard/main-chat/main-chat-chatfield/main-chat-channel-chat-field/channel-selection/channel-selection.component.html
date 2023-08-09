@@ -50,16 +50,28 @@
 
 
   <div class="full-message-left">
-
     <!-- Zeige Nachrichten des ausgewählten Kanals an -->
-    <div *ngFor="let message of messageData">
+    <div *ngFor="let message of messageData, let i = index">
       <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
-        <div *ngIf="message.userName != this.dataService.loggedInUserData.name">
+        <div class="single-message-left-container" *ngIf="message.userName != this.dataService.loggedInUserData.name"
+        (mouseover)="onHover(i)"
+        (mouseout)="onHoverEnd()">
+         
+          <div class="interaction-bubble-left" 
+          [style.display]="hoveredIndex === i ? 'block' : 'none'" 
+          [style.transition]="'display 125ms ease-in-out'">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+         
           <div class="avatar-left">
             <img src="assets/img/members/avatar1.png" />
           </div>
 
-          <div class="message-details-left">
+          <div class="message-details-left">            
+
             <div class="name-time">
               <div class="name">{{ message.userName }}</div>
               <div class="time"> {{ message.timestamp.clockString }}</div>
@@ -90,20 +102,30 @@
     </div>
   </div>
 
-  <!-- <div class="new-answers">
-      <p> 1 Antwort(en)</p>
-      <img src="./../../../../assets/img/line.png">
-    </div> -->
+
+
+
 
   <div class="full-message-right">
-    <div *ngFor="let message of messageData">
+    <div *ngFor="let message of messageData, let i = index">
       <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
-        <div *ngIf="message.userName == this.dataService.loggedInUserData.name">
+        <div class="single-message-right-container" *ngIf="message.userName == this.dataService.loggedInUserData.name"
+        (mouseover)="onHover(i)"
+        (mouseout)="onHoverEnd()"
+
+        >
           <div class="avatar-right">
             <img src="./../../../../assets/img/members/avatar3.png">
           </div>
 
-          <div class="message-details-right">
+          <div class="message-details-right">         
+
+            <div class="interaction-bubble-right" [style.display]="hoveredIndex === i ? 'block' : 'none'">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
 
             <div class="name-time">
               <div class="name"> {{ message.userName }} </div>

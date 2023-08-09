@@ -24,6 +24,7 @@ export class ChannelSelectionComponent implements OnInit {
   messageData: any = [];
   public chatEmojiLeft: boolean = false;
   public chatEmojiRight: boolean = false;
+  hoveredIndex: number | null = null;
 
   public chatEmoji: boolean = false;
   public emojiPicker: boolean = false;
@@ -90,5 +91,13 @@ export class ChannelSelectionComponent implements OnInit {
     // this.emojiCounter++; bei selben emoji = anzahl dahinter
     this.messageService.emojis.push(this.reactionArr);
     this.emojiPicker = false;
+  }
+
+  onHover(index: number) {
+    this.hoveredIndex = index;
+  }
+
+  onHoverEnd() {
+    this.hoveredIndex = null;
   }
 }

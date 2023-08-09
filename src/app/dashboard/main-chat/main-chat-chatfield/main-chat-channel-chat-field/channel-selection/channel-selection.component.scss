@@ -7,6 +7,38 @@
     position: relative;
     border-bottom: 1px solid #eeebeb;
     padding-bottom: 20px;
+   
+
+    .single-message-left-container {
+      position: relative;
+      transition: all 125ms ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #eceefe;
+        transition: all 125ms ease-in-out;      
+      }
+
+      .interaction-bubble-left {
+        position: absolute;
+        display: none;
+        top: -20px;
+        right: 0px;
+        width: 300px;
+        height: 50px;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px; 
+        transition: display 125ms ease-in-out;
+        
+      }      
+    }
+
+    .single-message-left-container:hover .message-content-left {
+      background-color: white;
+    }
 
     .avatar-left {
       // position: absolute;
@@ -24,7 +56,7 @@
       }
     }
 
-    .message-details-left {
+    .message-details-left {     
       // position: absolute;
       // top: 20px;
       // left: 100px;
@@ -32,7 +64,8 @@
       margin-left: 100px;
       width: 70%;
       display: flex;
-      flex-direction: column;
+      flex-direction: column;    
+      
 
       .name-time {
         display: flex;
@@ -62,6 +95,7 @@
         span {
           font-size: 16px;
         }
+        
       }
     }
 
@@ -141,6 +175,19 @@
     flex-direction: column;
     border-bottom: 1px solid #eeebeb;
 
+    .single-message-right-container {
+      position: relative;
+      transition: all 125ms ease-in-out;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #eceefe;
+        transition: all 125ms ease-in-out;      
+      }
+    }
+
+    
+
     .avatar-right {
       // position: absolute;
       // right: 40px;
@@ -160,6 +207,7 @@
     }
 
     .message-details-right {
+      position: relative;
       // position: absolute;
       // top: 30px;
       // right: 120px;
@@ -169,6 +217,19 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+
+      .interaction-bubble-right {
+        position: absolute;
+        top: -20px;
+        left: 100px;
+        width: 300px;
+        height: 50px;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;       
+      }
 
       .name-time {
         display: flex;
@@ -253,5 +314,16 @@
       }
     }
   }
+
+  .interaction-bubble-left {
+    width: 500px;
+    height: 300px;
+    background-color: #eeebeb;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+  }
+
+
 }
 
