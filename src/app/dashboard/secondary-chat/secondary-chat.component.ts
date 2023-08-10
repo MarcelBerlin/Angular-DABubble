@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TestBastiService } from 'src/app/services/test-basti.service';
 import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({

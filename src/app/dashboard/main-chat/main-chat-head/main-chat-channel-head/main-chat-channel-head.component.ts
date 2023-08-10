@@ -5,7 +5,6 @@ import { DialogAddMembersComponent } from 'src/app/dialog/dialog-add-members/dia
 import { DialogChannelEditionComponent } from 'src/app/dialog/dialog-channel-edition/dialog-channel-edition.component';
 import { DialogMembersComponent } from 'src/app/dialog/dialog-members/dialog-members.component';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
-import { TestBastiService } from 'src/app/services/test-basti.service';
 import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
@@ -18,7 +17,6 @@ export class MainChatChannelHeadComponent {
 
   constructor(
     public dialog: MatDialog,
-    public tBS: TestBastiService,
     public tagChannel: DialogAddService,
     public variableService: VariablesService,
   ) {}
