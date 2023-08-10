@@ -6,6 +6,7 @@ import { AppComponent } from 'src/app/app.component';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 
+
 @Component({
   selector: 'app-secondary-chat-messagefield',
   templateUrl: './secondary-chat-messagefield.component.html',
@@ -31,8 +32,6 @@ export class SecondaryChatMessagefieldComponent {
   public emoji: string = '';
   public reactionArrLeft: any = [];
   public reactionArrRight: any = [];
-  public emojiCounter: number = 0;
-  private emojiCountMapRight: any = new Map();;
 
   constructor(public getUser: DataService,
     public app: AppComponent,
@@ -43,7 +42,6 @@ export class SecondaryChatMessagefieldComponent {
   }
 
 
-  // WIRD SPÄTER ALLES NOCH GEKÜRZT! 
   public addEmojiLeft(event) {
     this.threadEmojiLeft = true;
     this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
@@ -52,62 +50,50 @@ export class SecondaryChatMessagefieldComponent {
     if (this.reactionArrLeft.length > 1) { this.emojiFilterLeft(this.reactionArrLeft); }
   }
 
+
   emojiFilterLeft(reactionArr) {
     const emojiCountMapLeft: any = new Map();
     let reactionBarLeft = document.getElementById("reactionBarLeft");
     reactionArr.forEach(emoji => {
-      if (emojiCountMapLeft.has(emoji)) { emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji)+ 1);
-      } else { emojiCountMapLeft.set(emoji, 1);}
+      if (emojiCountMapLeft.has(emoji)) {emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
+      } else {emojiCountMapLeft.set(emoji, 1);}
     });
-
+    reactionBarLeft.innerHTML = '';
     emojiCountMapLeft.forEach((count, emoji) => {
-      if(count > 1) { reactionBarLeft.innerHTML = '';}
       reactionBarLeft.innerHTML +=
-        `<div> <span  class="reactions"> ${emoji} ${count} </span> </div>`
+        `<div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`
     });
-    console.log(emojiCountMapLeft);
-    
-  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-  public addEmojiRight(event) {
-    this.threadEmojiRight = true;
-    this.reactionArrRight = `${this.emoji}${event.emoji.native}`;
-    this.getMessage.emojis.push(this.reactionArrRight); // speichern in firebase?
-    this.emojiPickerRight = false;
-
-    if (this.getMessage.emojis.length > 1) {
-      this.emojiFilterRight(this.getMessage.emojis);
+    if(reactionArr.length >= 7) {
+      reactionBarLeft.innerHTML = 'zu viele reaktionen. Wir arbeiten gerade daran 🙁'
     }
   }
 
 
+  public addEmojiRight(event) {
+    this.threadEmojiRight = true;
+    this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
+    this.reactionArrRight.push(this.getMessage.emojis); // speichern in firebase fuer jede nachricht einzeln?
+    this.emojiPickerRight = false;
+    if(this.reactionArrRight.length > 1) {this.emojiFilterRight(this.reactionArrRight); }
+  }
+
+
   emojiFilterRight(reactionArr) {
-    const emojiCountMapRight = new Map();
-    let reactionBarRight = document.getElementById("reactionsRight"); // span für rechte seite, wo emojis angezeigt werden
-
+    const emojiCountMapRight: any = new Map();
+    let reactionBarRight = document.getElementById("reactionBarRight");
     reactionArr.forEach(emoji => {
-      if (emojiCountMapRight.has(emoji)) {
-        emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
-      } else { emojiCountMapRight.set(emoji, 1); }
+      if (emojiCountMapRight.has(emoji)) {emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
+      } else {emojiCountMapRight.set(emoji, 1);}
+    });
+    reactionBarRight.innerHTML = '';
+    emojiCountMapRight.forEach((count, emoji) => {
+      reactionBarRight.innerHTML +=
+        `<div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`
     });
 
-    emojiCountMapRight.forEach((count, emoji) => {
-      this.emojiPickerRight = true;
-      reactionBarRight.innerHTML = '';
-      reactionBarRight.innerHTML += `${emoji} ${count > 1 ? count : ""}`;
-      this.emojiPickerRight = false;
-    });
+    if(reactionArr.length >= 7) {
+      reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊'
+    }
   }
 }

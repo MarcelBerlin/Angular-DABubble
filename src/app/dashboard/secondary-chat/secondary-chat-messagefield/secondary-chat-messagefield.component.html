@@ -52,9 +52,9 @@
       </div>
 
       <div class="reaction-bar-left">
-        <div id="reactionBarLeft" *ngIf="threadEmojiLeft">
-          <div id="reactionsLeft" matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-            <span> {{ reactionArrLeft }} </span>
+        <div class="reactions" id="reactionBarLeft" *ngIf="threadEmojiLeft">
+          <div id="reactionsLeft" matTooltip ='{{this.getUser.loggedInUserData.name}}' > <!--  reagierter User-->
+            <span *ngIf="this.reactionArrLeft.length <= 1"> {{ reactionArrLeft }} </span>
           </div>
         </div>
         <div class="reaction-column">
@@ -94,11 +94,10 @@
         <span> Hallo, ich bin's. Der Max </span>
       </div>
 
-      <div id="ReactionBarRight" class="reaction-bar-right">
-        <div *ngIf="threadEmojiRight">
-          <div id="reactionsRight" matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-            <span> {{ reactionArrRight }} </span>
-            <!-- <span>{{ app.reactionNumber }}</span> -->
+      <div class="reaction-bar-right">
+        <div class="reactions" id="reactionBarRight" *ngIf="threadEmojiRight">
+          <div id="reactionsRight" matTooltip ='{{this.getUser.loggedInUserData.name}}' > <!--  reagierter User-->
+            <span *ngIf="this.reactionArrRight.length <= 1"> {{ reactionArrRight }} </span>
           </div>
         </div>
         <div class="reaction-column">

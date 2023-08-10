@@ -57,11 +57,12 @@
         .reaction-bar-left {
             display: flex;
             align-items: flex-start;
+            width: max-content;
             padding-left: 10px;
             padding-bottom: 12px;
             gap: 5px;
             margin-top: 6px;
-            flex-direction: column;
+            margin-left: -100px;
 
             img {
                 cursor: pointer;
@@ -72,13 +73,13 @@
                     border-radius: 10px;
                 }
             }
-
             .reactions {
                 border: 1px solid #adb0d9;
                 border-radius: 20px;
                 display: flex;
                 justify-content: center;
                 padding: 3px 15px;
+                gap: 8px;
             }
         }
 
@@ -115,8 +116,7 @@
         }
     }
 
-
-    // ######  USER MESSAGE  ######
+    // ######  USER MESSAGES  ######
 
     .full-message-right {
         width: calc(100% - 20px);
@@ -181,6 +181,7 @@
             padding-top: 12px;
             gap: 5px;
             margin-bottom: 6px;
+            margin-right: -120px;
 
             img {
                 cursor: pointer;
@@ -206,6 +207,7 @@
                 justify-content: flex-end;
                 padding: 3px 15px;
                 width: fit-content;
+                gap: 8px;
             }
 
             .reaction-column {
@@ -213,7 +215,6 @@
                 align-items: flex-end;
                 flex-direction: column;
                 width: 10px;
-
 
                 .emoji-mart {
                     z-index: 1;
@@ -223,12 +224,4 @@
             }
         }
     }
-}
-
-.reactions {
-    border: 1px solid #adb0d9;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    padding: 3px 15px;
 }
