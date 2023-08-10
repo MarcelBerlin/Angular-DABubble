@@ -24,7 +24,7 @@
         display: none;
         top: -20px;
         right: 0px;
-        width: 300px;
+        width: 100px;
         height: 50px;
         background-color: white;
         border: 1px solid rgba(0, 0, 0, 0.2);
@@ -34,6 +34,38 @@
         transition: display 125ms ease-in-out;
         
       }      
+
+      .interaction-bubble-emoji {    
+        display: flex;
+        justify-content: center; 
+        align-items: center;         
+        position: absolute;         
+        top: 6px;
+        left: 8px;
+        width: 40px;
+        height: 40px;
+
+        &:hover{          
+          background-color: #eceefe;
+          border-radius: 100%;
+        }
+      }
+
+      mat-icon{
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        position: absolute; 
+        top: 8px;
+        right: 8px;
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+          background-color: #eceefe;
+          border-radius: 100%;
+        }
+      }
     }
 
     .single-message-left-container:hover .message-content-left {
@@ -222,13 +254,45 @@
         position: absolute;
         top: -20px;
         left: 100px;
-        width: 300px;
+        width: 100px;
         height: 50px;
         background-color: white;
         border: 1px solid rgba(0, 0, 0, 0.2);
         border-top-right-radius: 30px;
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;       
+      }
+
+      .interaction-bubble-emoji {    
+        display: flex;
+        justify-content: center; 
+        align-items: center;         
+        position: absolute;         
+        top: 6px;
+        left: 8px;
+        width: 40px;
+        height: 40px;
+
+        &:hover{          
+          background-color: #eceefe;
+          border-radius: 100%;
+        }
+      }
+
+      mat-icon{
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        position: absolute; 
+        top: 8px;
+        right: 8px;
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+          background-color: #eceefe;
+          border-radius: 100%;
+        }
       }
 
       .name-time {

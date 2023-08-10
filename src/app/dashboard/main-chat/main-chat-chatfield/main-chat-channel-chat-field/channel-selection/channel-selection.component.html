@@ -60,8 +60,18 @@
           <div class="interaction-bubble-left" 
           [style.display]="hoveredIndex === i ? 'block' : 'none'" 
           [style.transition]="'display 125ms ease-in-out'">
-            <div></div>
-            <div></div>
+            <div class="interaction-bubble-emoji">
+              <img ngDefaultControl (click)="emojiPicker= !emojiPicker;"
+                 src="./../../../../assets/img/reaction.png">
+                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPicker"
+                  (emojiSelect)="addEmoji($event)" title="Choose your emoji">
+                </emoji-mart>
+            </div>
+            <div>
+              <mat-icon>
+                comment
+              </mat-icon>
+            </div>
             <div></div>
             <div></div>
           </div>
@@ -121,8 +131,18 @@
           <div class="message-details-right">         
 
             <div class="interaction-bubble-right" [style.display]="hoveredIndex === i ? 'block' : 'none'">
-              <div></div>
-              <div></div>
+              <div class="interaction-bubble-emoji">
+                <img ngDefaultControl (click)="emojiPicker= !emojiPicker;"
+                 src="./../../../../assets/img/reaction.png">
+                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPicker"
+                  (emojiSelect)="addEmoji($event)" title="Choose your emoji">
+                </emoji-mart>
+              </div>
+              <div>
+                <mat-icon class="interaction-bubble-comment">
+                  comment
+                </mat-icon>
+              </div>
               <div></div>
               <div></div>
             </div>

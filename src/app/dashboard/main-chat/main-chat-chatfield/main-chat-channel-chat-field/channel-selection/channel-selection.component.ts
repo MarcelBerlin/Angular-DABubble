@@ -24,7 +24,7 @@ export class ChannelSelectionComponent implements OnInit {
   messageData: any = [];
   public chatEmojiLeft: boolean = false;
   public chatEmojiRight: boolean = false;
-  hoveredIndex: number | null = null;
+  hoveredIndex: number | null = null;  
 
   public chatEmoji: boolean = false;
   public emojiPicker: boolean = false;
@@ -57,8 +57,8 @@ export class ChannelSelectionComponent implements OnInit {
     const coll = collection(this.firestore, 'messages');
     this.messages$ = collectionData(coll, { idField: 'id' });
     this.messages$.subscribe((message: any) => {
-      this.messageData = message;
-      // console.log(this.messageData);
+      this.messageData = message.sort((a, b) => a.timestamp.dateTimeNumber - b.timestamp.dateTimeNumber);
+      console.log(this.messageData);
     });
   }
 
