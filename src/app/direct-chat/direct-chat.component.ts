@@ -56,6 +56,7 @@ export class DirectChatComponent {
     this.dataService.users$.subscribe(() => {
       if (this.directChatService.directChatActive && this.directChatService.directChatIndex.directChatId) {
         this.directChatService.loadChatDataSets(this.directChatService.directChatIndex.directChatId);
+        this.directChatService.checkForNewMessages();
       }
     })
   }

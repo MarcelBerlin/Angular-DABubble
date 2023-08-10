@@ -24,7 +24,7 @@ export class DirectChatService {
     private dataService: DataService,
     private firestore: Firestore,
     private timelineService: TimelinesService
-  ) {}
+  ) { }
 
 
   /**
@@ -296,9 +296,9 @@ export class DirectChatService {
       if (user.userId === partnerChatIndex.ownId) {
         user.directChats.push(partnerChatIndex);
         const qData = doc(this.firestore, 'users', user.userId);
-        const newData = {directChats: user.directChats,};
+        const newData = { directChats: user.directChats, };
         updateDoc(qData, newData).then(() => {
-          
+
         }).catch((error) => {
           console.log('partner chatIndex set failed');
         })
@@ -395,6 +395,27 @@ export class DirectChatService {
     }).catch((error) => {
       console.log('update user failed');
     })
+  }
+
+  checkForNewMessages(): void {
+    let ownDirectChats = this.dataService.loggedInUserData.directChats;
+    ownDirectChats.forEach(element => {
+      let directChatId = element.directChatId;
+      let ownDateTimeNumber = element.lastTimeStamp.dateTimeNumber;
+      let pId = element.partnerId;
+      this.dataService.userData.forEach(user  => {
+        if(user.userId == pId) {
+          let pDirectChats = user.directChats;
+          pDirectChats.forEach(chat => {
+            if(chat.directChatId === directChatId) {
+              if(chat.lastTimeStamp.dateTimeNumber > ownDateTimeNumber) {
+                console.log('neu Nachricht', pId);
+              }
+            }
+          });
+        }
+      });
+    });
   }
 }//end
 
