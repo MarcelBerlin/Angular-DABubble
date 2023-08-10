@@ -68,10 +68,12 @@ export class MenuSidenavComponent implements OnInit {
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
+    
   }
 
   ngOnInit(): void {
     this.allTags();
+    // this.getService.deleteFromFirebase() // bitte lassen. Basti
   }
 
   allTags() {
@@ -80,6 +82,7 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
+      // console.log(this.tags); // bitte lassen. Basti
     });
   }
 

@@ -11,6 +11,7 @@ import {
   getDoc,
 } from '@angular/fire/firestore';
 import 'firebase/compat/firestore';
+import { DataService } from './data.service';
 
 interface Tag {
   id: string;
@@ -29,7 +30,7 @@ export class DialogAddService {
   tagsData: any = [];
   channelIndex: number = 0;
 
-  constructor(private firestore: Firestore) {
+  constructor(private firestore: Firestore, private dataService: DataService) {
     const coll = collection(firestore, 'tags');
     this.newTags$ = collectionData(coll, { idField: 'id' });
     this.newTags$.subscribe((tag: any) => {
@@ -50,6 +51,7 @@ export class DialogAddService {
     description: string,
     channelCreator: string
   ) {
+    this.members.push(this.dataService.loggedInUserEmail);
     this.description = description;
     this.newTag = generatedTag;
     this.channelCreator = channelCreator;
