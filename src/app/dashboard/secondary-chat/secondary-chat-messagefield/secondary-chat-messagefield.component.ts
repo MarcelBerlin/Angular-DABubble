@@ -32,6 +32,7 @@ export class SecondaryChatMessagefieldComponent {
   public reactionArrLeft: any = [];
   public reactionArrRight: any = [];
   public emojiCounter: number = 0;
+  private emojiCountMapRight: any = new Map();;
 
   constructor(public getUser: DataService,
     public app: AppComponent,
@@ -45,31 +46,39 @@ export class SecondaryChatMessagefieldComponent {
   // WIRD SPÄTER ALLES NOCH GEKÜRZT! 
   public addEmojiLeft(event) {
     this.threadEmojiLeft = true;
-    this.reactionArrLeft = `${this.emoji}${event.emoji.native}`;
-    this.getMessage.emojis.push(this.reactionArrLeft); // speichern in firebase?
+    this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
+    this.reactionArrLeft.push(this.getMessage.emojis); // speichern in firebase fuer jede nachricht einzeln?
     this.emojiPickerLeft = false;
-
-    if (this.getMessage.emojis.length > 1) {
-      this.emojiFilterLeft(this.getMessage.emojis);
-    }
+    if (this.reactionArrLeft.length > 1) { this.emojiFilterLeft(this.reactionArrLeft); }
   }
 
   emojiFilterLeft(reactionArr) {
-    const emojiCountMapLeft = new Map();
-    let reactionBarLeft = document.getElementById("reactionsLeft"); // span für linke seite, wo emojis angezeigt werden
-
+    const emojiCountMapLeft: any = new Map();
+    let reactionBarLeft = document.getElementById("reactionBarLeft");
     reactionArr.forEach(emoji => {
-      if (emojiCountMapLeft.has(emoji)) {
-        emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
-      } else { emojiCountMapLeft.set(emoji, 1); }
+      if (emojiCountMapLeft.has(emoji)) { emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji)+ 1);
+      } else { emojiCountMapLeft.set(emoji, 1);}
     });
 
     emojiCountMapLeft.forEach((count, emoji) => {
-      reactionBarLeft.innerHTML = '';
-      reactionBarLeft.innerHTML += `${emoji} ${count > 1 ? count : ""}`;
-      this.emojiPickerLeft = false;
+      if(count > 1) { reactionBarLeft.innerHTML = '';}
+      reactionBarLeft.innerHTML +=
+        `<div> <span  class="reactions"> ${emoji} ${count} </span> </div>`
     });
+    console.log(emojiCountMapLeft);
+    
   }
+
+
+
+
+
+
+
+
+
+
+
 
 
   public addEmojiRight(event) {
@@ -101,21 +110,4 @@ export class SecondaryChatMessagefieldComponent {
       this.emojiPickerRight = false;
     });
   }
-
-
-  /**
-   * subscribes messages from firebase from channel
-   */
-  getMessages() {
-    console.log(this.addService.tagsData[this.varService.selectedChannel]);
-  }
-
-  // deleteDoubledEmojis(doubledEmoji) {
-  //   for (let i = 0; i < doubledEmoji.length; i++) {
-  //     if (doubledEmoji[i].emoji && doubledEmoji.filter(item => item.emoji === doubledEmoji[i].emoji).length > 1) {
-  //       doubledEmoji.splice(i, 1);
-  //       i--;
-  //     }
-  //   }
-  // }
 }

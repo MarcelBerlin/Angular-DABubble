@@ -51,11 +51,10 @@
         <span> Hallo, i bim's. Der Peter </span>
       </div>
 
-      <div id="reactionBarLeft" class="reaction-bar-left">
-        <div *ngIf="threadEmojiLeft">
-          <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-            <span id="reactionsLeft"> {{ reactionArrLeft }} </span>
-            <!-- <span>{{ app.reactionNumber }}</span> -->
+      <div class="reaction-bar-left">
+        <div id="reactionBarLeft" *ngIf="threadEmojiLeft">
+          <div id="reactionsLeft" matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
+            <span> {{ reactionArrLeft }} </span>
           </div>
         </div>
         <div class="reaction-column">
@@ -68,12 +67,16 @@
       </div>
     </div>
 
-    <div *ngIf="getMessage.emojis.length > 0" class="new-answers"> 
-      <p> {{ getMessage.emojis.length }} Antwort(en)</p>
+    <div *ngIf="getMessage.emojis.length > 0" class="new-answers">
+      <p> {{ getMessage.emojis.length -1 }} Antwort(en)</p>
       <img src="./../../../../assets/img/line.png">
     </div>
-
   </div>
+
+
+
+
+
 
   <div class="full-message-right">
 
@@ -93,8 +96,8 @@
 
       <div id="ReactionBarRight" class="reaction-bar-right">
         <div *ngIf="threadEmojiRight">
-          <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
-            <span id="reactionsRight"> {{ reactionArrRight }} </span>
+          <div id="reactionsRight" matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reactions"> <!--  reagierter User-->
+            <span> {{ reactionArrRight }} </span>
             <!-- <span>{{ app.reactionNumber }}</span> -->
           </div>
         </div>

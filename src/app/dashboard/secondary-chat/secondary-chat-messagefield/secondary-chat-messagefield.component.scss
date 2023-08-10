@@ -56,11 +56,12 @@
 
         .reaction-bar-left {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             padding-left: 10px;
             padding-bottom: 12px;
             gap: 5px;
             margin-top: 6px;
+            flex-direction: column;
 
             img {
                 cursor: pointer;
@@ -222,4 +223,12 @@
             }
         }
     }
+}
+
+.reactions {
+    border: 1px solid #adb0d9;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 3px 15px;
 }
