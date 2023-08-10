@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { DashboardComponentsShowHideService } from './dashboard-components-show-hide.service';
+import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,11 @@ import { DashboardComponentsShowHideService } from './dashboard-components-show-
 export class DashboardComponent {
   imageUrl: string = 'assets/img/nav-hide.png';
 
-  constructor(public dcshService: DashboardComponentsShowHideService) {}
+  constructor(public dcshService: DashboardComponentsShowHideService, private directChatService: DirectChatService) {
+    setTimeout(() =>{
+      this.directChatService.checkForNewMessages();
+    }, 5000);
+  }
 
   /**
    * Toggles the visibility of the navigation by invoking the 'hideShowNavigation' method of 'dcshService'.
