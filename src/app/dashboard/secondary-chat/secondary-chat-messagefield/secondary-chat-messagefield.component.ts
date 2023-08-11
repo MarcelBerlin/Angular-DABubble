@@ -15,23 +15,14 @@ import { DialogAddService } from 'src/app/services/dialog-add.service';
 
 export class SecondaryChatMessagefieldComponent {
 
-  @ViewChild('reactions') reactions: ElementRef;
+  threadEmojiLeft: boolean = false;
+  threadEmojiRight: boolean = false;
 
-  public content: any = '';       // wieder loeschen, wenn main chat fertig ist
-  public sentTime: any = '';      // wieder loeschen, wenn main chat fertig ist
-  public message: any = {};       // wieder loeschen, wenn main chat fertig ist
-  public userName: string = '';   // wieder loeschen, wenn main chat fertig ist
-  public userImg: string = '';    // wieder loeschen, wenn main chat fertig ist
-  public allMessages: any = [];   // wieder loeschen, wenn main chat fertig ist
-
-  public threadEmojiLeft: boolean = false;
-  public threadEmojiRight: boolean = false;
-
-  public emojiPickerRight: boolean = false;
-  public emojiPickerLeft: boolean = false;
-  public emoji: string = '';
-  public reactionArrLeft: any = [];
-  public reactionArrRight: any = [];
+  emojiPickerRight: boolean = false;
+  emojiPickerLeft: boolean = false;
+  emoji: string = '';
+  reactionArrLeft: any = [];
+  reactionArrRight: any = [];
 
   constructor(public getUser: DataService,
     public app: AppComponent,
@@ -61,9 +52,8 @@ export class SecondaryChatMessagefieldComponent {
     reactionBarLeft.innerHTML = '';
     emojiCountMapLeft.forEach((count, emoji) => {
       reactionBarLeft.innerHTML +=
-        `<div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`
+        `<div class="reaction-container"> <span matTooltip ='{{${this.getUser.loggedInUserData.name}}}'> ${emoji} ${count} </span> </div>`
     });
-
     if(reactionArr.length >= 10) { reactionBarLeft.innerHTML = 'Zu viele reaktionen. Wir arbeiten gerade daran'}
   }
 

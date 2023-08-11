@@ -2,21 +2,21 @@
     <mat-dialog-content class="user-profile">
         <div class="profile-overview-head">
             <span>Dein Profil bearbeiten</span>
-            <img class="close-icon" mat-button mat-dialog-close src="./../../assets/img/close.png">
+            <img class="close-icon" mat-button mat-dialog-close src="assets/img/close.png">
         </div>
 
         <img class="user-img" src="{{ loggedUserImg }}">
 
         <div class="input-section">
             <div class="edit-description">
-                <img src="./../../assets/img/user-icon.png">
+                <img src="assets/img/user-icon.png">
                 <span>Vollständiger Name</span>
             </div>
             <input #inputName [(ngModel)]="newInputName" class="header-input" placeholder="{{ loggedUserName  }}">
         </div>
         <div class="input-section">
             <div class="edit-description">
-                <img src="./../../assets/img/mail-icon.png">
+                <img src="assets/img/mail-icon.png">
                 <span> E-Mail Adresse </span>
             </div>
             <input [formControl]="emailFormControl" #inputMail [(ngModel)]="newInputMail" 

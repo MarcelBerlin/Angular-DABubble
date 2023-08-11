@@ -1,6 +1,6 @@
 <div class="header-body">
   <div class="header-logo">
-    <img src="../../../assets/img/Login/Logo.png" />
+    <img src="assets/img/Login/Logo.png" />
   </div>
 
   <div class="header-searchbar">
@@ -9,7 +9,7 @@
       mat-icon="search"
       placeholder="Code learning durchsuchen"
     />
-    <img src="../../../assets/img/search-icon.png" />
+    <img src="assets/img/search-icon.png" />
   </div>
 
   <div class="header-profile" *ngIf="getUserData.loggedInUserData">
@@ -23,9 +23,7 @@
         "
       ></div>
     </div>
-    <!-- <span> {{ loggedUserName }} </span>
-        <img src="{{ loggedUserImg }}"> -->
-
+    
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>

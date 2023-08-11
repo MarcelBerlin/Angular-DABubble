@@ -146,8 +146,6 @@
             <div class="message-content-right">
               {{ message.content }}
             </div>
-
-            <!-- AB HIER NEUE EMOJI DIVS + FILTER -->
             <div class="reaction-bar-right">
               <div class="reactions" id="reactionBarRight" *ngIf="chatEmojiRight"> <!-- id's stimmen nicht-->
                 <div id="reactionsRight" matTooltip ='{{this.dataService.loggedInUserData.name}}' > <!--  reagierter User-->
@@ -155,18 +153,6 @@
                 </div>
               </div>
             </div>
-            <!-- BIS HIER -->
-
-            <!-- ALTE EMOJI DIV'S AB HIER -->
-
-            <!-- <div class="reaction-bar-right">
-              <div id="reactionBarRight" *ngIf="chatEmojiRight">
-                <div matTooltip='{{this.dataService.loggedInUserData.name}}' class="reactions">
-                  <span>{{ reactionArrRight }}</span>
-                </div>
-              </div>
-            </div> -->
-
           </div>
         </div>
       </div>
