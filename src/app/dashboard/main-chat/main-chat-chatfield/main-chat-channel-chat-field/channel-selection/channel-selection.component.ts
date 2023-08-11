@@ -22,17 +22,17 @@ export class ChannelSelectionComponent implements OnInit {
   chatText: string = '';
   messages$: any = [];
   messageData: any = [];
-  public chatEmojiLeft: boolean = false;
-  public chatEmojiRight: boolean = false;
-  hoveredIndex: number | null = null;  
+  hoveredIndex: number | null = null;
 
-  public chatEmoji: boolean = false;
-  public emojiPicker: boolean = false;
-  public emoji: string = '';
-  public reactionArr: any = [];
-  public emojiCounter: number = 0;
+  chatEmojiRight: boolean = false;
+  chatEmojiLeft: boolean = false;
+  emojiPickerRight: boolean = false;
+  emojiPickerLeft: boolean = false;
+  emoji: string = '';
+  reactionArrRight: any = [];
+  reactionArrLeft: any = [];
 
-  constructor(
+  constructor (
     private firestore: Firestore,
     private dcshService: DashboardComponentsShowHideService,
     private dialog: Dialog,
@@ -44,9 +44,7 @@ export class ChannelSelectionComponent implements OnInit {
     public chatService: ChatService,
     public app: AppComponent
   ) {
-    console.log(this.messageData);
-    
-    this.allMessages();    
+    this.allMessages();
   }
 
   ngOnInit(): void {
@@ -85,13 +83,6 @@ export class ChannelSelectionComponent implements OnInit {
     this.emptyChat = this.messageData.length < 1;
   }
 
-  public addEmoji(event) {
-    this.chatEmoji = true;
-    this.reactionArr += `${this.emoji }${event.emoji.native}`;
-    // this.emojiCounter++; bei selben emoji = anzahl dahinter
-    this.messageService.emojis.push(this.reactionArr);
-    this.emojiPicker = false;
-  }
 
   onHover(index: number) {
     this.hoveredIndex = index;
@@ -100,4 +91,54 @@ export class ChannelSelectionComponent implements OnInit {
   onHoverEnd() {
     this.hoveredIndex = null;
   }
+
+
+  public addEmojiRight(event) {
+    this.chatEmojiRight = true;
+    this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
+    this.reactionArrRight.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
+    this.emojiPickerRight = false;
+    if(this.reactionArrRight.length > 1) {this.emojiFilterRight(this.reactionArrRight); }
+  }
+
+  emojiFilterRight(reactionArr) { // tooltip funktioniert nicht mehr!
+    const emojiCountMapRight: any = new Map();
+    let reactionBarRight = document.getElementById("reactionBarRight"); // ABOUT TO CHANGE
+    reactionArr.forEach(emoji => {
+      if (emojiCountMapRight.has(emoji)) {emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);} 
+      else {emojiCountMapRight.set(emoji, 1);}
+    }); 
+    reactionBarRight.innerHTML = '';
+    emojiCountMapRight.forEach((count, emoji) => {
+      reactionBarRight.innerHTML +=
+        `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`
+    });
+    if(reactionArr.length >= 7) { reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊'}
+  }
+
+
+  public addEmojiLeft(event) {
+    this.chatEmojiLeft = true;
+    this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
+    this.reactionArrLeft.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
+    this.emojiPickerLeft = false;
+    if (this.reactionArrLeft.length > 1) { this.emojiFilterLeft(this.reactionArrLeft); }
+  }
+
+
+  emojiFilterLeft(reactionArr) {  // tooltip funktioniert nicht mehr!
+    const emojiCountMapLeft: any = new Map();
+    let reactionBarLeft = document.getElementById("reactionBarLeft");
+    reactionArr.forEach(emoji => {
+      if (emojiCountMapLeft.has(emoji)) {emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
+      } else {emojiCountMapLeft.set(emoji, 1);}
+    });
+    reactionBarLeft.innerHTML = '';
+    emojiCountMapLeft.forEach((count, emoji) => {
+      reactionBarLeft.innerHTML +=
+        `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"><span> ${emoji} ${count} </span></div>`
+    });
+    if(reactionArr.length >= 7) { reactionBarLeft.innerHTML = 'zu viele reaktionen. Wir arbeiten gerade daran 🙁'}
+  }
+  
 }

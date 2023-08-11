@@ -1,40 +1,5 @@
 <div class="thread-content">
 
-
-
-  <!-- <div *ngFor="let messages of this.allMessages" class="full-message-left">
-
-    <div class="avatar-left">
-      <img src="{{ messages.userImg }}">
-    </div>
-
-    <div class="message-details-left">
-
-      <div class="name"> {{ messages.userName }} </div>
-      <div class="time">{{ messages.timestamp.clockString }} </div>
-
-      <div class="message-content-left">
-        <span> {{ messages.content }} </span>
-      </div>
-
-      <div class="reaction-bar-left">
-        <div *ngIf="app.reactionBoo">
-          <div class="reactions">
-            <span>{{ app.newReaction }}</span> 
-            <span>{{ app.reactionNumber }}</span>
-          </div>
-        </div>
-
-        <img ngDefaultControl name="emoji" [(ngModel)]="app.emoji"
-          (click)="app.isEmojiPickerVisible = !app.isEmojiPickerVisible;" src="./../../../../assets/img/reaction.png">
-        <br />
-        <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="app.isEmojiPickerVisible"
-          (emojiSelect)="app.addEmoji($event)" title="Choose your emoji">
-        </emoji-mart>
-      </div>
-    </div>
-  </div> -->
-
   <div class="full-message-left">
 
     <div class="avatar-left">
@@ -66,17 +31,9 @@
         </div>
       </div>
     </div>
-
-    <div *ngIf="getMessage.emojis.length > 0" class="new-answers">
-      <p> {{ getMessage.emojis.length -1 }} Antwort(en)</p>
-      <img src="./../../../../assets/img/line.png">
-    </div>
   </div>
 
-
-
-
-
+  <!-- ######  MESSAGE FROM USER (RIGHT SIDE) ###### -->
 
   <div class="full-message-right">
 
@@ -110,4 +67,12 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="getMessage.emojis.length > 0" class="new-answers"> <!-- SPÄTER MIT ANTWORTEN IM THREAD ANSTATT EMOJIS-->
+    <!-- <p *ngIf="getMessage.emojis.length == 1"> 1 Antwort</p> --> <!-- wenn nur eine antwort ist = einzahl -->
+    <p> {{ getMessage.emojis.length -1 }} Antwort(en)</p> <!-- wenn mehrere antworten sind = Mehrzahl-->
+    <img src="./../../../../assets/img/line.png">
+  </div>
+  
 </div>
+

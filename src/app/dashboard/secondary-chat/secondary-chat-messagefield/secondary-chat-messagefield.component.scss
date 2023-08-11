@@ -73,6 +73,7 @@
                     border-radius: 10px;
                 }
             }
+
             .reactions {
                 border: 1px solid #adb0d9;
                 border-radius: 20px;
@@ -81,18 +82,18 @@
                 padding: 3px 15px;
                 gap: 8px;
             }
-        }
 
-        .reaction-column {
-            display: flex;
-            align-items: flex-start;
-            flex-direction: column;
+            .reaction-column {
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
 
 
-            .emoji-mart {
-                z-index: 1;
-                position: relative;
-                right: 100px;
+                .emoji-mart {
+                    z-index: 1;
+                    position: relative;
+                    right: 100px;
+                }
             }
         }
     }
