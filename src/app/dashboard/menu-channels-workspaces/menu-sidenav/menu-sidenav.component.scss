@@ -1,5 +1,6 @@
 .content {
   position: relative;
+
   .sidenavHeaderContainer {
     position: absolute;
     top: 16px;
@@ -10,6 +11,7 @@
     padding-left: 32px;
     padding-right: 32px;
   }
+
   .channelAndMessage {
     position: absolute;
     top: 92px;
@@ -17,10 +19,12 @@
     left: 0;
     right: 0;
     overflow-y: hidden;
+
     .channels-container {
       position: relative;
       min-height: 50px;
       overflow-y: scroll;
+
       .channels-headline {
         position: sticky;
         top: 0;
@@ -32,39 +36,47 @@
         background-color: white;
         z-index: 1;
       }
+
       .channels-content {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         padding-left: 10.5%;
         gap: 10px;
+
         .channels-line {
           height: 30px;
           padding: 4px 20px 4px;
           display: flex;
           justify-content: space-between;
           align-items: center;
+
           &:hover {
             transition: background-color 0.1s, color 0.1s ease-in;
             border-radius: 30px;
             background-color: #eceefe;
           }
+
           .channel-name {
             display: flex;
             justify-content: flex-start;
             align-items: center;
             gap: 10px;
+
             .pointer {
               display: flex;
               align-items: center;
               gap: 10px;
+
               &:hover {
                 color: #535af1;
               }
+
               .hashtag {
                 font-size: 23px;
                 font-weight: 500;
               }
+
               .afterHashtag {
                 font-family: "Nunito";
                 font-weight: 400;
@@ -73,16 +85,19 @@
             }
           }
         }
-        .channel-add{
+
+        .channel-add {
           position: sticky;
           bottom: -1px;
           background-color: white;
         }
       }
     }
+
     .direct-messages {
       position: relative;
       overflow-y: scroll;
+
       .direct-messages-headline {
         position: sticky;
         top: 0;
@@ -94,6 +109,7 @@
         background-color: white;
         z-index: 1;
       }
+
       .direct-message-content {
         position: relative;
         display: flex;
@@ -101,6 +117,7 @@
         align-items: flex-start;
         padding-left: 10.5%;
         gap: 15px;
+
         .direct-message-user {
           position: relative;
           display: flex;
@@ -108,10 +125,12 @@
           align-items: center;
           gap: 20px;
           padding: 4px 20px 4px 20px;
+
           div {
             width: 50px;
             height: 50px;
           }
+
           .activeDot {
             position: absolute;
             top: 40px;
@@ -121,11 +140,33 @@
             border-radius: 100%;
             border: 2px solid white;
           }
+
+          .messageDot {
+            display: flex;
+            width: 10px;
+            height: 10px;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+            padding: 3px;
+            // background-color: #444DF2;
+            background-color: crimson;
+            border: 2px solid black;
+            font-family: "Nunito";
+            font-weight: 400;
+            font-size: 14px;
+            color: white;
+            position: absolute;
+            left: 62px;
+            top: 5px;
+          }
+
           img {
             width: 50px;
             height: 50px;
             border-radius: 35px;
           }
+
           &:hover {
             cursor: pointer;
             transition: background-color 0.1s, color 0.1s ease-in;

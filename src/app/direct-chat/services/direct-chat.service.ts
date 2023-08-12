@@ -398,6 +398,7 @@ export class DirectChatService {
   }
 
   newMessagesPartnerIndex: number[] = [];
+  
 
   checkForNewMessages(): void {
     this.newMessagesPartnerIndex = [];
@@ -407,23 +408,30 @@ export class DirectChatService {
       let ownDateTimeNumber = element.lastTimeStamp.dateTimeNumber;
       let pId = element.partnerId;
       let i: number = 0;
-      this.dataService.userData.forEach(user  => {
-        if(user.userId == pId) {
-          let pDirectChats = user.directChats;
-          pDirectChats.forEach(chat => {
-            if(chat.directChatId === directChatId) {
-              if(chat.lastTimeStamp.dateTimeNumber > ownDateTimeNumber) {
-                console.log('neu Nachricht', pId, i);
-                this.newMessagesPartnerIndex.push(i);
-              }
-            }
-          });
-        }
-        i++
-      });
+      this.newMessagePartnerIndex(pId, directChatId, ownDateTimeNumber, i);
+      i++;
     });
   }
+
+  newMessagePartnerIndex(pId: string, directChatId: string, ownDateTimeNumber: number, i: number){
+    this.dataService.userData.forEach(user  => {
+      if(user.userId == pId) {
+        let pDirectChats = user.directChats;
+        pDirectChats.forEach(chat => {
+          if(chat.directChatId === directChatId) {
+            if(chat.lastTimeStamp.dateTimeNumber > ownDateTimeNumber) this.newMessagesPartnerIndex.push(i);
+          }
+        });
+      }
+      i++;
+    });
+  }
+
+
 }//end
+
+
+
 
 
 
