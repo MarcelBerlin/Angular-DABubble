@@ -1,0 +1,80 @@
+<mat-card>
+    <mat-card-header>
+        <div class="searchContainer">
+            <input type="search" placeholder="Search" [(ngModel)]="searchField" (ngModelChange)="searchFunction()">
+            <mat-icon>search</mat-icon>
+        </div>
+        <nav>
+            <mat-icon>restore</mat-icon>
+            <a href="#emoji0" [title]="this.emojiGroupList[0]" (click)="handleLinkClick($event)">
+                <mat-icon>sentiment_satisfied_alt</mat-icon>
+            </a>
+            <a href="#emoji1"  [title]="this.emojiGroupList[1]" (click)="handleLinkClick($event)">
+                <mat-icon>emoji_people</mat-icon>
+            </a>
+            <a href="#emoji2"  [title]="this.emojiGroupList[2]" (click)="handleLinkClick($event)">
+                <mat-icon>pets</mat-icon>
+            </a>
+            <a href="#emoji3"  [title]="this.emojiGroupList[3]" (click)="handleLinkClick($event)">
+                <mat-icon>local_cafe</mat-icon>
+            </a>
+            <a href="#emoji4"  [title]="this.emojiGroupList[4]" (click)="handleLinkClick($event)">
+                <mat-icon>public</mat-icon>
+            </a>
+            <a href="#emoji5"  [title]="this.emojiGroupList[5]" (click)="handleLinkClick($event)">
+                <mat-icon>sports_baseball</mat-icon>
+            </a>
+            <a href="#emoji6"  [title]="this.emojiGroupList[6]" (click)="handleLinkClick($event)">
+                <mat-icon>tablet_mac</mat-icon>
+            </a>
+            <a href="#emoji7"  [title]="this.emojiGroupList[7]" (click)="handleLinkClick($event)">
+                <mat-icon>call_made</mat-icon>
+            </a>
+            <a  href="#emoji8" [title]="this.emojiGroupList[8]" (click)="handleLinkClick($event)">
+                <mat-icon>flag</mat-icon>
+            </a>
+        </nav>
+
+    </mat-card-header>
+
+    <mat-card-content *ngIf="!searchfieldActive">
+        <div *ngFor="let group of allEmojisGroups; let i=index;" >
+            <h3 id="emoji{{i}}" >{{this.emojiGroupList[i]}}</h3>
+            <div class="emojisDivOuter">
+                <div *ngFor="let x of group; let i=index;">
+                    <div class="emojiDiv">
+                        <span (mouseover)="showInFooter(x)" (mouseleave)="notShowFooter()" (click)="setEmoji(x)">
+                            {{x.emoji}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="searchfieldActive">
+        <div>
+            <div class="emojisDivOuter">
+                <div *ngFor="let x of searchResults; let i=index;">
+                    <div class="emojiDiv">
+                        <span (mouseover)="showInFooter(x)" (mouseleave)="notShowFooter()" (click)="setEmoji(x)">
+                            {{x.emoji}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+
+    <mat-card-footer>
+        <div class="infoContainer">
+            <div class="infoEmoji">
+                <span>{{footerEmoji}}</span>
+            </div>
+            <div class="infoText">
+                <span>{{footerName}}</span>
+                <span>{{footerGroup}}</span>
+            </div>
+        </div>
+    </mat-card-footer>
+</mat-card>

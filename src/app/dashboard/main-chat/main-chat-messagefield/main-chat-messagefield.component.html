@@ -54,7 +54,9 @@
     placeholder="Nachricht an {{ varService.selectedArrayofSearch[varService.indexOfSearch]?.[varService.propertyOfSearch] || '' }}"
   ></textarea>
   <div class="iconsContainer" style="position: relative">
-    <app-emoji-menu *ngIf="emojiService.emojiSelectorActive"></app-emoji-menu>
+
+    <!-- <app-emoji-menu *ngIf="emojiService.emojiSelectorActive"></app-emoji-menu> -->
+    <app-emoji-picker-bossi *ngIf="emojiService.emojiSelectorActive"></app-emoji-picker-bossi>
     <div class="addElements">
       <div class="element">
         <img src="assets/img/add.png" />

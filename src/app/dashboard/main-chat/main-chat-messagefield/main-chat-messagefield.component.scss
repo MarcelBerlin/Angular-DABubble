@@ -47,6 +47,20 @@
       background-color: #ECEEFE;
     }
 
+    app-emoji-picker-bossi{
+      display: flex;
+      justify-content: flex-start;
+      // max-height: 350px;
+      position: absolute;
+      bottom: 35px;
+      border: 1px dashed rgba(0, 0, 0, 0.2);
+      // border-radius: 20px;
+      overflow: hidden;
+      overflow-y: scroll;
+      flex-wrap: wrap;
+      background-color: #ECEEFE;
+    }
+
     .addElements {
       display: flex;
       align-items: center;

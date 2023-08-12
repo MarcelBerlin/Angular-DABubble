@@ -6,7 +6,7 @@ import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
-import { EmojiApiService } from './emoji-menu/services/emoji-api.service';
+import { EmojiPickerBossiService } from 'src/app/emoji-picker-bossi/services/emoji-picker-bossi.service';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class MainChatMessagefieldComponent {
     public messageService: MessageService,
     public chatService: ChatService,
     public directChatService: DirectChatService,
-    public emojiService: EmojiApiService
+    public emojiService: EmojiPickerBossiService
   ) { }
 
   currentUser() {
