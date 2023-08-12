@@ -54,7 +54,6 @@ export class DirectChatComponent {
    */
   getChanges():void {
     this.dataService.users$.subscribe(() => {
-      console.log('getChanges');
       if (this.directChatService.directChatActive && this.directChatService.directChatIndex.directChatId) {
         this.directChatService.loadChatDataSets(this.directChatService.directChatIndex.directChatId);
         
