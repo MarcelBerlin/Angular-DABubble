@@ -60,7 +60,6 @@ import { SecondaryChatInputfieldComponent } from './dashboard/secondary-chat/sec
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { DialogUserReactionsComponent } from './dialog/dialog-user-reactions/dialog-user-reactions.component';
 import { DirectChatComponent } from './direct-chat/direct-chat.component';
-import { EmojiMenuComponent } from './dashboard/main-chat/main-chat-messagefield/emoji-menu/emoji-menu.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmojiPickerBossiComponent } from './emoji-picker-bossi/emoji-picker-bossi.component';
 
@@ -101,7 +100,6 @@ import { EmojiPickerBossiComponent } from './emoji-picker-bossi/emoji-picker-bos
     SecondaryChatInputfieldComponent,
     DialogUserReactionsComponent,
     DirectChatComponent,
-    EmojiMenuComponent,
     EmojiPickerBossiComponent,
 
   ],
