@@ -50,7 +50,7 @@ export class ChannelSelectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkIfMessageDataIsEmpty();
+    this.checkIfChannelIsEmpty();
   }
 
   allMessages() {
@@ -60,6 +60,10 @@ export class ChannelSelectionComponent implements OnInit {
       this.messageData = message.sort((a, b) => a.timestamp.dateTimeNumber - b.timestamp.dateTimeNumber);
       console.log(this.messageData);
     });
+  }
+
+  checkIfChannelIsEmpty() {
+    this.emptyChat = this.messageData.length === 0;
   }
 
   /**
