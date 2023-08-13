@@ -21,6 +21,7 @@ import { VariablesService } from './variables.service';
 export class MessageService {
   messages$: any = [];
   messageData: any = [];
+  channelMessages: any = [];
   newMessage: Messages = new Messages();
   messageText: string = '';
   messageId: string = 'unset';
