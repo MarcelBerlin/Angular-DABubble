@@ -3,11 +3,13 @@ export class ActualChat {
     date: string;
     time: string;
     message: string;
+    dateTimeNumber: number;
 
     constructer(obj?: any) {
         this.name = obj ? obj.name : 'unset';
         this.date = obj ? obj.date : 'unset';
         this.time = obj ? obj.time : 'unset';
+        this.dateTimeNumber = obj ? obj.dateTimeNumber : 0;
         this.message = obj ? obj.message : false;
     }
 
@@ -21,6 +23,7 @@ export class ActualChat {
             name: this.name,
             date: this.date,
             time: this.time,
+            dateTimeNumber: this.dateTimeNumber,
             message: this.message,
         }
     }

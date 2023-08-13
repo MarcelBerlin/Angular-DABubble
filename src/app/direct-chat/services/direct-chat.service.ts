@@ -181,7 +181,7 @@ export class DirectChatService {
     this.chatDataSet.chat = [];
     this.chatDataSet.id = 'unset';//hinzugefügt wichtig, da sonst nicht die Id aktualisiert wird.
     this.saveChatDataSet().then(() => {
-      console.log('saveChatDataSet called');
+
     }).catch(() => {
       console.log('Error saving chat data');
     });
@@ -320,6 +320,7 @@ export class DirectChatService {
     this.actualChat.name = this.dataService.loggedInUserData.name;
     this.actualChat.date = this.createDateString(today);
     this.actualChat.time = this.createClockString(today);
+    this.actualChat.dateTimeNumber = today.getTime();
     this.directChat.chat.push(this.actualChat.toJSON());
     this.directMessage = '';
     this.updateFirestoreChat();
@@ -398,7 +399,7 @@ export class DirectChatService {
   }
 
   newMessagesPartnerIndex: number[] = [];
-  
+
 
   checkForNewMessages(): void {
     this.newMessagesPartnerIndex = [];
@@ -419,11 +420,49 @@ export class DirectChatService {
         let pDirectChats = user.directChats;
         pDirectChats.forEach(chat => {
           if(chat.directChatId === directChatId) {
-            if(chat.lastTimeStamp.dateTimeNumber > ownDateTimeNumber) this.newMessagesPartnerIndex.push(i);
+            if(chat.lastTimeStamp.dateTimeNumber > ownDateTimeNumber){
+              this.newMessagesPartnerIndex.push(i);
+              this.getMessageAmount(directChatId);
+
+            } 
           }
         });
       }
       i++;
+    });
+  }
+
+
+  getMessageAmount(directChatId){
+    let amount:number = 0;
+    const coll = collection(this.firestore, 'directChats');
+    const qData = doc(coll, directChatId);
+    let foundChat: any = [];
+    getDoc(qData).then((chatDataSet) => {
+      foundChat = chatDataSet.data();
+      console.log(foundChat);
+      foundChat.chat.forEach(element => {
+        console.log(element);
+        
+      });
+      foundChat.chat.dateTimeNumber
+    }).catch((error) => {
+      console.log('Fehler beim Abrufen des Dokuments:');
+    });
+  }
+
+  getChatDataSets2(): void {
+    const coll = collection(this.firestore, 'directChats');
+    const qData = doc(coll, this.chatDataSet.id);
+    getDoc(qData).then((chatDataSet) => {
+      this.directChat = chatDataSet.data();
+      this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex());
+      this.updateUser();
+      if (this.chatDataSet.firstMember != this.chatDataSet.secondMember) {
+        this.createNewDirectChatPartnerIndex();
+      }
+    }).catch((error) => {
+      console.log('Fehler beim Abrufen des Dokuments:');
     });
   }
 
