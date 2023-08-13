@@ -69,7 +69,7 @@ export class MenuSidenavComponent implements OnInit {
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
-    
+
   }
 
   ngOnInit(): void {
@@ -163,6 +163,7 @@ export class MenuSidenavComponent implements OnInit {
     this.currentUser()
       ? this.sendMessageToLoggedUser(arrayId)
       : this.sendMessageToSpecificUser(arrayId);
+    this.varService.previousScrollTop = 0; // important for the autoscroll functionality
     this.getDirectChatData(arrayId);
   }
 

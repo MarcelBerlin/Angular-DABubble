@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { VariablesService } from 'src/app/services/variables.service';
+
 @Component({
   selector: 'app-main-chat',
   templateUrl: './main-chat.component.html',
   styleUrls: ['./main-chat.component.scss'],
 })
 export class MainChatComponent {
-  previousScrollTop: number = 0;
   autoscroll: boolean = true;
 
 
   constructor(
     public varService: VariablesService
-  ) { }
-
+  ) {} 
+  
 
   /**
    * Lifecycle hook that executes after Angular has checked the component's view.
@@ -51,13 +51,13 @@ export class MainChatComponent {
   handleScroll(event: Event): void {
     const container = event.target as HTMLElement;
     const currentScrollTop = container.scrollTop;
-    const isScrollingUp = this.previousScrollTop > currentScrollTop;
+    const isScrollingUp = this.varService.previousScrollTop > currentScrollTop;
     if (isScrollingUp) this.autoscroll = false;
     else {
       const scrollOffset = container.scrollHeight - container.clientHeight;
-      if (currentScrollTop >= scrollOffset) this.autoscroll = true;
+      if (currentScrollTop >= scrollOffset -1) this.autoscroll = true;
     }
-    this.previousScrollTop = currentScrollTop;
+    this.varService.previousScrollTop = currentScrollTop;
   }
 }
 

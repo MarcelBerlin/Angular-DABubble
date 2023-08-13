@@ -15,6 +15,8 @@ export class VariablesService {
   selectedArrayofSearch: string = '';
   propertyOfSearch: string = '';
   indexOfSearch: number;
+  previousScrollTop: number = 0; // for autoscroll functionality
+  
 
   constructor() {}
 
