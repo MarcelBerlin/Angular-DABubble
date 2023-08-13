@@ -1,8 +1,8 @@
-@font-face {
-    font-family: NotoColorEmojiLimited;
-    unicode-range: U+1F1E6-1F1FF;
-    src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
-  }
+// @font-face {
+//     font-family: NotoColorEmojiLimited;
+//     unicode-range: U+1F1E6-1F1FF;
+//     src: url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf);
+//   }
   
   
   mat-card {
@@ -47,9 +47,10 @@
   
         mat-icon{
           color: blue;
+          cursor: pointer;
         }
   
-        a{
+        span{
           font-size: 24px; 
           // text-decoration: none;
           &:hover{
@@ -126,6 +127,15 @@
   
           span{
             font-size: 20px;
+            font-family: 'NotoColorEmojiLimited', -apple-system, BlinkMacSystemFont,
+                'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+                'Segoe UI Emoji', 'Segoe UI Symbol';
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-size: 24px;
+              width: 40px;
+              height: 40px;
           }
         }
   
@@ -144,6 +154,11 @@
     }
   
   
+  }
+
+
+  .colorBlue{
+    color: #444DF2 !important;
   }
   
   // ::-webkit-scrollbar {

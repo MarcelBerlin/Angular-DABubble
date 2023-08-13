@@ -28,8 +28,13 @@ export class EmojiPickerBossiComponent {
   searchResults: any[] = [];
   searchfieldActive: boolean = false;
 
+  selectedGroup: number = 0;
 
-  constructor(private emojiService: EmojiPickerBossiService, private directChatService: DirectChatService) { }
+
+  constructor(
+    private emojiService: EmojiPickerBossiService,
+    private directChatService: DirectChatService,
+  ) { }
 
 
   /**
@@ -51,6 +56,7 @@ export class EmojiPickerBossiComponent {
         console.error('Fehler beim Laden der Daten:');
       }
     );
+    // this.router.navigate(['/']);
   }
 
 
@@ -161,12 +167,16 @@ export class EmojiPickerBossiComponent {
     this.searchField = this.searchField.trim().toLowerCase();
     if (this.searchFieldNotEmty()) {
       this.searchfieldActive = true;
+      this.selectedGroup = -1;
       for (let i = 0; i < this.emojiDatabase.length; i++) {
         let name: string = this.emojiDatabase[i].name.toLowerCase();
         let group: string = this.emojiDatabase[i].group.toLowerCase();
         if (this.searchValueFound(name, group)) this.searchResults.push(this.createResultArray(i));
       }
-    } else this.searchfieldActive = false;
+    } else{
+      this.searchfieldActive = false;
+      this.selectedGroup = 0;
+    } 
   }
 
 
@@ -205,9 +215,9 @@ export class EmojiPickerBossiComponent {
     }
   }
 
-  handleLinkClick(event: Event) {
-    event.preventDefault(); // Verhindert das Standardverhalten des Links (Seite neu laden)
-    // Führe hier die gewünschten Aktionen aus
+
+  showGroup(groupNumber: number): void {
+    this.selectedGroup = groupNumber;
   }
 
 }
