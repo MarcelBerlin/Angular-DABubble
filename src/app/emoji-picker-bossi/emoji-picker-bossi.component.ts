@@ -148,7 +148,6 @@ export class EmojiPickerBossiComponent {
 
 
   setEmoji(x: any): any {
-    console.log(x.emoji);
     this.directChatService.directMessage += x.emoji;
     this.emojiService.toggleEmojiSelector();
   }
