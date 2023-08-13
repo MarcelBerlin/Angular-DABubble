@@ -404,6 +404,7 @@ export class DirectChatService {
 
   checkForNewMessages(): void {
     this.newMessagesPartnerIndex = [];
+    this.messageAmountArray = [];
     let ownDirectChats = this.dataService.loggedInUserData.directChats;
     ownDirectChats.forEach(element => {
       let directChatId = element.directChatId;
@@ -424,7 +425,6 @@ export class DirectChatService {
             if(chat.lastTimeStamp.dateTimeNumber > ownDateTimeNumber){
               this.newMessagesPartnerIndex.push(i);
               this.getMessageAmount(directChatId, ownDateTimeNumber, i);
-
             } 
           }
         });
@@ -448,21 +448,6 @@ export class DirectChatService {
       this.messageAmountArray.push(pushElement);
     }).catch((error) => 
     {console.log('Fehler beim Abrufen des Dokuments:');
-    });
-  }
-
-  getChatDataSets2(): void {
-    const coll = collection(this.firestore, 'directChats');
-    const qData = doc(coll, this.chatDataSet.id);
-    getDoc(qData).then((chatDataSet) => {
-      this.directChat = chatDataSet.data();
-      this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex());
-      this.updateUser();
-      if (this.chatDataSet.firstMember != this.chatDataSet.secondMember) {
-        this.createNewDirectChatPartnerIndex();
-      }
-    }).catch((error) => {
-      console.log('Fehler beim Abrufen des Dokuments:');
     });
   }
 
