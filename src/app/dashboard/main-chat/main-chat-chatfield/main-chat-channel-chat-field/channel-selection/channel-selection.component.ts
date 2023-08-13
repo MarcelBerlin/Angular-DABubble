@@ -5,6 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
+import { TimelinesService } from 'src/app/direct-chat/services/timelines.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { DataService } from 'src/app/services/data.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
@@ -42,8 +43,9 @@ export class ChannelSelectionComponent implements OnInit {
     public directChatService: DirectChatService,
     public messageService: MessageService,
     public chatService: ChatService,
-    public app: AppComponent
-  ) {
+    public app: AppComponent,
+    public timelinesService: TimelinesService
+    ) {
     this.allMessages();
   }
 

@@ -1,11 +1,35 @@
 .thread-content {
   height: 100%; // SPÄTER ÄNDERN
 
+  .timeLine {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    height: 2px;
+    background-color: lightgray;
+    .timeLineHead {
+      position: absolute;
+      top: -20px;
+      display: flex;
+      align-items: center;
+      width: auto;
+      height: 40px;
+      padding: 0 16px;
+      border: 1px solid lightgray;
+      border-radius: 30px;
+      background-color: white;
+      font-family: "Nunito";
+      font-weight: 400;
+      font-size: 18px;
+    }
+  }
+
   .full-message-left {
     width: calc(100% - 50px);
     // height: calc(50% - 100px);
     position: relative;
-    border-bottom: 1px solid #eeebeb;
+    // border-bottom: 1px solid #eeebeb;
     padding-bottom: 20px;
 
 
@@ -193,7 +217,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid #eeebeb;
+    // border-bottom: 1px solid #eeebeb;
 
     .single-message-right-container {
       position: relative;
