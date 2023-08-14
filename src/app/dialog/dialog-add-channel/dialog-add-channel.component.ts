@@ -37,7 +37,6 @@ export class DialogAddChannelComponent {
           doc.data() as Tag;
         });
       });
-
     this.dialogRef.close();
   }
 

@@ -55,7 +55,7 @@ export class MainChatMessagefieldComponent {
   }
 
   messageSend() {
-    if (this.varService.mainChatHead == 0) {
+    if (this.varService.mainChatHead == 0 && this.messageService.messageText.length >= 1) {
       this.messageService.addMessage();   
       this.messageService.messageText = '';
     }
