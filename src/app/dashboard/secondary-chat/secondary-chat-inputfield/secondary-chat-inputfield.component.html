@@ -1,16 +1,11 @@
 <div class="inputContainer">
-    <form class="example-form">
-        <input matInput [formControl]="userForm" [matAutocomplete]="auto" [(ngModel)]="textarea" type="text" 
-            placeholder="Antworten...">
-            <mat-autocomplete #auto="matAutocomplete" >
-                <mat-option *ngFor="let user of filteredOptions | async" [value]="user">
-                  {{user}}
-                </mat-option>
-              </mat-autocomplete>
-    </form>
+
+    <textarea [(ngModel)]="textarea" type="text" placeholder="Antworten..."></textarea>
+
     <div class="icons-container">
         <div class="add-elements">
-            <div class="element">
+            <div (click)="triggerInput()" class="element-upload">
+                <input class="hidden-input" (change)="getInputDatas($event)" #uploadInput type="file">
                 <img src="assets/img/add.png" />
             </div>
             <div class="vector"></div>
@@ -21,6 +16,6 @@
                 <img (click)="markUser()" src="assets/img/email.png" />
             </div>
         </div>
-        <div class="send-icon"><img (click)="sendMessage()" src="assets/img/send_icon.png" /></div>
+        <div class="send-icon"><img src="assets/img/send_icon.png" /></div>
     </div>
 </div>

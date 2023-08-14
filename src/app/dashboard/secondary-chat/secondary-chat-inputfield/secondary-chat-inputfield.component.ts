@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, map } from 'rxjs';
 import { ChatService } from 'src/app/services/chat.service';
@@ -14,13 +14,9 @@ import { VariablesService } from 'src/app/services/variables.service';
 })
 export class SecondaryChatInputfieldComponent {
 
-  textarea: string; // ngModel
-  userForm = new FormControl('');
-  name: string = 'name';
-  options: '';
-  channel = 'aktueller Channel'
-  user = 'alle user im channel'
-  filteredOptions: Observable<string[]>;
+  @ViewChild('uploadInput') uploadInput: ElementRef<HTMLInputElement>;
+
+  textarea: any = '';
 
   specificChannel: string = '';
   directMessage: string = '';
@@ -40,26 +36,31 @@ export class SecondaryChatInputfieldComponent {
     // );
   }
 
-
-  sendMessage() {
-    console.log('senden funktioniert noch nicht');
+  triggerInput() {
+    this.uploadInput.nativeElement.click();
   }
+
+  getInputDatas(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      console.log(file.type);
+      const reader: FileReader = new FileReader();
+      reader.onload = (e: any) => {
+        this.textarea = e.target.result;
+      console.log(e.target.result);
+
+      };
+      reader.readAsDataURL(file);
+      // console.log(file);
+    }
+  }
+
 
 
   markUser() {
     // console.log(this.dataService.userData[this.varService.selectedChannel].name);
-    this.textarea = '@'
+    
     // this.dataService.userData[this.varService.selectedChannel].name
     
   }
-
-  // displayFn(user: User): string {
-  //   return user && user.name ? user.name : '';
-  // }
-
-  // private _filter(name: string): User[] {
-  //   const filterValue = name.toLowerCase();
-
-  //   return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
-  // }
 }

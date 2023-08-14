@@ -11,12 +11,13 @@
     border: 3px solid rgba(0, 0, 0, 0.1);
     border-radius: 20px;
 
-    input {
+    textarea {
         width: 90%;
         max-width: 90%;
         height: 60%;
         max-height: 60%;
         padding-bottom: 30px;
+        padding-top: 20px;
         font-family: "Nunito";
         font-weight: 400;
         font-size: 18px;
@@ -45,6 +46,24 @@
                 background-color: rgba(0, 0, 0, 0.1);
             }
 
+            .element-upload {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 30px;
+                cursor: pointer;
+
+                .hidden-input {
+                    visibility: hidden;
+                    position: absolute;
+                    width: 40px;
+                    height: 30px;
+                    cursor: pointer;
+                }
+            }
+
             .element {
                 display: flex;
                 align-items: center;
@@ -54,9 +73,6 @@
                 border-radius: 30px;
                 cursor: pointer;
 
-                img {
-                    fill: red;
-                }
 
                 &:hover {
                     background-color: #eceefe;
