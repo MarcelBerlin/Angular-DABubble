@@ -18,8 +18,9 @@
 
         <div class="channels-content" [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'">
           <div *ngFor="let tag of tags; let i = index">
-            <div class="channels-line" *ngIf="authorizationShowChannel(i)">
-              <div class="channel-name" (click)="openChannel(i)">
+            <!-- <div class="channels-line" *ngIf="authorizationShowChannel(i)"> -->
+              <div class="channels-line">
+                <div class="channel-name" (click)="openChannel(i)">
                 <span class="pointer"><span class="hashtag">{{ tag.name[0] }}</span><span class="afterHashtag">
                     {{ tag.name.slice(1) }}</span></span>
               </div>
