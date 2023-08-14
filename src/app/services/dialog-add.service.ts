@@ -19,7 +19,8 @@ interface Tag {
   imagePath: string;
   description: string;
   channelCreator: string;
-  members: any[];
+  // members: any[];
+  members: any['guest@guest.de'];
 }
 
 @Injectable({
