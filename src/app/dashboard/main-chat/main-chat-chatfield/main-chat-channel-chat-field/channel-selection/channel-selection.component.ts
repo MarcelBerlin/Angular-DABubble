@@ -50,7 +50,7 @@ export class ChannelSelectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkIfChannelIsEmpty();
+    
   }
 
   allMessages() {
@@ -59,7 +59,7 @@ export class ChannelSelectionComponent implements OnInit {
     this.messages$.subscribe((message: any) => {
       this.messageData = message.sort((a, b) => a.timestamp.dateTimeNumber - b.timestamp.dateTimeNumber);
       console.log(this.messageData);
-    });
+    });   
   }
 
   checkIfChannelIsEmpty() {
@@ -85,11 +85,7 @@ export class ChannelSelectionComponent implements OnInit {
     this.dialog.open(DialogProfileViewUsersComponent);
   }
 
-  checkIfMessageDataIsEmpty() {
-    this.emptyChat = this.messageData.length < 1;
-  }
-
-
+  
   onHover(index: number) {
     this.hoveredIndex = index;
   }

@@ -19,32 +19,84 @@
     </ng-container>
   </div>
 
-  <div class="content-container" *ngFor="let message of messageData, let i = index">
+  <div *ngFor="let message of messageData, let i = index">
+    <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
 
-    <div class="timeLine" *ngIf="timelinesService.timeline[i]">
-      <div class="timeLineHead">{{timelinesService.timeline[i]}}</div>
-    </div>
-  
+      <div class="timeLine" *ngIf="timelinesService.timeline[i]">
+        <div class="timeLineHead">{{timelinesService.timeline[i]}}</div>
+      </div>
 
-    <div class="full-message-left">
-      <!-- Zeige Nachrichten des ausgewählten Kanals an -->
-     
-        <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
+      <div class="full-message-left">
+        <!-- Zeige Nachrichten des ausgewählten Kanals an -->
 
-          <div class="single-message-left-container" *ngIf="message.userName != this.dataService.loggedInUserData.name"
-            (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
+        <div class="single-message-left-container" *ngIf="message.userName != this.dataService.loggedInUserData.name"
+          (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
 
-            <div class="interaction-bubble-left" [style.display]="hoveredIndex === i ? 'block' : 'none'"
-              [style.transition]="'display 125ms ease-in-out'">
+          <div class="interaction-bubble-left" [style.display]="hoveredIndex === i ? 'block' : 'none'"
+            [style.transition]="'display 125ms ease-in-out'">
+            <div class="interaction-bubble-emoji">
+              <img ngDefaultControl (click)="emojiPickerLeft= !emojiPickerLeft;"
+                src="./../../../../assets/img/reaction.png">
+              <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft"
+                (emojiSelect)="addEmojiLeft($event)" title="Choose your emoji">
+              </emoji-mart>
+            </div>
+            <div>
+              <mat-icon>
+                comment
+              </mat-icon>
+            </div>
+            <div></div>
+            <div></div>
+          </div>
+
+          <div class="avatar-left">
+            <img src="assets/img/members/avatar1.png" />
+          </div>
+
+          <div class="message-details-left">
+
+            <div class="name-time">
+              <div class="name">{{ message.userName }}</div>
+              <div class="time"> {{ message.timestamp.clockString }}</div>
+            </div>
+
+            <div class="message-content-left">
+              {{ message.content }}
+            </div>
+            <div class="reaction-bar-left">
+              <div id="reactionBarLeft" *ngIf="chatEmojiLeft">
+                <div matTooltip='{{ dataService.loggedInUserData.name }}' class="reactions">
+                  <span>{{ reactionArrLeft }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="full-message-right">
+
+        <div class="single-message-right-container" *ngIf="message.userName == this.dataService.loggedInUserData.name"
+          (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
+
+          <div class="avatar-right">
+            <img src="./../../../../assets/img/members/avatar3.png">
+          </div>
+
+          <div class="message-details-right">
+
+            <div class="interaction-bubble-right" [style.display]="hoveredIndex === i ? 'block' : 'none'">
               <div class="interaction-bubble-emoji">
-                <img ngDefaultControl (click)="emojiPickerLeft= !emojiPickerLeft;"
+                <img ngDefaultControl (click)="emojiPickerRight= !emojiPickerRight;"
                   src="./../../../../assets/img/reaction.png">
-                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft"
-                  (emojiSelect)="addEmojiLeft($event)" title="Choose your emoji">
+                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerRight"
+                  (emojiSelect)="addEmojiRight($event)" title="Choose your emoji">
+                  <!-- addEmoji(id oder index von nachricht) -->
                 </emoji-mart>
               </div>
               <div>
-                <mat-icon>
+                <mat-icon class="interaction-bubble-comment">
                   comment
                 </mat-icon>
               </div>
@@ -52,80 +104,25 @@
               <div></div>
             </div>
 
-            <div class="avatar-left">
-              <img src="assets/img/members/avatar1.png" />
+            <div class="name-time">
+              <div class="name"> {{ message.userName }} </div>
+              <div class="time"> {{ message.timestamp.clockString }}</div>
             </div>
 
-            <div class="message-details-left">
-
-              <div class="name-time">
-                <div class="name">{{ message.userName }}</div>
-                <div class="time"> {{ message.timestamp.clockString }}</div>
-              </div>
-
-              <div class="message-content-left">
-                {{ message.content }}
-              </div>
-              <div class="reaction-bar-left">
-                <div id="reactionBarLeft" *ngIf="chatEmojiLeft">
-                  <div matTooltip='{{ dataService.loggedInUserData.name }}' class="reactions">
-                    <span>{{ reactionArrLeft }}</span>
-                  </div>
+            <div class="message-content-right">
+              {{ message.content }}
+            </div>
+            <div class="reaction-bar-right">
+              <div class="reactions" id="reactionBarRight" *ngIf="chatEmojiRight"> <!-- id's stimmen nicht-->
+                <div id="reactionsRight" matTooltip='{{this.dataService.loggedInUserData.name}}'>
+                  <!--  reagierter User-->
+                  <span *ngIf="this.reactionArrRight.length <= 1"> {{ reactionArrRight }} </span>
                 </div>
               </div>
             </div>
           </div>
-        </div>      
-    </div>
-
-    <div class="full-message-right">
-     
-        <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
-          <div class="single-message-right-container" *ngIf="message.userName == this.dataService.loggedInUserData.name"
-            (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
-            <div class="avatar-right">
-              <img src="./../../../../assets/img/members/avatar3.png">
-            </div>
-
-            <div class="message-details-right">
-
-              <div class="interaction-bubble-right" [style.display]="hoveredIndex === i ? 'block' : 'none'">
-                <div class="interaction-bubble-emoji">
-                  <img ngDefaultControl (click)="emojiPickerRight= !emojiPickerRight;"
-                    src="./../../../../assets/img/reaction.png">
-                  <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerRight"
-                    (emojiSelect)="addEmojiRight($event)" title="Choose your emoji">
-                    <!-- addEmoji(id oder index von nachricht) -->
-                  </emoji-mart>
-                </div>
-                <div>
-                  <mat-icon class="interaction-bubble-comment">
-                    comment
-                  </mat-icon>
-                </div>
-                <div></div>
-                <div></div>
-              </div>
-
-              <div class="name-time">
-                <div class="name"> {{ message.userName }} </div>
-                <div class="time"> {{ message.timestamp.clockString }}</div>
-              </div>
-
-              <div class="message-content-right">
-                {{ message.content }}
-              </div>
-              <div class="reaction-bar-right">
-                <div class="reactions" id="reactionBarRight" *ngIf="chatEmojiRight"> <!-- id's stimmen nicht-->
-                  <div id="reactionsRight" matTooltip='{{this.dataService.loggedInUserData.name}}'>
-                    <!--  reagierter User-->
-                    <span *ngIf="this.reactionArrRight.length <= 1"> {{ reactionArrRight }} </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>      
+        </div>
+      </div>
     </div>
   </div>
 </div>

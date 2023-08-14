@@ -1,5 +1,7 @@
-.thread-content {
+.thread-content {   
   height: 100%; // SPÄTER ÄNDERN
+  
+
 
   .timeLine {
     position: relative;
@@ -26,7 +28,7 @@
   }
 
   .full-message-left {
-    width: calc(100% - 50px);
+    width: 100%;
     // height: calc(50% - 100px);
     position: relative;
     // border-bottom: 1px solid #eeebeb;
@@ -250,8 +252,8 @@
     .message-details-right {
       position: relative;
       margin-top: -60px;
-      margin-left: -100px;
-      width: 100%;
+      margin-left: 0px;
+      width: calc(100% - 100px);      
       display: flex;
       flex-direction: column;
       align-items: flex-end;

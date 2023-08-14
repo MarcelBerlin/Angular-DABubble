@@ -7,14 +7,8 @@
         (mouseleave)="newMessagePath = 'assets/img/sidenav/newMessage.png'" />
     </div>
     <div class="channelAndMessage">
-      <div class="channels-container" [style.height]="
-          !channelsVisible
-            ? '0'
-            : directMessageUserVisible
-            ? '50%'
-            : 'calc(100% - 78px)'
-        ">
-        <div class="channels-headline pd-left pd-right">
+      <div class="channels-container">
+        <div class="channels-headline">
           <img class="pointer" [src]="channelsPath" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
             (click)="toggleChannels(); onClickChannels()" />
 
