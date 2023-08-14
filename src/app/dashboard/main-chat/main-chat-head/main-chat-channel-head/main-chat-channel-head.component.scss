@@ -12,14 +12,9 @@
     gap: 10px;
     margin-left: 32px;
     height: 45px;
-    // width: 280px;
-    width: auto;
+    width: inherit;
     border-radius: 100px;
     cursor: pointer;
-    // div {
-    //   font-size: 24px;
-    //   margin-left: 16px;
-    // }
     .nameContainer {
       display: flex;
       align-items: center;
