@@ -1,4 +1,4 @@
-.inputContainer {
+.input-container {
     position: absolute;
     bottom: 32px;
     right: 32px;
@@ -11,12 +11,11 @@
     border: 3px solid rgba(0, 0, 0, 0.1);
     border-radius: 20px;
 
-    textarea {
+    .input-thread {
         width: 90%;
         max-width: 90%;
         height: 60%;
         max-height: 60%;
-        padding-bottom: 30px;
         padding-top: 20px;
         font-family: "Nunito";
         font-weight: 400;

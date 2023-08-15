@@ -1,6 +1,16 @@
-<div class="inputContainer">
+<div class="input-container">
 
-    <textarea [(ngModel)]="textarea" type="text" placeholder="Antworten..."></textarea>
+    <div class="filter-menu">
+        <input class="input-thread" *ngIf="showUsers" type="text" placeholder="Antworten...">
+        <mat-form-field appearance="fill" *ngIf="!showUsers">
+            <input class="input-thread" [formControl]="formcontrol" type="text" matInput [matAutocomplete]="auto">
+            <mat-autocomplete  #auto="matAutocomplete" >
+                <mat-option *ngFor="let user of users" [value]="user">
+                  {{ user }}
+                </mat-option>
+              </mat-autocomplete>
+        </mat-form-field>
+    </div>
 
     <div class="icons-container">
         <div class="add-elements">
@@ -13,7 +23,7 @@
                 <img src="assets/img/satisfied.png" />
             </div>
             <div class="element">
-                <img (click)="markUser()" src="assets/img/email.png" />
+                <img (click)="showAutocomplete()" src="assets/img/email.png" />
             </div>
         </div>
         <div class="send-icon"><img src="assets/img/send_icon.png" /></div>
