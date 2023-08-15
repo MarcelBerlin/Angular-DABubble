@@ -14,7 +14,7 @@ import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.serv
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   loading: boolean = false;
@@ -23,10 +23,20 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\.?[a-zA-Z]{0,2}')]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
+      Validators.pattern(
+        '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}.?[a-zA-Z]{0,2}'
+      ),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
   });
-
+  selectedImprintOrDataProtection: string = 'logIn';
+  imgPath: string = 'assets/img/Login/forgot_password/arrow_back_black.png';
 
   constructor(
     private router: Router,
@@ -34,37 +44,41 @@ export class LoginComponent {
     public dialog: MatDialog,
     public dialogInfoService: DialogInfoService,
     private dataService: DataService,
-    private directChatService: DirectChatService,
+    private directChatService: DirectChatService
   ) {
     this.dataService.forgotPasswordMenu = false;
   }
 
-
   /**
    * Logs in the user using the Google authentication provider.
-   * 
+   *
    * @returns {void}
    */
   loginWithGoogle(): void {
     this.loading = true;
     this.loginForm.disable();
-    this.authService.signInWithGoogle().then((res: any) => {
-      this.authService.setLocalStorage({ email: res.additionalUserInfo.profile.email, password: '' });
-      this.router.navigateByUrl('dashboard');
-      this.setUserData(res.additionalUserInfo.profile);
-      this.dataService.getLoggedInUserData();
-      this.loading = false;
-    }).catch((error: any) => {
-      this.loading = false;
-      console.error(error);
-      this.loginForm.enable();
-    });
+    this.authService
+      .signInWithGoogle()
+      .then((res: any) => {
+        this.authService.setLocalStorage({
+          email: res.additionalUserInfo.profile.email,
+          password: '',
+        });
+        this.router.navigateByUrl('dashboard');
+        this.setUserData(res.additionalUserInfo.profile);
+        this.dataService.getLoggedInUserData();
+        this.loading = false;
+      })
+      .catch((error: any) => {
+        this.loading = false;
+        console.error(error);
+        this.loginForm.enable();
+      });
   }
-
 
   /**
    * Sets the user data based on the provided Google data.
-   * 
+   *
    * @param {object} googleData - The Google data containing user information.
    * @returns {void}
    */
@@ -80,30 +94,34 @@ export class LoginComponent {
     }, 500);
   }
 
-
   /**
    * Performs login with email and password.
-   * 
+   *
    * @returns {void}
    */
   loginWithEmailAndPassword(): void {
     this.loading = true;
     this.loginForm.disable();
-    this.authService.signWithEmailAndPassword(this.getLoginFormData()).then((res: any) => {
-      this.loginOkProgramSettings();
-    }).catch((error: any) => {
-      this.loginFailedProgramSettings();
-      if (error.code === 'auth/user-not-found') this.dialogLoginEmailUnknown();
-      else if (error.code === 'auth/wrong-password') this.dialogLoginPasswordWrong();
-      else if (error.code === 'auth/network-request-failed') this.dialogNoServerConnection();
-      else this.dialogSystemError();
-    });
+    this.authService
+      .signWithEmailAndPassword(this.getLoginFormData())
+      .then((res: any) => {
+        this.loginOkProgramSettings();
+      })
+      .catch((error: any) => {
+        this.loginFailedProgramSettings();
+        if (error.code === 'auth/user-not-found')
+          this.dialogLoginEmailUnknown();
+        else if (error.code === 'auth/wrong-password')
+          this.dialogLoginPasswordWrong();
+        else if (error.code === 'auth/network-request-failed')
+          this.dialogNoServerConnection();
+        else this.dialogSystemError();
+      });
   }
-
 
   /**
    * Navigates via router link forgot password page.
-   * 
+   *
    * @returns {void}
    */
   forgotPassword(): void {
@@ -111,62 +129,57 @@ export class LoginComponent {
     // this.dataService.forgotPasswordMenu = true;
   }
 
-
   /**
    * Opens the dialog to display an info message for an unknown login email.
-   * 
+   *
    * @returns {void}
    */
   dialogLoginEmailUnknown(): void {
     this.dialogInfoService.setDialogInfoText(1);
-    this.dialog.open(DialogInfoComponent,{
-      panelClass: 'custom-modalbox'
-  });
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox',
+    });
   }
-
 
   /**
    * Opens the dialog to display an info message for a wrong login password.
-   * 
+   *
    * @returns {void}
    */
   dialogLoginPasswordWrong(): void {
     this.dialogInfoService.setDialogInfoText(7);
     this.dialog.open(DialogInfoComponent, {
-      panelClass: 'custom-modalbox'
-  });
+      panelClass: 'custom-modalbox',
+    });
   }
-
 
   /**
    * Opens the dialog to display an info message for no server connection.
-   * 
+   *
    * @returns {void}
    */
   dialogNoServerConnection(): void {
     this.dialogInfoService.setDialogInfoText(6);
     this.dialog.open(DialogInfoComponent, {
-      panelClass: 'custom-modalbox'
-  });;
+      panelClass: 'custom-modalbox',
+    });
   }
-
 
   /**
    * Opens the dialog to display a system error message.
-   * 
+   *
    * @returns {void}
    */
   dialogSystemError(): void {
     this.dialogInfoService.setDialogInfoText(5);
     this.dialog.open(DialogInfoComponent, {
-      panelClass: 'custom-modalbox'
-  });
+      panelClass: 'custom-modalbox',
+    });
   }
-
 
   /**
    *  Retrieves login form data.
-   * 
+   *
    * @returns {Login} The login form data.
    */
   getLoginFormData(): Login {
@@ -175,10 +188,9 @@ export class LoginComponent {
     return { email: this.email.toLowerCase(), password: this.password };
   }
 
-
   /**
    * Handles program settings after successful login.
-   * 
+   *
    * @returns {void}
    */
   loginOkProgramSettings(): void {
@@ -190,10 +202,9 @@ export class LoginComponent {
     this.loginForm.enable();
   }
 
-
   /**
    * Handles program settings after login failure.
-   * 
+   *
    * @returns {void}
    */
   loginFailedProgramSettings(): void {
@@ -201,16 +212,14 @@ export class LoginComponent {
     this.loginForm.enable();
   }
 
-
   /**
    * Initiates the forgot password process.
-   * 
+   *
    * @returns {void}
    */
   openDialogForgotPassword(): void {
     // this.dialog.open(DialogForgotPasswordComponent);
   }
-
 
   /**
    * Toggles the password visibility.
@@ -221,18 +230,27 @@ export class LoginComponent {
     else this.inputType = 'password';
   }
 
-
   /**
    * Performs a guest login by setting the login form values to a predefined guest email and password,
    * and then calling the loginWithEmailAndPassword function.
-   * 
+   *
    * @returns {void}
    */
   guestLogin(): void {
     this.loginForm.patchValue({
       email: 'guest@guest.de',
-      password: 'Guest123456789'
+      password: 'Guest123456789',
     });
     this.loginWithEmailAndPassword();
+  }
+
+  openImprintDataProtection(element: string): any {
+    this.selectedImprintOrDataProtection = element;
+  }
+
+  hovered(element: boolean) {
+    this.imgPath = element
+      ? 'assets/img/Login/forgot_password/arrow_back_blue.png'
+      : 'assets/img/Login/forgot_password/arrow_back_black.png';
   }
 }
