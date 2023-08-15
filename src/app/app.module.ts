@@ -62,6 +62,7 @@ import { DialogUserReactionsComponent } from './dialog/dialog-user-reactions/dia
 import { DirectChatComponent } from './direct-chat/direct-chat.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EmojiPickerBossiComponent } from './emoji-picker-bossi/emoji-picker-bossi.component';
+import { ImprintDataProtectionComponent } from './auth-features/login/imprint-data-protection/imprint-data-protection.component';
 
 
 @NgModule({
@@ -101,6 +102,7 @@ import { EmojiPickerBossiComponent } from './emoji-picker-bossi/emoji-picker-bos
     DialogUserReactionsComponent,
     DirectChatComponent,
     EmojiPickerBossiComponent,
+    ImprintDataProtectionComponent,
 
   ],
   imports: [

@@ -89,6 +89,7 @@
           }
         }
       }
+      
       .imprintDataProtection {
         display: flex;
         gap: 16px;
@@ -111,69 +112,6 @@
             border: 1px solid #adb0d9;
             border-radius: 30px;
             color: #444df2;
-          }
-        }
-      }
-    }
-    .noLogin {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100vw;
-      height: 100vh;
-      .imprintMasterContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 67px;
-        width: 676px;
-        height: 469px;
-        border-radius: 30px;
-        background-color: white;
-        padding: 48px 56px;
-        img {
-          width: 40px;
-          height: 40px;
-        }
-        .imprintContainer {
-          display: flex;
-          flex-direction: column;
-          width: 564px;
-          height: 167px;
-          gap: 32px;
-          .imprintHead {
-            display: flex;
-            flex-direction: column;
-            font-family: "Nunito";
-            font-weight: 700;
-            font-size: 46px;
-            color: #444df2;
-          }
-          .imprint {
-            font-family: "Nunito";
-            font-weight: 400;
-            font-size: 24px;
-            line-height: 24px;
-          }
-        }
-        .contactContainer {
-          display: flex;
-          flex-direction: column;
-          width: 564px;
-          height: 102px;
-          gap: 32px;
-          .contactHead {
-            display: flex;
-            flex-direction: column;
-            font-family: "Nunito";
-            font-weight: 700;
-            font-size: 32px;
-            color: #444df2;
-          }
-          .content {
-            font-family: "Nunito";
-            font-weight: 400;
-            font-size: 24px;
           }
         }
       }

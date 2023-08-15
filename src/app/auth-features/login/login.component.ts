@@ -35,12 +35,10 @@ export class LoginComponent {
       Validators.minLength(8),
     ]),
   });
-  selectedImprintOrDataProtection: string = 'logIn';
-  imgPath: string = 'assets/img/Login/forgot_password/arrow_back_black.png';
 
   constructor(
     private router: Router,
-    private authService: AuthService,
+    public authService: AuthService,
     public dialog: MatDialog,
     public dialogInfoService: DialogInfoService,
     private dataService: DataService,
@@ -244,13 +242,13 @@ export class LoginComponent {
     this.loginWithEmailAndPassword();
   }
 
-  openImprintDataProtection(element: string): any {
-    this.selectedImprintOrDataProtection = element;
-  }
-
-  hovered(element: boolean) {
-    this.imgPath = element
-      ? 'assets/img/Login/forgot_password/arrow_back_blue.png'
-      : 'assets/img/Login/forgot_password/arrow_back_black.png';
+  /**
+   * Sets the selected imprint or data protection element.
+   *
+   * @param {string} element - The element to be selected (imprint or data protection).
+   * @returns {void} - Any return value description, if applicable.
+   */
+  openImprintDataProtection(element: string): void {
+    this.authService.selectedImprintOrDataProtection = element;
   }
 }

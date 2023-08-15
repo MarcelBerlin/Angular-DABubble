@@ -1,0 +1,140 @@
+.noLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  .imprintMasterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 67px;
+    width: 676px;
+    height: 469px;
+    border-radius: 30px;
+    background-color: white;
+    padding: 48px 56px;
+
+    .imgContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+
+      &:hover {
+        border-radius: 50px;
+        background-color: #eceefe;
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .imprintContainer {
+      display: flex;
+      flex-direction: column;
+      width: 564px;
+      height: 167px;
+      gap: 32px;
+
+      .imprintHead {
+        display: flex;
+        flex-direction: column;
+        font-family: "Nunito";
+        font-weight: 700;
+        font-size: 46px;
+        color: #444df2;
+      }
+
+      .imprint {
+        font-family: "Nunito";
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 24px;
+      }
+    }
+
+    .contactContainer {
+      display: flex;
+      flex-direction: column;
+      width: 564px;
+      height: 102px;
+      gap: 32px;
+
+      .contactHead {
+        display: flex;
+        flex-direction: column;
+        font-family: "Nunito";
+        font-weight: 700;
+        font-size: 32px;
+        color: #444df2;
+      }
+
+      .content {
+        font-family: "Nunito";
+        font-weight: 400;
+        font-size: 24px;
+      }
+    }
+  }
+  .dataProtectionMasterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+    height: 50%;
+    border-radius: 30px;
+    background-color: white;
+    padding: 48px 56px;
+
+    .imgContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      margin-bottom: 24px;
+
+      &:hover {
+        border-radius: 100%;
+        background-color: #eceefe;
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    .dataProtectionContainer {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 80%;
+      gap: 32px;
+
+      .dataProtectionHead {
+        display: flex;
+        flex-direction: column;
+        height: fit-content;
+        font-family: "Nunito";
+        font-weight: 700;
+        font-size: 46px;
+        color: #444df2;
+      }
+
+      .dataProtection {
+        font-family: "Nunito";
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 24px;
+        overflow-y: scroll;
+      }
+    }
+  }
+}

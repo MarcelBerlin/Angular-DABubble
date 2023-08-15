@@ -2,10 +2,13 @@
   <div class="loginContainer">
     <app-start-animation></app-start-animation>
     <app-login-header
-      *ngIf="selectedImprintOrDataProtection === 'logIn'"
+      *ngIf="authService.selectedImprintOrDataProtection === 'logIn'"
     ></app-login-header>
     <!-- für imprintDataProtection geändert Basti -->
-    <div class="card" *ngIf="selectedImprintOrDataProtection === 'logIn'">
+    <div
+      class="card"
+      *ngIf="authService.selectedImprintOrDataProtection === 'logIn'"
+    >
       <!-- für imprintDataProtection geändert Basti -->
       <form [formGroup]="loginForm" (submit)="loginWithEmailAndPassword()">
         <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
@@ -115,27 +118,8 @@
         >
       </div>
     </div>
-    <!-- wird später noch in eine Componente gepackt -->
-    <div *ngIf="selectedImprintOrDataProtection !== 'logIn'" class="noLogin">
-      <div class="imprintMasterContainer">
-        <img
-          [src]="imgPath"
-          (mouseenter)="hovered(true)"
-          (mouseleave)="hovered(false)"
-        />
-        <div class="imprintContainer">
-          <span class="imprintHead">Impressum</span>
-          <span class="imprint"
-            >[Student Names List] <br />
-            [Address of the DABubble operator - e.g. one of the students] <br />
-            [Postcode and city]
-          </span>
-        </div>
-        <div class="contactContainer">
-          <span class="contactHead">Contact:</span>
-          <span class="content">Email: deinemudda@test.de</span>
-        </div>
-      </div>
-    </div>
+    <app-imprint-data-protection
+      *ngIf="authService.selectedImprintOrDataProtection !== 'logIn'"
+    ></app-imprint-data-protection>
   </div>
 </div>

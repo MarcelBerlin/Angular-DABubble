@@ -17,6 +17,9 @@ export class AuthService {
 // beforeunloadHandler(event: Event) {
 //     this.signOut()
 //   }
+  
+selectedImprintOrDataProtection: string = 'logIn';
+
 
 
   constructor(
