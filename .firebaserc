@@ -1,12 +1,5 @@
 {
   "targets": {
-    "angular-dabubble": {
-      "hosting": {
-        "Angular-DABubble": [
-          "angular-dabubble"
-        ]
-      }
-    },
     "daangularbubble2": {
       "hosting": {
         "Angular-DABubble": [
