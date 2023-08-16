@@ -1,15 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
 import { ChatService } from 'src/app/services/chat.service';
 import { DataService } from 'src/app/services/data.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { VariablesService } from 'src/app/services/variables.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { User } from 'src/app/models/user.class';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-secondary-chat-inputfield',
@@ -23,9 +21,10 @@ export class SecondaryChatInputfieldComponent {
   textarea: any = '';
   showUsers: boolean = true;
   formcontrol = new FormControl('');
-
-  // users = this.dataService.userData[this.varService.selectedChannel];
-  users = ['Sonja', 'Waldi', 'Hugo', 'Irmtraud'];
+  userValue: string = '';
+  inputValue: string = '';
+  markedUser: string = '';
+  users = this.dialogAddService.tagsData[this.varService.selectedChannel].members;
 
   directMessage: string = '';
   loggedUser: string = '';
@@ -38,31 +37,29 @@ export class SecondaryChatInputfieldComponent {
     public chatService: ChatService,
   ) { }
 
-  ngOnInit() {
-    // this.filteredOptions = this.userForm.valueChanges.pipe(
-    //   map((value) => this._filter(value || ''))
-    // );
-  }
-
-  // filterUser(value: string) {
-  //   this.filteredOptions = this.formcontrol.valueChanges.pipe(
-  //     startWith(''),
-  //     map(value => {
-  //       const name = typeof value === 'string' ? value : value;
-  //       return name ? this._filter(name as string) : this.users.slice();
-  //     }),
-  //   );
-  // }
-
-  // private _filter(name: string): User[] {
-  //   const filterValue = name.toLowerCase();
-
-  //   return this.users.filter(option => this.users.toLowerCase().includes(filterValue));
-  // }
-
 
   showAutocomplete() {
+    this.inputValue = this.userValue;
     this.showUsers = !this.showUsers;
+    if(this.showUsers) {
+      this.highlightUsers();
+    }
+  }
+
+
+  highlightUsers() { // beim absenden mit einbauen?
+    const message = this.inputValue;
+    this.markedUser = this.highlightUsernames(message);
+  }
+
+
+  highlightUsernames(message: string) {
+    for (const user of this.users) {
+      const highlight = new RegExp(`@${user}\\b`, 'g');  // Wortgrenze + globaler Suchmodus
+      message = message.replace(highlight, `<span class="highlight">${user}</span>`);
+    }
+    console.log('marked user should be',message);
+    return message;
   }
 
 
@@ -78,7 +75,7 @@ export class SecondaryChatInputfieldComponent {
       const reader: FileReader = new FileReader();
       reader.onload = (e: any) => {
         this.textarea = e.target.result;
-      console.log(e.target.result);
+        console.log(e.target.result);
 
       };
       reader.readAsDataURL(file);
@@ -89,7 +86,7 @@ export class SecondaryChatInputfieldComponent {
 
   markUser() {
     // this.textarea = '@'+ this.dataService.userData[this.varService.selectedChannel].name;
-    
+
     // this.dataService.userData[this.varService.selectedChannel].name
   }
 }

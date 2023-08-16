@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { ChatService } from 'src/app/services/chat.service';
@@ -42,28 +42,33 @@ export class SecondaryChatMessagefieldComponent {
   }
 
 
-  emojiFilterLeft(reactionArr) {
-    const emojiCountMapLeft: any = new Map();
-    let reactionBarLeft = document.getElementById("reactionBarLeft");
-    reactionArr.forEach(emoji => {
-      if (emojiCountMapLeft.has(emoji)) {emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
-      } else {emojiCountMapLeft.set(emoji, 1);}
-    });
-    reactionBarLeft.innerHTML = '';
-    emojiCountMapLeft.forEach((count, emoji) => {
-      reactionBarLeft.innerHTML +=
-        `<div class="reaction-container"> <span matTooltip ='{{${this.getUser.loggedInUserData.name}}}'> ${emoji} ${count} </span> </div>`
-    });
-    if(reactionArr.length >= 10) { reactionBarLeft.innerHTML = 'Zu viele reaktionen. Wir arbeiten gerade daran'}
-  }
-
-
   public addEmojiRight(event) {
     this.threadEmojiRight = true;
     this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
     this.reactionArrRight.push(this.getMessage.emojis);
     this.emojiPickerRight = false;
-    if(this.reactionArrRight.length > 1) {this.emojiFilterRight(this.reactionArrRight); }
+    if (this.reactionArrRight.length > 1) { this.emojiFilterRight(this.reactionArrRight); }
+  }
+
+
+  emojiFilterLeft(reactionArr) {
+    const emojiCountMapLeft: any = new Map();
+    let reactionBarLeft = document.getElementById("reactionBarLeft"); 
+    reactionArr.forEach(emoji => {
+      if (emojiCountMapLeft.has(emoji)) {
+        emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
+      } else { emojiCountMapLeft.set(emoji, 1); }
+    });
+    reactionBarLeft.innerHTML = '';
+    emojiCountMapLeft.forEach((count, emoji) => {
+      reactionBarLeft.innerHTML +=
+        `<div>
+          <span class="base"> ${emoji} ${count} 
+            <!-- <span class="user-tool">${this.getUser.loggedInUserData.name}</span> -->
+          </span>
+        </div>`
+    });
+    if (reactionArr.length >= 10) { reactionBarLeft.innerHTML = 'Zu viele reaktionen. Wir arbeiten gerade daran' }
   }
 
 
@@ -71,14 +76,14 @@ export class SecondaryChatMessagefieldComponent {
     const emojiCountMapRight: any = new Map();
     let reactionBarRight = document.getElementById("reactionBarRight");
     reactionArr.forEach(emoji => {
-      if (emojiCountMapRight.has(emoji)) {emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);} 
-      else {emojiCountMapRight.set(emoji, 1);}
-    }); 
+      if (emojiCountMapRight.has(emoji)) { emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1); }
+      else { emojiCountMapRight.set(emoji, 1); }
+    });
     reactionBarRight.innerHTML = '';
     emojiCountMapRight.forEach((count, emoji) => {
       reactionBarRight.innerHTML +=
         `<div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`
     });
-    if(reactionArr.length >= 7) { reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran'}
+    if (reactionArr.length >= 7) { reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran' }
   }
 }
