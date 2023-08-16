@@ -7,6 +7,7 @@ import { MessageService } from 'src/app/services/messages.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
 import { EmojiPickerBossiService } from 'src/app/emoji-picker-bossi/services/emoji-picker-bossi.service';
+import { AddUserToMessageService } from 'src/app/services/add-user-to-message.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class MainChatMessagefieldComponent {
     public messageService: MessageService,
     public chatService: ChatService,
     public directChatService: DirectChatService,
-    public emojiService: EmojiPickerBossiService
+    public emojiService: EmojiPickerBossiService,
+    public addUserToMessageService: AddUserToMessageService,
   ) { }
 
   currentUser() {
@@ -63,6 +65,10 @@ export class MainChatMessagefieldComponent {
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive) {
       this.directChatService.saveMessage();
     }
+  }
+
+  addSign() {
+    this.addUserToMessageService.addToMessage();
   }
 
 }
