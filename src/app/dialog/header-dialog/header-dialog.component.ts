@@ -11,10 +11,7 @@ import { DataService } from '../../services/data.service';
   styleUrls: ['./header-dialog.component.scss']
 })
 export class HeaderDialogComponent {
-
-  loggedUserName: string = '';
-  loggedUserImg: string = '';
-  loggedUserMail: string = '';
+  
   loggedUserStatus: boolean = true;
 
 
@@ -23,12 +20,12 @@ export class HeaderDialogComponent {
     private auth: AuthService,
     public getUserData: DataService) {
 
-    setTimeout(() => {
-      this.loggedUserImg = getUserData.loggedInUserData.img;
-      this.loggedUserName = getUserData.loggedInUserData.name;
-      this.loggedUserMail = getUserData.loggedInUserData.email;
-      this.loggedUserStatus = getUserData.loggedInUserData.online;
-    }, 1000);
+    // setTimeout(() => {
+    //   this.loggedUserImg = getUserData.loggedInUserData.img;
+    //   this.loggedUserName = getUserData.loggedInUserData.name;
+    //   this.loggedUserMail = getUserData.loggedInUserData.email;
+    //   this.loggedUserStatus = getUserData.loggedInUserData.online;
+    // }, 1000);
   }
 
   editingProfile() {
