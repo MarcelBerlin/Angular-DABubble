@@ -30,6 +30,18 @@ export class DialogAddService {
   newTags$: any;
   tagsData: any = [];
   channelIndex: number = 0;
+  newTag: string = '';
+  description: string = '';
+  channelCreator: string = '';
+  members: any = [];
+  newChannel: Tag = {
+    id: '',
+    name: this.newTag,
+    imagePath: 'assets/img/sidenav/tag.png',
+    description: this.description,
+    channelCreator: this.channelCreator,
+    members: this.members,
+  }; ;
 
   constructor(private firestore: Firestore, private dataService: DataService) {
     const coll = collection(firestore, 'tags');
@@ -42,10 +54,7 @@ export class DialogAddService {
 
   tags: Tag[] = []; // neue Tags werden als JSON hinzugefügt
 
-  newTag: string = '';
-  description: string = '';
-  channelCreator: string = '';
-  members: any = [];
+  
 
   async addTag(
     generatedTag: string,
@@ -57,21 +66,25 @@ export class DialogAddService {
     this.newTag = generatedTag;
     this.channelCreator = channelCreator;
     if (this.newTag) {
-      const tag: Tag = {
-        id: '',
-        name: this.newTag,
-        imagePath: 'assets/img/sidenav/tag.png',
-        description: this.description,
-        channelCreator: this.channelCreator,
-        members: this.members,
-      };
+
+      // const newChannel: Tag = {
+      //   id: '',
+      //   name: this.newTag,
+      //   imagePath: 'assets/img/sidenav/tag.png',
+      //   description: this.description,
+      //   channelCreator: this.channelCreator,
+      //   members: this.members,
+      // };
 
       // Firestore-Dokument erstellen und Tag speichern
-      const docRef = await addDoc(collection(this.firestore, 'tags'), tag);
+      const docRef = await addDoc(collection(this.firestore, 'tags'), this.newChannel);
+      console.log(docRef.id);
+      this.newChannel.id = docRef.id;     
+
 
       // Tag mit generierter ID aus Firestore abrufen und dem lokalen Array hinzufügen
-      const tagWithId = { ...tag, id: docRef.id };
-      this.tags.push(tagWithId);
+      // const tagWithId = { ...newChannel, id: docRef.id };
+      // this.tags.push(tagWithId);
     }
   }
 
