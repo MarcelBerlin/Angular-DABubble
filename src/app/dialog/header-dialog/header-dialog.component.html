@@ -5,10 +5,10 @@
             <img class="close-icon" mat-button mat-dialog-close src="assets/img/close.png">
         </div>
         
-        <img  class="user-img" src="{{ loggedUserImg }}">
+        <img  class="user-img" src="{{ getUserData.loggedInUserData.img }}">
         
         <div class="edit-div">
-            <span class="head-span"> {{ loggedUserName }} </span> 
+            <span class="head-span"> {{ getUserData.loggedInUserData.name }} </span> 
             <span mat-button mat-dialog-close (click)="editingProfile()" class="edit-span">Bearbeiten</span>
         </div>
         
@@ -22,6 +22,6 @@
             <img class="profile-icon" src="assets/img/mail-icon.png">
             <span>E-Mail-Adresse</span>
         </div>
-        <span class="mail-span">{{ loggedUserMail }}</span>
+        <span class="mail-span">{{ getUserData.loggedInUserData.email }}</span>
     </mat-dialog-content>
 </div>

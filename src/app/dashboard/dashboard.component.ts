@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DashboardComponentsShowHideService } from './dashboard-components-show-hide.service';
 import { DirectChatService } from '../direct-chat/services/direct-chat.service';
+import { ChannelSelectionComponent } from './main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
 
 @Component({
   selector: 'app-dashboard',

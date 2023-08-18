@@ -22,25 +22,18 @@ export class HeaderEditDialogComponent {
   loggedUserImg: string = '';
   loggedUserMail: string = '';
 
-  newInputName: string = ''; // [(ngModel)]
-  newInputMail: string = ''; // [(ngModel)]
+  newInputName: string = '';
+  newInputMail: string = '';
 
   constructor(
     public dialog: MatDialog,
     private auth: AuthService,
     public getUserData: DataService) {
-
-    setTimeout(() => {
-      this.loggedUserImg = getUserData.loggedInUserData.img;
-      this.loggedUserName = getUserData.loggedInUserData.name;
-      this.loggedUserMail = getUserData.loggedInUserData.email;
-    }, 1000);
   }
 
   saveUserChanges() {
     this.getUserData.loggedInUserData.name = this.newInputName;
     this.getUserData.loggedInUserData.email = this.newInputMail;
-    this.getUserData.loggedInUserEmail = this.newInputMail;
     this.getUserData.updateUser();
   }
 }

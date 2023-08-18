@@ -23,15 +23,14 @@ export class SecondaryChatHeadComponent {
     private dcshService: DashboardComponentsShowHideService,
     public addService: DialogAddService,
     public varService: VariablesService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog) 
+  { }
 
 
-    setTimeout(() => {
-      this.channelName = addService.tagsData[varService.selectedChannel]?.name.slice(1)
-    }, 5000);
-  }
-
-
+  /**
+   * Closes the 'Thread' (Secondary-chat-component)
+   *
+   */
   slideOut() {
     this.dcshService.chatSlideOut();
   }

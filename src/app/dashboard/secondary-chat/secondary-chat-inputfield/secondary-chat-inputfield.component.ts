@@ -39,11 +39,11 @@ export class SecondaryChatInputfieldComponent {
 
 
   showAutocomplete() {
-    this.inputValue = this.userValue;
     this.showUsers = !this.showUsers;
-    if(this.showUsers) {
-      this.highlightUsers();
-    }
+    this.inputValue = '@' + this.userValue;
+    
+    if(this.showUsers) { this.highlightUsers()}
+    if(this.userValue == '') {this.inputValue = ''}
   }
 
 
@@ -86,7 +86,5 @@ export class SecondaryChatInputfieldComponent {
 
   markUser() {
     // this.textarea = '@'+ this.dataService.userData[this.varService.selectedChannel].name;
-
-    // this.dataService.userData[this.varService.selectedChannel].name
   }
 }

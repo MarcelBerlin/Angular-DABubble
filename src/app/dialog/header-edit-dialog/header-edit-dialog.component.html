@@ -5,14 +5,14 @@
             <img class="close-icon" mat-button mat-dialog-close src="assets/img/close.png">
         </div>
 
-        <img class="user-img" src="{{ loggedUserImg }}">
+        <img class="user-img" src="{{ getUserData.loggedInUserData.img }}">
 
         <div class="input-section">
             <div class="edit-description">
                 <img src="assets/img/user-icon.png">
                 <span>Vollständiger Name</span>
             </div>
-            <input #inputName [(ngModel)]="newInputName" class="header-input" placeholder="{{ loggedUserName  }}">
+            <input #inputName [(ngModel)]="newInputName" class="header-input" placeholder="{{ getUserData.loggedInUserData.name }}">
         </div>
         <div class="input-section">
             <div class="edit-description">
@@ -20,7 +20,7 @@
                 <span> E-Mail Adresse </span>
             </div>
             <input [formControl]="emailFormControl" #inputMail [(ngModel)]="newInputMail" 
-            class="header-input" placeholder="{{ loggedUserMail }}">
+            class="header-input" placeholder="{{ getUserData.loggedInUserData.email }}">
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                 Please enter a valid email address
             </mat-error>
