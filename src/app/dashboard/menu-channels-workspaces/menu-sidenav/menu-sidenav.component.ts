@@ -16,6 +16,7 @@ import { User } from 'src/app/models/user.class';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
 import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
+import { MessageService } from 'src/app/services/messages.service';
 
 
 interface Tag {
@@ -65,7 +66,8 @@ export class MenuSidenavComponent implements OnInit {
     public getUserData: DataService,
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService,
-    public directChatService: DirectChatService
+    public directChatService: DirectChatService,
+    public messageService: MessageService,
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
@@ -176,12 +178,16 @@ export class MenuSidenavComponent implements OnInit {
     );
   }
 
-  openChannel(arrayId: number) {
+  async openChannel(arrayId: number) {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
     this.getService.channelIndex = arrayId;
-    this.dcshService.chatSlideIn();
-  }
+    this.dcshService.chatSlideIn();    
+
+    const selectedChannel = this.tags[arrayId];
+    await this.messageService.onChannelClick(selectedChannel.id);
+  } 
+  
 
   openNewMessage() {
     this.varService.setVar('mainChatHead', 2);

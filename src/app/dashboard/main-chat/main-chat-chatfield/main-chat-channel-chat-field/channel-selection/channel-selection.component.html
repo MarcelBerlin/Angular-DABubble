@@ -1,6 +1,6 @@
 <div class="thread-content">
 
-  <div class="empty-chat-message" *ngIf="emptyChat">
+  <!-- <div class="empty-chat-message" *ngIf="emptyChat">
     <ng-container *ngIf="
           dialogAdd.tagsData && varService.selectedChannel
         ">
@@ -17,17 +17,17 @@
         </a>
       </ng-container>
     </ng-container>
-  </div>
+  </div> -->
 
   <div *ngFor="let message of messageData, let i = index">
-    <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
-
-      <div class="timeLine" *ngIf="timelinesService.timeline[i]">
-        <div class="timeLineHead">{{ timelinesService.timeline[i] }}</div>
-      </div>
+    <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">      
 
       <div class="full-message-left">
         <!-- Zeige Nachrichten des ausgewählten Kanals an -->
+
+        <div class="timeLine" *ngIf="timelinesService.timeline[i]">
+          <div class="timeLineHead">{{ timelinesService.timeline[i] }}</div>
+        </div>
 
         <div class="single-message-left-container" *ngIf="message.userName != this.dataService.loggedInUserData.name"
           (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">

@@ -7,6 +7,9 @@ import {
   addDoc,
   updateDoc,
   doc,
+  getDocs,
+  where,
+  query,
 } from '@angular/fire/firestore';
 import { Messages } from '../models/messages.interface';
 import { Observable } from 'rxjs';
@@ -34,28 +37,39 @@ export class MessageService {
     private dialogAddService: DialogAddService,
     private direktChatService: DirectChatService,
     public varService: VariablesService
-  ) { }
+  ) {}
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
   async addMessage() {
     this.newMessage.channelId =
       this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
-    this.varService.selectedChannelId = this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id;
+    this.varService.selectedChannelId =
+      this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id;
     this.newMessage.userId = this.dataService.loggedInUserData.userId;
     this.newMessage.userName = this.dataService.loggedInUserData.name;
     this.newMessage.userImg = this.dataService.loggedInUserData.img;
     this.newMessage.content = this.messageText;
-    this.newMessage.timestamp = this.direktChatService.getActualTimeStamp();   
+    this.newMessage.timestamp = this.direktChatService.getActualTimeStamp();
 
     const coll = collection(this.firestore, 'messages'); // definiert die Collection, worauf man zugreifen möchte
     await addDoc(coll, this.newMessage.toJSON()); // fügt eine neue Nachricht aus dem Textfeld in die Firebase Collection hinzu bzw. returned die Message in docId
     this.messageData.push(this.newMessage);
-    
+  }
+
+  async loadChannelMessages(channelId: string) {
+    const coll = collection(this.firestore, 'messages');
+    const q = query(coll, where('channelId', '==', channelId));
+    const messages = await getDocs(q);
+    this.messageData = messages.docs.map((doc) => doc.data());
+  }
+
+  async onChannelClick(channelId: string) {
+    this.varService.selectedChannelId = channelId;
+    await this.loadChannelMessages(channelId);
   }
 
   // setSelectedChannel(channelId: string) {
   //   // Suche nach dem Index des Kanals basierend auf der übergebenen channelId
   //   this.dialogAddService.channelIndex = this.dialogAddService.tags.findIndex(tag => tag.id === channelId);
   // }
-
 }

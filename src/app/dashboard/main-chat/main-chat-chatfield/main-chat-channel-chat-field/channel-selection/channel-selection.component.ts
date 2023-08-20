@@ -58,7 +58,7 @@ export class ChannelSelectionComponent implements OnInit {
     this.messages$ = collectionData(coll, { idField: 'id' });
     this.messages$.subscribe((message: any) => {
       this.messageData = message.sort((a, b) => a.timestamp.dateTimeNumber - b.timestamp.dateTimeNumber);
-      console.log(this.messageData);
+      console.log(this.messageService.channelMessages);
     });   
   }
 
