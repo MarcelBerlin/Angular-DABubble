@@ -5,7 +5,7 @@
             <img class="close-icon" mat-button mat-dialog-close src="assets/img/close.png">
         </div>
         <!-- edit uploadImg by Bossi for upload img -->
-        <img  class="user-img" src="{{ getUserData.loggedInUserData.img }}" (click)="uploadImg()">
+        <img  class="user-img" src="{{ getUserData.loggedInUserData.img }}" (click)="uploadImg()" contenteditable="true" type="file">
         
         <div class="edit-div">
             <span class="head-span"> {{ getUserData.loggedInUserData.name }} </span> 
