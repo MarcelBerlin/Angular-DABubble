@@ -4,8 +4,8 @@
             <span>Profil</span> 
             <img class="close-icon" mat-button mat-dialog-close src="assets/img/close.png">
         </div>
-        
-        <img  class="user-img" src="{{ getUserData.loggedInUserData.img }}">
+        <!-- edit uploadImg by Bossi for upload img -->
+        <img  class="user-img" src="{{ getUserData.loggedInUserData.img }}" (click)="uploadImg()">
         
         <div class="edit-div">
             <span class="head-span"> {{ getUserData.loggedInUserData.name }} </span> 

@@ -4,6 +4,7 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { HeaderEditDialogComponent } from '../header-edit-dialog/header-edit-dialog.component';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
+import { DialogUploadComponent } from 'src/app/file-upload/dialog-upload/dialog-upload.component';
 
 @Component({
   selector: 'app-header-dialog',
@@ -31,6 +32,13 @@ export class HeaderDialogComponent {
   editingProfile() {
     const dialogRef = this.dialog.open(HeaderEditDialogComponent);
     dialogRef.afterClosed();
+  }
+
+
+  // edit by Bossi to upload profile image
+  uploadImg(){
+    this.dialog.open(DialogUploadComponent);
+    console.log('upload image');
   }
 
 }

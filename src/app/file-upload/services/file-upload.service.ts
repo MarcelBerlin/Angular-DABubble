@@ -14,6 +14,7 @@ export class FileUploadService {
   basePath ='/uploads/';
   filePath: string = '';
   filename: string = '';
+  lastUpload: string = '';
 
 
   constructor(
@@ -32,6 +33,7 @@ export class FileUploadService {
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           fileUpload.url = downloadURL;
+          this.lastUpload = downloadURL;
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
           console.log(downloadURL);
