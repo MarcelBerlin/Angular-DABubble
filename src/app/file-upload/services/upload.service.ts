@@ -17,6 +17,8 @@ export class UploadService {
 
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
+    console.log('Selected File: ', this.selectedFiles);
+    this.upload();
   }
 
 
@@ -33,7 +35,6 @@ export class UploadService {
           percentage => {
             this.percentage = Math.round(percentage ? percentage : 0);
             console.log(this.percentage);
-            // if(this.percentage == 100) this.showUrl();
           },
           error => {
             console.log(error);

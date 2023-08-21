@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { HeaderEditDialogComponent } from '../header-edit-dialog/header-edit-dialog.component';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
 import { DialogUploadComponent } from 'src/app/file-upload/dialog-upload/dialog-upload.component';
+import { UploadService } from 'src/app/file-upload/services/upload.service';
 
 @Component({
   selector: 'app-header-dialog',
@@ -19,7 +20,9 @@ export class HeaderDialogComponent {
   constructor(
     public dialog: MatDialog,
     private auth: AuthService,
-    public getUserData: DataService) {
+    public getUserData: DataService,
+    public uploadService: UploadService,
+    ) {
 
     // setTimeout(() => {
     //   this.loggedUserImg = getUserData.loggedInUserData.img;
@@ -36,6 +39,21 @@ export class HeaderDialogComponent {
 
 
   // edit by Bossi to upload profile image
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
+  openFileExplorer() {
+    this.fileInput.nativeElement.click();
+  }
+
+  // handleFileInput(event: any) {
+  //   const selectedFile = event.target.files[0];
+  //   if (selectedFile) {
+  //     console.log(selectedFile);
+  //   }
+  // }
+
+  
   uploadImg(){
     this.dialog.open(DialogUploadComponent);
     console.log('upload image');

@@ -5,6 +5,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { FileUpload } from '../models/file-upload.model';
+import { DataService } from 'src/app/services/data.service';
 
 
 @Injectable({
@@ -19,7 +20,8 @@ export class FileUploadService {
 
   constructor(
     private db: AngularFireDatabase, 
-    private storage: AngularFireStorage, 
+    private storage: AngularFireStorage,
+    private dataService: DataService, 
     ) {}
 
 
@@ -36,13 +38,18 @@ export class FileUploadService {
           this.lastUpload = downloadURL;
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
-          console.log(downloadURL);
+          console.log('upload finished: ', downloadURL);
+          this.dataService.loggedInUserData.img = this.lastUpload;
+          this.dataService.updateUser();
         });
       })
     ).subscribe();
 
     return uploadTask.percentageChanges();
   }
+
+
+
 
   private saveFileData(fileUpload: FileUpload): void {
     this.db.list(this.basePath).push(fileUpload);
