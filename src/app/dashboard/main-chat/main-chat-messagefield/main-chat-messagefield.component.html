@@ -59,7 +59,8 @@
     <app-emoji-picker-bossi *ngIf="emojiService.emojiSelectorActive"></app-emoji-picker-bossi>
     <div class="addElements">
       <div class="element">
-        <img src="assets/img/add.png" />
+        <!-- file upload click -->
+        <img src="assets/img/add.png" (click)="uploadFile()" />
       </div>
       <div class="vector"></div>
       <div class="element">
