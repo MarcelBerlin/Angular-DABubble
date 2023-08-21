@@ -9,7 +9,6 @@ import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.serv
 import { EmojiPickerBossiService } from 'src/app/emoji-picker-bossi/services/emoji-picker-bossi.service';
 import { AddUserToMessageService } from 'src/app/services/add-user-to-message.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogUploadComponent } from 'src/app/file-upload/dialog-upload/dialog-upload.component';
 
 
 @Component({
@@ -72,12 +71,6 @@ export class MainChatMessagefieldComponent {
 
   addSign() {
     this.addUserToMessageService.addToMessage();
-  }
-
-  // add by Bossi for fileUpload
-  uploadFile(){
-    console.log('uploadFile');
-    this.dialog.open(DialogUploadComponent);
   }
 }
 

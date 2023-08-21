@@ -4,7 +4,6 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { HeaderEditDialogComponent } from '../header-edit-dialog/header-edit-dialog.component';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
-import { DialogUploadComponent } from 'src/app/file-upload/dialog-upload/dialog-upload.component';
 import { UploadService } from 'src/app/file-upload/services/upload.service';
 
 @Component({
@@ -45,18 +44,4 @@ export class HeaderDialogComponent {
   openFileExplorer() {
     this.fileInput.nativeElement.click();
   }
-
-  // handleFileInput(event: any) {
-  //   const selectedFile = event.target.files[0];
-  //   if (selectedFile) {
-  //     console.log(selectedFile);
-  //   }
-  // }
-
-  
-  uploadImg(){
-    this.dialog.open(DialogUploadComponent);
-    console.log('upload image');
-  }
-
 }
