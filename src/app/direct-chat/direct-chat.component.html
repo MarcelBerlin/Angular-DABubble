@@ -13,8 +13,9 @@
         'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',
         transition: 'background-color 400ms'
       }" 
-    >
-      <div class="avatar"><img src="{{ messageService.messageData.userImg }}" /></div>
+    > 
+    <!-- direct chat save data extend with user img, will be done by Bossi -->
+      <div class="avatar"><img src="../../assets/img/members/avatar1.png" /></div>
       <div class="messageContent">
         <div class="nameTime">
           <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
