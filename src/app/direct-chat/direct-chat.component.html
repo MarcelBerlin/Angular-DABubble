@@ -14,7 +14,7 @@
         transition: 'background-color 400ms'
       }" 
     >
-      <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
+      <div class="avatar"><img src="{{ messageService.messageData.userImg }}" /></div>
       <div class="messageContent">
         <div class="nameTime">
           <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
@@ -58,7 +58,7 @@
           <div class="time">Letzte Antwort 14:56</div>
         </div>
       </div>
-      <div class="avatar"><img src="assets/img/members/avatar1.png" /></div>
+      <div class="avatar"><img src="{{ dataService.loggedInUserData.img }}" /></div>
     </div>
   
     <!-- <app-conversation-between
