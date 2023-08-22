@@ -11,6 +11,8 @@ import { DataService } from 'src/app/services/data.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { VariablesService } from 'src/app/services/variables.service';
+import { ChannelTimeStamp } from './models/channel-timestamp.class';
+import { Messages } from 'src/app/models/messages.interface';
 
 @Component({
   selector: 'app-channel-selection',
@@ -96,6 +98,21 @@ export class ChannelSelectionComponent implements OnInit {
     this.hoveredIndex = null;
   }
 
+  getMessageDate(timestamp: Messages): string {
+    const currentTimestamp = new Date().getTime();
+    const messageTimestamp = new Date(timestamp.dateTimeNumber).getTime();
+  
+    if (currentTimestamp - messageTimestamp < 24 * 60 * 60 * 1000) {
+      // Zeige die Uhrzeit, wenn die Nachricht weniger als 24 Stunden alt ist
+      return 'Heute';
+    } else {
+      // Zeige das Datum, wenn die Nachricht älter als 24 Stunden ist
+      return timestamp.dateString;
+    }
+  }
+  
+
+  
 
   public addEmojiRight(event) {
     this.chatEmojiRight = true;

@@ -5,6 +5,9 @@ export class Messages {
     userImg: any; 
     userId: string; 
     content: string; 
+    dateTimeNumber: number;
+    dateString: string; 
+    clockString: string; 
        
    
     constructor(obj?: any) {
@@ -12,7 +15,10 @@ export class Messages {
         this.userName = obj? obj.userName : '';
         this.userId = obj ? obj.userId : '';
         this.userImg = obj? obj.userImg : '';
-        this.content = obj ? obj.content : '';     
+        this.content = obj ? obj.content : '';  
+        this.dateTimeNumber = obj ? obj.dateTimeNumber : 0;
+        this.dateString = obj ? obj.dateString : 'unset';
+        this.clockString = obj ? obj.clockString : 'unset';   
     }
 
     toJSON() {
@@ -21,7 +27,10 @@ export class Messages {
             userName: this.userName,
             userId: this.userId,
             userImg: this.userImg,
-            content: this.content,          
+            content: this.content,   
+            dateTimeNumber: this.dateTimeNumber,
+            dateString: this.dateString,
+            clockString: this.clockString,       
         }
     }
       

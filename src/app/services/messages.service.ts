@@ -51,6 +51,7 @@ export class MessageService {
     this.newMessage.userName = this.dataService.loggedInUserData.name;
     this.newMessage.userImg = this.dataService.loggedInUserData.img;
     this.newMessage.content = this.messageText; 
+    
 
     const coll = collection(this.firestore, 'messages'); // definiert die Collection, worauf man zugreifen möchte
     await addDoc(coll, this.newMessage.toJSON()); // fügt eine neue Nachricht aus dem Textfeld in die Firebase Collection hinzu bzw. returned die Message in docId
