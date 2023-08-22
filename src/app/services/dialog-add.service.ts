@@ -82,6 +82,10 @@ export class DialogAddService {
       const tagWithId = { ...this.newChannel, id: docRef.id };
       this.tags.push(tagWithId);
     }
+    else {
+      alert('Bitte einen korrekten Channel Namen eingeben!')
+      return;
+    }
   }
 
  

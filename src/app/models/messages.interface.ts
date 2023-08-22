@@ -5,15 +5,14 @@ export class Messages {
     userImg: any; 
     userId: string; 
     content: string; 
-    timestamp: any;  
+       
    
-    constructor(obj?:any) {
+    constructor(obj?: any) {
         this.channelId = obj ? obj.channelId : '';
-        this.userName = obj? obj.name : '';
+        this.userName = obj? obj.userName : '';
         this.userId = obj ? obj.userId : '';
         this.userImg = obj? obj.userImg : '';
-        this.content = obj ? obj.content : '';
-        this.timestamp = obj ? obj.timestamp : false;
+        this.content = obj ? obj.content : '';     
     }
 
     toJSON() {
@@ -22,8 +21,7 @@ export class Messages {
             userName: this.userName,
             userId: this.userId,
             userImg: this.userImg,
-            content: this.content,
-            timestamp: this.timestamp
+            content: this.content,          
         }
     }
       

@@ -66,6 +66,8 @@ export class ChannelSelectionComponent implements OnInit {
     this.emptyChat = this.messageData.length === 0;
   }
 
+
+
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
    *

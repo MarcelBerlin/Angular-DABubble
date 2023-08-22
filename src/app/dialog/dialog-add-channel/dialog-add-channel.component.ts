@@ -40,15 +40,19 @@ export class DialogAddChannelComponent {
     this.dialogRef.close();
   }
 
-  generateTag() {
-    this.getService.addTag(
-      '# ' + this.newTag,
-      this.description,
-      this.channelCreator
-    );
-    this.newTag = ''; // Zurücksetzen des Inputfelds nach dem Hinzufügen
-    setTimeout(() => {
-      this.closeDialog();
-    }, 1000);
+  generateTag() {  
+    if(this.newTag.length > 0) {
+      this.getService.addTag(
+        '# ' + this.newTag,
+        this.description,
+        this.channelCreator
+      );
+      this.newTag = ''; // Zurücksetzen des Inputfelds nach dem Hinzufügen
+      setTimeout(() => {
+        this.closeDialog();
+      }, 1000);
+    }  else {
+      alert('Bitte einen Channel Namen eingeben!');
+    }    
   }
 }

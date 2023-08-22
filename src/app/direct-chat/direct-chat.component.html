@@ -5,7 +5,7 @@
   
   
     <!-- Left Site chat partner -->
-    <div *ngIf="message.name[i] != this.dataService.loggedInUserData.name[i]"
+    <div *ngIf="message.name != this.dataService.loggedInUserData.name"
       class="messagesMainChatLeft"
       (mouseenter)="hoveredMessagesMainChat = true"
       (mouseleave)="hoveredMessagesMainChat = false"
@@ -19,7 +19,7 @@
       <div class="messageContent">
         <div class="nameTime">
           <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
-          <span class="time">{{message.date }} {{message.time}} Uhr</span>
+          <span class="time">{{ message.date }} {{ message.time }} Uhr</span>
         </div>
         <div
           class="messageBox"
@@ -35,9 +35,9 @@
   
   
     <!-- Right Site logged User -->
-    <div   *ngIf="message.name[i] == this.dataService.loggedInUserData.name[i]"
+    <div   *ngIf="message.name == this.dataService.loggedInUserData.name"
       class="messagesMainChatRight"
-      (mouseenter)="hoveredMessagesMainChat = true"
+      (mouseenter)="hoveredMessagesMainChat[i] = true"
       (mouseleave)="hoveredMessagesMainChat = false"
       [ngStyle]="{
         'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',

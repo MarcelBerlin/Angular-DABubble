@@ -20,14 +20,12 @@
   </div> -->
 
   <div *ngFor="let message of messageData, let i = index">
-    <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">      
+    <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">  
+      
+      {{ message.timestamp }}
 
       <div class="full-message-left">
-        <!-- Zeige Nachrichten des ausgewählten Kanals an -->
-
-        <div class="timeLine" *ngIf="timelinesService.timeline[i]">
-          <div class="timeLineHead">{{ timelinesService.timeline[i] }}</div>
-        </div>
+        <!-- Zeige Nachrichten auf der linken Seite des ausgewählten Kanals an -->
 
         <div class="single-message-left-container" *ngIf="message.userName != this.dataService.loggedInUserData.name"
           (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
@@ -77,6 +75,7 @@
 
       <div class="full-message-right">
 
+        <!-- Zeige Nachrichten auf der rechten Seite des ausgewählten Kanals an -->
         <div class="single-message-right-container" *ngIf="message.userName == this.dataService.loggedInUserData.name"
           (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
 

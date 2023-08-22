@@ -30,6 +30,7 @@ export class MessageService {
   messageId: string = 'unset';
   selectedChannel: string = '';
   emojis: any = [];
+  
 
   constructor(
     private firestore: Firestore,
@@ -37,7 +38,8 @@ export class MessageService {
     private dialogAddService: DialogAddService,
     private direktChatService: DirectChatService,
     public varService: VariablesService
-  ) {}
+  ) {    
+  }
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
   async addMessage() {
@@ -48,8 +50,7 @@ export class MessageService {
     this.newMessage.userId = this.dataService.loggedInUserData.userId;
     this.newMessage.userName = this.dataService.loggedInUserData.name;
     this.newMessage.userImg = this.dataService.loggedInUserData.img;
-    this.newMessage.content = this.messageText;
-    this.newMessage.timestamp = this.direktChatService.getActualTimeStamp();
+    this.newMessage.content = this.messageText; 
 
     const coll = collection(this.firestore, 'messages'); // definiert die Collection, worauf man zugreifen möchte
     await addDoc(coll, this.newMessage.toJSON()); // fügt eine neue Nachricht aus dem Textfeld in die Firebase Collection hinzu bzw. returned die Message in docId
@@ -67,6 +68,12 @@ export class MessageService {
     this.varService.selectedChannelId = channelId;
     await this.loadChannelMessages(channelId);
   }
+
+  privateAnswer(index: number) {
+    this.messageData = index;
+
+  }
+  
 
   // setSelectedChannel(channelId: string) {
   //   // Suche nach dem Index des Kanals basierend auf der übergebenen channelId

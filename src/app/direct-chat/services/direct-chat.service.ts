@@ -40,7 +40,7 @@ export class DirectChatService {
     return this.timeStamp.toJSON();
   }
 
-
+  
   /**
    * Creates a formatted date string in the format 'day.month.year'.
    * 

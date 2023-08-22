@@ -105,7 +105,7 @@ import { UploadComponent } from './file-upload/upload/upload.component';
     DirectChatComponent,
     EmojiPickerBossiComponent,
     ImprintDataProtectionComponent,
-    UploadComponent,
+    UploadComponent, 
 
   ],
   imports: [
