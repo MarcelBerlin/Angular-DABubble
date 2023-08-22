@@ -51,7 +51,7 @@
           </div>
 
           <div class="avatar-left">
-            <img src="assets/img/members/avatar1.png" />
+            <img src="{{ message.userImg }}">
           </div>
 
           <div class="message-details-left">
@@ -81,7 +81,7 @@
           (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
 
           <div class="avatar-right">
-            <img src="./../../../../assets/img/members/avatar3.png">
+            <img src="{{ dataService.loggedInUserData.img }}">
           </div>
 
           <div class="message-details-right">
