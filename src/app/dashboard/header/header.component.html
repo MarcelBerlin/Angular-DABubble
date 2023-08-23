@@ -3,23 +3,32 @@
     <img src="assets/img/Login/Logo.png" />
   </div>
 
-  <div class="header-searchbar">
-    <input (click)="filter()"
+  <form class="header-searchbar">
+    <input
+      type="text"
+      placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
+      [formControl]="control"
+      [matAutocomplete]="auto"
       class="input-searchbar"
-      mat-icon="search"
-      placeholder="Code learning durchsuchen"
     />
-    <img src="assets/img/search-icon.png" />
-  </div>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+      <mat-option
+        *ngFor="let element of filteredArrays | async"
+        [value]="element[property]"
+      >
+        {{ element[property] }}
+      </mat-option>
+    </mat-autocomplete>
+  </form>
 
-  <div class="header-profile" *ngIf="getUserData.loggedInUserData">
-    <span> {{ getUserData.loggedInUserData.name }} </span>
+  <div class="header-profile" *ngIf="dataService.loggedInUserData">
+    <span> {{ dataService.loggedInUserData.name }} </span>
     <div class="img-container">
-      <img src="{{ getUserData.loggedInUserData.img }}" />
+      <img src="{{ dataService.loggedInUserData.img }}" />
       <div
         class="activeDot"
         [style.background-color]="
-          getUserData.loggedInUserData.online ? '#92C83E' : '#686868'
+          dataService.loggedInUserData.online ? '#92C83E' : '#686868'
         "
       ></div>
     </div>

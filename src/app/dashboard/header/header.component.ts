@@ -5,8 +5,10 @@ import { MatMenuTrigger, MatMenuModule } from '@angular/material/menu';
 import { HeaderDialogComponent } from 'src/app/dialog/header-dialog/header-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
-import { Observable } from 'rxjs';
-import { collection, collectionData } from '@angular/fire/firestore';
+import { Observable, map } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { DialogAddService } from 'src/app/services/dialog-add.service';
+import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
   selector: 'app-header',
@@ -22,11 +24,62 @@ export class HeaderComponent {
   constructor(
     public dialog: MatDialog,
     private auth: AuthService,
-    public getUserData: DataService) {
+    public dataService: DataService,
+    private dialogAddService: DialogAddService,
+    private varService: VariablesService) {
   }
 
-  filter() {
+  control = new FormControl('');
+  filteredArrays: Observable<string[]>;
+  selectedArray: any = [];
+  property: string = '';
 
+  ngOnInit() {
+    this.filteredArrays = this.control.valueChanges.pipe(
+      map((value) => this._filter(value || ''))
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = this._normalizeValue(value);
+    if (filterValue.startsWith('#')) {
+      this.property = 'name';
+      this.selectedArray = this.dialogAddService.tagsData;
+      return this.dialogAddService.tagsData.filter((element) =>
+        this._normalizeValue(element.name).includes(filterValue)
+      );
+    } else if (filterValue.startsWith('@')) {
+      this.property = 'email';
+      this.selectedArray = this.dataService.userData;
+      return this.dataService.userData.filter((element) =>
+        this._normalizeValue(element.email).includes(filterValue)
+      );
+    } else if (filterValue.startsWith('')) {
+      this.property = 'name';
+      this.selectedArray = this.dataService.userData;
+      return this.dataService.userData.filter((element) =>
+        this._normalizeValue(element.name).includes(filterValue)
+      );
+    }
+    return [];
+  }
+
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
+  }
+
+  onOptionSelected(event: any) {
+    const selectedOption = event.option.value;
+    this.selectedArray.forEach((element, index) => {
+      if (element.name === selectedOption) {
+        this.varService.setVar('indexOfSearch', index);
+        this.varService.setVar('selectedArrayofSearch', this.selectedArray);
+      } else if (element.email === selectedOption) {
+        this.varService.setVar('indexOfSearch', index);
+        this.varService.setVar('selectedArrayofSearch', this.selectedArray);
+      }
+      this.varService.setVar('propertyOfSearch', 'name');
+    });
   }
 
 
