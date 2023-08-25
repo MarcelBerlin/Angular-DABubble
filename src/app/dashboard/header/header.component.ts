@@ -83,12 +83,12 @@ export class HeaderComponent {
       } else if (element.email === selectedOption) {
         this.varService.setVar('indexOfSearch', index);
         this.varService.setVar('selectedArrayofSearch', this.selectedArray);
-      }
+      } 
+      // else if(element.hashtag) {
+      //   this.messageService.openChannel(this.varService.indexOfSearch); // ADDED BY FELIX
+      // }
       this.varService.setVar('propertyOfSearch', 'name');
-      this.messageService.openChannel(this.varService.indexOfSearch); // ADDED BY FELIX
-
-
-      
+      // this.messageService.openChannel(this.varService.indexOfSearch); // ADDED BY FELIX
     });
   }
 

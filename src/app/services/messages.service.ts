@@ -18,6 +18,7 @@ import { DialogAddService } from './dialog-add.service';
 import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 import { VariablesService } from './variables.service';
 import { DashboardComponentsShowHideService } from '../dashboard/dashboard-components-show-hide.service';
+import { ChannelTimeStamp } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
 
 @Injectable({
   providedIn: 'root',
@@ -174,9 +175,9 @@ export class MessageService {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
     this.dialogAddService.channelIndex = arrayId;
-    this.dcshService.chatSlideIn();    
+    this.dcshService.chatSlideIn();
 
     const selectedChannel = this.tags[arrayId];
     await this.onChannelClick(selectedChannel.id);
   } 
-}
+} 
