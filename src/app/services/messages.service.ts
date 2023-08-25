@@ -17,8 +17,7 @@ import { DataService } from './data.service';
 import { DialogAddService } from './dialog-add.service';
 import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 import { VariablesService } from './variables.service';
-import { ChannelSelectionComponent } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
-import { ChannelTimeStamp } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
+import { DashboardComponentsShowHideService } from '../dashboard/dashboard-components-show-hide.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +31,7 @@ export class MessageService {
   messageId: string = 'unset';
   selectedChannel: string = '';
   emojis: any = [];
+  tags: any; // ADDED BY FELIX
   
 
   constructor(
@@ -39,10 +39,9 @@ export class MessageService {
     private dataService: DataService,
     private dialogAddService: DialogAddService,
     private directChatService: DirectChatService,
-    public varService: VariablesService,    
-  ) {    
-   
-  }
+    public varService: VariablesService,
+    private dcshService: DashboardComponentsShowHideService
+  ) {   }
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
   async addMessage() {
@@ -122,4 +121,62 @@ export class MessageService {
   //   // Suche nach dem Index des Kanals basierend auf der übergebenen channelId
   //   this.dialogAddService.channelIndex = this.dialogAddService.tags.findIndex(tag => tag.id === channelId);
   // }
+
+
+
+
+
+  // ######### AB HIER ############
+  // ###### FELIX TESTZWECKE ###### 
+  //   KOPIERT AUS MENU-SIDENAV.TS 
+  // ###### DIRECT MESSAGES #######
+
+  messageToUser(arrayId: number) {
+    this.currentUser()
+      ? this.sendMessageToLoggedUser(arrayId)
+      : this.sendMessageToSpecificUser(arrayId);
+    this.varService.previousScrollTop = 0; // important for the autoscroll functionality
+    this.getDirectChatData(arrayId);
+  }
+
+  currentUser() {
+    return (
+      this.dataService.loggedInUserData.email ===
+      this.dataService.userData[this.varService.selectedUserToMessage].email
+    );
+  }
+
+  sendMessageToLoggedUser(arrayId: number) {
+    this.varService.setVar('mainChatHead', 1);
+    this.varService.setVar('selectedUserToMessage', arrayId);
+    this.dcshService.chatSlideOut();
+  }
+
+  sendMessageToSpecificUser(arrayId: number) {
+    this.varService.setVar('mainChatHead', 1);
+    this.varService.setVar('selectedUserToMessage', arrayId);
+    this.dcshService.chatSlideOut();
+  }
+
+  getDirectChatData(arrayId: number): void {
+    if (this.directChatService.directChatActive) {
+      let clickedUserId: string = this.dataService.userData[arrayId].id;
+      this.directChatService.getChatId(clickedUserId);
+    }
+  }
+
+  // ######### AB HIER ############
+  // ###### FELIX TESTZWECKE ###### 
+  //   KOPIERT AUS MENU-SIDENAV.TS 
+  // ######### CHANNELS  ##########
+
+  async openChannel(arrayId: number) {
+    this.varService.setVar('mainChatHead', 0);
+    this.varService.setVar('selectedChannel', arrayId);
+    this.dialogAddService.channelIndex = arrayId;
+    this.dcshService.chatSlideIn();    
+
+    const selectedChannel = this.tags[arrayId];
+    await this.onChannelClick(selectedChannel.id);
+  } 
 }

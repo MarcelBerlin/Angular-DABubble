@@ -9,6 +9,8 @@ import { Observable, map } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { VariablesService } from 'src/app/services/variables.service';
+import { MenuSidenavComponent } from '../menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
+import { MessageService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +28,8 @@ export class HeaderComponent {
     private auth: AuthService,
     public dataService: DataService,
     private dialogAddService: DialogAddService,
-    private varService: VariablesService) {
+    private varService: VariablesService,
+    public messageService: MessageService) {
   }
 
   control = new FormControl('');
@@ -45,6 +48,7 @@ export class HeaderComponent {
     if (filterValue.startsWith('#')) {
       this.property = 'name';
       this.selectedArray = this.dialogAddService.tagsData;
+      console.log(this.dialogAddService.tagsData); // ADDED BY FELIX
       return this.dialogAddService.tagsData.filter((element) =>
         this._normalizeValue(element.name).includes(filterValue)
       );
@@ -61,6 +65,7 @@ export class HeaderComponent {
         this._normalizeValue(element.name).includes(filterValue)
       );
     }
+
     return [];
   }
 
@@ -74,11 +79,16 @@ export class HeaderComponent {
       if (element.name === selectedOption) {
         this.varService.setVar('indexOfSearch', index);
         this.varService.setVar('selectedArrayofSearch', this.selectedArray);
+        this.messageService.messageToUser(this.varService.indexOfSearch); // ADDED BY FELIX
       } else if (element.email === selectedOption) {
         this.varService.setVar('indexOfSearch', index);
         this.varService.setVar('selectedArrayofSearch', this.selectedArray);
       }
       this.varService.setVar('propertyOfSearch', 'name');
+      this.messageService.openChannel(this.varService.indexOfSearch); // ADDED BY FELIX
+
+
+      
     });
   }
 

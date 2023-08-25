@@ -4,18 +4,10 @@
   </div>
 
   <form class="header-searchbar">
-    <input
-      type="text"
-      placeholder="An: #channel, oder @jemand oder E-Mail Adresse"
-      [formControl]="control"
-      [matAutocomplete]="auto"
-      class="input-searchbar"
-    />
+    <input type="text" placeholder="An: #channel, @user oder E-Mail Adresse" [formControl]="control"
+      [matAutocomplete]="auto" class="input-searchbar" />
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
-      <mat-option
-        *ngFor="let element of filteredArrays | async"
-        [value]="element[property]"
-      >
+      <mat-option *ngFor="let element of filteredArrays | async" [value]="element[property]">
         {{ element[property] }}
       </mat-option>
     </mat-autocomplete>
@@ -25,14 +17,11 @@
     <span> {{ dataService.loggedInUserData.name }} </span>
     <div class="img-container">
       <img src="{{ dataService.loggedInUserData.img }}" />
-      <div
-        class="activeDot"
-        [style.background-color]="
+      <div class="activeDot" [style.background-color]="
           dataService.loggedInUserData.online ? '#92C83E' : '#686868'
-        "
-      ></div>
+        "></div>
     </div>
-    
+
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
