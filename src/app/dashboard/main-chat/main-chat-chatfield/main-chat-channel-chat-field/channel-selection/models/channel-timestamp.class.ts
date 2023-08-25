@@ -10,7 +10,6 @@ export class ChannelTimeStamp{
         this.clockString = obj ? obj.clockString : 'unset';
     }
 
-
     toJSON() {
         return {
             dateTimeNumber: this.dateTimeNumber,

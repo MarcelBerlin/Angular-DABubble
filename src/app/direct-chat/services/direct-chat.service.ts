@@ -6,6 +6,8 @@ import { DataService } from '../../services/data.service';
 import { ActualChat } from '../models/actual-chat.class';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { TimelinesService } from './timelines.service';
+import { ChannelTimeStamp } from 'src/app/dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +40,23 @@ export class DirectChatService {
     this.timeStamp.dateString = this.createDateString(today);
     this.timeStamp.clockString = this.createClockString(today);
     return this.timeStamp.toJSON();
+  }
+
+  /**
+   * Returns the current timestamp, date string, and clock string FOR THE CHANNELS !!!!.
+   * 
+   * @returns {Object} An object containing the current timestamp, date string, and clock string.
+   */
+  getActualTimeStampForChannels(): ChannelTimeStamp {
+    let today: Date = new Date();
+    this.timeStamp.dateTimeNumber = today.getTime();
+    this.timeStamp.dateString = this.createDateString(today);
+    this.timeStamp.clockString = this.createClockString(today);
+    return new ChannelTimeStamp({
+      dateTimeNumber: today.getTime(),
+      dateString: this.createDateString(today),
+      clockString: this.createClockString(today)
+    });
   }
 
   

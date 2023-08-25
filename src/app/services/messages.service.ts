@@ -17,6 +17,8 @@ import { DataService } from './data.service';
 import { DialogAddService } from './dialog-add.service';
 import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 import { VariablesService } from './variables.service';
+import { ChannelSelectionComponent } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
+import { ChannelTimeStamp } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
 
 @Injectable({
   providedIn: 'root',
@@ -36,9 +38,10 @@ export class MessageService {
     private firestore: Firestore,
     private dataService: DataService,
     private dialogAddService: DialogAddService,
-    private direktChatService: DirectChatService,
-    public varService: VariablesService
+    private directChatService: DirectChatService,
+    public varService: VariablesService,    
   ) {    
+   
   }
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
@@ -51,12 +54,52 @@ export class MessageService {
     this.newMessage.userName = this.dataService.loggedInUserData.name;
     this.newMessage.userImg = this.dataService.loggedInUserData.img;
     this.newMessage.content = this.messageText; 
-    
 
-    const coll = collection(this.firestore, 'messages'); // definiert die Collection, worauf man zugreifen möchte
+    const timeStampData: ChannelTimeStamp = this.directChatService.getActualTimeStampForChannels(); 
+    this.newMessage.dateTimeNumber = timeStampData.dateTimeNumber;
+    this.newMessage.dateString = timeStampData.dateString;
+    this.newMessage.clockString = timeStampData.clockString;
+    console.log(this.newMessage.dateTimeNumber);
+    console.log(this.newMessage.dateString);
+    console.log(this.newMessage.clockString);  
+
+    const coll = collection(this.firestore, 'newMessages'); // definiert die Collection, worauf man zugreifen möchte
     await addDoc(coll, this.newMessage.toJSON()); // fügt eine neue Nachricht aus dem Textfeld in die Firebase Collection hinzu bzw. returned die Message in docId
     this.messageData.push(this.newMessage);
   }
+
+  /**
+   * 
+   * @param channelId versuch für ein separates Array bezogen auf die jeweiligen ChannelMessages 
+   * 
+   */
+
+  // async addMessage() {
+  //   // Vorhandener Code zur Erstellung der Nachricht
+  //   this.newMessage.userId = this.dataService.loggedInUserData.userId;
+  //   this.newMessage.userName = this.dataService.loggedInUserData.name;
+  //   this.newMessage.userImg = this.dataService.loggedInUserData.img;
+  //   this.newMessage.content = this.messageText;
+  
+  //   const timeStampData: ChannelTimeStamp = this.directChatService.getActualTimeStampForChannels(); 
+  //   this.newMessage.dateTimeNumber = timeStampData.dateTimeNumber;
+  //   this.newMessage.dateString = timeStampData.dateString;
+  //   this.newMessage.clockString = timeStampData.clockString;
+  
+  //   // Channel-spezifische Daten
+  //   const selectedChannelIndex = this.dialogAddService.channelIndex;
+  //   const selectedChannel = this.dialogAddService.tagsData[selectedChannelIndex];
+  //   const channelId = selectedChannel.id;
+  
+  //   // Nachricht der Channel-Subkollektion hinzufügen
+  //   const channelMessagesColl = collection(this.firestore, 'channelMessages', channelId);
+  //   await addDoc(channelMessagesColl, this.newMessage.toJSON());
+  
+  //   // Aktualisierte Nachrichtenliste
+  //   this.messageData.push(this.newMessage);
+  // }
+  
+
 
   async loadChannelMessages(channelId: string) {
     const coll = collection(this.firestore, 'messages');
@@ -72,7 +115,6 @@ export class MessageService {
 
   privateAnswer(index: number) {
     this.messageData = index;
-
   }
   
 

@@ -185,7 +185,9 @@ export class MenuSidenavComponent implements OnInit {
     this.dcshService.chatSlideIn();    
 
     const selectedChannel = this.tags[arrayId];
-    await this.messageService.onChannelClick(selectedChannel.id);
+    const channelId = selectedChannel.id;
+
+    await this.messageService.onChannelClick(channelId);
   } 
   
 

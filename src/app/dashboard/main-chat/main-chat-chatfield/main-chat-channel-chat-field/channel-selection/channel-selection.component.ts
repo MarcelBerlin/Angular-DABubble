@@ -35,7 +35,7 @@ export class ChannelSelectionComponent implements OnInit {
   reactionArrRight: any = [];
   reactionArrLeft: any = [];
 
-  constructor (
+  constructor(
     private firestore: Firestore,
     private dcshService: DashboardComponentsShowHideService,
     private dialog: Dialog,
@@ -47,28 +47,53 @@ export class ChannelSelectionComponent implements OnInit {
     public chatService: ChatService,
     public app: AppComponent,
     public timelinesService: TimelinesService
-    ) {
+  ) {
     this.allMessages();
   }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {}
+
+  async allMessages() {
+    const coll = collection(this.firestore, 'newMessages');
+    this.messages$ = collectionData(coll, { idField: 'id' });
+    await this.messages$.subscribe((message: any) => {
+      this.messageData = message.sort(
+        (a, b) => a.dateTimeNumber - b.dateTimeNumber
+      );
+      console.log(this.messageData);
+    });
   }
 
-  allMessages() {
-    const coll = collection(this.firestore, 'messages');
-    this.messages$ = collectionData(coll, { idField: 'id' });
-    this.messages$.subscribe((message: any) => {
-      this.messageData = message.sort((a, b) => a.timestamp.dateTimeNumber - b.timestamp.dateTimeNumber);
-      console.log(this.messageService.channelMessages);
-    });   
-  }
+/**
+ * versuch für eigene channelMessages - bisher ohne erfolg
+ * 
+ */
+
+  // async allMessages() {
+  //   const selectedChannelIndex = this.dialogAdd.channelIndex;
+  //   const selectedChannel = this.dialogAdd.tagsData[selectedChannelIndex];
+  //   const channelId = selectedChannel.id;
+  
+  //   const channelMessagesColl = collection(this.firestore, 'channelMessages', channelId);
+  //   this.messages$ = collectionData(channelMessagesColl, { idField: 'id' });
+  
+  //   await this.messages$.subscribe((message: any) => {
+  //     this.messageData = message.sort(
+  //       (a, b) => a.dateTimeNumber - b.dateTimeNumber
+  //     );
+  //     console.log(this.messageData);
+  //   });
+  // }
+  
+
+/**
+ * #########################################################
+ */
+
 
   checkIfChannelIsEmpty() {
-    this.emptyChat = this.messageData.length === 0;
+    this.emptyChat = this.messageData.channelId.content.length === 0;
   }
-
-
 
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
@@ -89,7 +114,6 @@ export class ChannelSelectionComponent implements OnInit {
     this.dialog.open(DialogProfileViewUsersComponent);
   }
 
-  
   onHover(index: number) {
     this.hoveredIndex = index;
   }
@@ -98,68 +122,64 @@ export class ChannelSelectionComponent implements OnInit {
     this.hoveredIndex = null;
   }
 
-  getMessageDate(timestamp: Messages): string {
-    const currentTimestamp = new Date().getTime();
-    const messageTimestamp = new Date(timestamp.dateTimeNumber).getTime();
-  
-    if (currentTimestamp - messageTimestamp < 24 * 60 * 60 * 1000) {
-      // Zeige die Uhrzeit, wenn die Nachricht weniger als 24 Stunden alt ist
-      return 'Heute';
-    } else {
-      // Zeige das Datum, wenn die Nachricht älter als 24 Stunden ist
-      return timestamp.dateString;
-    }
-  }
-  
-
-  
-
   public addEmojiRight(event) {
     this.chatEmojiRight = true;
     this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
     this.reactionArrRight.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
     this.emojiPickerRight = false;
-    if(this.reactionArrRight.length > 1) {this.emojiFilterRight(this.reactionArrRight); }
+    if (this.reactionArrRight.length > 1) {
+      this.emojiFilterRight(this.reactionArrRight);
+    }
   }
 
-  emojiFilterRight(reactionArr) { // tooltip funktioniert nicht mehr!
+  emojiFilterRight(reactionArr) {
+    // tooltip funktioniert nicht mehr!
     const emojiCountMapRight: any = new Map();
-    let reactionBarRight = document.getElementById("reactionBarRight"); // ABOUT TO CHANGE
-    reactionArr.forEach(emoji => {
-      if (emojiCountMapRight.has(emoji)) {emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);} 
-      else {emojiCountMapRight.set(emoji, 1);}
-    }); 
+    let reactionBarRight = document.getElementById('reactionBarRight'); // ABOUT TO CHANGE
+    reactionArr.forEach((emoji) => {
+      if (emojiCountMapRight.has(emoji)) {
+        emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
+      } else {
+        emojiCountMapRight.set(emoji, 1);
+      }
+    });
     reactionBarRight.innerHTML = '';
     emojiCountMapRight.forEach((count, emoji) => {
-      reactionBarRight.innerHTML +=
-        `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`
+      reactionBarRight.innerHTML += `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
     });
-    if(reactionArr.length >= 7) { reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊'}
+    if (reactionArr.length >= 7) {
+      reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊';
+    }
   }
-
 
   public addEmojiLeft(event) {
     this.chatEmojiLeft = true;
     this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
     this.reactionArrLeft.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
     this.emojiPickerLeft = false;
-    if (this.reactionArrLeft.length > 1) { this.emojiFilterLeft(this.reactionArrLeft); }
+    if (this.reactionArrLeft.length > 1) {
+      this.emojiFilterLeft(this.reactionArrLeft);
+    }
   }
 
-
-  emojiFilterLeft(reactionArr) {  // tooltip funktioniert nicht mehr!
+  emojiFilterLeft(reactionArr) {
+    // tooltip funktioniert nicht mehr!
     const emojiCountMapLeft: any = new Map();
-    let reactionBarLeft = document.getElementById("reactionBarLeft");
-    reactionArr.forEach(emoji => {
-      if (emojiCountMapLeft.has(emoji)) {emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
-      } else {emojiCountMapLeft.set(emoji, 1);}
+    let reactionBarLeft = document.getElementById('reactionBarLeft');
+    reactionArr.forEach((emoji) => {
+      if (emojiCountMapLeft.has(emoji)) {
+        emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
+      } else {
+        emojiCountMapLeft.set(emoji, 1);
+      }
     });
     reactionBarLeft.innerHTML = '';
     emojiCountMapLeft.forEach((count, emoji) => {
-      reactionBarLeft.innerHTML +=
-        `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"><span> ${emoji} ${count} </span></div>`
+      reactionBarLeft.innerHTML += `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"><span> ${emoji} ${count} </span></div>`;
     });
-    if(reactionArr.length >= 7) { reactionBarLeft.innerHTML = 'zu viele reaktionen. Wir arbeiten gerade daran 🙁'}
+    if (reactionArr.length >= 7) {
+      reactionBarLeft.innerHTML =
+        'zu viele reaktionen. Wir arbeiten gerade daran 🙁';
+    }
   }
-  
 }
