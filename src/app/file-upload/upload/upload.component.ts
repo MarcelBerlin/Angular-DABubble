@@ -3,7 +3,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FileUpload } from '../models/file-upload.model';
 import { FileUploadService } from '../services/file-upload.service';
 
-
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
