@@ -5,6 +5,8 @@ import { HeaderEditDialogComponent } from '../header-edit-dialog/header-edit-dia
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
 import { UploadService } from 'src/app/file-upload/services/upload.service';
+import { FileUploadService } from 'src/app/file-upload/services/file-upload.service';
+
 
 @Component({
   selector: 'app-header-dialog',
@@ -20,6 +22,7 @@ export class HeaderDialogComponent {
     public dialog: MatDialog,
     private auth: AuthService,
     public getUserData: DataService,
+    public fileUploadService: FileUploadService,
     public uploadService: UploadService,
     ) {
 
@@ -42,6 +45,7 @@ export class HeaderDialogComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   openFileExplorer() {
+    this.fileUploadService.basePath ='/uploads/' + this.getUserData.loggedInUserData.userId + '/profile/';
     this.fileInput.nativeElement.click();
   }
 }

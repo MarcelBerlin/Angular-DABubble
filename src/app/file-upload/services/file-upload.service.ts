@@ -39,7 +39,12 @@ export class FileUploadService {
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
           console.log('upload finished: ', downloadURL);
+
+          this.deleteFile(this.dataService.loggedInUserData.img);
+          
           this.dataService.loggedInUserData.img = this.lastUpload;
+          // this.dataService.loggedInUserData.img = fileUpload;
+          
           this.dataService.updateUser();
         });
       })
@@ -55,12 +60,25 @@ export class FileUploadService {
     this.db.list(this.basePath).push(fileUpload);
   }
 
+  deleteFile(fileURL: string): Promise<void> {
+    const fileRef = this.storage.refFromURL(fileURL);
+
+    // Delete the file
+    return fileRef.delete().toPromise();
+  }
+
+
+
+
+
+
+
   getFiles(numberItems: number): AngularFireList<FileUpload> {
     return this.db.list(this.basePath, ref =>
       ref.limitToLast(numberItems));
   }
 
-  deleteFile(fileUpload: FileUpload): void {
+  deleteFile2(fileUpload: FileUpload): void {
     this.deleteFileDatabase(fileUpload.key)
       .then(() => {
         this.deleteFileStorage(fileUpload.name);
@@ -76,6 +94,8 @@ export class FileUploadService {
     const storageRef = this.storage.ref(this.basePath);
     storageRef.child(name).delete();
   }
+
+  
 
   
 }
