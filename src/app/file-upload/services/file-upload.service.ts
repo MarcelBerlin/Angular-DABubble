@@ -16,6 +16,7 @@ export class FileUploadService {
   filePath: string = '';
   filename: string = '';
   lastUpload: string = '';
+  profileImgUpload: boolean = false;
 
 
   constructor(
@@ -29,7 +30,6 @@ export class FileUploadService {
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
-    console.log('filename', this.basePath +'/'+ fileUpload.file.name);
     this.filePath = this.basePath +'/'+ fileUpload.file.name;
     uploadTask.snapshotChanges().pipe(
       finalize(() => {
@@ -38,12 +38,14 @@ export class FileUploadService {
           this.lastUpload = downloadURL;
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
-          console.log('upload finished: ', downloadURL);
 
-          this.deleteFile(this.dataService.loggedInUserData.img);
+          if (this.profileImgUpload){
+            this.deleteFile(this.dataService.loggedInUserData.img);
+            this.profileImgUpload = false;
+          }
+          
           
           this.dataService.loggedInUserData.img = this.lastUpload;
-          // this.dataService.loggedInUserData.img = fileUpload;
           
           this.dataService.updateUser();
         });
