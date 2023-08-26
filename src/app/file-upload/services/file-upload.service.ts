@@ -17,6 +17,7 @@ export class FileUploadService {
   filename: string = '';
   lastUpload: string = '';
   profileImgUpload: boolean = false;
+  uploadPercentage: number = 0;
 
 
   constructor(
@@ -27,6 +28,7 @@ export class FileUploadService {
 
 
   pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
+    this.profileImgUpload = true;
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
@@ -39,15 +41,21 @@ export class FileUploadService {
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
 
-          if (this.profileImgUpload){
+          if (this.profileImgUpload && this.dataService.loggedInUserData.img != '/assets/img/members/avatar2.png'){
             this.deleteFile(this.dataService.loggedInUserData.img);
+            this.profileImgUpload = false;
+            this.dataService.loggedInUserData.img = this.lastUpload;
+            this.dataService.updateUser();
+          } else if (this.profileImgUpload){
+            this.dataService.loggedInUserData.img = this.lastUpload;
+            this.dataService.updateUser();
+            this.profileImgUpload = false;
+          } else{
             this.profileImgUpload = false;
           }
           
           
-          this.dataService.loggedInUserData.img = this.lastUpload;
           
-          this.dataService.updateUser();
         });
       })
     ).subscribe();

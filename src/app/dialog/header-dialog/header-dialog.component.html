@@ -5,8 +5,14 @@
             <img class="close-icon" mat-button mat-dialog-close src="assets/img/close.png">
         </div>
         <!-- edit uploadImg by Bossi for upload img -->
-        <input type="file" style="display: none;" #fileInput (change)="uploadService.selectFile($event)" accept=".png, .jpg, .bmp, .JPEG, .JPG, .svg, .tiff, .gif">
-        <img  class="user-img" src="{{ getUserData.loggedInUserData.img }}" (click)="openFileExplorer()">
+        <div class="user-img" style="position: relative;">
+            <input type="file" style="display: none;" #fileInput (change)="uploadService.selectFile($event)" accept=".png, .jpg, .bmp, .JPEG, .JPG, .svg, .tiff, .gif">
+            <img  class="user-img" src="{{ getUserData.loggedInUserData.img }}" (click)="openFileExplorer()">
+            <div class="user-img" style="display: flex; justify-content: center; align-items: center; position: absolute; top: 0px;" *ngIf="this.fileUploadService.profileImgUpload">
+                <span style="background-color: black; color: white; width: 50px; text-align: center;">{{uploadService.percentage}}%</span>
+            </div>
+        </div>
+       
         
         <div class="edit-div">
             <span class="head-span"> {{ getUserData.loggedInUserData.name }} </span> 

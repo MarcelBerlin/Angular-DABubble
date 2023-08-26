@@ -45,7 +45,6 @@ export class HeaderDialogComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
   openFileExplorer() {
-    this.fileUploadService.profileImgUpload = true;
     this.fileUploadService.basePath ='/uploads/' + this.getUserData.loggedInUserData.userId + '/profile/';
     this.fileInput.nativeElement.click();
   }

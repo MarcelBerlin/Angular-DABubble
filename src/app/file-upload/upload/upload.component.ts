@@ -35,6 +35,7 @@ export class UploadComponent {
           percentage => {
             this.percentage = Math.round(percentage ? percentage : 0);
             console.log(this.percentage);
+            this.uploadService.uploadPercentage = this.percentage;
             if(this.percentage == 100) this.showUrl();
           },
           error => {

@@ -16,9 +16,16 @@ export class UploadService {
   constructor(private uploadService: FileUploadService) { }
 
   selectFile(event: any): void {
+    this.selectedFiles = undefined;
     this.selectedFiles = event.target.files;
-    console.log('Selected File: ', this.selectedFiles);
-    this.upload();
+    if (this.selectedFiles.length > 0){
+      console.log('Selected File: ', this.selectedFiles);
+      this.upload();
+    } else {
+      console.log('No Selected File: ', this.selectedFiles);
+      this.uploadService.profileImgUpload = false;
+    }
+   
   }
 
 
