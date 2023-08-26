@@ -1,37 +1,36 @@
 <!-- <div class="container"> -->
-  <!-- <div class="box"> -->
-    <div class="inputDiv" #editableDiv contenteditable="true">
-      <p *ngFor="let _ of memberCache; let i = index" [attr.id]="'p' + i">
-        <!-- Info Box -->
-        <span class="infoBox" *ngIf="showInfoBox == i">
-          <span>Name:</span><span>Email:</span>
-        </span>
+<div class="box">
+  <div class="inputDiv" contenteditable="true">
+    <p *ngFor="let _ of memberCache; let i = index" [attr.id]="'p' + i">
+      <!-- Info Box -->
+      <span class="infoBox" *ngIf="showInfoBox == i">
+        <span>Name: {{ dataService.userData[selectedUserIndex].name }}</span
+        ><span>Email: {{ dataService.userData[selectedUserIndex].email }}</span>
+      </span>
 
-        <!-- Ausgewählte User -->
-        <span
-          class="member"
-          *ngIf="i > 0"
-          (mouseenter)="showInfo(i)"
-          (mouseleave)="hideInfo()"
-          [attr.id]="'span' + i"
-          >@ {{ memberCache[i].member }} </span
-        >{{ invisibleSign }}
-      </p>
+      <!-- Ausgewählte User -->
+      <span
+        class="member"
+        *ngIf="i > 0"
+        (mouseenter)="showInfo(i)"
+        (mouseleave)="hideInfo()"
+        [attr.id]="'span' + i"
+        >@ {{ memberCache[i].member }} </span
+      >{{ invisibleSign }}
+    </p>
+  </div>
+
+  <!-- User Box -->
+  <div class="userBox" *ngIf="varService.sign">
+    <div *ngFor="let name of dataService.userData; let i = index">
+      <span class="user" (click)="selectedUser(i)">{{ name.name }}</span>
     </div>
+  </div>
+  <!-- <button class="buttonSign" (click)="addSign()">@</button> -->
+  <!-- <button class="buttonSend" (click)="send()">Send</button> -->
 
-    <!-- User Box -->
-    <div class="userList" *ngIf="varService.sign">
-      <div *ngFor="let name of dataService.userData; let i = index">
-        <span class="searchContent" (click)="selectUser(i)">{{
-          name.name
-        }}</span>
-      </div>
-    </div>
-    <!-- <button class="buttonSign" (click)="addSign()">@</button> -->
-    <!-- <button class="buttonSend" (click)="send()">Send</button> -->
-
-    <!-- Ausgabe -->
-    <!-- <div class="outputBox">
+  <!-- Ausgabe -->
+  <!-- <div class="outputBox">
       <div *ngFor="let entry of saveArray; let i = index" class="output">
         <span
           *ngIf="i > 0 && entry?.span?.length > 0"
@@ -43,5 +42,5 @@
         <p>{{ entry.p }}</p>
       </div>
     </div> -->
-  <!-- </div> -->
+</div>
 <!-- </div> -->

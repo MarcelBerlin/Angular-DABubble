@@ -71,7 +71,8 @@ export class MainChatMessagefieldComponent {
 
   addSign() {
     // this.addUserToMessageService.addToMessage();
-    this.varService.setVar('sign', true);
+    this.varService.sign = !this.varService.sign;
+    console.log(this.varService.sign);
   }
 }
 
