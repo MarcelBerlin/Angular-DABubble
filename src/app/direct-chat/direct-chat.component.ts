@@ -60,4 +60,21 @@ export class DirectChatComponent {
       this.directChatService.checkForNewMessages();
     })
   }
+
+
+  loadChatPartnerProfilImg():string {
+    this.dataService.userData[0].img;
+    const firstMemberId: string = this.directChatService.directChat.firstMember;
+    const secondMemberId: string = this.directChatService.directChat.secondMember;
+    let searchUserId: string = '';
+    let profileImgUrl: string = '';
+    if(firstMemberId == this.dataService.loggedInUserData.userId) searchUserId = secondMemberId;
+    else searchUserId = firstMemberId;
+    for (let i = 0; i < this.dataService.userData.length; i++) {
+      if (this.dataService.userData[i].userId == searchUserId){
+        profileImgUrl = this.dataService.userData[i];
+      }
+    }
+    return profileImgUrl;
+  }
 }

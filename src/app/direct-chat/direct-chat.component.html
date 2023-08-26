@@ -15,7 +15,8 @@
       }" 
     > 
     <!-- direct chat save data extend with user img, will be done by Bossi -->
-      <div class="avatar"><img src="../../assets/img/members/avatar1.png" /></div>
+      <!-- <div class="avatar"><img src="../../assets/img/members/avatar1.png" /></div> -->
+      <div class="avatar"><img src={{loadChatPartnerProfilImg()}} /></div>
       <div class="messageContent">
         <div class="nameTime">
           <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
@@ -37,7 +38,7 @@
     <!-- Right Site logged User -->
     <div   *ngIf="message.name == this.dataService.loggedInUserData.name"
       class="messagesMainChatRight"
-      (mouseenter)="hoveredMessagesMainChat[i] = true"
+      (mouseenter)="hoveredMessagesMainChat = true"
       (mouseleave)="hoveredMessagesMainChat = false"
       [ngStyle]="{
         'background-color': hoveredMessagesMainChat ? '#eceefe' : 'white',

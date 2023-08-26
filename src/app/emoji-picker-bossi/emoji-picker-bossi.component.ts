@@ -27,7 +27,6 @@ export class EmojiPickerBossiComponent {
   searchField: string = '';
   searchResults: any[] = [];
   searchfieldActive: boolean = false;
-
   selectedGroup: number = 0;
 
 
@@ -147,6 +146,10 @@ export class EmojiPickerBossiComponent {
   }
 
 
+  /**
+   * Sets the selected emoji to the direct chat message and closes the emoji selector.
+   * @param {any} x - The selected emoji object.
+   */
   setEmoji(x: any): any {
     this.directChatService.directMessage += x.emoji;
     this.emojiService.toggleEmojiSelector();
@@ -215,8 +218,12 @@ export class EmojiPickerBossiComponent {
   }
 
 
+  /**
+   * Displays the emojis from the specified group.
+   * @param {number} groupNumber - The index of the emoji group to be displayed.
+   * @returns {void}
+   */
   showGroup(groupNumber: number): void {
     this.selectedGroup = groupNumber;
   }
-
 }
