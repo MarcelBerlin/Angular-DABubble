@@ -32,7 +32,7 @@
     }}"
     [disabled]="!directChatService.directChatActive"
   ></textarea>
-  <textarea
+  <!-- <textarea
     *ngIf="
       varService.mainChatHead == 1 && currentUser() && dataService.userData
     "
@@ -40,7 +40,12 @@
     [(ngModel)]="directChatService.directMessage"
     placeholder="Nachricht an mich :-)"
     [disabled]="!directChatService.directChatActive"
-  ></textarea>
+  ></textarea> -->
+  <app-user-to-message
+    *ngIf="
+      varService.mainChatHead == 1 && currentUser() && dataService.userData
+    "
+  ></app-user-to-message>
 
   <textarea
     *ngIf="
@@ -54,9 +59,10 @@
     placeholder="Nachricht an {{ varService.selectedArrayofSearch[varService.indexOfSearch]?.[varService.propertyOfSearch] || '' }}"
   ></textarea>
   <div class="iconsContainer" style="position: relative">
-
     <!-- <app-emoji-menu *ngIf="emojiService.emojiSelectorActive"></app-emoji-menu> -->
-    <app-emoji-picker-bossi *ngIf="emojiService.emojiSelectorActive"></app-emoji-picker-bossi>
+    <app-emoji-picker-bossi
+      *ngIf="emojiService.emojiSelectorActive"
+    ></app-emoji-picker-bossi>
     <div class="addElements">
       <div class="element">
         <!-- file upload click -->
@@ -74,10 +80,7 @@
       </div>
     </div>
     <div class="sendIcon">
-      <img
-        src="assets/img/send_icon.png"
-        (click)="send()"
-      />
+      <img src="assets/img/send_icon.png" (click)="send()" />
     </div>
   </div>
 </div>

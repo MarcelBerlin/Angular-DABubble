@@ -16,6 +16,7 @@ export class VariablesService {
   propertyOfSearch: string = '';
   indexOfSearch: number;
   previousScrollTop: number = 0; // for autoscroll functionality
+  sign: boolean = false;
   
 
   constructor() {}

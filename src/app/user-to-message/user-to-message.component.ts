@@ -1,4 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { DataService } from '../services/data.service';
+import { VariablesService } from '../services/variables.service';
 
 @Component({
   selector: 'app-user-to-message',
@@ -8,32 +10,24 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 export class UserToMessageComponent {
   @ViewChild('editableDiv') editableDiv!: ElementRef;
 
-  names = [
-    { name: 'Peter' },
-    { name: 'Alice' },
-    { name: 'Bob' },
-    { name: 'Charlie' },
-    { name: 'David' },
-    { name: 'Emily' },
-    { name: 'Frank' },
-    { name: 'Grace' },
-  ];
 
   memberCache = [{ number: 0, member: '', id: 0 }];
   selectedUserIndex!: number;
   invisibleSign: string = '\u200B';
   showInfoBox: number = -1;
-  sign: boolean = false;
   saveArray: any = [];
+
+
+  constructor(public dataService:DataService, public varService:VariablesService){}
 
   selectUser(index: number) {
     this.selectedUserIndex = index;
     this.memberCache.push({
       number: this.memberCache.length,
-      member: this.names[index].name,
+      member: this.dataService.userData[index].name,
       id: index,
     });
-    this.sign = false;
+    this.varService.setVar('sign', false);
   }
 
   showInfo(index: number): void {
@@ -45,7 +39,7 @@ export class UserToMessageComponent {
   }
 
   addSign() {
-    this.sign = true;
+    this.varService.setVar('sign', true);
   }
 
   send() {

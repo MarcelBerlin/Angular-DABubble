@@ -70,7 +70,8 @@ export class MainChatMessagefieldComponent {
   }
 
   addSign() {
-    this.addUserToMessageService.addToMessage();
+    // this.addUserToMessageService.addToMessage();
+    this.varService.setVar('sign', true);
   }
 }
 
