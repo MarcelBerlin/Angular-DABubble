@@ -56,12 +56,11 @@ export class ChannelSelectionComponent implements OnInit {
   async allMessages() {
     const coll = collection(this.firestore, 'newMessages');
     this.messages$ = collectionData(coll, { idField: 'id' });
-    await this.messages$.subscribe((message: any) => {
+    await this.messages$.subscribe((message: any) => {      
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
-      );
-      console.log(this.messageData);
-    });
+      );           
+    });        
   }
 
 /**

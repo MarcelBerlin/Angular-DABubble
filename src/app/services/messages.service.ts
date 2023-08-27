@@ -106,6 +106,14 @@ export class MessageService {
     this.messageData = messages.docs.map((doc) => doc.data());
   }
 
+
+  // // Initialisiere ein leeres Nachrichten-Array für den Channel
+//  const channelMessages: any[] = [];
+//  await setDoc(doc(collection(this.firestore, 'channelMessages'), docRef.id), {
+//    messages: channelMessages
+//  });
+
+
   async onChannelClick(channelId: string) {
     this.varService.selectedChannelId = channelId;
     await this.loadChannelMessages(channelId);

@@ -21,6 +21,7 @@ interface Tag {
   channelCreator: string;
   // members: any[];
   members: any['guest@guest.de'];
+  
 }
 
 @Injectable({
@@ -63,7 +64,7 @@ export class DialogAddService {
         imagePath: 'assets/img/sidenav/tag.png',
         description: this.description,
         channelCreator: this.channelCreator,
-        members: this.members,
+        members: this.members,        
       };
 
       // Firestore-Dokument erstellen und Tag speichern
@@ -71,13 +72,7 @@ export class DialogAddService {
         collection(this.firestore, 'tags'),
         newChannel
       );
-      newChannel.id = docRef.id;
-
-      // // Initialisiere ein leeres Nachrichten-Array für den Channel
-      // const channelMessages: any[] = [];
-      // await setDoc(doc(collection(this.firestore, 'channelMessages'), docRef.id), {
-      //   messages: channelMessages
-      // });
+      newChannel.id = docRef.id;     
 
       // Tag mit generierter ID aus Firestore abrufen und dem lokalen Array hinzufügen
       const tagWithId = { ...newChannel, id: docRef.id };
@@ -117,3 +112,6 @@ export class DialogAddService {
     updateDoc(document, newData);
   }
 }
+
+
+ 
