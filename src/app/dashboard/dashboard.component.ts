@@ -18,6 +18,7 @@ export class DashboardComponent {
       this.newMessageAmountService.checkForNewMessages();
     }, 5000);
   }
+  
 
   /**
    * Toggles the visibility of the navigation by invoking the 'hideShowNavigation' method of 'dcshService'.

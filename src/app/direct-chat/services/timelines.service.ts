@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -31,7 +32,9 @@ export class TimelinesService {
   ];
 
 
-  constructor() { }
+  constructor(
+    
+  ) { }
 
   
   /**
@@ -51,6 +54,7 @@ export class TimelinesService {
         this.timeline.push(this.getTimeLineText(chat[i].date));
       }
     }
+    // this.newMessageAmountService.checkForNewMessages();
   }
 
 
