@@ -54,7 +54,6 @@ export class NewMessageAmountService {
             if(chat.lastTimeStamp.dateTimeNumber > ownDateTimeNumber){
               this.newMessagesPartnerIndex.push(i);
               this.getMessageAmount(directChatId, ownDateTimeNumber, i);
-              console.log(this.newMessagesPartnerIndex);
             } 
           }
         });
@@ -79,7 +78,6 @@ export class NewMessageAmountService {
     }).catch((error) => 
     {console.log('Fehler beim Abrufen des Dokuments:');
     });
-    console.log('Test: ', this.messageAmountArray);
   }
 
 
