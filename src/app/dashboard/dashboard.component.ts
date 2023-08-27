@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DashboardComponentsShowHideService } from './dashboard-components-show-hide.service';
 import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 import { ChannelSelectionComponent } from './main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
+import { NewMessageAmountService } from '../direct-chat/services/new-message-amount.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,10 +12,14 @@ import { ChannelSelectionComponent } from './main-chat/main-chat-chatfield/main-
 export class DashboardComponent {
   imageUrl: string = 'assets/img/nav-hide.png';
 
-  constructor(public dcshService: DashboardComponentsShowHideService, private directChatService: DirectChatService) {
+  constructor(
+    public dcshService: DashboardComponentsShowHideService, 
+    private directChatService: DirectChatService,
+    private newMessageAmountService: NewMessageAmountService,
+    ) {
     setTimeout(() =>{
-      this.directChatService.checkForNewMessages();
-    }, 5000);
+      this.newMessageAmountService.checkForNewMessages();
+    }, 2000);
   }
 
   /**

@@ -17,6 +17,7 @@ import { VariablesService } from 'src/app/services/variables.service';
 import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
 import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
 import { MessageService } from 'src/app/services/messages.service';
+import { NewMessageAmountService } from 'src/app/direct-chat/services/new-message-amount.service';
 
 
 interface Tag {
@@ -67,7 +68,9 @@ export class MenuSidenavComponent implements OnInit {
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService,
     public directChatService: DirectChatService,
+    public newMessageAmountService: NewMessageAmountService,
     public messageService: MessageService,
+    
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;

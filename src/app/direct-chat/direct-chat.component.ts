@@ -9,6 +9,7 @@ import { MessageService } from '../services/messages.service';
 import { VariablesService } from '../services/variables.service';
 import { DirectChatService } from './services/direct-chat.service';
 import { TimelinesService } from './services/timelines.service';
+import { NewMessageAmountService } from './services/new-message-amount.service';
 
 @Component({
   selector: 'app-direct-chat',
@@ -31,6 +32,7 @@ export class DirectChatComponent {
     public dataService: DataService,
     public directChatService: DirectChatService,
     public timelinesService: TimelinesService,
+    private newMessageAmountService: NewMessageAmountService
     ) {
       this.getChanges();
     }
@@ -57,7 +59,7 @@ export class DirectChatComponent {
       if (this.directChatService.directChatActive && this.directChatService.directChatIndex.directChatId) {
         this.directChatService.loadChatDataSets(this.directChatService.directChatIndex.directChatId);
       }
-      this.directChatService.checkForNewMessages();
+      this.newMessageAmountService.checkForNewMessages();
     })
   }
 
