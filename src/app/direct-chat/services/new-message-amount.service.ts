@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
-
+import { DirectChatService } from './direct-chat.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,6 +9,7 @@ export class NewMessageAmountService {
 
   constructor(
     private dataService: DataService,
+    private directChatService: DirectChatService,
     private firestore: Firestore
     ) { }
 
@@ -64,5 +65,28 @@ export class NewMessageAmountService {
     }).catch((error) => 
     {console.log('Fehler beim Abrufen des Dokuments:');
     });
+    console.log(this.newMessagesPartnerIndex,  this.messageAmountArray );
+  }
+
+
+
+  setLastMessageTimeStamp(){
+    // get partner timestamp
+    console.log(this.dataService.loggedInUserData.directChats);
+    let directChatLength = this.directChatService.directChat.chat.length;
+    let lastChatDate = this.directChatService.directChat.chat[directChatLength - 1].date;
+    let lastChatTime = this.directChatService.directChat.chat[directChatLength - 1].time;
+    let lastDateTimeNumber = this.directChatService.directChat.chat[directChatLength - 1].dateTimeNumber;
+    let lastTimeStamp = {date: lastChatDate, time: lastChatTime, lastDateTimeNumber: lastDateTimeNumber};
+    let actualChatId = this.directChatService.directChat.id;
+    for (let i = 0;i < this.dataService.loggedInUserData.directChats.length; i++) {
+      let directChatId = this.dataService.loggedInUserData.directChats[i].directChatId;
+      if (directChatId === actualChatId) {
+        this.dataService.loggedInUserData.directChats[i].lastTimeStamp = lastTimeStamp;
+      }
+    }
+    // loggedInUserData werden zum Update genutzt.
+    console.log(this.dataService.loggedInUserData.directChats, lastTimeStamp);
+    this.dataService.updateUser();
   }
 }
