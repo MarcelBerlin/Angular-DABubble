@@ -14,9 +14,9 @@ export class DashboardComponent {
     public dcshService: DashboardComponentsShowHideService, 
     private newMessageAmountService: NewMessageAmountService,
     ) {
-    setTimeout(() =>{
-      this.newMessageAmountService.checkForNewMessages();
-    }, 5000);
+    // setTimeout(() =>{
+    //   this.newMessageAmountService.checkForNewMessages();
+    // }, 5000);
   }
   
 

@@ -11,12 +11,25 @@ export class NewMessageAmountService {
     private dataService: DataService,
     private directChatService: DirectChatService,
     private firestore: Firestore
-    ) { }
+    ) {
+      this.subcribeUserData();
+     }
 
+
+    
 
   newMessagesPartnerIndex: number[] = [];
   messageAmountArray: any[] = [];
+  users$;
 
+
+  subcribeUserData(): void {
+    this.dataService.users$.subscribe((user: any) => {
+        this.checkForNewMessages();
+    });
+  }
+
+  
 
   checkForNewMessages(): void {
     this.newMessagesPartnerIndex = [];
@@ -41,6 +54,7 @@ export class NewMessageAmountService {
             if(chat.lastTimeStamp.dateTimeNumber > ownDateTimeNumber){
               this.newMessagesPartnerIndex.push(i);
               this.getMessageAmount(directChatId, ownDateTimeNumber, i);
+              console.log(this.newMessagesPartnerIndex);
             } 
           }
         });
@@ -65,14 +79,12 @@ export class NewMessageAmountService {
     }).catch((error) => 
     {console.log('Fehler beim Abrufen des Dokuments:');
     });
-    console.log(this.newMessagesPartnerIndex,  this.messageAmountArray );
+    console.log('Test: ', this.messageAmountArray);
   }
 
 
 
   setLastMessageTimeStamp(){
-    // get partner timestamp
-    console.log(this.dataService.loggedInUserData.directChats);
     let directChatLength = this.directChatService.directChat.chat.length;
     let lastChatDate = this.directChatService.directChat.chat[directChatLength - 1].date;
     let lastChatTime = this.directChatService.directChat.chat[directChatLength - 1].time;
@@ -85,8 +97,6 @@ export class NewMessageAmountService {
         this.dataService.loggedInUserData.directChats[i].lastTimeStamp = lastTimeStamp;
       }
     }
-    // loggedInUserData werden zum Update genutzt.
-    console.log(this.dataService.loggedInUserData.directChats, lastTimeStamp);
     this.dataService.updateUser();
   }
 }
