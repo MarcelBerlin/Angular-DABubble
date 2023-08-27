@@ -34,14 +34,6 @@ export class DialogAddService {
   description: string = '';
   channelCreator: string = '';
   members: any = [];
-  newChannel: Tag = {
-    id: '',
-    name: this.newTag,
-    imagePath: 'assets/img/sidenav/tag.png',
-    description: this.description,
-    channelCreator: this.channelCreator,
-    members: this.members,
-  }; ;
 
   constructor(private firestore: Firestore, private dataService: DataService) {
     const coll = collection(firestore, 'tags');
@@ -54,8 +46,6 @@ export class DialogAddService {
 
   tags: Tag[] = []; // neue Tags werden als JSON hinzugefügt
 
-  
-
   async addTag(
     generatedTag: string,
     description: string,
@@ -65,30 +55,36 @@ export class DialogAddService {
     this.description = description;
     this.newTag = generatedTag;
     this.channelCreator = channelCreator;
+
     if (this.newTag) {
+      const newChannel: Tag = {
+        id: '',
+        name: this.newTag,
+        imagePath: 'assets/img/sidenav/tag.png',
+        description: this.description,
+        channelCreator: this.channelCreator,
+        members: this.members,
+      };
 
       // Firestore-Dokument erstellen und Tag speichern
-      const docRef = await addDoc(collection(this.firestore, 'tags'), this.newChannel);
-      console.log(docRef.id);
-      this.newChannel.id = docRef.id;     
+      const docRef = await addDoc(
+        collection(this.firestore, 'tags'),
+        newChannel
+      );
+      newChannel.id = docRef.id;
 
-      // Initialisiere ein leeres Nachrichten-Array für den Channel
-      const channelMessages: any[] = [];
-      await setDoc(doc(collection(this.firestore, 'channelMessages'), docRef.id), {
-        messages: channelMessages
-      });
+      // // Initialisiere ein leeres Nachrichten-Array für den Channel
+      // const channelMessages: any[] = [];
+      // await setDoc(doc(collection(this.firestore, 'channelMessages'), docRef.id), {
+      //   messages: channelMessages
+      // });
 
       // Tag mit generierter ID aus Firestore abrufen und dem lokalen Array hinzufügen
-      const tagWithId = { ...this.newChannel, id: docRef.id };
+      const tagWithId = { ...newChannel, id: docRef.id };
       this.tags.push(tagWithId);
-    }
-    else {
-      alert('Bitte einen korrekten Channel Namen eingeben!')
-      return;
+      
     }
   }
-
- 
 
   async deleteFromFirebase(tagId: string) {
     try {

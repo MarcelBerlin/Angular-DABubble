@@ -41,7 +41,7 @@ export class DialogAddChannelComponent {
   }
 
   generateTag() {  
-    if(this.newTag.length > 0) {
+    if(this.newTag && this.newTag.length > 0) {
       this.getService.addTag(
         '# ' + this.newTag,
         this.description,
