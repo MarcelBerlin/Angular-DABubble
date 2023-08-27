@@ -1,19 +1,18 @@
-<!-- <div class="container"> -->
 <div class="box">
   <div class="inputDiv" contenteditable="true">
     <p *ngFor="let _ of memberCache; let i = index" [attr.id]="'p' + i">
       <!-- Info Box -->
       <span class="infoBox" *ngIf="showInfoBox == i">
-        <span>Name: {{ dataService.userData[selectedUserIndex].name }}</span
-        ><span>Email: {{ dataService.userData[selectedUserIndex].email }}</span>
+        <span>Name: {{ dataService.userData[calculateIndexInput()].name }}</span
+        ><span>Email: {{ dataService.userData[calculateIndexInput()].email }}</span>
       </span>
 
       <!-- Ausgewählte User -->
       <span
         class="member"
         *ngIf="i > 0"
-        (mouseenter)="showInfo(i)"
-        (mouseleave)="hideInfo()"
+        (mouseenter)="showInfoInput(i)"
+        (mouseleave)="hideInfoInput()"
         [attr.id]="'span' + i"
         >@ {{ memberCache[i].member }} </span
       >{{ invisibleSign }}
@@ -27,20 +26,24 @@
     </div>
   </div>
   <!-- <button class="buttonSign" (click)="addSign()">@</button> -->
-  <!-- <button class="buttonSend" (click)="send()">Send</button> -->
+  <button class="buttonSend" (click)="send()">Send</button>
 
-  <!-- Ausgabe -->
-  <!-- <div class="outputBox">
-      <div *ngFor="let entry of saveArray; let i = index" class="output">
-        <span
-          *ngIf="i > 0 && entry?.span?.length > 0"
-          class="member"
-          (mouseenter)="showInfo(i)"
-          (mouseleave)="hideInfo()"
-          >{{ entry.span }}
-        </span>
-        <p>{{ entry.p }}</p>
-      </div>
-    </div> -->
+  <!-- Ausgabe  -->
+  <div class="outputBox">
+    <div *ngFor="let entry of saveArray; let i = index" class="output">
+      <span class="infoBox" *ngIf="showInfoBox == i">
+        <span>Name: {{ dataService.userData[calculateIndexOutput()].name }}</span
+        ><span>Email: {{ dataService.userData[calculateIndexOutput()].email }}</span>
+      </span>
+
+      <span
+        *ngIf="i > 0 && entry?.span?.length > 0"
+        class="member"
+        (mouseenter)="showInfoOutput(i)"
+        (mouseleave)="hideInfoOutput()"
+        >{{ entry.span }}
+      </span>
+      <p>{{ entry.p }}</p>
+    </div>
+  </div>
 </div>
-<!-- </div> -->

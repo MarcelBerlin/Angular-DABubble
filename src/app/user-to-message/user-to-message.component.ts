@@ -5,11 +5,11 @@ import { VariablesService } from '../services/variables.service';
 @Component({
   selector: 'app-user-to-message',
   templateUrl: './user-to-message.component.html',
-  styleUrls: ['./user-to-message.component.scss']
+  styleUrls: ['./user-to-message.component.scss'],
 })
+  
 export class UserToMessageComponent {
   // @ViewChild('editableDiv') editableDiv!: ElementRef;
-
 
   memberCache = [{ number: 0, member: '', id: 0 }]; // Zwischenspeicher
   selectedUserIndex!: number;
@@ -17,8 +17,18 @@ export class UserToMessageComponent {
   showInfoBox: number = -1;
   saveArray: any = []; // das ist das array wo bei druck auf senden alles gespeichert wird
 
-  constructor(public dataService:DataService, public varService:VariablesService){}
+  constructor(
+    public dataService: DataService,
+    public varService: VariablesService
+  ) {}
 
+  showInfoInput = (index: number) => (this.showInfoBox = index);
+  hideInfoInput = () => (this.showInfoBox = -1);
+  calculateIndexInput = (): number => (this.memberCache[this.showInfoBox].id);
+  
+  showInfoOutput =(index: number) => (this.showInfoBox = index);
+  hideInfoOutput = () => (this.showInfoBox = -1);
+  calculateIndexOutput = (): number => (this.saveArray[this.showInfoBox].userId);
 
   // mit click auf den user wird der selectedUser in den Zwischenspeicher gespeichert
   selectedUser(index: number) {
@@ -31,28 +41,6 @@ export class UserToMessageComponent {
     this.varService.setVar('sign', false);
   }
 
-  showInfo(index: number): void {
-    this.showInfoBox = index;
-  }
-
-  hideInfo(): void {
-    this.showInfoBox = -1;
-  }
-
-
-  // das user auswahlmenu wird geöffnet
-  // addSign() {
-  //   if (this.varService.sign) {
-  //     this.varService.setVar('sign', false);
-
-  //   } else {
-  //     this.varService.setVar('sign', true);
-  //   }
-  //   console.log(this.varService.sign);
-    
-  // }
-
-  
   send() {
     for (let i = 0; i < this.memberCache.length; i++) {
       let spanElement = document.getElementById(`span${i}`);
@@ -71,6 +59,7 @@ export class UserToMessageComponent {
         userId: this.memberCache[i].id,
       });
     }
+    this.memberCache = [{ number: 0, member: '', id: 0 }];
+    console.log(this.saveArray);
   }
-
 }

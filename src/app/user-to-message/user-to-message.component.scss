@@ -36,7 +36,6 @@
   overflow: scroll;
 }
 
-
 .infoBox {
   position: absolute;
   top: -250px;
@@ -64,7 +63,7 @@
   font-size: 18px;
   cursor: pointer;
   padding: 0 8px;
-  &:hover{
+  &:hover {
     background-color: #eceefe;
     border-radius: 30px;
   }
@@ -78,26 +77,27 @@ p {
   width: 0px;
 }
 
-
 // .buttonSign{
 //   position: absolute;
 //   top: 65%;
 //   left: 50%;
 // }
-// .buttonSend{
-//   position: absolute;
-//   top: 65%;
-//   right: 5%;
-// }
 
-// .outputBox{
-//   position: relative;
-//   display: flex;
-//   margin: 16px 32px;
-//   border: 1px solid lightgray;
-// }
-//   .output{
-//     display: flex;
-//   }
+.buttonSend{
+  position: absolute;
+  top: -13%;
+  right: 10%;
+}
+
+.outputBox {
+  position: relative;
+  top: 50px;
+  display: flex;
+  margin: 16px 32px;
+  border: 1px solid lightgray;
+}
+.output {
+  display: flex;
+}
 
 // }
