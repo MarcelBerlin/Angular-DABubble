@@ -424,11 +424,11 @@ export class DirectChatService {
   checkForNewMessages(): void {
     this.newMessagesPartnerIndex = [];
     this.messageAmountArray = [];
-    let ownDirectChats = this.dataService.loggedInUserData.directChats;
+    let ownDirectChats: any[] = this.dataService.loggedInUserData.directChats;
     ownDirectChats.forEach(element => {
-      let directChatId = element.directChatId;
-      let ownDateTimeNumber = element.lastTimeStamp.dateTimeNumber;
-      let pId = element.partnerId;
+      let directChatId: string = element.directChatId;
+      let ownDateTimeNumber: number = element.lastTimeStamp.dateTimeNumber;
+      let pId: string = element.partnerId;
       let i: number = 0;
       this.newMessagePartnerIndex(pId, directChatId, ownDateTimeNumber, i);
       i++;
@@ -453,7 +453,7 @@ export class DirectChatService {
   }
 
 
-  getMessageAmount(directChatId, ownDateTimeNumber, index: number){
+  getMessageAmount(directChatId: string, ownDateTimeNumber: number, index: number){
     let amount:number = 0;
     const coll = collection(this.firestore, 'directChats');
     const qData = doc(coll, directChatId);
