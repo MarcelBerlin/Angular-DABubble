@@ -48,7 +48,6 @@ export class HeaderComponent {
     if (filterValue.startsWith('#')) {
       this.property = 'name';
       this.selectedArray = this.dialogAddService.tagsData;
-      console.log(this.dialogAddService.tagsData); // ADDED BY FELIX
       return this.dialogAddService.tagsData.filter((element) =>
         this._normalizeValue(element.name).includes(filterValue)
       );
@@ -79,16 +78,16 @@ export class HeaderComponent {
       if (element.name === selectedOption) {
         this.varService.setVar('indexOfSearch', index);
         this.varService.setVar('selectedArrayofSearch', this.selectedArray);
-        this.messageService.messageToUser(this.varService.indexOfSearch); // ADDED BY FELIX
+        if (element.name.startsWith('#')) {
+          this.messageService.openChannel(this.varService.indexOfSearch); // ADDED BY FELIX
+        } else if (element.name.startsWith('')) {
+          this.messageService.messageToUser(this.varService.indexOfSearch); // ADDED BY FELIX
+        }
       } else if (element.email === selectedOption) {
         this.varService.setVar('indexOfSearch', index);
         this.varService.setVar('selectedArrayofSearch', this.selectedArray);
-      } 
-      // else if(element.hashtag) {
-      //   this.messageService.openChannel(this.varService.indexOfSearch); // ADDED BY FELIX
-      // }
-      this.varService.setVar('propertyOfSearch', 'name');
-      // this.messageService.openChannel(this.varService.indexOfSearch); // ADDED BY FELIX
+        this.messageService.messageToUser(this.varService.indexOfSearch); // ADDED BY FELIX
+      }
     });
   }
 
