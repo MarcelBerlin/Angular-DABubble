@@ -357,7 +357,7 @@ export class DirectChatService {
    */
   updateFirestoreDirectChatIndex() {
     this.directChat.lastTimeStamp = this.getActualTimeStamp();
-    console.log(this.directChat);
+    // this.directChat.timeStamp = this.getActualTimeStamp();
     this.dataService.loggedInUserData.directChats.forEach(chat => {
       if (chat.directChatId == this.directChat.id) {
         chat.lastTimeStamp = this.getActualTimeStamp();

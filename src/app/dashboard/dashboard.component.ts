@@ -13,11 +13,7 @@ export class DashboardComponent {
   constructor(
     public dcshService: DashboardComponentsShowHideService, 
     private newMessageAmountService: NewMessageAmountService,
-    ) {
-    // setTimeout(() =>{
-    //   this.newMessageAmountService.checkForNewMessages();
-    // }, 5000);
-  }
+    ) {}
   
 
   /**

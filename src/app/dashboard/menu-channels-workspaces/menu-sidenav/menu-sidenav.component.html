@@ -54,7 +54,8 @@
               <p class="messageDot" *ngIf="newMessageAmountService.newMessagesPartnerIndex.includes(i)" title="New Message">
                 <span *ngFor="let user of newMessageAmountService.messageAmountArray; let x = index">
                   <span *ngIf="user.user == i">
-                    {{newMessageAmountService.messageAmountArray[x].amount}}
+                    <!-- {{newMessageAmountService.messageAmountArray[x].amount}} -->
+                    {{user.amount}}
                   </span>
                 </span>
               </p>
