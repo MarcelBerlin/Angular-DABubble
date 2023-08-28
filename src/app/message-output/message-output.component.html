@@ -1,0 +1,17 @@
+  <div class="outputBox">
+    <div class="output" *ngFor="let entry of userToMessageService.saveArray; let i = index">
+      <span class="infoBox" *ngIf="userToMessageService.showInfoBox == i">
+        <span>Name: {{ dataService.userData[calculateIndexOutput()].name }}</span
+        ><span>Email: {{ dataService.userData[calculateIndexOutput()].email }}</span>
+      </span>
+
+      <span
+        *ngIf="i > 0 && entry?.span?.length > 0"
+        class="member"
+        (mouseenter)="showInfoOutput(i)"
+        (mouseleave)="hideInfoOutput()"
+        >{{ entry.span }}
+      </span>
+      <p>{{ entry.p }}</p>
+    </div>
+  </div>
