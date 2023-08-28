@@ -5,6 +5,8 @@ import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { FormControl, Validators } from '@angular/forms';
+import { FileUploadService } from 'src/app/file-upload/services/file-upload.service';
+import { UploadService } from 'src/app/file-upload/services/upload.service';
 
 
 @Component({
@@ -28,6 +30,8 @@ export class HeaderEditDialogComponent {
   constructor(
     public dialog: MatDialog,
     private auth: AuthService,
+    public fileUploadService: FileUploadService,
+    public uploadService: UploadService,
     public getUserData: DataService) {
   }
 
@@ -35,5 +39,12 @@ export class HeaderEditDialogComponent {
     this.getUserData.loggedInUserData.name = this.newInputName;
     this.getUserData.loggedInUserData.email = this.newInputMail;
     this.getUserData.updateUser();
+  }
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
+  openFileExplorer() {
+    this.fileUploadService.basePath ='/uploads/' + this.getUserData.loggedInUserData.userId + '/profile/';
+    this.fileInput.nativeElement.click();
   }
 }

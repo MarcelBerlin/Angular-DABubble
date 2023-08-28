@@ -22,8 +22,6 @@ export class HeaderDialogComponent {
     public dialog: MatDialog,
     private auth: AuthService,
     public getUserData: DataService,
-    public fileUploadService: FileUploadService,
-    public uploadService: UploadService,
     ) {
 
     // setTimeout(() => {
@@ -42,10 +40,5 @@ export class HeaderDialogComponent {
 
   // edit by Bossi to upload profile image
 
-  @ViewChild('fileInput') fileInput!: ElementRef;
-
-  openFileExplorer() {
-    this.fileUploadService.basePath ='/uploads/' + this.getUserData.loggedInUserData.userId + '/profile/';
-    this.fileInput.nativeElement.click();
-  }
+  
 }
