@@ -6,6 +6,9 @@ import { DirectChatService } from './direct-chat.service';
   providedIn: 'root'
 })
 export class NewMessageAmountService {
+  newMessagesPartnerIndex: number[] = [];
+  messageAmountArray: any[] = [];
+
 
   constructor(
     private dataService: DataService,
@@ -16,14 +19,11 @@ export class NewMessageAmountService {
   }
 
 
-
-
-  newMessagesPartnerIndex: number[] = [];
-  messageAmountArray: any[] = [];
-  users$;
-  newMessageCalcRun = false;
-
-
+  /**
+   * Subscribes to changes in user data and triggers the check for new messages.
+   * 
+   * @returns {void}
+   */
   subcribeUserData(): void {
     this.dataService.users$.subscribe((user: any) => {
       this.checkForNewMessages();
@@ -31,10 +31,12 @@ export class NewMessageAmountService {
   }
 
 
-
+  /**
+   * Checks for new messages in the user's direct chats and calculates message counts.
+   * 
+   * @returns {void}
+   */
   checkForNewMessages(): void {
-    
-      this.newMessageCalcRun = true;
       this.newMessagesPartnerIndex = [];
       this.messageAmountArray = [];
       let ownDirectChats: any[] = this.dataService.loggedInUserData.directChats;
@@ -46,10 +48,19 @@ export class NewMessageAmountService {
         this.newMessagePartnerIndex(pId, directChatId, ownDateTimeNumber, i);
         i++;
       });
-   
   }
 
-  newMessagePartnerIndex(pId: string, directChatId: string, ownDateTimeNumber: number, i: number) {
+
+  /**
+   * Calculates new message partner indexes and message amounts based on comparison of timestamps.
+   * 
+   * @param {string} pId - The partner's user ID.
+   * @param {string} directChatId - The ID of the direct chat.
+   * @param {number} ownDateTimeNumber - The timestamp of the user's own last message.
+   * @param {number} i - The index used for tracking in the loop.
+   * @returns {void}
+ */
+  newMessagePartnerIndex(pId: string, directChatId: string, ownDateTimeNumber: number, i: number):void {
     this.dataService.userData.forEach(user => {
       if (user.userId == pId) {
         let pDirectChats = user.directChats;
@@ -67,7 +78,15 @@ export class NewMessageAmountService {
   }
 
 
-  getMessageAmount(directChatId: string, ownDateTimeNumber: number, index: number) {
+  /**
+   * Calculates the amount of new messages in a direct chat based on timestamps.
+   * 
+   * @param {string} directChatId - The ID of the direct chat.
+   * @param {number} ownDateTimeNumber - The timestamp of the user's own last message.
+   * @param {number} index - The index used for tracking in the loop.
+   * @returns {void}
+   */
+  getMessageAmount(directChatId: string, ownDateTimeNumber: number, index: number):void {
     let amount: number = 0;
     const coll = collection(this.firestore, 'directChats');
     const qData = doc(coll, directChatId);
@@ -81,27 +100,43 @@ export class NewMessageAmountService {
       if (!this.messageAmountArray.includes({ user: index, amount: amount })){
         this.messageAmountArray.push(pushElement);
       }
-      // this.messageAmountArray.push(pushElement);
     }).catch((error) => {
       console.log('Fehler beim Abrufen des Dokuments:');
     });
   }
 
 
-
-  setLastMessageTimeStamp() {
-    let directChatLength = this.directChatService.directChat.chat.length;
-    let lastChatDate = this.directChatService.directChat.chat[directChatLength - 1].date;
-    let lastChatTime = this.directChatService.directChat.chat[directChatLength - 1].time;
-    let lastDateTimeNumber = this.directChatService.directChat.chat[directChatLength - 1].dateTimeNumber;
-    let lastTimeStamp = { date: lastChatDate, time: lastChatTime, lastDateTimeNumber: lastDateTimeNumber };
+  /**
+   * Calculates the amount of new messages in a direct chat based on timestamps.
+   * 
+   * @param {string} directChatId - The ID of the direct chat.
+   * @param {number} ownDateTimeNumber - The timestamp of the user's own last message.
+   * @param {number} index - The index used for tracking in the loop.
+   * 
+   * @returns {void}
+   */
+  setLastMessageTimeStamp():void {
     let actualChatId = this.directChatService.directChat.id;
     for (let i = 0; i < this.dataService.loggedInUserData.directChats.length; i++) {
       let directChatId = this.dataService.loggedInUserData.directChats[i].directChatId;
       if (directChatId === actualChatId) {
-        this.dataService.loggedInUserData.directChats[i].lastTimeStamp = lastTimeStamp;
+        this.dataService.loggedInUserData.directChats[i].lastTimeStamp = this.createLastMessageTimeStamp();
       }
     }
     this.dataService.updateUser();
+  }
+
+
+  /**
+   * Creates an object containing the timestamp information of the last message in the direct chat.
+   * 
+   * @returns {Object} An object with properties for the date, time, and lastDateTimeNumber of the last message.
+   */
+  createLastMessageTimeStamp(): { date: string, time: string, lastDateTimeNumber: number } {
+    let directChatLength = this.directChatService.directChat.chat.length;
+    let lastChatDate: string = this.directChatService.directChat.chat[directChatLength - 1].date;
+    let lastChatTime: string = this.directChatService.directChat.chat[directChatLength - 1].time;
+    let lastDateTimeNumber: number = this.directChatService.directChat.chat[directChatLength - 1].dateTimeNumber;
+    return { date: lastChatDate, time: lastChatTime, lastDateTimeNumber: lastDateTimeNumber };
   }
 }
