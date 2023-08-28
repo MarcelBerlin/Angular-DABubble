@@ -19,8 +19,8 @@
         <div class="channels-content" [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'">
           <div *ngFor="let tag of tags; let i = index">
             <!-- <div class="channels-line" *ngIf="authorizationShowChannel(i)"> -->
-              <div class="channels-line">
-                <div class="channel-name" (click)="openChannel(i)">
+            <div class="channels-line">
+              <div class="channel-name" (click)="openChannel(i)">
                 <span class="pointer"><span class="hashtag">{{ tag.name[0] }}</span><span class="afterHashtag">
                     {{ tag.name.slice(1) }}</span></span>
               </div>
@@ -50,8 +50,9 @@
               <span class="pointer">{{ user.name }}
                 <span *ngIf="user.email === getUserData.loggedInUserData.email">(Du)</span></span>
               <div class="activeDot" [style.background-color]="user.online ? '#92C83E' : '#686868'"></div>
-                <!-- Bossi Area for direct Chats -->
-              <p class="messageDot" *ngIf="newMessageAmountService.newMessagesPartnerIndex.includes(i)" title="New Message">
+              <!-- Bossi Area for direct Chats -->
+              <p class="messageDot" *ngIf="newMessageAmountService.newMessagesPartnerIndex.includes(i)"
+                title="New Message">
                 <span *ngFor="let user of newMessageAmountService.messageAmountArray; let x = index">
                   <span *ngIf="user.user == i">
                     <!-- {{newMessageAmountService.messageAmountArray[x].amount}} -->

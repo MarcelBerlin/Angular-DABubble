@@ -68,11 +68,9 @@ export class MessageService {
     this.messageData.push(this.newMessage);
   }
 
-  /**
-   * 
-   * @param channelId versuch für ein separates Array bezogen auf die jeweiligen ChannelMessages 
-   * 
-   */
+  
+  // ##################  BITTE STEHEN LASSEN !!! #################
+  // ################# Marcel Test für channelMessages Array #############
 
   // async addMessage() {
   //   // Vorhandener Code zur Erstellung der Nachricht
@@ -99,7 +97,7 @@ export class MessageService {
   //   this.messageData.push(this.newMessage);
   // }
   
-
+// ##########################################################
 
   async loadChannelMessages(channelId: string) {
     const coll = collection(this.firestore, 'messages');
@@ -107,6 +105,14 @@ export class MessageService {
     const messages = await getDocs(q);
     this.messageData = messages.docs.map((doc) => doc.data());
   }
+
+
+  // // Initialisiere ein leeres Nachrichten-Array für den Channel
+//  const channelMessages: any[] = [];
+//  await setDoc(doc(collection(this.firestore, 'channelMessages'), docRef.id), {
+//    messages: channelMessages
+//  });
+
 
   async onChannelClick(channelId: string) {
     this.varService.selectedChannelId = channelId;
