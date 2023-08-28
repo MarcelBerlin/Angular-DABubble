@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
+import { Firestore, collection, doc, getDoc } from '@angular/fire/firestore';
 import { DirectChatService } from './direct-chat.service';
 @Injectable({
   providedIn: 'root'
