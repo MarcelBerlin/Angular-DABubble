@@ -1,32 +1,33 @@
-<div class="thread-content">
-  <div *ngIf="getSelectedMessageStatus() && channelMessages.messageData">
-    <div *ngFor="let message of channelMessages.messageData; let i = index">
-      <div *ngIf="channelMessages.selectedMessageIndex === i">
-
-        <div class="avatar-left">
-          <img src="{{ message.userImg }}">
-        </div>
-
-        <div class="message-details-left">
-
-          <div class="name-time">
-            <div class="name">{{ message.userName }}</div>
-            <div class="time">{{ message.dateString }} {{ message.clockString }}</div>
+<div *ngIf="getSelectedMessageStatus() && channelMessages.messageData">
+  <div *ngFor="let message of channelMessages.messageData; let i = index">
+    <div *ngIf="channelMessages.selectedMessageIndex === i">
+      <div class="thread-content">
+        <div class="full-message-left">
+          <div class="avatar-left">
+            <img src="{{ message.userImg }}">
           </div>
 
-          <div class="message-content-left">
-            {{ message.content }}
+          <div class="message-details-left">
+
+            <div class="name-time">
+              <div class="name">{{ message.userName }}</div>
+              <div class="time">{{ message.dateString }} {{ message.clockString }}</div>
+            </div>
+
+            <div class="message-content-left">
+              {{ message.content }}
+            </div>
           </div>
-          <div class="reaction-bar-left">
+          <!-- <div class="reaction-bar-left">
             <div id="reactionBarLeft">
               <div matTooltip='{{ dataService.loggedInUserData.name }}' class="reactions">
                 <span>{{ reactionArrLeft }}</span>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
-
     </div>
+
   </div>
 </div>

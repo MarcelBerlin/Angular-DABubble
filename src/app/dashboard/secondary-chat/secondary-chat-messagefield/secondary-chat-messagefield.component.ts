@@ -12,7 +12,7 @@ import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main
   templateUrl: './secondary-chat-messagefield.component.html',
   styleUrls: ['./secondary-chat-messagefield.component.scss'],
 })
-export class SecondaryChatMessagefieldComponent implements OnInit {
+export class SecondaryChatMessagefieldComponent {
   threadEmojiLeft: boolean = false;
   threadEmojiRight: boolean = false;
   index: number = 0;
@@ -34,13 +34,7 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     public channelMessages: ChannelMessagesService,
     public dataService: DataService
   
-  ) {
-    
-  }
-
-  ngOnInit() {
-    console.log(this.channelMessages.messageData);
-  }
+  ) { }
 
   getSelectedMessageStatus() {
     return this.channelMessages.getSelectedMessageStatus();
