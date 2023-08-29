@@ -19,7 +19,7 @@
     </ng-container>
   </div> -->
 
-  <div *ngFor="let message of messageData, let i = index">
+  <div *ngFor="let message of channelMessages.messageData, let i = index">
     <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">  
       
      
@@ -40,7 +40,7 @@
               </emoji-mart>
             </div>
             <div (click)="openSecondaryChat()">
-              <mat-icon>
+              <mat-icon class="interaction-bubble-comment" (click)="channelMessages.openAnswer(i)">
                 comment
               </mat-icon>
             </div>
@@ -95,7 +95,7 @@
                 </emoji-mart>
               </div>
               <div>
-                <mat-icon class="interaction-bubble-comment">
+                <mat-icon class="interaction-bubble-comment" (click)="channelMessages.openAnswer(i)">
                   comment
                 </mat-icon>
               </div>

@@ -1,83 +1,32 @@
 <div class="thread-content">
-  <app-channel-selection></app-channel-selection>
-</div>
-<!--
-  <div class="full-message-left">
+  <div *ngIf="getSelectedMessageStatus() && channelMessages.messageData">
+    <div *ngFor="let message of channelMessages.messageData; let i = index">
+      <div *ngIf="channelMessages.selectedMessageIndex === i">
 
-    <div class="avatar-left">
-      <img src="./../../../../assets/img/members/avatar5.png">
-    </div>
-
-    <div class="message-details-left">
-      <div class="name-time">
-        <div class="name"> Peter Maffay </div>
-        <div class="time"> 13:12 </div>
-      </div>
-
-      <div class="message-content-left">
-        <span> Hallo </span>
-      </div>
-
-      <div class="reaction-bar-left">
-        <div class="reactions" id="reactionBarLeft" *ngIf="threadEmojiLeft">
-          <div *ngIf="reactionArrLeft.length <= 1" id="reactionsLeft" matTooltip='{{this.getUser.loggedInUserData.name}}'>
-            <span> {{ reactionArrLeft }} </span> -->
-<!-- <span #baseSpan class="base"> 
-              <span #userToolSpan class="user-tool"></span>
-            </span> -->
-<!--</div>
+        <div class="avatar-left">
+          <img src="{{ message.userImg }}">
         </div>
-        <div class="reaction-column">
-          <img ngDefaultControl (click)="emojiPickerLeft = !emojiPickerLeft;"
-            src="./../../../../assets/img/reaction.png">
-          <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft" (emojiSelect)="addEmojiLeft($event)"
-            title="Choose your emoji">
-          </emoji-mart>
-        </div>
-      </div>
-    </div>
-  </div> -->
 
-<!-- ######  MESSAGE FROM USER (RIGHT SIDE) ###### -->
+        <div class="message-details-left">
 
-<!--<div class="full-message-right">
+          <div class="name-time">
+            <div class="name">{{ message.userName }}</div>
+            <div class="time">{{ message.dateString }} {{ message.clockString }}</div>
+          </div>
 
-    <div class="avatar-right">
-      <img src="./../../../../assets/img/members/avatar5.png">
-    </div>
-
-    <div class="message-details-right">
-      <div class="name-time">
-        <div class="name"> Max Mustermann </div>
-        <div class="time"> 13:12 </div>
-      </div>
-
-      <div class="message-content-right">
-        <span> Hallo </span>
-      </div>
-
-      <div class="reaction-bar-right">
-        <div class="reactions" id="reactionBarRight" *ngIf="threadEmojiRight">
-          <div id="reactionsRight" matTooltip='{{this.getUser.loggedInUserData.name}}'>
-            <span *ngIf="this.reactionArrRight.length <= 1"> {{ reactionArrRight }} </span>
+          <div class="message-content-left">
+            {{ message.content }}
+          </div>
+          <div class="reaction-bar-left">
+            <div id="reactionBarLeft">
+              <div matTooltip='{{ dataService.loggedInUserData.name }}' class="reactions">
+                <span>{{ reactionArrLeft }}</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="reaction-column">
-          <img ngDefaultControl (click)="emojiPickerRight = !emojiPickerRight;"
-            src="./../../../../assets/img/reaction.png">
-          <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerRight" (emojiSelect)="addEmojiRight($event)"
-            title="Choose your emoji">
-          </emoji-mart>
-        </div>
       </div>
+
     </div>
   </div>
-
-  <div *ngIf="getMessage.emojis.length > 0" class="new-answers"> -->
-<!-- SPÄTER MIT ANTWORTEN IM THREAD ANSTATT EMOJIS-->
-<!-- <p *ngIf="getMessage.emojis.length == 1"> 1 Antwort</p> --> <!-- wenn nur eine antwort ist = einzahl -->
-<!-- <p> {{ getMessage.emojis.length }} Antwort(en)</p> --> <!-- wenn mehrere antworten sind = Mehrzahl-->
-<!--<img src="./../../../../assets/img/line.png">
-  </div>
-
-</div> -->
+</div>

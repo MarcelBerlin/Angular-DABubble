@@ -13,6 +13,7 @@ import { MessageService } from 'src/app/services/messages.service';
 import { VariablesService } from 'src/app/services/variables.service';
 import { ChannelTimeStamp } from './models/channel-timestamp.class';
 import { Messages } from 'src/app/models/messages.interface';
+import { ChannelMessagesService } from './service/channel-messages.service';
 
 @Component({
   selector: 'app-channel-selection',
@@ -46,22 +47,14 @@ export class ChannelSelectionComponent implements OnInit {
     public messageService: MessageService,
     public chatService: ChatService,
     public app: AppComponent,
-    public timelinesService: TimelinesService
+    public timelinesService: TimelinesService,
+    public channelMessages: ChannelMessagesService
   ) {
-    this.allMessages();
+    
   }
 
   ngOnInit(): void {}
 
-  async allMessages() {
-    const coll = collection(this.firestore, 'newMessages');
-    this.messages$ = collectionData(coll, { idField: 'id' });
-    await this.messages$.subscribe((message: any) => {      
-      this.messageData = message.sort(
-        (a, b) => a.dateTimeNumber - b.dateTimeNumber
-      );           
-    });        
-  }
 
 /**
  * versuch für eigene channelMessages - bisher ohne erfolg
