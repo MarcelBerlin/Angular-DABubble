@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
 import { TimelinesService } from 'src/app/direct-chat/services/timelines.service';
 
 @Injectable({
@@ -16,6 +17,7 @@ export class ChannelMessagesService {
   constructor(
     private firestore: Firestore,
     public timelinesService: TimelinesService,
+    private dcshService: DashboardComponentsShowHideService,
   ) {
     this.allMessages();
    }
@@ -33,7 +35,8 @@ export class ChannelMessagesService {
 
   openAnswer(index: number) {
     this.selectedMessageIndex = index;
-    this.selectedMessage = true;            
+    this.selectedMessage = true;  
+    this.dcshService.chatSlideIn()          
   }
 
   getSelectedMessageStatus() {

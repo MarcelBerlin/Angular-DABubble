@@ -39,8 +39,8 @@
                 (emojiSelect)="addEmojiLeft($event)" title="Choose your emoji">
               </emoji-mart>
             </div>
-            <div (click)="openSecondaryChat()">
-              <mat-icon class="interaction-bubble-comment" (click)="channelMessages.openAnswer(i)">
+            <div (click)="channelMessages.openAnswer(i)">
+              <mat-icon class="interaction-bubble-comment">
                 comment
               </mat-icon>
             </div>
@@ -94,8 +94,8 @@
                   <!-- addEmoji(id oder index von nachricht) -->
                 </emoji-mart>
               </div>
-              <div>
-                <mat-icon class="interaction-bubble-comment" (click)="channelMessages.openAnswer(i)">
+              <div (click)="channelMessages.openAnswer(i)">
+                <mat-icon class="interaction-bubble-comment">
                   comment
                 </mat-icon>
               </div>

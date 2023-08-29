@@ -92,9 +92,7 @@ export class ChannelSelectionComponent implements OnInit {
    *
    * This method is responsible for triggering the slide-in animation of the secondary chat.
    */
-  openSecondaryChat() {
-    this.dcshService.chatSlideIn();
-  }
+ 
 
   /**
    * Opens the 'DialogProfileViewUsersComponent' dialog to display user profiles.
