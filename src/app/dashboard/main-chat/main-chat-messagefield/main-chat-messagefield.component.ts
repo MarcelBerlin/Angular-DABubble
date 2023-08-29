@@ -9,6 +9,7 @@ import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.serv
 import { EmojiPickerBossiService } from 'src/app/emoji-picker-bossi/services/emoji-picker-bossi.service';
 import { AddUserToMessageService } from 'src/app/services/add-user-to-message.service';
 import { MatDialog } from '@angular/material/dialog';
+import { NewMessageAmountService } from 'src/app/direct-chat/services/new-message-amount.service';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class MainChatMessagefieldComponent {
     public emojiService: EmojiPickerBossiService,
     public addUserToMessageService: AddUserToMessageService,
     public dialog: MatDialog,
+    private newMessageAmountService: NewMessageAmountService,
   ) { }
 
   currentUser() {
@@ -66,6 +68,7 @@ export class MainChatMessagefieldComponent {
     // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive) {
       this.directChatService.saveMessage();
+      this.newMessageAmountService.addPartnerDirectChatMessageAmount();
     }
   }
 

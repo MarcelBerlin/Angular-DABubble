@@ -216,11 +216,9 @@ export class MenuSidenavComponent implements OnInit {
     if (this.directChatService.directChatActive) {
       let clickedUserId: string = this.getUserData.userData[arrayId].id;
       this.directChatService.getChatId(clickedUserId);
-      if (this.newMessageAmountService.newMessagesPartnerIndex.includes(arrayId)){
-        setTimeout(() => {
-        this.newMessageAmountService.setLastMessageTimeStamp();
-      }, 1000);
-    }
+      setTimeout(() => {
+        this.newMessageAmountService.actualPartnerUserDataIndex = arrayId;
+      }, 5000);
     }
   }
 

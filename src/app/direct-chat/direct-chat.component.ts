@@ -59,7 +59,6 @@ export class DirectChatComponent {
       if (this.directChatService.directChatActive && this.directChatService.directChatIndex.directChatId) {
         this.directChatService.loadChatDataSets(this.directChatService.directChatIndex.directChatId);
       }
-      this.newMessageAmountService.checkForNewMessages();
     })
   }
 }
