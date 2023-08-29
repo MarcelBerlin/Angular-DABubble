@@ -219,11 +219,8 @@ export class MenuSidenavComponent implements OnInit {
       if (this.newMessageAmountService.newMessagesPartnerIndex.includes(arrayId)){
         setTimeout(() => {
         this.newMessageAmountService.setLastMessageTimeStamp();
-        console.log('called setLastMessageTimeStamp');
-
       }, 1000);
     }
-    
     }
   }
 

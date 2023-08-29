@@ -71,12 +71,13 @@ export class DataService {
    */
   getLoggedUserData(user: any): any {
     return {
-      email: user.email,
       name: user.name,
       img: user.img,
+      email: user.email,
       online: true,
-      userId: user.id,
       directChats: user.directChats,
+      userId: user.id,
+      channels: user.channels
     };
   }
 
