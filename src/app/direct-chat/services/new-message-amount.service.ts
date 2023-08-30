@@ -36,7 +36,6 @@ export class NewMessageAmountService {
     let partnerDirectChats = this.dataService.userData[this.actualPartnerUserDataIndex].directChats;
     for (let index = 0; index < partnerDirectChats.length; index++) {
       if (partnerDirectChats[index].directChatId == directChatId) {
-        console.log('partner directchats index: ', index);
         partnerDirectChats[index].newMessageAmount += 1;
         this.directChatService.updateOtherUser(this.actualPartnerUserDataIndex);
       }
@@ -49,7 +48,6 @@ export class NewMessageAmountService {
     let directChatId = this.directChatService.directChat.id;
     for (let index = 0; index < this.dataService.loggedInUserData.directChats.length; index++) {
       if (this.dataService.loggedInUserData.directChats[index].directChatId == directChatId) {
-        console.log('own directchats index: ', index);
         this.dataService.loggedInUserData.directChats[index].newMessageAmount = 0;
         this.dataService.updateUser();
       }
