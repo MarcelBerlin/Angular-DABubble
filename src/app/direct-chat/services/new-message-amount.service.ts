@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { Firestore, collection, doc, getDoc } from '@angular/fire/firestore';
 import { DirectChatService } from './direct-chat.service';
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,6 @@ export class NewMessageAmountService {
   constructor(
     private dataService: DataService,
     private directChatService: DirectChatService,
-    private firestore: Firestore
   ) {
     this.subcribeUserData();
   }
@@ -31,6 +29,11 @@ export class NewMessageAmountService {
   }
 
 
+  /**
+   * Increments the new message amount for the partner's direct chat and updates the other user's data.
+   * 
+   * @returns {void}
+   */
   addPartnerDirectChatMessageAmount(): void {
     let directChatId = this.directChatService.directChat.id;
     let partnerDirectChats = this.dataService.userData[this.actualPartnerUserDataIndex].directChats;
@@ -44,6 +47,11 @@ export class NewMessageAmountService {
   }
 
 
+  /**
+   * Sets the new message amount for the current user's direct chat to zero and updates the user's data.
+   * 
+   * @returns {void}
+   */
   setOwnMessageAmountToZero(): void {
     let directChatId = this.directChatService.directChat.id;
     for (let index = 0; index < this.dataService.loggedInUserData.directChats.length; index++) {
@@ -55,6 +63,11 @@ export class NewMessageAmountService {
   }
 
 
+  /**
+   * Creates an array of badges representing the new message amounts for each user's direct chats.
+   * 
+   * @returns {void}
+   */
   createDirectChatBadges(): void {
     this.bagesArray = [];
     for (let i = 0; i < this.dataService.userData.length; i++) {

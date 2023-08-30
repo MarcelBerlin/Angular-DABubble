@@ -420,6 +420,12 @@ export class DirectChatService {
   }
 
 
+  /**
+   * Updates the data of another user in Firestore.
+   * 
+   * @param {number} i - The index of the user in the `userData` array.
+   * @returns {Promise<void>} A promise that resolves when the update is successful.
+   */
   async updateOtherUser(i: number): Promise<void> {
     const qData = doc(this.firestore, 'users', this.dataService.userData[i].userId);
     const newData = this.dataService.userData[i];
