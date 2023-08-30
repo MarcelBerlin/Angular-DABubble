@@ -6,7 +6,7 @@ import { DirectChatService } from './direct-chat.service';
 })
 export class NewMessageAmountService {
   actualPartnerUserDataIndex: number;
-  bagesArray = [];
+  badgesArray = [];
 
 
   constructor(
@@ -69,13 +69,13 @@ export class NewMessageAmountService {
    * @returns {void}
    */
   createDirectChatBadges(): void {
-    this.bagesArray = [];
+    this.badgesArray = [];
     for (let i = 0; i < this.dataService.userData.length; i++) {
       this.dataService.loggedInUserData.directChats.forEach(directChat => {
         if (directChat.partnerId == this.dataService.userData[i].userId) {
-          this.bagesArray[i] = directChat.newMessageAmount;
-        } else if (this.bagesArray[i] == undefined) {
-          this.bagesArray[i] = 0;
+          this.badgesArray[i] = directChat.newMessageAmount;
+        } else if (this.badgesArray[i] == undefined) {
+          this.badgesArray[i] = 0;
         }
       });
     }
