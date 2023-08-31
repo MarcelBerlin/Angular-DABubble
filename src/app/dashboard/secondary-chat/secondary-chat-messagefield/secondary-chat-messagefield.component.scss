@@ -5,62 +5,117 @@
     position: relative;
     display: flex;
     flex-direction: row;
-  }
 
-  .avatar-left {
-    padding-top: 16px;
-    width: 70px;
-    height: 70px;
+    .avatar-left {
+      padding-top: 16px;
+      width: 70px;
+      height: 70px;
 
-    img {
-      width: 70px !important;
-      height: 70px !important;
-      border-radius: 50%;
-      object-fit: cover;
+      img {
+        width: 70px !important;
+        height: 70px !important;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
-  }
 
-  .message-details-left {
-    display: flex;
-    flex-direction: column;
-    padding-left: 8px;
-    width: 70%;
-
-    .name-time {
+    .message-details-left {
       display: flex;
-      flex-direction: column-reverse;
-      justify-content: flex-end;
-      margin-top: 20px;
-      margin-left: 8px;
+      flex-direction: column;
+      padding-left: 8px;
+      width: 70%;
 
-      .name {
-        font-family: "nunito";
-        font-size: 18px;
-        font-weight: 700;
-        padding-right: 20px;
+      .name-time {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        margin-top: 20px;
+        margin-left: 8px;
+
+        .name {
+          font-family: "nunito";
+          font-size: 18px;
+          font-weight: 700;
+          padding-right: 20px;
+        }
+
+        .time {
+          color: #686868;
+          font-family: "nunito";
+          font-size: 14px;
+        }
       }
 
-      .time {
-        color: #686868;
-        font-family: "nunito";
-        font-size: 14px;
+      .message-content-left {
+        background-color: #eceefe;
+        border-radius: 0 20px 20px 20px;
+        width: fit-content;
+        padding: 16px;
+
+        span {
+          font-size: 16px;
+        }
       }
     }
-
-    .message-content-left {
-      background-color: #eceefe;
-      border-radius: 0 20px 20px 20px;
-      width: fit-content;
-      padding: 16px;
-
-      span {
-        font-size: 16px;
-      }
-    }
-
   }
 
+  .full-message-right {
+    position: relative;
+    display: flex;
+    flex-direction: row;
 
+    .avatar-right {
+      padding-top: 16px;
+      width: 70px;
+      height: 70px;
+
+      img {
+        width: 70px !important;
+        height: 70px !important;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .message-details-right {
+      display: flex;
+      flex-direction: column;
+      padding-right: 8px;
+      width: 70%;
+
+      .name-time {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        margin-top: 20px;
+        margin-right: 8px;
+
+        .name {
+          font-family: "nunito";
+          font-size: 18px;
+          font-weight: 700;
+          padding-left: 20px;
+        }
+
+        .time {
+          color: #686868;
+          font-family: "nunito";
+          font-size: 14px;
+        }
+      }
+
+      .message-content-left {
+        background-color: #eceefe;
+        border-radius: 0 20px 20px 20px;
+        width: fit-content;
+        padding: 16px;
+
+        span {
+          font-size: 16px;
+        }
+      }
+    }
+  }
 
   .full-message-left {
     // width: 100%;
@@ -99,10 +154,6 @@
     .single-message-left-container:hover .message-content-left {
       background-color: white;
     }
-
-
-
-
 
     .reaction-bar-left {
       display: flex;
@@ -166,7 +217,6 @@
     }
   }
 
-
   // .timeLine {
   //   position: relative;
   //   display: flex;
@@ -191,11 +241,6 @@
   //     font-size: 18px;
   //   }
   // }
-
-
-
-
-
 
   // // ######  USER MESSAGE  ######
 

@@ -13,7 +13,7 @@ import { SecondaryChatAnswerService } from '../service/secondary-chat-answer.ser
   templateUrl: './secondary-chat-messagefield.component.html',
   styleUrls: ['./secondary-chat-messagefield.component.scss'],
 })
-export class SecondaryChatMessagefieldComponent {
+export class SecondaryChatMessagefieldComponent implements OnInit {
   threadEmojiLeft: boolean = false;
   threadEmojiRight: boolean = false;
   index: number = 0;
@@ -37,6 +37,10 @@ export class SecondaryChatMessagefieldComponent {
     public answerService: SecondaryChatAnswerService
   
   ) { 
+    
+  }
+
+  ngOnInit() {
     this.answerService.getThreadAnswer();
   }
 
