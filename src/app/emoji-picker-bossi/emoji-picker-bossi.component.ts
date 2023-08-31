@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { EmojiPickerBossiService } from './services/emoji-picker-bossi.service';
 import { DirectChatService } from '../direct-chat/services/direct-chat.service';
+import { UserToMessageService } from '../user-to-message/user-to-message.service';
 
 @Component({
   selector: 'app-emoji-picker-bossi',
@@ -33,6 +34,7 @@ export class EmojiPickerBossiComponent {
   constructor(
     private emojiService: EmojiPickerBossiService,
     private directChatService: DirectChatService,
+    private userToMessageService: UserToMessageService
   ) { }
 
 
@@ -152,6 +154,9 @@ export class EmojiPickerBossiComponent {
    */
   setEmoji(x: any): any {
     this.directChatService.directMessage += x.emoji;
+    // edit by Bossi
+    this.userToMessageService.insertEmoji(x.emoji);
+    
     this.emojiService.toggleEmojiSelector();
   }
 

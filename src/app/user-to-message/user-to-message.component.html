@@ -1,6 +1,6 @@
 <div class="box">
   <div class="inputDiv" contenteditable="true">
-    <p *ngFor="let _ of memberCache; let i = index" [attr.id]="'p' + i">
+    <p *ngFor="let _ of userToMessageService.memberCache; let i = index" [attr.id]="'p' + i">
       <!-- Info Box -->
       <span class="infoBox" *ngIf="userToMessageService.showInfoBox == i">
         <span>Name: {{ dataService.userData[calculateIndexInput()].name }}</span
@@ -10,12 +10,15 @@
       <!-- Ausgewählte User -->
       <span
         class="member"
-        *ngIf="i > 0"
+        *ngIf="i > 0 && userToMessageService.memberCache[i].number != -1"
         (mouseenter)="showInfoInput(i)"
         (mouseleave)="hideInfoInput()"
         [attr.id]="'span' + i"
-        >@ {{ memberCache[i].member }} </span
-      >{{ invisibleSign }}
+        >@ {{ userToMessageService.memberCache[i].member }} 
+        </span>{{ invisibleSign }}
+        <span *ngIf="userToMessageService.memberCache[i].number == -1" class="emojiSpan">
+          {{userToMessageService.memberCache[i].member}}
+        </span>
     </p>
   </div>
 

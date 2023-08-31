@@ -12,7 +12,8 @@ import { UserToMessageService } from './user-to-message.service';
 export class UserToMessageComponent {
   // @ViewChild('editableDiv') editableDiv!: ElementRef;
 
-  memberCache = [{ number: 0, member: '', id: 0 }]; // Zwischenspeicher
+  // memberCache = [{ number: 0, member: '', id: 0 }]; // Zwischenspeicher
+
   selectedUserIndex!: number;
   invisibleSign: string = '\u200B'; // verstecktes Zeichen
   // showInfoBox: number = -1;
@@ -26,7 +27,9 @@ export class UserToMessageComponent {
 
   showInfoInput = (index: number) => (this.userToMessageService.showInfoBox = index);
   hideInfoInput = () => (this.userToMessageService.showInfoBox = -1);
-  calculateIndexInput = (): number => (this.memberCache[this.userToMessageService.showInfoBox].id);
+  // calculateIndexInput = (): number => (this.memberCache[this.userToMessageService.showInfoBox].id);
+  // edit by Bossi
+  calculateIndexInput = (): number => (this.userToMessageService.memberCache[this.userToMessageService.showInfoBox].id);
   
   // showInfoOutput =(index: number) => (this.showInfoBox = index);
   // hideInfoOutput = () => (this.showInfoBox = -1);
@@ -34,34 +37,63 @@ export class UserToMessageComponent {
 
   // mit click auf den user wird der selectedUser in den Zwischenspeicher gespeichert
   selectedUser(index: number) {
-    this.selectedUserIndex = index;
-    this.memberCache.push({
-      number: this.memberCache.length,
+    // this.selectedUserIndex = index;
+    // this.memberCache.push({
+    //   number: this.memberCache.length,
+    //   member: this.dataService.userData[index].name,
+    //   id: index,
+    // });
+    // edit by Bossi
+    this.userToMessageService.memberCache.push({
+      number: this.userToMessageService.memberCache.length,
       member: this.dataService.userData[index].name,
       id: index,
     });
+
     this.varService.setVar('sign', false);
   }
 
   send() {
-    for (let i = 0; i < this.memberCache.length; i++) {
-      let spanElement = document.getElementById(`span${i}`);
-      let pElement = document.getElementById(`p${i}`);
+  //   for (let i = 0; i < this.memberCache.length; i++) {
+  //     let spanElement = document.getElementById(`span${i}`);
+  //     let pElement = document.getElementById(`p${i}`);
 
-      let spanElementHTML = spanElement?.innerText;
-      let pElementHTML = pElement?.innerText;
+  //     let spanElementHTML = spanElement?.innerText;
+  //     let pElementHTML = pElement?.innerText;
 
-      if (pElementHTML && spanElementHTML) {
-        pElementHTML = pElementHTML.replace(spanElementHTML, '');
-      }
+  //     if (pElementHTML && spanElementHTML) {
+  //       pElementHTML = pElementHTML.replace(spanElementHTML, '');
+  //     }
 
-      this.userToMessageService.saveArray.push({
-        span: spanElementHTML,
-        p: pElementHTML,
-        userId: this.memberCache[i].id,
-      });
+  //     this.userToMessageService.saveArray.push({
+  //       span: spanElementHTML,
+  //       p: pElementHTML,
+  //       userId: this.memberCache[i].id,
+  //     });
+  //   }
+  //   this.memberCache = [{ number: 0, member: '', id: 0 }];
+  //   console.log(this.userToMessageService.saveArray);
+  // }
+
+  //edit by Bossi
+  for (let i = 0; i < this.userToMessageService.memberCache.length; i++) {
+    let spanElement = document.getElementById(`span${i}`);
+    let pElement = document.getElementById(`p${i}`);
+
+    let spanElementHTML = spanElement?.innerText;
+    let pElementHTML = pElement?.innerText;
+
+    if (pElementHTML && spanElementHTML) {
+      pElementHTML = pElementHTML.replace(spanElementHTML, '');
     }
-    this.memberCache = [{ number: 0, member: '', id: 0 }];
-    console.log(this.userToMessageService.saveArray);
+
+    this.userToMessageService.saveArray.push({
+      span: spanElementHTML,
+      p: pElementHTML,
+      userId: this.userToMessageService.memberCache[i].id,
+    });
   }
+  this.userToMessageService.memberCache = [{ number: 0, member: '', id: 0 }];
+  console.log(this.userToMessageService.saveArray);
+}
 }
