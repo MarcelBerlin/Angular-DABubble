@@ -1,17 +1,18 @@
 <div class="input-container">
 
     <div class="filter-menu">
-        <input contenteditable="true" [(ngModel)]="inputValue" 
-        class="input-thread" *ngIf="showUsers" type="text" placeholder="Antworten...">
+        <input contenteditable="true" [(ngModel)]="answerService.answerText"  class="input-thread" *ngIf="showUsers" type="text"
+            placeholder="Antworten...">
 
-        <mat-form-field appearance="fill" *ngIf="!showUsers">
-            <input [(ngModel)]="userValue" class="mat-input" [formControl]="formcontrol" type="text" matInput [matAutocomplete]="auto">
-            <mat-autocomplete  #auto="matAutocomplete">
+        <!-- <mat-form-field appearance="fill" *ngIf="!showUsers">
+            <input [(ngModel)]="userValue" class="mat-input" [formControl]="formcontrol" type="text" matInput
+                [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
                 <mat-option *ngFor="let user of users" [value]="user">
-                  {{ user }}
+                    {{ user }}
                 </mat-option>
-              </mat-autocomplete>
-        </mat-form-field>
+            </mat-autocomplete>
+        </mat-form-field> -->
     </div>
 
     <div class="icons-container">
@@ -28,6 +29,6 @@
                 <img (click)="showAutocomplete()" src="assets/img/email.png" />
             </div>
         </div>
-        <div class="send-icon"><img src="assets/img/send_icon.png" /></div>
+        <div class="send-icon"><img src="assets/img/send_icon.png" (click)="answerService.sendAnswer()" /></div>
     </div>
 </div>

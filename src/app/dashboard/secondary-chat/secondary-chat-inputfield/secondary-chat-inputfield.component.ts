@@ -8,6 +8,7 @@ import { VariablesService } from 'src/app/services/variables.service';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SecondaryChatAnswerService } from '../service/secondary-chat-answer.service';
 
 @Component({
   selector: 'app-secondary-chat-inputfield',
@@ -22,10 +23,9 @@ export class SecondaryChatInputfieldComponent {
   showUsers: boolean = true;
   formcontrol = new FormControl('');
   userValue: string = '';
-  inputValue: string = '';
+  inputValue = this.answerService.answerText;
   markedUser: string = '';
   users = this.dialogAddService.tagsData[this.varService.selectedChannel].members;
-
   directMessage: string = '';
   loggedUser: string = '';
   searchField: string = '';
@@ -35,6 +35,7 @@ export class SecondaryChatInputfieldComponent {
     public dialogAddService: DialogAddService,
     public messageService: MessageService,
     public chatService: ChatService,
+    public answerService: SecondaryChatAnswerService
   ) { }
 
 

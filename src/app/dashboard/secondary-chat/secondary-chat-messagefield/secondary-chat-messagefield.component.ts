@@ -6,6 +6,7 @@ import { AppComponent } from 'src/app/app.component';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
+import { SecondaryChatAnswerService } from '../service/secondary-chat-answer.service';
 
 @Component({
   selector: 'app-secondary-chat-messagefield',
@@ -32,9 +33,12 @@ export class SecondaryChatMessagefieldComponent {
     public getMessage: MessageService,
     public chatService: ChatService,
     public channelMessages: ChannelMessagesService,
-    public dataService: DataService
+    public dataService: DataService,
+    public answerService: SecondaryChatAnswerService
   
-  ) { }
+  ) { 
+    this.answerService.getThreadAnswer();
+  }
 
   getSelectedMessageStatus() {
     return this.channelMessages.getSelectedMessageStatus();
