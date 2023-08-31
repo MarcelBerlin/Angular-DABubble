@@ -9,8 +9,8 @@
 
           <div class="message-details-left">
 
-            <div class="name-time">
-              <div class="name">{{ message.userName }}</div>
+            <div class="name-time-left">
+              <div class="name-left">{{ message.userName }}</div>
               <div class="time">{{ message.dateString }} {{ message.clockString }}</div>
             </div>
 
@@ -31,7 +31,7 @@
   </div>
 
   <div *ngFor="let answer of answerService.answerData; let i = index">
-    <div *ngIf="channelMessages.selectedMessageIndex === i && answerService.answerData">
+    <div *ngIf="channelMessages.selectedMessageIndex === i">
       <div *ngIf="answer.userName == this.dataService.loggedInUserData.name">
         <div class="thread-content">
           <div class="full-message-right">
@@ -40,8 +40,8 @@
             </div>
 
             <div class="message-details-right">
-              <div class="name-time">
-                <div class="name">{{ answer.userName }}</div>
+              <div class="name-time-right">
+                <div class="name-right">{{ answer.userName }}</div>
                 <div class="time">{{ answer.dateString }} {{ answer.clockString }}</div>
               </div>
 

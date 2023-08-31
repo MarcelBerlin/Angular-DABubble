@@ -16,8 +16,7 @@ import { SecondaryChatAnswerService } from '../service/secondary-chat-answer.ser
 export class SecondaryChatMessagefieldComponent implements OnInit {
   threadEmojiLeft: boolean = false;
   threadEmojiRight: boolean = false;
-  index: number = 0;
-  
+  index: number = 0;   
 
   emojiPickerRight: boolean = false;
   emojiPickerLeft: boolean = false;
@@ -41,7 +40,8 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.answerService.getThreadAnswer();
+    this.answerService.getThreadAnswer() ;
+    
   }
 
   getSelectedMessageStatus() {

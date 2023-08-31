@@ -25,14 +25,14 @@
       padding-left: 8px;
       width: 70%;
 
-      .name-time {
+      .name-time-left {
         display: flex;
         flex-direction: column-reverse;
         justify-content: flex-end;
         margin-top: 20px;
         margin-left: 8px;
 
-        .name {
+        .name-left {
           font-family: "nunito";
           font-size: 18px;
           font-weight: 700;
@@ -83,18 +83,18 @@
       padding-right: 8px;
       width: 70%;
 
-      .name-time {
+      .name-time-right {
         display: flex;
         flex-direction: column-reverse;
         justify-content: flex-end;
         margin-top: 20px;
-        margin-right: 8px;
+        margin-left: 8px;
 
-        .name {
+        .name-right {
           font-family: "nunito";
           font-size: 18px;
           font-weight: 700;
-          padding-left: 20px;
+          padding-right: 20px;
         }
 
         .time {
@@ -104,7 +104,7 @@
         }
       }
 
-      .message-content-left {
+      .message-content-right {
         background-color: #eceefe;
         border-radius: 0 20px 20px 20px;
         width: fit-content;

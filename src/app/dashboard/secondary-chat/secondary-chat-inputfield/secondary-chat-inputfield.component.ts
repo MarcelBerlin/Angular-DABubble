@@ -38,7 +38,7 @@ export class SecondaryChatInputfieldComponent {
     public answerService: SecondaryChatAnswerService
   ) { }
 
-
+  
   showAutocomplete() {
     this.showUsers = !this.showUsers;
     this.inputValue = '@' + this.userValue;

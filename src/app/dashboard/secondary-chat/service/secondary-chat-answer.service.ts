@@ -39,7 +39,7 @@ export class SecondaryChatAnswerService {
     this.newAnswer.userId = this.dataService.loggedInUserData.userId;
     this.newAnswer.userName = this.dataService.loggedInUserData.name;
     this.newAnswer.userImg = this.dataService.loggedInUserData.img;
-    this.newAnswer.content = this.answerText;
+    this.newAnswer.content = this.answerText;    
 
     const timeStampData: ChannelTimeStamp =
       this.directChatService.getActualTimeStampForChannels();
@@ -51,7 +51,7 @@ export class SecondaryChatAnswerService {
     await addDoc(coll, this.newAnswer.toJSON()); // fügt eine neue Nachricht aus dem Textfeld in die Firebase Collection hinzu bzw. returned die Message in docId
     this.answerData.push(this.newAnswer);
     this.answerText = '';
-    console.log(this.answerData);
+    
   }
 
   async getThreadAnswer() {
@@ -61,6 +61,8 @@ export class SecondaryChatAnswerService {
       this.answerData = answer.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
       );
+      console.log(this.answerData);
     });
+    
   }
 }
