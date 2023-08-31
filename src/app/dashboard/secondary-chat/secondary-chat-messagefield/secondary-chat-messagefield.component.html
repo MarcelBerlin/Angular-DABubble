@@ -31,14 +31,17 @@
 
   </div>
 
-  <div *ngFor="let answer of answerService.answerData">
-    <div>
-      <div class="name">{{ answer.userName }}</div>
-      <div class="time">{{ answer.dateString }} {{ answer.clockString }}</div>
-    </div>
+  <div *ngFor="let answer of answerService.answerData; let i = index">
+    <div *ngIf="channelMessages.selectedMessageIndex === i">
+      <div>
+        <div class="name">{{ answer.userName }}</div>
+        <div class="time">{{ answer.dateString }} {{ answer.clockString }}</div>
+      </div>
 
-    <div>
-      {{ answer.content }}
+      <div>
+        {{ answer.content }}
+      </div>
     </div>
   </div>
+
 </div>
