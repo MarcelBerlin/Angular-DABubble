@@ -10,6 +10,7 @@ import { VariablesService } from '../services/variables.service';
 import { DirectChatService } from './services/direct-chat.service';
 import { TimelinesService } from './services/timelines.service';
 import { NewMessageAmountService } from './services/new-message-amount.service';
+import { UserToMessageService } from '../user-to-message/user-to-message.service';
 
 @Component({
   selector: 'app-direct-chat',
@@ -32,7 +33,8 @@ export class DirectChatComponent {
     public dataService: DataService,
     public directChatService: DirectChatService,
     public timelinesService: TimelinesService,
-    private newMessageAmountService: NewMessageAmountService
+    private newMessageAmountService: NewMessageAmountService,
+    public userToMessageService: UserToMessageService
     ) {
       this.getChanges();
     }
@@ -61,4 +63,9 @@ export class DirectChatComponent {
       }
     })
   }
+
+
+  showInfoOutput =(index: number) => (this.userToMessageService.showInfoBox = index);
+  hideInfoOutput = () => (this.userToMessageService.showInfoBox = -1);
+  calculateIndexOutput = (): number => (this.userToMessageService.saveArray[this.userToMessageService.showInfoBox].userId);
 }

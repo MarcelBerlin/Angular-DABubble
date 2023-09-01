@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { EmojiPickerBossiService } from './services/emoji-picker-bossi.service';
 import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 import { UserToMessageService } from '../user-to-message/user-to-message.service';
+import { VariablesService } from '../services/variables.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-emoji-picker-bossi',
@@ -34,7 +36,9 @@ export class EmojiPickerBossiComponent {
   constructor(
     private emojiService: EmojiPickerBossiService,
     private directChatService: DirectChatService,
-    private userToMessageService: UserToMessageService
+    private userToMessageService: UserToMessageService,
+    private varService: VariablesService,
+    private dataService: DataService
   ) { }
 
 
@@ -149,15 +153,35 @@ export class EmojiPickerBossiComponent {
 
 
   /**
-   * Sets the selected emoji to the direct chat message and closes the emoji selector.
-   * @param {any} x - The selected emoji object.
+   * Inserts an emoji into a chat message based on the current chat context.
+   * 
+   * @param {any} x - The emoji object to insert.
+   * @returns {void}
    */
-  setEmoji(x: any): any {
-    this.directChatService.directMessage += x.emoji;
-    // edit by Bossi
-    this.userToMessageService.insertEmoji(x.emoji);
-    
+  setEmoji(x: any): void {
+    console.log(this.varService.mainChatHead);
+    if(this.varService.mainChatHead == 1 && !this.currentUser()){
+      this.directChatService.directMessage += x.emoji;
+    }
+    if(this.varService.mainChatHead == 1 && this.currentUser()){
+      this.userToMessageService.insertEmoji(x.emoji);
+    }
     this.emojiService.toggleEmojiSelector();
+  }
+
+
+  /**
+   * Check if the currently logged-in user matches the selected user to message based on 
+   * their email addresses.
+   * 
+   * @returns {boolean} - `true` if the currently logged-in user matches the selected user;
+   * otherwise, `false`
+   */
+  currentUser(): boolean {
+    return (
+      this.dataService.loggedInUserData.email ===
+      this.dataService.userData[this.varService.selectedUserToMessage].email
+    );
   }
 
 
