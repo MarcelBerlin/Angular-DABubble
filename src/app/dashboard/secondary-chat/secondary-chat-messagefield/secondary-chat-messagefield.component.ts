@@ -16,7 +16,7 @@ import { SecondaryChatAnswerService } from '../service/secondary-chat-answer.ser
 export class SecondaryChatMessagefieldComponent implements OnInit {
   threadEmojiLeft: boolean = false;
   threadEmojiRight: boolean = false;
-  index: number = 0;   
+  index: number = 0;
 
   emojiPickerRight: boolean = false;
   emojiPickerLeft: boolean = false;
@@ -34,21 +34,18 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     public channelMessages: ChannelMessagesService,
     public dataService: DataService,
     public answerService: SecondaryChatAnswerService
-  
-  ) { 
-    
-  }
+
+  ) { }
 
   ngOnInit() {
-    this.answerService.getThreadAnswer() ;
-    
+    this.answerService.getThreadAnswer();
   }
 
   getSelectedMessageStatus() {
     return this.channelMessages.getSelectedMessageStatus();
   }
 
-  public addEmojiLeft(event) {
+  addEmojiLeft(event) {
     this.threadEmojiLeft = true;
     this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
     this.reactionArrLeft.push(this.getMessage.emojis);
@@ -58,25 +55,20 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     }
   }
 
-  public addEmojiRight(event) {
+  addEmojiRight(event) {
     this.threadEmojiRight = true;
     this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
     this.reactionArrRight.push(this.getMessage.emojis);
     this.emojiPickerRight = false;
-    if (this.reactionArrRight.length > 1) {
-      this.emojiFilterRight(this.reactionArrRight);
-    }
+    if (this.reactionArrRight.length > 1) { this.emojiFilterRight(this.reactionArrRight) }
   }
 
   emojiFilterLeft(reactionArr) {
     const emojiCountMapLeft: any = new Map();
     let reactionBarLeft = document.getElementById('reactionBarLeft');
     reactionArr.forEach((emoji) => {
-      if (emojiCountMapLeft.has(emoji)) {
-        emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
-      } else {
-        emojiCountMapLeft.set(emoji, 1);
-      }
+      if (emojiCountMapLeft.has(emoji)) { emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1); }
+      else { emojiCountMapLeft.set(emoji, 1); }
     });
     reactionBarLeft.innerHTML = '';
     emojiCountMapLeft.forEach((count, emoji) => {
@@ -87,8 +79,7 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
         </div>`;
     });
     if (reactionArr.length >= 10) {
-      reactionBarLeft.innerHTML =
-        'Zu viele reaktionen. Wir arbeiten gerade daran';
+      reactionBarLeft.innerHTML = 'Zu viele reaktionen. Wir arbeiten gerade daran';
     }
   }
 

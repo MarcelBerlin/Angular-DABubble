@@ -1,7 +1,7 @@
 <div *ngIf="getSelectedMessageStatus() && channelMessages.messageData">
-  <div *ngFor="let message of channelMessages.messageData; let i = index">
-    <div *ngIf="channelMessages.selectedMessageIndex === i">      
-      <div class="thread-content">
+  <div class="thread-content">
+    <div *ngFor="let message of channelMessages.messageData; let i = index">
+      <div *ngIf="channelMessages.selectedMessageIndex === i">
         <div class="full-message-left">
           <div class="avatar-left">
             <img src="{{ message.userImg }}">
@@ -28,12 +28,10 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div *ngFor="let answer of answerService.answerData; let i = index">
-    <div *ngIf="channelMessages.selectedMessageIndex === i">
-      <div *ngIf="answer.userName == this.dataService.loggedInUserData.name">
-        <div class="thread-content">
+    <div *ngFor="let answer of answerService.answerData; let i = index">
+      <div *ngIf="channelMessages.selectedMessageIndex === i">
+        <div *ngIf="answer.userName == this.dataService.loggedInUserData.name">
           <div class="full-message-right">
             <div class="avatar-right">
               <img src="{{ answer.userImg }}">
@@ -51,11 +49,9 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div *ngIf="answer.userName != this.dataService.loggedInUserData.name">
-        <div class="thread-content">
-          <div class="full-message-right">
+        <div *ngIf="answer.userName != this.dataService.loggedInUserData.name">
+          <div class="full-message-left">
             <div class="avatar-left">
               <img src="{{ answer.userImg }}">
             </div>
@@ -75,5 +71,4 @@
       </div>
     </div>
   </div>
-
 </div>

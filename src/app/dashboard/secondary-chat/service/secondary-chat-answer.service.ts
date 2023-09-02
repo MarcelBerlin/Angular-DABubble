@@ -51,7 +51,6 @@ export class SecondaryChatAnswerService {
     await addDoc(coll, this.newAnswer.toJSON()); // fügt eine neue Nachricht aus dem Textfeld in die Firebase Collection hinzu bzw. returned die Message in docId
     this.answerData.push(this.newAnswer);
     this.answerText = '';
-    
   }
 
   async getThreadAnswer() {
@@ -63,6 +62,5 @@ export class SecondaryChatAnswerService {
       );
       console.log(this.answerData);
     });
-    
   }
 }
