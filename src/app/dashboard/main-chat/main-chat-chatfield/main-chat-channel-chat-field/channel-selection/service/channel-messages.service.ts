@@ -13,31 +13,33 @@ export class ChannelMessagesService {
   messageData: any = [];
   selectedMessage = false;
   selectedMessageIndex: number | null = null;
-  
+
   constructor(
     private firestore: Firestore,
     public timelinesService: TimelinesService,
-    private dcshService: DashboardComponentsShowHideService,
+    private dcshService: DashboardComponentsShowHideService
   ) {
     this.allMessages();
-   }
+  }
 
 
   async allMessages() {
     const coll = collection(this.firestore, 'newMessages');
     this.messages$ = collectionData(coll, { idField: 'id' });
-    await this.messages$.subscribe((message: any) => {            
+    await this.messages$.subscribe((message: any) => {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
-      );          
-    });        
+      );
+    });
   }
 
   openAnswer(index: number) {
     this.selectedMessageIndex = index;
-    this.selectedMessage = true;  
+    this.selectedMessage = true;
     this.dcshService.chatSlideIn();
-    console.log(this.messageData);         
+    console.log(this.messageData);
+    console.log('es fehlen antworten auf den thread. siehe secondary answer Service log');
+    
   }
 
   getSelectedMessageStatus() {

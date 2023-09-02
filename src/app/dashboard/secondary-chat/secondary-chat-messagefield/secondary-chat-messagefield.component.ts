@@ -34,7 +34,6 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     public channelMessages: ChannelMessagesService,
     public dataService: DataService,
     public answerService: SecondaryChatAnswerService
-
   ) { }
 
   ngOnInit() {
@@ -50,9 +49,7 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
     this.reactionArrLeft.push(this.getMessage.emojis);
     this.emojiPickerLeft = false;
-    if (this.reactionArrLeft.length > 1) {
-      this.emojiFilterLeft(this.reactionArrLeft);
-    }
+    if (this.reactionArrLeft.length > 1) {this.emojiFilterLeft(this.reactionArrLeft)};
   }
 
   addEmojiRight(event) {
@@ -78,27 +75,23 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
           </span>
         </div>`;
     });
-    if (reactionArr.length >= 10) {
-      reactionBarLeft.innerHTML = 'Zu viele reaktionen. Wir arbeiten gerade daran';
-    }
+    if (reactionArr.length >= 10) {reactionBarLeft.innerHTML = 'Zu viele reaktionen. Wir arbeiten gerade daran'};
   }
 
   emojiFilterRight(reactionArr) {
     const emojiCountMapRight: any = new Map();
     let reactionBarRight = document.getElementById('reactionBarRight');
     reactionArr.forEach((emoji) => {
-      if (emojiCountMapRight.has(emoji)) {
-        emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
-      } else {
-        emojiCountMapRight.set(emoji, 1);
+      if (emojiCountMapRight.has(emoji)) { emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
+      } else { emojiCountMapRight.set(emoji, 1);
       }
     });
     reactionBarRight.innerHTML = '';
     emojiCountMapRight.forEach((count, emoji) => {
-      reactionBarRight.innerHTML += `<div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
+      reactionBarRight.innerHTML += `
+      <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reaction-container"> 
+      <span> ${emoji} ${count} </span> </div>`;
     });
-    if (reactionArr.length >= 7) {
-      reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran';
-    }
+    if (reactionArr.length >= 7) { reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran'};
   }
 }

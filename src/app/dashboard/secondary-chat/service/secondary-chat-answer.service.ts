@@ -12,6 +12,7 @@ import { DataService } from 'src/app/services/data.service';
 import { VariablesService } from 'src/app/services/variables.service';
 import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
 import { ChannelTimeStamp } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
+import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +29,10 @@ export class SecondaryChatAnswerService {
     private dialogAddService: DialogAddService,
     private dataService: DataService,
     public varService: VariablesService,
-    private directChatService: DirectChatService
-  ) {}
+    private directChatService: DirectChatService,
+    private channelMessages: ChannelMessagesService
+  ) {
+   }
 
   async sendAnswer() {
     this.newAnswer.channelId =
