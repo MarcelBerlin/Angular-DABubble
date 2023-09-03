@@ -9,7 +9,6 @@ import { MessageService } from '../services/messages.service';
 import { VariablesService } from '../services/variables.service';
 import { DirectChatService } from './services/direct-chat.service';
 import { TimelinesService } from './services/timelines.service';
-import { NewMessageAmountService } from './services/new-message-amount.service';
 import { UserToMessageService } from '../user-to-message/user-to-message.service';
 
 @Component({
@@ -21,10 +20,10 @@ export class DirectChatComponent {
   hoveredMessagesMainChat: boolean = false;
   emptyChat: boolean = false;
   chatText: string = '';
+  showInfoBox: number = -1;
 
 
   constructor(
-    private dcshService: DashboardComponentsShowHideService,
     private dialog: Dialog,
     public varService: VariablesService,
     public dialogAdd: DialogAddService,
@@ -33,7 +32,6 @@ export class DirectChatComponent {
     public dataService: DataService,
     public directChatService: DirectChatService,
     public timelinesService: TimelinesService,
-    private newMessageAmountService: NewMessageAmountService,
     public userToMessageService: UserToMessageService,
   ) {
     this.getChanges();
@@ -65,9 +63,24 @@ export class DirectChatComponent {
 
   }
 
-  showInfoBox: number = -1;
-  showInfoOutput = (index: number) => (this.showInfoBox = index);
-  hideInfoOutput = () => (this.showInfoBox = -1);
-  
 
+  /**
+   * Displays additional information or an info box for an item or element at the specified index.
+   *
+   * @param {number} index - The index of the item or element for which to display information.
+   * @returns {void}
+   */
+  showInfoOutput(index: number):void{
+    this.showInfoBox = index;
+  }
+
+
+  /**
+   * Hides or closes the currently displayed information or info box.
+   * 
+   * @returns {void}
+   */
+  hideInfoOutput(): void {
+    this.showInfoBox = -1
+  }
 }
