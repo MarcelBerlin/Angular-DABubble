@@ -2,7 +2,7 @@ export class ActualChat {
     name: string;
     date: string;
     time: string;
-    message: string;
+    message: any;
     dateTimeNumber: number;
 
     constructer(obj?: any) {

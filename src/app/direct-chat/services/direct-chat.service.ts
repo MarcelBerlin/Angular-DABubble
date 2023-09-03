@@ -7,6 +7,7 @@ import { ActualChat } from '../models/actual-chat.class';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { TimelinesService } from './timelines.service';
 import { ChannelTimeStamp } from 'src/app/dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
+import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,8 @@ export class DirectChatService {
   constructor(
     private dataService: DataService,
     private firestore: Firestore,
-    private timelineService: TimelinesService
+    private timelineService: TimelinesService,
+    private userToMessageService: UserToMessageService,
   ) { }
 
 
@@ -434,6 +436,28 @@ export class DirectChatService {
     }).catch((error) => {
       console.log('update other user failed');
     })
+  }
+
+  // Testarea für neues Message Format
+  saveMessage2(): void {
+    this.directChatActive = false;
+    let today: Date = new Date();
+
+    this.actualChat.message = this.userToMessageService.saveArray;
+    console.log('save message: ', this.userToMessageService.saveArray);
+    console.log('actualChat: ', this.actualChat);
+    this.actualChat.name = this.dataService.loggedInUserData.name;
+    this.actualChat.date = this.createDateString(today);
+    this.actualChat.time = this.createClockString(today);
+    this.actualChat.dateTimeNumber = today.getTime();
+    console.log(this.directChat.chat)
+    this.directChat.chat.push(this.actualChat.toJSON());
+    console.log(this.directChat.chat);
+    this.directMessage = '';
+    debugger;
+    this.updateFirestoreChat();
+    debugger;
+    this.updateFirestoreDirectChatIndex();
   }
 
   

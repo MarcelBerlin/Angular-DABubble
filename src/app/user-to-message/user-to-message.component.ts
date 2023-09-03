@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { VariablesService } from '../services/variables.service';
 import { UserToMessageService } from './user-to-message.service';
+import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 
 @Component({
   selector: 'app-user-to-message',
@@ -22,7 +23,8 @@ export class UserToMessageComponent {
   constructor(
     public dataService: DataService,
     public varService: VariablesService,
-    public userToMessageService: UserToMessageService
+    public userToMessageService: UserToMessageService,
+    private directChatService: DirectChatService
   ) {}
 
   showInfoInput = (index: number) => (this.userToMessageService.showInfoBox = index);
@@ -49,9 +51,11 @@ export class UserToMessageComponent {
       member: this.dataService.userData[index].name,
       id: index,
     });
-
     this.varService.setVar('sign', false);
   }
+
+
+  
 
   send() {
   //   for (let i = 0; i < this.memberCache.length; i++) {
@@ -95,5 +99,9 @@ export class UserToMessageComponent {
   }
   this.userToMessageService.memberCache = [{ number: 0, member: '', id: 0 }];
   console.log(this.userToMessageService.saveArray);
+  setTimeout(() => {
+    this.directChatService.saveMessage2();
+  }, 5000);
+  
 }
 }

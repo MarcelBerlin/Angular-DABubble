@@ -66,9 +66,12 @@ export class MainChatMessagefieldComponent {
       this.messageService.messageText = '';
     }
     // add by Bossi for directChatService
-    if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive) {
+    if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
       this.directChatService.saveMessage();
       this.newMessageAmountService.addPartnerDirectChatMessageAmount();
+    }
+    if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser() ){
+      console.log('chat mit sich selber');
     }
   }
 

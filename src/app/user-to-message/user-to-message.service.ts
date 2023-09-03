@@ -8,6 +8,7 @@ export class UserToMessageService {
   saveArray: any = []; // das ist das array wo bei druck auf senden alles gespeichert wird
   // edit by Bossi
   memberCache = [{ number: 0, member: '', id: 0 }]; // Zwischenspeicher
+  // memberCache: any[] = []; // zwischenspeicher
 
 
   constructor() { }

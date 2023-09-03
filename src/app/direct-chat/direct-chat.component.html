@@ -39,9 +39,28 @@
       </div>
       <div class="messageBox" [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'">
         <span class="message">{{message.message}}</span>
+
         <!-- testarea new message Data format -->
-        <!-- <app-message-output></app-message-output> -->
+        <!-- <app-message-output ></app-message-output> -->
+        <!-- <div class="outputBox">
+          <div class="output" *ngIf="userToMessageService.saveArray[i] != undefined">
+            <span class="infoBox" *ngIf="userToMessageService.showInfoBox == i">
+              <span>Name: {{ dataService.userData[calculateIndexOutput()].name }}</span
+              ><span>Email: {{ dataService.userData[calculateIndexOutput()].email }}</span>
+            </span>
+      
+            <span
+              *ngIf="i > 0 && userToMessageService.saveArray[i]?.span?.length > 0"
+              class="member"
+              (mouseenter)="showInfoOutput(i)"
+              (mouseleave)="hideInfoOutput()"
+              >{{ userToMessageService.saveArray[i].span }}
+            </span>
+            <p class="message">{{ userToMessageService.saveArray[i].p }}</p>
+          </div>
+        </div> -->
         <!-- testarea new message Data format -->
+
       </div>
       <div class="labelAnswersAndTime">
         <div class="time">Letzte Antwort 14:56</div>

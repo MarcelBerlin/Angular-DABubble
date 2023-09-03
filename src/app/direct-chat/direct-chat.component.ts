@@ -34,7 +34,7 @@ export class DirectChatComponent {
     public directChatService: DirectChatService,
     public timelinesService: TimelinesService,
     private newMessageAmountService: NewMessageAmountService,
-    public userToMessageService: UserToMessageService
+    public userToMessageService: UserToMessageService,
     ) {
       this.getChanges();
     }
