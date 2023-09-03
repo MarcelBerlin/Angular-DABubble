@@ -51,10 +51,12 @@
                 <span *ngIf="user.email === getUserData.loggedInUserData.email">(Du)</span></span>
               <div class="activeDot" [style.background-color]="user.online ? '#92C83E' : '#686868'"></div>
               <!-- Bossi Area for direct Chats -->
-              <p class="messageDot" *ngIf="newMessageAmountService.badgesArray[i] >= 1">
+              <!-- <p class="messageDot" *ngIf="newMessageAmountService.badgesArray[i] >= 1"> -->
+              <p class="messageDot" *ngIf="getUserData.badgesArray[i] >= 1">
                 <span>
                   <span>
-                    {{newMessageAmountService.badgesArray[i]}}
+                    <!-- {{newMessageAmountService.badgesArray[i]}} -->
+                    {{getUserData.badgesArray[i]}}
                   </span>
                 </span>
               </p>

@@ -16,6 +16,7 @@ export class DataService {
   loggedInUserData: any;
   loggedInUserId: string = '';
   forgotPasswordMenu: boolean = false;
+  badgesArray: any[] = [];
 
 
   constructor(
@@ -31,16 +32,13 @@ export class DataService {
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
       this.userData = user;
-
       this.userData.sort((a, b) => { // von Basti eingefügte Sortierfunktion nach eingeloggtem User
         if (a.email === this.loggedInUserEmail) return -1;
         if (b.email === this.loggedInUserEmail) return 1;
         return a.email < b.email ? -1 : 1;
       });
-      if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
-        this.getLoggedInUserData();
-        // console.log('logged in userData',this.loggedInUserData);
-      }
+      if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
+      if(this.loggedInUserData) this.updateUserDirectChatBagesAmount();
     });
   }
 
@@ -59,7 +57,6 @@ export class DataService {
         this.updateUser();
       }
     });
-
   }
 
 
@@ -144,7 +141,37 @@ export class DataService {
     })
   }
 
+  
+  createDirectChatBadges(): void {
+    this.badgesArray = [];
+    for (let i = 0; i < this.userData.length; i++) {
+      this.loggedInUserData.directChats.forEach(directChat => {
+        if (directChat.partnerId == this.userData[i].userId) {
+          this.badgesArray[i] = directChat.newMessageAmount;
+        } else if (this.badgesArray[i] == undefined) {
+          this.badgesArray[i] = 0;
+        }
+      });
+    }
+  }
+
+
+  updateUserDirectChatBagesAmount(){
+    this.userData.forEach((user: any) => {
+      let userJson: any = localStorage.getItem('user');
+      this.loggedInUserEmail = JSON.parse(userJson);
+      if (user.email == this.loggedInUserEmail) {
+          for (let i = 0; i < user.directChats.length; i++) {
+            this.loggedInUserData.directChats[i].newMessageAmount = user.directChats[i].newMessageAmount;
+          }
+      }
+    });
+    this.createDirectChatBadges();
+  }
 }
+
+
+
 
 
 

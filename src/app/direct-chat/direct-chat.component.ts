@@ -62,6 +62,7 @@ export class DirectChatComponent {
         this.directChatService.loadChatDataSets(this.directChatService.directChatIndex.directChatId);
       }
     })
+    
   }
 
 
