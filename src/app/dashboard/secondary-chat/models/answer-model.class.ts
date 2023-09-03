@@ -1,6 +1,8 @@
 export class Answers {
 
-    channelId: string; 
+    channelId: string;
+    answerId: string; 
+    messageId: string;
     userName: string; 
     userImg: any; 
     userId: string; 
@@ -12,6 +14,8 @@ export class Answers {
    
     constructor(obj?: any) {
         this.channelId = obj ? obj.channelId : '';
+        this.answerId = obj ? obj.answerId : 'unset';
+        this.messageId = obj ? obj.messageId : '';
         this.userName = obj? obj.userName : '';
         this.userId = obj ? obj.userId : '';
         this.userImg = obj? obj.userImg : '';
@@ -24,6 +28,8 @@ export class Answers {
     toJSON() {
         return {
             channelId: this.channelId,
+            answerId: this.answerId,
+            messageId: this.messageId,
             userName: this.userName,
             userId: this.userId,
             userImg: this.userImg,

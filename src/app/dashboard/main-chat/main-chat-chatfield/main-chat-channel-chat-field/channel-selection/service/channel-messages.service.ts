@@ -30,6 +30,7 @@ export class ChannelMessagesService {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
       );
+      console.log(this.messageData);
     });
   }
 
@@ -37,8 +38,7 @@ export class ChannelMessagesService {
     this.selectedMessageIndex = index;
     this.selectedMessage = true;
     this.dcshService.chatSlideIn();
-    console.log(this.messageData);
-    console.log('es fehlen antworten auf den thread. siehe secondary answer Service log');
+    console.log(this.messageData);    
     
   }
 

@@ -34,10 +34,13 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     public channelMessages: ChannelMessagesService,
     public dataService: DataService,
     public answerService: SecondaryChatAnswerService
-  ) { }
+  ) { 
+
+    this.answerService.getThreadAnswer();
+  }
 
   ngOnInit() {
-    this.answerService.getThreadAnswer();
+    
   }
 
   getSelectedMessageStatus() {

@@ -1,6 +1,7 @@
 export class Messages {
 
     channelId: string; 
+    messageId: string;
     userName: string; 
     userImg: any; 
     userId: string; 
@@ -12,6 +13,7 @@ export class Messages {
    
     constructor(obj?: any) {
         this.channelId = obj ? obj.channelId : '';
+        this.messageId = obj ? obj.messageId : 'unset';
         this.userName = obj? obj.userName : '';
         this.userId = obj ? obj.userId : '';
         this.userImg = obj? obj.userImg : '';
@@ -24,6 +26,7 @@ export class Messages {
     toJSON() {
         return {
             channelId: this.channelId,
+            messageId: this.messageId,
             userName: this.userName,
             userId: this.userId,
             userImg: this.userImg,

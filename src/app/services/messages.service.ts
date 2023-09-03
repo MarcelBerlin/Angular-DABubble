@@ -45,7 +45,14 @@ export class MessageService {
   ) {   }
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
-  async addMessage() {
+  async addMessage() {    
+    this.UserAndMessageDetails();
+    this.addTimeStampToMessage();
+    this.saveMessageWithIdToDoc();
+    this.messageData.push(this.newMessage);
+  }
+
+  UserAndMessageDetails(){
     this.newMessage.channelId =
       this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
     this.varService.selectedChannelId =
@@ -54,50 +61,35 @@ export class MessageService {
     this.newMessage.userName = this.dataService.loggedInUserData.name;
     this.newMessage.userImg = this.dataService.loggedInUserData.img;
     this.newMessage.content = this.messageText; 
+  }
 
+  addTimeStampToMessage() {
     const timeStampData: ChannelTimeStamp = this.directChatService.getActualTimeStampForChannels(); 
     this.newMessage.dateTimeNumber = timeStampData.dateTimeNumber;
     this.newMessage.dateString = timeStampData.dateString;
     this.newMessage.clockString = timeStampData.clockString;
-    console.log(this.newMessage.dateTimeNumber);
-    console.log(this.newMessage.dateString);
-    console.log(this.newMessage.clockString);  
-
-    const coll = collection(this.firestore, 'newMessages'); // definiert die Collection, worauf man zugreifen möchte
-    await addDoc(coll, this.newMessage.toJSON()); // fügt eine neue Nachricht aus dem Textfeld in die Firebase Collection hinzu bzw. returned die Message in docId
-    this.messageData.push(this.newMessage);
   }
 
-  
-  // ##################  BITTE STEHEN LASSEN !!! #################
-  // ################# Marcel Test für channelMessages Array #############
+  async saveMessageWithIdToDoc() {
+    const coll = collection(this.firestore, 'newMessages'); // definiert die Collection, worauf man zugreifen möchte
+    try {
+      let docId = await addDoc(coll, this.newMessage.toJSON()); // generiert für das Dokument eine eigene ID in Firestore
+      this.newMessage.messageId = docId.id; // die DokumentID wird auf die Variable messageID gesetzt.
+      this.updateIdToMessageCollection(); // funktion zum Updaten der Dokumenten ID in die Collection selbst, damit später darauf zugegriffen werden kann.
+    } catch (error) {
+      console.log('update Id to doc failed!!');
+    }
+  }
 
-  // async addMessage() {
-  //   // Vorhandener Code zur Erstellung der Nachricht
-  //   this.newMessage.userId = this.dataService.loggedInUserData.userId;
-  //   this.newMessage.userName = this.dataService.loggedInUserData.name;
-  //   this.newMessage.userImg = this.dataService.loggedInUserData.img;
-  //   this.newMessage.content = this.messageText;
-  
-  //   const timeStampData: ChannelTimeStamp = this.directChatService.getActualTimeStampForChannels(); 
-  //   this.newMessage.dateTimeNumber = timeStampData.dateTimeNumber;
-  //   this.newMessage.dateString = timeStampData.dateString;
-  //   this.newMessage.clockString = timeStampData.clockString;
-  
-  //   // Channel-spezifische Daten
-  //   const selectedChannelIndex = this.dialogAddService.channelIndex;
-  //   const selectedChannel = this.dialogAddService.tagsData[selectedChannelIndex];
-  //   const channelId = selectedChannel.id;
-  
-  //   // Nachricht der Channel-Subkollektion hinzufügen
-  //   const channelMessagesColl = collection(this.firestore, 'channelMessages', channelId);
-  //   await addDoc(channelMessagesColl, this.newMessage.toJSON());
-  
-  //   // Aktualisierte Nachrichtenliste
-  //   this.messageData.push(this.newMessage);
-  // }
-  
-// ##########################################################
+  updateIdToMessageCollection(): void {
+    const qData = doc(this.firestore, 'newMessages', this.newMessage.messageId);
+    const newData = { messageId: this.newMessage.messageId };
+    try {
+      updateDoc(qData, newData);
+    } catch (error) {
+      console.log('update doc failed!!');
+    }    
+  }
 
   async loadChannelMessages(channelId: string) {
     const coll = collection(this.firestore, 'messages');

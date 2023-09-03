@@ -4,6 +4,8 @@ import {
   addDoc,
   collection,
   collectionData,
+  doc,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { TimelinesService } from 'src/app/direct-chat/services/timelines.service';
 import { Answers } from '../models/answer-model.class';
@@ -18,52 +20,85 @@ import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main
   providedIn: 'root',
 })
 export class SecondaryChatAnswerService {
+  index: number = 0;
   answers$: any = [];
   answerData: any = [];
   newAnswer: Answers = new Answers();
   answerText: string = '';
+  messageId: string | null = null;
 
   constructor(
     private firestore: Firestore,
     public timelinesService: TimelinesService,
     private dialogAddService: DialogAddService,
-    private dataService: DataService,
+    public dataService: DataService,
     public varService: VariablesService,
     private directChatService: DirectChatService,
-    private channelMessages: ChannelMessagesService
+    public channelMessages: ChannelMessagesService
   ) {
+
    }
 
-  async sendAnswer() {
+  async sendAnswer() {    
+    this.UserAndAnswerDetails();
+    this.addTimeStampToAnswer();    
+    this.saveAnswerWithAnswerId();
+    this.answerData.push(this.newAnswer);    
+    this.answerText = '';   
+    console.log(this.answerData); 
+  }
+
+  UserAndAnswerDetails() {
     this.newAnswer.channelId =
-      this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
+    this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
     this.varService.selectedChannelId =
-      this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id;
+    this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id;
     this.newAnswer.userId = this.dataService.loggedInUserData.userId;
     this.newAnswer.userName = this.dataService.loggedInUserData.name;
     this.newAnswer.userImg = this.dataService.loggedInUserData.img;
-    this.newAnswer.content = this.answerText;    
+    this.newAnswer.content = this.answerText;  
+    
+  }
 
+  addTimeStampToAnswer() {
     const timeStampData: ChannelTimeStamp =
-      this.directChatService.getActualTimeStampForChannels();
+    this.directChatService.getActualTimeStampForChannels();
     this.newAnswer.dateTimeNumber = timeStampData.dateTimeNumber;
     this.newAnswer.dateString = timeStampData.dateString;
     this.newAnswer.clockString = timeStampData.clockString;
-
-    const coll = collection(this.firestore, 'threadAnswer'); // definiert die Collection, worauf man zugreifen möchte
-    await addDoc(coll, this.newAnswer.toJSON()); // fügt eine neue Nachricht aus dem Textfeld in die Firebase Collection hinzu bzw. returned die Message in docId
-    this.answerData.push(this.newAnswer);
-    this.answerText = '';
   }
+
+  async saveAnswerWithAnswerId(): Promise<void> {
+    const coll = collection(this.firestore, 'threadAnswer'); // definiert die Collection, worauf man zugreifen möchte
+    this.newAnswer.messageId = this.channelMessages.messageData[this.channelMessages.selectedMessageIndex]?.messageId;
+    try {
+      let docId = await addDoc(coll, this.newAnswer.toJSON()); // generiert für das Dokument eine eigene ID in Firestore
+      this.newAnswer.answerId = docId.id; // die DokumentID wird auf die Variable messageID gesetzt.
+      this.updateIdToAnswerCollection(); // funktion zum Updaten der Dokumenten ID in die Collection selbst, damit später darauf zugegriffen werden kann.
+    } catch (error) {
+      console.log('update Id to doc failed!!');
+    }
+  }
+
+  updateIdToAnswerCollection(): void {
+    const qData = doc(this.firestore, 'threadAnswer', this.newAnswer.answerId);
+    const newData = { answerId: this.newAnswer.answerId };
+    try {
+      updateDoc(qData, newData);
+    } catch (error) {
+      console.log('update doc failed!!');
+    }    
+  }
+
 
   async getThreadAnswer() {
     const coll = collection(this.firestore, 'threadAnswer');
     this.answers$ = collectionData(coll, { idField: 'id' });
     await this.answers$.subscribe((answer: any) => {
-      this.answerData = answer.sort(
+      this.answerData = 
+      answer.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
-      );
-      console.log(this.answerData);
+      );      
     });
   }
 }
