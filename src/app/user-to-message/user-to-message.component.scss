@@ -16,14 +16,12 @@
     outline-style: none;
     padding: 0 16px;
 
-    padding: 8px;
-    /* Hier kannst du die gewünschte Höhe festlegen */
-    overflow-y: auto;
-    /* Scrollen aktivieren, wenn der Inhalt zu groß ist */
-    white-space: pre-wrap;
+    padding: 8px; /* Hier kannst du die gewünschte Höhe festlegen */
+    overflow-y: auto; /* Scrollen aktivieren, wenn der Inhalt zu groß ist */
+    white-space: pre-wrap;  /* Umbruch von langen Zeilen aktivieren */
     flex-wrap: wrap;
 
-    /* Umbruch von langen Zeilen aktivieren */
+   
     .infoBox {
       position: absolute;
       top: -250px;
@@ -83,12 +81,6 @@ p {
 
 ::-webkit-scrollbar {
   width: 0px;
-}
-
-.buttonSend {
-  position: absolute;
-  top: -13%;
-  right: 10%;
 }
 
 .emojiSpan {

@@ -10,6 +10,7 @@ import { EmojiPickerBossiService } from 'src/app/emoji-picker-bossi/services/emo
 import { AddUserToMessageService } from 'src/app/services/add-user-to-message.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewMessageAmountService } from 'src/app/direct-chat/services/new-message-amount.service';
+import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class MainChatMessagefieldComponent {
     public addUserToMessageService: AddUserToMessageService,
     public dialog: MatDialog,
     private newMessageAmountService: NewMessageAmountService,
+    private userToMessageService: UserToMessageService
   ) { }
 
   currentUser() {
@@ -72,6 +74,7 @@ export class MainChatMessagefieldComponent {
     }
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser() ){
       console.log('chat mit sich selber');
+      this.userToMessageService.send();
     }
   }
 

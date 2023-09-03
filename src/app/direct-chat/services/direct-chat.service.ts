@@ -7,7 +7,7 @@ import { ActualChat } from '../models/actual-chat.class';
 import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { TimelinesService } from './timelines.service';
 import { ChannelTimeStamp } from 'src/app/dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
-import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
+// import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class DirectChatService {
     private dataService: DataService,
     private firestore: Firestore,
     private timelineService: TimelinesService,
-    private userToMessageService: UserToMessageService,
+    // private userToMessageService: UserToMessageService,
   ) { }
 
 
@@ -442,7 +442,9 @@ export class DirectChatService {
   saveMessage2(chatData): void {
     this.directChatActive = false;
     let today: Date = new Date();
+
     this.actualChat.message = chatData;
+
     this.actualChat.name = this.dataService.loggedInUserData.name;
     this.actualChat.date = this.createDateString(today);
     this.actualChat.time = this.createClockString(today);
