@@ -21,7 +21,7 @@ export class DataService {
 
   constructor(
     private firestore: Firestore,
-    
+
   ) {
     this.subcribeUserData();
   }
@@ -38,7 +38,7 @@ export class DataService {
         return a.email < b.email ? -1 : 1;
       });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
-      if(this.loggedInUserData) this.updateUserDirectChatBagesAmount();
+      if (this.loggedInUserData) this.updateUserDirectChatBagesAmount();
     });
   }
 
@@ -141,7 +141,12 @@ export class DataService {
     })
   }
 
-  
+
+  /**
+   * Creates an array of badges representing the new message amounts for each user's direct chats.
+   * 
+   * @returns {void}
+   */
   createDirectChatBadges(): void {
     this.badgesArray = [];
     for (let i = 0; i < this.userData.length; i++) {
@@ -156,14 +161,20 @@ export class DataService {
   }
 
 
-  updateUserDirectChatBagesAmount(){
+  /**
+   * Updates the new message amount for direct chats in the logged-in user's data
+   * based on the stored data in local storage and then recreates the direct chat badges.
+   * 
+   * @returns {void}
+   */
+  updateUserDirectChatBagesAmount(): void {
     this.userData.forEach((user: any) => {
       let userJson: any = localStorage.getItem('user');
       this.loggedInUserEmail = JSON.parse(userJson);
       if (user.email == this.loggedInUserEmail) {
-          for (let i = 0; i < user.directChats.length; i++) {
-            this.loggedInUserData.directChats[i].newMessageAmount = user.directChats[i].newMessageAmount;
-          }
+        for (let i = 0; i < user.directChats.length; i++) {
+          this.loggedInUserData.directChats[i].newMessageAmount = user.directChats[i].newMessageAmount;
+        }
       }
     });
     this.createDirectChatBadges();

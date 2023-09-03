@@ -211,7 +211,15 @@ export class MenuSidenavComponent implements OnInit {
     this.dcshService.chatSlideOut();
   }
 
-  // Funktion von Bossi. Verbindung zu directChatService
+ 
+  /**
+   * Retrieves direct chat data for the user at the specified index in the user data array.
+   * If a direct chat is active, it sets the chat ID, updates the new message amount index, 
+   * and resets the own message amount to zero after a delay.
+   * 
+   * @param {number} arrayId - The index of the user in the user data array.
+   * @returns {void}
+   */
   getDirectChatData(arrayId: number): void {
     if (this.directChatService.directChatActive) {
       let clickedUserId: string = this.getUserData.userData[arrayId].id;
@@ -223,6 +231,7 @@ export class MenuSidenavComponent implements OnInit {
     }
   }
 
+  
   /**
    * Checks user authorization to display a channel.
    * @param {number} index - The index of the channel in the Service Tags Data list.

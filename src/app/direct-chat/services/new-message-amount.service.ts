@@ -6,27 +6,12 @@ import { DirectChatService } from './direct-chat.service';
 })
 export class NewMessageAmountService {
   actualPartnerUserDataIndex: number;
-  badgesArray = [];
 
 
   constructor(
     private dataService: DataService,
     private directChatService: DirectChatService,
-  ) {
-    this.subcribeUserData();
-  }
-
-
-  /**
-   * Subscribes to changes in user data and triggers the check for new messages.
-   * 
-   * @returns {void}
-   */
-  subcribeUserData(): void {
-    this.dataService.users$.subscribe(() => {
-      this.createDirectChatBadges();
-    });
-  }
+  ) {}
 
 
   /**
@@ -59,25 +44,6 @@ export class NewMessageAmountService {
         this.dataService.loggedInUserData.directChats[index].newMessageAmount = 0;
         this.dataService.updateUser();
       }
-    }
-  }
-
-
-  /**
-   * Creates an array of badges representing the new message amounts for each user's direct chats.
-   * 
-   * @returns {void}
-   */
-  createDirectChatBadges(): void {
-    this.badgesArray = [];
-    for (let i = 0; i < this.dataService.userData.length; i++) {
-      this.dataService.loggedInUserData.directChats.forEach(directChat => {
-        if (directChat.partnerId == this.dataService.userData[i].userId) {
-          this.badgesArray[i] = directChat.newMessageAmount;
-        } else if (this.badgesArray[i] == undefined) {
-          this.badgesArray[i] = 0;
-        }
-      });
     }
   }
 }
