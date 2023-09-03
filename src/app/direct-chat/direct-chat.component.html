@@ -41,24 +41,27 @@
         <span class="message">{{message.message}}</span>
 
         <!-- testarea new message Data format -->
-        <!-- <app-message-output ></app-message-output> -->
+
         <!-- <div class="outputBox">
-          <div class="output" *ngIf="userToMessageService.saveArray[i] != undefined">
-            <span class="infoBox" *ngIf="userToMessageService.showInfoBox == i">
-              <span>Name: {{ dataService.userData[calculateIndexOutput()].name }}</span
-              ><span>Email: {{ dataService.userData[calculateIndexOutput()].email }}</span>
+          <div class="output" *ngFor="let entry of message.message; let index = index">
+
+            <span class="infoBox" *ngIf="entry.email != 'unset' && showInfoBox == i">
+              <span>Name: {{ entry.name }}</span>
+              <span>Email: {{ entry.email }}</span>
+              <span>userId: {{entry.userId}}</span>
             </span>
       
             <span
-              *ngIf="i > 0 && userToMessageService.saveArray[i]?.span?.length > 0"
+              *ngIf="index > 0 && entry?.span?.length > 0"
               class="member"
               (mouseenter)="showInfoOutput(i)"
               (mouseleave)="hideInfoOutput()"
-              >{{ userToMessageService.saveArray[i].span }}
+              >{{ entry.span }}
             </span>
-            <p class="message">{{ userToMessageService.saveArray[i].p }}</p>
+            <p class="messageOut">{{ entry.p }}</p>
           </div>
         </div> -->
+
         <!-- testarea new message Data format -->
 
       </div>

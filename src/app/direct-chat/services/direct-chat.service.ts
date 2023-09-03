@@ -439,24 +439,17 @@ export class DirectChatService {
   }
 
   // Testarea für neues Message Format
-  saveMessage2(): void {
+  saveMessage2(chatData): void {
     this.directChatActive = false;
     let today: Date = new Date();
-
-    this.actualChat.message = this.userToMessageService.saveArray;
-    console.log('save message: ', this.userToMessageService.saveArray);
-    console.log('actualChat: ', this.actualChat);
+    this.actualChat.message = chatData;
     this.actualChat.name = this.dataService.loggedInUserData.name;
     this.actualChat.date = this.createDateString(today);
     this.actualChat.time = this.createClockString(today);
     this.actualChat.dateTimeNumber = today.getTime();
-    console.log(this.directChat.chat)
     this.directChat.chat.push(this.actualChat.toJSON());
-    console.log(this.directChat.chat);
     this.directMessage = '';
-    debugger;
     this.updateFirestoreChat();
-    debugger;
     this.updateFirestoreDirectChatIndex();
   }
 

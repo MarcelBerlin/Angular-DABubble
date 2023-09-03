@@ -7,7 +7,7 @@ export class UserToMessageService {
   showInfoBox: number = -1;
   saveArray: any = []; // das ist das array wo bei druck auf senden alles gespeichert wird
   // edit by Bossi
-  memberCache = [{ number: 0, member: '', id: 0 }]; // Zwischenspeicher
+  memberCache = [{ number: 0, member: '', id: 0 , email: 'unset', userId: 'unset'}]; // Zwischenspeicher
   // memberCache: any[] = []; // zwischenspeicher
 
 
@@ -19,7 +19,9 @@ export class UserToMessageService {
     this.memberCache.push({
       number: -1,
       member: emoji,
-      id: undefined,
+      id: -1,
+      email: 'unset',
+      userId: 'unset',
     });
   }
 

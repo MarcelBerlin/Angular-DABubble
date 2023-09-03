@@ -50,6 +50,8 @@ export class UserToMessageComponent {
       number: this.userToMessageService.memberCache.length,
       member: this.dataService.userData[index].name,
       id: index,
+      email: this.dataService.userData[index].email,
+      userId: this.dataService.userData[index].userId,
     });
     this.varService.setVar('sign', false);
   }
@@ -83,25 +85,32 @@ export class UserToMessageComponent {
   for (let i = 0; i < this.userToMessageService.memberCache.length; i++) {
     let spanElement = document.getElementById(`span${i}`);
     let pElement = document.getElementById(`p${i}`);
-
     let spanElementHTML = spanElement?.innerText;
     let pElementHTML = pElement?.innerText;
-
+    if(spanElementHTML == undefined) spanElementHTML = '';
+    if(pElementHTML == undefined) pElementHTML = '';
     if (pElementHTML && spanElementHTML) {
       pElementHTML = pElementHTML.replace(spanElementHTML, '');
     }
-
+    let name = this.userToMessageService.memberCache[i].member;
+    let email = this.userToMessageService.memberCache[i].email;
+    let userId = this.userToMessageService.memberCache[i].userId;
     this.userToMessageService.saveArray.push({
       span: spanElementHTML,
       p: pElementHTML,
-      userId: this.userToMessageService.memberCache[i].id,
+      // userId: this.userToMessageService.memberCache[i].id,
+      userId: userId,
+      name: name,
+      email: email,
     });
   }
-  this.userToMessageService.memberCache = [{ number: 0, member: '', id: 0 }];
+
+  this.userToMessageService.memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset' }];
   console.log(this.userToMessageService.saveArray);
-  setTimeout(() => {
-    this.directChatService.saveMessage2();
-  }, 5000);
+  // setTimeout(() => {
+    this.directChatService.saveMessage2(this.userToMessageService.saveArray);
+    this.userToMessageService.saveArray = [];
+  // }, 5000);
   
 }
 }

@@ -181,4 +181,45 @@
       }
     }
   }
+
+
+  .outputBox {
+    position: relative;
+    // top: 50px;
+    display: flex;
+    // margin: 16px 32px;
+  }
+  .output {
+    display: flex;
+  }
+  .infoBox {
+    position: absolute;
+    bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+    border: 1px solid lightgrey;
+    border-radius: 30px;
+    padding: 16px;
+    background-color: white;
+
+  }
+  .member {
+    background-color: #eceefe;
+    cursor: pointer;
+    user-select: none;
+    padding: 0 8px;
+    margin: 0 8px;
+    border-radius: 8px;
+  }
+p{
+    margin: 0;
+}  
+
+.messageOut {
+  font-family: "Nunito", "NotoColorEmojiLimited";
+  font-weight: 400;
+  font-size: 18px;
+}
   

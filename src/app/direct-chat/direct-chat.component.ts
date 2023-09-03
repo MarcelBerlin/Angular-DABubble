@@ -21,7 +21,7 @@ export class DirectChatComponent {
   hoveredMessagesMainChat: boolean = false;
   emptyChat: boolean = false;
   chatText: string = '';
-  
+
 
   constructor(
     private dcshService: DashboardComponentsShowHideService,
@@ -35,9 +35,9 @@ export class DirectChatComponent {
     public timelinesService: TimelinesService,
     private newMessageAmountService: NewMessageAmountService,
     public userToMessageService: UserToMessageService,
-    ) {
-      this.getChanges();
-    }
+  ) {
+    this.getChanges();
+  }
 
 
   /**
@@ -56,17 +56,18 @@ export class DirectChatComponent {
    * 
    * @returns {void}
    */
-  getChanges():void {
+  getChanges(): void {
     this.dataService.users$.subscribe(() => {
       if (this.directChatService.directChatActive && this.directChatService.directChatIndex.directChatId) {
         this.directChatService.loadChatDataSets(this.directChatService.directChatIndex.directChatId);
       }
     })
-    
+
   }
 
+  showInfoBox: number = -1;
+  showInfoOutput = (index: number) => (this.showInfoBox = index);
+  hideInfoOutput = () => (this.showInfoBox = -1);
+  
 
-  showInfoOutput =(index: number) => (this.userToMessageService.showInfoBox = index);
-  hideInfoOutput = () => (this.userToMessageService.showInfoBox = -1);
-  calculateIndexOutput = (): number => (this.userToMessageService.saveArray[this.userToMessageService.showInfoBox].userId);
 }
