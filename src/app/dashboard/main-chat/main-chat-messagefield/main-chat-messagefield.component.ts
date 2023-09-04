@@ -78,15 +78,12 @@ export class MainChatMessagefieldComponent {
       this.newMessageAmountService.addPartnerDirectChatMessageAmount();
     }
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser() ){
-      console.log('chat mit sich selber');
       this.userToMessageService.send();
     }
   }
 
   addSign() {
-    // this.addUserToMessageService.addToMessage();
     this.varService.sign = !this.varService.sign;
-    console.log(this.varService.sign);
   }
 
 

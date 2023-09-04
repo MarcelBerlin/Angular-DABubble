@@ -63,15 +63,9 @@ export class FileUploadService {
     this.lastUpload = downloadURL;
     fileUpload.name = fileUpload.file.name;
     this.filename = fileUpload.name;
-    console.log(this.filename);
-    console.log(this.lastUpload);
     this.saveFileData(fileUpload);
     if (this.profileImgUpload) this.userUpdate();
-    else{
-      console.log('set into input');
-      this.userToMessageService.insertFileLink(this.filename, this.lastUpload);
-    }
-    
+    else this.userToMessageService.insertFileLink(this.filename, this.lastUpload);
   }
 
 

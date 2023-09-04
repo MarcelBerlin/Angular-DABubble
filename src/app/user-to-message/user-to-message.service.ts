@@ -42,7 +42,6 @@ export class UserToMessageService {
       filelink: filelink,
       filename: filename
     });
-    console.log(this.memberCache);
   }
 
 

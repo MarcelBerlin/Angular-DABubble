@@ -20,7 +20,7 @@ export class UserToMessageComponent {
     public userToMessageService: UserToMessageService,
   ) { }
 
-  showInfoInput = (index: number) => (this.userToMessageService.showInfoBox = index, console.log('show info', index));
+  showInfoInput = (index: number) => (this.userToMessageService.showInfoBox = index);
 
 
   hideInfoInput = () => (this.userToMessageService.showInfoBox = -1);
