@@ -39,8 +39,8 @@
       </div>
       <div class="messageBox" [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'">
 
-        <!-- testarea new message Data format -->
-        
+        <!-- testarea new message Data format, old format-->
+
         <span class="message" *ngIf="directChatService.directChat.firstMember != directChatService.directChat.secondMember">{{message.message}}</span>
 
         <!-- testarea new message Data format -->
@@ -65,7 +65,7 @@
           </div>
         </div>
 
-        <!-- testarea new message Data format -->
+        <!-- testarea new message Data format  end-->
 
       </div>
       <div class="labelAnswersAndTime">
