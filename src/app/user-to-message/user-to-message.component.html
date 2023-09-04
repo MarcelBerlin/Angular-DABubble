@@ -2,9 +2,14 @@
   <div class="inputDiv" contenteditable="true" placeholder="Naricht schreiben" [style.overflow-y] ="userToMessageService.showInfoBox == -1 ? 'auto':'unset'">
     <p *ngFor="let _ of userToMessageService.memberCache; let i = index" [attr.id]="'p' + i">
       <!-- Info Box -->
-      <span class="infoBox" *ngIf="userToMessageService.showInfoBox == i">     
+      <span class="infoBox" *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].email != 'unset'">     
         <span>Name: {{ userToMessageService.memberCache[i].member }}</span
         ><span>Email: {{ userToMessageService.memberCache[i].email }}</span>
+      </span>
+
+      <span class="infoBox" *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].filename != 'unset'"> 
+        <img src={{userToMessageService.memberCache[i].filelink}} alt="" style="max-width: 100%; height: auto;">    
+        <a href={{userToMessageService.memberCache[i].filelink}}>{{ userToMessageService.memberCache[i].filename }}</a>
       </span>
 
       <!-- Ausgewählte User -->
@@ -16,10 +21,17 @@
         [attr.id]="'span' + i" contenteditable="false"
         >@ {{ userToMessageService.memberCache[i].member }} 
         </span>
-        <!-- {{ invisibleSign }} -->
-        <span class="member" *ngIf="userToMessageService.memberCache[i].number == -2" [attr.id]="'span' + i" contenteditable="false">
+
+        {{ invisibleSign }}
+        <span class="member" 
+        *ngIf="i > 0 && userToMessageService.memberCache[i].number == -2 && userToMessageService.memberCache[i].number != -1"
+        (mouseenter)="showInfoInput(i)"
+        (mouseleave)="hideInfoInput()"
+        [attr.id]="'span' + i" 
+         contenteditable="false">
           {{userToMessageService.memberCache[i].filename}}
         </span>
+
         {{ invisibleSign }}
         <span *ngIf="userToMessageService.memberCache[i].number == -1" class="emojiSpan">
           {{userToMessageService.memberCache[i].member}}

@@ -33,7 +33,6 @@ export class UserToMessageService {
 
 
   insertFileLink(filename: string, filelink: string): void {
-    debugger;
     this.memberCache.push({
       number: -2,
       member: 'unset',
@@ -60,7 +59,9 @@ export class UserToMessageService {
       let pElementHTML = pElement?.innerText;
       if (spanElementHTML == undefined) spanElementHTML = '';
       if (pElementHTML == undefined) pElementHTML = '';
+      console.log ('span: ', spanElementHTML, 'p: ', pElementHTML);
       if (pElementHTML && spanElementHTML) pElementHTML = pElementHTML.replace(spanElementHTML, '');
+      console.log ('span: ', spanElementHTML, 'p: ', pElementHTML);
       this.editSaveArray(i, spanElementHTML, pElementHTML);
     }
     this.memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset', filelink: 'unset', filename: 'unset', }];
@@ -81,12 +82,16 @@ export class UserToMessageService {
     let name = this.memberCache[i].member;
     let email = this.memberCache[i].email;
     let userId = this.memberCache[i].userId;
+    let filelink = this.memberCache[i].filelink;
+    let filename = this.memberCache[i].filename;
     this.saveArray.push({
       span: spanElementHTML,
       p: pElementHTML,
       userId: userId,
       name: name,
       email: email,
+      filelink: filelink,
+      filename: filename,
     });
   }
 }

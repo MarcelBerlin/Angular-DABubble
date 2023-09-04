@@ -41,11 +41,13 @@
 
         <!-- testarea new message Data format, old format-->
 
-        <span class="message" *ngIf="directChatService.directChat.firstMember != directChatService.directChat.secondMember">{{message.message}}</span>
+        <span class="message"
+          *ngIf="directChatService.directChat.firstMember != directChatService.directChat.secondMember">{{message.message}}</span>
 
         <!-- testarea new message Data format -->
 
-        <div class="outputBox" *ngIf="directChatService.directChat.firstMember == directChatService.directChat.secondMember">
+        <div class="outputBox"
+          *ngIf="directChatService.directChat.firstMember == directChatService.directChat.secondMember">
           <div class="output" *ngFor="let entry of message.message; let index = index">
 
             <span class="infoBox" *ngIf="entry.email != 'unset' && showInfoBox == i">
@@ -53,13 +55,14 @@
               <span>Email: {{ entry.email }}</span>
               <span>userId: {{entry.userId}}</span>
             </span>
-      
-            <span
-              *ngIf="index > 0 && entry?.span?.length > 0"
-              class="member"
-              (mouseenter)="showInfoOutput(i)"
-              (mouseleave)="hideInfoOutput()"
-              >{{ entry.span }}
+
+            <span class="infoBox" *ngIf="entry.filename != 'unset' && showInfoBox == i">
+              <img src={{entry.filelink}} alt="" style="max-width: 100%; height: auto; width: 100px">
+              <a href={{entry.filelink}} target="_blank">{{entry.filename}}</a>
+            </span>
+
+            <span *ngIf="index > 0 && entry?.span?.length > 0" class="member" (mouseenter)="showInfoOutput(i)"
+              (mouseleave)="hideInfoOutput()">{{ entry.span }}
             </span>
             <p class="messageOut">{{ entry.p }}</p>
           </div>
