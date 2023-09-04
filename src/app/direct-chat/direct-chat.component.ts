@@ -35,10 +35,6 @@ export class DirectChatComponent {
     public userToMessageService: UserToMessageService,
   ) {
     this.getChanges();
-    setTimeout(()=>{
-      console.log(this.directChatService.directChat.chat);
-    }, 2000);
-    
   }
 
 

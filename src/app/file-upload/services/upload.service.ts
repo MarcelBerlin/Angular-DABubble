@@ -1,6 +1,10 @@
 import { Injectable, Component } from '@angular/core';
 import { FileUploadService } from './file-upload.service';
 import { FileUpload } from '../models/file-upload.model';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogInfoService } from 'src/app/services/dialog-info.service';
+import { DialogInfoComponent } from '../../dialog/dialog-info/dialog-info.component';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +15,11 @@ export class UploadService {
   fileLink: string = '';
 
 
-  constructor(private uploadService: FileUploadService) { }
+  constructor(
+    private uploadService: FileUploadService,
+    public dialog: MatDialog,
+    public dialogInfoService: DialogInfoService,
+    ) { }
 
 
   /**
@@ -59,9 +67,21 @@ export class UploadService {
             this.percentage = Math.round(percentage ? percentage : 0);
           },
           error => {
-            console.log(error);
+            this.openDialogUploadFailed();
           }
         );
+  }
+
+
+  /**
+   * Opens a custom dialog box to display an upload failure message.
+   * Sets the dialog info text to code 8, which corresponds to the specific message.
+   */
+  openDialogUploadFailed(): void {
+    this.dialogInfoService.setDialogInfoText(8);
+    this.dialog.open(DialogInfoComponent, {
+      panelClass: 'custom-modalbox',
+    });
   }
 }
 

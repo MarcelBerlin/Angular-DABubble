@@ -41,9 +41,4 @@ export class UserToMessageComponent {
     });
     this.varService.setVar('sign', false);
   }
-
-  removeScrollAttribute(): void {
-    let scrollableDiv = document.getElementsByClassName('inputDiv');
-    
-  }
 }

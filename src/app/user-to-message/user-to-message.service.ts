@@ -59,9 +59,7 @@ export class UserToMessageService {
       let pElementHTML = pElement?.innerText;
       if (spanElementHTML == undefined) spanElementHTML = '';
       if (pElementHTML == undefined) pElementHTML = '';
-      console.log ('span: ', spanElementHTML, 'p: ', pElementHTML);
       if (pElementHTML && spanElementHTML) pElementHTML = pElementHTML.replace(spanElementHTML, '');
-      console.log ('span: ', spanElementHTML, 'p: ', pElementHTML);
       this.editSaveArray(i, spanElementHTML, pElementHTML);
     }
     this.memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset', filelink: 'unset', filename: 'unset', }];

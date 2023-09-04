@@ -16,6 +16,7 @@ export class DialogInfoService {
     {title: 'System Fehler!', subtitle: 'Bitte versuchen Sie es später noch einmal.', titleClass: 'colorCrimson'},
     {title: 'Keine Verbindung zum Server!', subtitle: 'Bitte überprüfen Sie Ihre Internetverbindung.', titleClass: 'colorCrimson'},
     {title: 'Login fehlgeschlagen!', subtitle: 'Geben Sie das richtige Passwort ein.', titleClass: 'colorCrimson'},
+    {title: 'Upload fehlgeschlagen!', subtitle: 'Die Datei darf nicht größer als 5MB sein. Desweiteren sind nur Bilddateien und PDF Dateien erlaubt.', titleClass: 'colorCrimson'},
   ];
 
   

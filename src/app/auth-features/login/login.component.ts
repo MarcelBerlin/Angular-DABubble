@@ -8,9 +8,6 @@ import { DialogInfoService } from '../../services/dialog-info.service';
 import { Login } from '../../login';
 import { DataService } from '../../services/data.service';
 import { User } from '../../models/user.class';
-// directChatService wird aktuell nur für Testzwecke importiert !
-import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -36,16 +33,17 @@ export class LoginComponent {
     ]),
   });
 
+
   constructor(
     private router: Router,
     public authService: AuthService,
     public dialog: MatDialog,
     public dialogInfoService: DialogInfoService,
     private dataService: DataService,
-    private directChatService: DirectChatService
   ) {
     this.dataService.forgotPasswordMenu = false;
   }
+
 
   /**
    * Logs in the user using the Google authentication provider.
@@ -74,6 +72,7 @@ export class LoginComponent {
       });
   }
 
+
   /**
    * Sets the user data based on the provided Google data.
    *
@@ -91,6 +90,7 @@ export class LoginComponent {
       this.dataService.createGoogleUser(userData);
     }, 500);
   }
+
 
   /**
    * Performs login with email and password.
@@ -117,6 +117,7 @@ export class LoginComponent {
       });
   }
 
+
   /**
    * Navigates via router link forgot password page.
    *
@@ -124,8 +125,8 @@ export class LoginComponent {
    */
   forgotPassword(): void {
     this.router.navigateByUrl('forgot_password');
-    // this.dataService.forgotPasswordMenu = true;
   }
+
 
   /**
    * Opens the dialog to display an info message for an unknown login email.
@@ -139,6 +140,7 @@ export class LoginComponent {
     });
   }
 
+
   /**
    * Opens the dialog to display an info message for a wrong login password.
    *
@@ -150,6 +152,7 @@ export class LoginComponent {
       panelClass: 'custom-modalbox',
     });
   }
+
 
   /**
    * Opens the dialog to display an info message for no server connection.
@@ -163,6 +166,7 @@ export class LoginComponent {
     });
   }
 
+
   /**
    * Opens the dialog to display a system error message.
    *
@@ -174,6 +178,7 @@ export class LoginComponent {
       panelClass: 'custom-modalbox',
     });
   }
+
 
   /**
    *  Retrieves login form data.
@@ -210,6 +215,7 @@ export class LoginComponent {
     this.loginForm.enable();
   }
 
+
   /**
    * Initiates the forgot password process.
    *
@@ -219,6 +225,7 @@ export class LoginComponent {
     // this.dialog.open(DialogForgotPasswordComponent);
   }
 
+
   /**
    * Toggles the password visibility.
    */
@@ -227,6 +234,7 @@ export class LoginComponent {
     if (this.passwordView == true) this.inputType = 'text';
     else this.inputType = 'password';
   }
+
 
   /**
    * Performs a guest login by setting the login form values to a predefined guest email and password,
@@ -242,6 +250,7 @@ export class LoginComponent {
     this.loginWithEmailAndPassword();
   }
 
+  
   /**
    * Sets the selected imprint or data protection element.
    *
