@@ -34,7 +34,6 @@ export class FileUploadService {
    * @returns {Observable<number | undefined>} - An observable of the upload progress percentage.
    */
   pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
-    this.profileImgUpload = true;
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
@@ -61,6 +60,9 @@ export class FileUploadService {
     fileUpload.url = downloadURL;
     this.lastUpload = downloadURL;
     fileUpload.name = fileUpload.file.name;
+    this.filename = fileUpload.name;
+    console.log(this.filename);
+    console.log(this.lastUpload);
     this.saveFileData(fileUpload);
     this.userUpdate();
   }

@@ -38,11 +38,14 @@
         <span class="time">{{message.date}} {{message.time}} Uhr</span>
       </div>
       <div class="messageBox" [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'">
-        <span class="message">{{message.message}}</span>
+
+        <!-- testarea new message Data format -->
+        
+        <span class="message" *ngIf="directChatService.directChat.firstMember != directChatService.directChat.secondMember">{{message.message}}</span>
 
         <!-- testarea new message Data format -->
 
-        <!-- <div class="outputBox">
+        <div class="outputBox" *ngIf="directChatService.directChat.firstMember == directChatService.directChat.secondMember">
           <div class="output" *ngFor="let entry of message.message; let index = index">
 
             <span class="infoBox" *ngIf="entry.email != 'unset' && showInfoBox == i">
@@ -60,7 +63,7 @@
             </span>
             <p class="messageOut">{{ entry.p }}</p>
           </div>
-        </div> -->
+        </div>
 
         <!-- testarea new message Data format -->
 

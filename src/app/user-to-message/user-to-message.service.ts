@@ -72,7 +72,4 @@ export class UserToMessageService {
       email: email,
     });
   }
-
-
-
 }
