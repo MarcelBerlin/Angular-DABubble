@@ -20,13 +20,13 @@ export class UserToMessageComponent {
     public userToMessageService: UserToMessageService,
   ) { }
 
-  showInfoInput = (index: number) => (this.userToMessageService.showInfoBox = index);
+  showInfoInput = (index: number) => (this.userToMessageService.showInfoBox = index, console.log('show info', index));
 
 
   hideInfoInput = () => (this.userToMessageService.showInfoBox = -1);
 
 
-  calculateIndexInput = (): number => (this.userToMessageService.memberCache[this.userToMessageService.showInfoBox].id);
+  // calculateIndexInput = (): number => (this.userToMessageService.memberCache[this.userToMessageService.showInfoBox].id);
 
   
   selectedUser(index: number) {
@@ -36,7 +36,14 @@ export class UserToMessageComponent {
       id: index,
       email: this.dataService.userData[index].email,
       userId: this.dataService.userData[index].userId,
+      filelink: 'unset',
+      filename: 'unset',
     });
     this.varService.setVar('sign', false);
+  }
+
+  removeScrollAttribute(): void {
+    let scrollableDiv = document.getElementsByClassName('inputDiv');
+    
   }
 }

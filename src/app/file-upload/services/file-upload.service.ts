@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { FileUpload } from '../models/file-upload.model';
 import { DataService } from 'src/app/services/data.service';
+import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,6 +22,7 @@ export class FileUploadService {
     private db: AngularFireDatabase,
     private storage: AngularFireStorage,
     private dataService: DataService,
+    private userToMessageService: UserToMessageService,
   ) { }
 
 
@@ -64,7 +66,12 @@ export class FileUploadService {
     console.log(this.filename);
     console.log(this.lastUpload);
     this.saveFileData(fileUpload);
-    this.userUpdate();
+    if (this.profileImgUpload) this.userUpdate();
+    else{
+      console.log('set into input');
+      this.userToMessageService.insertFileLink(this.filename, this.lastUpload);
+    }
+    
   }
 
 

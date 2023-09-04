@@ -17,7 +17,7 @@
     padding: 0 16px;
 
     padding: 8px; /* Hier kannst du die gewünschte Höhe festlegen */
-    overflow-y: auto; /* Scrollen aktivieren, wenn der Inhalt zu groß ist */
+    // overflow-y: scroll; /* Scrollen aktivieren, wenn der Inhalt zu groß ist (auto)*/
     white-space: pre-wrap;  /* Umbruch von langen Zeilen aktivieren */
     flex-wrap: wrap;
 

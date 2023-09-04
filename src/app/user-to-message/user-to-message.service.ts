@@ -7,7 +7,7 @@ import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 export class UserToMessageService {
   showInfoBox: number = -1;
   saveArray: any = []; // das ist das array wo bei druck auf senden alles gespeichert wird
-  memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset' }]; // Zwischenspeicher
+  memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset', filelink: 'unset', filename: 'unset' }]; // Zwischenspeicher
 
 
   constructor(private directChatService: DirectChatService) { }
@@ -19,14 +19,31 @@ export class UserToMessageService {
    * @param {string} emoji - The emoji to be inserted.
    * @returns {void}
    */
-  insertEmoji(emoji):void {
+  insertEmoji(emoji): void {
     this.memberCache.push({
       number: -1,
       member: emoji,
       id: -1,
       email: 'unset',
       userId: 'unset',
+      filelink: 'unset',
+      filename: 'unset',
     });
+  }
+
+
+  insertFileLink(filename: string, filelink: string): void {
+    debugger;
+    this.memberCache.push({
+      number: -2,
+      member: 'unset',
+      id: -1,
+      email: 'unset',
+      userId: 'unset',
+      filelink: filelink,
+      filename: filename
+    });
+    console.log(this.memberCache);
   }
 
 
@@ -35,7 +52,7 @@ export class UserToMessageService {
    * 
    * @returns {void}
    */
-  send():void {
+  send(): void {
     for (let i = 0; i < this.memberCache.length; i++) {
       let spanElement = document.getElementById(`span${i}`);
       let pElement = document.getElementById(`p${i}`);
@@ -46,7 +63,7 @@ export class UserToMessageService {
       if (pElementHTML && spanElementHTML) pElementHTML = pElementHTML.replace(spanElementHTML, '');
       this.editSaveArray(i, spanElementHTML, pElementHTML);
     }
-    this.memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset' }];
+    this.memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset', filelink: 'unset', filename: 'unset', }];
     this.directChatService.saveMessage2(this.saveArray);
     this.saveArray = [];
   }
