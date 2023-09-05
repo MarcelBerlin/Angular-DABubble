@@ -1,29 +1,29 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { UsersService } from '../../services/users.service';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { HeaderEditDialogComponent } from '../header-edit-dialog/header-edit-dialog.component';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
 import { UploadService } from 'src/app/file-upload/services/upload.service';
 import { FileUploadService } from 'src/app/file-upload/services/file-upload.service';
 
-
 @Component({
   selector: 'app-header-dialog',
   templateUrl: './header-dialog.component.html',
-  styleUrls: ['./header-dialog.component.scss']
+  styleUrls: ['./header-dialog.component.scss'],
 })
 export class HeaderDialogComponent {
-  
   loggedUserStatus: boolean = true;
-
 
   constructor(
     public dialog: MatDialog,
     private auth: AuthService,
-    public getUserData: DataService,
-    ) {
-
+    public getUserData: DataService
+  ) {
     // setTimeout(() => {
     //   this.loggedUserImg = getUserData.loggedInUserData.img;
     //   this.loggedUserName = getUserData.loggedInUserData.name;
@@ -37,8 +37,5 @@ export class HeaderDialogComponent {
     dialogRef.afterClosed();
   }
 
-
   // edit by Bossi to upload profile image
-
-  
 }

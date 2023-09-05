@@ -7,6 +7,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { FormControl, Validators } from '@angular/forms';
 import { FileUploadService } from 'src/app/file-upload/services/file-upload.service';
 import { UploadService } from 'src/app/file-upload/services/upload.service';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-header-edit-dialog',
@@ -27,6 +28,7 @@ export class HeaderEditDialogComponent {
 
   newInputName: string = '';
   // newInputMail: string = '';
+  buttonDis: boolean = false;
 
   @ViewChild('fileInput') fileInput!: ElementRef;
 
@@ -35,13 +37,19 @@ export class HeaderEditDialogComponent {
     private auth: AuthService,
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
-    public getUserData: DataService
+    public getUserData: DataService,
+    private dialogRef: DialogRef
   ) {}
 
   saveUserChanges() {
-    this.getUserData.loggedInUserData.name = this.newInputName;
-    // this.getUserData.loggedInUserData.email = this.newInputMail;
-    this.getUserData.updateUser();
+    console.log(this.newInputName.length);
+
+    if (this.newInputName.length > 2) {
+      this.getUserData.loggedInUserData.name = this.newInputName;
+      // this.getUserData.loggedInUserData.email = this.newInputMail;
+      this.getUserData.updateUser();
+      this.dialogRef.close();
+    }
   }
 
   /**
