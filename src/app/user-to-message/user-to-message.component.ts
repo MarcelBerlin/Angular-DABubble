@@ -40,14 +40,18 @@ export class UserToMessageComponent {
       filename: 'unset',
     });
     this.varService.setVar('sign', false);
-    this.userToMessageService.contentLength += 1;
+    this.userToMessageService.contentLength += 10;
     this.userToMessageService.placeholderView = false;
   }
 
+
+
   onContentChange(event: any) {
+    const innerText2 = event.target.innerText.trim();
     const innerText = event.target.innerText.toString().trim();
-    this.userToMessageService.contentLength = innerText.length -1;
-    console.log(innerText.toString());
+    this.userToMessageService.contentLength = innerText2.length;
+    console.log('innerText to String: ',innerText.toString());
+    console.log('innerText not to String: ',innerText2);
     console.log(innerText.length);
   }
 
@@ -73,7 +77,7 @@ export class UserToMessageComponent {
 
   checkPlaceholder() {
     setTimeout(() => {
-      if (this.userToMessageService.contentLength == 0 || this.userToMessageService.contentLength == -1) {
+      if (this.userToMessageService.contentLength == 0) {
         this.userToMessageService.placeholderView = true;
       }
       console.log(this.userToMessageService.contentLength);

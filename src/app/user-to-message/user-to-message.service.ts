@@ -31,7 +31,7 @@ export class UserToMessageService {
       filelink: 'unset',
       filename: 'unset',
     });
-    this.contentLength += 1;
+    this.contentLength += 10;
     this.placeholderView = false;
   }
 
@@ -46,7 +46,7 @@ export class UserToMessageService {
       filelink: filelink,
       filename: filename
     });
-    this.contentLength += 1;
+    this.contentLength += 10;
     this.placeholderView = false;
   }
 
