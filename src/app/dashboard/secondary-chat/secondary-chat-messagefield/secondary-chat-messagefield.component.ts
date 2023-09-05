@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, Renderer2, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { ChatService } from 'src/app/services/chat.service';
@@ -14,6 +14,7 @@ import { SecondaryChatAnswerService } from '../service/secondary-chat-answer.ser
   styleUrls: ['./secondary-chat-messagefield.component.scss'],
 })
 export class SecondaryChatMessagefieldComponent implements OnInit {
+  @ViewChild('secondaryChatautoscrollContainer') private container: ElementRef;
   threadEmojiLeft: boolean = false;
   threadEmojiRight: boolean = false;
   index: number = 0;
@@ -23,6 +24,7 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
   emoji: string = '';
   reactionArrLeft: any = [];
   reactionArrRight: any = [];
+  autoscroll: boolean = true;
 
   constructor(
     public getUser: DataService,
@@ -33,9 +35,9 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     public chatService: ChatService,
     public channelMessages: ChannelMessagesService,
     public dataService: DataService,
-    public answerService: SecondaryChatAnswerService
+    public answerService: SecondaryChatAnswerService,
+    
   ) { 
-
     this.answerService.getThreadAnswer();
   }
 
@@ -96,5 +98,52 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
       <span> ${emoji} ${count} </span> </div>`;
     });
     if (reactionArr.length >= 7) { reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran'};
+  }
+
+   /**
+   * Lifecycle hook that executes after Angular has checked the component's view.
+   * If autoscroll is enabled (true), it calls the 'scrollToBottom' method to scroll 
+   * the chat container to the bottom.
+   * 
+   * @returns {void}
+   */
+   ngAfterViewChecked(): void {
+    if (this.autoscroll == true){
+      this.scrollToBottom();
+    } 
+  }
+
+
+  /**
+   * Scrolls the chat container to the bottom.
+   * 
+   * @returns {void}
+   */
+  scrollToBottom(): void {    
+    if (this.container) {
+      const container = this.container.nativeElement;
+      container.scrollTop = container.scrollHeight;
+    }
+  }
+
+
+  /**
+   * Handles the 'scroll' event of the chat container.
+   * Determines whether the user is manually scrolling up or reaching the bottom of the chat.
+   * Updates the 'autoscroll' flag accordingly to enable or disable autoscroll behavior.
+   * 
+   * @param {Event} event - The 'scroll' event object.
+   * @returns {void}
+   */
+  handleScroll(event: Event): void {
+    const container = event.target as HTMLElement;
+    const currentScrollTop = container.scrollTop;
+    const isScrollingUp = this.varService.previousScrollTop > currentScrollTop;
+    if (isScrollingUp) this.autoscroll = false;
+    else {
+      const scrollOffset = container.scrollHeight - container.clientHeight;
+      if (currentScrollTop >= scrollOffset -1) this.autoscroll = true;
+    }
+    this.varService.previousScrollTop = currentScrollTop;
   }
 }

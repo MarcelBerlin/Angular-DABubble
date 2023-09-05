@@ -22,7 +22,7 @@ import { ChannelMessagesService } from './service/channel-messages.service';
 })
 export class ChannelSelectionComponent implements OnInit {
   hoveredMessagesMainChat: boolean = false;
-  emptyChat: boolean = true;
+  emptyChat: boolean;
   chatText: string = '';
   messages$: any = [];
   messageData: any = [];
@@ -49,50 +49,29 @@ export class ChannelSelectionComponent implements OnInit {
     public app: AppComponent,
     public timelinesService: TimelinesService,
     public channelMessages: ChannelMessagesService
-  ) {
-    
+  ) {}
+
+  ngOnInit(): void {
+    // setTimeout(() => {
+    //   this.checkIfChannelIsEmpty();
+    // }, 1000);
   }
 
-  ngOnInit(): void {}
 
-
-/**
- * versuch für eigene channelMessages - bisher ohne erfolg
- * 
- */
-
-  // async allMessages() {
-  //   const selectedChannelIndex = this.dialogAdd.channelIndex;
-  //   const selectedChannel = this.dialogAdd.tagsData[selectedChannelIndex];
-  //   const channelId = selectedChannel.id;
-  
-  //   const channelMessagesColl = collection(this.firestore, 'channelMessages', channelId);
-  //   this.messages$ = collectionData(channelMessagesColl, { idField: 'id' });
-  
-  //   await this.messages$.subscribe((message: any) => {
-  //     this.messageData = message.sort(
-  //       (a, b) => a.dateTimeNumber - b.dateTimeNumber
-  //     );
-  //     console.log(this.messageData);
-  //   });
+  // checkIfChannelIsEmpty() {
+  //   if () {
+  //     this.emptyChat = true;
+  //   } else {
+  //     this.emptyChat = false;
+  //   }
+  //   console.log();
   // }
-  
-
-/**
- * #########################################################
- */
-
-
-  checkIfChannelIsEmpty() {
-    this.emptyChat = this.messageData.channelId.content.length === 0;
-  }
 
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
    *
    * This method is responsible for triggering the slide-in animation of the secondary chat.
    */
- 
 
   /**
    * Opens the 'DialogProfileViewUsersComponent' dialog to display user profiles.

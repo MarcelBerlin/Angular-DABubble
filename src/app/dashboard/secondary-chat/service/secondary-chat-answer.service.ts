@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { EventEmitter, Injectable, OnInit } from '@angular/core';
 import {
   Firestore,
   addDoc,
@@ -20,12 +20,13 @@ import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main
   providedIn: 'root',
 })
 export class SecondaryChatAnswerService {
+ 
   index: number = 0;
   answers$: any = [];
   answerData: any = [];
   newAnswer: Answers = new Answers();
   answerText: string = '';
-  messageId: string | null = null;
+  messageId: string | null = null;  
 
   constructor(
     private firestore: Firestore,
@@ -44,7 +45,7 @@ export class SecondaryChatAnswerService {
     this.addTimeStampToAnswer();    
     this.saveAnswerWithAnswerId();
     this.answerData.push(this.newAnswer);    
-    this.answerText = '';   
+    this.answerText = '';    
     console.log(this.answerData); 
   }
 
