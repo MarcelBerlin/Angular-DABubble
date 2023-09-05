@@ -8,7 +8,9 @@ export class UserToMessageService {
   showInfoBox: number = -1;
   saveArray: any = []; // das ist das array wo bei druck auf senden alles gespeichert wird
   memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset', filelink: 'unset', filename: 'unset' }]; // Zwischenspeicher
-
+  contentLength: number = 0;
+  placeholderText: string = "Nachricht an";
+  placeholderView: boolean = true;
 
   constructor(private directChatService: DirectChatService) { }
 
@@ -29,6 +31,8 @@ export class UserToMessageService {
       filelink: 'unset',
       filename: 'unset',
     });
+    this.contentLength += 1;
+    this.placeholderView = false;
   }
 
 
@@ -42,6 +46,8 @@ export class UserToMessageService {
       filelink: filelink,
       filename: filename
     });
+    this.contentLength += 1;
+    this.placeholderView = false;
   }
 
 

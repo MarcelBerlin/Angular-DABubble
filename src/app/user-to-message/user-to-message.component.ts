@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { VariablesService } from '../services/variables.service';
 import { UserToMessageService } from './user-to-message.service';
@@ -12,7 +12,7 @@ import { UserToMessageService } from './user-to-message.service';
 export class UserToMessageComponent {
   selectedUserIndex!: number;
   invisibleSign: string = '\u200B'; // verstecktes Zeichen
-
+   @ViewChild('inputP', { static: false }) inputP: ElementRef;
 
   constructor(
     public dataService: DataService,
@@ -28,7 +28,7 @@ export class UserToMessageComponent {
 
   // calculateIndexInput = (): number => (this.userToMessageService.memberCache[this.userToMessageService.showInfoBox].id);
 
-  
+
   selectedUser(index: number) {
     this.userToMessageService.memberCache.push({
       number: this.userToMessageService.memberCache.length,
@@ -40,5 +40,46 @@ export class UserToMessageComponent {
       filename: 'unset',
     });
     this.varService.setVar('sign', false);
+    this.userToMessageService.contentLength += 1;
+    this.userToMessageService.placeholderView = false;
+  }
+
+  onContentChange(event: any) {
+    const innerText = event.target.innerText.toString().trim();
+    this.userToMessageService.contentLength = innerText.length -1;
+    console.log(innerText.toString());
+    console.log(innerText.length);
+  }
+
+  // @ViewChild('inputDiv', { static: false }) inputDiv: ElementRef;
+ 
+
+
+  moveCursorToBeginning() {
+    this.userToMessageService.placeholderView = false;
+    if(this.userToMessageService.contentLength == 0){
+      
+    const el = this.inputP.nativeElement;
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.setStart(el.firstChild, 0);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    el.focus();
+    }
+  }
+
+
+  checkPlaceholder() {
+    setTimeout(() => {
+      if (this.userToMessageService.contentLength == 0 || this.userToMessageService.contentLength == -1) {
+        this.userToMessageService.placeholderView = true;
+      }
+      console.log(this.userToMessageService.contentLength);
+      console.log(this.userToMessageService.placeholderView);
+
+     }, 500); 
+    
   }
 }

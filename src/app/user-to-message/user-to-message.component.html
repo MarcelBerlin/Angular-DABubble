@@ -1,42 +1,56 @@
 <div class="box">
-  <div class="inputDiv" contenteditable="true" placeholder="Naricht schreiben" [style.overflow-y] ="userToMessageService.showInfoBox == -1 ? 'auto':'unset'">
-    <p *ngFor="let _ of userToMessageService.memberCache; let i = index" [attr.id]="'p' + i">
+  <!-- (input)="onContentChange($event)" -->
+  <div class="inputDiv" #inputDiv contenteditable="true"
+    [style.overflow-y]="userToMessageService.showInfoBox == -1 ? 'auto':'unset'" 
+    (input)="onContentChange($event)"
+    (click)="moveCursorToBeginning()"
+    (blur)="checkPlaceholder()">
+
+    <h4 class="placeholder" 
+    contenteditable="false" 
+    style="position: absolute; display: flex;" 
+    *ngIf="userToMessageService.placeholderView"
+    [style.left]="!userToMessageService.placeholderView ? '-300px':'0px'"
+    >
+      {{userToMessageService.placeholderText}}
+    </h4>
+    <p *ngFor="let _ of userToMessageService.memberCache; let i = index" [attr.id]="'p' + i" #inputP>
+
       <!-- Info Box -->
-      <span class="infoBox" *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].email != 'unset'">     
-        <span>Name: {{ userToMessageService.memberCache[i].member }}</span
-        ><span>Email: {{ userToMessageService.memberCache[i].email }}</span>
+      <span class="infoBox"
+        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].email != 'unset'">
+        <span>Name: {{ userToMessageService.memberCache[i].member }}</span><span>Email: {{
+          userToMessageService.memberCache[i].email }}</span>
       </span>
 
-      <span class="infoBox" *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].filename != 'unset'"> 
-        <img src={{userToMessageService.memberCache[i].filelink}} alt="" style="max-width: 100%; height: auto;">    
+      <span class="infoBox"
+        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].filename != 'unset'">
+        <img src={{userToMessageService.memberCache[i].filelink}} alt="" style="max-width: 100%; height: auto;">
         <a href={{userToMessageService.memberCache[i].filelink}}>{{ userToMessageService.memberCache[i].filename }}</a>
       </span>
 
+
       <!-- Ausgewählte User -->
-      <span
-        class="member"
+      <span class="member"
         *ngIf="i > 0 && userToMessageService.memberCache[i].number != -1 && userToMessageService.memberCache[i].number != -2"
-        (mouseenter)="showInfoInput(i)"
-        (mouseleave)="hideInfoInput()"
-        [attr.id]="'span' + i" contenteditable="false"
-        >@ {{ userToMessageService.memberCache[i].member }} 
-        </span>
+        (mouseenter)="showInfoInput(i)" (mouseleave)="hideInfoInput()" [attr.id]="'span' + i" contenteditable="false">@
+        {{ userToMessageService.memberCache[i].member }}
+      </span>
 
-        {{ invisibleSign }}
-        <span class="member" 
+      <!-- {{ invisibleSign }} -->
+      <span class="member"
         *ngIf="i > 0 && userToMessageService.memberCache[i].number == -2 && userToMessageService.memberCache[i].number != -1"
-        (mouseenter)="showInfoInput(i)"
-        (mouseleave)="hideInfoInput()"
-        [attr.id]="'span' + i" 
-         contenteditable="false">
-          {{userToMessageService.memberCache[i].filename}}
-        </span>
+        (mouseenter)="showInfoInput(i)" (mouseleave)="hideInfoInput()" [attr.id]="'span' + i" contenteditable="false">
+        {{userToMessageService.memberCache[i].filename}}
+      </span>
 
-        {{ invisibleSign }}
-        <span *ngIf="userToMessageService.memberCache[i].number == -1" class="emojiSpan">
-          {{userToMessageService.memberCache[i].member}}
-        </span>
-        
+      <!-- {{ invisibleSign }} -->
+      <span *ngIf="userToMessageService.memberCache[i].number == -1" class="emojiSpan">
+        {{userToMessageService.memberCache[i].member}}
+      </span>
+      {{ invisibleSign }}
+      
+
     </p>
   </div>
 
@@ -46,6 +60,6 @@
       <span class="user" (click)="selectedUser(i)">{{ name.name }}</span>
     </div>
   </div>
-  
+
 
 </div>
