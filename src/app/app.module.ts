@@ -23,11 +23,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { MatDialogActions, } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { MatDialogActions } from '@angular/material/dialog';
 import { MatDialogContent } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderDialogComponent } from './dialog/header-dialog/header-dialog.component';
@@ -65,8 +68,6 @@ import { EmojiPickerBossiComponent } from './emoji-picker-bossi/emoji-picker-bos
 import { ImprintDataProtectionComponent } from './auth-features/login/imprint-data-protection/imprint-data-protection.component';
 import { UserToMessageComponent } from './user-to-message/user-to-message.component';
 import { MessageOutputComponent } from './message-output/message-output.component';
-
-
 
 @NgModule({
   declarations: [
@@ -107,8 +108,7 @@ import { MessageOutputComponent } from './message-output/message-output.componen
     EmojiPickerBossiComponent,
     ImprintDataProtectionComponent,
     UserToMessageComponent,
-    MessageOutputComponent, 
-
+    MessageOutputComponent,
   ],
   imports: [
     BrowserModule,
@@ -129,10 +129,9 @@ import { MessageOutputComponent } from './message-output/message-output.componen
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
   ],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

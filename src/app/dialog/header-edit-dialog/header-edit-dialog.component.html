@@ -55,7 +55,7 @@
         #inputName
         [(ngModel)]="newInputName"
         class="header-input"
-        value="{{ getUserData.loggedInUserData.name }}"
+        placeholder="{{ getUserData.loggedInUserData.name }}"
       />
     </div>
     <div class="input-section">
@@ -63,27 +63,40 @@
         <img src="assets/img/mail-icon.png" />
         <span> E-Mail Adresse </span>
       </div>
-      <input
+      <!-- <input
         [formControl]="emailFormControl"
         #inputMail
         [(ngModel)]="newInputMail"
         class="header-input"
+        placeholder="{{ getUserData.loggedInUserData.email }}"
+      /> -->
+      <input
+        disabled
+        matTooltip="not editable"
+        matTooltipPosition="above"
+        class="header-input"
         value="{{ getUserData.loggedInUserData.email }}"
       />
-      <mat-error
+      <!-- <mat-error
         *ngIf="
           emailFormControl.hasError('email') &&
           !emailFormControl.hasError('required')
         "
-      >
         Please enter a valid email address
-      </mat-error>
+      </mat-error> -->
     </div>
 
     <div class="btn-container">
       <button [mat-dialog-close] class="cancel-btn">Abbrechen</button>
-      <button
+      <!-- <button
         [mat-dialog-close]="newInputMail"
+        [mat-dialog-close]="newInputName"
+        (click)="saveUserChanges()"
+        class="save-btn"
+      >
+        Speichern
+      </button> -->
+      <button
         [mat-dialog-close]="newInputName"
         (click)="saveUserChanges()"
         class="save-btn"
