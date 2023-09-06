@@ -31,6 +31,7 @@ import {
 import { MatDialogActions } from '@angular/material/dialog';
 import { MatDialogContent } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderDialogComponent } from './dialog/header-dialog/header-dialog.component';
@@ -125,6 +126,7 @@ import { MessageOutputComponent } from './message-output/message-output.componen
     ReactiveFormsModule,
     MatTreeModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
     PickerModule,
     HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),

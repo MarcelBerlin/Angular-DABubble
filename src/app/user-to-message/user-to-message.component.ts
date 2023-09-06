@@ -20,7 +20,21 @@ export class UserToMessageComponent {
     public userToMessageService: UserToMessageService,
   ) { }
 
-  showInfoInput = (index: number) => (this.userToMessageService.showInfoBox = index);
+
+  TimeoutArray = [];
+  // showInfoInput = (index: number) => (this.userToMessageService.showInfoBox = index);
+  showInfoInput(index: number){
+    this.userToMessageService.showInfoBox = index;
+      const timeoutId = setTimeout(() => {
+        this.hideInfoInput();
+      }, 5000)
+      this.TimeoutArray.push(timeoutId);
+      for (let i = 0; i < this.TimeoutArray.length -1; i++) {
+        clearTimeout(this.TimeoutArray[i]);
+      }
+      this.TimeoutArray = this.TimeoutArray.slice(this.TimeoutArray.length - 1, this.TimeoutArray.length);
+      console.log(this.TimeoutArray);
+  }
 
 
   hideInfoInput = () => (this.userToMessageService.showInfoBox = -1);
@@ -49,7 +63,7 @@ export class UserToMessageComponent {
   onContentChange(event: any) {
     const innerText2 = event.target.innerText.trim();
     const innerText = event.target.innerText.toString().trim();
-    this.userToMessageService.contentLength = innerText2.length;
+    this.userToMessageService.contentLength = (innerText2.length + innerText.length) / 2;
     console.log('innerText to String: ',innerText.toString());
     console.log('innerText not to String: ',innerText2);
     console.log(innerText.length);

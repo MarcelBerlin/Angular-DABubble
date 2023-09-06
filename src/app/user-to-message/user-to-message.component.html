@@ -18,29 +18,29 @@
 
       <!-- Info Box -->
       <span class="infoBox"
-        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].email != 'unset'">
+        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].email != 'unset'" contenteditable="false">
         <span>Name: {{ userToMessageService.memberCache[i].member }}</span><span>Email: {{
           userToMessageService.memberCache[i].email }}</span>
       </span>
 
       <span class="infoBox"
-        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].filename != 'unset'">
-        <img src={{userToMessageService.memberCache[i].filelink}} alt="" style="max-width: 100%; height: auto;">
-        <a href={{userToMessageService.memberCache[i].filelink}}>{{ userToMessageService.memberCache[i].filename }}</a>
+        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].filename != 'unset'" contenteditable="false">
+        <img src={{userToMessageService.memberCache[i].filelink}} alt="" style="max-width: 50%; height: auto;">
+        <a href={{userToMessageService.memberCache[i].filelink}} target="_blank">{{ userToMessageService.memberCache[i].filename }}</a>
       </span>
 
 
       <!-- Ausgewählte User -->
       <span class="member"
         *ngIf="i > 0 && userToMessageService.memberCache[i].number != -1 && userToMessageService.memberCache[i].number != -2"
-        (mouseenter)="showInfoInput(i)" (mouseleave)="hideInfoInput()" [attr.id]="'span' + i" contenteditable="false">@
+        (mouseenter)="showInfoInput(i)"  [attr.id]="'span' + i" contenteditable="false">@
         {{ userToMessageService.memberCache[i].member }}
       </span>
 
       <!-- {{ invisibleSign }} -->
       <span class="member"
         *ngIf="i > 0 && userToMessageService.memberCache[i].number == -2 && userToMessageService.memberCache[i].number != -1"
-        (mouseenter)="showInfoInput(i)" (mouseleave)="hideInfoInput()" [attr.id]="'span' + i" contenteditable="false">
+        (mouseenter)="showInfoInput(i)" [attr.id]="'span' + i" contenteditable="false">
         {{userToMessageService.memberCache[i].filename}}
       </span>
 

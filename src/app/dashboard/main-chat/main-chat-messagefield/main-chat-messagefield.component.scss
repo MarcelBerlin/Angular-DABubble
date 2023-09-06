@@ -47,7 +47,7 @@
       background-color: #ECEEFE;
     }
 
-    app-emoji-picker-bossi{
+    app-emoji-picker-bossi {
       display: flex;
       justify-content: flex-start;
       // max-height: 350px;
@@ -107,8 +107,21 @@
   width: 0px !important;
 }
 
-app-user-to-message{
+app-user-to-message {
   width: 100%;
   height: 100%;
 }
 
+.uploadIndication {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 145px;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 35px;
+  right: 32px;
+  left: 32px;
+  background-color: rgba(0, 0, 0, 0.08);
+  z-index: 100;
+}

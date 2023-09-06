@@ -15,6 +15,7 @@ export class FileUploadService {
   filename: string = '';
   lastUpload: string = '';
   profileImgUpload: boolean = false;
+  fileUploadRuns: boolean = false;
   uploadPercentage: number = 0;
 
 
@@ -36,6 +37,7 @@ export class FileUploadService {
    * @returns {Observable<number | undefined>} - An observable of the upload progress percentage.
    */
   pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
+    if(!this.profileImgUpload) this.fileUploadRuns = true;
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
@@ -44,6 +46,7 @@ export class FileUploadService {
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           this.finalizeUpload(downloadURL, fileUpload);
+          console.log()
         });
       })
     ).subscribe();
@@ -64,8 +67,14 @@ export class FileUploadService {
     fileUpload.name = fileUpload.file.name;
     this.filename = fileUpload.name;
     this.saveFileData(fileUpload);
-    if (this.profileImgUpload) this.userUpdate();
-    else this.userToMessageService.insertFileLink(this.filename, this.lastUpload);
+    if (this.profileImgUpload){
+      this.userUpdate();
+    } 
+    else {
+      this.userToMessageService.insertFileLink(this.filename, this.lastUpload);
+      this.fileUploadRuns = false;
+      this.uploadPercentage = 0;
+    }
   }
 
 
@@ -87,6 +96,7 @@ export class FileUploadService {
     } else {
       this.profileImgUpload = false;
     }
+    this.uploadPercentage = 0;
   }
 
 

@@ -45,6 +45,7 @@ export class UploadService {
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       this.selectedFiles = undefined;
+
       if (file) {
         this.uploadFile(file);
       }
@@ -65,9 +66,12 @@ export class UploadService {
         this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
           percentage => {
             this.percentage = Math.round(percentage ? percentage : 0);
+            this.uploadService.uploadPercentage = this.percentage;
           },
           error => {
             this.openDialogUploadFailed();
+            this.uploadService.fileUploadRuns = false;
+            this.uploadService.profileImgUpload = false;
           }
         );
   }

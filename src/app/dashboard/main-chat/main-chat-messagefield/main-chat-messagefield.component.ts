@@ -48,6 +48,7 @@ export class MainChatMessagefieldComponent {
       this.dataService.loggedInUserData.email ===
       this.dataService.userData[this.varService.selectedUserToMessage].email
     );
+    
   }
 
   send() {
@@ -94,8 +95,9 @@ export class MainChatMessagefieldComponent {
    * @returns {void}
    */
   openFileExplorer(): void {
+    let today: Date = new Date();
     this.fileUploadService.profileImgUpload = false;
-    this.fileUploadService.basePath ='/uploads/' + this.dataService.loggedInUserData.userId + '/files/';
+    this.fileUploadService.basePath ='/uploads/' + this.dataService.loggedInUserData.userId + '/files/' + today.getTime().toString();
     this.fileInput.nativeElement.click();
   }
 }
