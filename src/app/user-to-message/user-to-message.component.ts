@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { VariablesService } from '../services/variables.service';
 import { UserToMessageService } from './user-to-message.service';
+import { FileUploadService } from '../file-upload/services/file-upload.service';
 
 @Component({
   selector: 'app-user-to-message',
@@ -18,6 +19,7 @@ export class UserToMessageComponent {
     public dataService: DataService,
     public varService: VariablesService,
     public userToMessageService: UserToMessageService,
+    private fileUploadService: FileUploadService,
   ) { }
 
 
@@ -61,22 +63,22 @@ export class UserToMessageComponent {
 
 
   onContentChange(event: any) {
+    this.userToMessageService.getContentLength();
     const innerText2 = event.target.innerText.trim();
     const innerText = event.target.innerText.toString().trim();
     this.userToMessageService.contentLength = (innerText2.length + innerText.length) / 2;
     console.log('innerText to String: ',innerText.toString());
     console.log('innerText not to String: ',innerText2);
     console.log(innerText.length);
+    if(innerText == undefined && innerText2 == undefined){
+      console.log('undefined');
+    }
   }
-
-  // @ViewChild('inputDiv', { static: false }) inputDiv: ElementRef;
- 
 
 
   moveCursorToBeginning() {
     this.userToMessageService.placeholderView = false;
-    if(this.userToMessageService.contentLength == 0){
-      
+    if(this.userToMessageService.contentLength <= 0){
     const el = this.inputP.nativeElement;
     const range = document.createRange();
     const sel = window.getSelection();
@@ -91,13 +93,24 @@ export class UserToMessageComponent {
 
   checkPlaceholder() {
     setTimeout(() => {
-      if (this.userToMessageService.contentLength == 0) {
+      if (this.userToMessageService.contentLength <= 0) {
         this.userToMessageService.placeholderView = true;
       }
       console.log(this.userToMessageService.contentLength);
       console.log(this.userToMessageService.placeholderView);
 
      }, 500); 
-    
   }
+
+  deleteFile(i: number) {
+    const filepath = this.userToMessageService.memberCache[i].filelink;
+    this.userToMessageService.memberCache.splice(i, 1);
+    this.fileUploadService.deleteFile(filepath);
+    // document.getElementById('p' + `${i}`).innerHTML = '';
+    setTimeout(()=>{
+      this.userToMessageService.getContentLength();
+    }, 500);
+  }
+
+  
 }

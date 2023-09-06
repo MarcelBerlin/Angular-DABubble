@@ -1,6 +1,6 @@
 <div class="box">
   <!-- (input)="onContentChange($event)" -->
-  <div class="inputDiv" #inputDiv contenteditable="true"
+  <div class="inputDiv" #inputDiv contenteditable="true" id="inputDiv"
     [style.overflow-y]="userToMessageService.showInfoBox == -1 ? 'auto':'unset'" 
     (input)="onContentChange($event)"
     (click)="moveCursorToBeginning()"
@@ -14,19 +14,23 @@
     >
       {{userToMessageService.placeholderText}}
     </h4>
-    <p *ngFor="let _ of userToMessageService.memberCache; let i = index" [attr.id]="'p' + i" #inputP>
+    <p *ngFor="let _ of userToMessageService.memberCache; let i = index" [attr.id]="'p' + i" #inputP class="pClass">
 
-      <!-- Info Box -->
+      <!-- Info Box @-->
       <span class="infoBox"
         *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].email != 'unset'" contenteditable="false">
         <span>Name: {{ userToMessageService.memberCache[i].member }}</span><span>Email: {{
           userToMessageService.memberCache[i].email }}</span>
       </span>
 
+      <!-- Info Box files-->
       <span class="infoBox"
         *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].filename != 'unset'" contenteditable="false">
         <img src={{userToMessageService.memberCache[i].filelink}} alt="" style="max-width: 50%; height: auto;">
         <a href={{userToMessageService.memberCache[i].filelink}} target="_blank">{{ userToMessageService.memberCache[i].filename }}</a>
+        <mat-icon (click)="deleteFile(i)" title="löschen">
+          delete
+        </mat-icon>
       </span>
 
 
@@ -45,7 +49,7 @@
       </span>
 
       <!-- {{ invisibleSign }} -->
-      <span *ngIf="userToMessageService.memberCache[i].number == -1" class="emojiSpan">
+      <span *ngIf="userToMessageService.memberCache[i].number == -1" class="emojiSpan" data-active='1'>
         {{userToMessageService.memberCache[i].member}}
       </span>
       {{ invisibleSign }}

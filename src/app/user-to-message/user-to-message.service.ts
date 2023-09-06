@@ -46,8 +46,11 @@ export class UserToMessageService {
       filelink: filelink,
       filename: filename
     });
-    this.contentLength += 10;
+    // this.contentLength += 10;
     this.placeholderView = false;
+    setTimeout(()=>{
+      this.contentLength += this.getContentLength();
+    }, 500);
   }
 
 
@@ -97,4 +100,43 @@ export class UserToMessageService {
       filename: filename,
     });
   }
+
+  getContentLength1() {
+    let spanLength = 0;
+    const inputDiv = document.getElementById('inputDiv').innerHTML;
+    // const container = document.querySelector(".member");
+    const allMemberClasses = document.querySelectorAll(".member");
+    const pClasses = document.querySelectorAll(".pClass");
+    console.log(allMemberClasses[0]?.innerHTML.trim().length);
+    console.log(pClasses[0].innerHTML);
+    // for (let i = 0; i < allMemberClasses.length; i++) {
+    //   const element = allMemberClasses[i];
+    //   console.log(allMemberClasses[i].innerHTML);
+    //   spanLength += element.innerHTML.trim().length;
+    // }
+    // console.log(spanLength);
+    
+  }
+
+  getContentLength(): number {
+    let contentLength = 0;
+    for (let i = 0; i < this.memberCache.length; i++) {
+      let spanElement = document.getElementById(`span${i}`);
+      let pElement = document.getElementById(`p${i}`);
+      let spanElementHTML = spanElement?.innerText;
+      let pElementHTML = pElement?.innerText;
+      if (spanElementHTML == undefined) spanElementHTML = '';
+      if (pElementHTML == undefined) pElementHTML = '';
+      if (pElementHTML && spanElementHTML) pElementHTML = pElementHTML.replace(spanElementHTML, '');
+      contentLength += spanElementHTML.trim().length + pElementHTML.trim().length;
+    }
+    
+      console.log('getContentLengthService: ',contentLength);
+      this.contentLength = contentLength -1;
+    
+    return contentLength;
+  }
+  
+
+
 }
