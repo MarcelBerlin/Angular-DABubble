@@ -70,9 +70,6 @@ export class UserToMessageComponent {
     console.log('innerText to String: ',innerText.toString());
     console.log('innerText not to String: ',innerText2);
     console.log(innerText.length);
-    if(innerText == undefined && innerText2 == undefined){
-      console.log('undefined');
-    }
   }
 
 
