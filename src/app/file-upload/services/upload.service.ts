@@ -72,6 +72,7 @@ export class UploadService {
             this.openDialogUploadFailed();
             this.uploadService.fileUploadRuns = false;
             this.uploadService.profileImgUpload = false;
+            this.uploadService.uploadPercentage = 0;
           }
         );
   }
