@@ -14,6 +14,7 @@ export class UserToMessageComponent {
   selectedUserIndex!: number;
   invisibleSign: string = '\u200B'; // verstecktes Zeichen
    @ViewChild('inputP', { static: false }) inputP: ElementRef;
+   @ViewChild('invisible', { static: false }) invisible: ElementRef;
 
   constructor(
     public dataService: DataService,
@@ -35,7 +36,6 @@ export class UserToMessageComponent {
         clearTimeout(this.TimeoutArray[i]);
       }
       this.TimeoutArray = this.TimeoutArray.slice(this.TimeoutArray.length - 1, this.TimeoutArray.length);
-      console.log(this.TimeoutArray);
   }
 
 
@@ -63,23 +63,29 @@ export class UserToMessageComponent {
 
 
   onContentChange(event: any) {
+    // this.userToMessageService.getContentLength();
+    // const innerText2 = event.target.innerText.trim();
+    // const innerText = event.target.innerText.toString().trim();
+    // this.userToMessageService.contentLength = (innerText2.length + innerText.length) / 2;
+    // console.log('innerText to String: ',innerText.toString());
+    // console.log('innerText not to String: ',innerText2);
+   
+    // console.log(this.invisibleSign.length);
     this.userToMessageService.getContentLength();
-    const innerText2 = event.target.innerText.trim();
-    const innerText = event.target.innerText.toString().trim();
-    this.userToMessageService.contentLength = (innerText2.length + innerText.length) / 2;
-    console.log('innerText to String: ',innerText.toString());
-    console.log('innerText not to String: ',innerText2);
-    console.log(innerText.length);
+
+    // console.log(this.userToMessageService.getContentLength());
   }
 
 
   moveCursorToBeginning() {
+    // this.userToMessageService.getContentLength();
     this.userToMessageService.placeholderView = false;
-    if(this.userToMessageService.contentLength <= 0){
+    if(this.userToMessageService.contentLength == 0){
     const el = this.inputP.nativeElement;
     const range = document.createRange();
     const sel = window.getSelection();
-    range.setStart(el.firstChild, 0);
+    range.setStart(el.firstChild, 1);
+    console.log(el.firstChild);
     range.collapse(true);
     sel.removeAllRanges();
     sel.addRange(range);
@@ -89,21 +95,36 @@ export class UserToMessageComponent {
 
 
   checkPlaceholder() {
+    this.userToMessageService.getContentLength();
     setTimeout(() => {
-      if (this.userToMessageService.contentLength <= 0) {
+      
+      if (this.userToMessageService.contentLength == 1) {
         this.userToMessageService.placeholderView = true;
       }
-      console.log(this.userToMessageService.contentLength);
-      console.log(this.userToMessageService.placeholderView);
-
-     }, 500); 
+      // console.log(this.userToMessageService.contentLength);
+      // console.log(this.userToMessageService.placeholderView);
+      
+     }, 700); 
   }
 
   deleteFile(i: number) {
     const filepath = this.userToMessageService.memberCache[i].filelink;
-    this.userToMessageService.memberCache.splice(i, 1);
+    // this.userToMessageService.memberCache.splice(i, 1);
     this.fileUploadService.deleteFile(filepath);
+    this.userToMessageService.memberCache[i].filelink = 'unset';
+    this.userToMessageService.memberCache[i].filename = 'unset';
     // document.getElementById('p' + `${i}`).innerHTML = '';
+    setTimeout(()=>{
+      this.userToMessageService.getContentLength();
+    }, 500);
+  }
+
+
+  deleteUserRef(i: number) {
+    // this.userToMessageService.memberCache.splice(i, 1);
+    this.userToMessageService.memberCache[i].email = 'unset';
+    this.userToMessageService.memberCache[i].member = 'unset';
+    this.userToMessageService.memberCache[i].userId = 'unset';
     setTimeout(()=>{
       this.userToMessageService.getContentLength();
     }, 500);

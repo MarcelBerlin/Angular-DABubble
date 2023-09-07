@@ -4,7 +4,8 @@
     [style.overflow-y]="userToMessageService.showInfoBox == -1 ? 'auto':'unset'" 
     (input)="onContentChange($event)"
     (click)="moveCursorToBeginning()"
-    (blur)="checkPlaceholder()">
+    (blur)="checkPlaceholder()"
+    >
 
     <h4 class="placeholder" 
     contenteditable="false" 
@@ -14,13 +15,19 @@
     >
       {{userToMessageService.placeholderText}}
     </h4>
+
+    <a  contenteditable="false"></a>
     <p *ngFor="let _ of userToMessageService.memberCache; let i = index" [attr.id]="'p' + i" #inputP class="pClass">
 
+      <!-- <a  contenteditable="false">{{ invisibleSign }}</a> -->
       <!-- Info Box @-->
       <span class="infoBox"
         *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].email != 'unset'" contenteditable="false">
-        <span>Name: {{ userToMessageService.memberCache[i].member }}</span><span>Email: {{
-          userToMessageService.memberCache[i].email }}</span>
+        <span>Name:<br> {{ userToMessageService.memberCache[i].member }}</span>
+        <span>Email:<br> {{userToMessageService.memberCache[i].email }}</span>
+          <mat-icon (click)="deleteUserRef(i)" title="löschen">
+            delete
+          </mat-icon>
       </span>
 
       <!-- Info Box files-->
@@ -36,14 +43,14 @@
 
       <!-- Ausgewählte User -->
       <span class="member"
-        *ngIf="i > 0 && userToMessageService.memberCache[i].number != -1 && userToMessageService.memberCache[i].number != -2"
+        *ngIf="i > 0 && userToMessageService.memberCache[i].number != -1 && userToMessageService.memberCache[i].number != -2 && userToMessageService.memberCache[i].member != 'unset'"
         (mouseenter)="showInfoInput(i)"  [attr.id]="'span' + i" contenteditable="false">@
         {{ userToMessageService.memberCache[i].member }}
       </span>
 
       <!-- {{ invisibleSign }} -->
       <span class="member"
-        *ngIf="i > 0 && userToMessageService.memberCache[i].number == -2 && userToMessageService.memberCache[i].number != -1"
+        *ngIf="i > 0 && userToMessageService.memberCache[i].number == -2 && userToMessageService.memberCache[i].filelink != 'unset'"
         (mouseenter)="showInfoInput(i)" [attr.id]="'span' + i" contenteditable="false">
         {{userToMessageService.memberCache[i].filename}}
       </span>
@@ -52,7 +59,11 @@
       <span *ngIf="userToMessageService.memberCache[i].number == -1" class="emojiSpan" data-active='1'>
         {{userToMessageService.memberCache[i].member}}
       </span>
-      {{ invisibleSign }}
+      
+      <span contenteditable="false" *ngIf="i==0">
+        {{ invisibleSign }}
+      </span>
+      
       
 
     </p>

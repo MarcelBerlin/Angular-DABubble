@@ -8,7 +8,7 @@ export class UserToMessageService {
   showInfoBox: number = -1;
   saveArray: any = []; // das ist das array wo bei druck auf senden alles gespeichert wird
   memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset', filelink: 'unset', filename: 'unset' }]; // Zwischenspeicher
-  contentLength: number = 0;
+  contentLength: number = 1;
   placeholderText: string = "Nachricht an";
   placeholderView: boolean = true;
 
@@ -31,7 +31,9 @@ export class UserToMessageService {
       filelink: 'unset',
       filename: 'unset',
     });
-    this.contentLength += 10;
+    setTimeout(()=>{
+      this.contentLength += this.getContentLength();
+    }, 500);
     this.placeholderView = false;
   }
 
@@ -101,22 +103,6 @@ export class UserToMessageService {
     });
   }
 
-  getContentLength1() {
-    let spanLength = 0;
-    const inputDiv = document.getElementById('inputDiv').innerHTML;
-    // const container = document.querySelector(".member");
-    const allMemberClasses = document.querySelectorAll(".member");
-    const pClasses = document.querySelectorAll(".pClass");
-    console.log(allMemberClasses[0]?.innerHTML.trim().length);
-    console.log(pClasses[0].innerHTML);
-    // for (let i = 0; i < allMemberClasses.length; i++) {
-    //   const element = allMemberClasses[i];
-    //   console.log(allMemberClasses[i].innerHTML);
-    //   spanLength += element.innerHTML.trim().length;
-    // }
-    // console.log(spanLength);
-    
-  }
 
   getContentLength(): number {
     let contentLength = 0;
@@ -131,8 +117,12 @@ export class UserToMessageService {
       contentLength += spanElementHTML.trim().length + pElementHTML.trim().length;
     }
     
-      console.log('getContentLengthService: ',contentLength);
-      this.contentLength = contentLength -1;
+      
+      // contentLength -= this.memberCache.length;
+      // contentLength -= 1;
+      this.contentLength = contentLength;
+      // console.log('getContentLengthService: ',contentLength, 'membercache: ',this.memberCache);
+      
     
     return contentLength;
   }
