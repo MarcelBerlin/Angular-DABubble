@@ -9,6 +9,7 @@ export class UserToMessageService {
   saveArray: any = []; // das ist das array wo bei druck auf senden alles gespeichert wird
   memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset', filelink: 'unset', filename: 'unset' }]; // Zwischenspeicher
   contentLength: number = 1;
+  placeholderBasicText: string ="Nachricht an";
   placeholderText: string = "Nachricht an";
   placeholderView: boolean = true;
 
@@ -121,7 +122,7 @@ export class UserToMessageService {
       // contentLength -= this.memberCache.length;
       // contentLength -= 1;
       this.contentLength = contentLength;
-      // console.log('getContentLengthService: ',contentLength, 'membercache: ',this.memberCache);
+      console.log('getContentLengthService: ',contentLength, 'membercache: ',this.memberCache);
       
     
     return contentLength;
