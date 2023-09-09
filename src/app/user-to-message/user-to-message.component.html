@@ -1,40 +1,38 @@
 <div class="box">
   <!-- (input)="onContentChange($event)" -->
-  <div class="inputDiv" #inputDiv contenteditable="true" id="inputDiv"
-    [style.overflow-y]="userToMessageService.showInfoBox == -1 ? 'auto':'unset'" 
-    (input)="onContentChange($event)"
-    (click)="moveCursorToBeginning()"
-    (blur)="checkPlaceholder()"
-    >
+  <div class="inputDiv" contenteditable="true" id="inputDiv" appPreventDelete #inputDiv
+    [style.overflow-y]="userToMessageService.showInfoBox == -1 ? 'auto':'unset'" (input)="onContentChange($event)"
+    (click)="moveCursorToBeginning()" (blur)="checkPlaceholder()">
 
-    <h4 class="placeholder" 
-    contenteditable="false" 
-    style="position: absolute; display: flex;" 
-    *ngIf="userToMessageService.placeholderView"
-    [style.left]="!userToMessageService.placeholderView ? '-300px':'0px'"
-    >
+
+    <h4 class="placeholder" contenteditable="false" style="position: absolute; display: flex;"
+      *ngIf="userToMessageService.placeholderView"
+      [style.left]="!userToMessageService.placeholderView ? '-300px':'0px'">
       {{userToMessageService.placeholderText}}
     </h4>
 
-    <a  contenteditable="false"></a>
+    <a contenteditable="false"></a>
     <p *ngFor="let _ of userToMessageService.memberCache; let i = index" [attr.id]="'p' + i" #inputP class="pClass">
 
       <!-- <a  contenteditable="false">{{ invisibleSign }}</a> -->
       <!-- Info Box @-->
       <span class="infoBox"
-        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].email != 'unset'" contenteditable="false">
+        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].email != 'unset'"
+        contenteditable="false">
         <span>Name:<br> {{ userToMessageService.memberCache[i].member }}</span>
         <span>Email:<br> {{userToMessageService.memberCache[i].email }}</span>
-          <mat-icon (click)="deleteUserRef(i)" title="löschen">
-            delete
-          </mat-icon>
+        <mat-icon (click)="deleteUserRef(i)" title="löschen">
+          delete
+        </mat-icon>
       </span>
 
       <!-- Info Box files-->
       <span class="infoBox"
-        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].filename != 'unset'" contenteditable="false">
+        *ngIf="userToMessageService.showInfoBox == i && userToMessageService.memberCache[i].filename != 'unset'"
+        contenteditable="false">
         <img src={{userToMessageService.memberCache[i].filelink}} alt="" style="max-width: 50%; height: auto;">
-        <a href={{userToMessageService.memberCache[i].filelink}} target="_blank">{{ userToMessageService.memberCache[i].filename }}</a>
+        <a href={{userToMessageService.memberCache[i].filelink}} target="_blank">{{
+          userToMessageService.memberCache[i].filename }}</a>
         <mat-icon (click)="deleteFile(i)" title="löschen">
           delete
         </mat-icon>
@@ -44,7 +42,7 @@
       <!-- Ausgewählte User -->
       <span class="member"
         *ngIf="i > 0 && userToMessageService.memberCache[i].number != -1 && userToMessageService.memberCache[i].number != -2 && userToMessageService.memberCache[i].member != 'unset'"
-        (mouseenter)="showInfoInput(i)"  [attr.id]="'span' + i" contenteditable="false">@
+        (mouseenter)="showInfoInput(i)" [attr.id]="'span' + i" contenteditable="false">@
         {{ userToMessageService.memberCache[i].member }}
       </span>
 
@@ -59,12 +57,12 @@
       <span *ngIf="userToMessageService.memberCache[i].number == -1" class="emojiSpan" data-active='1'>
         {{userToMessageService.memberCache[i].member}}
       </span>
-      
+
       <span contenteditable="false" *ngIf="i==0">
         {{ invisibleSign }}
       </span>
-      
-      
+
+
 
     </p>
   </div>
@@ -78,3 +76,16 @@
 
 
 </div>
+
+<!-- <div data-qa="message_input" data-message-input="true" data-channel-id="C05H7LKB3UG" data-view-context="Channel"
+  data-min-lines="1" class="c-texty_input_unstyled ql-container focus">
+  <div class="ql-editor" data-gramm="false" contenteditable="true" dir="auto" role="textbox" tabindex="0"
+    data-team-id="T01CDQFUXFE" data-input-metric-boundary="composer" aria-label="Message to angular-625"
+    aria-describedby="context_bar_text-47d6bb92" aria-multiline="true" spellcheck="true">
+    <p><ts-mention data-id="U03F5SNAJNB" data-label="@Felix Röder" spellcheck="false"
+        class="c-member_slug c-member_slug--link ts_tip_texty" dir="ltr">@Felix Röder</ts-mention> afwaefwf <img
+        data-id=":smile:" data-title=":lächeln:" data-stringify-text=":smile:" class="emoji"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="lächeln-Emoji"
+        style="background-image: url(https://a.slack-edge.com/production-standard-emoji-assets/14.0/google-large/1f604.png);">
+      fsawe</p>
+</div> -->

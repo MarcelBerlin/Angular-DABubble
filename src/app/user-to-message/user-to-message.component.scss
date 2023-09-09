@@ -123,3 +123,9 @@ p {
   font-size: 18px;
   color: #999; 
 }
+
+/* placeholder code */
+[contentEditable=true]:empty:before {
+  content: attr(placeholder);
+  opacity: 0.6;
+}

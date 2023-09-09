@@ -9,9 +9,10 @@ export class UserToMessageService {
   saveArray: any = []; // das ist das array wo bei druck auf senden alles gespeichert wird
   memberCache = [{ number: 0, member: '', id: 0, email: 'unset', userId: 'unset', filelink: 'unset', filename: 'unset' }]; // Zwischenspeicher
   contentLength: number = 1;
-  placeholderBasicText: string ="Nachricht an";
-  placeholderText: string = "Nachricht an";
+  placeholderBasicText: string = 'Nachricht an ';
+  placeholderText: string = '';
   placeholderView: boolean = true;
+
 
   constructor(private directChatService: DirectChatService) { }
 
@@ -49,7 +50,6 @@ export class UserToMessageService {
       filelink: filelink,
       filename: filename
     });
-    // this.contentLength += 10;
     this.placeholderView = false;
     setTimeout(()=>{
       this.contentLength += this.getContentLength();
@@ -117,17 +117,13 @@ export class UserToMessageService {
       if (pElementHTML && spanElementHTML) pElementHTML = pElementHTML.replace(spanElementHTML, '');
       contentLength += spanElementHTML.trim().length + pElementHTML.trim().length;
     }
-    
-      
-      // contentLength -= this.memberCache.length;
-      // contentLength -= 1;
       this.contentLength = contentLength;
-      console.log('getContentLengthService: ',contentLength, 'membercache: ',this.memberCache);
-      
-    
+      // console.log(this.contentLength);
     return contentLength;
   }
   
 
-
+  setPlaceholderText(name: string){
+    this.placeholderText = this.placeholderBasicText + name;
+  }
 }
