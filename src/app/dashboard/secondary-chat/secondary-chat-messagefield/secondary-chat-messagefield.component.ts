@@ -39,6 +39,9 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     
   ) { 
     this.answerService.getThreadAnswer();
+    console.log(channelMessages, ' Channelmessages');
+    console.log(answerService, ' answerService');
+  
   }
 
   ngOnInit() {
