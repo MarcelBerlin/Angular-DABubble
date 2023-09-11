@@ -1,4 +1,5 @@
 <div class="box">
+  <button class="testbutton" (click)="moveCursorLeftOnClick()">Test</button>
   <!-- (input)="onContentChange($event)" -->
   <div class="inputDiv" contenteditable="true" id="inputDiv" appPreventDelete #inputDiv
     [style.overflow-y]="userToMessageService.showInfoBox == -1 ? 'auto':'unset'" (input)="onContentChange($event)"

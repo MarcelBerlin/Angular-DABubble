@@ -172,5 +172,17 @@ export class UserToMessageComponent {
     }
   }
 
+  moveCursorLeftOnClick() {
+    const selection = window.getSelection();
+    const range = selection.getRangeAt(0);
+  
+    if (range.startOffset > 0) {
+      range.setStart(range.startContainer, range.startOffset - 1);
+      range.setEnd(range.startContainer, range.startOffset - 1);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+  }
+
 
 }
