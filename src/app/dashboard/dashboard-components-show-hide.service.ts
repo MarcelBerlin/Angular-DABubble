@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DashboardComponentsShowHideService {
-  secondaryChatSlideOut: boolean = false;
+  secondaryChatSlideOut: boolean = true;
   hideNavigation: boolean = false;
 
   constructor() { }
