@@ -187,11 +187,11 @@ export class MenuSidenavComponent implements OnInit {
   async openChannel(arrayId: number) {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
-    this.getService.channelIndex = arrayId;
-    this.dcshService.chatSlideIn();    
-
+    this.getService.channelIndex = arrayId;      
+    this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
     const channelId = selectedChannel.id;
+    
 
     await this.messageService.onChannelClick(channelId);
   } 

@@ -1,6 +1,6 @@
 <div class="thread-content" *ngIf="getSelectedMessageStatus()">
   <div *ngFor="let message of channelMessages.messageData; let i = index">
-    <div *ngIf="channelMessages.selectedMessageIndex === i">
+    <div *ngIf="channelMessages.selectedMessageIndex === i && answerService.answerData.channelId == channelMessages.messageData.channelId">
       <div class="secondary-chat-container" id="secondaryChatautoscrollContainer" #secondaryChatautoscrollContainer
         (scroll)="handleScroll($event)">
         <div *ngIf="answerService.answerData.userName === this.dataService.loggedInUserData.name">

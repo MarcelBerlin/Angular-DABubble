@@ -109,7 +109,7 @@ import { MessageOutputComponent } from './message-output/message-output.componen
     EmojiPickerBossiComponent,
     ImprintDataProtectionComponent,
     UserToMessageComponent,
-    MessageOutputComponent,
+    MessageOutputComponent,    
   ],
   imports: [
     BrowserModule,

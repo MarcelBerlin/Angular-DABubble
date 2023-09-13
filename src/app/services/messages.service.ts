@@ -28,12 +28,12 @@ export class MessageService {
   messageData: any = [];
   channelMessages: any = [];
   newMessage: Messages = new Messages();
+  groupedMessages: { [key: string]: any[] } = {};
   messageText: string = '';
   messageId: string = 'unset';
   selectedChannel: string = '';
   emojis: any = [];
   tags: any; // ADDED BY FELIX
-  
 
   constructor(
     private firestore: Firestore,
@@ -42,17 +42,23 @@ export class MessageService {
     private directChatService: DirectChatService,
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService
-  ) {   }
+  ) {}
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
-  async addMessage() {    
+  async addMessage() {
     this.UserAndMessageDetails();
     this.addTimeStampToMessage();
     this.saveMessageWithIdToDoc();
     this.messageData.push(this.newMessage);
+    const messageDate = new Date(this.newMessage.dateTimeNumber);
+    const dayKey = messageDate.toDateString();
+    if (!this.groupedMessages[dayKey]) {
+      this.groupedMessages[dayKey] = [];
+    }
+    this.groupedMessages[dayKey].push(this.newMessage);
   }
 
-  UserAndMessageDetails(){
+  UserAndMessageDetails() {
     this.newMessage.channelId =
       this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
     this.varService.selectedChannelId =
@@ -60,11 +66,12 @@ export class MessageService {
     this.newMessage.userId = this.dataService.loggedInUserData.userId;
     this.newMessage.userName = this.dataService.loggedInUserData.name;
     this.newMessage.userImg = this.dataService.loggedInUserData.img;
-    this.newMessage.content = this.messageText; 
+    this.newMessage.content = this.messageText;
   }
 
   addTimeStampToMessage() {
-    const timeStampData: ChannelTimeStamp = this.directChatService.getActualTimeStampForChannels(); 
+    const timeStampData: ChannelTimeStamp =
+      this.directChatService.getActualTimeStampForChannels();
     this.newMessage.dateTimeNumber = timeStampData.dateTimeNumber;
     this.newMessage.dateString = timeStampData.dateString;
     this.newMessage.clockString = timeStampData.clockString;
@@ -88,7 +95,7 @@ export class MessageService {
       updateDoc(qData, newData);
     } catch (error) {
       console.log('update doc failed!!');
-    }    
+    }
   }
 
   async loadChannelMessages(channelId: string) {
@@ -98,13 +105,11 @@ export class MessageService {
     this.messageData = messages.docs.map((doc) => doc.data());
   }
 
-
   // // Initialisiere ein leeres Nachrichten-Array für den Channel
-//  const channelMessages: any[] = [];
-//  await setDoc(doc(collection(this.firestore, 'channelMessages'), docRef.id), {
-//    messages: channelMessages
-//  });
-
+  //  const channelMessages: any[] = [];
+  //  await setDoc(doc(collection(this.firestore, 'channelMessages'), docRef.id), {
+  //    messages: channelMessages
+  //  });
 
   async onChannelClick(channelId: string) {
     this.varService.selectedChannelId = channelId;
@@ -114,20 +119,15 @@ export class MessageService {
   privateAnswer(index: number) {
     this.messageData = index;
   }
-  
 
   // setSelectedChannel(channelId: string) {
   //   // Suche nach dem Index des Kanals basierend auf der übergebenen channelId
   //   this.dialogAddService.channelIndex = this.dialogAddService.tags.findIndex(tag => tag.id === channelId);
   // }
 
-
-
-
-
   // ######### AB HIER ############
-  // ###### FELIX TESTZWECKE ###### 
-  //   KOPIERT AUS MENU-SIDENAV.TS 
+  // ###### FELIX TESTZWECKE ######
+  //   KOPIERT AUS MENU-SIDENAV.TS
   // ###### DIRECT MESSAGES #######
 
   messageToUser(arrayId: number) {
@@ -165,8 +165,8 @@ export class MessageService {
   }
 
   // ######### AB HIER ############
-  // ###### FELIX TESTZWECKE ###### 
-  //   KOPIERT AUS MENU-SIDENAV.TS 
+  // ###### FELIX TESTZWECKE ######
+  //   KOPIERT AUS MENU-SIDENAV.TS
   // ######### CHANNELS  ##########
 
   async openChannel(arrayId: number) {
@@ -177,5 +177,5 @@ export class MessageService {
 
     const selectedChannel = this.tags[arrayId];
     await this.onChannelClick(selectedChannel.id);
-  } 
-} 
+  }
+}

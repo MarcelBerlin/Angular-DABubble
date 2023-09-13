@@ -179,6 +179,12 @@
       }
     }
   }
+
+  .activeAtResponsive {
+    @media (max-width: 800px) {
+      display: none !important;
+    }    
+  }
 }
 
 .pointer {

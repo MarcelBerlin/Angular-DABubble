@@ -27,6 +27,7 @@ export class ChannelSelectionComponent implements OnInit {
   messages$: any = [];
   messageData: any = [];
   hoveredIndex: number | null = null;
+  groupedMessages: { [key: string]: any[] } = {};
 
   chatEmojiRight: boolean = false;
   chatEmojiLeft: boolean = false;
@@ -43,7 +44,7 @@ export class ChannelSelectionComponent implements OnInit {
     public varService: VariablesService,
     public dataService: DataService,
     public dialogAdd: DialogAddService,
-    public directChatService: DirectChatService,
+    public directChatService: DirectChatService,   
     public messageService: MessageService,
     public chatService: ChatService,
     public app: AppComponent,
@@ -52,20 +53,10 @@ export class ChannelSelectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.checkIfChannelIsEmpty();
-    // }, 1000);
+    this.channelMessages.allMessages(); // Stelle sicher, dass du bereits alle Nachrichten geholt hast
+    this.groupedMessages = this.channelMessages.groupedMessages;
   }
 
-
-  // checkIfChannelIsEmpty() {
-  //   if () {
-  //     this.emptyChat = true;
-  //   } else {
-  //     this.emptyChat = false;
-  //   }
-  //   console.log();
-  // }
 
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.

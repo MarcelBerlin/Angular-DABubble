@@ -1,6 +1,6 @@
 <div class="thread-content">
-  
-      <!-- <div class="empty-chat-message" *ngIf="emptyChat">
+
+  <!-- <div class="empty-chat-message" *ngIf="emptyChat">
         <ng-container *ngIf="
           dialogAdd.tagsData && varService.selectedChannel
         ">
@@ -20,9 +20,13 @@
       </div> -->
 
 
-      <div *ngFor="let message of channelMessages.messageData, let i = index">
-        <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
+  <div *ngFor="let message of channelMessages.messageData, let i = index">
+    
 
+      <div class="timeLine" *ngIf="i === 0 || channelMessages.isDifferentDay(message, channelMessages.messageData[i-1])">
+        <div class="timeLineHead">{{ channelMessages.getFormattedDate(message) }}</div>
+      </div>
+      <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
       <div class="full-message-left">
         <!-- Zeige Nachrichten auf der linken Seite des ausgewählten Kanals an -->
 
