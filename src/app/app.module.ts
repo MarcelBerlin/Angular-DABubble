@@ -69,6 +69,7 @@ import { EmojiPickerBossiComponent } from './emoji-picker-bossi/emoji-picker-bos
 import { ImprintDataProtectionComponent } from './auth-features/login/imprint-data-protection/imprint-data-protection.component';
 import { UserToMessageComponent } from './user-to-message/user-to-message.component';
 import { MessageOutputComponent } from './message-output/message-output.component';
+import { MessageInputComponent } from './message-input/message-input.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +110,8 @@ import { MessageOutputComponent } from './message-output/message-output.componen
     EmojiPickerBossiComponent,
     ImprintDataProtectionComponent,
     UserToMessageComponent,
-    MessageOutputComponent,    
+    MessageOutputComponent,
+    MessageInputComponent,
   ],
   imports: [
     BrowserModule,

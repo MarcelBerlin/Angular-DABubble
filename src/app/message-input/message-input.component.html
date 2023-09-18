@@ -1,0 +1,22 @@
+<div style="display: flex; position: relative; width: 100%; flex-direction: column;">
+    <!-- Input -->
+    <div #editableDiv contenteditable="true" class="inputDiv" id="inputDiv" (keyup)="getContent()"
+        [innerHTML]="content">
+
+    </div>
+
+    <button (click)="saveHTMLTagsAndText()">Save</button>
+    <button (click)="addHTMLTags()">addHTML</button>
+    <!-- Input end-->
+    <!-- InfoWindow -->
+    <div class="infoWindow" *ngIf="inputService.showInputInfo">
+        <p *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'NameType'">
+            {{inputService.inputLinks[inputService.shownId].name}}
+        </p>
+        <p *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'NameType'">
+            {{inputService.inputLinks[inputService.shownId].emailContent}}
+        </p>
+
+    </div>
+    <!-- InfoWindow ende-->
+</div>

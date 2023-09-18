@@ -17,6 +17,7 @@ export class UserToMessageComponent {
   TimeoutArray = [];
   @ViewChild('inputP', { static: false }) inputP: ElementRef;
   @ViewChild('inputDiv', { static: false }) inputDiv: ElementRef;
+  @ViewChild('leftButton', { static: false }) leftButton: ElementRef;
 
   constructor(
     public dataService: DataService,
@@ -132,47 +133,67 @@ export class UserToMessageComponent {
     }, 500);
   }
 
+  // @HostListener('keydown', ['$event'])
+  // onKeyDown(event: KeyboardEvent): void {
+  //   const selection = window.getSelection();
+  //   const range = selection.getRangeAt(0);
+  //   const currentNode = range.startContainer;
+  //   // console.log('keydown Name: ', currentNode.nodeName);
+  //   // console.log('keydown Key:  ', event.key);
+  //   // Überprüfen, ob der aktuelle Knoten ein <p>-Tag ist
+  //   if ((currentNode.nodeName === 'P' && event.key === 'Delete') ||
+  //     (currentNode.nodeName === 'P' && event.key === 'Backspace')) {
+  //     console.log('prevent deletion', currentNode);
+  //     event.preventDefault();
+  //     // this.moveCursorOneLeft();
+  //     this.leftButton.nativeElement.click();
+  //   }
+  // }
+
   @HostListener('keydown', ['$event'])
-  onKeyDown(event: KeyboardEvent): void {
-    const selection = window.getSelection();
-    const range = selection.getRangeAt(0);
-    const currentNode = range.startContainer;
-    // console.log('keydown Name: ', currentNode.nodeName);
-    // console.log('keydown Key:  ', event.key);
-    // Überprüfen, ob der aktuelle Knoten ein <p>-Tag ist
-    if ((currentNode.nodeName === 'P' && event.key === 'Delete') ||
-      (currentNode.nodeName === 'P' && event.key === 'Backspace')) {
-      console.log('prevent deletion');
-      event.preventDefault();
-      // this.moveCursorOneLeft();
-    }
+onKeyDown(event: KeyboardEvent): void {
+  const selection = window.getSelection();
+  const range = selection.getRangeAt(0);
+  const currentNode = range.startContainer;
+  
+  // Überprüfen, ob der aktuelle Knoten ein <p>-Tag ist
+  if (currentNode instanceof Element && currentNode.nodeName === 'P' &&
+      (event.key === 'Delete' || event.key === 'Backspace')) {
+    const pElementId = currentNode.id;
+    console.log('ID des <p>-Elements:', pElementId);
+    console.log('prevent deletion', currentNode);
+    if(pElementId == 'p0') event.preventDefault();
+    
+    // this.moveCursorOneLeft();
+    this.leftButton.nativeElement.click();
   }
+}
 
 
-  moveCursorOneLeft(): void {
-    console.log('move cursor started');
-    if (this.userToMessageService.contentLength != 1) {
-      const editableDiv = this.inputDiv.nativeElement;
-      console.log('move left init');
-      // Erstellen Sie eine Auswahl (Selection) im bearbeitbaren Div
-      const selection = window.getSelection();
-      const range = selection.getRangeAt(0);
-      console.log(range.startOffset);
+  // moveCursorOneLeft(): void {
+  //   console.log('move cursor started');
+  //   if (this.userToMessageService.contentLength != 1) {
+  //     const editableDiv = this.inputDiv.nativeElement;
+  //     console.log('move left init');
+  //     const selection = window.getSelection();
+  //     const range = selection.getRangeAt(0);
+  //     console.log(range.startOffset);
 
-      // Überprüfen, ob sich der Cursor am Anfang der Div befindet
-      if (range.startContainer.nodeName === 'P') {
-        const offset = range.startOffset;
-        if (offset > 0) {
-          range.setStart(range.startContainer, offset - 1);
-          range.setEnd(range.startContainer, offset - 1);
-          selection.removeAllRanges();
-          selection.addRange(range);
-        }
-      }
-    }
-  }
+  //     // Überprüfen, ob sich der Cursor am Anfang der Div befindet
+  //     if (range.startContainer.nodeName === 'P') {
+  //       const offset = range.startOffset;
+  //       if (offset > 0) {
+  //         range.setStart(range.startContainer, offset - 1);
+  //         range.setEnd(range.startContainer, offset - 1);
+  //         selection.removeAllRanges();
+  //         selection.addRange(range);
+  //       }
+  //     }
+  //   }
+  // }
 
   moveCursorLeftOnClick() {
+    // debugger;
     const selection = window.getSelection();
     const range = selection.getRangeAt(0);
   
@@ -182,6 +203,7 @@ export class UserToMessageComponent {
       selection.removeAllRanges();
       selection.addRange(range);
     }
+    this.inputDiv.nativeElement.click();
   }
 
 
