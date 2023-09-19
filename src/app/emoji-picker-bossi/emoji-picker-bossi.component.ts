@@ -4,6 +4,7 @@ import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 import { UserToMessageService } from '../user-to-message/user-to-message.service';
 import { VariablesService } from '../services/variables.service';
 import { DataService } from '../services/data.service';
+import { MessageInputServiceService } from '../message-input/service/message-input-service.service';
 
 @Component({
   selector: 'app-emoji-picker-bossi',
@@ -38,7 +39,8 @@ export class EmojiPickerBossiComponent {
     private directChatService: DirectChatService,
     private userToMessageService: UserToMessageService,
     private varService: VariablesService,
-    private dataService: DataService
+    private dataService: DataService,
+    private messageInputService: MessageInputServiceService
   ) { }
 
 
@@ -164,7 +166,8 @@ export class EmojiPickerBossiComponent {
       this.directChatService.directMessage += x.emoji;
     }
     if(this.varService.mainChatHead == 1 && this.currentUser()){
-      this.userToMessageService.insertEmoji(x.emoji);
+      // this.userToMessageService.insertEmoji(x.emoji);
+      this.messageInputService.insertEmoji(x.emoji);
     }
     this.emojiService.toggleEmojiSelector();
   }

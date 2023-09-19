@@ -4,6 +4,7 @@ import { MessageInputServiceService } from './service/message-input-service.serv
 import { VariablesService } from '../services/variables.service';
 import { DataService } from '../services/data.service';
 
+
 @Component({
   selector: 'app-message-input',
   templateUrl: './message-input.component.html',
@@ -21,11 +22,24 @@ export class MessageInputComponent {
     private renderer: Renderer2,
     public inputService: MessageInputServiceService,
     public varService: VariablesService,
-    public dataService: DataService
-    ) { }
+    public dataService: DataService,
+    ) { 
+    
+    }
 
 
-    selectedUser(index: number) {
+    test(){
+      console.log('Testing');
+    }
+
+
+    /**
+     * Handles the selection of a user and generates HTML elements based on the user's data.
+     *
+     * @param {number} index - The index of the selected user in a data array.
+     * @returns {void}
+     */
+    selectedUser(index: number): void {
       this.inputService.setId += 1;
       this.inputService.textContent = '@' + this.dataService.userData[index].name;
       this.inputService.emailContent = this.dataService.userData[index].email;
@@ -38,6 +52,8 @@ export class MessageInputComponent {
       this.addHTMLTags();
       this.varService.sign = !this.varService.sign;
     }
+
+
 
   
   /**
