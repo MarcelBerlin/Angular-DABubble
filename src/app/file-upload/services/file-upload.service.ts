@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { FileUpload } from '../models/file-upload.model';
 import { DataService } from 'src/app/services/data.service';
 import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
+import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +25,7 @@ export class FileUploadService {
     private storage: AngularFireStorage,
     private dataService: DataService,
     private userToMessageService: UserToMessageService,
+    private messageInputService: MessageInputServiceService, 
   ) { }
 
 
@@ -46,7 +48,6 @@ export class FileUploadService {
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
           this.finalizeUpload(downloadURL, fileUpload);
-          console.log()
         });
       })
     ).subscribe();
@@ -71,7 +72,10 @@ export class FileUploadService {
       this.userUpdate();
     } 
     else {
-      this.userToMessageService.insertFileLink(this.filename, this.lastUpload);
+      this.messageInputService.filename = this.filename;
+      this.messageInputService.linkTaget = this.lastUpload;
+      this.messageInputService.textContent = this.filename;
+      this.messageInputService.insertFileLink();
       this.fileUploadRuns = false;
       this.uploadPercentage = 0;
     }

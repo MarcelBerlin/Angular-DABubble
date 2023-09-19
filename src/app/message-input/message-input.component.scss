@@ -64,6 +64,7 @@ p {
 
 .infoWindow {
   display: flex;
+  justify-content: center;
   position: absolute;
   bottom: 75px;
   height: fit-content;

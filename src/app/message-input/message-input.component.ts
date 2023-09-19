@@ -27,10 +27,28 @@ export class MessageInputComponent {
     
     }
 
-
-    test(){
-      console.log('Testing');
+    ngOnInit() {
+      this.inputService.myVariable$.subscribe((newValue) => {
+        if (newValue) {
+          this.test();
+        }
+      });
     }
+  
+    test() {
+      // Ihre Test-Funktion hier
+      console.log('Test wurde ausgeführt.');
+      if (this.inputService.nameType == 'EmojiType'){
+        this.addHTMLTags();
+      }
+      if (this.inputService.filename != 'unset'){
+        this.addHTMLTags();
+      }
+
+    }
+
+
+    
 
 
     /**
@@ -77,11 +95,21 @@ export class MessageInputComponent {
    * @returns {void}
    */
   onSpanMouseEnter(id: string): void {
+    // this.inputService.showInputInfo = false;
+    this.clearTimoutArray();
     this.inputService.shownId = +id;
     this.inputService.showInputInfo = true;
   }
 
+  clearTimoutArray(): void {
+    for (let i = 0; i < this.timeoutArray.length; i++) {
+      const element = this.timeoutArray[i];
+      clearTimeout(element);
+    }
+  }
 
+
+  timeoutArray: any[] = [];
   /**
    * Event handler triggered when the mouse leaves a <span> element.
    *
@@ -89,7 +117,10 @@ export class MessageInputComponent {
    * @returns {void}
    */
   onSpanMouseLeave(id: string): void {
-    this.inputService.showInputInfo = false;
+    let leaveTimeOut = setTimeout(() => {
+      this.inputService.showInputInfo = false;
+    }, 2000)
+    this.timeoutArray.push(leaveTimeOut);
   }
 
 
@@ -153,12 +184,15 @@ export class MessageInputComponent {
     this.renderer.setAttribute(ankerElement, 'contenteditable', 'false');
     this.renderer.setAttribute(ankerElement, `id`, `${this.inputService.setId}`);
     this.renderer.addClass(ankerElement, this.inputService.class);
-    this.renderer.listen(ankerElement, 'mouseenter', () => {
-      this.onSpanMouseEnter(`${index}`);
-    });
-    this.renderer.listen(ankerElement, 'mouseleave', () => {
-      this.onSpanMouseLeave(`${this.inputService.setId}`);
-    });
+    if(this.inputService.nameType != 'EmojiType'){
+      this.renderer.listen(ankerElement, 'mouseenter', () => {
+        this.onSpanMouseEnter(`${index}`);
+      });
+      this.renderer.listen(ankerElement, 'mouseleave', () => {
+        this.onSpanMouseLeave(`${this.inputService.setId}`);
+      });
+    }
+    
     return ankerElement;
   }
 
