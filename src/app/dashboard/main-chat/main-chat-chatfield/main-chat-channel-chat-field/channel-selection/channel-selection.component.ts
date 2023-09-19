@@ -21,6 +21,7 @@ import { ChannelMessagesService } from './service/channel-messages.service';
   styleUrls: ['./channel-selection.component.scss'],
 })
 export class ChannelSelectionComponent implements OnInit {
+  index: number = 0;
   hoveredMessagesMainChat: boolean = false;
   emptyChat: boolean;
   chatText: string = '';
@@ -49,12 +50,12 @@ export class ChannelSelectionComponent implements OnInit {
     public chatService: ChatService,
     public app: AppComponent,
     public timelinesService: TimelinesService,
-    public channelMessages: ChannelMessagesService
+    public channelMessages: ChannelMessagesService,
   ) {}
 
   ngOnInit(): void {
     this.channelMessages.allMessages(); // Stelle sicher, dass du bereits alle Nachrichten geholt hast
-    this.groupedMessages = this.channelMessages.groupedMessages;
+    this.groupedMessages = this.channelMessages.groupedMessages;    
   }
 
 

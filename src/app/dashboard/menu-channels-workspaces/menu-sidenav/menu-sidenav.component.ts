@@ -19,6 +19,7 @@ import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.serv
 import { MessageService } from 'src/app/services/messages.service';
 import { NewMessageAmountService } from 'src/app/direct-chat/services/new-message-amount.service';
 import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
+import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
 
 
 interface Tag {
@@ -72,6 +73,7 @@ export class MenuSidenavComponent implements OnInit {
     public newMessageAmountService: NewMessageAmountService,
     public messageService: MessageService,
     private userToMessageService: UserToMessageService,
+    private channelMessageService: ChannelMessagesService
     
   ) {
     this.tags = this.getService.tags;
@@ -190,9 +192,8 @@ export class MenuSidenavComponent implements OnInit {
     this.getService.channelIndex = arrayId;      
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
-    const channelId = selectedChannel.id;
-    
-
+    const channelId = selectedChannel.id;   
+    this.channelMessageService.selectedChannelId = channelId;       
     await this.messageService.onChannelClick(channelId);
   } 
   

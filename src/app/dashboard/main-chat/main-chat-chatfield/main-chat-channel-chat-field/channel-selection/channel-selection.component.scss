@@ -1,30 +1,33 @@
-.thread-content {   
+.thread-content {
   height: 100%; // SPÄTER ÄNDERN
-  
 
-  .timeLine {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    // width: 90%;
-    height: 2px;
-    background-color: lightgray;
+  .timeline-container {
+    margin-top: 30px;
 
-    .timeLineHead {
-      position: absolute;
-      top: -20px;
+    .timeLine {
+      position: relative;
       display: flex;
-      align-items: center;
-      width: auto;
-      height: 40px;
-      padding: 0 16px;
-      border: 1px solid lightgray;
-      border-radius: 30px;
-      background-color: white;
-      font-family: "Nunito";
-      font-weight: 400;
-      font-size: 18px;
-      z-index: 1;
+      justify-content: center;
+      // width: 90%;
+      height: 1px;
+      background-color: lightgray;
+
+      .timeLineHead {
+        position: absolute;
+        top: -20px;
+        display: flex;
+        align-items: center;
+        width: auto;
+        height: 40px;
+        padding: 0 16px;
+        border: 1px solid lightgray;
+        border-radius: 30px;
+        background-color: white;
+        font-family: "Nunito";
+        font-weight: 400;
+        font-size: 18px;
+        z-index: 1;
+      }
     }
   }
 
@@ -34,7 +37,6 @@
     position: relative;
     // border-bottom: 1px solid #eeebeb;
     padding-bottom: 20px;
-
 
     .single-message-left-container {
       position: relative;
@@ -59,7 +61,6 @@
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;
         transition: display 125ms ease-in-out;
-
       }
 
       .interaction-bubble-emoji {
@@ -119,7 +120,6 @@
       display: flex;
       flex-direction: column;
 
-
       .name-time {
         display: flex;
 
@@ -147,7 +147,6 @@
         span {
           font-size: 16px;
         }
-
       }
     }
 
@@ -184,7 +183,6 @@
       display: flex;
       align-items: flex-start;
       flex-direction: column;
-
 
       .emoji-mart {
         z-index: 1;
@@ -234,8 +232,6 @@
       }
     }
 
-
-
     .avatar-right {
       width: 100%;
       height: 70px;
@@ -255,7 +251,7 @@
       position: relative;
       margin-top: -60px;
       margin-left: 0px;
-      width: calc(100% - 100px);      
+      width: calc(100% - 100px);
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -394,7 +390,6 @@
   }
 }
 
-
 .reaction-bar-right {
   display: flex;
   padding-right: 10px;
@@ -435,7 +430,6 @@
   align-items: flex-end;
   flex-direction: column;
   width: 10px;
-
 
   .emoji-mart {
     z-index: 1;
