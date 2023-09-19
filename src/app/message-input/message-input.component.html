@@ -1,12 +1,12 @@
-<div style="display: flex; position: relative; width: 100%; flex-direction: column;">
+<div class="box">
     <!-- Input -->
     <div #editableDiv contenteditable="true" class="inputDiv" id="inputDiv" (keyup)="getContent()"
         [innerHTML]="content">
 
     </div>
 
-    <button (click)="saveHTMLTagsAndText()">Save</button>
-    <button (click)="addHTMLTags()">addHTML</button>
+    <!-- <button (click)="saveHTMLTagsAndText()">Save</button>
+    <button (click)="addHTMLTags()">addHTML</button> -->
     <!-- Input end-->
     <!-- InfoWindow -->
     <div class="infoWindow" *ngIf="inputService.showInputInfo">
@@ -19,4 +19,11 @@
 
     </div>
     <!-- InfoWindow ende-->
+
+    <!-- User Box -->
+  <div class="userBox" *ngIf="varService.sign">
+    <div *ngFor="let name of dataService.userData; let i = index">
+      <span class="user" (click)="selectedUser(i)">{{ name.name }}</span>
+    </div>
+  </div>
 </div>

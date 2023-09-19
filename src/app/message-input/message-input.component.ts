@@ -1,6 +1,8 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { MessageInputServiceService } from './service/message-input-service.service';
+import { VariablesService } from '../services/variables.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-message-input',
@@ -17,7 +19,25 @@ export class MessageInputComponent {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2,
-    public inputService: MessageInputServiceService) { }
+    public inputService: MessageInputServiceService,
+    public varService: VariablesService,
+    public dataService: DataService
+    ) { }
+
+
+    selectedUser(index: number) {
+      this.inputService.setId += 1;
+      this.inputService.textContent = '@' + this.dataService.userData[index].name;
+      this.inputService.emailContent = this.dataService.userData[index].email;
+      this.inputService.class = 'member';
+      this.inputService.linkTaget = 'unset';
+      this.inputService.name = this.dataService.userData[index].name;
+      this.inputService.filename = 'unset';
+      this.inputService.nameType = 'NameType';
+      this.inputService.userId = this.dataService.userData[index].userId;
+      this.addHTMLTags();
+      this.varService.sign = !this.varService.sign;
+    }
 
   
   /**
@@ -41,8 +61,6 @@ export class MessageInputComponent {
    * @returns {void}
    */
   onSpanMouseEnter(id: string): void {
-    console.log('Span element hover', id);
-    console.log(this.inputService.inputLinks[+id]);
     this.inputService.shownId = +id;
     this.inputService.showInputInfo = true;
   }
@@ -55,7 +73,6 @@ export class MessageInputComponent {
    * @returns {void}
    */
   onSpanMouseLeave(id: string): void {
-    console.log('Span element leave', id);
     this.inputService.showInputInfo = false;
   }
 
@@ -67,16 +84,14 @@ export class MessageInputComponent {
    * @returns {void}
    */
   addHTMLTags(): void {
-    this.inputService.setId += 1;
     const inputDiv = this.elementRef.nativeElement.querySelector('#inputDiv');
-
     let ankerElement = this.createAnkerElement();
     this.renderer.appendChild(inputDiv, ankerElement);
-
     let emptySpan = this.createEmptySpanElement();
     this.renderer.appendChild(inputDiv, emptySpan);
-
     this.inputService.inputLinks[this.inputService.setId] = this.createLinkInfo();
+
+    this.setCursorWithClick(`${this.inputService.setId}` + 'Span');
   }
 
 
@@ -116,13 +131,14 @@ export class MessageInputComponent {
    */
   createAnkerElement(): HTMLElement {
     const ankerElement = this.renderer.createElement('a');
+    const index = this.inputService.setId;
     const text = this.renderer.createText(`${this.inputService.textContent}`);
     this.renderer.appendChild(ankerElement, text);
     this.renderer.setAttribute(ankerElement, 'contenteditable', 'false');
     this.renderer.setAttribute(ankerElement, `id`, `${this.inputService.setId}`);
     this.renderer.addClass(ankerElement, this.inputService.class);
     this.renderer.listen(ankerElement, 'mouseenter', () => {
-      this.onSpanMouseEnter(`${this.inputService.setId}`);
+      this.onSpanMouseEnter(`${index}`);
     });
     this.renderer.listen(ankerElement, 'mouseleave', () => {
       this.onSpanMouseLeave(`${this.inputService.setId}`);
@@ -140,6 +156,7 @@ export class MessageInputComponent {
     const emptySpan = this.renderer.createElement('span');
     const space = this.renderer.createText(' ');
     this.renderer.appendChild(emptySpan, space);
+    this.renderer.setAttribute(emptySpan, `id`, `${this.inputService.setId}Span`);
     return emptySpan;
   }
 
@@ -256,5 +273,25 @@ export class MessageInputComponent {
         index.linkInfo[0] = this.inputService.inputLinks[index.attributes[2].value];
       }
     });
+  }
+
+
+
+  setCursorWithClick(id:string): void {
+    const el = document.getElementById(id);
+    // const el = this.inputP.nativeElement;
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.setStart(el.firstChild, 1);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    el.focus();
+    const doubleClickEvent = new MouseEvent('click', {
+      bubbles: true,
+      cancelable: true,
+      view: window,
+    });
+    el.dispatchEvent(doubleClickEvent);
   }
 }

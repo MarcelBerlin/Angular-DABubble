@@ -41,11 +41,16 @@
     placeholder="Nachricht an mich :-)"
     [disabled]="!directChatService.directChatActive"
   ></textarea> -->
-  <app-user-to-message
+  <!-- <app-user-to-message
     *ngIf="
       varService.mainChatHead == 1 && currentUser() && dataService.userData
     "
-  ></app-user-to-message>
+  ></app-user-to-message> -->
+
+  <app-message-input  
+  *ngIf="varService.mainChatHead == 1 && currentUser() && dataService.userData" style="width: 98%;">
+
+  </app-message-input>
 
   <textarea
     *ngIf="
