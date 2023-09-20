@@ -1,12 +1,10 @@
 <div class="box">
   <!-- Input -->
-  <div #editableDiv contenteditable="true" class="inputDiv" id="inputDiv" (keyup)="getContent()" [innerHTML]="content">
+  <div #editableDiv contenteditable="true" class="inputDiv" id="inputDiv"  [innerHTML]="content">
 
   </div>
-
-  <!-- <button (click)="saveHTMLTagsAndText()">Save</button>
-    <button (click)="addHTMLTags()">addHTML</button> -->
   <!-- Input end-->
+
   <!-- InfoWindow -->
   <div class="infoWindow" *ngIf="inputService.showInputInfo">
     <p *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'NameType'">
