@@ -15,6 +15,7 @@ export class MessageInputComponent {
   content: SafeHtml = '';
   inputText: any = HTMLBaseElement;
   inputLength: number = 0;
+  timeoutArray: any[] = [];
   @ViewChild('editableDiv', { static: false }) editableDiv!: ElementRef;
 
 
@@ -25,36 +26,37 @@ export class MessageInputComponent {
     public varService: VariablesService,
     public dataService: DataService,
     private fileUploadService: FileUploadService
-    ) { 
-    
-    }
+    ) { }
 
+
+    /**
+     * Angular lifecycle hook that is called after the component has been initialized.
+     * Subscribes to the myVariable$ observable from inputService, and when a new value is emitted,
+     * it triggers the startApplicableButtonAction function if the new value is truthy.
+     *
+     * @returns {void}
+     */
     ngOnInit() {
       this.inputService.myVariable$.subscribe((newValue) => {
-        if (newValue) {
-          this.test();
-        }
+        if (newValue)  this.startApplicableButtonAction();
       });
     }
-  
-    test() {
-      // Ihre Test-Funktion hier
-      console.log('Test wurde ausgeführt.');
-      if (this.inputService.nameType == 'EmojiType'){
-        this.addHTMLTags();
-      }
-      if (this.inputService.filename != 'unset'){
-        this.addHTMLTags();
-      }
-      if (this.inputService.nameType == 'unset' && this.inputService.setId == -1){
-        this.saveHTMLTagsAndText();
-        console.log('saveHTML started');
-      }
-
-    }
-
 
     
+    /**
+     * Performs various actions based on the state of inputService properties.
+     * If nameType is 'EmojiType' or filename is not 'unset', it adds HTML tags.
+     * If nameType is 'unset' and setId is -1, it saves HTML tags and text.
+     *
+     * @returns {void}
+     */
+    startApplicableButtonAction():void {
+      if (this.inputService.nameType == 'EmojiType') this.addHTMLTags();
+      if (this.inputService.filename != 'unset') this.addHTMLTags();
+      if (this.inputService.nameType == 'unset' && this.inputService.setId == -1){
+        this.saveHTMLTagsAndText();
+      } 
+    }
 
 
     /**
@@ -78,20 +80,19 @@ export class MessageInputComponent {
     }
 
 
-
-  
   /**
    * Retrieves the HTML content of an element with the ID 'inputDiv' and calculates its length.
    *
    * @returns {void}
    */
-  getContent(): void {
-    this.inputText = document.getElementById('inputDiv')?.innerHTML;
-    this.inputLength = this.inputText.length;
-    for (let i = 0; i < this.inputText.length; i++) {
-      const element = this.inputText[i];
-    }
-  }
+  // getContent(): void {
+  //   this.inputText = document.getElementById('inputDiv')?.innerHTML;
+  //   this.inputLength = this.inputText.length;
+  //   for (let i = 0; i < this.inputText.length; i++) {
+  //     const element = this.inputText[i];
+  //   }
+  // }
+  // (keyup)="getContent()" for editableDiv HTML element
 
 
   /**
@@ -107,6 +108,12 @@ export class MessageInputComponent {
     this.inputService.showInputInfo = true;
   }
 
+
+  /**
+   * Clears all timeouts stored in the timeoutArray.
+   *
+   * @returns {void}
+   */
   clearTimoutArray(): void {
     for (let i = 0; i < this.timeoutArray.length; i++) {
       const element = this.timeoutArray[i];
@@ -115,7 +122,18 @@ export class MessageInputComponent {
   }
 
 
-  timeoutArray: any[] = [];
+  /**
+   * Opens a URL in a new browser tab or window.
+   *
+   * @param {string} href - The URL to open in a new tab.
+   * @returns {void}
+   */
+  openInNewTab(href: string){
+    window.open(href, '_blank');
+  }
+
+
+  
   /**
    * Event handler triggered when the mouse leaves a <span> element.
    *
@@ -143,7 +161,6 @@ export class MessageInputComponent {
     let emptySpan = this.createEmptySpanElement();
     this.renderer.appendChild(inputDiv, emptySpan);
     this.inputService.inputLinks[this.inputService.setId] = this.createLinkInfo();
-
     this.setCursorWithClick(`${this.inputService.setId}` + 'Span');
   }
 
@@ -198,7 +215,6 @@ export class MessageInputComponent {
         this.onSpanMouseLeave(`${this.inputService.setId}`);
       });
     }
-    
     return ankerElement;
   }
 
@@ -251,6 +267,7 @@ export class MessageInputComponent {
   childIsAOrSpanTag(child: HTMLElement): boolean {
     return child instanceof HTMLElement && (child.tagName === 'A' || child.tagName === 'SPAN');
   }
+
 
   /**
    * Checks if a given element is a text node.
@@ -351,10 +368,8 @@ export class MessageInputComponent {
     el.dispatchEvent(doubleClickEvent);
   }
 
-  openInNewTab(href: string){
-    window.open(href, '_blank');
-  }
 
+  // Unused functions
   deleteFile(i: number) {
     const filepath = this.inputService.inputLinks[i].linkTaget;
     this.fileUploadService.deleteFile(filepath);

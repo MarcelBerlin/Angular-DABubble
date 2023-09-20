@@ -6,18 +6,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MessageInputServiceService {
-
   private myVariableSubject = new BehaviorSubject<boolean>(false);
   myVariable$: Observable<boolean> = this.myVariableSubject.asObservable();
-
-  setMyVariable(newValue: boolean) {
-    this.myVariableSubject.next(newValue);
-  }
-
-
-
   inputLinks: any[] = [];
-
   textContent: string = 'unset';
   emailContent: string = 'unset';
   class: string = 'unset';
@@ -27,19 +18,31 @@ export class MessageInputServiceService {
   filename: string = 'unset';
   nameType: string = 'unset';
   userId: string = 'unset';
-
   contentArray: any[] = [];
-
   showInputInfo: boolean = false;
   shownId: number = 0;
 
 
+  constructor() {}
 
-  constructor() {
 
+  /**
+   * Sets the value of a boolean variable and notifies observers.
+   *
+   * @param {boolean} newValue - The new boolean value to set.
+   * @returns {void}
+   */
+  setMyVariable(newValue: boolean):void {
+    this.myVariableSubject.next(newValue);
   }
 
 
+  /**
+   * Inserts an emoji into the content and notifies observers.
+   *
+   * @param {string} emoji - The emoji to insert.
+   * @returns {void}
+   */
   insertEmoji(emoji): void {
     this.setId += 1;
     this.textContent = emoji;
@@ -54,7 +57,12 @@ export class MessageInputServiceService {
   }
 
 
-  insertFileLink() {
+  /**
+   * Inserts a file link into the content and notifies observers.
+   *
+   * @returns {void}
+   */
+  insertFileLink():void {
     this.setId += 1;
     this.emailContent = 'unset';
     this.class = 'member';
@@ -65,7 +73,12 @@ export class MessageInputServiceService {
   }
 
 
-  resetVariables() {
+  /**
+   * Resets various properties to their default 'unset' values.
+   *
+   * @returns {void}
+   */
+  resetVariables():void {
     this.textContent = 'unset';
     this.emailContent = 'unset';
     this.class = 'unset';
@@ -76,13 +89,4 @@ export class MessageInputServiceService {
     this.nameType = 'unset';
     this.userId = 'unset';
   }
-
-
-
-
-
-
-
-
-
 }
