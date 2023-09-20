@@ -34,7 +34,7 @@ export class MessageInputComponent {
      *
      * @returns {void}
      */
-    ngOnInit() {
+    ngOnInit():void {
       this.inputService.myVariable$.subscribe((newValue) => {
         if (newValue)  this.startApplicableButtonAction();
       });
@@ -100,7 +100,6 @@ export class MessageInputComponent {
    * @returns {void}
    */
   onSpanMouseEnter(id: string): void {
-    // this.inputService.showInputInfo = false;
     this.clearTimoutArray();
     this.inputService.shownId = +id;
     this.inputService.showInputInfo = true;
@@ -131,7 +130,6 @@ export class MessageInputComponent {
   }
 
 
-  
   /**
    * Event handler triggered when the mouse leaves a <span> element.
    *
