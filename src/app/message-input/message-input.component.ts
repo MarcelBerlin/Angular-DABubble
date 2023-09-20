@@ -3,6 +3,7 @@ import { SafeHtml } from '@angular/platform-browser';
 import { MessageInputServiceService } from './service/message-input-service.service';
 import { VariablesService } from '../services/variables.service';
 import { DataService } from '../services/data.service';
+import { FileUploadService } from '../file-upload/services/file-upload.service';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class MessageInputComponent {
     public inputService: MessageInputServiceService,
     public varService: VariablesService,
     public dataService: DataService,
+    private fileUploadService: FileUploadService
     ) { 
     
     }
@@ -43,6 +45,10 @@ export class MessageInputComponent {
       }
       if (this.inputService.filename != 'unset'){
         this.addHTMLTags();
+      }
+      if (this.inputService.nameType == 'unset' && this.inputService.setId == -1){
+        this.saveHTMLTagsAndText();
+        console.log('saveHTML started');
       }
 
     }
@@ -343,5 +349,16 @@ export class MessageInputComponent {
       view: window,
     });
     el.dispatchEvent(doubleClickEvent);
+  }
+
+  openInNewTab(href: string){
+    window.open(href, '_blank');
+  }
+
+  deleteFile(i: number) {
+    const filepath = this.inputService.inputLinks[i].linkTaget;
+    this.fileUploadService.deleteFile(filepath);
+    this.inputService.inputLinks[i].linkTaget = 'unset';
+    this.inputService.inputLinks[i].filename = 'unset';
   }
 }

@@ -13,6 +13,7 @@ import { NewMessageAmountService } from 'src/app/direct-chat/services/new-messag
 import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 import { FileUploadService } from 'src/app/file-upload/services/file-upload.service';
 import { UploadService } from 'src/app/file-upload/services/upload.service';
+import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class MainChatMessagefieldComponent {
     private userToMessageService: UserToMessageService,
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
+    private messageInputService:  MessageInputServiceService
   ) { }
 
   currentUser() {
@@ -79,7 +81,10 @@ export class MainChatMessagefieldComponent {
       this.newMessageAmountService.addPartnerDirectChatMessageAmount();
     }
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser() ){
-      this.userToMessageService.send();
+      // this.userToMessageService.send();
+      // neu sende Funktion für neues input Field
+      this.messageInputService.resetVariables();
+      this.messageInputService.setMyVariable(true);
     }
   }
 

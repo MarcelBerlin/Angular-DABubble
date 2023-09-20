@@ -18,12 +18,15 @@
 
     <img *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'" src={{inputService.inputLinks[inputService.shownId].linkTaget}} alt="" style="max-height: 200px; max-width: 200px; width: auto; height: auto;">
 
-    <a href={{inputService.inputLinks[inputService.shownId].linkTaget}} target="_blank" *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'">
+    <p  *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'">
       {{inputService.inputLinks[inputService.shownId].filename}}
-    </a>
-    <!-- <p *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'">
-      {{inputService.inputLinks[inputService.shownId].linkTaget}}
-    </p> -->
+    </p>
+    <div *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'" class="element">
+      <!-- <mat-icon (click)="deleteFile(inputService.shownId)">delete</mat-icon> -->
+
+      <mat-icon (click)="openInNewTab(inputService.inputLinks[inputService.shownId].linkTaget)">open_in_browser</mat-icon>
+    </div>
+    
 
   </div>
   <!-- InfoWindow ende-->

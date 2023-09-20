@@ -70,6 +70,7 @@ export class MessageInputServiceService {
     this.emailContent = 'unset';
     this.class = 'unset';
     this.linkTaget = 'unset';
+    this.setId = -1;
     this.name = 'unset';
     this.filename = 'unset';
     this.nameType = 'unset';

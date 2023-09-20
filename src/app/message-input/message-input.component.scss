@@ -65,15 +65,17 @@ p {
 .infoWindow {
   display: flex;
   justify-content: center;
+  align-items: center;
   position: absolute;
   bottom: 75px;
   height: fit-content;
   width: fit-content;
   margin: 8px;
   padding: 8px;
-  border-radius: 10px;
-  background-color: bisque;
+  border-radius: 30px;
+  background-color: white;
   flex-direction: column;
+  border: 1px solid lightgrey;
 }
 
 
@@ -104,5 +106,24 @@ p {
       background-color: #eceefe;
       border-radius: 30px;
     }
+  }
+}
+
+
+.element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+  cursor: pointer;
+
+  img {
+    fill: red;
+  }
+
+  &:hover {
+    background-color: #eceefe;
   }
 }
