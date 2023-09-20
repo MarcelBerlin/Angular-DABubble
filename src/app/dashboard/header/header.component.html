@@ -16,7 +16,8 @@
   <div class="header-profile" *ngIf="dataService.loggedInUserData">
     <span> {{ dataService.loggedInUserData.name }} </span>
     <div class="img-container">
-      <img src="{{ dataService.loggedInUserData.img }}" />
+      <img *ngIf="innerWidth > 550" src="{{ dataService.loggedInUserData.img }}" />
+      <img *ngIf="innerWidth <= 550" class="mobile-image" [matMenuTriggerFor]="menu" src="{{ dataService.loggedInUserData.img }}" />
       <div class="activeDot" [style.background-color]="
           dataService.loggedInUserData.online ? '#92C83E' : '#686868'
         "></div>

@@ -1,5 +1,5 @@
 import { UsersService } from 'src/app/services/users.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuTrigger, MatMenuModule } from '@angular/material/menu';
 import { HeaderDialogComponent } from 'src/app/dialog/header-dialog/header-dialog.component';
@@ -22,6 +22,11 @@ export class HeaderComponent {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
 
   actualUser: any;
+  control = new FormControl('');
+  filteredArrays: Observable<string[]>;
+  selectedArray: any = [];
+  property: string = '';
+  innerWidth: number = 0;
 
   constructor(
     public dialog: MatDialog,
@@ -32,10 +37,12 @@ export class HeaderComponent {
     public messageService: MessageService) {
   }
 
-  control = new FormControl('');
-  filteredArrays: Observable<string[]>;
-  selectedArray: any = [];
-  property: string = '';
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    // console.log(this.innerWidth);
+  }
+
 
   ngOnInit() {
     this.filteredArrays = this.control.valueChanges.pipe(
