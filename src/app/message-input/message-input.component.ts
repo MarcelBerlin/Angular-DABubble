@@ -4,8 +4,6 @@ import { MessageInputServiceService } from './service/message-input-service.serv
 import { VariablesService } from '../services/variables.service';
 import { DataService } from '../services/data.service';
 import { FileUploadService } from '../file-upload/services/file-upload.service';
-
-
 @Component({
   selector: 'app-message-input',
   templateUrl: './message-input.component.html',
