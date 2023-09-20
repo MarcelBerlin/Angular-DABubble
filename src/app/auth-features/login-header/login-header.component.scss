@@ -22,11 +22,12 @@
             width: 153px;
             height: 42px;
             padding: 0px 15px;
-            margin-right: -55px;
+            margin-right: -32px;
             border-radius: 25px;
             border: 1px solid #ECEEFE;
             display: flex;
             align-items: center;
+            justify-content: center;
             font-family: 'Figtree';
             font-weight: 400;
             font-size: 18px;
@@ -49,7 +50,7 @@
     .loginHeadLinks {
         position: absolute;
         top: 780px;
-        left: calc(50% - 75.65px);
+        left: calc(50% - 92.5px);
         align-items: center !important;
     }
 
@@ -64,7 +65,7 @@
     .loginHeadLinks {
         position: absolute;
         top: 801.25px;
-        left: calc(50% - 75.65px);
+        left: calc(50% - 92.5px);
         align-items: center !important;
     }
 }
