@@ -6,20 +6,14 @@
 
 
 .inputDiv {
-
-  // position: absolute;
-
-  // top: 16px;
-  // left: 32px;
-  // right: 32px;
   display: flex;
   flex-direction: row;
   height: 60px;
   border: 1px solid lightgrey;
   outline-style: none;
-  padding: 0 16px;
-
-  padding: 8px;
+  overflow-y: auto;
+  margin: 16px 5% 0px 5%;
+  user-select: none;
   /* Hier kannst du die gewünschte Höhe festlegen */
   white-space: pre-wrap;
   /* Umbruch von langen Zeilen aktivieren */
@@ -29,6 +23,18 @@
   font-size: 18px;
   color: black;
   caret-color: blue;
+
+  a{
+    overflow: hidden;
+    user-select: none;
+  }
+  span{
+    overflow: hidden;
+    user-select: none;
+    text-wrap: wrap;
+    
+  }
+
 }
 
 .userLink {
