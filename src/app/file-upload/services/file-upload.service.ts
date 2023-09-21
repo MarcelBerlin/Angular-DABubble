@@ -7,6 +7,7 @@ import { FileUpload } from '../models/file-upload.model';
 import { DataService } from 'src/app/services/data.service';
 import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 @Injectable({
   providedIn: 'root'
 })
@@ -24,8 +25,8 @@ export class FileUploadService {
     private db: AngularFireDatabase,
     private storage: AngularFireStorage,
     private dataService: DataService,
-    private userToMessageService: UserToMessageService,
-    private messageInputService: MessageInputServiceService, 
+    private messageInputService: MessageInputServiceService,
+    private auth: AngularFireAuth
   ) { }
 
 
@@ -39,7 +40,7 @@ export class FileUploadService {
    * @returns {Observable<number | undefined>} - An observable of the upload progress percentage.
    */
   pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
-    if(!this.profileImgUpload) this.fileUploadRuns = true;
+    if (!this.profileImgUpload) this.fileUploadRuns = true;
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
@@ -62,15 +63,15 @@ export class FileUploadService {
    * @param {string} downloadURL - The download URL of the uploaded file.
    * @param {FileUpload} fileUpload - The file upload information.
    */
-  finalizeUpload(downloadURL: string, fileUpload:FileUpload): void {
+  finalizeUpload(downloadURL: string, fileUpload: FileUpload): void {
     fileUpload.url = downloadURL;
     this.lastUpload = downloadURL;
     fileUpload.name = fileUpload.file.name;
     this.filename = fileUpload.name;
     this.saveFileData(fileUpload);
-    if (this.profileImgUpload){
+    if (this.profileImgUpload) {
       this.userUpdate();
-    } 
+    }
     else {
       this.messageInputService.filename = this.filename;
       this.messageInputService.linkTaget = this.lastUpload;
@@ -87,7 +88,7 @@ export class FileUploadService {
    * 
    * @returns {void}
    */
-  userUpdate():void {
+  userUpdate(): void {
     if (this.profileImgUpload && this.dataService.loggedInUserData.img != '/assets/img/members/avatar2.png') {
       this.deleteFile(this.dataService.loggedInUserData.img);
       this.profileImgUpload = false;
@@ -130,6 +131,7 @@ export class FileUploadService {
 
 
 
+
   // unused functions ##############################################################
   getFiles(numberItems: number): AngularFireList<FileUpload> {
     return this.db.list(this.basePath, ref =>
@@ -152,6 +154,23 @@ export class FileUploadService {
     const storageRef = this.storage.ref(this.basePath);
     storageRef.child(name).delete();
   }
+
+  async downloadFile2(downloadUrl: string, fileName: string): Promise<void> {
+    try {
+      // Authentifiziere den Benutzer, falls erforderlich
+      const user = await this.auth.currentUser;
+
+      if (user) {
+        console.log(user);
+      } else {
+        console.error('Fehler beim Herunterladen der Datei: HTTP-Statuscode');
+      }
+    } catch (error) {
+      console.error('Fehler beim Herunterladen der Datei:', error);
+    }
+
+  }
+
 
 
 

@@ -85,6 +85,7 @@ export class MainChatMessagefieldComponent {
       // neu sende Funktion für neues input Field
       this.messageInputService.resetVariables();
       this.messageInputService.setMyVariable(true);
+      
     }
   }
 

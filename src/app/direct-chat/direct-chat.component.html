@@ -63,7 +63,6 @@
               
             </span>
 
-
             <span 
             *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'NameType'" 
             class={{entry.attributes[3].value}}
@@ -89,6 +88,7 @@
                     <mat-icon (click)="inputService.openInNewTab(entry.linkInfo[0].linkTaget)">open_in_browser</mat-icon>
                   </div>
                   <div class="element" title="Datei herunterladen">
+                    
                     <mat-icon>download</mat-icon>
                   </div>
                 </div>

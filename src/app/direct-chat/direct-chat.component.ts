@@ -11,6 +11,7 @@ import { DirectChatService } from './services/direct-chat.service';
 import { TimelinesService } from './services/timelines.service';
 import { UserToMessageService } from '../user-to-message/user-to-message.service';
 import { MessageInputServiceService } from '../message-input/service/message-input-service.service';
+import { FileUploadService } from '../file-upload/services/file-upload.service';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class DirectChatComponent {
     public directChatService: DirectChatService,
     public timelinesService: TimelinesService,
     public userToMessageService: UserToMessageService,
-    public inputService: MessageInputServiceService
+    public inputService: MessageInputServiceService,
+    private fileuploadService: FileUploadService
   ) {
     this.getChanges();
   }
@@ -123,4 +125,9 @@ export class DirectChatComponent {
       clearTimeout(element);
     }
   }
+
+
+  // downloadFile(downloadURL: string, fileName: string){
+  //   this.fileuploadService.downloadFile(downloadURL, fileName);
+  // }
 }
