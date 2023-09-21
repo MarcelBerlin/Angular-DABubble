@@ -23,6 +23,7 @@ export class DirectChatComponent {
   emptyChat: boolean = false;
   chatText: string = '';
   showInfoBox: number = -1;
+  timeoutArray: any[] = [];
 
 
   constructor(
@@ -74,6 +75,7 @@ export class DirectChatComponent {
    * @returns {void}
    */
   showInfoOutput(index: number, i: number):void{
+    this.clearTimoutArray();
     const indexString = index.toString();
     const iString = i.toString();
     const newNumber = +(indexString + iString)
@@ -82,6 +84,13 @@ export class DirectChatComponent {
   }
 
 
+  /**
+   * Creates a unique information ID by combining two numbers.
+   *
+   * @param {number} index - The first number to be combined.
+   * @param {number} i - The second number to be combined.
+   * @returns {number} A new unique information ID.
+   */
   createInfoId(index: number, i: number): number{
     const indexString = index.toString();
     const iString = i.toString();
@@ -89,13 +98,29 @@ export class DirectChatComponent {
     return newNumber;
   }
 
-
+  
   /**
    * Hides or closes the currently displayed information or info box.
    * 
    * @returns {void}
    */
   hideInfoOutput(): void {
-    // this.showInfoBox = -1;
+    let leaveTimeOut = setTimeout(() => {
+      this.showInfoBox = -1;
+    }, 500)
+    this.timeoutArray.push(leaveTimeOut);
+  }
+
+
+  /**
+   * Clears all timeouts stored in the timeoutArray.
+   *
+   * @returns {void}
+   */
+  clearTimoutArray(): void {
+    for (let i = 0; i < this.timeoutArray.length; i++) {
+      const element = this.timeoutArray[i];
+      clearTimeout(element);
+    }
   }
 }

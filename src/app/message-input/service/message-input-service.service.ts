@@ -98,4 +98,16 @@ export class MessageInputServiceService {
     console.log('openInNewTab', href);
     window.open(href, '_blank');
   }
+
+
+  fileIsPDF(filename): boolean{
+    let isFilname:boolean = false;
+    const filenameLength = filename.length;
+    if(filename[filenameLength -1] == 'f' && filename[filenameLength -2] == 'd'){
+        if(filename[filenameLength -3] == 'p' && filename[filenameLength -4] == '.'){ 
+            isFilname = true;
+      }
+    }
+    return isFilname;
+  }
 }

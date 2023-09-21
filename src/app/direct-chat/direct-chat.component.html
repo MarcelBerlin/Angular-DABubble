@@ -16,7 +16,9 @@
         <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
         <span class="time">{{ message.date }} {{ message.time }} Uhr</span>
       </div>
+
       <div class="messageBox" [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'">
+        <!-- hier muss das neue Output Format rein -->
         <span class="message">{{message.message}}</span>
       </div>
       <div class="labelAnswersAndTime">
@@ -39,8 +41,6 @@
       </div>
       <div class="messageBox" [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'">
 
-        <!-- testarea new message Data format, old format-->
-
         <span class="message"
           *ngIf="directChatService.directChat.firstMember != directChatService.directChat.secondMember">{{message.message}}
         </span>
@@ -50,27 +50,6 @@
         <div class="outputBox"
           *ngIf="directChatService.directChat.firstMember == directChatService.directChat.secondMember">
           <div class="output" *ngFor="let entry of message.message; let index = index">
-
-            <!-- <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'NameType' && showInfoBox == i">
-              <span>Name: {{ entry.name }}</span>
-              <span>Email: {{ entry.emailContent }}</span>
-            </span> -->
-
-            <!-- <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == i">
-              <img src={{entry.filelink}} alt="" style="max-width: 100%; height: auto; width: 100px">
-              <a href={{entry.filelink}} target="_blank">{{entry.filename}}</a>
-              FileType
-            </span> -->
-
-
-            <!-- old text format -->
-            <!-- <span *ngIf="index > 0 && entry?.span?.length > 0" class="member" (mouseenter)="showInfoOutput(i)"
-              (mouseleave)="hideInfoOutput()">{{ entry.span }}
-            </span>
-
-            <p class="messageOut">{{ entry.p }}</p> -->
-            <!-- old text format end -->
-
             <span *ngIf="entry.tagType == 'text'">
               {{entry.content}}
             </span>
@@ -105,10 +84,18 @@
             (mouseleave)="hideInfoOutput()">
               {{entry.content}}
               <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == createInfoId(index, i)">
-                <div class="element">
-                  <mat-icon (click)="inputService.openInNewTab(entry.linkInfo[0].linkTaget)">open_in_browser</mat-icon>
+                <div style="display: flex; justify-content: space-evenly; width: 100%;">
+                  <div class="element" title="Datei in neuen Tab öffnen">
+                    <mat-icon (click)="inputService.openInNewTab(entry.linkInfo[0].linkTaget)">open_in_browser</mat-icon>
+                  </div>
+                  <div class="element" title="Datei herunterladen">
+                    <mat-icon>download</mat-icon>
+                  </div>
                 </div>
-                <img src={{entry.linkInfo[0].linkTaget}}  alt="" style="max-height: 200px; max-width: 200px; width: auto; height: auto;">
+                
+
+                <img src={{entry.linkInfo[0].linkTaget}}  alt="" *ngIf="!inputService.fileIsPDF(entry.content)">
+                <img src="../../assets/img/PDF.png" alt="" *ngIf="inputService.fileIsPDF(entry.content)">
               </span>
             </span>
 
