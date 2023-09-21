@@ -42,7 +42,8 @@
         <!-- testarea new message Data format, old format-->
 
         <span class="message"
-          *ngIf="directChatService.directChat.firstMember != directChatService.directChat.secondMember">{{message.message}}</span>
+          *ngIf="directChatService.directChat.firstMember != directChatService.directChat.secondMember">{{message.message}}
+        </span>
 
         <!-- testarea new message Data format -->
 
@@ -50,21 +51,67 @@
           *ngIf="directChatService.directChat.firstMember == directChatService.directChat.secondMember">
           <div class="output" *ngFor="let entry of message.message; let index = index">
 
-            <span class="infoBox" *ngIf="entry.email != 'unset' && showInfoBox == i">
+            <!-- <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'NameType' && showInfoBox == i">
               <span>Name: {{ entry.name }}</span>
-              <span>Email: {{ entry.email }}</span>
-              <span>userId: {{entry.userId}}</span>
-            </span>
+              <span>Email: {{ entry.emailContent }}</span>
+            </span> -->
 
-            <span class="infoBox" *ngIf="entry.filename != 'unset' && showInfoBox == i">
+            <!-- <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == i">
               <img src={{entry.filelink}} alt="" style="max-width: 100%; height: auto; width: 100px">
               <a href={{entry.filelink}} target="_blank">{{entry.filename}}</a>
-            </span>
+              FileType
+            </span> -->
 
-            <span *ngIf="index > 0 && entry?.span?.length > 0" class="member" (mouseenter)="showInfoOutput(i)"
+
+            <!-- old text format -->
+            <!-- <span *ngIf="index > 0 && entry?.span?.length > 0" class="member" (mouseenter)="showInfoOutput(i)"
               (mouseleave)="hideInfoOutput()">{{ entry.span }}
             </span>
-            <p class="messageOut">{{ entry.p }}</p>
+
+            <p class="messageOut">{{ entry.p }}</p> -->
+            <!-- old text format end -->
+
+            <span *ngIf="entry.tagType == 'text'">
+              {{entry.content}}
+            </span>
+
+            <span *ngIf="entry.tagType == 'SPAN'">
+              {{entry.content}}
+            </span>
+
+            <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'EmojiType'" >
+              {{entry.content}}
+              
+            </span>
+
+
+            <span 
+            *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'NameType'" 
+            class={{entry.attributes[3].value}}
+            (mouseenter)="showInfoOutput(index, i)"
+            (mouseleave)="hideInfoOutput()"
+            >
+              {{entry.content}}
+              <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'NameType' && showInfoBox == createInfoId(index, i)">
+                <span>{{ entry.linkInfo[0].name }}</span>
+                <span>{{ entry.linkInfo[0].emailContent }}</span>
+              </span>
+            </span>
+
+            <span 
+            *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'FileType'" 
+            class={{entry.attributes[3].value}}
+            (mouseenter)="showInfoOutput(index, i)"
+            (mouseleave)="hideInfoOutput()">
+              {{entry.content}}
+              <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == createInfoId(index, i)">
+                <img src={{entry.linkInfo[0].linkTaget}} alt="" style="max-height: 200px; max-width: 200px; width: auto; height: auto;">
+                
+                FileType
+              </span>
+            </span>
+
+
           </div>
         </div>
 

@@ -70,8 +70,20 @@ export class DirectChatComponent {
    * @param {number} index - The index of the item or element for which to display information.
    * @returns {void}
    */
-  showInfoOutput(index: number):void{
-    this.showInfoBox = index;
+  showInfoOutput(index: number, i: number):void{
+    const indexString = index.toString();
+    const iString = i.toString();
+    const newNumber = +(indexString + iString)
+    this.showInfoBox = newNumber;
+    console.log(newNumber);
+  }
+
+
+  createInfoId(index: number, i: number): number{
+    const indexString = index.toString();
+    const iString = i.toString();
+    const newNumber = +(indexString + iString);
+    return newNumber;
   }
 
 
@@ -81,6 +93,6 @@ export class DirectChatComponent {
    * @returns {void}
    */
   hideInfoOutput(): void {
-    this.showInfoBox = -1
+    this.showInfoBox = -1;
   }
 }

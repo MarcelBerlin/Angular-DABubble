@@ -4,6 +4,7 @@ import { MessageInputServiceService } from './service/message-input-service.serv
 import { VariablesService } from '../services/variables.service';
 import { DataService } from '../services/data.service';
 import { FileUploadService } from '../file-upload/services/file-upload.service';
+import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 @Component({
   selector: 'app-message-input',
   templateUrl: './message-input.component.html',
@@ -23,7 +24,8 @@ export class MessageInputComponent {
     public inputService: MessageInputServiceService,
     public varService: VariablesService,
     public dataService: DataService,
-    private fileUploadService: FileUploadService
+    private fileUploadService: FileUploadService,
+    private directChatService: DirectChatService
     ) { }
 
 
@@ -52,7 +54,8 @@ export class MessageInputComponent {
       if (this.inputService.nameType == 'EmojiType') this.addHTMLTags();
       if (this.inputService.filename != 'unset') this.addHTMLTags();
       if (this.inputService.nameType == 'unset' && this.inputService.setId == -1){
-        this.saveHTMLTagsAndText();
+        // this.saveHTMLTagsAndText();
+        this.saveMessage();
       } 
     }
 
@@ -323,7 +326,6 @@ export class MessageInputComponent {
   addTagAttributes(attributes: NamedNodeMap, tagInfo: any): Object {
     for (let j = 0; j < attributes.length; j++) {
       const attribute = attributes[j];
-      console.log(attribute.name, attribute.value)
       let aInfo = { name: attribute.name, value: attribute.value };
       tagInfo.attributes[j] = aInfo;
     }
@@ -362,6 +364,12 @@ export class MessageInputComponent {
       view: window,
     });
     el.dispatchEvent(doubleClickEvent);
+  }
+
+
+  saveMessage(){
+    this.directChatService.saveMessage2(this.saveHTMLTagsAndText());
+    this.inputService.contentArray = [];
   }
 
 
