@@ -9,10 +9,10 @@
     <div class="channelAndMessage">
       <div class="channels-container" [style]="'max-height: 50%'">
         <div class="channels-headline">
-          <img class="pointer" [src]="channelsPath" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
+          <img class="pointer-name" [src]="channelsPath" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
             (click)="toggleChannels(); onClickChannels()" />
 
-          <img class="pointer" [src]="addPathChannel" (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
+          <img class="pointer-plus" [src]="addPathChannel" (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
             (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'" (click)="addChannel()" />
         </div>
 
@@ -34,10 +34,10 @@
 
       <div class="direct-messages" [style.height]="channelsVisible ? '50%' : 'calc(100% - 68px)'">
         <div class="direct-messages-headline pd-left pd-right pd-top">
-          <img class="pointer" [src]="directMessagePath" (mouseenter)="hoverDirectMessage()"
+          <img class="pointer-name" [src]="directMessagePath" (mouseenter)="hoverDirectMessage()"
             (mouseleave)="unhoverDirectMessage()" (click)="toggleDirectMessage(); onClickDirectMessage()" />
 
-          <img class="pointer" [src]="addPathMessage" (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
+          <img class="pointer-plus" [src]="addPathMessage" (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
             (mouseleave)="addPathMessage = 'assets/img/sidenav/add.png'"
             (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'" />
         </div>

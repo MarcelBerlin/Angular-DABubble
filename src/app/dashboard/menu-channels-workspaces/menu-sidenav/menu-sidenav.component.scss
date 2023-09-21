@@ -100,6 +100,7 @@
     .direct-messages {
       position: relative;
       overflow-y: scroll;
+
       .direct-messages-headline {
         position: sticky;
         top: 0;
@@ -184,7 +185,7 @@
   .activeAtResponsive {
     @media (max-width: 800px) {
       display: none !important;
-    }    
+    }
   }
 }
 
@@ -216,7 +217,7 @@
 //   padding-right: 35px;
 // }
 
-@media (max-width: 1450px) { 
+@media (max-width: 1450px) {
   .sidenavHeaderContainer {
     padding-left: 22px !important;
     padding-right: 22px !important;
@@ -225,13 +226,36 @@
       width: 180px !important;
     }
 
-    .pointer {
+    .pointer-plus {
       width: 40px !important;
     }
   }
+
+  .channels-container {
+    .channels-headline {
+      padding-left: 0 !important;
+    }
+
+    .channels-content {
+      padding-left: 0 !important;
+    }
+  }
+
+  .direct-messages-headline {
+    padding-left: 0 !important;
+
+    .pointer-name {
+      width: 200px !important;
+    }
+  }
+
+  .direct-message-content {
+    padding-left: 0 !important;
+  }
+
 }
 
-@media (max-width: 1150px) { 
+@media (max-width: 1150px) {
   .sidenavHeaderContainer {
     padding-right: 0 !important;
 
@@ -239,14 +263,46 @@
       width: 150px !important;
     }
 
-    .pointer {
+    .pointer-plus {
       width: 35px !important;
     }
   }
+
+  .channels-content {
+    .channel-add {
+      width: 180px !important;
+      margin-left: 7px;
+    }
+  }
+
+  .direct-messages-headline {
+
+    .pointer-name {
+      width: 180px !important;
+    }
+  }
+
+  .direct-message-user {
+    padding-left: 0 !important;
+    gap: 12px !important;
+
+    span {
+      font-size: 15px !important;
+    }
+  }
+
+  .activeDot {
+    left: 36px !important;
+  }
+
 }
 
-@media (max-width: 1000px) { 
+@media (max-width: 1000px) {
   .sidenavHeaderContainer {
-    padding-left: 10px !important;
+    padding-left: 0 !important;
+
+    .codeLearning {
+      width: 130px !important;
+    }
   }
 }
