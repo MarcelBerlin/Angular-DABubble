@@ -4,6 +4,7 @@
   height: 100%;
   background-color: #eceefe;
   overflow: hidden;
+
   .header {
     position: absolute;
     top: 0;
@@ -12,24 +13,35 @@
     height: 100px;
     background-color: #eceefe;
     margin-top: 20px;
+
+    @media(max-width: 800px) {
+      position: unset;
+      height: unset;
+      margin-top: 10px;
+    }
   }
+
   .leftContainer {
     position: absolute;
     top: 100px;
     bottom: 16px;
     left: 8px;
     width: 25%;
-    transition: 200ms;        
+    transition: 200ms;
+
     @media (max-width: 800px) {
       left: 0px;
       bottom: 0px;
       width: 100%;
+      top: 80px;
     }
   }
-  .leftContainerSlideOut{
+
+  .leftContainerSlideOut {
     transform: translateX(-25vw);
     transition: 200ms;
   }
+
   .mainChatContainer {
     position: absolute;
     top: 100px;
@@ -42,14 +54,17 @@
       display: none;
     }
   }
+
   .slideRight {
     right: 0;
     transition: 200ms;
   }
-  .slideLeft{
+
+  .slideLeft {
     left: 0;
     transition: 200ms;
   }
+
   .secondaryChatContainer {
     position: absolute;
     top: 100px;
@@ -58,6 +73,7 @@
     width: 25%;
     transition: 200ms;
   }
+
   .secondarySlideOut {
     transform: translateX(25vw);
     transition: 200ms;
@@ -75,23 +91,27 @@
   rotate: -90deg;
   cursor: pointer;
   z-index: 2;
+
   &:hover {
     span {
       color: #535af1;
       transform: scale(1.02);
     }
   }
+
   div {
     display: flex;
     align-items: center;
     height: 100%;
     width: 100%;
+
     span {
       font-family: "Nunito";
       font-weight: 500;
       font-size: 20px;
       margin-left: 32px;
-      img{
+
+      img {
         margin-left: 8px;
         rotate: 90deg;
       }

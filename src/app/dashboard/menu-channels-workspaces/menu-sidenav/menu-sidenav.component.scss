@@ -2,14 +2,15 @@
   position: relative;
 
   .sidenavHeaderContainer {
-    position: absolute;
-    top: 16px;
+    // position: absolute;
+    // top: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    padding-left: 32px;
-    padding-right: 32px;
+    // padding-left: 32px;
+    // padding-right: 32px;
+    margin-top: 16px;
   }
 
   .channelAndMessage {
@@ -214,3 +215,38 @@
 //   cursor: pointer;
 //   padding-right: 35px;
 // }
+
+@media (max-width: 1450px) { 
+  .sidenavHeaderContainer {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+
+    .codeLearning {
+      width: 180px !important;
+    }
+
+    .pointer {
+      width: 40px !important;
+    }
+  }
+}
+
+@media (max-width: 1150px) { 
+  .sidenavHeaderContainer {
+    padding-right: 0 !important;
+
+    .codeLearning {
+      width: 150px !important;
+    }
+
+    .pointer {
+      width: 35px !important;
+    }
+  }
+}
+
+@media (max-width: 1000px) { 
+  .sidenavHeaderContainer {
+    padding-left: 10px !important;
+  }
+}
