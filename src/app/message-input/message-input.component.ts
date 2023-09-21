@@ -128,9 +128,9 @@ export class MessageInputComponent {
    * @param {string} href - The URL to open in a new tab.
    * @returns {void}
    */
-  openInNewTab(href: string){
-    window.open(href, '_blank');
-  }
+  // openInNewTab(href: string){
+  //   window.open(href, '_blank');
+  // }
 
 
   /**

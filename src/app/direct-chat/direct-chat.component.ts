@@ -10,6 +10,8 @@ import { VariablesService } from '../services/variables.service';
 import { DirectChatService } from './services/direct-chat.service';
 import { TimelinesService } from './services/timelines.service';
 import { UserToMessageService } from '../user-to-message/user-to-message.service';
+import { MessageInputServiceService } from '../message-input/service/message-input-service.service';
+
 
 @Component({
   selector: 'app-direct-chat',
@@ -33,6 +35,7 @@ export class DirectChatComponent {
     public directChatService: DirectChatService,
     public timelinesService: TimelinesService,
     public userToMessageService: UserToMessageService,
+    public inputService: MessageInputServiceService
   ) {
     this.getChanges();
   }
@@ -93,6 +96,6 @@ export class DirectChatComponent {
    * @returns {void}
    */
   hideInfoOutput(): void {
-    this.showInfoBox = -1;
+    // this.showInfoBox = -1;
   }
 }

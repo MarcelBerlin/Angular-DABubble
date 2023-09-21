@@ -87,4 +87,15 @@ export class MessageInputServiceService {
     this.nameType = 'unset';
     this.userId = 'unset';
   }
+
+  /**
+   * Opens a URL in a new browser tab or window.
+   *
+   * @param {string} href - The URL to open in a new tab.
+   * @returns {void}
+   */
+  openInNewTab(href: string){
+    console.log('openInNewTab', href);
+    window.open(href, '_blank');
+  }
 }

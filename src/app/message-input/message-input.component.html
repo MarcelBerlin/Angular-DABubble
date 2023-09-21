@@ -22,7 +22,7 @@
     <div *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'" class="element">
       <!-- <mat-icon (click)="deleteFile(inputService.shownId)">delete</mat-icon> -->
 
-      <mat-icon (click)="openInNewTab(inputService.inputLinks[inputService.shownId].linkTaget)">open_in_browser</mat-icon>
+      <mat-icon (click)="inputService.openInNewTab(inputService.inputLinks[inputService.shownId].linkTaget)">open_in_browser</mat-icon>
     </div>
     
 

@@ -105,9 +105,10 @@
             (mouseleave)="hideInfoOutput()">
               {{entry.content}}
               <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == createInfoId(index, i)">
-                <img src={{entry.linkInfo[0].linkTaget}} alt="" style="max-height: 200px; max-width: 200px; width: auto; height: auto;">
-                
-                FileType
+                <div class="element">
+                  <mat-icon (click)="inputService.openInNewTab(entry.linkInfo[0].linkTaget)">open_in_browser</mat-icon>
+                </div>
+                <img src={{entry.linkInfo[0].linkTaget}}  alt="" style="max-height: 200px; max-width: 200px; width: auto; height: auto;">
               </span>
             </span>
 
