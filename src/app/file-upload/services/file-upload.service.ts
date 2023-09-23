@@ -8,6 +8,8 @@ import { DataService } from 'src/app/services/data.service';
 import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 @Injectable({
   providedIn: 'root'
 })
@@ -19,6 +21,7 @@ export class FileUploadService {
   profileImgUpload: boolean = false;
   fileUploadRuns: boolean = false;
   uploadPercentage: number = 0;
+  const = getStorage();
 
 
   constructor(
@@ -26,7 +29,8 @@ export class FileUploadService {
     private storage: AngularFireStorage,
     private dataService: DataService,
     private messageInputService: MessageInputServiceService,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    private http: HttpClient
   ) { }
 
 
@@ -125,6 +129,33 @@ export class FileUploadService {
     const fileRef = this.storage.refFromURL(fileURL);
     return fileRef.delete().toPromise();
   }
+
+
+
+  async downloadFile(fileUrl, fileName) {
+    // const fileUrl = 'URL_DER_DATEI'; // Die URL der herunterzuladenden Datei
+    const user = await this.auth.currentUser;
+    if (user) {
+      const idToken = await user.getIdToken();
+      // Setzen Sie das ID-Token im Authorization-Header
+      const headers = new HttpHeaders().set('Authorization', 'Bearer ' + idToken);
+
+      this.http
+        .get(fileUrl, { responseType: 'blob', headers: headers })
+        .subscribe((blob) => {
+          const a = document.createElement('a');
+          const url = window.URL.createObjectURL(blob);
+          a.href = url;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+        });
+    }
+  }
+
+
+  
 
 
 

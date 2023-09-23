@@ -82,7 +82,6 @@ export class DirectChatComponent {
     const iString = i.toString();
     const newNumber = +(indexString + iString)
     this.showInfoBox = newNumber;
-    console.log(newNumber);
   }
 
 
@@ -127,7 +126,7 @@ export class DirectChatComponent {
   }
 
 
-  // downloadFile(downloadURL: string, fileName: string){
-  //   this.fileuploadService.downloadFile(downloadURL, fileName);
-  // }
+  downloadFile(downloadURL: string, fileName: string){
+    this.fileuploadService.downloadFile(downloadURL, fileName);
+  }
 }
