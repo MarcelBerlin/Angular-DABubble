@@ -252,7 +252,7 @@ export class MessageInputComponent {
       }
     }
     this.addTagInfoLinkInfo();
-    console.log(this.inputService.contentArray);
+    // console.log(this.inputService.contentArray);
     return this.inputService.contentArray;
   }
 
@@ -370,6 +370,7 @@ export class MessageInputComponent {
   saveMessage(){
     this.directChatService.saveMessage2(this.saveHTMLTagsAndText());
     this.inputService.contentArray = [];
+    document.getElementById('inputDiv').innerHTML = '';
   }
 
 

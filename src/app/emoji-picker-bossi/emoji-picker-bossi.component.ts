@@ -161,9 +161,9 @@ export class EmojiPickerBossiComponent {
    * @returns {void}
    */
   setEmoji(x: any): void {
-    console.log(this.varService.mainChatHead);
     if(this.varService.mainChatHead == 1 && !this.currentUser()){
-      this.directChatService.directMessage += x.emoji;
+      // this.directChatService.directMessage += x.emoji;
+      this.messageInputService.insertEmoji(x.emoji);
     }
     if(this.varService.mainChatHead == 1 && this.currentUser()){
       // this.userToMessageService.insertEmoji(x.emoji);

@@ -77,14 +77,16 @@ export class MainChatMessagefieldComponent {
     }
     // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
-      this.directChatService.saveMessage();
+      // this.directChatService.saveMessage();
+      this.messageInputService.resetVariables();
+      this.messageInputService.setMyVariable(true) ;
       this.newMessageAmountService.addPartnerDirectChatMessageAmount();
     }
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser() ){
       // this.userToMessageService.send();
       // neu sende Funktion für neues input Field
       this.messageInputService.resetVariables();
-      this.messageInputService.setMyVariable(true);
+      this.messageInputService.setMyVariable(true) ;
     }
   }
 
