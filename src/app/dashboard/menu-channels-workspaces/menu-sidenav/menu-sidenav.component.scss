@@ -106,10 +106,25 @@
           }
         }
 
-        .channel-add {
-          position: sticky;
-          bottom: -1px;
-          background-color: white;
+        .add-channel {
+          display: flex;
+          align-items: center;
+          padding: 4px 0px 4px 20px;
+          cursor: pointer;
+          
+          img {
+            padding-right: 5px;
+            margin-left: -5px;
+          }
+
+          span {
+            font-family: 'nunito';
+            font-size: 18px;
+          }
+
+          &:hover {
+            color: #535af1;
+          }
         }
       }
     }
@@ -125,7 +140,7 @@
         justify-content: space-between;
         height: 46px;
         align-items: center;
-        padding: 16px;
+        padding-bottom: 16px;
         background-color: white;
         z-index: 1;
       }
@@ -220,17 +235,18 @@
   display: flex;
   align-items: center;
   width: 100%;
+  padding-right: 0 !important;
 
   img {
     padding-right: 10px;
     width: 30px;
-    height: 30px;
     object-fit: cover;
   }
 
   span {
     font-family: "Nunito";
     font-size: 20px;
+    font-weight: 700;
   }
 
   &:hover {
@@ -316,10 +332,9 @@
     }
   }
 
-  .channels-content {
-    .channel-add {
-      width: 180px !important;
-      margin-left: 7px;
+  .add-channel {
+    span {
+      font-size: 17px !important;
     }
   }
 
@@ -343,9 +358,28 @@
     left: 36px !important;
   }
 
+  .side-menu-head {
+    .menu-span {
+      font-size: 17px !important;
+    }
+
+    .menu-logo {
+      width: 25px !important;
+      padding-right: 5px !important;
+    }
+
+    .menu-arrow {
+      width: 25px !important;
+      padding-right: 5px !important;
+    }
+  }
+
 }
 
 @media (max-width: 1000px) {
+  .content {
+    width: calc(100% - 20px) !important;
+  }
   .sidenavHeaderContainer {
     padding-left: 0 !important;
 
@@ -356,5 +390,52 @@
     .pointer-pen {
       width: 35px !important;
     }
+  }
+
+  .channelAndMessage {
+    left: -5px !important;
+
+    .pointer {
+      font-size: 15px !important;
+
+      .hashtag {
+        font-size: 15px !important;
+      }
+
+      .afterHashtag {
+        font-size: 15px !important;
+      }
+
+    }
+  }
+
+  .add-channel {
+    img {
+      width: 20px !important;
+    }
+
+    span {
+      font-size: 15px !important;
+    }
+  }
+
+  .side-menu-head {
+    .menu-span {
+      font-size: 15px !important;
+    }
+
+    .menu-logo {
+      width: 20px !important;
+      padding-right: 5px !important;
+    }
+
+    .menu-arrow {
+      width: 20px !important;
+      padding-right: 5px !important;
+    }
+  }
+
+  .channels-container {
+    gap: 5px !important;
   }
 }

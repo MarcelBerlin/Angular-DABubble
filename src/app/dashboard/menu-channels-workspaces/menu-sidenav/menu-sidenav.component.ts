@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import {
   trigger,
   state,
@@ -55,17 +55,18 @@ export class MenuSidenavComponent implements OnInit {
   chatLogo: string = 'assets/img/sidenav/account.png';
   addPathChannel: string = 'assets/img/sidenav/add.png';
   addPathMessage: string = 'assets/img/sidenav/add.png';
-  addNewChannel: string = 'assets/img/sidenav/add_Channel.png';
+  addNewChannel: string = 'assets/img/sidenav/add_circle.png';
   firstTagPath: string = 'assets/img/sidenav/tag.png';
   secondTagPath: string = 'assets/img/sidenav/tag.png';
   thirdTagPath: string = 'assets/img/sidenav/tag.png';
-  arrowChannel: boolean = true;
-  arrowMessage: boolean = true;
+  arrowStateChannel: boolean = true;
+  arrowStateMessage: boolean = true;
 
 
   channelsVisible: boolean = true;
   hover: boolean = false;
   directMessageUserVisible: boolean = true;
+  innerWidth: number;
 
   constructor(
     public dialog: MatDialog,
@@ -91,6 +92,12 @@ export class MenuSidenavComponent implements OnInit {
     // this.getService.deleteFromFirebase() // bitte lassen. Basti
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    // console.log(this.innerWidth);
+  }
+
   allTags() {
     const tagCollection = collection(this.firestore, 'tags');
     this.tags$ = collectionData(tagCollection, { idField: 'id' });
@@ -114,13 +121,13 @@ export class MenuSidenavComponent implements OnInit {
       : 'assets/img/sidenav/arrow_left.png';
     // this.hover ? (this.channelArrow += '_hover') : '';
     console.log(this.channelsVisible);
-    this.arrowChannel = !this.arrowChannel;
+    this.arrowStateChannel = !this.arrowStateChannel;
   }
 
 
   hoverChannels() {
     this.hover = true;
-    if (!this.arrowChannel) {
+    if (!this.arrowStateChannel) {
       this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left_blue.png' : 'assets/img/sidenav/arrow_left_blue.png'
     } else {
       this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down_blue.png' : 'assets/img/sidenav/arrow_down_blue.png'
@@ -130,7 +137,7 @@ export class MenuSidenavComponent implements OnInit {
 
   unhoverChannels() {
     this.hover = false;
-    if (!this.arrowChannel) {
+    if (!this.arrowStateChannel) {
       this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left.png' : 'assets/img/sidenav/arrow_left.png';
     } else {
       this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down.png' : 'assets/img/sidenav/arrow_down.png';
@@ -141,15 +148,15 @@ export class MenuSidenavComponent implements OnInit {
   toggleDirectMessage() {
     this.directMessageUserVisible = !this.directMessageUserVisible;
     this.chatArrow = this.directMessageUserVisible
-    ? 'assets/img/sidenav/arrow_down.png'
-    : 'assets/img/sidenav/arrow_left.png';
+      ? 'assets/img/sidenav/arrow_down.png'
+      : 'assets/img/sidenav/arrow_left.png';
     // this.hover ? (this.chatLogo += '_hover') : '';
-    this.arrowMessage = !this.arrowMessage;
+    this.arrowStateMessage = !this.arrowStateMessage;
   }
 
   hoverDirectMessage() {
     this.hover = true;
-    if (!this.arrowMessage) {
+    if (!this.arrowStateMessage) {
       this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left_blue.png' : 'assets/img/sidenav/arrow_left_blue.png'
     } else {
       this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down_blue.png' : 'assets/img/sidenav/arrow_down_blue.png'
@@ -159,12 +166,20 @@ export class MenuSidenavComponent implements OnInit {
 
   unhoverDirectMessage() {
     this.hover = false;
-    if (!this.arrowMessage) {
+    if (!this.arrowStateMessage) {
       this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left.png' : 'assets/img/sidenav/arrow_left.png';
     } else {
       this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down.png' : 'assets/img/sidenav/arrow_down.png';
     }
     this.chatLogo = this.channelsVisible ? 'assets/img/sidenav/account.png' : 'assets/img/sidenav/account.png';
+  }
+
+  hoverAddChannel() {
+    this.addNewChannel = this.channelsVisible ? 'assets/img/sidenav/add_circle_blue.png' : 'assets/img/sidenav/add_circle_blue.png'
+  }
+
+  unhoverAddChannel() {
+    this.addNewChannel = this.channelsVisible ? 'assets/img/sidenav/add_circle.png' : 'assets/img/sidenav/add_circle.png'
   }
 
   // onClickChannels() {

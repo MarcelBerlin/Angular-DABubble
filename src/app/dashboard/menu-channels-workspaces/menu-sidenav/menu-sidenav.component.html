@@ -15,9 +15,9 @@
         <div class="channels-headline">
           <div class="side-menu-head" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
           (click)="toggleChannels()" >
-            <img [src]="channelArrow"/>
-            <img [src]="channelLogo" />
-            <span>Channels</span>
+            <img class="menu-arrow" [src]="channelArrow"/>
+            <img class="menu-logo" [src]="channelLogo" />
+            <span class="menu-span" >Channels</span>
           </div>
           <!-- <img class="pointer-name" [src]="channelsPath" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
             (click)="toggleChannels(); onClickChannels()" />
@@ -35,19 +35,22 @@
               </div>
             </div>
           </div>
-          <img class="pointer channel-add" [src]="addNewChannel" (mouseenter)="
-              addNewChannel = 'assets/img/sidenav/add_channel_hover.png'
-            " (mouseleave)="addNewChannel = 'assets/img/sidenav/add_Channel.png'" (click)="addChannel()" />
+          <div class="add-channel" (click)="addChannel()" (mouseenter)=" hoverAddChannel()"
+          (mouseleave)=" unhoverAddChannel()" >
+            <img class="pointer" [src]="addNewChannel"  />
+            <span>Channel hinzufügen</span>
+          </div>
         </div>
       </div>
 
       <div class="direct-messages" [style.height]="channelsVisible ? '50%' : 'calc(100% - 68px)'">
-        <div class="direct-messages-headline pd-left pd-right pd-top">
+        <div class="direct-messages-headline pd-left pd-top">
           <div class="side-menu-head" (mouseenter)="hoverDirectMessage()"
           (mouseleave)="unhoverDirectMessage()" (click)="toggleDirectMessage()">
-            <img [src]="chatArrow" />
-            <img [src]="chatLogo" />
-            <span>Direktnachrichten</span>
+            <img class="menu-arrow" [src]="chatArrow" />
+            <img class="menu-logo" [src]="chatLogo" />
+            <span *ngIf="innerWidth > 900" class="menu-span">Direktnachrichten</span>
+            <span *ngIf="innerWidth <= 900" class="menu-span">Nachrichten</span>
           </div>
           <!-- <img class="pointer-name" [src]="directMessagePath" (mouseenter)="hoverDirectMessage()"
             (mouseleave)="unhoverDirectMessage()" (click)="toggleDirectMessage(); onClickDirectMessage()" /> -->
