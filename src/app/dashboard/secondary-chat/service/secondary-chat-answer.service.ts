@@ -25,6 +25,7 @@ export class SecondaryChatAnswerService {
   answers$: any = [];
   answerData: any = [];
   newAnswer: Answers = new Answers();
+  groupedAnswers: { [key: string]: any[] } = {};
   answerText: string = '';
   messageId: string | null = null;  
 
@@ -46,7 +47,13 @@ export class SecondaryChatAnswerService {
     this.saveAnswerWithAnswerId();
     this.answerData.push(this.newAnswer);    
     this.answerText = '';    
-    console.log(this.answerData); 
+    const answerDate = new Date(this.newAnswer.dateTimeNumber);
+    const dayKey = answerDate.toDateString();
+    if (!this.groupedAnswers[dayKey]) {
+      this.groupedAnswers[dayKey] = [];
+    }
+    this.groupedAnswers[dayKey].push(this.newAnswer);
+    console.log(this.groupedAnswers[dayKey]);    
   }
 
   UserAndAnswerDetails() {
@@ -100,6 +107,21 @@ export class SecondaryChatAnswerService {
       answer.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
       );      
+      this.updateGroupedAnswers();
+      console.log(this.groupedAnswers);
     });
+  }
+
+  updateGroupedAnswers() {
+    this.groupedAnswers = {}; // Leere die bestehende Struktur
+    for (const answer of this.answerData) {
+      const answerDate = new Date(answer.dateTimeNumber);
+      const dayKey = answerDate.toDateString();
+
+      if (!this.groupedAnswers[dayKey]) {
+        this.groupedAnswers[dayKey] = [];
+      }
+      this.groupedAnswers[dayKey].push(answer);
+    }
   }
 }

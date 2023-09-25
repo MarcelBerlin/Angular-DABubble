@@ -16,6 +16,7 @@ export class ChannelMessagesService {
   selectedMessageIndex: number | null = null;
   groupedMessages: { [key: string]: any[] } = {};
   selectedChannelId: string = '';
+  selectedMessageForAnswer: string = '';
 
   constructor(
     private firestore: Firestore,
@@ -74,10 +75,11 @@ export class ChannelMessagesService {
     const messagesForDay = this.groupedMessages[dayKey];
     if (messagesForDay && messagesForDay[index]) {
       const selectedMessage = messagesForDay[index];
+      this.selectedMessageForAnswer = selectedMessage;
       this.selectedMessageIndex = index;
       this.selectedMessage = true;
       this.dcshService.chatSlideIn();
-      console.log(selectedMessage);      
+      console.log(this.selectedMessageForAnswer);      
     }
   }
   

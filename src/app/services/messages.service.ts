@@ -50,6 +50,7 @@ export class MessageService {
     this.addTimeStampToMessage();
     this.saveMessageWithIdToDoc();
     this.messageData.push(this.newMessage);
+    this.messageText = '';
     const messageDate = new Date(this.newMessage.dateTimeNumber);
     const dayKey = messageDate.toDateString();
     if (!this.groupedMessages[dayKey]) {
