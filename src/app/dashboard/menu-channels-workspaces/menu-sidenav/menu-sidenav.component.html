@@ -43,7 +43,8 @@
 
       <div class="direct-messages" [style.height]="channelsVisible ? '50%' : 'calc(100% - 68px)'">
         <div class="direct-messages-headline pd-left pd-right pd-top">
-          <div class="side-menu-head">
+          <div class="side-menu-head" (mouseenter)="hoverDirectMessage()"
+          (mouseleave)="unhoverDirectMessage()" (click)="toggleDirectMessage()">
             <img [src]="chatArrow" />
             <img [src]="chatLogo" />
             <span>Direktnachrichten</span>

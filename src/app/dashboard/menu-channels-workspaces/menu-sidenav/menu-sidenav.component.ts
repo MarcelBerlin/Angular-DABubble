@@ -59,7 +59,8 @@ export class MenuSidenavComponent implements OnInit {
   firstTagPath: string = 'assets/img/sidenav/tag.png';
   secondTagPath: string = 'assets/img/sidenav/tag.png';
   thirdTagPath: string = 'assets/img/sidenav/tag.png';
-  arrowState: boolean = true;
+  arrowChannel: boolean = true;
+  arrowMessage: boolean = true;
 
 
   channelsVisible: boolean = true;
@@ -113,13 +114,13 @@ export class MenuSidenavComponent implements OnInit {
       : 'assets/img/sidenav/arrow_left.png';
     // this.hover ? (this.channelArrow += '_hover') : '';
     console.log(this.channelsVisible);
-    this.arrowState = !this.arrowState;
+    this.arrowChannel = !this.arrowChannel;
   }
 
 
   hoverChannels() {
     this.hover = true;
-    if (!this.arrowState) {
+    if (!this.arrowChannel) {
       this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left_blue.png' : 'assets/img/sidenav/arrow_left_blue.png'
     } else {
       this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down_blue.png' : 'assets/img/sidenav/arrow_down_blue.png'
@@ -129,7 +130,7 @@ export class MenuSidenavComponent implements OnInit {
 
   unhoverChannels() {
     this.hover = false;
-    if (!this.arrowState) {
+    if (!this.arrowChannel) {
       this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left.png' : 'assets/img/sidenav/arrow_left.png';
     } else {
       this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down.png' : 'assets/img/sidenav/arrow_down.png';
@@ -140,35 +141,30 @@ export class MenuSidenavComponent implements OnInit {
   toggleDirectMessage() {
     this.directMessageUserVisible = !this.directMessageUserVisible;
     this.chatArrow = this.directMessageUserVisible
-      ? 'assets/img/sidenav/direct_message_open.png'
-      : 'assets/img/sidenav/direct_message_closed.png';
-
-    this.chatLogo = this.directMessageUserVisible
-      ? 'assets/img/sidenav/direct_message_open.png'
-      : 'assets/img/sidenav/direct_message_closed.png';
-    this.hover ? (this.chatLogo += '_hover') : '';
+    ? 'assets/img/sidenav/arrow_down.png'
+    : 'assets/img/sidenav/arrow_left.png';
+    // this.hover ? (this.chatLogo += '_hover') : '';
+    this.arrowMessage = !this.arrowMessage;
   }
 
   hoverDirectMessage() {
     this.hover = true;
-    this.chatArrow = this.directMessageUserVisible
-      ? 'assets/img/sidenav/direct_message_open.png'
-      : 'assets/img/sidenav/direct_message_closed_hover.png';
-
-    this.chatLogo = this.directMessageUserVisible
-      ? 'assets/img/sidenav/direct_message_open.png'
-      : 'assets/img/sidenav/direct_message_closed_hover.png';
+    if (!this.arrowMessage) {
+      this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left_blue.png' : 'assets/img/sidenav/arrow_left_blue.png'
+    } else {
+      this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down_blue.png' : 'assets/img/sidenav/arrow_down_blue.png'
+    }
+    this.chatLogo = this.channelsVisible ? 'assets/img/sidenav/account_blue.png' : 'assets/img/sidenav/account_blue.png'
   }
 
   unhoverDirectMessage() {
     this.hover = false;
-    this.chatArrow = this.directMessageUserVisible
-      ? 'assets/img/sidenav/direct_message_open.png'
-      : 'assets/img/sidenav/direct_message_closed.png';
-
-    this.chatLogo = this.directMessageUserVisible
-      ? 'assets/img/sidenav/direct_message_open.png'
-      : 'assets/img/sidenav/direct_message_closed.png';
+    if (!this.arrowMessage) {
+      this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left.png' : 'assets/img/sidenav/arrow_left.png';
+    } else {
+      this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down.png' : 'assets/img/sidenav/arrow_down.png';
+    }
+    this.chatLogo = this.channelsVisible ? 'assets/img/sidenav/account.png' : 'assets/img/sidenav/account.png';
   }
 
   // onClickChannels() {
@@ -177,15 +173,15 @@ export class MenuSidenavComponent implements OnInit {
   //     : 'assets/img/sidenav/arrow_left_blue.png';
   // }
 
-  onClickDirectMessage() {
-    this.chatArrow = this.directMessageUserVisible
-      ? 'assets/img/sidenav/arrow_down.png'
-      : 'assets/img/sidenav/arrow_left.png';
+  // onClickDirectMessage() {
+  //   this.chatArrow = this.directMessageUserVisible
+  //     ? 'assets/img/sidenav/arrow_down.png'
+  //     : 'assets/img/sidenav/arrow_left.png';
 
-    this.chatLogo = this.directMessageUserVisible
-      ? 'assets/img/sidenav/account_blue.png'
-      : 'assets/img/sidenav/account.png';
-  }
+  //   this.chatLogo = this.directMessageUserVisible
+  //     ? 'assets/img/sidenav/account_blue.png'
+  //     : 'assets/img/sidenav/account.png';
+  // }
 
   addChannel() {
     this.dialog.open(DialogAddChannelComponent);
