@@ -11,6 +11,23 @@
     // padding-left: 32px;
     // padding-right: 32px;
     margin-top: 16px;
+
+    .code-learning {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+
+      span {
+        font-family: "Nunito";
+        font-size: 20px;
+        font-weight: bold;
+        padding-left: 10px;
+
+        &:hover {
+          color: #535af1;
+        }
+      }
+    }
   }
 
   .channelAndMessage {
@@ -199,6 +216,29 @@
   line-height: normal;
 }
 
+.side-menu-head {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  img {
+    padding-right: 10px;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+  }
+
+  span {
+    font-family: "Nunito";
+    font-size: 20px;
+  }
+
+  &:hover {
+    color: #535af1;
+    cursor: pointer;
+  }
+}
+
 ::-webkit-scrollbar {
   // width: 12px;
   width: 0;
@@ -222,8 +262,16 @@
     padding-left: 22px !important;
     padding-right: 22px !important;
 
-    .codeLearning {
-      width: 180px !important;
+    .code-learning {
+      margin-left: 0 !important;
+
+      img {
+        width: 60px;
+      }
+
+      span {
+        font-size: 16px !important;
+      }
     }
 
     .pointer-plus {
@@ -301,8 +349,12 @@
   .sidenavHeaderContainer {
     padding-left: 0 !important;
 
-    .codeLearning {
-      width: 130px !important;
+    .code-learning img {
+      width: 50px !important;
+    }
+
+    .pointer-pen {
+      width: 35px !important;
     }
   }
 }

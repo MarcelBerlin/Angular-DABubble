@@ -49,14 +49,18 @@ export class MenuSidenavComponent implements OnInit {
   tagState = 'visible';
 
   newMessagePath: string = 'assets/img/sidenav/newMessage.png';
-  channelsPath: string = 'assets/img/sidenav/channel_open.png';
+  channelArrow: string = 'assets/img/sidenav/arrow_down.png';
+  channelLogo: string = 'assets/img/sidenav/circles.png';
+  chatArrow: string = 'assets/img/sidenav/arrow_down.png';
+  chatLogo: string = 'assets/img/sidenav/account.png';
   addPathChannel: string = 'assets/img/sidenav/add.png';
   addPathMessage: string = 'assets/img/sidenav/add.png';
   addNewChannel: string = 'assets/img/sidenav/add_Channel.png';
   firstTagPath: string = 'assets/img/sidenav/tag.png';
   secondTagPath: string = 'assets/img/sidenav/tag.png';
   thirdTagPath: string = 'assets/img/sidenav/tag.png';
-  directMessagePath: string = 'assets/img/sidenav/direct_message_closed.png';
+  arrowState: boolean = true;
+
 
   channelsVisible: boolean = true;
   hover: boolean = false;
@@ -74,7 +78,7 @@ export class MenuSidenavComponent implements OnInit {
     public messageService: MessageService,
     private userToMessageService: UserToMessageService,
     private channelMessageService: ChannelMessagesService
-    
+
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
@@ -92,9 +96,9 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
-    //   console.log(this.tags); // bitte lassen. Basti
-    // console.log(this.getUserData.userData); // bitte lassen. Basti
-    
+      //   console.log(this.tags); // bitte lassen. Basti
+      // console.log(this.getUserData.userData); // bitte lassen. Basti
+
     });
   }
 
@@ -104,58 +108,83 @@ export class MenuSidenavComponent implements OnInit {
 
   toggleChannels() {
     this.channelsVisible = !this.channelsVisible;
-    this.channelsPath = this.channelsVisible
-      ? 'assets/img/sidenav/channel_open.png'
-      : 'assets/img/sidenav/channel_closed.png';
-    this.hover ? (this.channelsPath += '_hover') : '';
+    this.channelArrow = this.channelsVisible
+      ? 'assets/img/sidenav/arrow_down.png'
+      : 'assets/img/sidenav/arrow_left.png';
+    // this.hover ? (this.channelArrow += '_hover') : '';
+    console.log(this.channelsVisible);
+    this.arrowState = !this.arrowState;
   }
+
 
   hoverChannels() {
     this.hover = true;
-    this.channelsPath = this.channelsVisible
-      ? 'assets/img/sidenav/channel_open_hover.png'
-      : 'assets/img/sidenav/channel_closed_hover.png';
+    if (!this.arrowState) {
+      this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left_blue.png' : 'assets/img/sidenav/arrow_left_blue.png'
+    } else {
+      this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down_blue.png' : 'assets/img/sidenav/arrow_down_blue.png'
+    }
+    this.channelLogo = this.channelsVisible ? 'assets/img/sidenav/circles_blue.png' : 'assets/img/sidenav/circles_blue.png'
   }
 
   unhoverChannels() {
     this.hover = false;
-    this.channelsPath = this.channelsVisible
-      ? 'assets/img/sidenav/channel_open.png'
-      : 'assets/img/sidenav/channel_closed.png';
+    if (!this.arrowState) {
+      this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left.png' : 'assets/img/sidenav/arrow_left.png';
+    } else {
+      this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down.png' : 'assets/img/sidenav/arrow_down.png';
+    }
+    this.channelLogo = this.channelsVisible ? 'assets/img/sidenav/circles.png' : 'assets/img/sidenav/circles.png';
   }
 
   toggleDirectMessage() {
     this.directMessageUserVisible = !this.directMessageUserVisible;
-    this.directMessagePath = this.directMessageUserVisible
+    this.chatArrow = this.directMessageUserVisible
       ? 'assets/img/sidenav/direct_message_open.png'
       : 'assets/img/sidenav/direct_message_closed.png';
-    this.hover ? (this.directMessagePath += '_hover') : '';
+
+    this.chatLogo = this.directMessageUserVisible
+      ? 'assets/img/sidenav/direct_message_open.png'
+      : 'assets/img/sidenav/direct_message_closed.png';
+    this.hover ? (this.chatLogo += '_hover') : '';
   }
 
   hoverDirectMessage() {
     this.hover = true;
-    this.directMessagePath = this.directMessageUserVisible
+    this.chatArrow = this.directMessageUserVisible
+      ? 'assets/img/sidenav/direct_message_open.png'
+      : 'assets/img/sidenav/direct_message_closed_hover.png';
+
+    this.chatLogo = this.directMessageUserVisible
       ? 'assets/img/sidenav/direct_message_open.png'
       : 'assets/img/sidenav/direct_message_closed_hover.png';
   }
 
   unhoverDirectMessage() {
     this.hover = false;
-    this.directMessagePath = this.directMessageUserVisible
+    this.chatArrow = this.directMessageUserVisible
+      ? 'assets/img/sidenav/direct_message_open.png'
+      : 'assets/img/sidenav/direct_message_closed.png';
+
+    this.chatLogo = this.directMessageUserVisible
       ? 'assets/img/sidenav/direct_message_open.png'
       : 'assets/img/sidenav/direct_message_closed.png';
   }
 
-  onClickChannels() {
-    this.channelsPath = this.channelsVisible
-      ? 'assets/img/sidenav/channel_open_click.png'
-      : 'assets/img/sidenav/channel_closed_click.png';
-  }
+  // onClickChannels() {
+  //   this.channelArrow = this.channelsVisible
+  //     ? 'assets/img/sidenav/arrow_down_blue.png'
+  //     : 'assets/img/sidenav/arrow_left_blue.png';
+  // }
 
   onClickDirectMessage() {
-    this.directMessagePath = this.directMessageUserVisible
-      ? 'assets/img/sidenav/direct_message_open_click.png'
-      : 'assets/img/sidenav/direct_message_closed_click.png';
+    this.chatArrow = this.directMessageUserVisible
+      ? 'assets/img/sidenav/arrow_down.png'
+      : 'assets/img/sidenav/arrow_left.png';
+
+    this.chatLogo = this.directMessageUserVisible
+      ? 'assets/img/sidenav/account_blue.png'
+      : 'assets/img/sidenav/account.png';
   }
 
   addChannel() {
@@ -189,14 +218,14 @@ export class MenuSidenavComponent implements OnInit {
   async openChannel(arrayId: number) {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
-    this.getService.channelIndex = arrayId;      
+    this.getService.channelIndex = arrayId;
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
-    const channelId = selectedChannel.id;   
-    this.channelMessageService.selectedChannelId = channelId;       
+    const channelId = selectedChannel.id;
+    this.channelMessageService.selectedChannelId = channelId;
     await this.messageService.onChannelClick(channelId);
-  } 
-  
+  }
+
 
   openNewMessage() {
     this.varService.setVar('mainChatHead', 2);
@@ -215,7 +244,7 @@ export class MenuSidenavComponent implements OnInit {
     this.dcshService.chatSlideOut();
   }
 
- 
+
   /**
    * Retrieves direct chat data for the user at the specified index in the user data array.
    * If a direct chat is active, it sets the chat ID, updates the new message amount index, 
@@ -235,7 +264,7 @@ export class MenuSidenavComponent implements OnInit {
     }
   }
 
-  
+
   /**
    * Checks user authorization to display a channel.
    * @param {number} index - The index of the channel in the Service Tags Data list.

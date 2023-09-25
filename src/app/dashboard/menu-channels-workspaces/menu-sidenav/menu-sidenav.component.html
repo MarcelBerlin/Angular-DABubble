@@ -1,19 +1,28 @@
 <div class="contentContainer">
   <div class="content">
     <div class="sidenavHeaderContainer">
-      <img class="codeLearning" src="assets/img/sidenav/sidenavTitle.png" />
-      <img class="pointer" [src]="newMessagePath" (click)="openNewMessage()"
+      <div class="code-learning">
+        <img src="assets/img/sidenav/codelearning_logo.png" /> 
+        <span> Code learning</span>
+      </div>
+      <img class="pointer-pen" [src]="newMessagePath" (click)="openNewMessage()"
         (mouseenter)="newMessagePath = 'assets/img/sidenav/newMessageHover.png'"
         (mouseleave)="newMessagePath = 'assets/img/sidenav/newMessage.png'" />
+
     </div>
     <div class="channelAndMessage">
       <div class="channels-container" [style]="'max-height: 50%'">
         <div class="channels-headline">
-          <img class="pointer-name" [src]="channelsPath" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
+          <div class="side-menu-head" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
+          (click)="toggleChannels()" >
+            <img [src]="channelArrow"/>
+            <img [src]="channelLogo" />
+            <span>Channels</span>
+          </div>
+          <!-- <img class="pointer-name" [src]="channelsPath" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
             (click)="toggleChannels(); onClickChannels()" />
-
           <img class="pointer-plus" [src]="addPathChannel" (mouseenter)="addPathChannel = 'assets/img/sidenav/add_Hover.png'"
-            (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'" (click)="addChannel()" />
+            (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'" (click)="addChannel()" /> -->
         </div>
 
         <div class="channels-content" [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'">
@@ -34,12 +43,17 @@
 
       <div class="direct-messages" [style.height]="channelsVisible ? '50%' : 'calc(100% - 68px)'">
         <div class="direct-messages-headline pd-left pd-right pd-top">
-          <img class="pointer-name" [src]="directMessagePath" (mouseenter)="hoverDirectMessage()"
-            (mouseleave)="unhoverDirectMessage()" (click)="toggleDirectMessage(); onClickDirectMessage()" />
+          <div class="side-menu-head">
+            <img [src]="chatArrow" />
+            <img [src]="chatLogo" />
+            <span>Direktnachrichten</span>
+          </div>
+          <!-- <img class="pointer-name" [src]="directMessagePath" (mouseenter)="hoverDirectMessage()"
+            (mouseleave)="unhoverDirectMessage()" (click)="toggleDirectMessage(); onClickDirectMessage()" /> -->
 
-          <img class="pointer-plus" [src]="addPathMessage" (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
+          <!-- <img class="pointer-plus" [src]="addPathMessage" (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
             (mouseleave)="addPathMessage = 'assets/img/sidenav/add.png'"
-            (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'" />
+            (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'" /> -->
         </div>
         <div class="direct-message-content" [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'">
           <div *ngFor="let user of getUserData.userData; let i = index">
