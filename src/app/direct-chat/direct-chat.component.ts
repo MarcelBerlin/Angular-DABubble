@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DashboardComponentsShowHideService } from '../dashboard/dashboard-components-show-hide.service';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { ChatService } from '../services/chat.service';
@@ -9,7 +8,6 @@ import { MessageService } from '../services/messages.service';
 import { VariablesService } from '../services/variables.service';
 import { DirectChatService } from './services/direct-chat.service';
 import { TimelinesService } from './services/timelines.service';
-import { UserToMessageService } from '../user-to-message/user-to-message.service';
 import { MessageInputServiceService } from '../message-input/service/message-input-service.service';
 @Component({
   selector: 'app-direct-chat',
@@ -33,7 +31,6 @@ export class DirectChatComponent {
     public dataService: DataService,
     public directChatService: DirectChatService,
     public timelinesService: TimelinesService,
-    public userToMessageService: UserToMessageService,
     public inputService: MessageInputServiceService,
   ) {
     this.getChanges();

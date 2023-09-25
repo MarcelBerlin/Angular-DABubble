@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { VariablesService } from 'src/app/services/variables.service';
-import { DashboardComponentsShowHideService } from '../../dashboard-components-show-hide.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { ChatService } from 'src/app/services/chat.service';
@@ -10,7 +9,6 @@ import { EmojiPickerBossiService } from 'src/app/emoji-picker-bossi/services/emo
 import { AddUserToMessageService } from 'src/app/services/add-user-to-message.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NewMessageAmountService } from 'src/app/direct-chat/services/new-message-amount.service';
-import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 import { FileUploadService } from 'src/app/file-upload/services/file-upload.service';
 import { UploadService } from 'src/app/file-upload/services/upload.service';
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
@@ -39,7 +37,6 @@ export class MainChatMessagefieldComponent {
     public addUserToMessageService: AddUserToMessageService,
     public dialog: MatDialog,
     private newMessageAmountService: NewMessageAmountService,
-    private userToMessageService: UserToMessageService,
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
     private messageInputService:  MessageInputServiceService
@@ -77,14 +74,11 @@ export class MainChatMessagefieldComponent {
     }
     // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
-      // this.directChatService.saveMessage();
       this.messageInputService.resetVariables();
       this.messageInputService.setMyVariable(true) ;
       this.newMessageAmountService.addPartnerDirectChatMessageAmount();
     }
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser() ){
-      // this.userToMessageService.send();
-      // neu sende Funktion für neues input Field
       this.messageInputService.resetVariables();
       this.messageInputService.setMyVariable(true) ;
     }

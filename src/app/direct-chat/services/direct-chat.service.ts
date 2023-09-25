@@ -4,10 +4,10 @@ import { DirectChatIndex } from '../models/direct-chat-index.class';
 import { ChatDataSet } from '../models/chat-data-set.class';
 import { DataService } from '../../services/data.service';
 import { ActualChat } from '../models/actual-chat.class';
-import { Firestore, collectionData, collection, setDoc, doc, updateDoc, deleteDoc, addDoc, getDoc } from '@angular/fire/firestore';
+import { Firestore, collection, doc, updateDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { TimelinesService } from './timelines.service';
 import { ChannelTimeStamp } from 'src/app/dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
-// import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,6 @@ export class DirectChatService {
     private dataService: DataService,
     private firestore: Firestore,
     private timelineService: TimelinesService,
-    // private userToMessageService: UserToMessageService,
   ) { }
 
 

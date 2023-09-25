@@ -18,7 +18,6 @@ import { DashboardComponentsShowHideService } from '../../dashboard-components-s
 import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { NewMessageAmountService } from 'src/app/direct-chat/services/new-message-amount.service';
-import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
 
 
@@ -78,7 +77,6 @@ export class MenuSidenavComponent implements OnInit {
     public directChatService: DirectChatService,
     public newMessageAmountService: NewMessageAmountService,
     public messageService: MessageService,
-    private userToMessageService: UserToMessageService,
     private channelMessageService: ChannelMessagesService
 
   ) {
@@ -216,7 +214,6 @@ export class MenuSidenavComponent implements OnInit {
       : this.sendMessageToSpecificUser(arrayId);
     this.varService.previousScrollTop = 0; // important for the autoscroll functionality
     this.getDirectChatData(arrayId);
-    this.userToMessageService.setPlaceholderText(this.getUserData.userData[arrayId].name);
   }
 
   currentUser() {
