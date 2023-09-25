@@ -88,6 +88,7 @@ export class MessageInputServiceService {
     this.userId = 'unset';
   }
 
+
   /**
    * Opens a URL in a new browser tab or window.
    *
@@ -100,14 +101,24 @@ export class MessageInputServiceService {
   }
 
 
-  fileIsPDF(filename): boolean{
-    let isFilname:boolean = false;
-    const filenameLength = filename.length;
-    if(filename[filenameLength -1] == 'f' && filename[filenameLength -2] == 'd'){
-        if(filename[filenameLength -3] == 'p' && filename[filenameLength -4] == '.'){ 
-            isFilname = true;
-      }
-    }
-    return isFilname;
+/**
+ * Checks if a filename has a PDF file extension.
+ *
+ * @param {string} filename - The name of the file to be checked.
+ * @returns {boolean} `true` if the file has a PDF extension, otherwise `false`.
+ */
+fileIsPDF(filename: string): boolean {
+  let isPDFFile = false;
+  const filenameLength = filename.length;
+  if (
+      filename[filenameLength - 1] === 'f' &&
+      filename[filenameLength - 2] === 'd' &&
+      filename[filenameLength - 3] === 'p' &&
+      filename[filenameLength - 4] === '.'
+  ) {
+      isPDFFile = true;
   }
+
+  return isPDFFile;
+}
 }

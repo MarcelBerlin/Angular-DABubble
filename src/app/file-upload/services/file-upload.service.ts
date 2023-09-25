@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
+import { AngularFireDatabase} from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { FileUpload } from '../models/file-upload.model';
 import { DataService } from 'src/app/services/data.service';
-import { UserToMessageService } from 'src/app/user-to-message/user-to-message.service';
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getStorage} from "firebase/storage";
 @Injectable({
   providedIn: 'root'
 })
@@ -29,8 +26,6 @@ export class FileUploadService {
     private storage: AngularFireStorage,
     private dataService: DataService,
     private messageInputService: MessageInputServiceService,
-    private auth: AngularFireAuth,
-    private http: HttpClient
   ) { }
 
 
@@ -129,82 +124,6 @@ export class FileUploadService {
     const fileRef = this.storage.refFromURL(fileURL);
     return fileRef.delete().toPromise();
   }
-
-
-
-  async downloadFile(fileUrl, fileName) {
-    // const fileUrl = 'URL_DER_DATEI'; // Die URL der herunterzuladenden Datei
-    const user = await this.auth.currentUser;
-    if (user) {
-      const idToken = await user.getIdToken();
-      // Setzen Sie das ID-Token im Authorization-Header
-      const headers = new HttpHeaders().set('Authorization', 'Bearer ' + idToken);
-
-      this.http
-        .get(fileUrl, { responseType: 'blob', headers: headers })
-        .subscribe((blob) => {
-          const a = document.createElement('a');
-          const url = window.URL.createObjectURL(blob);
-          a.href = url;
-          a.download = fileName;
-          document.body.appendChild(a);
-          a.click();
-          window.URL.revokeObjectURL(url);
-        });
-    }
-  }
-
-
-  
-
-
-
-
-
-
-
-  // unused functions ##############################################################
-  getFiles(numberItems: number): AngularFireList<FileUpload> {
-    return this.db.list(this.basePath, ref =>
-      ref.limitToLast(numberItems));
-  }
-
-  deleteFile2(fileUpload: FileUpload): void {
-    this.deleteFileDatabase(fileUpload.key)
-      .then(() => {
-        this.deleteFileStorage(fileUpload.name);
-      })
-      .catch(error => console.log(error));
-  }
-
-  private deleteFileDatabase(key: string): Promise<void> {
-    return this.db.list(this.basePath).remove(key);
-  }
-
-  private deleteFileStorage(name: string): void {
-    const storageRef = this.storage.ref(this.basePath);
-    storageRef.child(name).delete();
-  }
-
-  async downloadFile2(downloadUrl: string, fileName: string): Promise<void> {
-    try {
-      // Authentifiziere den Benutzer, falls erforderlich
-      const user = await this.auth.currentUser;
-
-      if (user) {
-        console.log(user);
-      } else {
-        console.error('Fehler beim Herunterladen der Datei: HTTP-Statuscode');
-      }
-    } catch (error) {
-      console.error('Fehler beim Herunterladen der Datei:', error);
-    }
-
-  }
-
-
-
-
 
 }
 

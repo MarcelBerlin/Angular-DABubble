@@ -3,7 +3,6 @@
     <div class="timeLineHead">{{timelinesService.timeline[i]}}</div>
   </div>
 
-
   <!-- Left Site chat partner -->
   <div *ngIf="message.name != this.dataService.loggedInUserData.name" class="messagesMainChatLeft"
     (mouseenter)="hoveredMessagesMainChat = true" (mouseleave)="hoveredMessagesMainChat = false" [ngStyle]="{
@@ -16,66 +15,53 @@
         <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
         <span class="time">{{ message.date }} {{ message.time }} Uhr</span>
       </div>
-
-
       <div class="messageBox" [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'">
-        <!-- hier muss das neue Output Format rein -->
         <!-- testarea new message Data format -->
 
-        <div class="outputBox"
-          *ngIf="message.name != this.dataService.loggedInUserData.name">
+        <div class="outputBox" *ngIf="message.name != this.dataService.loggedInUserData.name">
           <div class="output" *ngFor="let entry of message.message; let index = index">
             <span *ngIf="entry.tagType == 'text'">
               {{entry.content}}
             </span>
-
             <span *ngIf="entry.tagType == 'SPAN'">
               {{entry.content}}
             </span>
-
-            <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'EmojiType'" >
+            <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'EmojiType'">
               {{entry.content}}
-              
             </span>
 
-            <span 
-            *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'NameType'" 
-            class={{entry.attributes[3].value}}
-            (mouseenter)="showInfoOutput(index, i)"
-            (mouseleave)="hideInfoOutput()"
-            >
+            <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'NameType'"
+              class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"
+              (mouseleave)="hideInfoOutput()">
               {{entry.content}}
-              <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'NameType' && showInfoBox == createInfoId(index, i)">
+              <span class="infoBox"
+                *ngIf="entry.linkInfo[0].nameType == 'NameType' && showInfoBox == createInfoId(index, i)">
                 <span>{{ entry.linkInfo[0].name }}</span>
                 <span>{{ entry.linkInfo[0].emailContent }}</span>
               </span>
             </span>
 
-            <span 
-            *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'FileType'" 
-            class={{entry.attributes[3].value}}
-            (mouseenter)="showInfoOutput(index, i)"
-            (mouseleave)="hideInfoOutput()">
+            <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'FileType'"
+              class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"
+              (mouseleave)="hideInfoOutput()">
               {{entry.content}}
-              <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == createInfoId(index, i)">
+              <span class="infoBox"
+                *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == createInfoId(index, i)">
                 <div style="display: flex; justify-content: space-evenly; width: 100%;">
                   <div class="element" title="Datei in neuen Tab öffnen">
-                    <mat-icon (click)="inputService.openInNewTab(entry.linkInfo[0].linkTaget)">open_in_browser</mat-icon>
+                    <mat-icon
+                      (click)="inputService.openInNewTab(entry.linkInfo[0].linkTaget)">open_in_browser</mat-icon>
                   </div>
                 </div>
-
-                <img src={{entry.linkInfo[0].linkTaget}}  alt="" *ngIf="!inputService.fileIsPDF(entry.content)">
+                <img src={{entry.linkInfo[0].linkTaget}} alt="" *ngIf="!inputService.fileIsPDF(entry.content)">
                 <img src="../../assets/img/PDF.png" alt="" *ngIf="inputService.fileIsPDF(entry.content)">
               </span>
             </span>
 
-
           </div>
         </div>
-
         <!-- testarea new message Data format  end-->
         <!-- <span class="message">{{message.message}}</span> -->
-        
       </div>
       <div class="labelAnswersAndTime">
         <div class="time">Letzte Antwort 14:56</div>
@@ -95,67 +81,53 @@
         <span class="name" (click)="profileViewUsers()">{{message.name}}</span>
         <span class="time">{{message.date}} {{message.time}} Uhr</span>
       </div>
-
       <div class="messageBox" [style.background-color]="hoveredMessagesMainChat ? 'white' : '#eceefe'">
-
-        <!-- <span class="message"
-          *ngIf="directChatService.directChat.firstMember != directChatService.directChat.secondMember">{{message.message}}
-        </span> -->
-
         <!-- testarea new message Data format -->
-
-        <div class="outputBox"
-        *ngIf="message.name == this.dataService.loggedInUserData.name">
+        <div class="outputBox" *ngIf="message.name == this.dataService.loggedInUserData.name">
           <div class="output" *ngFor="let entry of message.message; let index = index">
             <span *ngIf="entry.tagType == 'text'">
               {{entry.content}}
             </span>
-
             <span *ngIf="entry.tagType == 'SPAN'">
               {{entry.content}}
             </span>
-
-            <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'EmojiType'" >
+            <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'EmojiType'">
               {{entry.content}}
-              
             </span>
 
-            <span 
-            *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'NameType'" 
-            class={{entry.attributes[3].value}}
-            (mouseenter)="showInfoOutput(index, i)"
-            (mouseleave)="hideInfoOutput()"
-            >
+            <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'NameType'"
+              class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"
+              (mouseleave)="hideInfoOutput()">
               {{entry.content}}
-              <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'NameType' && showInfoBox == createInfoId(index, i)">
+              <span class="infoBox"
+                *ngIf="entry.linkInfo[0].nameType == 'NameType' && showInfoBox == createInfoId(index, i)">
                 <span>{{ entry.linkInfo[0].name }}</span>
                 <span>{{ entry.linkInfo[0].emailContent }}</span>
               </span>
             </span>
-
-            <span 
-            *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'FileType'" 
-            class={{entry.attributes[3].value}}
-            (mouseenter)="showInfoOutput(index, i)"
-            (mouseleave)="hideInfoOutput()">
+            <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'FileType'"
+              class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"
+              (mouseleave)="hideInfoOutput()">
               {{entry.content}}
-              <span class="infoBox" *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == createInfoId(index, i)">
+              <span class="infoBox"
+                *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == createInfoId(index, i)">
                 <div style="display: flex; justify-content: space-evenly; width: 100%;">
                   <div class="element" title="Datei in neuen Tab öffnen">
-                    <mat-icon (click)="inputService.openInNewTab(entry.linkInfo[0].linkTaget)">open_in_browser</mat-icon>
+                    <mat-icon
+                      (click)="inputService.openInNewTab(entry.linkInfo[0].linkTaget)">open_in_browser</mat-icon>
                   </div>
                 </div>
-
-                <img src={{entry.linkInfo[0].linkTaget}}  alt="" *ngIf="!inputService.fileIsPDF(entry.content)">
+                <img src={{entry.linkInfo[0].linkTaget}} alt="" *ngIf="!inputService.fileIsPDF(entry.content)">
                 <img src="../../assets/img/PDF.png" alt="" *ngIf="inputService.fileIsPDF(entry.content)">
               </span>
             </span>
 
-
           </div>
         </div>
-
         <!-- testarea new message Data format  end-->
+        <!-- <span class="message"
+          *ngIf="directChatService.directChat.firstMember != directChatService.directChat.secondMember">{{message.message}}
+        </span> -->
 
       </div>
       <div class="labelAnswersAndTime">
@@ -164,12 +136,7 @@
     </div>
     <div class="avatar"><img src="{{ dataService.loggedInUserData.img }}" /></div>
   </div>
-
   <!-- <app-conversation-between
       *ngIf="!varService.conversationBetween"
     ></app-conversation-between> -->
-
 </div>
-
-<!-- Test von Basti -->
-<!-- <app-message-output></app-message-output> -->
