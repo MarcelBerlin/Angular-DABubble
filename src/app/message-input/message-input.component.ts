@@ -327,7 +327,7 @@ export class MessageInputComponent {
     });
   }
 
-  
+
   setCursorWithClick(id:string): void {
     const el = document.getElementById(id);
     const range = document.createRange();
@@ -350,6 +350,7 @@ export class MessageInputComponent {
     this.directChatService.saveMessage2(this.saveHTMLTagsAndText());
     this.inputService.contentArray = [];
     document.getElementById('inputDiv').innerHTML = '';
+    setTimeout(()=>{ this.restorePlaceholder();}, 500);
   }
 
 
