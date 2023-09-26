@@ -62,6 +62,7 @@ export class MessageInputComponent {
       } 
       if (this.inputService.chatChange) {
         this.removePlaceholder();
+        document.getElementById('inputDiv').innerText = '';
         setTimeout(()=>{ this.restorePlaceholder();}, 500);
         this.inputService.chatChange = false;
       }
