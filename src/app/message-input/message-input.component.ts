@@ -11,7 +11,7 @@ import { DirectChatService } from '../direct-chat/services/direct-chat.service';
   styleUrls: ['./message-input.component.scss']
 })
 export class MessageInputComponent {
-  content: SafeHtml = '';
+  content: SafeHtml = ''; // ggf. aus html löschen
   inputText: any = HTMLBaseElement;
   inputLength: number = 0;
   timeoutArray: any[] = [];
@@ -47,16 +47,24 @@ export class MessageInputComponent {
      * Performs various actions based on the state of inputService properties.
      * If nameType is 'EmojiType' or filename is not 'unset', it adds HTML tags.
      * If nameType is 'unset' and setId is -1, it saves HTML tags and text.
+     * If 
      *
      * @returns {void}
      */
-    startApplicableButtonAction():void {
+    async startApplicableButtonAction():Promise<void> {
       if (this.inputService.nameType == 'EmojiType') this.addHTMLTags();
       if (this.inputService.filename != 'unset') this.addHTMLTags();
-      if (this.inputService.nameType == 'unset' && this.inputService.setId == -1){
-        // this.saveHTMLTagsAndText();
+      if (
+        this.inputService.nameType == 'unset' 
+        && this.inputService.setId == -1
+        && !this.inputService.chatChange){
         this.saveMessage();
       } 
+      if (this.inputService.chatChange) {
+        this.removePlaceholder();
+        setTimeout(()=>{ this.restorePlaceholder();}, 500);
+        this.inputService.chatChange = false;
+      }
     }
 
 
@@ -79,21 +87,6 @@ export class MessageInputComponent {
       this.addHTMLTags();
       this.varService.sign = !this.varService.sign;
     }
-
-
-  /**
-   * Retrieves the HTML content of an element with the ID 'inputDiv' and calculates its length.
-   *
-   * @returns {void}
-   */
-  // getContent(): void {
-  //   this.inputText = document.getElementById('inputDiv')?.innerHTML;
-  //   this.inputLength = this.inputText.length;
-  //   for (let i = 0; i < this.inputText.length; i++) {
-  //     const element = this.inputText[i];
-  //   }
-  // }
-  // (keyup)="getContent()" for editableDiv HTML element
 
 
   /**
@@ -120,17 +113,6 @@ export class MessageInputComponent {
       clearTimeout(element);
     }
   }
-
-
-  /**
-   * Opens a URL in a new browser tab or window.
-   *
-   * @param {string} href - The URL to open in a new tab.
-   * @returns {void}
-   */
-  // openInNewTab(href: string){
-  //   window.open(href, '_blank');
-  // }
 
 
   /**
@@ -252,7 +234,6 @@ export class MessageInputComponent {
       }
     }
     this.addTagInfoLinkInfo();
-    // console.log(this.inputService.contentArray);
     return this.inputService.contentArray;
   }
 
@@ -346,11 +327,9 @@ export class MessageInputComponent {
     });
   }
 
-
-
+  
   setCursorWithClick(id:string): void {
     const el = document.getElementById(id);
-    // const el = this.inputP.nativeElement;
     const range = document.createRange();
     const sel = window.getSelection();
     range.setStart(el.firstChild, 1);
@@ -380,5 +359,42 @@ export class MessageInputComponent {
     this.fileUploadService.deleteFile(filepath);
     this.inputService.inputLinks[i].linkTaget = 'unset';
     this.inputService.inputLinks[i].filename = 'unset';
+  }
+
+  // Placeholder
+  ngAfterViewInit(){
+    this.restorePlaceholder();
+  }
+
+
+  removePlaceholder():void {
+    if (document.querySelector('.placeholder')) {
+    const editableDiv = this.editableDiv.nativeElement;
+    const placeholderElement = editableDiv.querySelector('.placeholder');
+    this.renderer.removeChild(editableDiv, placeholderElement);
+    }
+  }
+
+
+  restorePlaceholder() {
+    if(!document.querySelector('.placeholder')) {
+      const text = this.renderer.createText(this.inputService.placeholderText);
+      const newPlaceholder = this.renderer.createElement('div');
+      this.renderer.addClass(newPlaceholder, 'placeholder');
+      this.renderer.setAttribute(newPlaceholder, `id`, 'placholder');
+      this.renderer.appendChild(newPlaceholder, text);
+      this.renderer.setAttribute(newPlaceholder, 'contenteditable', 'true');
+      this.renderer.addClass(newPlaceholder, 'placeholder');
+      this.renderer.appendChild(this.editableDiv.nativeElement, newPlaceholder);
+    }
+  }
+
+
+  onLeave(){
+    let textLenght = document.getElementById('inputDiv').textContent.trim().length;
+    if (textLenght == 0){
+      document.getElementById('inputDiv').innerText = '';
+      this.restorePlaceholder();
+    }
   }
 }

@@ -19,6 +19,7 @@ import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.serv
 import { MessageService } from 'src/app/services/messages.service';
 import { NewMessageAmountService } from 'src/app/direct-chat/services/new-message-amount.service';
 import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
+import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
 
 
 interface Tag {
@@ -77,7 +78,8 @@ export class MenuSidenavComponent implements OnInit {
     public directChatService: DirectChatService,
     public newMessageAmountService: NewMessageAmountService,
     public messageService: MessageService,
-    private channelMessageService: ChannelMessagesService
+    private channelMessageService: ChannelMessagesService,
+    private messageInputService: MessageInputServiceService,
 
   ) {
     this.tags = this.getService.tags;
@@ -263,9 +265,14 @@ export class MenuSidenavComponent implements OnInit {
    */
   getDirectChatData(arrayId: number): void {
     if (this.directChatService.directChatActive) {
-      let clickedUserId: string = this.getUserData.userData[arrayId].id;
+      this.messageInputService.chatChange = true;
+      const clickedUserId: string = this.getUserData.userData[arrayId].id;
+      const clickedUserName: string = this.getUserData.userData[arrayId].name;
+      this.messageInputService.placeholderUserName = clickedUserName; 
+      this.messageInputService.placeholderText = 'Nachricht an ' + clickedUserName;
       this.directChatService.getChatId(clickedUserId);
       this.newMessageAmountService.actualPartnerUserDataIndex = arrayId;
+      this.messageInputService.setMyVariable(true);
       setTimeout(() => {
         this.newMessageAmountService.setOwnMessageAmountToZero();
       }, 1000);

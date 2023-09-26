@@ -1,6 +1,7 @@
 <div class="box">
   <!-- Input -->
-  <div #editableDiv contenteditable="true" class="inputDiv" id="inputDiv"  [innerHTML]="content">
+  <div #editableDiv contenteditable="true" class="inputDiv" id="inputDiv"  [innerHTML]="content"
+  (click)="removePlaceholder()" (blur)="onLeave()">
 
   </div>
   <!-- Input end-->

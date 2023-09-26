@@ -19,6 +19,10 @@ export class MessageInputServiceService {
   contentArray: any[] = [];
   showInputInfo: boolean = false;
   shownId: number = 0;
+  placeholderUserName: string = '';
+  placeholderText: string = 'Nachicht an';
+  chatChange: boolean = false;
+  
 
 
   constructor() {}
