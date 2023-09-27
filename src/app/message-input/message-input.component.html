@@ -6,7 +6,8 @@
   id="inputDiv"  
   [innerHTML]="content"
   (click)="removePlaceholder()" 
-  (blur)="onLeave()">
+  (blur)="onLeave()"
+  (keyup)="inputService.enableSendButton()">
   </div>
 
   <div class="infoWindow" *ngIf="inputService.showInputInfo">

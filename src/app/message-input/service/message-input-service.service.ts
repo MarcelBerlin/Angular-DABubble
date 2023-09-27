@@ -23,6 +23,9 @@ export class MessageInputServiceService {
   placeholderText: string = 'Nachicht an';
   chatChange: boolean = false;
 
+  sendButtonEnabled: boolean = false;
+  placeholerView: boolean = false;
+
 
   constructor() { }
 
@@ -260,5 +263,15 @@ export class MessageInputServiceService {
         index.linkInfo[0] = this.inputLinks[index.attributes[2].value];
       }
     });
+  }
+
+
+  enableSendButton(): void {
+    let textLenght = document.getElementById('inputDiv').textContent.trim().length;
+    if (textLenght == 0){
+      this.sendButtonEnabled = false;
+    } else  if (textLenght >= 1){
+      this.sendButtonEnabled = true;
+    }
   }
 }

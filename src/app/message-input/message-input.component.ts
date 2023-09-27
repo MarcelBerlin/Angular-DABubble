@@ -44,6 +44,7 @@ export class MessageInputComponent {
       const editableDiv = this.editableDiv.nativeElement;
       const placeholderElement = editableDiv.querySelector('.placeholder');
       this.renderer.removeChild(editableDiv, placeholderElement);
+      this.inputService.placeholerView = false;
     }
   }
 
@@ -63,6 +64,7 @@ export class MessageInputComponent {
       this.renderer.setAttribute(newPlaceholder, 'contenteditable', 'true');
       this.renderer.addClass(newPlaceholder, 'placeholder');
       this.renderer.appendChild(this.editableDiv.nativeElement, newPlaceholder);
+      this.inputService.placeholerView = false;
     }
   }
 
@@ -80,6 +82,8 @@ export class MessageInputComponent {
       this.restorePlaceholder();
     }
   }
+
+  
 
 
   /**

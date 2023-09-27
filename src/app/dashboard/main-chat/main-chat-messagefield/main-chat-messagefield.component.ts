@@ -74,13 +74,19 @@ export class MainChatMessagefieldComponent {
     }
     // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
-      this.messageInputService.resetVariables();
-      this.messageInputService.setMyVariable(true) ;
-      this.newMessageAmountService.addPartnerDirectChatMessageAmount();
+      if(this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
+        this.messageInputService.resetVariables();
+        this.messageInputService.setMyVariable(true) ;
+        this.newMessageAmountService.addPartnerDirectChatMessageAmount();
+        this.messageInputService.sendButtonEnabled = false;
+      }
     }
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser() ){
+      if(this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
       this.messageInputService.resetVariables();
       this.messageInputService.setMyVariable(true) ;
+      this.messageInputService.sendButtonEnabled = false;
+      }
     }
   }
 
