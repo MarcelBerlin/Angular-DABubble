@@ -29,6 +29,20 @@ export class MessageInputComponent {
   ) { }
 
 
+  /**
+   * Angular lifecycle hook that is called after the component has been initialized.
+   * Subscribes to the myVariable$ observable from inputService, and when a new value is emitted,
+   * it triggers the startApplicableButtonAction function if the new value is truthy.
+   *
+   * @returns {void}
+   */
+  ngOnInit(): void {
+    this.inputService.myVariable$.subscribe((newValue) => {
+      if (newValue) this.startApplicableButtonAction();
+    });
+  }
+
+
   ngAfterViewInit() {
     this.restorePlaceholder();
   }
@@ -81,22 +95,6 @@ export class MessageInputComponent {
       document.getElementById('inputDiv').innerText = '';
       this.restorePlaceholder();
     }
-  }
-
-  
-
-
-  /**
-   * Angular lifecycle hook that is called after the component has been initialized.
-   * Subscribes to the myVariable$ observable from inputService, and when a new value is emitted,
-   * it triggers the startApplicableButtonAction function if the new value is truthy.
-   *
-   * @returns {void}
-   */
-  ngOnInit(): void {
-    this.inputService.myVariable$.subscribe((newValue) => {
-      if (newValue) this.startApplicableButtonAction();
-    });
   }
 
 
