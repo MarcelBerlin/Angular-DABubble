@@ -38,13 +38,11 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     public answerService: SecondaryChatAnswerService,
     
   ) { 
-    this.answerService.getThreadAnswer();
-    console.log(channelMessages, ' Channelmessages');
-    console.log(answerService, ' answerService');
-  
+    this.answerService.getThreadAnswer(); 
+    console.log(this.answerService.groupedMessages);
   }
 
-  ngOnInit() {
+  ngOnInit() {   
     
   }
 

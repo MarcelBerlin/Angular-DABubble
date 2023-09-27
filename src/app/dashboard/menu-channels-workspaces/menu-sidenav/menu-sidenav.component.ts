@@ -207,7 +207,7 @@ export class MenuSidenavComponent implements OnInit {
     this.getService.tags = this.getService.tags.filter((t) => t !== tag);
 
     // Löschen des Tags aus der Firestore-Datenbank
-    // this.getService.deleteTagFromFirestore(tag);
+    // this.getService.deleteFromFirebase(tag);
   }
 
   messageToUser(arrayId: number) {

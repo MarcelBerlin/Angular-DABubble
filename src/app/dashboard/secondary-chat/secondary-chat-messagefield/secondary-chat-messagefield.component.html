@@ -1,9 +1,9 @@
 <div class="thread-content" *ngIf="getSelectedMessageStatus()">
   <div *ngFor="let dayKey of channelMessages.getDistinctDaysInCurrentChannel()">
     <div *ngFor="let message of channelMessages.groupedMessages[dayKey]; let i = index">
-    
+
       <!-- hier bin ich noch dran. Nachrichten werden nicht korrekt übergeben nach der "groupedMessage" einbindung - MARCEL -->
-      
+
       <div
         *ngIf="channelMessages.selectedMessageIndex === i && answerService.answerData.channelId == channelMessages.messageData.channelId">
         <div class="secondary-chat-container" id="secondaryChatautoscrollContainer" #secondaryChatautoscrollContainer
@@ -63,8 +63,8 @@
           </div>
 
 
-
-          <div *ngFor="let answer of answerService.groupedAnswers[dayKey]">
+          
+          <div *ngFor="let answer of answerService.groupedMessages[dayKey]">
             <div *ngIf="answer.messageId === message.messageId">
               <div *ngIf="answer.userName == this.dataService.loggedInUserData.name">
                 <div class="full-message-right">
@@ -108,13 +108,7 @@
         </div>
 
       </div>
+
     </div>
   </div>
 </div>
-
-
-
-
-
-
-

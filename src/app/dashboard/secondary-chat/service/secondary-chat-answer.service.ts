@@ -20,14 +20,14 @@ import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main
   providedIn: 'root',
 })
 export class SecondaryChatAnswerService {
- 
+
   index: number = 0;
   answers$: any = [];
   answerData: any = [];
   newAnswer: Answers = new Answers();
-  groupedAnswers: { [key: string]: any[] } = {};
+  groupedMessages: { [key: string]: any[] } = {};
   answerText: string = '';
-  messageId: string | null = null;  
+  messageId: string | null = null;
 
   constructor(
     private firestore: Firestore,
@@ -38,39 +38,47 @@ export class SecondaryChatAnswerService {
     private directChatService: DirectChatService,
     public channelMessages: ChannelMessagesService
   ) {
+  }
 
-   }
+  async checkIfInputIsFilled() {
+    if (this.answerText.length > 0) {
+      await this.sendAnswer();
+    } else {
+      alert('Inputfeld darf nicht leer sein!');
+      return;
+    }
+  }
 
   async sendAnswer() {    
     this.UserAndAnswerDetails();
-    this.addTimeStampToAnswer();    
+    this.addTimeStampToAnswer();
     this.saveAnswerWithAnswerId();
-    this.answerData.push(this.newAnswer);    
-    this.answerText = '';    
+    this.answerData.push(this.newAnswer);
+    this.answerText = '';
     const answerDate = new Date(this.newAnswer.dateTimeNumber);
     const dayKey = answerDate.toDateString();
-    if (!this.groupedAnswers[dayKey]) {
-      this.groupedAnswers[dayKey] = [];
+    if (!this.groupedMessages[dayKey]) {
+      this.groupedMessages[dayKey] = [];
     }
-    this.groupedAnswers[dayKey].push(this.newAnswer);
-    console.log(this.groupedAnswers[dayKey]);    
+    this.groupedMessages[dayKey].push(this.newAnswer);
+    
   }
 
   UserAndAnswerDetails() {
     this.newAnswer.channelId =
-    this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
+      this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
     this.varService.selectedChannelId =
-    this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id;
+      this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id;
     this.newAnswer.userId = this.dataService.loggedInUserData.userId;
     this.newAnswer.userName = this.dataService.loggedInUserData.name;
     this.newAnswer.userImg = this.dataService.loggedInUserData.img;
-    this.newAnswer.content = this.answerText;  
+    this.newAnswer.content = this.answerText;
     
   }
 
   addTimeStampToAnswer() {
     const timeStampData: ChannelTimeStamp =
-    this.directChatService.getActualTimeStampForChannels();
+      this.directChatService.getActualTimeStampForChannels();
     this.newAnswer.dateTimeNumber = timeStampData.dateTimeNumber;
     this.newAnswer.dateString = timeStampData.dateString;
     this.newAnswer.clockString = timeStampData.clockString;
@@ -78,7 +86,10 @@ export class SecondaryChatAnswerService {
 
   async saveAnswerWithAnswerId(): Promise<void> {
     const coll = collection(this.firestore, 'threadAnswer'); // definiert die Collection, worauf man zugreifen möchte
-    this.newAnswer.messageId = this.channelMessages.messageData[this.channelMessages.selectedMessageIndex]?.messageId;
+    this.newAnswer.messageId =
+      this.channelMessages.messageData[
+        this.channelMessages.selectedMessageIndex
+      ]?.messageId;
     try {
       let docId = await addDoc(coll, this.newAnswer.toJSON()); // generiert für das Dokument eine eigene ID in Firestore
       this.newAnswer.answerId = docId.id; // die DokumentID wird auf die Variable messageID gesetzt.
@@ -95,33 +106,32 @@ export class SecondaryChatAnswerService {
       updateDoc(qData, newData);
     } catch (error) {
       console.log('update doc failed!!');
-    }    
+    }
   }
 
 
-  async getThreadAnswer() {
+  async getThreadAnswer() {    
     const coll = collection(this.firestore, 'threadAnswer');
     this.answers$ = collectionData(coll, { idField: 'id' });
     await this.answers$.subscribe((answer: any) => {
-      this.answerData = 
-      answer.sort(
+      this.answerData = answer.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
-      );      
-      this.updateGroupedAnswers();
-      console.log(this.groupedAnswers);
+      );
+      this.updateGroupedAnswers(); 
+
     });
   }
 
   updateGroupedAnswers() {
-    this.groupedAnswers = {}; // Leere die bestehende Struktur
+    this.groupedMessages = {}; // Leere die bestehende Struktur
     for (const answer of this.answerData) {
       const answerDate = new Date(answer.dateTimeNumber);
       const dayKey = answerDate.toDateString();
 
-      if (!this.groupedAnswers[dayKey]) {
-        this.groupedAnswers[dayKey] = [];
+      if (!this.groupedMessages[dayKey]) {
+        this.groupedMessages[dayKey] = [];
       }
-      this.groupedAnswers[dayKey].push(answer);
+      this.groupedMessages[dayKey].push(answer);
     }
   }
 }
