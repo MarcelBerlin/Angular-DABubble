@@ -66,7 +66,7 @@ export class MenuSidenavComponent implements OnInit {
   channelsVisible: boolean = true;
   hover: boolean = false;
   directMessageUserVisible: boolean = true;
-  innerWidth: number;
+  innerWidth: number = window.innerWidth;
 
   constructor(
     public dialog: MatDialog,
@@ -95,7 +95,6 @@ export class MenuSidenavComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
-    // console.log(this.innerWidth);
   }
 
   allTags() {

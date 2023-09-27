@@ -44,6 +44,7 @@ export class MessageInputComponent {
       const editableDiv = this.editableDiv.nativeElement;
       const placeholderElement = editableDiv.querySelector('.placeholder');
       this.renderer.removeChild(editableDiv, placeholderElement);
+      this.inputService.placeholerView = false;
     }
   }
 
@@ -63,6 +64,7 @@ export class MessageInputComponent {
       this.renderer.setAttribute(newPlaceholder, 'contenteditable', 'true');
       this.renderer.addClass(newPlaceholder, 'placeholder');
       this.renderer.appendChild(this.editableDiv.nativeElement, newPlaceholder);
+      this.inputService.placeholerView = false;
     }
   }
 
@@ -80,6 +82,8 @@ export class MessageInputComponent {
       this.restorePlaceholder();
     }
   }
+
+  
 
 
   /**
@@ -334,7 +338,7 @@ export class MessageInputComponent {
    * @returns {void}
    */
   saveMessage(): void {
-    this.directChatService.saveMessage2(this.saveHTMLTagsAndText());
+    this.directChatService.saveMessage(this.saveHTMLTagsAndText());
     this.inputService.contentArray = [];
     document.getElementById('inputDiv').innerHTML = '';
     setTimeout(() => { this.restorePlaceholder(); }, 500);
