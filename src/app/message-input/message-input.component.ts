@@ -37,9 +37,12 @@ export class MessageInputComponent {
    * @returns {void}
    */
   ngOnInit(): void {
-    this.inputService.myVariable$.subscribe((newValue) => {
-      if (newValue) this.startApplicableButtonAction();
-    });
+    setTimeout(() => {
+      this.inputService.myVariable$.subscribe((newValue) => {
+        if (newValue) this.startApplicableButtonAction();
+      });
+    }, 500);
+    
   }
 
 
