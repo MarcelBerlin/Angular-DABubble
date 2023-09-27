@@ -42,7 +42,6 @@ export class MessageInputComponent {
         if (newValue) this.startApplicableButtonAction();
       });
     }, 500);
-    
   }
 
 
