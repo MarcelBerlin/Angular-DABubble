@@ -12,7 +12,6 @@
     margin: 16px 5% 0px 5%;
     user-select: none;
     white-space: pre-wrap;
-    /* Umbruch von langen Zeilen aktivieren */
     flex-wrap: wrap;
     font-family: "Nunito", "NotoColorEmojiLimited";
     font-weight: 400;
@@ -41,35 +40,15 @@
       height: 24px;
       text-decoration: none;
     }
-  }
 
-
-}
-
-
-
-
-.userLink {
-  color: blue;
-}
-
-.Test {
-  color: blue;
-
-  &:hover {
-    cursor: pointer;
+    .placeholder{
+      font-family: "Nunito", "NotoColorEmojiLimited";
+      font-weight: 400;
+      font-size: 18px;
+      color: #999; 
+    }
   }
 }
-
-
-
-
-
-p {
-  margin-block-start: 0px;
-  margin-block-end: 0px;
-}
-
 
 .infoWindow {
   display: flex;
@@ -87,8 +66,37 @@ p {
   border: 1px solid lightgrey;
   box-shadow: 5px 5px 15px -2px #000000;
   z-index: 10;
-}
 
+  .btnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    cursor: pointer;
+  
+    img {
+      fill: red;
+    }
+  
+    &:hover {
+      background-color: #eceefe;
+    }
+  }
+
+  img{
+    max-height: 200px; 
+    max-width: 200px; 
+    width: auto; 
+    height: auto;
+  }
+
+  p {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+  }
+}
 
 .userBox {
   position: absolute;
@@ -118,32 +126,4 @@ p {
       border-radius: 30px;
     }
   }
-}
-
-
-.element {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 30px;
-  cursor: pointer;
-
-  img {
-    fill: red;
-  }
-
-  &:hover {
-    background-color: #eceefe;
-  }
-}
-
-
-
-.placeholder{
-  font-family: "Nunito", "NotoColorEmojiLimited";
-  font-weight: 400;
-  font-size: 18px;
-  color: #999; 
 }

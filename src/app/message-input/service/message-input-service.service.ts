@@ -24,7 +24,6 @@ export class MessageInputServiceService {
   chatChange: boolean = false;
 
 
-
   constructor() { }
 
 
@@ -99,7 +98,7 @@ export class MessageInputServiceService {
    * @param {string} href - The URL to open in a new tab.
    * @returns {void}
    */
-  openInNewTab(href: string) {
+  openInNewTab(href: string): void {
     console.log('openInNewTab', href);
     window.open(href, '_blank');
   }
@@ -119,10 +118,7 @@ export class MessageInputServiceService {
       filename[filenameLength - 2] === 'd' &&
       filename[filenameLength - 3] === 'p' &&
       filename[filenameLength - 4] === '.'
-    ) {
-      isPDFFile = true;
-    }
-
+    ) isPDFFile = true;
     return isPDFFile;
   }
 
@@ -265,5 +261,4 @@ export class MessageInputServiceService {
       }
     });
   }
-
 }

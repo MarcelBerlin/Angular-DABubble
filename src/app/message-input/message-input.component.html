@@ -1,41 +1,40 @@
 <div class="box">
-  <!-- Input -->
-  <div #editableDiv contenteditable="true" class="inputDiv" id="inputDiv"  [innerHTML]="content"
-  (click)="removePlaceholder()" (blur)="onLeave()">
-
+  <div 
+  #editableDiv 
+  contenteditable="true" 
+  class="inputDiv" 
+  id="inputDiv"  
+  [innerHTML]="content"
+  (click)="removePlaceholder()" 
+  (blur)="onLeave()">
   </div>
-  <!-- Input end-->
 
-  <!-- InfoWindow -->
   <div class="infoWindow" *ngIf="inputService.showInputInfo">
     <p *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'NameType'">
       {{inputService.inputLinks[inputService.shownId].name}}
     </p>
+
     <p *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'NameType'">
       {{inputService.inputLinks[inputService.shownId].emailContent}}
     </p>
 
-    <img *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'" src={{inputService.inputLinks[inputService.shownId].linkTaget}} alt="" style="max-height: 200px; max-width: 200px; width: auto; height: auto;">
+    <img *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'" 
+    src={{inputService.inputLinks[inputService.shownId].linkTaget}} >
 
     <p  *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'">
       {{inputService.inputLinks[inputService.shownId].filename}}
     </p>
-    <div *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'" class="element">
-      <!-- <mat-icon (click)="deleteFile(inputService.shownId)">delete</mat-icon> -->
 
+    <div *ngIf="inputService.inputLinks[inputService.shownId].nameType == 'FileType'" class="btnContainer">
+      <!-- <mat-icon (click)="deleteFile(inputService.shownId)">delete</mat-icon> -->
       <mat-icon (click)="inputService.openInNewTab(inputService.inputLinks[inputService.shownId].linkTaget)">open_in_browser</mat-icon>
     </div>
-    
-
   </div>
-  <!-- InfoWindow ende-->
 
-  <!-- User Box -->
   <div class="userBox" *ngIf="varService.sign">
     <div *ngFor="let name of dataService.userData; let i = index">
       <span class="user" (click)="selectedUser(i)">{{ name.name }}</span>
     </div>
   </div>
-
 
 </div>
