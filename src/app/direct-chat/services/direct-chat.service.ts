@@ -7,6 +7,7 @@ import { ActualChat } from '../models/actual-chat.class';
 import { Firestore, collection, doc, updateDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { TimelinesService } from './timelines.service';
 import { ChannelTimeStamp } from 'src/app/dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
+import { DirectChatServiceService } from './direct-chat-service.service';
 
 
 @Injectable({
@@ -27,6 +28,7 @@ export class DirectChatService {
     private dataService: DataService,
     private firestore: Firestore,
     private timelineService: TimelinesService,
+    private directChatS: DirectChatServiceService
   ) { }
 
 
@@ -38,10 +40,11 @@ export class DirectChatService {
   getActualTimeStamp(): Object {
     let today: Date = new Date();
     this.timeStamp.dateTimeNumber = today.getTime();
-    this.timeStamp.dateString = this.createDateString(today);
-    this.timeStamp.clockString = this.createClockString(today);
+    this.timeStamp.dateString = this.directChatS.createDateString(today);
+    this.timeStamp.clockString = this.directChatS.createClockString(today);
     return this.timeStamp.toJSON();
   }
+
 
   /**
    * Returns the current timestamp, date string, and clock string FOR THE CHANNELS !!!!.
@@ -51,46 +54,13 @@ export class DirectChatService {
   getActualTimeStampForChannels(): ChannelTimeStamp {
     let today: Date = new Date();
     this.timeStamp.dateTimeNumber = today.getTime();
-    this.timeStamp.dateString = this.createDateString(today);
-    this.timeStamp.clockString = this.createClockString(today);
+    this.timeStamp.dateString = this.directChatS.createDateString(today);
+    this.timeStamp.clockString = this.directChatS.createClockString(today);
     return new ChannelTimeStamp({
       dateTimeNumber: today.getTime(),
-      dateString: this.createDateString(today),
-      clockString: this.createClockString(today)
+      dateString: this.directChatS.createDateString(today),
+      clockString: this.directChatS.createClockString(today)
     });
-  }
-
-  
-  /**
-   * Creates a formatted date string in the format 'day.month.year'.
-   * 
-   * @param {Date} today - The Date object from which to extract the day, month, and year.
-   * @returns {string} A formatted date string in the format 'day.month.year'.
-   */
-  createDateString(today: Date): string {
-    let day: string = today.getDate().toString();
-    let month: string = (today.getMonth() + 1).toString();
-    let year: string = today.getFullYear().toString();
-    if (day.length == 1) day = '0' + day;
-    if (month.length == 1) month = '0' + month;
-    let dateString: string = day + '.' + month + '.' + year;
-    return dateString;
-  }
-
-
-  /**
-   * Creates a formated clock string in the format 'hour:minutes'.
-   * 
-   * @param {Date} today - The Date object from which to extract the hour and minutes.
-   * @returns {string} A formatted clock string in the format 'hour:minutes'.
-   */
-  createClockString(today: Date): string {
-    let hour: string = today.getHours().toString();
-    let minutes: string = today.getMinutes().toString();
-    if (hour.length == 1) hour = '0' + hour;
-    if (minutes.length == 1) minutes = '0' + minutes;
-    let clockString: string = hour + ':' + minutes;
-    return clockString;
   }
 
 
@@ -116,25 +86,13 @@ export class DirectChatService {
    */
   searchUserDirectChat(clickedUserId: string): void {
     const directChatArray: [] = this.dataService.loggedInUserData.directChats;
-    if (this.userHasDirectChats(directChatArray)) {
+    if (this.directChatS.userHasDirectChats(directChatArray)) {
       directChatArray.forEach((userDirectChatIndex: DirectChatIndex) => {
         if (userDirectChatIndex.partnerId == clickedUserId) this.directChatIndex = userDirectChatIndex;
-        // Hier änderung des Timestamps um den Message Amount zurückzusetzen ? Bossi
       });
     }
     if (this.directChatFound()) this.loadChatDataSet(this.directChatIndex.directChatId);
     else if (this.directChatNotFound()) this.createNewChatDataSet(clickedUserId);
-  }
-
-
-  /**
-   * Checks if a user has any direct chats by evaluating the length of the directChatArray.
-   * 
-   * @param {Array} directChatArray - The array containing direct chat data for the user.
-   * @returns {boolean} - Returns true if the directChatArray is not empty, otherwise returns false.
-   */
-  userHasDirectChats(directChatArray: []): boolean {
-    return directChatArray.length != 0;
   }
 
 
@@ -176,7 +134,7 @@ export class DirectChatService {
    * @returns {Promise<void>} - A Promise that resolves when the chat dataset is successfully loaded 
    * or rejects if there is an error.
    */
-  async loadChatDataSets(id: string) {
+  async loadChatDataSets(id: string): Promise<void> {
     const coll = collection(this.firestore, 'directChats');
     const qData = doc(coll, id);
     getDoc(qData).then((chat) => {
@@ -319,7 +277,6 @@ export class DirectChatService {
         const qData = doc(this.firestore, 'users', user.userId);
         const newData = { directChats: user.directChats, };
         updateDoc(qData, newData).then(() => {
-
         }).catch((error) => {
           console.log('partner chatIndex set failed');
         })
@@ -334,13 +291,13 @@ export class DirectChatService {
    * 
    * @returns {void}
    */
-  saveMessage(): void {
+  saveMessage(chatData): void {
     this.directChatActive = false;
     let today: Date = new Date();
-    this.actualChat.message = this.directMessage.trim();
+    this.actualChat.message = chatData;
     this.actualChat.name = this.dataService.loggedInUserData.name;
-    this.actualChat.date = this.createDateString(today);
-    this.actualChat.time = this.createClockString(today);
+    this.actualChat.date = this.directChatS.createDateString(today);
+    this.actualChat.time = this.directChatS.createClockString(today);
     this.actualChat.dateTimeNumber = today.getTime();
     this.directChat.chat.push(this.actualChat.toJSON());
     this.directMessage = '';
@@ -356,7 +313,7 @@ export class DirectChatService {
    * 
    * @returns {void}
    */
-  updateFirestoreDirectChatIndex() {
+  updateFirestoreDirectChatIndex():void {
     this.directChat.lastTimeStamp = this.getActualTimeStamp();
     // this.directChat.timeStamp = this.getActualTimeStamp();
     this.dataService.loggedInUserData.directChats.forEach(chat => {
@@ -435,27 +392,8 @@ export class DirectChatService {
     }).catch((error) => {
       console.log('update other user failed');
     })
-  }
-
-  // Testarea für neues Message Format
-  saveMessage2(chatData): void {
-    this.directChatActive = false;
-    let today: Date = new Date();
-
-    this.actualChat.message = chatData;
-
-    this.actualChat.name = this.dataService.loggedInUserData.name;
-    this.actualChat.date = this.createDateString(today);
-    this.actualChat.time = this.createClockString(today);
-    this.actualChat.dateTimeNumber = today.getTime();
-    this.directChat.chat.push(this.actualChat.toJSON());
-    this.directMessage = '';
-    this.updateFirestoreChat();
-    this.updateFirestoreDirectChatIndex();
-  }
-
-  
-}//end
+  } 
+}
 
 
 

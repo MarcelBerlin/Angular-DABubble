@@ -334,7 +334,7 @@ export class MessageInputComponent {
    * @returns {void}
    */
   saveMessage(): void {
-    this.directChatService.saveMessage2(this.saveHTMLTagsAndText());
+    this.directChatService.saveMessage(this.saveHTMLTagsAndText());
     this.inputService.contentArray = [];
     document.getElementById('inputDiv').innerHTML = '';
     setTimeout(() => { this.restorePlaceholder(); }, 500);
