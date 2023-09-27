@@ -103,7 +103,7 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
-      //   console.log(this.tags); // bitte lassen. Basti
+      // console.log(this.tags); // bitte lassen. Basti
       // console.log(this.getUserData.userData); // bitte lassen. Basti
 
     });
@@ -230,8 +230,7 @@ export class MenuSidenavComponent implements OnInit {
     this.getService.channelIndex = arrayId;
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
-    const channelId = selectedChannel.id;
-    this.channelMessageService.selectedChannelId = channelId;
+    const channelId = selectedChannel.id;    
     await this.messageService.onChannelClick(channelId);
   }
 
