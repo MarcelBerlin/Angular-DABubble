@@ -107,13 +107,13 @@ selectedImprintOrDataProtection: string = 'logIn';
    * @param {string} password - The password of the user.
    * @returns {void} 
    */
-  signup(email: string, password: string, name: string): void {
+  signup(email: string, password: string, name: string, img: string): void {
     this.afs.createUserWithEmailAndPassword(email, password)
       .then((userCredentials: any) => {
         this.router.navigate(['login']);
         this.openDialogSuccessfullySignup();
         // this.dataService.saveSignUpUserEmail(email);
-        this.dataService.saveSignUpUserData(email, name);
+        this.dataService.saveSignUpUserData(email, name, img);
       }).catch((error) => {
         if (error.code === 'auth/email-already-in-use') this.openDialogEmailAlreadyExist();
         else if (error.code === 'auth/network-request-failed') this.openDialogNoServerConnection();

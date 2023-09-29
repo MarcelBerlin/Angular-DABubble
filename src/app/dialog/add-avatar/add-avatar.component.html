@@ -1,0 +1,30 @@
+<div class="avatarAddBox">
+  <div class="backIcon" (click)="back()">
+    <mat-icon>arrow_back</mat-icon>
+  </div>
+  <div class="headline"><span>Wähle deinen</span><span>Avatar</span></div>
+  <div class="content">
+    <img class="pickAvatar" src="{{ addAS.pickedAvatar }}" />
+    <div class="avatarContainer">
+      <div class="avatarContainerHead">{{addAS.name}}</div>
+      <div class="avatarContainerDescr">Choose your avatar....</div>
+      <div class="avatarList">
+        <div
+          class="itemContainer"
+          *ngFor="let avatar of avatars; let i = index"
+          (click)="avatarSelected(i)"
+          [style.background-color]="selectedAvatar === i ? '#797EF3' : ''"
+        >
+          <img class="avatar" src="{{ avatar.img }}" />
+        </div>
+      </div>
+    </div>
+    <div class="uploadContainer">
+      <div class="orYouCan">Or you can</div>
+      <div class="button">Upload foto</div>
+    </div>
+  </div>
+  <div class="buttonContainer">
+    <button class="primaryButton" (click)="signup()">Weiter</button>
+  </div>
+</div>

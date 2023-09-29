@@ -178,6 +178,11 @@
     display: none;
 }
 
+::-webkit-scrollbar{
+    width: 0;
+  }
+  
+
 @media screen and (max-width: 769px) {
     .card {
         height: calc(100% - 300px) !important;

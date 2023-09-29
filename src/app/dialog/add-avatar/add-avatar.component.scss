@@ -1,0 +1,135 @@
+.avatarAddBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 398px;
+  height: 585px;
+  gap: 24px;
+  padding: 26px 21px;
+  background-color: white;
+  .backIcon {
+    position: absolute;
+    top: 26px;
+    left: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    mat-icon {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      transition: 100ms ease-out;
+      &:hover {
+        color: #7e83f5;
+      }
+    }
+  }
+  .headline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    height: 76px;
+    font-family: "Nunito";
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 24px;
+    color: #444df2;
+  }
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 356px;
+    height: 360px;
+    gap: 24px;
+    .pickAvatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+    }
+    .avatarContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 356px;
+      height: 151px;
+      .avatarContainerHead {
+        text-align: center;
+        width: 356px;
+        height: 44px;
+        font-family: "Nunito";
+        font-size: 32px;
+        font-weight: 700;
+      }
+      .avatarContainerDescr {
+        width: 356px;
+        height: 27px;
+        font-family: "Nunito";
+        font-size: 20px;
+        font-weight: 400;
+      }
+      .avatarList {
+        display: flex;
+        gap: 4px;
+        width: 356px;
+        height: 56px;
+        .itemContainer {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 56px;
+          height: 56px;
+          padding: 4px;
+          border-radius: 10px;
+          &:hover {
+            background-color: #797ef3;
+          }
+          .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  .uploadContainer {
+    display: flex;
+    align-items: center;
+    width: 356px;
+    height: 41px;
+    .orYouCan {
+      font-family: "Nunito";
+      font-size: 20px;
+      font-weight: 400;
+      margin-right: 24px;
+    }
+    .button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 132px;
+      height: 41px;
+      border: 1px solid #797ef3;
+      border-radius: 25px;
+      font-family: "Nunito";
+      font-size: 18px;
+      font-weight: 700;
+      color: #444df2;
+      cursor: pointer;
+    }
+  }
+  .buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 356px;
+  }
+}
+

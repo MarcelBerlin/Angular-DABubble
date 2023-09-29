@@ -68,6 +68,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { EmojiPickerBossiComponent } from './emoji-picker-bossi/emoji-picker-bossi.component';
 import { ImprintDataProtectionComponent } from './auth-features/login/imprint-data-protection/imprint-data-protection.component';
 import { MessageInputComponent } from './message-input/message-input.component';
+import { AddAvatarComponent } from './dialog/add-avatar/add-avatar.component';
+
 
 @NgModule({
   declarations: [
@@ -108,6 +110,7 @@ import { MessageInputComponent } from './message-input/message-input.component';
     EmojiPickerBossiComponent,
     ImprintDataProtectionComponent,
     MessageInputComponent,
+    AddAvatarComponent,
   ],
   imports: [
     BrowserModule,
@@ -131,7 +134,7 @@ import { MessageInputComponent } from './message-input/message-input.component';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

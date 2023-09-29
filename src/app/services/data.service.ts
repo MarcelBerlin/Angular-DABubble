@@ -95,12 +95,12 @@ export class DataService {
    * @param {string} email - The email address of the signed up user.
    * @returns {void}
    */
-  saveSignUpUserData(email: string, name: string): void {
+  saveSignUpUserData(email: string, name: string, img:string): void {
     this.signUpUser.email = email;
     this.signUpUser.name = name;
+    this.signUpUser.img = img
     const coll = collection(this.firestore, 'users');
     setDoc(doc(coll), this.signUpUser.toJSON()).then(() => {
-
     }).catch((error) => {
       console.log('save user failed');
     });

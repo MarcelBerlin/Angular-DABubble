@@ -44,7 +44,6 @@ export class LoginComponent {
     this.dataService.forgotPasswordMenu = false;
   }
 
-
   /**
    * Logs in the user using the Google authentication provider.
    *
