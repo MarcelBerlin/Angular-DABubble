@@ -10,6 +10,7 @@ import {
   getDocs,
   where,
   query,
+  orderBy,
 } from '@angular/fire/firestore';
 import { Messages } from '../models/messages.interface';
 import { Observable } from 'rxjs';
@@ -24,6 +25,7 @@ import { ChannelTimeStamp } from '../dashboard/main-chat/main-chat-chatfield/mai
   providedIn: 'root',
 })
 export class MessageService {
+  index: number;
   messages$: any = [];
   messageData: any = [];
   channelMessages: any = [];
@@ -34,6 +36,8 @@ export class MessageService {
   selectedChannel: string = '';
   emojis: any = [];
   tags: any; // ADDED BY FELIX
+  dateString: string = '';
+  
 
   constructor(
     private firestore: Firestore,
@@ -48,15 +52,10 @@ export class MessageService {
   async addMessage() {
     this.UserAndMessageDetails();
     this.addTimeStampToMessage();
-    this.saveMessageWithIdToDoc();
+    this.saveMessageWithIdToDoc();      
     this.messageData.push(this.newMessage);
     this.messageText = '';
-    const messageDate = new Date(this.newMessage.dateTimeNumber);
-    const dayKey = messageDate.toDateString();
-    if (!this.groupedMessages[dayKey]) {
-      this.groupedMessages[dayKey] = [];
-    }
-    this.groupedMessages[dayKey].push(this.newMessage);
+  
   }
 
   UserAndMessageDetails() {
@@ -75,8 +74,11 @@ export class MessageService {
       this.directChatService.getActualTimeStampForChannels();
     this.newMessage.dateTimeNumber = timeStampData.dateTimeNumber;
     this.newMessage.dateString = timeStampData.dateString;
-    this.newMessage.clockString = timeStampData.clockString;
+    this.dateString = this.newMessage.dateString;
+    this.newMessage.clockString = timeStampData.clockString;  
   }
+
+  
 
   async saveMessageWithIdToDoc() {
     const coll = collection(this.firestore, 'newMessages'); // definiert die Collection, worauf man zugreifen möchte
@@ -105,6 +107,7 @@ export class MessageService {
     const messages = await getDocs(q);
     this.messageData = messages.docs.map((doc) => doc.data());
   }
+ 
 
   // // Initialisiere ein leeres Nachrichten-Array für den Channel
   //  const channelMessages: any[] = [];

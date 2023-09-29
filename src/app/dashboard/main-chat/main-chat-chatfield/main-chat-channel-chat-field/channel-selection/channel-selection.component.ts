@@ -52,9 +52,7 @@ export class ChannelSelectionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // setTimeout(() => {
-    //   this.checkIfChannelIsEmpty();
-    // }, 1000);
+    
   }
 
 
@@ -90,6 +88,7 @@ export class ChannelSelectionComponent implements OnInit {
   onHoverEnd() {
     this.hoveredIndex = null;
   }
+   
 
   public addEmojiRight(event) {
     this.chatEmojiRight = true;
