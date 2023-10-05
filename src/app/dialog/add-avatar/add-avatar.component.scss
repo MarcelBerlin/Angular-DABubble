@@ -115,7 +115,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 132px;
+      width: fit-content;
       height: 41px;
       border: 1px solid #797ef3;
       border-radius: 25px;
@@ -123,7 +123,7 @@
       font-size: 18px;
       font-weight: 700;
       color: #444df2;
-      cursor: pointer;
+      padding: 0 16px;
     }
   }
   .buttonContainer {
