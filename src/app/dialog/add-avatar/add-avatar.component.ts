@@ -1,7 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { AddAvatarService } from './add-avatar.service';
-
+import { UploadService } from 'src/app/file-upload/services/upload.service';
 @Component({
   selector: 'app-add-avatar',
   templateUrl: './add-avatar.component.html',
@@ -19,7 +19,11 @@ export class AddAvatarComponent {
 
   selectedAvatar: number = 6;
 
-  constructor(private dialogRef: DialogRef, public addAS: AddAvatarService) {}
+  constructor(
+    private dialogRef: DialogRef, 
+    public addAS: AddAvatarService,
+    public uploadService: UploadService,
+    ) {}
 
   back() {
     this.dialogRef.close();

@@ -88,7 +88,15 @@ export class FileUploadService {
    * @returns {void}
    */
   userUpdate(): void {
-    if (this.profileImgUpload && this.dataService.loggedInUserData.img != '/assets/img/members/avatar2.png') {
+    if (
+      this.profileImgUpload && this.dataService.loggedInUserData.img != '/assets/img/members/avatar2.png' &&
+      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar1.png' &&
+      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar2.png' &&
+      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar3.png' &&
+      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar4.png' &&
+      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar5.png' &&
+      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar6.png' &&
+      this.profileImgUpload && this.dataService.loggedInUserData.img !='../../../assets/img/members/avatar7.png') {
       this.deleteFile(this.dataService.loggedInUserData.img);
       this.profileImgUpload = false;
       this.dataService.loggedInUserData.img = this.lastUpload;

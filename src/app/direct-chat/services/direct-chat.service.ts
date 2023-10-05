@@ -126,7 +126,7 @@ export class DirectChatService {
       this.directChat = chat.data();
       this.directChatActive = true;
       this.timelineService.createTimlines(this.directChat.chat);
-      this.checkForNewChat();
+      this.checkForNewChat() ;
     }).catch((error) => {
       console.log('Failure during load of the Document');
     });
