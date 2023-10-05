@@ -8,6 +8,7 @@ import { Firestore, collection, doc, updateDoc, addDoc, getDoc } from '@angular/
 import { TimelinesService } from './timelines.service';
 import { ChannelTimeStamp } from 'src/app/dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
 import { DirectChatServiceService } from './direct-chat-service.service';
+import { VariablesService } from 'src/app/services/variables.service';
 
 
 @Injectable({
@@ -28,7 +29,8 @@ export class DirectChatService {
     private dataService: DataService,
     private firestore: Firestore,
     private timelineService: TimelinesService,
-    private directChatS: DirectChatServiceService
+    private directChatS: DirectChatServiceService,
+    public varService: VariablesService,
   ) { }
 
 
@@ -124,9 +126,20 @@ export class DirectChatService {
       this.directChat = chat.data();
       this.directChatActive = true;
       this.timelineService.createTimlines(this.directChat.chat);
+      this.checkForNewChat();
     }).catch((error) => {
       console.log('Failure during load of the Document');
     });
+  }
+
+
+  checkForNewChat(){
+    // console.log(this.directChat.chat.length);
+    if (this.directChat.chat.length == 0){
+      this.varService.conversationBetween = false;
+    }else {
+      this.varService.conversationBetween = true;
+    }
   }
 
 

@@ -138,5 +138,6 @@
   </div>
   
 </div>
-<app-conversation-between *ngIf="directChatService.directChat.chat.length == 0"></app-conversation-between>
+<!-- <app-conversation-between *ngIf="directChatService.directChat.chat.length == 0"></app-conversation-between> -->
+<app-conversation-between *ngIf="!varService.conversationBetween"></app-conversation-between>
     
