@@ -63,9 +63,9 @@
         <!-- testarea new message Data format  end-->
         <!-- <span class="message">{{message.message}}</span> -->
       </div>
-      <div class="labelAnswersAndTime">
+      <!-- <div class="labelAnswersAndTime">
         <div class="time">Letzte Antwort 14:56</div>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -130,13 +130,13 @@
         </span> -->
 
       </div>
-      <div class="labelAnswersAndTime">
+      <!-- <div class="labelAnswersAndTime">
         <div class="time">Letzte Antwort 14:56</div>
-      </div>
+      </div> -->
     </div>
     <div class="avatar"><img src="{{ dataService.loggedInUserData.img }}" /></div>
   </div>
-  <app-conversation-between
-      *ngIf="!varService.conversationBetween"
-    ></app-conversation-between>
+  
 </div>
+<app-conversation-between *ngIf="directChatService.directChat.chat.length == 0"></app-conversation-between>
+    
