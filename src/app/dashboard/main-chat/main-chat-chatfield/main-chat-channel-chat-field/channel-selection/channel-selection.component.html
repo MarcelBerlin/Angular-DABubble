@@ -23,7 +23,7 @@
   <div *ngFor="let message of channelMessages.messageData, let i = index">
     <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
 
-      <ng-container *ngIf="message.dateString === channelMessages.currentDate">
+      <ng-container *ngIf="channelMessages.isMessageForNewDay(message, i)">
         <!-- Anzeigen des Datums als Trennung -->
         <div class="timeline-container">      
           <div class="timeLine">

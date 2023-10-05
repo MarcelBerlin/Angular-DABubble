@@ -20,6 +20,8 @@ import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 import { VariablesService } from './variables.service';
 import { DashboardComponentsShowHideService } from '../dashboard/dashboard-components-show-hide.service';
 import { ChannelTimeStamp } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
+import { DirectChatServiceService } from '../direct-chat/services/direct-chat-service.service';
+import { ChannelTimestampService } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-timestamp.service';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +30,7 @@ export class MessageService {
   index: number;
   messages$: any = [];
   messageData: any = [];
-  channelMessages: any = [];
+  channelMessages: any = [];  
   newMessage: Messages = new Messages();
   groupedMessages: { [key: string]: any[] } = {};
   messageText: string = '';
@@ -37,7 +39,6 @@ export class MessageService {
   emojis: any = [];
   tags: any; // ADDED BY FELIX
   dateString: string = '';
-  
 
   constructor(
     private firestore: Firestore,
@@ -45,17 +46,18 @@ export class MessageService {
     private dialogAddService: DialogAddService,
     private directChatService: DirectChatService,
     public varService: VariablesService,
-    private dcshService: DashboardComponentsShowHideService
+    private dcshService: DashboardComponentsShowHideService,
+    private channelTimestampService: ChannelTimestampService
   ) {}
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
   async addMessage() {
     this.UserAndMessageDetails();
     this.addTimeStampToMessage();
-    this.saveMessageWithIdToDoc();      
+    this.saveMessageWithIdToDoc();
     this.messageData.push(this.newMessage);
     this.messageText = '';
-  
+    console.log(this.dateString);
   }
 
   UserAndMessageDetails() {
@@ -71,14 +73,12 @@ export class MessageService {
 
   addTimeStampToMessage() {
     const timeStampData: ChannelTimeStamp =
-      this.directChatService.getActualTimeStampForChannels();
+      this.channelTimestampService.getActualTimeStampForChannels();
     this.newMessage.dateTimeNumber = timeStampData.dateTimeNumber;
     this.newMessage.dateString = timeStampData.dateString;
     this.dateString = this.newMessage.dateString;
-    this.newMessage.clockString = timeStampData.clockString;  
+    this.newMessage.clockString = timeStampData.clockString;
   }
-
-  
 
   async saveMessageWithIdToDoc() {
     const coll = collection(this.firestore, 'newMessages'); // definiert die Collection, worauf man zugreifen möchte
@@ -107,7 +107,6 @@ export class MessageService {
     const messages = await getDocs(q);
     this.messageData = messages.docs.map((doc) => doc.data());
   }
- 
 
   // // Initialisiere ein leeres Nachrichten-Array für den Channel
   //  const channelMessages: any[] = [];
@@ -182,4 +181,6 @@ export class MessageService {
     const selectedChannel = this.tags[arrayId];
     await this.onChannelClick(selectedChannel.id);
   }
+
+  
 }

@@ -45,24 +45,7 @@ export class DirectChatService {
     return this.timeStamp.toJSON();
   }
 
-
-  /**
-   * Returns the current timestamp, date string, and clock string FOR THE CHANNELS !!!!.
-   * 
-   * @returns {Object} An object containing the current timestamp, date string, and clock string.
-   */
-  getActualTimeStampForChannels(): ChannelTimeStamp {
-    let today: Date = new Date();
-    this.timeStamp.dateTimeNumber = today.getTime();
-    this.timeStamp.dateString = this.directChatS.createDateString(today);
-    this.timeStamp.clockString = this.directChatS.createClockString(today);
-    return new ChannelTimeStamp({
-      dateTimeNumber: today.getTime(),
-      dateString: this.directChatS.createDateString(today),
-      clockString: this.directChatS.createClockString(today)
-    });
-  }
-
+ 
 
   /**
    * Retrieves the chat ID for a specific user from the dataService and initiates a search for a direct chat.
