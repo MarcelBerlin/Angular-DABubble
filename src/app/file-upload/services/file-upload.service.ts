@@ -88,15 +88,7 @@ export class FileUploadService {
    * @returns {void}
    */
   userUpdate(): void {
-    if (
-      this.profileImgUpload && this.dataService.loggedInUserData.img != '/assets/img/members/avatar2.png' &&
-      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar1.png' &&
-      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar2.png' &&
-      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar3.png' &&
-      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar4.png' &&
-      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar5.png' &&
-      this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar6.png' &&
-      this.profileImgUpload && this.dataService.loggedInUserData.img !='../../../assets/img/members/avatar7.png') {
+    if (this.noAppAvatar()) {
       this.deleteFile(this.dataService.loggedInUserData.img);
       this.profileImgUpload = false;
       this.dataService.loggedInUserData.img = this.lastUpload;
@@ -109,6 +101,23 @@ export class FileUploadService {
       this.profileImgUpload = false;
     }
     this.uploadPercentage = 0;
+  }
+
+
+  /**
+   * Checks if the user's profile image is not one of the default app avatars.
+   *
+   * @returns {boolean} True if the user's profile image is not a default app avatar, false otherwise.
+   */
+  noAppAvatar(): boolean {
+    return this.profileImgUpload && this.dataService.loggedInUserData.img != '/assets/img/members/avatar2.png' &&
+    this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar1.png' &&
+    this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar2.png' &&
+    this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar3.png' &&
+    this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar4.png' &&
+    this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar5.png' &&
+    this.profileImgUpload && this.dataService.loggedInUserData.img != '../../../assets/img/members/avatar6.png' &&
+    this.profileImgUpload && this.dataService.loggedInUserData.img !='../../../assets/img/members/avatar7.png';
   }
 
 

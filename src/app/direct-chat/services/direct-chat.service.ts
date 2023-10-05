@@ -133,8 +133,13 @@ export class DirectChatService {
   }
 
 
-  checkForNewChat(){
-    // console.log(this.directChat.chat.length);
+  /**
+   * If no message in selected direct chat available, then it set varService.conversationBetween to flase,
+   * otherwise to true.
+   * 
+   * @returns {void}
+   */
+  checkForNewChat(): void {
     if (this.directChat.chat.length == 0){
       this.varService.conversationBetween = false;
     }else {
