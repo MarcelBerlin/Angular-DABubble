@@ -37,14 +37,11 @@ export class DataService {
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
       this.userData = user;
-      setTimeout(() => {
         this.userData.sort((a, b) => { // von Basti eingefügte Sortierfunktion nach eingeloggtem User
           if (a.email === this.loggedInUserEmail) return -1;
           if (b.email === this.loggedInUserEmail) return 1;
           return a.email < b.email ? -1 : 1;
         });
-      }, 500);
-       
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
       if (this.loggedInUserData) this.updateUserDirectChatBagesAmount();
     });
