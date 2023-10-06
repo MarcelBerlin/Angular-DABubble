@@ -37,14 +37,15 @@ export class DataService {
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
       this.userData = user;
-      this.userData.sort((a, b) => {
-        // von Basti eingefügte Sortierfunktion nach eingeloggtem User
-        if (a.email === this.loggedInUserEmail) return -1;
-        if (b.email === this.loggedInUserEmail) return 1;
-        return a.email < b.email ? -1 : 1;
-      });
-      if (this.loggedInUserData === undefined && localStorage.getItem('user'))
-        this.getLoggedInUserData();
+      if (localStorage.getItem('user')){
+        this.userData.sort((a, b) => { // von Basti eingefügte Sortierfunktion nach eingeloggtem User
+          if (a.email === this.loggedInUserEmail) return -1;
+          if (b.email === this.loggedInUserEmail) return 1;
+          return a.email < b.email ? -1 : 1;
+        });
+      }
+      
+      if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
       if (this.loggedInUserData) this.updateUserDirectChatBagesAmount();
     });
   }
@@ -120,13 +121,11 @@ export class DataService {
     this.signUpUser = user;
     const coll = collection(this.firestore, 'users');
     if (this.loggedInUserData == undefined) {
-      setDoc(doc(coll), this.signUpUser.toJSON())
-        .then(() => {
-          console.log('google user created');
-        })
-        .catch((error) => {
-          console.log('save user failed', error.code);
-        });
+      setDoc(doc(coll), this.signUpUser.toJSON()).then(() => {
+        console.log('google user created');
+      }).catch((error) => {
+        console.log('google user creating failed', error.code);
+      });
     }
   }
 
