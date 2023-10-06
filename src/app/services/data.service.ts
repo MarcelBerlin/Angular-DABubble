@@ -37,7 +37,7 @@ export class DataService {
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
       this.userData = user;
-      if (localStorage.getItem('user')){
+      if (localStorage.getItem('user') !== undefined) {
         this.userData.sort((a, b) => { // von Basti eingefügte Sortierfunktion nach eingeloggtem User
           if (a.email === this.loggedInUserEmail) return -1;
           if (b.email === this.loggedInUserEmail) return 1;
