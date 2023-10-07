@@ -14,6 +14,7 @@ import { VariablesService } from 'src/app/services/variables.service';
 import { ChannelTimeStamp } from './models/channel-timestamp.class';
 import { Messages } from 'src/app/models/messages.interface';
 import { ChannelMessagesService } from './service/channel-messages.service';
+import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/service/secondary-chat-answer.service';
 
 @Component({
   selector: 'app-channel-selection',
@@ -48,7 +49,8 @@ export class ChannelSelectionComponent implements OnInit {
     public chatService: ChatService,
     public app: AppComponent,
     public timelinesService: TimelinesService,
-    public channelMessages: ChannelMessagesService
+    public channelMessages: ChannelMessagesService,
+    public answerService: SecondaryChatAnswerService
   ) {}
 
   ngOnInit(): void {

@@ -5,6 +5,7 @@ import {
   collection,
   collectionData,
   doc,
+  getDoc,
   updateDoc,
 } from '@angular/fire/firestore';
 import { TimelinesService } from 'src/app/direct-chat/services/timelines.service';
@@ -24,7 +25,7 @@ import { ChannelTimestampService } from '../../main-chat/main-chat-chatfield/mai
 export class SecondaryChatAnswerService {
  
   index: number = 0;
-  answers$: any = [];
+  answers$: any = []; 
   answerData: any = [];
   newAnswer: Answers = new Answers();
   answerText: string = '';
@@ -38,7 +39,8 @@ export class SecondaryChatAnswerService {
     public varService: VariablesService,
     private messageService: MessageService,    
     public channelMessages: ChannelMessagesService,
-    private channelTimestampService: ChannelTimestampService
+    private channelTimestampService: ChannelTimestampService,
+    
   ) {
 
    }
@@ -56,9 +58,12 @@ export class SecondaryChatAnswerService {
     this.UserAndAnswerDetails();
     this.addTimeStampToAnswer();    
     this.saveAnswerWithAnswerId();
+    this.getAnswerAmountFromFirestore();
     this.answerData.push(this.newAnswer);    
-    this.answerText = '';    
-    console.log(this.answerData); 
+    this.answerText = ''; 
+    // firebase aktualisieren für anzahl der Antworten - messageService.newMessage.amountAnswers   
+
+    // console.log(this.answerData); 
   }
 
   UserAndAnswerDetails() {
@@ -102,7 +107,33 @@ export class SecondaryChatAnswerService {
       console.log('update doc failed!!');
     }    
   }
+ 
 
+  updateAnswerAmountToMessageCollection(): void {
+    const qData = doc(this.firestore, 'newMessages', this.channelMessages.selectedMessageId);    
+    const newData = { amountAnswers: this.messageService.newMessage.amountAnswers };
+    try {
+      updateDoc(qData, newData);
+    } catch (error) {
+      console.log('update doc failed!!');
+    }
+  }
+
+  actualMessageAmount: number;
+  actualClockTime: string;
+
+  getAnswerAmountFromFirestore() {
+    const coll = collection(this.firestore, 'newMessages');
+    const qData = doc(coll, this.channelMessages.selectedMessageId); 
+    getDoc(qData).then((message) => {
+      const messagesArray: any = message.data();
+      // this.actualMessageAmount = messagesArray[0].amountAnswers;
+      // this.actualClockTime = new Date().getHours() + ':' + new Date().getMinutes;
+      // console.log(this.actualClockTime);
+      console.log(messagesArray);
+      console.log(this.channelMessages.selectedMessageId);
+    });
+  }
 
   async getThreadAnswer() {
     const coll = collection(this.firestore, 'threadAnswer');

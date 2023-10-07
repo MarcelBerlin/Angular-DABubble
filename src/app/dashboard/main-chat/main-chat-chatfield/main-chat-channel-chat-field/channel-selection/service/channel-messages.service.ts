@@ -13,6 +13,7 @@ export class ChannelMessagesService {
   messageData: any = [];
   selectedMessage = false;
   selectedMessageIndex: number | null = null;
+  selectedMessageId: string = '';
   currentDate: string = new Date().toISOString().split('T')[0]; // Aktuelles Tagesdatum im Format "YYYY-MM-DD";
  
    
@@ -63,8 +64,10 @@ export class ChannelMessagesService {
 
   openAnswer(index: number) {
     this.selectedMessageIndex = index;
+    this.selectedMessageId = this.messageData[index].messageId;
     this.selectedMessage = true;
     this.dcshService.chatSlideIn();   
+    console.log(this.selectedMessageId);
   }
 
   getSelectedMessageStatus() {

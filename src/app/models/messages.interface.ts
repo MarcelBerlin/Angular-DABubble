@@ -9,6 +9,8 @@ export class Messages {
     dateTimeNumber: number;
     dateString: string; 
     clockString: string; 
+    amountAnswers: number;
+    lastClockTime: string; 
        
    
     constructor(obj?: any) {
@@ -20,7 +22,9 @@ export class Messages {
         this.content = obj ? obj.content : '';     
         this.dateTimeNumber = obj ? obj.dateTimeNumber : 0;
         this.dateString = obj ? obj.dateString : 'unset';
-        this.clockString = obj ? obj.clockString : 'unset';   
+        this.clockString = obj ? obj.clockString : 'unset';  
+        this.amountAnswers = obj ? obj.amountAnswers : 0; 
+        this.lastClockTime = obj ? obj.lastClockTime : 'unset';
     }
 
     toJSON() {
@@ -33,7 +37,9 @@ export class Messages {
             content: this.content,    
             dateTimeNumber: this.dateTimeNumber,
             dateString: this.dateString,
-            clockString: this.clockString,       
+            clockString: this.clockString,
+            amountAnswers: this.amountAnswers,
+            lastClockTime: this.lastClockTime       
         }
     }
 }

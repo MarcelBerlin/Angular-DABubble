@@ -47,7 +47,7 @@ export class MessageService {
     private directChatService: DirectChatService,
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService,
-    private channelTimestampService: ChannelTimestampService
+    private channelTimestampService: ChannelTimestampService,   
   ) {}
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
@@ -68,7 +68,7 @@ export class MessageService {
     this.newMessage.userId = this.dataService.loggedInUserData.userId;
     this.newMessage.userName = this.dataService.loggedInUserData.name;
     this.newMessage.userImg = this.dataService.loggedInUserData.img;
-    this.newMessage.content = this.messageText;
+    this.newMessage.content = this.messageText;        
   }
 
   addTimeStampToMessage() {
@@ -77,7 +77,7 @@ export class MessageService {
     this.newMessage.dateTimeNumber = timeStampData.dateTimeNumber;
     this.newMessage.dateString = timeStampData.dateString;
     this.dateString = this.newMessage.dateString;
-    this.newMessage.clockString = timeStampData.clockString;
+    this.newMessage.clockString = timeStampData.clockString;   
   }
 
   async saveMessageWithIdToDoc() {
