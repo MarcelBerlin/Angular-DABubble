@@ -42,7 +42,7 @@ createDateString(today: Date): string {
   let year: string = today.getFullYear().toString();
   if (day.length == 1) day = '0' + day;
   if (month.length == 1) month = '0' + month;
-  let dateString: string = year + '-' + month + '-' + day;
+  let dateString: string = day + '.' + month + '.' + year;
   return dateString;
 }
 
