@@ -112,7 +112,7 @@ export class SecondaryChatAnswerService {
 
   updateAnswerAmountToMessageCollection(): void {
     const qData = doc(this.firestore, 'newMessages', this.channelMessages.selectedMessageId);    
-    const newData = { amountAnswers: this.messageService.newMessage.amountAnswers };
+    const newData = { amountAnswers: this.messagesArray[0].amountAnswers};
     try {
       updateDoc(qData, newData);
     } catch (error) {
@@ -133,6 +133,7 @@ export class SecondaryChatAnswerService {
       let date = new Date();
       this.messagesArray[0].lastClockTime = date.getHours() + ':' + date.getMinutes();
       console.log(this.messagesArray);
+      this.updateAnswerAmountToMessageCollection();
     });
   }
 
