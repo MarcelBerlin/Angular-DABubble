@@ -21,6 +21,7 @@ interface Tag {
   channelCreator: string;
   // members: any[];
   members: any['guest@guest.de'];
+  channelMessage: any[];
   
 }
 
@@ -35,6 +36,7 @@ export class DialogAddService {
   description: string = '';
   channelCreator: string = '';
   members: any = [];
+  channelMessage: any = [];
 
   constructor(private firestore: Firestore, private dataService: DataService) {
     const coll = collection(firestore, 'tags');
@@ -64,7 +66,8 @@ export class DialogAddService {
         imagePath: 'assets/img/sidenav/tag.png',
         description: this.description,
         channelCreator: this.channelCreator,
-        members: this.members,        
+        members: this.members, 
+        channelMessage: this.channelMessage       
       };
 
       // Firestore-Dokument erstellen und Tag speichern

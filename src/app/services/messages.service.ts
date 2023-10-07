@@ -55,6 +55,7 @@ export class MessageService {
     this.UserAndMessageDetails();
     this.addTimeStampToMessage();
     this.saveMessageWithIdToDoc();
+    
     this.messageData.push(this.newMessage);
     this.messageText = '';
     console.log(this.dateString);

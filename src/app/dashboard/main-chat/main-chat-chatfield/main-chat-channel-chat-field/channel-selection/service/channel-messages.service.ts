@@ -11,6 +11,7 @@ export class ChannelMessagesService {
   index: number = 0;
   messages$: any = [];
   messageData: any = [];
+  selectedMessageArray: any = [];
   selectedMessage = false;
   selectedMessageIndex: number | null = null;
   selectedMessageId: string = '';
@@ -62,7 +63,7 @@ export class ChannelMessagesService {
   // #####################
    
 
-  openAnswer(index: number) {
+  openAnswer(index: number) {    
     this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
     this.selectedMessage = true;

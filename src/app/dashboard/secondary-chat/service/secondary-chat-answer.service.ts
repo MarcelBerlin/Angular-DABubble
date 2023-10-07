@@ -59,7 +59,8 @@ export class SecondaryChatAnswerService {
     this.addTimeStampToAnswer();    
     this.saveAnswerWithAnswerId();
     this.getAnswerAmountFromFirestore();
-    this.answerData.push(this.newAnswer);    
+    this.answerData.push(this.newAnswer);
+    this.channelMessages.selectedMessageArray.push(this.newAnswer);    
     this.answerText = ''; 
     // firebase aktualisieren für anzahl der Antworten - messageService.newMessage.amountAnswers   
 
