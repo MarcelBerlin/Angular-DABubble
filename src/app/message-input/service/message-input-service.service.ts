@@ -155,7 +155,8 @@ export class MessageInputServiceService {
   sendButtonPressed(): boolean {
     return this.nameType == 'unset'
       && this.setId == -1
-      && !this.chatChange;
+      && !this.chatChange
+      && this.sendButtonEnabled;
   }
 
 

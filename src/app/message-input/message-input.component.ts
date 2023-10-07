@@ -108,7 +108,7 @@ export class MessageInputComponent {
   startApplicableButtonAction(): void {
     if (this.inputService.emojiSelected()) this.addHTMLTags();
     if (this.inputService.fileUploadSelected()) this.addHTMLTags();
-    if (this.inputService.sendButtonPressed()) this.saveMessage();
+    if (this.inputService.sendButtonPressed()) this.saveMessage(); 
     if (this.inputService.newChatSelected()) this.resetInputField();
   }
 
