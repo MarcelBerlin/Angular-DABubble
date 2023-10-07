@@ -22,14 +22,11 @@
 
   <div *ngFor="let message of channelMessages.messageData, let i = index">
     <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
-
-
+      
       <div class="timeline-container">
-
-        <div *ngIf="i !== 0">
+        <div *ngIf="i !== 0 && channelMessages.messageData[i-1].dateString != channelMessages.messageData[i].dateString">
           <div class="timeLine">
-            <span class="timeLineHead"
-              *ngIf='channelMessages.messageData[i-1].dateString != channelMessages.messageData[i].dateString'>
+            <span class="timeLineHead">
               {{ timelinesService.createTimlineText(message.dateString)}}
             </span>
           </div>
@@ -44,8 +41,6 @@
         </div>
 
       </div>
-
-
 
       <div class="full-message-left">
         <!-- Zeige Nachrichten auf der linken Seite des ausgewählten Kanals an -->
