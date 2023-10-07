@@ -171,7 +171,8 @@ export class DataService {
     this.userData.forEach((user: any) => {
       let userJson: any = localStorage.getItem('user');
       this.loggedInUserEmail = JSON.parse(userJson);
-      if (user.email == this.loggedInUserEmail) {
+      // user?.directChat hinzugefügt. gez Basti
+      if (user.email == this.loggedInUserEmail && user?.directChat) {
         for (let i = 0; i < user.directChats.length; i++) {
           this.loggedInUserData.directChats[i].newMessageAmount =
             user.directChats[i].newMessageAmount;
