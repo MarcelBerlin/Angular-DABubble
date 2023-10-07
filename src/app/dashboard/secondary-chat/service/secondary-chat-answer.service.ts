@@ -18,6 +18,7 @@ import { ChannelTimeStamp } from '../../main-chat/main-chat-chatfield/main-chat-
 import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
 import { MessageService } from 'src/app/services/messages.service';
 import { ChannelTimestampService } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-timestamp.service';
+import { Messages } from 'src/app/models/messages.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -122,17 +123,17 @@ export class SecondaryChatAnswerService {
 
   actualMessageAmount: number;
   actualClockTime: string;
+  messagesArray: any = [];
 
   getAnswerAmountFromFirestore() {
     const coll = collection(this.firestore, 'newMessages');
     const qData = doc(coll, this.channelMessages.selectedMessageId); 
     getDoc(qData).then((message) => {
-      const messagesArray: any = message.data();
-      // this.actualMessageAmount = messagesArray[0].amountAnswers;
-      // this.actualClockTime = new Date().getHours() + ':' + new Date().getMinutes;
-      // console.log(this.actualClockTime);
-      console.log(messagesArray);
-      console.log(this.channelMessages.selectedMessageId);
+      this.messagesArray.push(message.data());
+      this.messagesArray[0].amountAnswers += 1;
+      let date = new Date();
+      this.messagesArray[0].lastClockTime = date.getHours() + ':' + date.getMinutes();
+      console.log(this.messagesArray);
     });
   }
 
