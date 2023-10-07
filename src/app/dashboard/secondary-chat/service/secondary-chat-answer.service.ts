@@ -130,7 +130,8 @@ export class SecondaryChatAnswerService {
     getDoc(qData).then((message) => {
       this.messagesArray.push(message.data());
       this.messagesArray[0].amountAnswers += 1;
-      this.messagesArray[0].lastClockTime = new Date().getHours() + ':' + new Date().getMinutes;
+      let date = new Date();
+      this.messagesArray[0].lastClockTime = date.getHours() + ':' + date.getMinutes();
       console.log(this.messagesArray);
     });
   }
