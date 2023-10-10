@@ -88,7 +88,7 @@
               </div>
             </div>
           </div>
-          <div>
+          <div *ngIf="channelMessages.messageData[i].amountAnswers > 0">
             <span>{{ channelMessages.messageData[i].amountAnswers }} Antworten</span><br>
             <span>Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span><br>
           </div>
@@ -144,7 +144,7 @@
               </div>
             </div>
           </div>
-          <div>
+          <div *ngIf="channelMessages.messageData[i].amountAnswers > 0">
             <span>{{ channelMessages.messageData[i].amountAnswers }} Antworten</span><br>
             <span>Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span><br>
            
