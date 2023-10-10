@@ -89,9 +89,8 @@
             </div>
           </div>
           <div>
-            <!-- <span>1 Antwort</span> -->
-            <span>{{ message.channelId }}</span>
-            <!-- <span>{{ answerService.answerData }} </span> -->
+            <span>{{ channelMessages.messageData[i].amountAnswers }} Antworten</span><br>
+            <span>Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span><br>
           </div>
         </div>        
       </div>
@@ -146,9 +145,9 @@
             </div>
           </div>
           <div>
-            <span></span><br><br>
-            <span>{{ message.messageId }}</span><br><br>
-            <!-- <span>{{ answerService.answerData }} </span> -->
+            <span>{{ channelMessages.messageData[i].amountAnswers }} Antworten</span><br>
+            <span>Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span><br>
+           
           </div>
         </div>        
       </div>
