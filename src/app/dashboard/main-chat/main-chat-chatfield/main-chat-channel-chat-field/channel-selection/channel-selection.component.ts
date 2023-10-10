@@ -36,6 +36,7 @@ export class ChannelSelectionComponent implements OnInit {
   emoji: string = '';
   reactionArrRight: any = [];
   reactionArrLeft: any = [];
+  isThereAnAnswer: boolean = false;
 
   constructor(
     private firestore: Firestore,
@@ -50,7 +51,8 @@ export class ChannelSelectionComponent implements OnInit {
     public app: AppComponent,
     public timelinesService: TimelinesService,
     public channelMessages: ChannelMessagesService,
-    public answerService: SecondaryChatAnswerService
+    public answerService: SecondaryChatAnswerService,
+    public secondaryAnswerService: SecondaryChatAnswerService,
   ) {}
 
   ngOnInit(): void {
@@ -89,6 +91,14 @@ export class ChannelSelectionComponent implements OnInit {
 
   onHoverEnd() {
     this.hoveredIndex = null;
+  }
+
+  checkIfThereIsAnAnswer() {
+    if (this.secondaryAnswerService.messagesArray[0].amountAnswers.length > 0) {
+      this.isThereAnAnswer = true;
+    } else {
+      this.isThereAnAnswer = false;
+    }
   }
    
 

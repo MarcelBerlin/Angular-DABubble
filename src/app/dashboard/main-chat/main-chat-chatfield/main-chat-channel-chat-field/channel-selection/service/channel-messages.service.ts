@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
+import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/service/secondary-chat-answer.service';
 import { TimelinesService } from 'src/app/direct-chat/services/timelines.service';
 import { MessageService } from 'src/app/services/messages.service';
 
@@ -16,8 +17,7 @@ export class ChannelMessagesService {
   selectedMessageIndex: number | null = null;
   selectedMessageId: string = '';
   currentDate: string = new Date().toISOString().split('T')[0]; // Aktuelles Tagesdatum im Format "YYYY-MM-DD";
- 
-   
+
 
   constructor(
     private firestore: Firestore,
@@ -25,25 +25,24 @@ export class ChannelMessagesService {
     private dcshService: DashboardComponentsShowHideService,
     
   ) {
-    this.allMessages();    
+    this.allMessages();
   }
 
   async allMessages() {
     const coll = collection(this.firestore, 'newMessages');
     this.messages$ = collectionData(coll, { idField: 'id' });
-    await this.messages$.subscribe((message: any) => { 
+    await this.messages$.subscribe((message: any) => {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
-      );      
+      );
       console.log(this.messageData);
     });
-    
   }
 
-
+  
   // #################################
   // ##################### TEST FÜR TIMESTAMP VON MARCEL
-  // #################################  
+  // #################################
 
   formatDate(dateString) {
     // Splitte die Zeichenfolge an "." (Punkt) und erhalte Jahr, Monat und Tag
@@ -61,14 +60,13 @@ export class ChannelMessagesService {
   // #####################
   // ##################### TEST FÜR TIMESTAMP VON MARCEL
   // #####################
-   
 
-  openAnswer(index: number) {    
-    this.selectedMessageIndex = index;
+  openAnswer(index: number) {
+    this.selectedMessageIndex = index;    
     this.selectedMessageId = this.messageData[index].messageId;
-    this.selectedMessage = true;
-    this.dcshService.chatSlideIn();   
-    console.log(this.selectedMessageId);
+    this.selectedMessage = true;    
+    this.dcshService.chatSlideIn();
+    
   }
 
   getSelectedMessageStatus() {

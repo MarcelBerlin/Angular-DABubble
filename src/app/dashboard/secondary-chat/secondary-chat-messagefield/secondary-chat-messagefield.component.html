@@ -1,4 +1,4 @@
-<div class="thread-content" *ngIf="getSelectedMessageStatus()">
+<div class="thread-content">
   <div *ngFor="let message of channelMessages.messageData; let i = index">
     <div *ngIf="channelMessages.selectedMessageIndex === i">
       <div class="secondary-chat-container" id="secondaryChatautoscrollContainer" #secondaryChatautoscrollContainer
