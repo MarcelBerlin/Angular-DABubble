@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class VariablesService {
-  mainChatHead: number = 0;
+  mainChatHead: number = -1;
   selectedUserToMessage: number = 0;
   selectedUserDetailView: number = 0;
   selectedChannel: number = -1;

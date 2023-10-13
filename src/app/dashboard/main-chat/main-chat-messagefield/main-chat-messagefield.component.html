@@ -38,7 +38,7 @@
     [(ngModel)]="searchField"
     placeholder="Nachricht an {{ varService.selectedArrayofSearch[varService.indexOfSearch]?.[varService.propertyOfSearch] || '' }}"
   ></textarea>
-  <div class="iconsContainer" style="position: relative">
+  <div class="iconsContainer" style="position: relative" *ngIf="varService.mainChatHead != -1">
     <app-emoji-picker-bossi
       *ngIf="emojiService.emojiSelectorActive"
     ></app-emoji-picker-bossi>
