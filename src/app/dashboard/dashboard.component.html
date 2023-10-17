@@ -5,6 +5,7 @@
   <div
     class="leftContainer"
     [class.leftContainerSlideOut]="dcshService.hideNavigation"
+    *ngIf="varService.getInnerBrowserWidth() >= 801 || (varService.getInnerBrowserWidth() <= 800 && varService.mainChatHead == -1)"
   >
     <app-menu-channels-workspaces></app-menu-channels-workspaces>
   </div>
@@ -12,6 +13,7 @@
     class="mainChatContainer"
     [class.slideRight]="dcshService.secondaryChatSlideOut"
     [class.slideLeft]="dcshService.hideNavigation"
+    *ngIf="varService.getInnerBrowserWidth() >= 801 || (varService.getInnerBrowserWidth() <= 800 && varService.mainChatHead != -1)"
   >
     <app-main-chat></app-main-chat>
   </div>
@@ -23,7 +25,7 @@
   </div>
 </div>
 
-<mat-card class="hideShowNavigationBar">
+<mat-card class="hideShowNavigationBar" *ngIf="varService.getInnerBrowserWidth() > 800">
   <div
     (click)="hideShowNavigation()"
     (mouseenter)="changeImageOnHover(true)"

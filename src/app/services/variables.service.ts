@@ -50,4 +50,18 @@ export class VariablesService {
   setVar(variableValue: string, newValue: number | string | boolean) {
     this[variableValue] = newValue;
   }
+
+
+  /**
+   * Retrieves the inner width of the browser window.
+   * This function returns the inner width of the browser window by 
+   * accessing the `window.innerWidth` property.
+   *
+   * @returns {number} The inner width of the browser window in pixels.
+   */
+  getInnerBrowserWidth(): number {
+    const innerBrowserWidth = window.innerWidth;
+    console.log(innerBrowserWidth);
+    return innerBrowserWidth;
+  }
 }

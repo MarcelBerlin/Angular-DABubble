@@ -11,6 +11,7 @@ import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { VariablesService } from 'src/app/services/variables.service';
 import { MenuSidenavComponent } from '../menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { MessageService } from 'src/app/services/messages.service';
+import { DashboardComponentsShowHideService } from '../dashboard-components-show-hide.service';
 
 @Component({
   selector: 'app-header',
@@ -33,8 +34,10 @@ export class HeaderComponent {
     private auth: AuthService,
     public dataService: DataService,
     private dialogAddService: DialogAddService,
-    private varService: VariablesService,
-    public messageService: MessageService) {
+    public varService: VariablesService,
+    public messageService: MessageService,
+    private dcshService: DashboardComponentsShowHideService
+    ) {
   }
 
   @HostListener('window:resize', ['$event'])
@@ -113,5 +116,11 @@ export class HeaderComponent {
    */
   logout() {
     this.auth.signOut();
+  }
+
+
+  backToSideNav(){
+    this.varService.mainChatHead = -1;
+    this.dcshService.hideNavigation = false;
   }
 }
