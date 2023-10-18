@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Renderer2, HostListener} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +16,7 @@ export class VariablesService {
   indexOfSearch: number;
   previousScrollTop: number = 0; // for autoscroll functionality
   sign: boolean = false;
+  windowWidth: number;
   
 
   constructor() {}
@@ -61,7 +62,12 @@ export class VariablesService {
    */
   getInnerBrowserWidth(): number {
     const innerBrowserWidth = window.innerWidth;
-    console.log(innerBrowserWidth);
     return innerBrowserWidth;
+  }
+
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.windowWidth = window.innerWidth;
   }
 }
