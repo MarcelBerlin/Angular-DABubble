@@ -89,7 +89,7 @@
             </div>
           </div>
           <div *ngIf="channelMessages.messageData[i].amountAnswers > 0">
-            <span>{{ channelMessages.messageData[i].amountAnswers }} Antworten</span><br>
+            <span [class.resposivView]="varService.getInnerBrowserWidth() <= 800" (click)="channelMessages.openAnswer(i)">{{ channelMessages.messageData[i].amountAnswers }} Antworten</span><br>
             <span>Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span><br>
           </div>
         </div>        

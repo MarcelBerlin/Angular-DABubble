@@ -15,11 +15,12 @@
     [class.slideLeft]="dcshService.hideNavigation"
     *ngIf="varService.getInnerBrowserWidth() >= 801 || (varService.getInnerBrowserWidth() <= 800 && varService.mainChatHead != -1)"
   >
-    <app-main-chat></app-main-chat>
+    <app-main-chat *ngIf="varService.getInnerBrowserWidth() >= 801 || (varService.getInnerBrowserWidth() <= 800 && dcshService.secondaryChatSlideOut)"></app-main-chat>
   </div>
   <div
     class="secondaryChatContainer"
     [class.secondarySlideOut]="dcshService.secondaryChatSlideOut"
+    [style.width]="varService.getInnerBrowserWidth() <= 800 && !dcshService.secondaryChatSlideOut  ? '100%' : '25%'"
   >
     <app-secondary-chat></app-secondary-chat>
   </div>
