@@ -1,6 +1,7 @@
 <div class="contentContainer">
   <div class="content">
     <div class="sidenavHeaderContainer">
+
       <div class="code-learning">
         <img src="assets/img/sidenav/codelearning_logo.png" /> 
         <span> Code learning</span>
@@ -10,6 +11,17 @@
         (mouseleave)="newMessagePath = 'assets/img/sidenav/newMessage.png'" />
 
     </div>
+
+    <!-- <form class="header-searchbar">
+      <input type="text" placeholder="An: #channel, @user oder E-Mail Adresse" [formControl]="control"
+        [matAutocomplete]="auto" class="input-searchbar" />
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+        <mat-option *ngFor="let element of filteredArrays | async" [value]="element[property]">
+          {{ element[property] }}
+        </mat-option>
+      </mat-autocomplete>
+    </form> -->
+
     <div class="channelAndMessage">
       <div class="channels-container" [style]="'max-height: 50%'">
         <div class="channels-headline">
