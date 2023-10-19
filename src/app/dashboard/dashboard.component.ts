@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DashboardComponentsShowHideService } from './dashboard-components-show-hide.service';
-import { NewMessageAmountService } from '../direct-chat/services/new-message-amount.service';
 import { VariablesService } from '../services/variables.service';
+import { ConditionService } from '../services/condition.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,8 +13,8 @@ export class DashboardComponent {
 
   constructor(
     public dcshService: DashboardComponentsShowHideService, 
-    private newMessageAmountService: NewMessageAmountService,
-    public varService: VariablesService
+    public varService: VariablesService,
+    public conditionService: ConditionService
     ) {}
   
 

@@ -5,7 +5,7 @@
   <div
     class="leftContainer"
     [class.leftContainerSlideOut]="dcshService.hideNavigation"
-    *ngIf="varService.getInnerBrowserWidth() >= 801 || (varService.getInnerBrowserWidth() <= 800 && varService.mainChatHead == -1)"
+    *ngIf="conditionService.leftContainerShown()"
   >
     <app-menu-channels-workspaces></app-menu-channels-workspaces>
   </div>
@@ -13,21 +13,21 @@
     class="mainChatContainer"
     [class.slideRight]="dcshService.secondaryChatSlideOut"
     [class.slideLeft]="dcshService.hideNavigation"
-    *ngIf="varService.getInnerBrowserWidth() >= 801 || (varService.getInnerBrowserWidth() <= 800 && varService.mainChatHead != -1)"
+    *ngIf="conditionService.mainChatContainerShown()"
   >
-    <app-main-chat *ngIf="varService.getInnerBrowserWidth() >= 801 || (varService.getInnerBrowserWidth() <= 800 && dcshService.secondaryChatSlideOut)"></app-main-chat>
+    <app-main-chat *ngIf="conditionService.mainChatShown()"></app-main-chat>
   </div>
   <div
     class="secondaryChatContainer"
     [class.secondarySlideOut]="dcshService.secondaryChatSlideOut"
-    [style.width]="varService.getInnerBrowserWidth() <= 800 && !dcshService.secondaryChatSlideOut  ? '100%' : '25%'"
-    *ngIf="(varService.getInnerBrowserWidth() <= 800 && varService.mainChatHead != -1 )|| varService.getInnerBrowserWidth() >= 801"
+    [style.width]="conditionService.secondaryChatContainerStyleSetting()"
+    *ngIf="conditionService.secondaryChatContainerShown()"
   >
     <app-secondary-chat></app-secondary-chat>
   </div>
 </div>
 
-<mat-card class="hideShowNavigationBar" *ngIf="varService.getInnerBrowserWidth() > 800">
+<mat-card class="hideShowNavigationBar" *ngIf="conditionService.navigationBarShown()">
   <div
     (click)="hideShowNavigation()"
     (mouseenter)="changeImageOnHover(true)"

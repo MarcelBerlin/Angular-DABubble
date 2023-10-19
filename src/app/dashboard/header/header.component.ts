@@ -12,6 +12,8 @@ import { VariablesService } from 'src/app/services/variables.service';
 import { MenuSidenavComponent } from '../menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { MessageService } from 'src/app/services/messages.service';
 import { DashboardComponentsShowHideService } from '../dashboard-components-show-hide.service';
+import { ConditionService } from 'src/app/services/condition.service';
+
 
 @Component({
   selector: 'app-header',
@@ -36,10 +38,12 @@ export class HeaderComponent {
     private dialogAddService: DialogAddService,
     public varService: VariablesService,
     public messageService: MessageService,
-    private dcshService: DashboardComponentsShowHideService
+    private dcshService: DashboardComponentsShowHideService,
+    public conditionService: ConditionService
     ) {
   }
 
+  
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;

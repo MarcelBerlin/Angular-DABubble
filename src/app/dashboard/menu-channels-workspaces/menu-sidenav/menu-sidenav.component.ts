@@ -232,7 +232,7 @@ export class MenuSidenavComponent implements OnInit {
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
     const channelId = selectedChannel.id;
-    if (this.varService.getInnerBrowserWidth() <= 800){
+    if (innerWidth <= 800){
       this.dcshService.hideNavigation = true;
     }   
     await this.messageService.onChannelClick(channelId);
@@ -242,7 +242,7 @@ export class MenuSidenavComponent implements OnInit {
   openNewMessage() {
     this.varService.setVar('mainChatHead', 2);
     this.dcshService.chatSlideOut();
-    if (this.varService.getInnerBrowserWidth() <= 800){
+    if (innerWidth <= 800){
       this.dcshService.hideNavigation = true;
     }   
   }
@@ -251,7 +251,7 @@ export class MenuSidenavComponent implements OnInit {
     this.varService.setVar('mainChatHead', 1);
     this.varService.setVar('selectedUserToMessage', arrayId);
     this.dcshService.chatSlideOut();
-    if (this.varService.getInnerBrowserWidth() <= 800){
+    if (innerWidth <= 800){
       this.dcshService.hideNavigation = true;
     }   
   }
@@ -260,7 +260,7 @@ export class MenuSidenavComponent implements OnInit {
     this.varService.setVar('mainChatHead', 1);
     this.varService.setVar('selectedUserToMessage', arrayId);
     this.dcshService.chatSlideOut();
-    if (this.varService.getInnerBrowserWidth() <= 800){
+    if (innerWidth <= 800){
       this.dcshService.hideNavigation = true;
     }   
   }
