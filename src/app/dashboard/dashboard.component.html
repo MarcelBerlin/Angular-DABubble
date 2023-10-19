@@ -21,6 +21,7 @@
     class="secondaryChatContainer"
     [class.secondarySlideOut]="dcshService.secondaryChatSlideOut"
     [style.width]="varService.getInnerBrowserWidth() <= 800 && !dcshService.secondaryChatSlideOut  ? '100%' : '25%'"
+    *ngIf="(varService.getInnerBrowserWidth() <= 800 && varService.mainChatHead != -1 )|| varService.getInnerBrowserWidth() >= 801"
   >
     <app-secondary-chat></app-secondary-chat>
   </div>
