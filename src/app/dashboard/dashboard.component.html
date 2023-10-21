@@ -5,6 +5,7 @@
   <div
     class="leftContainer"
     [class.leftContainerSlideOut]="dcshService.hideNavigation"
+    *ngIf="conditionService.leftContainerShown()"
   >
     <app-menu-channels-workspaces></app-menu-channels-workspaces>
   </div>
@@ -12,18 +13,21 @@
     class="mainChatContainer"
     [class.slideRight]="dcshService.secondaryChatSlideOut"
     [class.slideLeft]="dcshService.hideNavigation"
+    *ngIf="conditionService.mainChatContainerShown()"
   >
-    <app-main-chat></app-main-chat>
+    <app-main-chat *ngIf="conditionService.mainChatShown()"></app-main-chat>
   </div>
   <div
     class="secondaryChatContainer"
     [class.secondarySlideOut]="dcshService.secondaryChatSlideOut"
+    [style.width]="conditionService.secondaryChatContainerStyleSetting()"
+    *ngIf="conditionService.secondaryChatContainerShown()"
   >
     <app-secondary-chat></app-secondary-chat>
   </div>
 </div>
 
-<mat-card class="hideShowNavigationBar">
+<mat-card class="hideShowNavigationBar" *ngIf="conditionService.navigationBarShown()">
   <div
     (click)="hideShowNavigation()"
     (mouseenter)="changeImageOnHover(true)"

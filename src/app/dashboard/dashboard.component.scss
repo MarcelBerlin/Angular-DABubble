@@ -51,7 +51,7 @@
     transition: 200ms;
 
     @media (max-width: 800px) {
-      display: none;
+      left: 0px;
     }
   }
 
@@ -72,6 +72,10 @@
     right: 8px;
     width: 25%;
     transition: 200ms;
+
+    // @media (max-width: 800px) {
+    //   width: 100%;
+    // }
   }
 
   .secondarySlideOut {
@@ -117,4 +121,15 @@
       }
     }
   }
+
+  .maxWidth{
+    position: absolute;
+    top: 100px;
+    bottom: 16px;
+    right: 8px;
+    transition: 200ms;
+    width: 100% !important;
+  }
+
+
 }

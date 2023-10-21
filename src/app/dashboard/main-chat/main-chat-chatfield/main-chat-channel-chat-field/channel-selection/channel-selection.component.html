@@ -22,9 +22,10 @@
 
   <div *ngFor="let message of channelMessages.messageData, let i = index">
     <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
-      
+
       <div class="timeline-container">
-        <div *ngIf="i !== 0 && channelMessages.messageData[i-1].dateString != channelMessages.messageData[i].dateString">
+        <div
+          *ngIf="i !== 0 && channelMessages.messageData[i-1].dateString != channelMessages.messageData[i].dateString">
           <div class="timeLine">
             <span class="timeLineHead">
               {{ timelinesService.createTimlineText(message.dateString)}}
@@ -89,13 +90,16 @@
             </div>
           </div>
           <div *ngIf="channelMessages.messageData[i].amountAnswers > 0">
-            <span>{{ channelMessages.messageData[i].amountAnswers }} Antworten</span><br>
+            <span [class.resposivView]="varService.getInnerBrowserWidth() <= 800"
+              (click)="channelMessages.openAnswer(i)">
+              {{ channelMessages.messageData[i].amountAnswers }} Antworten
+            </span><br>
             <span>Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span><br>
           </div>
-        </div>        
+        </div>
       </div>
 
-      
+
 
       <div class="full-message-right">
 
@@ -147,9 +151,9 @@
           <div *ngIf="channelMessages.messageData[i].amountAnswers > 0">
             <span>{{ channelMessages.messageData[i].amountAnswers }} Antworten</span><br>
             <span>Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span><br>
-           
+
           </div>
-        </div>        
+        </div>
       </div>
 
       <div>

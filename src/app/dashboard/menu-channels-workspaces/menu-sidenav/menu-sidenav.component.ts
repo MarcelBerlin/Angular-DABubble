@@ -215,6 +215,7 @@ export class MenuSidenavComponent implements OnInit {
       : this.sendMessageToSpecificUser(arrayId);
     this.varService.previousScrollTop = 0; // important for the autoscroll functionality
     this.getDirectChatData(arrayId);
+
   }
 
   currentUser() {
@@ -230,7 +231,10 @@ export class MenuSidenavComponent implements OnInit {
     this.getService.channelIndex = arrayId;
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
-    const channelId = selectedChannel.id;    
+    const channelId = selectedChannel.id;
+    if (innerWidth <= 800){
+      this.dcshService.hideNavigation = true;
+    }   
     await this.messageService.onChannelClick(channelId);
   }
 
@@ -238,18 +242,27 @@ export class MenuSidenavComponent implements OnInit {
   openNewMessage() {
     this.varService.setVar('mainChatHead', 2);
     this.dcshService.chatSlideOut();
+    if (innerWidth <= 800){
+      this.dcshService.hideNavigation = true;
+    }   
   }
 
   sendMessageToLoggedUser(arrayId: number) {
     this.varService.setVar('mainChatHead', 1);
     this.varService.setVar('selectedUserToMessage', arrayId);
     this.dcshService.chatSlideOut();
+    if (innerWidth <= 800){
+      this.dcshService.hideNavigation = true;
+    }   
   }
 
   sendMessageToSpecificUser(arrayId: number) {
     this.varService.setVar('mainChatHead', 1);
     this.varService.setVar('selectedUserToMessage', arrayId);
     this.dcshService.chatSlideOut();
+    if (innerWidth <= 800){
+      this.dcshService.hideNavigation = true;
+    }   
   }
 
 

@@ -1,6 +1,12 @@
 <div class="header-body">
-  <div class="header-logo">
+  <div class="header-logo" *ngIf="conditionService.headerLogoShown()">
     <img src="assets/img/Login/Logo.png" />
+  </div>
+
+  <div class="codeLerningDiv"  *ngIf="this.conditionService.codeLerningDivShown()" (click)="backToSideNav()">
+    <img src="assets/img/arrow_header.png" class="codeLerningBackArrow" (click)="backToSideNav()">
+    <img src="assets/img/sidenav/codelearning_logo.png" style="width: 50px; height: 50px;"/>
+    <span>Code learning</span>
   </div>
 
   <form class="header-searchbar">
