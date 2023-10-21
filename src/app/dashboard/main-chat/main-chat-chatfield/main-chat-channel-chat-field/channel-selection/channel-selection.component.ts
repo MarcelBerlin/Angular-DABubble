@@ -60,14 +60,14 @@ export class ChannelSelectionComponent implements OnInit {
   }
 
 
-  // checkIfChannelIsEmpty() {
-  //   if () {
-  //     this.emptyChat = true;
-  //   } else {
-  //     this.emptyChat = false;
-  //   }
-  //   console.log();
-  // }
+  checkIfChannelIsEmpty() {
+    if (this.dialogAdd.channelMessage.length < 1) {
+      this.emptyChat = true;
+    } else {
+      this.emptyChat = false;
+    }
+    console.log();
+  }
 
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.

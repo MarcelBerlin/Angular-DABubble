@@ -3,6 +3,7 @@ import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
 import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/service/secondary-chat-answer.service';
 import { TimelinesService } from 'src/app/direct-chat/services/timelines.service';
+import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
 
 @Injectable({
@@ -23,6 +24,7 @@ export class ChannelMessagesService {
     private firestore: Firestore,
     public timelinesService: TimelinesService,
     private dcshService: DashboardComponentsShowHideService,
+    private dialogAddService: DialogAddService,
     
   ) {
     this.allMessages();
