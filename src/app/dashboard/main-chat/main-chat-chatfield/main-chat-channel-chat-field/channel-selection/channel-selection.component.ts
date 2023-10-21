@@ -23,7 +23,7 @@ import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/ser
 })
 export class ChannelSelectionComponent implements OnInit {
   hoveredMessagesMainChat: boolean = false;
-  emptyChat: boolean;
+  
   chatText: string = '';
   messages$: any = [];
   messageData: any = [];
@@ -59,15 +59,14 @@ export class ChannelSelectionComponent implements OnInit {
     
   }
 
-
-  checkIfChannelIsEmpty() {
-    if (this.dialogAdd.channelMessage.length < 1) {
-      this.emptyChat = true;
-    } else {
-      this.emptyChat = false;
-    }
-    console.log();
+  isChannelEmpty(selectedChannel: number): boolean {
+    // Überprüfen, ob der ausgewählte Kanal keine Nachrichten hat
+    const channel = this.dialogAdd.tags.find(tag => tag.id === selectedChannel.toString());
+    console.log(channel);
+    return channel && channel.channelMessage.length === 0;
+    
   }
+  
 
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.

@@ -89,7 +89,7 @@ export class MenuSidenavComponent implements OnInit {
 
   ngOnInit(): void {
     this.allTags();
-    // this.getService.deleteFromFirebase() // bitte lassen. Basti
+    // this.getService.deleteFromFirebase('') // bitte lassen. Basti
   }
 
   @HostListener('window:resize', ['$event'])
@@ -231,7 +231,7 @@ export class MenuSidenavComponent implements OnInit {
     this.getService.channelIndex = arrayId;
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
-    const channelId = selectedChannel.id;
+    const channelId = selectedChannel.id;    
     if (innerWidth <= 800){
       this.dcshService.hideNavigation = true;
     }   

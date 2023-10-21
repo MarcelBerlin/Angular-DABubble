@@ -42,8 +42,7 @@ export class DialogAddService {
     const coll = collection(firestore, 'tags');
     this.newTags$ = collectionData(coll, { idField: 'id' });
     this.newTags$.subscribe((tag: any) => {
-      this.tagsData = tag;
-      // console.log(this.tagsData);
+      this.tagsData = tag;     
     });
   }
 
@@ -80,6 +79,8 @@ export class DialogAddService {
       // Tag mit generierter ID aus Firestore abrufen und dem lokalen Array hinzufügen
       const tagWithId = { ...newChannel, id: docRef.id };
       this.tags.push(tagWithId);
+      
+      console.log(newChannel);
       
     }
   }
