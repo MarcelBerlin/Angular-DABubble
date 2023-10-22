@@ -69,6 +69,7 @@ import { EmojiPickerBossiComponent } from './emoji-picker-bossi/emoji-picker-bos
 import { ImprintDataProtectionComponent } from './auth-features/login/imprint-data-protection/imprint-data-protection.component';
 import { MessageInputComponent } from './message-input/message-input.component';
 import { AddAvatarComponent } from './dialog/add-avatar/add-avatar.component';
+import { ResponsivViewSearchbarComponent } from './responsiv-view-searchbar/responsiv-view-searchbar.component';
 
 
 @NgModule({
@@ -111,6 +112,7 @@ import { AddAvatarComponent } from './dialog/add-avatar/add-avatar.component';
     ImprintDataProtectionComponent,
     MessageInputComponent,
     AddAvatarComponent,
+    ResponsivViewSearchbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -126,4 +126,9 @@ export class ConditionService {
   codeLerningDivShown(): boolean {
     return innerWidth <= 800 && this.varService.mainChatHead != -1;
   }
+
+
+  responsivSearchBarShown(): boolean {
+    return innerWidth <= 800 && this.varService.mainChatHead == -1;
+  }
 }

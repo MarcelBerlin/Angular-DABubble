@@ -20,6 +20,7 @@ import { MessageService } from 'src/app/services/messages.service';
 import { NewMessageAmountService } from 'src/app/direct-chat/services/new-message-amount.service';
 import { ChannelMessagesService } from '../../main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
+import { ConditionService } from 'src/app/services/condition.service';
 
 
 interface Tag {
@@ -80,6 +81,7 @@ export class MenuSidenavComponent implements OnInit {
     public messageService: MessageService,
     private channelMessageService: ChannelMessagesService,
     private messageInputService: MessageInputServiceService,
+    public conditionService: ConditionService,
 
   ) {
     this.tags = this.getService.tags;

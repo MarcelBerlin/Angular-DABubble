@@ -1,14 +1,23 @@
 <div class="contentContainer">
   <div class="content">
-    <div class="sidenavHeaderContainer">
 
-      <div class="code-learning">
+    
+
+    <div 
+    [class.sidenavHeaderContainer]="!conditionService.responsivSearchBarShown()"
+    [class.resp-header]="conditionService.responsivSearchBarShown()">
+      <app-responsiv-view-searchbar *ngIf="conditionService.responsivSearchBarShown()" style="display: flex; justify-content: center; width: 100%">
+
+      </app-responsiv-view-searchbar> 
+
+      <div class="code-learning" *ngIf="!conditionService.responsivSearchBarShown()">>
         <img src="assets/img/sidenav/codelearning_logo.png" /> 
         <span> Code learning</span>
       </div>
       <img class="pointer-pen" [src]="newMessagePath" (click)="openNewMessage()"
         (mouseenter)="newMessagePath = 'assets/img/sidenav/newMessageHover.png'"
-        (mouseleave)="newMessagePath = 'assets/img/sidenav/newMessage.png'" />
+        (mouseleave)="newMessagePath = 'assets/img/sidenav/newMessage.png'"
+        *ngIf="!conditionService.responsivSearchBarShown()" />
 
     </div>
 
