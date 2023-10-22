@@ -1,4 +1,19 @@
 <form  class="responsiveSearchBar" [formGroup]="responsiveSearchBar">
     <input type="text" formControlName="searchTerm" class="input-searchbar" placeholder="Gehe zu..." (keyup)="getSearchValue()">
     <img src="../assets/img/search-icon.png" alt="">
+    <div *ngIf="channelSearch || termSearch || emailSearch"
+    style="display: flex; 
+    height: 150px; 
+    width: 90%; 
+    position: absolute; 
+    z-index: 5; 
+    background-color: white; top:73px; 
+    border: 1px solid grey"
+    >
+    <ul>
+      <li *ngFor="let finding of findingsArray"> {{finding.term}}</li>
+    </ul>
+
+    </div>
 </form>
+

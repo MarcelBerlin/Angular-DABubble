@@ -12,7 +12,7 @@ import { ConditionService } from 'src/app/services/condition.service';
 export class ResponsivViewSearchbarComponent {
   emailArray: any[] = [];
   nameArray: any[] = [];
-  // findingsArray: any[] = [];
+  findingsArray: any[] = [];
   channelArray: any[] = [];
   emailSearch: boolean = false;
   termSearch: boolean = false;
@@ -43,12 +43,13 @@ export class ResponsivViewSearchbarComponent {
     this.createFindingsArraysInUserData(enteredStringTrimmed);
     this.createFindingsArrayChannels(enteredStringTrimmed);
     console.log(this.nameArray, this.emailArray, this.channelArray);
+    this.createFindingsArray();
   }
 
 
   resetFindingsArrays(): void {
     this.emailArray = [];
-    // this.findingsArray = [];
+    this.findingsArray = [];
     this.nameArray = [];
     this.channelArray = [];
   }
@@ -101,7 +102,10 @@ export class ResponsivViewSearchbarComponent {
       enteredStringTrimmed = enteredStringTrimmed.substring(1);
       this.channelSearch = true;
       console.log('channelsearch', enteredStringTrimmed);
-    } else console.log('termsearch');
+    } else if (enteredStringTrimmed.length > 0){
+      this.termSearch = true;
+      console.log('termsearch');
+    } 
     return enteredStringTrimmed;
   }
 
@@ -125,4 +129,15 @@ export class ResponsivViewSearchbarComponent {
     return array.findIndex(item => item === searchValue);
   }
 
+  createFindingsArray(): void {
+    this.nameArray.forEach(name => {
+      this.findingsArray.push(name);
+    });
+    this.emailArray.forEach(email => {
+      this.findingsArray.push(email);
+    });
+    this.channelArray.forEach(channel => {
+      this.findingsArray.push(channel);
+    });
+  }
 }
