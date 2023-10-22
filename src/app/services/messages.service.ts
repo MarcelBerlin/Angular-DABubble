@@ -55,10 +55,12 @@ export class MessageService {
     this.UserAndMessageDetails();
     this.addTimeStampToMessage();
     this.saveMessageWithIdToDoc();
-    
-    this.messageData.push(this.newMessage);
+
+    this.messageData.push(this.newMessage);   
+    this.dialogAddService.channelMessage.push(this.newMessage)
     this.messageText = '';
     console.log(this.dateString);
+    console.log(this.dialogAddService.channelMessage)
   }
 
   UserAndMessageDetails() {
