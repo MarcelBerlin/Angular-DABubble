@@ -1,39 +1,28 @@
-
-import { Component, HostListener, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { Component} from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { Observable, map } from 'rxjs';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
+import {FormControl, FormGroup, Validators,} from '@angular/forms';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { VariablesService } from 'src/app/services/variables.service';
-import { MessageService } from 'src/app/services/messages.service';
 import { ConditionService } from 'src/app/services/condition.service';
-
-
 @Component({
   selector: 'app-responsiv-view-searchbar',
   templateUrl: './responsiv-view-searchbar.component.html',
   styleUrls: ['./responsiv-view-searchbar.component.scss']
 })
 export class ResponsivViewSearchbarComponent {
-  actualUser: any;
-  control = new FormControl('');
-  filteredArrays: Observable<string[]>;
-  selectedArray: any = [];
-  property: string = '';
-  innerWidth: number = 0;
+  emailArray: any[] = [];
+  nameArray: any[] = [];
+  // findingsArray: any[] = [];
+  channelArray: any[] = [];
+  emailSearch: boolean = false;
+  termSearch: boolean = false;
+  channelSearch: boolean = false;
+  
 
   constructor(
     public varService: VariablesService,
-    public dialog: MatDialog,
     public dataService: DataService,
     private dialogAddService: DialogAddService,
-    public messageService: MessageService,
     public conditionService: ConditionService
   ) {
   }
@@ -45,15 +34,6 @@ export class ResponsivViewSearchbarComponent {
       Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}.?[a-zA-Z]{0,2}',),
       Validators.minLength(8),])
   });
-
-
-  emailArray: any[] = [];
-  nameArray: any[] = [];
-  // findingsArray: any[] = [];
-  channelArray: any[] = [];
-  emailSearch: boolean = false;
-  termSearch: boolean = false;
-  channelSearch: boolean = false;
 
 
   getSearchValue() {
@@ -72,6 +52,7 @@ export class ResponsivViewSearchbarComponent {
     this.nameArray = [];
     this.channelArray = [];
   }
+
 
   resetSearchCategory(): void {
     this.emailSearch = false;
@@ -94,6 +75,7 @@ export class ResponsivViewSearchbarComponent {
       index++;
     });
   }
+
 
   createFindingsArrayChannels(enteredStringTrimmed: string): void {
     let index = 0;
@@ -139,31 +121,8 @@ export class ResponsivViewSearchbarComponent {
   }
 
 
-
-
-
-
-
-
-
-
   findIndexInArray(array: string[], searchValue: string): number {
     return array.findIndex(item => item === searchValue);
   }
-
-
-  findIndicesInArray(array: string[], searchValue: string): number[] {
-    return array.reduce((indices, item, index) => {
-      if (item === searchValue) {
-        indices.push(index);
-      }
-      return indices;
-    }, []);
-  }
-
-
-
-
-
 
 }
