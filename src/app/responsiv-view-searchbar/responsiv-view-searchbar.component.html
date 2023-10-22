@@ -1,14 +1,3 @@
-<!-- <form class="header-searchbar">
-    <input type="text" placeholder="An: #channel, @user oder E-Mail Adresse" [formControl]="control"
-      [matAutocomplete]="auto" class="input-searchbar" />
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
-      <mat-option *ngFor="let element of filteredArrays | async" [value]="element[property]">
-        {{ element[property] }}
-      </mat-option>
-    </mat-autocomplete>
-</form> -->
-
-
 <form  class="responsiveSearchBar" [formGroup]="responsiveSearchBar">
     <input type="text" formControlName="searchTerm" class="input-searchbar" placeholder="Gehe zu..." (keyup)="getSearchValue()">
     <img src="../assets/img/search-icon.png" alt="">
