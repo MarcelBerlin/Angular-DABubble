@@ -217,7 +217,6 @@ export class MenuSidenavComponent implements OnInit {
       : this.sendMessageToSpecificUser(arrayId);
     this.varService.previousScrollTop = 0; // important for the autoscroll functionality
     this.getDirectChatData(arrayId);
-
   }
 
   currentUser() {

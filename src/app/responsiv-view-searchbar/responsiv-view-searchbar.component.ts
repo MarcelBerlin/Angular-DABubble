@@ -4,6 +4,11 @@ import {FormControl, FormGroup, Validators,} from '@angular/forms';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { VariablesService } from 'src/app/services/variables.service';
 import { ConditionService } from 'src/app/services/condition.service';
+import { DashboardComponentsShowHideService } from '../dashboard/dashboard-components-show-hide.service';
+import { MessageService } from '../services/messages.service';
+import { MessageInputServiceService } from '../message-input/service/message-input-service.service';
+import { DirectChatService } from '../direct-chat/services/direct-chat.service';
+import { NewMessageAmountService } from '../direct-chat/services/new-message-amount.service';
 @Component({
   selector: 'app-responsiv-view-searchbar',
   templateUrl: './responsiv-view-searchbar.component.html',
@@ -23,7 +28,12 @@ export class ResponsivViewSearchbarComponent {
     public varService: VariablesService,
     public dataService: DataService,
     private dialogAddService: DialogAddService,
-    public conditionService: ConditionService
+    public conditionService: ConditionService,
+    private dcshService: DashboardComponentsShowHideService,
+    private messageService: MessageService,
+    private messageInputService: MessageInputServiceService,
+    private directChatService: DirectChatService,
+    private newMessageAmountService: NewMessageAmountService
   ) {
   }
 
@@ -68,10 +78,10 @@ export class ResponsivViewSearchbarComponent {
       let emailLowerCase = data.email.toLowerCase();
       let nameLowerCase = data.name.toLowerCase();
       if (this.nameFound(nameLowerCase, enteredStringTrimmed) && !this.emailSearch && !this.channelSearch) {
-        this.nameArray.push({ term: data.name, index: index });
+        this.nameArray.push({ term: data.name, index: index, type: 'name'});
       }
       if (this.emailFound(emailLowerCase, enteredStringTrimmed) && !this.channelSearch) {
-        this.emailArray.push({ term: data.email, index: index });
+        this.emailArray.push({ term: data.email, index: index, type: 'email'});
       }
       index++;
     });
@@ -83,7 +93,7 @@ export class ResponsivViewSearchbarComponent {
     this.dialogAddService.tagsData.forEach((channel) => {
       let channelNameLowerCase = channel.name.toLowerCase();
       if (this.channelFound(channelNameLowerCase, enteredStringTrimmed) && !this.emailSearch){
-        this.channelArray.push({ term: channel.name, index: index });
+        this.channelArray.push({ term: channel.name, index: index, type: 'channel' });
       }
       index++;
     });
@@ -140,4 +150,80 @@ export class ResponsivViewSearchbarComponent {
       this.findingsArray.push(channel);
     });
   }
+
+
+
+
+
+
+  openApplicableChat(index: number, type: string): void {
+    if (type == 'channel') this.openChannel(index);
+    else this.messageToUser(index);
+  }
+
+
+  async openChannel(arrayId: number) {
+    this.varService.setVar('mainChatHead', 0);
+    this.varService.setVar('selectedChannel', arrayId);
+    this.dialogAddService.channelIndex = arrayId;
+    // this.dcshService.chatSlideOut();
+    const selectedChannel = this.dialogAddService.tags[arrayId];
+    const channelId = selectedChannel.id;    
+    if (innerWidth <= 800) this.dcshService.hideNavigation = true;  
+    await this.messageService.onChannelClick(channelId);
+  }
+
+  messageToUser(arrayId: number) {
+    this.currentUser()
+      ? this.sendMessageToLoggedUser(arrayId)
+      : this.sendMessageToSpecificUser(arrayId);
+    this.varService.previousScrollTop = 0; // important for the autoscroll functionality
+    this.getDirectChatData(arrayId);
+  }
+
+
+  sendMessageToLoggedUser(arrayId: number) {
+    this.varService.setVar('mainChatHead', 1);
+    this.varService.setVar('selectedUserToMessage', arrayId);
+    // this.dcshService.chatSlideOut();
+    // if (innerWidth <= 800){
+    //   this.dcshService.hideNavigation = true;
+    // }   
+  }
+
+  sendMessageToSpecificUser(arrayId: number) {
+    this.varService.setVar('mainChatHead', 1);
+    this.varService.setVar('selectedUserToMessage', arrayId);
+    // this.dcshService.chatSlideOut();
+    // if (innerWidth <= 800){
+    //   this.dcshService.hideNavigation = true;
+    // }   
+  }
+
+
+  currentUser() {
+    return (
+      this.dataService.loggedInUserData.email ===
+      this.dataService.userData[this.varService.selectedUserToMessage].email
+    );
+  }
+
+
+  getDirectChatData(arrayId: number): void {
+    if (this.directChatService.directChatActive) {
+      this.messageInputService.chatChange = true;
+      const clickedUserId: string = this.dataService.userData[arrayId].id;
+      const clickedUserName: string = this.dataService.userData[arrayId].name;
+      this.messageInputService.placeholderUserName = clickedUserName; 
+      this.messageInputService.placeholderText = 'Nachricht an ' + clickedUserName;
+      this.directChatService.getChatId(clickedUserId);
+      this.newMessageAmountService.actualPartnerUserDataIndex = arrayId;
+      this.messageInputService.setMyVariable(true);
+      setTimeout(() => {
+        this.newMessageAmountService.setOwnMessageAmountToZero();
+      }, 1000);
+    }
+  }
+
+
 }
