@@ -235,6 +235,7 @@ export class MenuSidenavComponent implements OnInit {
     const selectedChannel = this.tags[arrayId];
     const channelId = selectedChannel.id;    
     this.channelMessageService.currentChannelId = channelId;
+    this.getService.channelMessageAmount = selectedChannel.channelMessageAmount;
     if (innerWidth <= 800){
       this.dcshService.hideNavigation = true; 
     }   

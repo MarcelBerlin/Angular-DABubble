@@ -36,8 +36,7 @@ export class ChannelSelectionComponent implements OnInit {
   emoji: string = '';
   reactionArrRight: any = [];
   reactionArrLeft: any = [];
-  isThereAnAnswer: boolean = false;
-  emptyChat: boolean = false;
+  isThereAnAnswer: boolean = false;  
 
   constructor(
     private firestore: Firestore,
@@ -60,12 +59,12 @@ export class ChannelSelectionComponent implements OnInit {
     
   }
 
-  isChannelEmpty(selectedChannel: number): boolean {
-    // Überprüfen, ob der ausgewählte Kanal keine Nachrichten hat
-    const channel = this.dialogAdd.tags.find(tag => tag.id === selectedChannel.toString());
-    // console.log(channel);
-    return channel && channel.channelMessage.length === 0;
-    
+  checkIfChannelIsEmpty() {
+
+    console.log(this.dialogAdd.channelMessageAmount);
+    if (this.dialogAdd.channelMessageAmount < 1) {
+      return true;
+    } else return false;   
   }
   
 

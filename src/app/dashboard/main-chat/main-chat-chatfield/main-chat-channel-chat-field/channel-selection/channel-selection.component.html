@@ -1,23 +1,23 @@
 <div class="thread-content">
-
-  <div class="empty-chat-message" *ngIf="emptyChat">
-    <ng-container *ngIf="dialogAdd.tagsData && varService.selectedChannel">
-      <h2 *ngIf="isChannelEmpty(varService.selectedChannel)">
-        {{ dialogAdd.tagsData[varService.selectedChannel].name[0] }}
-        {{ dialogAdd.tagsData[varService.selectedChannel].name.slice(1) }}
-      </h2>
-      <span *ngIf="isChannelEmpty(varService.selectedChannel)">
-        Du hast diesen Channel heute erstellt. Das ist der Anfang des Channels
-      </span>
-      <ng-container>
-        <a *ngIf="isChannelEmpty(varService.selectedChannel)">
-          {{ dialogAdd.tagsData[varService.selectedChannel].name[0] }}
-          {{ dialogAdd.tagsData[varService.selectedChannel].name.slice(2) }}
-        </a>
-      </ng-container>
-    </ng-container>
-  </div>
   
+    <div class="empty-chat-message" *ngIf="checkIfChannelIsEmpty()">
+      <ng-container *ngIf="dialogAdd.tagsData && varService.selectedChannel">
+        <h2>
+          {{ dialogAdd.tagsData[varService.selectedChannel].name[0] }}
+          {{ dialogAdd.tagsData[varService.selectedChannel].name.slice(1) }}
+        </h2>
+        <span>
+          Du hast diesen Channel heute erstellt. Das ist der Anfang des Channels
+        </span>
+        <ng-container>
+          <a>
+            {{ dialogAdd.tagsData[varService.selectedChannel].name[0] }}
+            {{ dialogAdd.tagsData[varService.selectedChannel].name.slice(2) }}
+          </a>
+        </ng-container>
+      </ng-container>
+    </div>  
+
 
   <div *ngFor="let message of channelMessages.messageData, let i = index">
     <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
