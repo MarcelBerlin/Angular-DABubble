@@ -1,6 +1,6 @@
 <div class="thread-content">
 
-  <div class="empty-chat-message">
+  <div class="empty-chat-message" *ngIf="emptyChat">
     <ng-container *ngIf="dialogAdd.tagsData && varService.selectedChannel">
       <h2 *ngIf="isChannelEmpty(varService.selectedChannel)">
         {{ dialogAdd.tagsData[varService.selectedChannel].name[0] }}

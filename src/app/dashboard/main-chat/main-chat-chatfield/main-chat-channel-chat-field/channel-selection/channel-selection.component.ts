@@ -37,6 +37,7 @@ export class ChannelSelectionComponent implements OnInit {
   reactionArrRight: any = [];
   reactionArrLeft: any = [];
   isThereAnAnswer: boolean = false;
+  emptyChat: boolean = false;
 
   constructor(
     private firestore: Firestore,

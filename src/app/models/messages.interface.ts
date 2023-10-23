@@ -9,6 +9,7 @@ export class Messages {
     dateTimeNumber: number;
     dateString: string; 
     clockString: string; 
+    channelMessageAmount: number;
     amountAnswers: number;
     lastClockTime: string; 
        
@@ -23,6 +24,7 @@ export class Messages {
         this.dateTimeNumber = obj ? obj.dateTimeNumber : 0;
         this.dateString = obj ? obj.dateString : 'unset';
         this.clockString = obj ? obj.clockString : 'unset';  
+        this.channelMessageAmount = obj ? obj.channelMessageAmount : 0;
         this.amountAnswers = obj ? obj.amountAnswers : 0; 
         this.lastClockTime = obj ? obj.lastClockTime : 'unset';
     }
@@ -38,6 +40,7 @@ export class Messages {
             dateTimeNumber: this.dateTimeNumber,
             dateString: this.dateString,
             clockString: this.clockString,
+            channelMessageAmount: this.channelMessageAmount,
             amountAnswers: this.amountAnswers,
             lastClockTime: this.lastClockTime       
         }

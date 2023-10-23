@@ -62,6 +62,7 @@ export class MenuSidenavComponent implements OnInit {
   thirdTagPath: string = 'assets/img/sidenav/tag.png';
   arrowStateChannel: boolean = true;
   arrowStateMessage: boolean = true;
+  channelID: string = '';
 
 
   channelsVisible: boolean = true;
@@ -233,10 +234,12 @@ export class MenuSidenavComponent implements OnInit {
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
     const channelId = selectedChannel.id;    
+    this.channelMessageService.currentChannelId = channelId;
     if (innerWidth <= 800){
-      this.dcshService.hideNavigation = true;
+      this.dcshService.hideNavigation = true; 
     }   
-    await this.messageService.onChannelClick(channelId);
+    await this.messageService.onChannelClick(channelId); 
+    console.log(this.getService.tagsData);    
   }
 
 
