@@ -5,6 +5,7 @@ import { VariablesService } from '../services/variables.service';
 import { DataService } from '../services/data.service';
 import { FileUploadService } from '../file-upload/services/file-upload.service';
 import { DirectChatService } from '../direct-chat/services/direct-chat.service';
+import { MessageService } from '../services/messages.service';
 @Component({
   selector: 'app-message-input',
   templateUrl: './message-input.component.html',
@@ -25,7 +26,8 @@ export class MessageInputComponent {
     public varService: VariablesService,
     public dataService: DataService,
     private fileUploadService: FileUploadService,
-    private directChatService: DirectChatService
+    private directChatService: DirectChatService,
+    private messageService: MessageService
   ) { }
 
 
@@ -33,7 +35,7 @@ export class MessageInputComponent {
    * Angular lifecycle hook that is called after the component has been initialized.
    * Subscribes to the myVariable$ observable from inputService, and when a new value is emitted,
    * it triggers the startApplicableButtonAction function if the new value is truthy.
-   *
+   * 
    * @returns {void}
    */
   ngOnInit(): void {
@@ -338,10 +340,20 @@ export class MessageInputComponent {
    * @returns {void}
    */
   saveMessage(): void {
-    this.directChatService.saveMessage(this.saveHTMLTagsAndText());
-    this.inputService.contentArray = [];
-    document.getElementById('inputDiv').innerHTML = '';
-    setTimeout(() => { this.restorePlaceholder(); }, 500);
+    if(this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2){
+      this.directChatService.saveMessage(this.saveHTMLTagsAndText());
+      this.inputService.contentArray = [];
+      document.getElementById('inputDiv').innerHTML = '';
+      setTimeout(() => { this.restorePlaceholder(); }, 500);
+    }
+    if(this.varService.mainChatHead == 0){
+      debugger;
+      this.messageService.newMessage.content = this.saveHTMLTagsAndText();
+      console.log(this.messageService.newMessage.content);
+      document.getElementById('inputDiv').innerHTML = '';
+      this.messageService.addMessage();
+      setTimeout(() => { this.restorePlaceholder(); }, 500);
+    }
   }
 
 

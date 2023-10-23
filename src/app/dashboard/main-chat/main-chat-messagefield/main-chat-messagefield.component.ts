@@ -68,15 +68,23 @@ export class MainChatMessagefieldComponent {
   }
 
   messageSend() {
-    if (this.varService.mainChatHead == 0 && this.messageService.messageText.length >= 1) {
-      this.messageService.addMessage();   
-      this.messageService.messageText = '';
+    // if (this.varService.mainChatHead == 0 && this.messageService.messageText.length >= 1) {
+    //   this.messageService.addMessage();   
+    //   this.messageService.messageText = '';
+    // }
+    if(this.varService.mainChatHead == 0 && this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
+      this.messageInputService.resetVariables();
+      this.messageInputService.setMyVariable(true);
+      
+      this.messageInputService.sendButtonEnabled = false;
     }
+
+
     // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
       if(this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
         this.messageInputService.resetVariables();
-        this.messageInputService.setMyVariable(true) ;
+        this.messageInputService.setMyVariable(true);
         this.newMessageAmountService.addPartnerDirectChatMessageAmount();
         this.messageInputService.sendButtonEnabled = false;
       }

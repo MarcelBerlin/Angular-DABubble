@@ -163,6 +163,9 @@ export class EmojiPickerBossiComponent {
     if(this.varService.mainChatHead == 1 && this.currentUser()){
       this.messageInputService.insertEmoji(x.emoji);
     }
+    if(this.varService.mainChatHead == 0){
+      this.messageInputService.insertEmoji(x.emoji);
+    }
     this.emojiService.toggleEmojiSelector();
   }
 
