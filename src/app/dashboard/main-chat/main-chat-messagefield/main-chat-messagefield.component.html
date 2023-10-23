@@ -1,5 +1,5 @@
 <div class="inputContainer" *ngIf="dialogAddService.tagsData && dataService.userData">
-  <textarea *ngIf="
+  <!-- <textarea *ngIf="
       varService.mainChatHead == 0 &&
       dialogAddService.tagsData &&
       varService.selectedChannel !== undefined
@@ -10,10 +10,10 @@
       dialogAddService.tagsData[varService.selectedChannel]?.name?.slice(1) ||
         ''
     }}">
-</textarea>
+</textarea> -->
 
-  <app-message-input *ngIf="varService.mainChatHead == 1 && currentUser() && dataService.userData 
-  || varService.mainChatHead == 1 && !currentUser() && dataService.userData" style="width: 98%;">
+  <app-message-input *ngIf="(varService.mainChatHead == 1 && currentUser() && dataService.userData) 
+  || (varService.mainChatHead == 1 && !currentUser() && dataService.userData) || varService.mainChatHead == 0 " style="width: 98%;">
 
   </app-message-input>
 

@@ -31,7 +31,7 @@ export class EmojiPickerBossiService {
    * @returns {void}
    */
   toggleEmojiSelector(): void {
-    if (this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2) {
+    if (this.varService.mainChatHead == 0 ||this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2) {
       this.emojiSelectorActive = !this.emojiSelectorActive;
     } else this.emojiSelectorActive = false;
   }
