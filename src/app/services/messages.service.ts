@@ -71,7 +71,7 @@ export class MessageService {
     this.newMessage.userId = this.dataService.loggedInUserData.userId;
     this.newMessage.userName = this.dataService.loggedInUserData.name;
     this.newMessage.userImg = this.dataService.loggedInUserData.img;
-    // this.newMessage.content = this.messageText;        
+    // this.newMessage.content = this.messageText;       
   }
 
   addTimeStampToMessage() {

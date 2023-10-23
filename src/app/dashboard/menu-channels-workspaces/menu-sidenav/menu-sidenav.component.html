@@ -79,6 +79,7 @@
           <!-- <img class="pointer-plus" [src]="addPathMessage" (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
             (mouseleave)="addPathMessage = 'assets/img/sidenav/add.png'"
             (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'" /> -->
+            
         </div>
         <div class="direct-message-content" [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'">
           <div *ngFor="let user of getUserData.userData; let i = index">

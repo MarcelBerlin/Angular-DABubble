@@ -35,4 +35,5 @@ export class EmojiPickerBossiService {
       this.emojiSelectorActive = !this.emojiSelectorActive;
     } else this.emojiSelectorActive = false;
   }
+  
 }

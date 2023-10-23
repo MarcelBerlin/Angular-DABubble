@@ -167,6 +167,7 @@ export class EmojiPickerBossiComponent {
       this.messageInputService.insertEmoji(x.emoji);
     }
     this.emojiService.toggleEmojiSelector();
+    
   }
 
 

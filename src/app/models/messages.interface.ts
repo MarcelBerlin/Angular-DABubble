@@ -11,6 +11,7 @@ export class Messages {
     clockString: string; 
     amountAnswers: number;
     lastClockTime: string; 
+    
        
    
     constructor(obj?: any) {

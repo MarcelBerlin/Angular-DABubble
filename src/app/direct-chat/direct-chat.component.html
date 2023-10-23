@@ -94,6 +94,7 @@
             <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'EmojiType'">
               {{entry.content}}
             </span>
+            
 
             <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'NameType'"
               class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"

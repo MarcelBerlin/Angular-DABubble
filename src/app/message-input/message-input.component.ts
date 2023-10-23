@@ -347,13 +347,13 @@ export class MessageInputComponent {
       setTimeout(() => { this.restorePlaceholder(); }, 500);
     }
     if(this.varService.mainChatHead == 0){
-      debugger;
       this.messageService.newMessage.content = this.saveHTMLTagsAndText();
       console.log(this.messageService.newMessage.content);
       document.getElementById('inputDiv').innerHTML = '';
       this.messageService.addMessage();
       setTimeout(() => { this.restorePlaceholder(); }, 500);
     }
+    
   }
 
 

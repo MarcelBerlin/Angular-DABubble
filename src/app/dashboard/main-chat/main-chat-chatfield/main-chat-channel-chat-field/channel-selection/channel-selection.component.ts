@@ -64,7 +64,6 @@ export class ChannelSelectionComponent implements OnInit {
     const channel = this.dialogAdd.tags.find(tag => tag.id === selectedChannel.toString());
     // console.log(channel);
     return channel && channel.channelMessage.length === 0;
-    
   }
   
 

@@ -41,6 +41,7 @@ export class MainChatMessagefieldComponent {
     public uploadService: UploadService,
     private messageInputService:  MessageInputServiceService
   ) { }
+  
 
   currentUser() {
     return (
