@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, updateDoc } from '@angular/fire/firestore';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
+import { MenuSidenavComponent } from 'src/app/dashboard/menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/service/secondary-chat-answer.service';
 import { TimelinesService } from 'src/app/direct-chat/services/timelines.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
@@ -18,13 +19,13 @@ export class ChannelMessagesService {
   selectedMessageIndex: number | null = null;
   selectedMessageId: string = '';
   currentDate: string = new Date().toISOString().split('T')[0]; // Aktuelles Tagesdatum im Format "YYYY-MM-DD";
-
+  currentChannelId: string = '';
 
   constructor(
     private firestore: Firestore,
     public timelinesService: TimelinesService,
     private dcshService: DashboardComponentsShowHideService,
-    private dialogAddService: DialogAddService,
+    private dialogAddService: DialogAddService,   
     
   ) {
     this.allMessages();
@@ -36,8 +37,8 @@ export class ChannelMessagesService {
     await this.messages$.subscribe((message: any) => {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
-      );
-      console.log(this.messageData);
+      );      
+      
     });
   }
 
@@ -74,4 +75,41 @@ export class ChannelMessagesService {
   getSelectedMessageStatus() {
     return this.selectedMessage;
   }
+
+
+  getChannelMessageFromFirestore() {
+    const selectedChannelId = this.currentChannelId;
+    const selectedChannelData = this.dialogAddService.tagsData.find(
+      (tagsData) => tagsData.id === selectedChannelId
+    );
+    console.log(selectedChannelData);
+    if (selectedChannelData) {
+      this.increaseChannelMessageCount(selectedChannelData);
+      const qData = doc(this.firestore, 'tags', selectedChannelId);
+      const newData = {
+        channelMessageAmount: selectedChannelData.channelMessageAmount,
+      };
+      this.tryUpdateToFirebase(qData, newData);
+    } else {
+      console.error('Die ausgewählte Nachricht wurde im Array nicht gefunden.');
+    }
+  }
+
+  // funktion zum hochzählen der messages
+
+  increaseChannelMessageCount(selectedChannelData) {
+    selectedChannelData.channelMessageAmount += 1;
+  }
+
+  // Firebase wird mit den daten geuptdated
+
+  tryUpdateToFirebase(qData, newData) {
+    try {
+      updateDoc(qData, newData);
+      console.log('Message gesendet und channelMessageAmount aktualisiert.');
+    } catch (error) {
+      console.error('Fehler beim Aktualisieren der Firestore-Daten:', error);
+    }
+  }
+  
 }

@@ -22,6 +22,7 @@ import { DashboardComponentsShowHideService } from '../dashboard/dashboard-compo
 import { ChannelTimeStamp } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
 import { DirectChatServiceService } from '../direct-chat/services/direct-chat-service.service';
 import { ChannelTimestampService } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-timestamp.service';
+import { ChannelMessagesService } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class MessageService {
   index: number;
   messages$: any = [];
   messageData: any = [];
-  channelMessages: any = [];  
+  channelMessages: any = [];
   newMessage: Messages = new Messages();
   groupedMessages: { [key: string]: any[] } = {};
   messageText: string = '';
@@ -39,6 +40,7 @@ export class MessageService {
   emojis: any = [];
   tags: any; // ADDED BY FELIX
   dateString: string = '';
+  
 
   constructor(
     private firestore: Firestore,
@@ -47,7 +49,8 @@ export class MessageService {
     private directChatService: DirectChatService,
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService,
-    private channelTimestampService: ChannelTimestampService,   
+    private channelTimestampService: ChannelTimestampService,
+    private channelMessagesService: ChannelMessagesService
   ) {}
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
@@ -55,12 +58,11 @@ export class MessageService {
     this.UserAndMessageDetails();
     this.addTimeStampToMessage();
     this.saveMessageWithIdToDoc();
-
-    this.messageData.push(this.newMessage);   
-    this.dialogAddService.channelMessage.push(this.newMessage)
+    this.channelMessagesService.getChannelMessageFromFirestore();
+    this.messageData.push(this.newMessage);
+    this.dialogAddService.channelMessage.push(this.newMessage);
     this.messageText = '';
-    console.log(this.dateString);
-    console.log(this.dialogAddService.channelMessage)
+    console.log(this.newMessage);    
   }
 
   UserAndMessageDetails() {
@@ -80,7 +82,7 @@ export class MessageService {
     this.newMessage.dateTimeNumber = timeStampData.dateTimeNumber;
     this.newMessage.dateString = timeStampData.dateString;
     this.dateString = this.newMessage.dateString;
-    this.newMessage.clockString = timeStampData.clockString;   
+    this.newMessage.clockString = timeStampData.clockString;
   }
 
   async saveMessageWithIdToDoc() {
@@ -110,12 +112,6 @@ export class MessageService {
     const messages = await getDocs(q);
     this.messageData = messages.docs.map((doc) => doc.data());
   }
-
-  // // Initialisiere ein leeres Nachrichten-Array für den Channel
-  //  const channelMessages: any[] = [];
-  //  await setDoc(doc(collection(this.firestore, 'channelMessages'), docRef.id), {
-  //    messages: channelMessages
-  //  });
 
   async onChannelClick(channelId: string) {
     this.varService.selectedChannelId = channelId;
@@ -186,4 +182,5 @@ export class MessageService {
   }
 
   
+
 }

@@ -19,6 +19,7 @@ interface Tag {
   imagePath: string;
   description: string;
   channelCreator: string;
+  channelMessageAmount: number;
   // members: any[];
   members: any['guest@guest.de'];
   channelMessage: any[];
@@ -37,13 +38,14 @@ export class DialogAddService {
   channelCreator: string = '';
   members: any = [];
   channelMessage: any = [];
+  channelMessageAmount: number = 0;
 
   constructor(private firestore: Firestore, private dataService: DataService) {
     const coll = collection(firestore, 'tags');
     this.newTags$ = collectionData(coll, { idField: 'id' });
     this.newTags$.subscribe((tag: any) => {
       this.tagsData = tag;     
-    });
+    });    
   }
 
   tags: Tag[] = []; // neue Tags werden als JSON hinzugefügt
@@ -66,7 +68,8 @@ export class DialogAddService {
         description: this.description,
         channelCreator: this.channelCreator,
         members: this.members, 
-        channelMessage: this.channelMessage       
+        channelMessage: this.channelMessage,     
+        channelMessageAmount: this.channelMessageAmount  
       };
 
       // Firestore-Dokument erstellen und Tag speichern
