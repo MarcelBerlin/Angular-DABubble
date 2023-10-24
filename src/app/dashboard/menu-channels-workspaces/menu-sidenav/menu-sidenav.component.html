@@ -1,33 +1,24 @@
 <div class="contentContainer">
   <div class="content">
-    <div
-      [class.sidenavHeaderContainer]="
-        !conditionService.responsivSearchBarShown()
-      "
-      [class.resp-header]="conditionService.responsivSearchBarShown()"
-    >
-      <app-responsiv-view-searchbar
-        *ngIf="conditionService.responsivSearchBarShown()"
-        style="display: flex; justify-content: center; width: 100%"
-      >
-      </app-responsiv-view-searchbar>
 
-      <div
-        class="code-learning"
-        *ngIf="!conditionService.responsivSearchBarShown()"
-      >
-        >
-        <img src="assets/img/sidenav/codelearning_logo.png" />
+    
+
+    <div 
+    [class.sidenavHeaderContainer]="!conditionService.responsivSearchBarShown()"
+    [class.resp-header]="conditionService.responsivSearchBarShown()">
+      <app-responsiv-view-searchbar *ngIf="conditionService.responsivSearchBarShown()" style="display: flex; justify-content: center; width: 100%">
+
+      </app-responsiv-view-searchbar> 
+
+      <div class="code-learning" *ngIf="!conditionService.responsivSearchBarShown()">>
+        <img src="assets/img/sidenav/codelearning_logo.png" /> 
         <span> Code learning</span>
       </div>
-      <img
-        class="pointer-pen"
-        [src]="newMessagePath"
-        (click)="openNewMessage()"
+      <img class="pointer-pen" [src]="newMessagePath" (click)="openNewMessage()"
         (mouseenter)="newMessagePath = 'assets/img/sidenav/newMessageHover.png'"
         (mouseleave)="newMessagePath = 'assets/img/sidenav/newMessage.png'"
-        *ngIf="!conditionService.responsivSearchBarShown()"
-      />
+        *ngIf="!conditionService.responsivSearchBarShown()" />
+
     </div>
 
     <!-- <form class="header-searchbar">
@@ -43,15 +34,11 @@
     <div class="channelAndMessage">
       <div class="channels-container" [style]="'max-height: 50%'">
         <div class="channels-headline">
-          <div
-            class="side-menu-head"
-            (mouseenter)="hoverChannels()"
-            (mouseleave)="unhoverChannels()"
-            (click)="toggleChannels()"
-          >
-            <img class="menu-arrow" [src]="channelArrow" />
+          <div class="side-menu-head" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
+          (click)="toggleChannels()" >
+            <img class="menu-arrow" [src]="channelArrow"/>
             <img class="menu-logo" [src]="channelLogo" />
-            <span class="menu-span">Channels</span>
+            <span class="menu-span" >Channels</span>
           </div>
           <!-- <img class="pointer-name" [src]="channelsPath" (mouseenter)="hoverChannels()" (mouseleave)="unhoverChannels()"
             (click)="toggleChannels(); onClickChannels()" />
@@ -59,99 +46,65 @@
             (mouseleave)="addPathChannel = 'assets/img/sidenav/add.png'" (click)="addChannel()" /> -->
         </div>
 
-        <div
-          class="channels-content"
-          [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'"
-        >
+        <div class="channels-content" [@tagAnimation]="channelsVisible ? 'visible' : 'hidden'">
           <div *ngFor="let tag of tags; let i = index">
-            <!-- show authorizationShowChannel -->
-            <div class="channels-line" *ngIf="authorizationShowChannel(i)">
-              <!--end show authorizationShowChannel -->
-              <div class="channels-line">
-                <div class="channel-name" (click)="openChannel(i)">
-                  <span class="pointer"
-                    ><span class="hashtag">{{ tag.name[0] }}</span
-                    ><span class="afterHashtag">
-                      {{ tag.name.slice(1) }}</span
-                    ></span
-                  >
-                </div>
+            <!-- <div class="channels-line" *ngIf="authorizationShowChannel(i)"> -->
+            <div class="channels-line">
+              <div class="channel-name" (click)="openChannel(i)">
+                <span class="pointer"><span class="hashtag">{{ tag.name[0] }}</span><span class="afterHashtag">
+                    {{ tag.name.slice(1) }}</span></span>
               </div>
             </div>
-            <div
-              class="add-channel"
-              (click)="addChannel()"
-              (mouseenter)="hoverAddChannel()"
-              (mouseleave)="unhoverAddChannel()"
-            >
-              <img class="pointer" [src]="addNewChannel" />
-              <span>Channel hinzufügen</span>
-            </div>
+          </div>
+          <div class="add-channel" (click)="addChannel()" (mouseenter)=" hoverAddChannel()"
+          (mouseleave)=" unhoverAddChannel()" >
+            <img class="pointer" [src]="addNewChannel"  />
+            <span>Channel hinzufügen</span>
           </div>
         </div>
+      </div>
 
-        <div
-          class="direct-messages"
-          [style.height]="channelsVisible ? '50%' : 'calc(100% - 68px)'"
-        >
-          <div class="direct-messages-headline pd-left pd-top">
-            <div
-              class="side-menu-head"
-              (mouseenter)="hoverDirectMessage()"
-              (mouseleave)="unhoverDirectMessage()"
-              (click)="toggleDirectMessage()"
-            >
-              <img class="menu-arrow" [src]="chatArrow" />
-              <img class="menu-logo" [src]="chatLogo" />
-              <span *ngIf="innerWidth > 900" class="menu-span"
-                >Direktnachrichten</span
-              >
-              <span *ngIf="innerWidth <= 900" class="menu-span"
-                >Nachrichten</span
-              >
-            </div>
-            <!-- <img class="pointer-name" [src]="directMessagePath" (mouseenter)="hoverDirectMessage()"
+      <div class="direct-messages" [style.height]="channelsVisible ? '50%' : 'calc(100% - 68px)'">
+        <div class="direct-messages-headline pd-left pd-top">
+          <div class="side-menu-head" (mouseenter)="hoverDirectMessage()"
+          (mouseleave)="unhoverDirectMessage()" (click)="toggleDirectMessage()">
+            <img class="menu-arrow" [src]="chatArrow" />
+            <img class="menu-logo" [src]="chatLogo" />
+            <span *ngIf="innerWidth > 900" class="menu-span">Direktnachrichten</span>
+            <span *ngIf="innerWidth <= 900" class="menu-span">Nachrichten</span>
+          </div>
+          <!-- <img class="pointer-name" [src]="directMessagePath" (mouseenter)="hoverDirectMessage()"
             (mouseleave)="unhoverDirectMessage()" (click)="toggleDirectMessage(); onClickDirectMessage()" /> -->
 
-            <!-- <img class="pointer-plus" [src]="addPathMessage" (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
+          <!-- <img class="pointer-plus" [src]="addPathMessage" (mouseenter)="addPathMessage = 'assets/img/sidenav/add_Hover.png'"
             (mouseleave)="addPathMessage = 'assets/img/sidenav/add.png'"
             (click)="addPathMessage = 'assets/img/sidenav/add_Click.png'" /> -->
-          </div>
-          <div
-            class="direct-message-content"
-            [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'"
-          >
-            <div *ngFor="let user of getUserData.userData; let i = index">
-              <div class="direct-message-user" (click)="messageToUser(i)">
-                <div>
-                  <img class="pointer" [src]="user.img" />
-                </div>
-                <span class="pointer"
-                  >{{ user.name }}
-                  <!-- '?' hinzugefügt. gez Basti -->
-
-                  <span
-                    *ngIf="user?.email === getUserData?.loggedInUserData?.email"
-                    >(Du)</span
-                  ></span
-                >
-                <div
-                  class="activeDot"
-                  [style.background-color]="user.online ? '#92C83E' : '#686868'"
-                ></div>
-                <!-- Bossi Area for direct Chats -->
-                <p class="messageDot" *ngIf="getUserData.badgesArray[i] >= 1">
-                  <span>
-                    <span>
-                      {{ getUserData.badgesArray[i] }}
-                    </span>
-                  </span>
-                </p>
-                <!-- Bossi Area for direct Chats end -->
+            
+        </div>
+        <div class="direct-message-content" [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'">
+          <div *ngFor="let user of getUserData.userData; let i = index">
+            <div class="direct-message-user" (click)="messageToUser(i)">
+              <div>
+                <img class="pointer" [src]="user.img" />
               </div>
+              <span class="pointer">{{ user.name }}
+                <!-- '?' hinzugefügt. gez Basti -->
+                
+                <span *ngIf="user?.email === getUserData?.loggedInUserData?.email">(Du)</span></span>
+              <div class="activeDot" [style.background-color]="user.online ? '#92C83E' : '#686868'"></div>
+              <!-- Bossi Area for direct Chats -->
+              <p class="messageDot" *ngIf="getUserData.badgesArray[i] >= 1">
+                <span>
+                  <span>
+                    {{getUserData.badgesArray[i]}}
+                  </span>
+                </span>
+              </p>
+              <!-- Bossi Area for direct Chats end -->
 
-              <!-- <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon> -->
             </div>
+
+            <!-- <mat-icon class="delete-tag" (click)="deleteTag(tag)">delete</mat-icon> -->
           </div>
         </div>
       </div>
