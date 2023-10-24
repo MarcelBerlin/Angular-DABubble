@@ -23,6 +23,7 @@ import { ChannelTimeStamp } from '../dashboard/main-chat/main-chat-chatfield/mai
 import { DirectChatServiceService } from '../direct-chat/services/direct-chat-service.service';
 import { ChannelTimestampService } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-timestamp.service';
 import { ChannelMessagesService } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
+import { ChannelSelectionComponent } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +51,7 @@ export class MessageService {
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService,
     private channelTimestampService: ChannelTimestampService,
-    private channelMessagesService: ChannelMessagesService
+    private channelMessagesService: ChannelMessagesService,    
   ) {}
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
@@ -58,7 +59,7 @@ export class MessageService {
     this.UserAndMessageDetails();
     this.addTimeStampToMessage();
     this.saveMessageWithIdToDoc();
-    this.channelMessagesService.getChannelMessageFromFirestore();
+    this.channelMessagesService.getChannelMessageFromFirestore();   
     this.messageData.push(this.newMessage);
     this.dialogAddService.channelMessage.push(this.newMessage);
     this.messageText = '';

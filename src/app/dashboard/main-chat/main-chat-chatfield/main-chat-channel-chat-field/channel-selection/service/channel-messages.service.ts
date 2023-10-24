@@ -82,16 +82,16 @@ export class ChannelMessagesService {
       (tagsData) => tagsData.id === selectedChannelId
     );
     console.log(selectedChannelData);
-    // if (selectedChannelData) {
-    //   this.increaseChannelMessageCount(selectedChannelData);
-    //   const qData = doc(this.firestore, 'tags', selectedChannelId);
-    //   const newData = {
-    //     channelMessageAmount: selectedChannelData.channelMessageAmount,
-    //   };
-    //   this.tryUpdateToFirebase(qData, newData);
-    // } else {
-    //   console.error('Die ausgewählte Nachricht wurde im Array nicht gefunden.');
-    // }
+    if (selectedChannelData) {
+      this.increaseChannelMessageCount(selectedChannelData);
+      const qData = doc(this.firestore, 'tags', selectedChannelId);
+      const newData = {
+        channelMessageAmount: selectedChannelData.channelMessageAmount,
+      };
+      this.tryUpdateToFirebase(qData, newData);
+    } else {
+      console.error('Die ausgewählte Nachricht wurde im Array nicht gefunden.');
+    }
   }
 
   // funktion zum hochzählen der messages

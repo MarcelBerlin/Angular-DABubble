@@ -23,7 +23,7 @@ import { MessageInputServiceService } from 'src/app/message-input/service/messag
 })
 export class ChannelSelectionComponent implements OnInit {
   hoveredMessagesMainChat: boolean = false;
-  
+
   chatText: string = '';
   messages$: any = [];
   messageData: any = [];
@@ -36,7 +36,8 @@ export class ChannelSelectionComponent implements OnInit {
   emoji: string = '';
   reactionArrRight: any = [];
   reactionArrLeft: any = [];
-  isThereAnAnswer: boolean = false;  
+  isThereAnAnswer: boolean = false;
+  emptyChat: boolean = false;
 
   constructor(
     private firestore: Firestore,
@@ -54,20 +55,18 @@ export class ChannelSelectionComponent implements OnInit {
     public answerService: SecondaryChatAnswerService,
     public secondaryAnswerService: SecondaryChatAnswerService,
     public inputService: MessageInputServiceService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     
   }
 
-  checkIfChannelIsEmpty() {
-
-    console.log(this.dialogAdd.channelMessageAmount);
-    if (this.dialogAdd.channelMessageAmount < 1) {
-      return true;
-    } else return false;   
+  ngOnInit(): void {    
   }
-  
+
+  checkIfChannelIsEmpty() {    
+    if (this.dialogAdd.channelMessageAmount < 1) {
+      return false;
+    } else return true;   
+  }
 
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
@@ -100,7 +99,6 @@ export class ChannelSelectionComponent implements OnInit {
       this.isThereAnAnswer = false;
     }
   }
-   
 
   public addEmojiRight(event) {
     this.chatEmojiRight = true;
@@ -163,11 +161,8 @@ export class ChannelSelectionComponent implements OnInit {
     }
   }
 
-
-
   showInfoBox: number = -1;
   timeoutArray: any[] = [];
-
 
   /**
    * Displays additional information or an info box for an item or element at the specified index.
@@ -175,14 +170,13 @@ export class ChannelSelectionComponent implements OnInit {
    * @param {number} index - The index of the item or element for which to display information.
    * @returns {void}
    */
-  showInfoOutput(index: number, i: number):void{
+  showInfoOutput(index: number, i: number): void {
     this.clearTimoutArray();
     const indexString = index.toString();
     const iString = i.toString();
-    const newNumber = +(indexString + iString)
+    const newNumber = +(indexString + iString);
     this.showInfoBox = newNumber;
   }
-
 
   /**
    * Creates a unique information ID by combining two numbers.
@@ -191,23 +185,22 @@ export class ChannelSelectionComponent implements OnInit {
    * @param {number} i - The second number to be combined.
    * @returns {number} A new unique information ID.
    */
-  createInfoId(index: number, i: number): number{
+  createInfoId(index: number, i: number): number {
     const indexString = index.toString();
     const iString = i.toString();
     const newNumber = +(indexString + iString);
     return newNumber;
   }
 
-  
   /**
    * Hides or closes the currently displayed information or info box.
-   * 
+   *
    * @returns {void}
    */
   hideInfoOutput(): void {
     let leaveTimeOut = setTimeout(() => {
       this.showInfoBox = -1;
-    }, 500)
+    }, 500);
     this.timeoutArray.push(leaveTimeOut);
   }
 
@@ -223,7 +216,7 @@ export class ChannelSelectionComponent implements OnInit {
     }
   }
 
-  console(entry){
+  console(entry) {
     console.log(entry);
   }
 }
