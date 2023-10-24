@@ -443,3 +443,24 @@
   cursor: pointer;
   color: blue;
 }
+
+
+
+.messageBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  min-height: 55px;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
+  padding: 0 24px;
+
+  .message {
+    font-family: "Nunito", "NotoColorEmojiLimited";
+    font-weight: 400;
+    font-size: 18px;
+    margin: 16px;
+  }
+}

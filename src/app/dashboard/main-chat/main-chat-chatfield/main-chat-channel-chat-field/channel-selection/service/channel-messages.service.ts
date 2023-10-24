@@ -40,6 +40,8 @@ export class ChannelMessagesService {
       );      
       
     });
+    setTimeout(() => { console.log(this.messageData[5].content);}, 10000)
+    
   }
 
   

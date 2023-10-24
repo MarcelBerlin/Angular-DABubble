@@ -15,7 +15,7 @@ import { ChannelTimeStamp } from './models/channel-timestamp.class';
 import { Messages } from 'src/app/models/messages.interface';
 import { ChannelMessagesService } from './service/channel-messages.service';
 import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/service/secondary-chat-answer.service';
-
+import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
 @Component({
   selector: 'app-channel-selection',
   templateUrl: './channel-selection.component.html',
@@ -53,6 +53,7 @@ export class ChannelSelectionComponent implements OnInit {
     public channelMessages: ChannelMessagesService,
     public answerService: SecondaryChatAnswerService,
     public secondaryAnswerService: SecondaryChatAnswerService,
+    public inputService: MessageInputServiceService
   ) {}
 
   ngOnInit(): void {
@@ -160,5 +161,69 @@ export class ChannelSelectionComponent implements OnInit {
       reactionBarLeft.innerHTML =
         'zu viele reaktionen. Wir arbeiten gerade daran 🙁';
     }
+  }
+
+
+
+  showInfoBox: number = -1;
+  timeoutArray: any[] = [];
+
+
+  /**
+   * Displays additional information or an info box for an item or element at the specified index.
+   *
+   * @param {number} index - The index of the item or element for which to display information.
+   * @returns {void}
+   */
+  showInfoOutput(index: number, i: number):void{
+    this.clearTimoutArray();
+    const indexString = index.toString();
+    const iString = i.toString();
+    const newNumber = +(indexString + iString)
+    this.showInfoBox = newNumber;
+  }
+
+
+  /**
+   * Creates a unique information ID by combining two numbers.
+   *
+   * @param {number} index - The first number to be combined.
+   * @param {number} i - The second number to be combined.
+   * @returns {number} A new unique information ID.
+   */
+  createInfoId(index: number, i: number): number{
+    const indexString = index.toString();
+    const iString = i.toString();
+    const newNumber = +(indexString + iString);
+    return newNumber;
+  }
+
+  
+  /**
+   * Hides or closes the currently displayed information or info box.
+   * 
+   * @returns {void}
+   */
+  hideInfoOutput(): void {
+    let leaveTimeOut = setTimeout(() => {
+      this.showInfoBox = -1;
+    }, 500)
+    this.timeoutArray.push(leaveTimeOut);
+  }
+
+  /**
+   * Clears all timeouts stored in the timeoutArray.
+   *
+   * @returns {void}
+   */
+  clearTimoutArray(): void {
+    for (let i = 0; i < this.timeoutArray.length; i++) {
+      const element = this.timeoutArray[i];
+      clearTimeout(element);
+    }
+  }
+
+  console(entry){
+    console.log(entry);
   }
 }
