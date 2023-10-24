@@ -23,7 +23,8 @@ import { ChannelTimeStamp } from '../dashboard/main-chat/main-chat-chatfield/mai
 import { DirectChatServiceService } from '../direct-chat/services/direct-chat-service.service';
 import { ChannelTimestampService } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-timestamp.service';
 import { ChannelMessagesService } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/service/channel-messages.service';
-import { ChannelSelectionComponent } from '../dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/channel-selection.component';
+import { Subject } from 'rxjs';
+import { EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +41,9 @@ export class MessageService {
   selectedChannel: string = '';
   emojis: any = [];
   tags: any; // ADDED BY FELIX
-  dateString: string = '';
+  dateString: string = '';  
+  private emptyChatSubject = new Subject<boolean>()
+  emptyChat$ = this.emptyChatSubject.asObservable();  
   
 
   constructor(
@@ -51,7 +54,8 @@ export class MessageService {
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService,
     private channelTimestampService: ChannelTimestampService,
-    private channelMessagesService: ChannelMessagesService,    
+    private channelMessagesService: ChannelMessagesService,  
+        
   ) {}
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
@@ -62,8 +66,9 @@ export class MessageService {
     this.channelMessagesService.getChannelMessageFromFirestore();   
     this.messageData.push(this.newMessage);
     this.dialogAddService.channelMessage.push(this.newMessage);
-    this.messageText = '';
-    console.log(this.newMessage);    
+    this.messageText = '';    
+    console.log(this.newMessage);  
+      
   }
 
   UserAndMessageDetails() {
@@ -106,6 +111,7 @@ export class MessageService {
       console.log('update doc failed!!');
     }
   }
+ 
 
   async loadChannelMessages(channelId: string) {
     const coll = collection(this.firestore, 'messages');

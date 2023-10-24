@@ -16,12 +16,16 @@ import { Messages } from 'src/app/models/messages.interface';
 import { ChannelMessagesService } from './service/channel-messages.service';
 import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/service/secondary-chat-answer.service';
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
+import { Subscription } from 'rxjs';
+
+
 @Component({
   selector: 'app-channel-selection',
   templateUrl: './channel-selection.component.html',
   styleUrls: ['./channel-selection.component.scss'],
 })
 export class ChannelSelectionComponent implements OnInit {
+
   hoveredMessagesMainChat: boolean = false;
 
   chatText: string = '';
@@ -38,6 +42,7 @@ export class ChannelSelectionComponent implements OnInit {
   reactionArrLeft: any = [];
   isThereAnAnswer: boolean = false;
   emptyChat: boolean = false;
+  private emptyChatSubscription: Subscription;
 
   constructor(
     private firestore: Firestore,
@@ -54,20 +59,36 @@ export class ChannelSelectionComponent implements OnInit {
     public channelMessages: ChannelMessagesService,
     public answerService: SecondaryChatAnswerService,
     public secondaryAnswerService: SecondaryChatAnswerService,
-    public inputService: MessageInputServiceService
+    public inputService: MessageInputServiceService,
+    
   ) {
     
   }
 
-  ngOnInit(): void {    
+  ngOnInit() { 
+    this.emptyChatSubscription = this.messageService.emptyChat$.subscribe((isEmpty) => {
+      this.emptyChat = isEmpty;
+    });
   }
 
-  checkIfChannelIsEmpty() {    
-    if (this.dialogAdd.channelMessageAmount < 1) {
-      return false;
-    } else return true;   
+  ngOnDestroy() {
+    this.emptyChatSubscription.unsubscribe();
   }
 
+  checkIfChannelIsEmpty() { 
+    if (this.channelMessages.MessageAmount === 0) {
+      this.emptyChat = true;
+    } else {
+      this.emptyChat = false;
+    }       
+  }
+
+  get isChannelEmpty() {
+    this.checkIfChannelIsEmpty();
+    return this.emptyChat;
+  }
+
+  
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
    *
