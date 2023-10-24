@@ -203,6 +203,7 @@ export class MessageInputComponent {
     this.renderer.appendChild(inputDiv, emptySpan);
     this.inputService.inputLinks[this.inputService.setId] = this.inputService.createLinkInfo();
     this.setCursorWithClick(`${this.inputService.setId}` + 'Span');
+    this.inputService.enableSendButton();
   }
 
 
@@ -345,10 +346,8 @@ export class MessageInputComponent {
       this.inputService.contentArray = [];
       document.getElementById('inputDiv').innerHTML = '';
       setTimeout(() => { this.restorePlaceholder(); }, 500);
-    }
-    if(this.varService.mainChatHead == 0){
+    } else if(this.varService.mainChatHead == 0){
       this.messageService.newMessage.content = this.saveHTMLTagsAndText();
-      console.log(this.messageService.newMessage.content);
       document.getElementById('inputDiv').innerHTML = '';
       this.messageService.addMessage();
       setTimeout(() => { this.restorePlaceholder(); }, 500);
