@@ -106,7 +106,7 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
-      // console.log(this.tags); // bitte lassen. Basti
+      console.log(this.tags); // bitte lassen. Basti
       // console.log(this.getUserData.userData); // bitte lassen. Basti
 
     });
