@@ -38,7 +38,6 @@ export class ChannelMessagesService {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
       );      
-      
     });
   }
 
