@@ -38,10 +38,7 @@ export class ChannelMessagesService {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
       );      
-      
     });
-    setTimeout(() => { console.log(this.messageData[5].content);}, 10000)
-    
   }
 
   
