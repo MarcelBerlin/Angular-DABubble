@@ -9,6 +9,14 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SecondaryChatAnswerService } from '../service/secondary-chat-answer.service';
+import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
+import { EmojiPickerBossiService } from 'src/app/emoji-picker-bossi/services/emoji-picker-bossi.service';
+import { AddUserToMessageService } from 'src/app/services/add-user-to-message.service';
+import { MatDialog } from '@angular/material/dialog';
+import { NewMessageAmountService } from 'src/app/direct-chat/services/new-message-amount.service';
+import { FileUploadService } from 'src/app/file-upload/services/file-upload.service';
+import { UploadService } from 'src/app/file-upload/services/upload.service';
+import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
 
 @Component({
   selector: 'app-secondary-chat-inputfield',
@@ -30,12 +38,28 @@ export class SecondaryChatInputfieldComponent {
   loggedUser: string = '';
   searchField: string = '';
 
-  constructor(public varService: VariablesService,
+  constructor(
+    public varService: VariablesService,
     public dataService: DataService,
     public dialogAddService: DialogAddService,
     public messageService: MessageService,
     public chatService: ChatService,
-    public answerService: SecondaryChatAnswerService
+    public answerService: SecondaryChatAnswerService,
+
+    // public varService: VariablesService,
+    // public dataService: DataService,
+    // public dialogAddService: DialogAddService,
+    // public messageService: MessageService,
+    // public chatService: ChatService,
+    public directChatService: DirectChatService,
+    public emojiService: EmojiPickerBossiService,
+    public addUserToMessageService: AddUserToMessageService,
+    public dialog: MatDialog,
+    private newMessageAmountService: NewMessageAmountService,
+    public fileUploadService: FileUploadService,
+    public uploadService: UploadService,
+    private messageInputService:  MessageInputServiceService
+    
   ) { }
 
   
@@ -88,4 +112,74 @@ export class SecondaryChatInputfieldComponent {
   markUser() {
     // this.textarea = '@'+ this.dataService.userData[this.varService.selectedChannel].name;
   }
+
+
+
+  // Bossi#####################################
+
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
+  currentUser() {
+    return (
+      this.dataService.loggedInUserData.email ===
+      this.dataService.userData[this.varService.selectedUserToMessage].email
+    );
+  }
+
+
+  send() {
+    // this.messageSend();
+  }
+
+
+  messageSend() {
+    // if (this.varService.mainChatHead == 0 && this.messageService.messageText.length >= 1) {
+    //   this.messageService.addMessage();   
+    //   this.messageService.messageText = '';
+    // }
+    if(this.varService.mainChatHead == 0 && this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
+      this.messageInputService.resetVariables();
+      this.messageInputService.setMyVariable(true);
+      
+      this.messageInputService.sendButtonEnabled = false;
+    }
+
+
+    // add by Bossi for directChatService
+    if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
+      if(this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
+        this.messageInputService.resetVariables();
+        this.messageInputService.setMyVariable(true);
+        this.newMessageAmountService.addPartnerDirectChatMessageAmount();
+        this.messageInputService.sendButtonEnabled = false;
+      }
+    }
+    if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser() ){
+      if(this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
+      this.messageInputService.resetVariables();
+      this.messageInputService.setMyVariable(true) ;
+      this.messageInputService.sendButtonEnabled = false;
+      }
+    }
+  }
+
+  addSign() {
+    this.varService.sign = !this.varService.sign;
+  }
+
+
+  /**
+   * Opens the file explorer dialog for uploading a file.
+   * Sets the profile image upload flag to false and set base path for storage.
+   * 
+   * @returns {void}
+   */
+  openFileExplorer(): void {
+    let today: Date = new Date();
+    this.fileUploadService.profileImgUpload = false;
+    this.fileUploadService.basePath ='/uploads/' + this.dataService.loggedInUserData.userId + '/files/' + today.getTime().toString();
+    this.fileInput.nativeElement.click();
+  }
+
+
 }

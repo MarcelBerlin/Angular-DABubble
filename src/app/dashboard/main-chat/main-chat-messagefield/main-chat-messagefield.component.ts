@@ -40,6 +40,7 @@ export class MainChatMessagefieldComponent {
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
     private messageInputService:  MessageInputServiceService
+    
   ) { }
   
 
