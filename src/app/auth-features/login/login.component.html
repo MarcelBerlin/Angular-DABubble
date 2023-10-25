@@ -111,12 +111,10 @@
         </mat-card>
       </form>
 
-      <!-- für imprintDataProtection geändert Basti -->
-      <div class="imprintDataProtection">
+      <!-- für imprintDataProtection geändert Basti && window.innerWidth <= 800 Changed by Felix -->
+      <div class="imprintDataProtection" *ngIf="varService.windowWidth <= 800">
         <span (click)="openImprintDataProtection('imprint')">Impressum</span>
-        <span (click)="openImprintDataProtection('dataProtection')"
-          >Datenschutz</span
-        >
+        <span (click)="openImprintDataProtection('dataProtection')">Datenschutz</span>
       </div>
     </div>
     <app-imprint-data-protection

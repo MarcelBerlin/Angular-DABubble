@@ -20,6 +20,7 @@ export class ChannelMessagesService {
   selectedMessageId: string = '';
   currentDate: string = new Date().toISOString().split('T')[0]; // Aktuelles Tagesdatum im Format "YYYY-MM-DD";
   currentChannelId: string = '';
+  MessageAmount: number;
 
   constructor(
     private firestore: Firestore,

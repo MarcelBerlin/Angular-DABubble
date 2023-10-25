@@ -63,7 +63,7 @@ export class MenuSidenavComponent implements OnInit {
   arrowStateChannel: boolean = true;
   arrowStateMessage: boolean = true;
   channelID: string = '';
-
+  selChannelMessageAmount: number;
 
   channelsVisible: boolean = true;
   hover: boolean = false;
@@ -106,7 +106,7 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
-      // console.log(this.tags); // bitte lassen. Basti
+      console.log(this.tags); // bitte lassen. Basti
       // console.log(this.getUserData.userData); // bitte lassen. Basti
 
     });
@@ -235,8 +235,8 @@ export class MenuSidenavComponent implements OnInit {
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
     const channelId = selectedChannel.id;    
-    this.channelMessageService.currentChannelId = channelId;
-    // this.getService.channelMessageAmount = selectedChannel.channelMessageAmount;
+    this.channelMessageService.currentChannelId = channelId;    
+    this.channelMessageService.MessageAmount = selectedChannel.channelMessageAmount;     
     if (innerWidth <= 800){
       this.dcshService.hideNavigation = true; 
     }   
