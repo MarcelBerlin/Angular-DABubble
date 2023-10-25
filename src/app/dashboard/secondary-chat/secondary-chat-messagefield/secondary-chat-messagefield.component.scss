@@ -6,13 +6,13 @@
     top: 115px;
     bottom: 185px;
     right: 12px;
-    left: 30px;    
+    left: 30px;
     overflow-y: scroll;
 
     &::-webkit-scrollbar {
       width: 0;
     }
-  
+
 
     .full-message-left {
       position: relative;
@@ -60,10 +60,23 @@
         }
 
         .message-content-left {
+          // background-color: #eceefe;
+          // border-radius: 0 20px 20px 20px;
+          // width: fit-content;
+          // padding: 16px;
+
+          display: flex;
           background-color: #eceefe;
-          border-radius: 0 20px 20px 20px;
+          justify-content: center;
+          align-items: center;
           width: fit-content;
-          padding: 16px;
+          min-height: 55px;
+          border-top-right-radius: 30px;
+          border-bottom-left-radius: 30px;
+          border-bottom-right-radius: 30px;
+          padding: 0 24px;
+          font-family: "Nunito", "NotoColorEmojiLimited";
+          max-width: 70%;
 
           span {
             font-size: 16px;
@@ -118,10 +131,23 @@
         }
 
         .message-content-right {
+          // background-color: #eceefe;
+          // border-radius: 0 20px 20px 20px;
+          // width: fit-content;
+          // padding: 16px;
+
+          display: flex;
           background-color: #eceefe;
-          border-radius: 0 20px 20px 20px;
+          justify-content: center;
+          align-items: center;
           width: fit-content;
-          padding: 16px;
+          min-height: 55px;
+          border-top-left-radius: 30px;
+          border-bottom-right-radius: 30px;
+          border-bottom-left-radius: 30px;
+          padding: 0 24px;
+          font-family: "Nunito", "NotoColorEmojiLimited";
+          max-width: 70%;
 
           span {
             font-size: 16px;
@@ -264,15 +290,30 @@
       flex-direction: column;
       // border-bottom: 1px solid #eeebeb;
 
+      // .single-message-right-container {
+      //   position: relative;
+      //   transition: all 125ms ease-in-out;
+
+      //   &:hover {
+      //     cursor: pointer;
+      //     background-color: #eceefe;
+      //     transition: all 125ms ease-in-out;
+      //   }
+      // }
+
       .single-message-right-container {
         position: relative;
         transition: all 125ms ease-in-out;
-
+  
         &:hover {
           cursor: pointer;
           background-color: #eceefe;
           transition: all 125ms ease-in-out;
         }
+      }
+  
+      .single-message-right-container:hover .message-content-right {
+        background-color: white;
       }
 
       .avatar-right {
@@ -362,16 +403,17 @@
           }
         }
 
-        .message-content-right {
-          color: white;
-          background-color: #797ef3;
-          border-radius: 20px 0 20px 20px;
-          width: auto;
-          padding: 16px;
-          span {
-            font-size: 16px;
-          }
-        }
+        // .message-content-right {
+        //   color: white;
+        //   background-color: #797ef3;
+        //   border-radius: 20px 0 20px 20px;
+        //   width: auto;
+        //   padding: 16px;
+
+        //   span {
+        //     font-size: 16px;
+        //   }
+        // }
       }
 
       .reaction-bar-right {
@@ -481,4 +523,97 @@
       left: 100px;
     }
   }
+}
+
+
+
+// ###############################Bossi
+
+
+// .messageBox {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: fit-content;
+//   min-height: 55px;
+//   border-top-left-radius: 30px;
+//   border-bottom-right-radius: 30px;
+//   border-bottom-left-radius: 30px;
+//   padding: 0 24px;
+
+//   .message {
+//     font-family: "Nunito", "NotoColorEmojiLimited";
+//     font-weight: 400;
+//     font-size: 18px;
+//     margin: 16px;
+//   }
+// }
+
+
+.infoBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 25px;
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid lightgrey;
+  border-radius: 30px;
+  padding: 16px;
+  background-color: white;
+  box-shadow: 5px 5px 15px -2px #000000;
+  z-index: 10;
+
+  span{
+    color: black;
+  }
+
+  img {
+    fill: red;
+    max-height: 200px;
+    max-width: 200px;
+    width: auto;
+    height: auto;
+  }
+
+  .element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #eceefe;
+    }
+
+    .mat-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: unset !important;
+      top: 8px;
+      right: 8px;
+      width: 40px;
+      height: 40px;
+    }
+
+  }
+
+
+}
+
+.outputBox {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 16px;
+  gap: 8px;
+}
+
+.output {
+  display: flex;
 }
