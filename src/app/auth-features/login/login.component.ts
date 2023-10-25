@@ -8,6 +8,8 @@ import { DialogInfoService } from '../../services/dialog-info.service';
 import { Login } from '../../login';
 import { DataService } from '../../services/data.service';
 import { User } from '../../models/user.class';
+import { VariablesService } from 'src/app/services/variables.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -40,6 +42,7 @@ export class LoginComponent {
     public dialog: MatDialog,
     public dialogInfoService: DialogInfoService,
     private dataService: DataService,
+    public varService: VariablesService
   ) {
     this.dataService.forgotPasswordMenu = false;
   }

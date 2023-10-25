@@ -111,7 +111,7 @@
           align-items: center;
           padding: 4px 0px 4px 20px;
           cursor: pointer;
-          
+
           img {
             padding-right: 5px;
             margin-left: -5px;
@@ -262,7 +262,7 @@
   // border-radius: 10px;
 }
 
-.resp-header{
+.resp-header {
   display: flex;
   align-items: center;
   height: 60px;
@@ -388,6 +388,7 @@
   .content {
     width: calc(100% - 20px) !important;
   }
+
   .sidenavHeaderContainer {
     padding-left: 0 !important;
 
@@ -401,7 +402,6 @@
   }
 
   .channelAndMessage {
-    left: -5px !important;
 
     .pointer {
       font-size: 15px !important;
