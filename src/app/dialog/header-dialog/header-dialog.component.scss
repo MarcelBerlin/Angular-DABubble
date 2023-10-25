@@ -1,5 +1,6 @@
 .user-container {
     position: relative;
+
     .custom-menu {
         position: fixed !important;
         right: 3%;
@@ -44,6 +45,7 @@
             border-radius: 50%;
             width: 150px;
             height: 150px;
+            object-fit: cover;
         }
 
         .edit-div {
@@ -114,4 +116,18 @@
 .mat-mdc-dialog-container .mdc-dialog__surface {
     position: absolute !important;
     left: 100px !important;
+}
+
+@media (max-width: 1000px) {
+    .user-container {
+
+        .user-profile {
+            width: unset !important;
+            height: unset !important;
+        }
+
+        .custom-menu {
+            position: unset !important;
+        }
+    }
 }

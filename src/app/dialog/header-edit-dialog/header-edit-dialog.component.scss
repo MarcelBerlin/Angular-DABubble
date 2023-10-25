@@ -113,3 +113,26 @@
     }
   }
 }
+
+@media (max-width: 1000px) {
+  .user-overview {
+    position: unset !important;
+
+    .user-profile {
+      max-height: 85vh !important;
+      overflow-x: hidden !important;
+    }
+
+    .custom-menu {
+      position: unset !important;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .btn-container {
+    flex-direction: column-reverse;
+    align-items: unset !important;
+    gap: 10px !important;
+  }
+}

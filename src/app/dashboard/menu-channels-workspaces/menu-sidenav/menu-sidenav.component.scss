@@ -402,6 +402,7 @@
   }
 
   .channelAndMessage {
+    min-height: fit-content;
 
     .pointer {
       font-size: 15px !important;
@@ -446,7 +447,8 @@
   .channels-container {
     gap: 5px !important;
   }
+}
 
-
+@media (max-width: 500px) {
 
 }
