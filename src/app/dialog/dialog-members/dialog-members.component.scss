@@ -1,13 +1,16 @@
 mat-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 415px;
+
   mat-card-title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 335px;
     margin: 40px 0;
+
     .close {
       display: flex;
       justify-content: center;
@@ -19,12 +22,14 @@ mat-card {
       font-weight: 500;
       border: 100%;
       cursor: pointer;
+
       &:hover {
         background-color: #eceefe;
         color: #535af1;
       }
     }
   }
+
   mat-card-content {
     display: flex;
     flex-direction: column;
@@ -42,10 +47,12 @@ mat-card {
       padding: 0 24px;
       border-radius: 40px;
       cursor: pointer;
+
       &:hover {
         transition: background-color 300ms;
         background-color: #eceefe;
       }
+
       span {
         display: flex;
         align-items: center;
@@ -53,12 +60,14 @@ mat-card {
         font-family: "Nunito";
         font-weight: 400;
         font-size: 18px;
+
         img {
           width: 50px;
           height: 50px;
           border-radius: 30px;
         }
       }
+
       .activeDot {
         position: absolute;
         top: 40px;
@@ -70,6 +79,7 @@ mat-card {
       }
     }
   }
+
   .userAdd {
     display: flex;
     justify-content: center;
@@ -80,12 +90,15 @@ mat-card {
     margin-bottom: 40px;
     gap: 15px;
     cursor: pointer;
+
     &:hover {
       background-color: #eceefe;
+
       span {
         color: #535af1;
       }
     }
+
     div {
       display: flex;
       justify-content: center;
@@ -95,6 +108,7 @@ mat-card {
       border-radius: 20px;
       background-color: #eceefe;
     }
+
     span {
       text-align: center;
       font-family: "Nunito";
@@ -104,7 +118,30 @@ mat-card {
   }
 
 }
+
 .mat-mdc-card {
   border-radius: 30px;
 }
 
+@media (max-width: 800px) {
+  mat-card {
+    width: unset !important;
+
+    mat-card-title {
+      justify-content: space-around !important;
+      width: -webkit-fill-available !important;
+      margin: 20px 0 !important;
+    }
+
+    mat-card-content {
+      width: unset !important;
+      margin: 0 !important;
+      gap: 16px !important;
+      padding-bottom: 36px !important;
+    }
+  }
+
+  .mat-mdc-card {
+    border-radius: unset !important;
+  }
+}

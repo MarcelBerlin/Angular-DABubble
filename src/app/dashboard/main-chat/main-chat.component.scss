@@ -1,8 +1,9 @@
 .contentContainer {
   position: relative;
+
   .chatContainer {
     position: absolute;
-    top: 115px;
+    top: 100px;
     bottom: 185px;
     right: 12px;
     left: 12px;
@@ -11,7 +12,7 @@
     align-items: center;
     // justify-content: center;
     overflow-y: scroll;
-    
+
     app-direct-chat,
     app-main-chat-channel-chat-field {
       width: 100%;
@@ -21,6 +22,6 @@
   }
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 0px !important;
 }

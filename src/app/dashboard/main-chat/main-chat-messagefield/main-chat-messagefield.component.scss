@@ -125,3 +125,10 @@ app-user-to-message {
   background-color: rgba(0, 0, 0, 0.08);
   z-index: 100;
 }
+
+@media (max-width: 800px) {
+  .inputContainer {
+    bottom: 12px !important;
+    // height: 80px !important;
+  }
+}

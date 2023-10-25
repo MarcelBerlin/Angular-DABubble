@@ -18,13 +18,13 @@
     font-size: 18px;
     color: black;
     caret-color: blue;
-  
-    a{
+
+    a {
       overflow: hidden;
       user-select: none;
     }
 
-    span{
+    span {
       overflow: hidden;
       user-select: none;
       text-wrap: wrap;
@@ -41,11 +41,11 @@
       text-decoration: none;
     }
 
-    .placeholder{
+    .placeholder {
       font-family: "Nunito", "NotoColorEmojiLimited";
       font-weight: 400;
       font-size: 18px;
-      color: #999; 
+      color: #999;
     }
   }
 }
@@ -75,20 +75,20 @@
     height: 40px;
     border-radius: 30px;
     cursor: pointer;
-  
+
     img {
       fill: red;
     }
-  
+
     &:hover {
       background-color: #eceefe;
     }
   }
 
-  img{
-    max-height: 200px; 
-    max-width: 200px; 
-    width: auto; 
+  img {
+    max-height: 200px;
+    max-width: 200px;
+    width: auto;
     height: auto;
   }
 

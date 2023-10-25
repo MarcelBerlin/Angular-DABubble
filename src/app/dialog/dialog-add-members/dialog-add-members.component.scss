@@ -5,9 +5,11 @@ mat-card {
   width: 515px;
   height: 295px;
   padding: 40px;
+
   mat-card-title {
     display: flex;
     justify-content: space-between;
+
     .close {
       display: flex;
       justify-content: center;
@@ -19,21 +21,25 @@ mat-card {
       font-weight: 500;
       border: 100%;
       cursor: pointer;
+
       &:hover {
         background-color: #eceefe;
         color: #535af1;
       }
     }
   }
+
   mat-card-content {
     display: flex;
     flex-direction: column;
     padding-left: 0;
+
     .headContainer {
       display: flex;
       align-items: center;
       margin-bottom: 15px;
       gap: 10px;
+
       span {
         font-family: "Nunito";
         font-weight: 400;
@@ -41,6 +47,7 @@ mat-card {
         color: #797ef3;
       }
     }
+
     .inputContainer {
       display: flex;
       align-items: center;
@@ -49,6 +56,7 @@ mat-card {
       border-radius: 30px;
       margin: 15px 0;
       border: 1px solid lightgrey;
+
       input {
         width: 394px;
         height: 25px;
@@ -60,6 +68,7 @@ mat-card {
         outline: none;
       }
     }
+
     .buttonContainer {
       display: flex;
       justify-content: flex-end;
@@ -83,15 +92,18 @@ mat-card {
   display: flex;
   align-items: center;
   gap: 10px;
+
   .imgContainer {
     position: relative;
     width: 35px;
     height: 35px;
+
     img {
       width: 35px;
       height: 35px;
       border-radius: 100%;
     }
+
     .activeDot {
       position: absolute;
       top: 23px;
@@ -100,6 +112,39 @@ mat-card {
       height: 10px;
       border-radius: 100%;
       border: 2px solid white;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  mat-card {
+    width: unset !important;
+    height: unset !important;
+    padding: 30px !important;
+
+    mat-card-content {
+      padding-left: unset !important;
+
+      .headContainer {
+        justify-content: center;
+      }
+
+      .inputContainer {
+        width: unset !important;
+        height: 40px !important;
+        padding: 8px;
+
+        input {
+          width: unset !important;
+          height: unset !important;
+          font-size: 16px !important;
+        }
+      }
+
+      .buttonContainer {
+        justify-content: center;
+        padding-top: 8px;
+      }
     }
   }
 }

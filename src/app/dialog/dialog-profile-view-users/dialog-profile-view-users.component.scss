@@ -3,14 +3,17 @@ mat-card {
   height: 700px;
   background-color: white;
   border: none;
+
   mat-card-title {
     display: flex;
     justify-content: space-between;
     margin: 40px;
+
     .close {
       cursor: pointer;
     }
   }
+
   mat-card-content {
     display: flex;
     flex-direction: column;
@@ -18,15 +21,18 @@ mat-card {
     width: 100%;
     height: 450px;
     padding: 0;
+
     .avatarContainer {
       width: 200px;
       height: 200px;
+
       img {
         width: 200px;
         height: 200px;
         border-radius: 50%;
       }
     }
+
     .name {
       width: 420px;
       margin-top: 40px;
@@ -34,23 +40,27 @@ mat-card {
       font-weight: 700;
       font-size: 32px;
     }
+
     .active {
       display: flex;
       width: 420px;
       margin-top: 32px;
       gap: 15px;
+
       div {
         width: 16px;
         height: 16px;
         border-radius: 50%;
         background-color: #92c83e;
       }
+
       .online {
         color: #92c83e;
         font-family: "Nunito";
         font-weight: 400;
         font-size: 20px;
       }
+
       .offline {
         color: #686868;
         font-family: "Nunito";
@@ -58,18 +68,21 @@ mat-card {
         font-size: 20px;
       }
     }
+
     .email {
       display: flex;
       align-items: center;
       width: 420px;
       margin-top: 40px;
       gap: 20px;
+
       span {
         font-family: "Nunito";
         font-weight: 700;
         font-size: 20px;
       }
     }
+
     .emailAddress {
       width: 400px;
       margin-top: 16px;
@@ -80,11 +93,13 @@ mat-card {
       color: #1381ff;
     }
   }
+
   .buttonContainer {
     display: flex;
     justify-content: center;
     width: 100%;
     margin-top: 32px;
+
     button {
       width: 164px;
       height: 48px;
@@ -98,4 +113,57 @@ mat-card {
 
 .mat-mdc-card {
   border-radius: 30px !important;
+}
+
+@media (max-width: 800px) {
+  .mat-mdc-card {
+    border-radius: 0 !important;
+  }
+
+  mat-card {
+    width: unset !important;
+    height: unset !important;
+
+    mat-card-title {
+      margin: 20px !important;
+    }
+
+    mat-card-content {
+      width: unset !important;
+      height: unset !important;
+
+      .avatarContainer {
+        width: 120px !important;
+        height: 120px !important;
+
+        img {
+          width: 120px !important;
+          height: 120px !important;
+        }
+      }
+
+      .name {
+        width: unset !important;
+      }
+
+      .active {
+        width: unset !important;
+      }
+
+      .email {
+        width: unset !important;
+      }
+
+      .emailAddress {
+        width: unset !important;
+        margin-left: 0 !important;
+        padding: 10px;
+      }
+
+      .buttonContainer {
+        margin-top: 16px !important;
+        margin-bottom: 16px;
+      }
+    }
+  }
 }

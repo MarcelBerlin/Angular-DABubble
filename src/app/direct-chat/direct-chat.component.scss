@@ -231,9 +231,9 @@
 
   img {
     fill: red;
-    max-height: 200px; 
-    max-width: 200px; 
-    width: auto; 
+    max-height: 200px;
+    max-width: 200px;
+    width: auto;
     height: auto;
   }
 
@@ -245,7 +245,7 @@
     height: 40px;
     border-radius: 30px;
     cursor: pointer;
-  
+
     &:hover {
       background-color: #eceefe;
     }
@@ -273,3 +273,39 @@ p {
   font-size: 18px;
 }
 
+@media (max-width: 1000px) {
+  .container {
+
+    .messagesMainChatRight {
+      margin: 0 !important; // 26px 0
+      border-radius: 12px;
+
+      .messageContent {
+        margin: 0 !important;
+        padding-left: 4px;
+
+        .nameTime {
+          height: unset !important;
+          font-size: 16px !important;
+        }
+      }
+    }
+
+    .messagesMainChatLeft {
+      margin: 0 !important; // 26px 0
+      border-radius: 12px;
+
+      .messageContent {
+        .nameTime {
+          height: unset !important;
+          font-size: 16px !important;
+        }
+      }
+    }
+  }
+
+  .outputBox {
+    margin: 6px 0px !important;
+  }
+
+}

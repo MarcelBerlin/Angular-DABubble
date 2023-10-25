@@ -118,12 +118,40 @@
     left: 100px !important;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 800px) {
     .user-container {
 
         .user-profile {
             width: unset !important;
             height: unset !important;
+        }
+
+        .custom-menu {
+            position: unset !important;
+        }
+    }
+}
+
+@media (max-width: 800px) and (max-height: 600px) {
+    .user-container {
+        position: unset !important;
+
+        .profile-overview-head {
+            padding: 0 !important;
+        }
+
+        .user-profile {
+            width: unset !important;
+            height: unset !important;
+
+            img {
+                width: 90px !important;
+                height: 90px !important;
+            }
+
+            .head-span {
+                font-size: 16px !important;
+            }
         }
 
         .custom-menu {
