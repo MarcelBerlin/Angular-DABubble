@@ -21,7 +21,7 @@
                 <!-- testarea new message Data format -->
 
                 <div class="outputBox">
-                  <div class="output" *ngFor="let entry of message.content; let index = index" (click)="console(entry)">
+                  <div class="output" *ngFor="let entry of message.content; let index = index">
                     <span *ngIf="entry.tagType == 'text'">
                       {{entry.content}}
 
@@ -95,7 +95,7 @@
                 <!-- testarea new message Data format -->
 
                 <div class="outputBox">
-                  <div class="output" *ngFor="let entry of message.content; let index = index" (click)="console(entry)">
+                  <div class="output" *ngFor="let entry of message.content; let index = index">
                     <span *ngIf="entry.tagType == 'text'">
                       {{entry.content}}
 
@@ -167,7 +167,56 @@
                   </div>
 
                   <div class="message-content-right">
-                    {{ answer.content }}
+                    <!-- {{ answer.content }} -->
+                    <!-- testarea new message Data format -->
+
+                    <div class="outputBox">
+                      <div class="output" *ngFor="let entry of answer.content;">
+                        <span *ngIf="entry.tagType == 'text'">
+                          {{entry.content}}
+
+                        </span>
+                        <span *ngIf="entry.tagType == 'SPAN'">
+                          {{entry.content}}
+                        </span>
+                        <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'EmojiType'">
+                          {{entry.content}}
+                        </span>
+
+                        <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'NameType'"
+                          class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"
+                          (mouseleave)="hideInfoOutput()">
+                          {{entry.content}}
+                          <span class="infoBox"
+                            *ngIf="entry.linkInfo[0].nameType == 'NameType' && showInfoBox == createInfoId(index, i)">
+                            <span>{{ entry.linkInfo[0].name }}</span>
+                            <span>{{ entry.linkInfo[0].emailContent }}</span>
+                          </span>
+                        </span>
+
+                        <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'FileType'"
+                          class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"
+                          (mouseleave)="hideInfoOutput()">
+                          {{entry.content}}
+                          <span class="infoBox"
+                            *ngIf="entry.linkInfo[0].nameType == 'FileType' && showInfoBox == createInfoId(index, i)">
+                            <div style="display: flex; justify-content: space-evenly; width: 100%;">
+                              <div class="element" title="Datei in neuen Tab öffnen">
+                                <mat-icon class="mat-icon"
+                                  (click)="inputService.openInNewTab(entry.linkInfo[0].linkTaget)">open_in_browser</mat-icon>
+                              </div>
+                            </div>
+                            <img src={{entry.linkInfo[0].linkTaget}} alt=""
+                              *ngIf="!inputService.fileIsPDF(entry.content)">
+                            <img src="../../assets/img/PDF.png" alt="" *ngIf="inputService.fileIsPDF(entry.content)">
+                          </span>
+                        </span>
+
+                      </div>
+                    </div>
+
+                    <!-- testarea new message Data format  end-->
+
                   </div>
                 </div>
               </div>
@@ -198,4 +247,3 @@
     </div>
   </div>
 </div>
-
