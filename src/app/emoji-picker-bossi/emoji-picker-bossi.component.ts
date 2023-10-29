@@ -3,6 +3,7 @@ import { EmojiPickerBossiService } from './services/emoji-picker-bossi.service';
 import { VariablesService } from '../services/variables.service';
 import { DataService } from '../services/data.service';
 import { MessageInputServiceService } from '../message-input/service/message-input-service.service';
+import { MessageInputThreadService } from '../message-input-thread/service/message-input-thread.service';
 
 @Component({
   selector: 'app-emoji-picker-bossi',
@@ -36,7 +37,8 @@ export class EmojiPickerBossiComponent {
     private emojiService: EmojiPickerBossiService,
     private varService: VariablesService,
     private dataService: DataService,
-    private messageInputService: MessageInputServiceService
+    private messageInputService: MessageInputServiceService,
+    private messageInputThreadService: MessageInputThreadService
   ) { }
 
 
@@ -157,17 +159,20 @@ export class EmojiPickerBossiComponent {
    * @returns {void}
    */
   setEmoji(x: any): void {
-    if(this.varService.mainChatHead == 1 && !this.currentUser()){
+    if(this.varService.mainChatHead == 1 && !this.currentUser() && this.emojiService.emojiSelectorActive){
       this.messageInputService.insertEmoji(x.emoji);
     }
-    if(this.varService.mainChatHead == 1 && this.currentUser()){
+    if(this.varService.mainChatHead == 1 && this.currentUser() && this.emojiService.emojiSelectorActive){
       this.messageInputService.insertEmoji(x.emoji);
     }
-    if(this.varService.mainChatHead == 0){
+    if(this.varService.mainChatHead == 0 && this.emojiService.emojiSelectorActive){
       this.messageInputService.insertEmoji(x.emoji);
     }
-    this.emojiService.toggleEmojiSelector();
-    
+    if(this.emojiService.emojiSelectorActiveThread){
+      this.messageInputThreadService.insertEmoji(x.emoji);
+    }
+    this.emojiService.emojiSelectorActive = false;
+    this.emojiService.emojiSelectorActiveThread = false;
   }
 
 

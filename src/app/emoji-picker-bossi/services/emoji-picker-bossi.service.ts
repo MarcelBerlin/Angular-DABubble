@@ -9,6 +9,7 @@ import { VariablesService } from 'src/app/services/variables.service';
 export class EmojiPickerBossiService {
   private jsonUrl = '../assets/emojis.json';
   emojiSelectorActive = false;
+  emojiSelectorActiveThread = false;
 
 
   constructor(private http: HttpClient, private varService: VariablesService) { }
@@ -33,7 +34,16 @@ export class EmojiPickerBossiService {
   toggleEmojiSelector(): void {
     if (this.varService.mainChatHead == 0 ||this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2) {
       this.emojiSelectorActive = !this.emojiSelectorActive;
+      this.emojiSelectorActiveThread = false;
     } else this.emojiSelectorActive = false;
+  }
+
+  toggleEmojiSelectorThread(): void {
+    console.log('thread');
+    if (this.varService.mainChatHead == 0 ||this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2) {
+      this.emojiSelectorActiveThread = !this.emojiSelectorActiveThread;
+      this.emojiSelectorActive = false;
+    } else this.emojiSelectorActiveThread = false;
   }
   
 }

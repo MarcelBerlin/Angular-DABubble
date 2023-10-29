@@ -60,6 +60,7 @@ export class MessageService {
 
   // Methode zum Hinzufügen einer Nachricht in Firebase
   async addMessage() {
+
     this.UserAndMessageDetails();
     this.addTimeStampToMessage();
     this.saveMessageWithIdToDoc();

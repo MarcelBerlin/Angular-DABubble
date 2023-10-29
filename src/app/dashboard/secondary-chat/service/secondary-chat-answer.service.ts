@@ -76,7 +76,8 @@ export class SecondaryChatAnswerService {
     this.newAnswer.userId = this.dataService.loggedInUserData.userId;
     this.newAnswer.userName = this.dataService.loggedInUserData.name;
     this.newAnswer.userImg = this.dataService.loggedInUserData.img;
-    this.newAnswer.content = this.answerText;
+    // hier wird die Antwort des Threads gespeichert.
+    // this.newAnswer.content = this.answerText;
   }
 
   addTimeStampToAnswer() {

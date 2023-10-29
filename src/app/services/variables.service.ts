@@ -16,6 +16,7 @@ export class VariablesService {
   indexOfSearch: number;
   previousScrollTop: number = 0; // for autoscroll functionality
   sign: boolean = false;
+  signThread: boolean = false;
   windowWidth: number;
   
 

@@ -1,10 +1,10 @@
-<div class="input-container">
+<!-- <div class="input-container">
 
     <div class="filter-menu">
         <input contenteditable="true" [(ngModel)]="answerService.answerText"  class="input-thread" *ngIf="showUsers" type="text"
-            placeholder="Antworten...">
+            placeholder="Antworten..."> -->
 
-        <!-- <mat-form-field appearance="fill" *ngIf="!showUsers">
+<!-- <mat-form-field appearance="fill" *ngIf="!showUsers">
             <input [(ngModel)]="userValue" class="mat-input" [formControl]="formcontrol" type="text" matInput
                 [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete">
@@ -14,12 +14,12 @@
             </mat-autocomplete>
         </mat-form-field> -->
 
-        
-    </div>
 
-    
+<!-- </div> -->
 
-    <div class="icons-container">
+
+
+<!-- <div class="icons-container">
         <div class="add-elements">
             <div (click)="triggerInput()" class="element-upload">
                 <input class="hidden-input" (change)="getInputDatas($event)" #uploadInput type="file">
@@ -35,58 +35,47 @@
         </div>
         <div class="send-icon"><img src="assets/img/send_icon.png" (click)="answerService.checkIfInputIsFilled()" /></div>
     </div>
-</div>
+</div> -->
 
 
 <!-- Bossi auskommentierten Text nicht löschen !!!!!!!!!!!!!!!!!!!!! -->
 
-<!-- <div class="inputContainer" *ngIf="dialogAddService.tagsData && dataService.userData">
+<div class="inputContainer" *ngIf="dialogAddService.tagsData && dataService.userData">
 
-  
-    <app-message-input *ngIf="(varService.mainChatHead == 1 && currentUser() && dataService.userData) 
-    || (varService.mainChatHead == 1 && !currentUser() && dataService.userData) || varService.mainChatHead == 0 " style="width: 98%;">
-  
-    </app-message-input>
-  
-    <textarea *ngIf="
-        varService.mainChatHead == 2 &&
-        dataService.userData &&
-        varService.indexOfSearch !== undefined &&
-        varService.propertyOfSearch
-      " type="text" [(ngModel)]="searchField"
-      placeholder="Nachricht an {{ varService.selectedArrayofSearch[varService.indexOfSearch]?.[varService.propertyOfSearch] || '' }}"></textarea>
-  
-  
-  
-    <div class="iconsContainer" style="position: relative" *ngIf="varService.mainChatHead != -1">
-      <app-emoji-picker-bossi *ngIf="emojiService.emojiSelectorActive"></app-emoji-picker-bossi>
-      <div class="addElements">
-        <div class="element">
-          
-          <input type="file" style="display: none" #fileInput (change)="uploadService.selectFile($event)"
-            accept=".png, .jpg, .bmp, .JPEG, .JPG, .svg, .tiff, .gif, .pdf" />
-  
-          <img src="assets/img/add.png" (click)="openFileExplorer()" />
-        </div>
-  
-        <div class="vector"></div>
-        <div class="element">
-          <img src="assets/img/satisfied.png" (click)="emojiService.toggleEmojiSelector()" />
-        </div>
-        <div class="element" (click)="addSign()">
-          <img src="assets/img/email.png" />
-        </div>
+  <app-message-input-thread *ngIf="(varService.mainChatHead == 1 && currentUser() && dataService.userData) 
+    || (varService.mainChatHead == 1 && !currentUser() && dataService.userData) || varService.mainChatHead == 0 "
+    style="width: 98%;">
+  </app-message-input-thread>
+
+  <div class="iconsContainer" style="position: relative" *ngIf="varService.mainChatHead != -1">
+    <app-emoji-picker-bossi *ngIf="emojiService.emojiSelectorActiveThread"></app-emoji-picker-bossi>
+    <div class="addElements">
+      <div class="element">
+
+        <input type="file" style="display: none" #fileInputThread (change)="uploadService.selectFile($event)"
+          accept=".png, .jpg, .bmp, .JPEG, .JPG, .svg, .tiff, .gif, .pdf" />
+
+        <img src="assets/img/add.png" (click)="openFileExplorer()" />
       </div>
-      <div class="sendIcon">
-        <img src="assets/img/send_icon.png" (click)="send()" />
+
+      <div class="vector"></div>
+      <div class="element">
+        <img src="assets/img/satisfied.png" (click)="emojiService.toggleEmojiSelectorThread()" />
+      </div>
+      <div class="element" (click)="addSign()">
+        <img src="assets/img/email.png" />
       </div>
     </div>
+    <div class="sendIcon">
+      <img src="assets/img/send_icon.png" (click)="send()" />
+    </div>
   </div>
-  
-  
-  <div class="uploadIndication" *ngIf="fileUploadService.fileUploadRuns">
-    <mat-progress-spinner class="example-margin" [color]="'primary'" [mode]="'determinate'"
-      [value]="fileUploadService.uploadPercentage">
-    </mat-progress-spinner>
-    <span style="display: flex; position: absolute;">{{fileUploadService.uploadPercentage}}%</span>
-  </div> -->
+</div>
+
+
+<div class="uploadIndication" *ngIf="fileUploadService.fileUploadRuns">
+  <mat-progress-spinner class="example-margin" [color]="'primary'" [mode]="'determinate'"
+    [value]="fileUploadService.uploadPercentage">
+  </mat-progress-spinner>
+  <span style="display: flex; position: absolute;">{{fileUploadService.uploadPercentage}}%</span>
+</div>

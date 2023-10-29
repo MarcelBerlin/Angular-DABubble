@@ -17,6 +17,7 @@ import { NewMessageAmountService } from 'src/app/direct-chat/services/new-messag
 import { FileUploadService } from 'src/app/file-upload/services/file-upload.service';
 import { UploadService } from 'src/app/file-upload/services/upload.service';
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
+import { MessageInputThreadService } from 'src/app/message-input-thread/service/message-input-thread.service';
 
 @Component({
   selector: 'app-secondary-chat-inputfield',
@@ -58,7 +59,7 @@ export class SecondaryChatInputfieldComponent {
     private newMessageAmountService: NewMessageAmountService,
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
-    private messageInputService:  MessageInputServiceService
+    private messageInputService:  MessageInputThreadService
     
   ) { }
 
@@ -118,7 +119,7 @@ export class SecondaryChatInputfieldComponent {
   // Bossi#####################################
 
 
-  @ViewChild('fileInput') fileInput!: ElementRef;
+  @ViewChild('fileInputThread') fileInputThread!: ElementRef;
   currentUser() {
     return (
       this.dataService.loggedInUserData.email ===
@@ -129,6 +130,9 @@ export class SecondaryChatInputfieldComponent {
 
   send() {
     // this.messageSend();
+    this.messageInputService.resetVariables();
+    this.messageInputService.setMyVariable(true);
+    console.log('thread Send Button pressed');
   }
 
 
@@ -164,7 +168,7 @@ export class SecondaryChatInputfieldComponent {
   }
 
   addSign() {
-    this.varService.sign = !this.varService.sign;
+    this.varService.signThread = !this.varService.signThread;
   }
 
 
@@ -175,10 +179,11 @@ export class SecondaryChatInputfieldComponent {
    * @returns {void}
    */
   openFileExplorer(): void {
+    this.fileUploadService.threadUpload = true;
     let today: Date = new Date();
     this.fileUploadService.profileImgUpload = false;
     this.fileUploadService.basePath ='/uploads/' + this.dataService.loggedInUserData.userId + '/files/' + today.getTime().toString();
-    this.fileInput.nativeElement.click();
+    this.fileInputThread.nativeElement.click();
   }
 
 

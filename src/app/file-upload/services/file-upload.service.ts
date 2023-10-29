@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { FileUpload } from '../models/file-upload.model';
 import { DataService } from 'src/app/services/data.service';
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
+import { MessageInputThreadService } from 'src/app/message-input-thread/service/message-input-thread.service';
 import { getStorage} from "firebase/storage";
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class FileUploadService {
   filename: string = '';
   lastUpload: string = '';
   profileImgUpload: boolean = false;
+
+  threadUpload: boolean = false;
+
   fileUploadRuns: boolean = false;
   uploadPercentage: number = 0;
   const = getStorage();
@@ -26,6 +30,7 @@ export class FileUploadService {
     private storage: AngularFireStorage,
     private dataService: DataService,
     private messageInputService: MessageInputServiceService,
+    private messageInputThreadService: MessageInputThreadService
   ) { }
 
 
@@ -63,6 +68,7 @@ export class FileUploadService {
    * @param {FileUpload} fileUpload - The file upload information.
    */
   finalizeUpload(downloadURL: string, fileUpload: FileUpload): void {
+    
     fileUpload.url = downloadURL;
     this.lastUpload = downloadURL;
     fileUpload.name = fileUpload.file.name;
@@ -71,13 +77,21 @@ export class FileUploadService {
     if (this.profileImgUpload) {
       this.userUpdate();
     }
-    else {
+    else if (this.threadUpload == false){
       this.messageInputService.filename = this.filename;
       this.messageInputService.linkTaget = this.lastUpload;
       this.messageInputService.textContent = this.filename;
       this.messageInputService.insertFileLink();
       this.fileUploadRuns = false;
       this.uploadPercentage = 0;
+    } else if (this.threadUpload){
+      this.messageInputThreadService.filename = this.filename;
+      this.messageInputThreadService.linkTaget = this.lastUpload;
+      this.messageInputThreadService.textContent = this.filename;
+      this.messageInputThreadService.insertFileLink();
+      this.fileUploadRuns = false;
+      this.uploadPercentage = 0;
+      this.threadUpload = false;
     }
   }
 

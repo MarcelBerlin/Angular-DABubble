@@ -70,6 +70,8 @@ import { ImprintDataProtectionComponent } from './auth-features/login/imprint-da
 import { MessageInputComponent } from './message-input/message-input.component';
 import { AddAvatarComponent } from './dialog/add-avatar/add-avatar.component';
 import { ResponsivViewSearchbarComponent } from './responsiv-view-searchbar/responsiv-view-searchbar.component';
+import { MessageInputThreadComponent } from './message-input-thread/message-input-thread.component';
+
 
 
 @NgModule({
@@ -113,6 +115,7 @@ import { ResponsivViewSearchbarComponent } from './responsiv-view-searchbar/resp
     MessageInputComponent,
     AddAvatarComponent,
     ResponsivViewSearchbarComponent,
+    MessageInputThreadComponent,
   ],
   imports: [
     BrowserModule,
