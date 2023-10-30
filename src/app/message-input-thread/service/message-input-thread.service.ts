@@ -21,7 +21,7 @@ export class MessageInputThreadService {
   showInputInfo: boolean = false;
   shownId: number = 0;
   placeholderUserName: string = '';
-  placeholderText: string = 'Nachicht an';
+  placeholderText: string = 'Antworten...';
   chatChange: boolean = false;
 
   sendButtonEnabled: boolean = false;

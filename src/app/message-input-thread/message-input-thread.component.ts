@@ -46,7 +46,7 @@ export class MessageInputThreadComponent {
 
 
   ngAfterViewInit() {
-    // this.restorePlaceholder();
+    this.restorePlaceholder();
   }
 
 
@@ -56,12 +56,12 @@ export class MessageInputThreadComponent {
    * @returns {void}
    */
   removePlaceholder(): void {
-    // if (document.querySelector('.placeholder')) {
-    //   const editableDivThread = this.editableDivThread.nativeElement;
-    //   const placeholderElement = editableDivThread.querySelector('.placeholder');
-    //   this.renderer.removeChild(editableDivThread, placeholderElement);
-    //   this.inputService.placeholerView = false;
-    // }
+    if (document.querySelector('.placeholderT')) {
+      const editableDivThread = this.editableDivThread.nativeElement;
+      const placeholderElement = editableDivThread.querySelector('.placeholderT');
+      this.renderer.removeChild(editableDivThread, placeholderElement);
+      this.inputService.placeholerView = false;
+    }
   }
 
 
@@ -71,17 +71,17 @@ export class MessageInputThreadComponent {
    * @returns {void}
    */
   restorePlaceholder(): void {
-    // if (!document.querySelector('.placeholder')) {
-    //   const text = this.renderer.createText(this.inputService.placeholderText);
-    //   const newPlaceholder = this.renderer.createElement('div');
-    //   this.renderer.addClass(newPlaceholder, 'placeholder');
-    //   this.renderer.setAttribute(newPlaceholder, `id`, 'placholder');
-    //   this.renderer.appendChild(newPlaceholder, text);
-    //   this.renderer.setAttribute(newPlaceholder, 'contenteditable', 'true');
-    //   this.renderer.addClass(newPlaceholder, 'placeholder');
-    //   this.renderer.appendChild(this.editableDivThread.nativeElement, newPlaceholder);
-    //   this.inputService.placeholerView = false;
-    // }
+    if (!document.querySelector('.placeholderT')) {
+      const text = this.renderer.createText(this.inputService.placeholderText);
+      const newPlaceholder = this.renderer.createElement('div');
+      this.renderer.addClass(newPlaceholder, 'placeholderT');
+      this.renderer.setAttribute(newPlaceholder, `id`, 'placholderT');
+      this.renderer.appendChild(newPlaceholder, text);
+      this.renderer.setAttribute(newPlaceholder, 'contenteditable', 'true');
+      this.renderer.addClass(newPlaceholder, 'placeholderT');
+      this.renderer.appendChild(this.editableDivThread.nativeElement, newPlaceholder);
+      this.inputService.placeholerView = false;
+    }
   }
 
 

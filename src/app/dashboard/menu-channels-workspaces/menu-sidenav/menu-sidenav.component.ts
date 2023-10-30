@@ -234,6 +234,10 @@ export class MenuSidenavComponent implements OnInit {
     this.getService.channelIndex = arrayId;
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
+    this.messageInputService.chatChange = true;
+    this.messageInputService.placeholderUserName = selectedChannel.name;
+    this.messageInputService.placeholderText = 'Nachricht an ' + selectedChannel.name;
+    this.messageInputService.setMyVariable(true);
     const channelId = selectedChannel.id;    
     this.channelMessageService.currentChannelId = channelId;    
     this.channelMessageService.MessageAmount = selectedChannel.channelMessageAmount;     
