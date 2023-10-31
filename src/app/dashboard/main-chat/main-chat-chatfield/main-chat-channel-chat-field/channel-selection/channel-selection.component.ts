@@ -240,4 +240,8 @@ export class ChannelSelectionComponent implements OnInit {
   console(entry) {
     console.log(entry);
   }
+
+  alertMessage(){
+    alert('Hier soll eigentlich der Button sein, zum bearbeiten der Frage');
+  }
 }

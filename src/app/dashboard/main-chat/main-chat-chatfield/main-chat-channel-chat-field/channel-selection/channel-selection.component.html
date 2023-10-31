@@ -169,7 +169,7 @@
                   <!-- addEmoji(id oder index von nachricht) -->
                 </emoji-mart>
               </div>
-              <div (click)="channelMessages.openAnswer(i)">
+              <div (click)="alertMessage(); channelMessages.openAnswer(i)">
                 <mat-icon class="interaction-bubble-comment">
                   comment
                 </mat-icon>
@@ -243,8 +243,8 @@
               </div>
             </div>
           </div>
-          <div *ngIf="channelMessages.messageData[i].amountAnswers > 0">
-            <span>{{ channelMessages.messageData[i].amountAnswers }} Antworten</span><br>
+          <div *ngIf="channelMessages.messageData[i].amountAnswers > 0" style="margin-left:16px">
+            <span style="display:flex">{{ channelMessages.messageData[i].amountAnswers }} Antworten <h3 style="color:red;margin:0 8px">hier soll man die Antworten öffnen können</h3></span><br>
             <span>Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span><br>
 
           </div>
