@@ -84,7 +84,7 @@ export class MainChatMessagefieldComponent {
 
     // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
-      debugger;
+      // debugger;
       if(this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
         this.messageInputService.resetVariables();
         this.messageInputService.setMyVariable(true);
