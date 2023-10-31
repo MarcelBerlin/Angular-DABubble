@@ -6,9 +6,6 @@ import {
   setDoc,
   doc,
   updateDoc,
-  deleteDoc,
-  addDoc,
-  getDoc,
 } from '@angular/fire/firestore';
 import { User } from '../models/user.class';
 import { __param } from 'tslib';
@@ -33,19 +30,21 @@ export class DataService {
   }
 
   subcribeUserData(): void {
+    let test = false;
     const coll = collection(this.firestore, 'users');
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
       this.userData = user;
-        this.userData.sort((a, b) => { // von Basti eingefügte Sortierfunktion nach eingeloggtem User
-          if (a.email === this.loggedInUserEmail) return -1;
-          if (b.email === this.loggedInUserEmail) return 1;
-          return a.email < b.email ? -1 : 1;
-        });
+      this.userData.sort((a, b) => { // von Basti eingefügte Sortierfunktion nach eingeloggtem User
+        if (a.email === this.loggedInUserEmail) return -1;
+        if (b.email === this.loggedInUserEmail) return 1;
+        return a.email < b.email ? -1 : 1;
+      });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
-      if (this.loggedInUserData) this.updateUserDirectChatBagesAmount();
+      this.updateUserDirectChatBagesAmount();
     });
   }
+
 
   /**
    * Retrieves the logged-in user's data from the userData array and sets the necessary values.
@@ -62,6 +61,7 @@ export class DataService {
       }
     });
   }
+
 
   /**
    * Retrieves the logged user's data from the provided user object.
@@ -81,6 +81,7 @@ export class DataService {
     };
   }
 
+
   /**
    * Returns the logged user id.
    *
@@ -89,6 +90,7 @@ export class DataService {
   getUserID(): string {
     return this.loggedInUserData.userId;
   }
+
 
   /**
    * Save a new user doc to firestore, with the email of the signed up user email.
@@ -102,11 +104,12 @@ export class DataService {
     this.signUpUser.img = img;
     const coll = collection(this.firestore, 'users');
     setDoc(doc(coll), this.signUpUser.toJSON())
-      .then(() => {})
+      .then(() => { })
       .catch((error) => {
         console.log('save user failed');
       });
   }
+
 
   /**
    * Creates a new user with the provided user data, if logged in user not listed yet.
@@ -126,6 +129,7 @@ export class DataService {
     }
   }
 
+
   /**
    * Updates the user data in Firestore.
    *
@@ -143,6 +147,7 @@ export class DataService {
       });
   }
 
+
   /**
    * Creates an array of badges representing the new message amounts for each user's direct chats.
    *
@@ -151,7 +156,7 @@ export class DataService {
   createDirectChatBadges(): void {
     this.badgesArray = [];
     for (let i = 0; i < this.userData.length; i++) {
-      this.loggedInUserData.directChats.forEach((directChat) => {
+      this.userData[0].directChats.forEach((directChat) => {
         if (directChat.partnerId == this.userData[i].userId) {
           this.badgesArray[i] = directChat.newMessageAmount;
         } else if (this.badgesArray[i] == undefined) {
@@ -160,6 +165,7 @@ export class DataService {
       });
     }
   }
+
 
   /**
    * Updates the new message amount for direct chats in the logged-in user's data

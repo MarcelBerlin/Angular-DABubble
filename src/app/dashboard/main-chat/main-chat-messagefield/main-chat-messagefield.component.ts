@@ -39,17 +39,17 @@ export class MainChatMessagefieldComponent {
     private newMessageAmountService: NewMessageAmountService,
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
-    private messageInputService:  MessageInputServiceService
-    
+    private messageInputService: MessageInputServiceService
+
   ) { }
-  
+
 
   currentUser() {
     return (
       this.dataService.loggedInUserData.email ===
       this.dataService.userData[this.varService.selectedUserToMessage].email
     );
-    
+
   }
 
   send() {
@@ -74,29 +74,25 @@ export class MainChatMessagefieldComponent {
     //   this.messageService.addMessage();   
     //   this.messageService.messageText = '';
     // }
-    if(this.varService.mainChatHead == 0 && this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
+    if (this.varService.mainChatHead == 0 && this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
       this.messageInputService.resetVariables();
       this.messageInputService.setMyVariable(true);
-      
       this.messageInputService.sendButtonEnabled = false;
     }
-
-
     // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
-      // debugger;
-      if(this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
+      if (this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
+        this.newMessageAmountService.addPartnerDirectChatMessageAmount();
         this.messageInputService.resetVariables();
         this.messageInputService.setMyVariable(true);
-        this.newMessageAmountService.addPartnerDirectChatMessageAmount();
         this.messageInputService.sendButtonEnabled = false;
       }
     }
-    if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser() ){
-      if(this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
-      this.messageInputService.resetVariables();
-      this.messageInputService.setMyVariable(true) ;
-      this.messageInputService.sendButtonEnabled = false;
+    if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser()) {
+      if (this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
+        this.messageInputService.resetVariables();
+        this.messageInputService.setMyVariable(true);
+        this.messageInputService.sendButtonEnabled = false;
       }
     }
   }
@@ -115,7 +111,7 @@ export class MainChatMessagefieldComponent {
   openFileExplorer(): void {
     let today: Date = new Date();
     this.fileUploadService.profileImgUpload = false;
-    this.fileUploadService.basePath ='/uploads/' + this.dataService.loggedInUserData.userId + '/files/' + today.getTime().toString();
+    this.fileUploadService.basePath = '/uploads/' + this.dataService.loggedInUserData.userId + '/files/' + today.getTime().toString();
     this.fileInput.nativeElement.click();
   }
 }
