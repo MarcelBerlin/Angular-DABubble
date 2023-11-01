@@ -55,7 +55,6 @@ export class ResponsivViewSearchbarComponent {
     const enteredStringTrimmed = this.getTrimmedLowerCaseSearchTerm();
     this.createFindingsArraysInUserData(enteredStringTrimmed);
     this.createFindingsArrayChannels(enteredStringTrimmed);
-    console.log(this.nameArray, this.emailArray, this.channelArray);
     this.createFindingsArray();
   }
 
