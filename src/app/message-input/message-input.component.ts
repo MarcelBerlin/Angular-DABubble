@@ -122,7 +122,7 @@ export class MessageInputComponent {
    */
   resetInputField(): void {
     this.removePlaceholder();
-    document.getElementById('inputDiv').innerText = '';
+    if (document.getElementById('inputDiv')) document.getElementById('inputDiv').innerText = '';
     setTimeout(() => { this.restorePlaceholder(); }, 500);
     this.inputService.chatChange = false;
   }

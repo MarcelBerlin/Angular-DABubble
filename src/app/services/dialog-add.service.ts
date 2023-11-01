@@ -40,6 +40,7 @@ export class DialogAddService {
   channelMessage: any = [];
   channelMessageAmount: number = 0;
 
+  
   constructor(private firestore: Firestore, private dataService: DataService) {
     const coll = collection(firestore, 'tags');
     this.newTags$ = collectionData(coll, { idField: 'id' });
