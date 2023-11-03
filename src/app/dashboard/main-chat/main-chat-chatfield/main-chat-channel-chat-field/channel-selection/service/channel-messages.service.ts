@@ -27,8 +27,8 @@ export class ChannelMessagesService {
     private firestore: Firestore,
     public timelinesService: TimelinesService,
     private dcshService: DashboardComponentsShowHideService,
-    private dialogAddService: DialogAddService,   
-    
+    private dialogAddService: DialogAddService,
+
   ) {
     this.allMessages();
   }
@@ -39,11 +39,11 @@ export class ChannelMessagesService {
     await this.messages$.subscribe((message: any) => {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
-      );      
+      );
     });
   }
 
-  
+
   // #################################
   // ##################### TEST FÜR TIMESTAMP VON MARCEL
   // #################################
@@ -66,11 +66,11 @@ export class ChannelMessagesService {
   // #####################
 
   openAnswer(index: number) {
-    this.selectedMessageIndex = index;    
+    this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
-    this.selectedMessage = true;    
-    this.dcshService.chatSlideIn();    
-    
+    this.selectedMessage = true;
+    this.dcshService.chatSlideIn();
+
   }
 
   getSelectedMessageStatus() {
@@ -114,17 +114,17 @@ export class ChannelMessagesService {
   }
 
 
-  UpdateEmojiToFirebase(){
+  UpdateEmojiToFirebase() {
+    debugger;
     const messageIdForEmoji = this.selectedMessageId;
     const qData = doc(this.firestore, 'newMessages', messageIdForEmoji);
-    const newData = {
-      messageEmojis: this.messageEmojis
-    };try {
+    const newData = { messageEmojis: this.messageEmojis }; 
+
+    try {
       updateDoc(qData, newData);
       console.log('Message Emoji wurde korrekt hinzugefügt');
     } catch (error) {
       console.error('Fehler beim Aktualisieren der Firestore-Daten:', error);
     }
   }
-  
 }

@@ -238,7 +238,7 @@
               <div class="reactions" id="reactionBarRight" *ngIf="chatEmojiRight"> <!-- id's stimmen nicht-->
                 <div id="reactionsRight" matTooltip='{{this.dataService.loggedInUserData.name}}'>
                   <!--  reagierter User-->
-                  <span *ngIf="this.reactionArrRight.length <= 1"> {{ reactionArrRight }} </span>
+                  <span *ngIf="this.reactionArrRight.length <= 1"> {{ this.channelMessages.messageEmojis }} </span>
                 </div>
               </div>
             </div>

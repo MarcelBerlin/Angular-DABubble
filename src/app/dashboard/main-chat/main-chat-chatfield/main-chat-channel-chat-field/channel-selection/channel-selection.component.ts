@@ -125,14 +125,16 @@ export class ChannelSelectionComponent implements OnInit {
   public addEmojiRight(event) {
     this.chatEmojiRight = true;
     this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
-    // this.reactionArrRight.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
-    this.reactionArrRight.push(this.channelMessages.messageEmojis); // speichern in firebase fuer jede nachricht einzeln?
+    //this.reactionArrRight.push(this.messageService.emojis); 
+    this.channelMessages.messageEmojis.push(this.messageService.emojis);
     this.emojiPickerRight = false;
     if (this.reactionArrRight.length > 1) {
       this.emojiFilterRight(this.reactionArrRight);
     }
+    console.log(this.channelMessages.messageEmojis, '(firebase)');
+    console.log(this.messageService.emojis);
+
     this.channelMessages.UpdateEmojiToFirebase();
-    console.log(this.channelMessages.messageEmojis);
   }
 
   emojiFilterRight(reactionArr) {
