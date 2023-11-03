@@ -28,6 +28,7 @@ export class ChannelSelectionComponent implements OnInit {
 
   hoveredMessagesMainChat: boolean = false;
 
+  index: number;
   chatText: string = '';
   messages$: any = [];
   messageData: any = [];
@@ -122,7 +123,8 @@ export class ChannelSelectionComponent implements OnInit {
     }
   }
 
-  public addEmojiRight(event) {
+  public addEmojiRight(event, i) {
+    
     this.chatEmojiRight = true;
     this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
     // this.reactionArrRight.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
@@ -131,7 +133,8 @@ export class ChannelSelectionComponent implements OnInit {
     if (this.reactionArrRight.length > 1) {
       this.emojiFilterRight(this.reactionArrRight);
     }
-    this.channelMessages.UpdateEmojiToFirebase();
+    this.channelMessages.UpdateEmojiToFirebase(i);
+    this.channelMessages.messageEmojis.push(this.messageService.emojis); 
     console.log(this.channelMessages.messageEmojis);
   }
 
@@ -162,7 +165,8 @@ export class ChannelSelectionComponent implements OnInit {
     this.emojiPickerLeft = false;
     if (this.reactionArrLeft.length > 1) {
       this.emojiFilterLeft(this.reactionArrLeft);
-    }
+    }  
+    
   }
 
   emojiFilterLeft(reactionArr) {

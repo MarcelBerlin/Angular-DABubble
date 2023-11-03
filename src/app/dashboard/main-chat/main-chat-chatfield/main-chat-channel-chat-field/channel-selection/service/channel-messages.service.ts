@@ -12,7 +12,7 @@ import { MessageService } from 'src/app/services/messages.service';
 })
 export class ChannelMessagesService {
   index: number = 0;
-  messages$: any = [];
+  messages$: any = []; 
   messageData: any = [];
   selectedMessageArray: any = [];
   selectedMessage = false;
@@ -114,8 +114,8 @@ export class ChannelMessagesService {
   }
 
 
-  UpdateEmojiToFirebase(){
-    const messageIdForEmoji = this.selectedMessageId;
+  UpdateEmojiToFirebase(index: number){ 
+    const messageIdForEmoji = this.messageData[index].messageId;
     const qData = doc(this.firestore, 'newMessages', messageIdForEmoji);
     const newData = {
       messageEmojis: this.messageEmojis
