@@ -20,6 +20,7 @@ export class ChannelMessagesService {
   selectedMessageId: string = '';
   currentDate: string = new Date().toISOString().split('T')[0]; // Aktuelles Tagesdatum im Format "YYYY-MM-DD";
   currentChannelId: string = '';
+  messageEmojis: any = [];
   MessageAmount: number;
 
   constructor(
@@ -68,7 +69,7 @@ export class ChannelMessagesService {
     this.selectedMessageIndex = index;    
     this.selectedMessageId = this.messageData[index].messageId;
     this.selectedMessage = true;    
-    this.dcshService.chatSlideIn();
+    this.dcshService.chatSlideIn();    
     
   }
 
@@ -107,6 +108,20 @@ export class ChannelMessagesService {
     try {
       updateDoc(qData, newData);
       console.log('Message gesendet und channelMessageAmount aktualisiert.');
+    } catch (error) {
+      console.error('Fehler beim Aktualisieren der Firestore-Daten:', error);
+    }
+  }
+
+
+  UpdateEmojiToFirebase(){
+    const messageIdForEmoji = this.selectedMessageId;
+    const qData = doc(this.firestore, 'newMessages', messageIdForEmoji);
+    const newData = {
+      messageEmojis: this.messageEmojis
+    };try {
+      updateDoc(qData, newData);
+      console.log('Message Emoji wurde korrekt hinzugefügt');
     } catch (error) {
       console.error('Fehler beim Aktualisieren der Firestore-Daten:', error);
     }

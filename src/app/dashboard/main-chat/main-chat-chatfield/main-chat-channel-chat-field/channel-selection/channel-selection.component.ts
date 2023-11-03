@@ -1,5 +1,5 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AppComponent } from 'src/app/app.component';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
@@ -47,6 +47,7 @@ export class ChannelSelectionComponent implements OnInit {
   constructor(
     private firestore: Firestore,
     private dcshService: DashboardComponentsShowHideService,
+    private renderer: Renderer2,
     private dialog: Dialog,
     public varService: VariablesService,
     public dataService: DataService,
@@ -124,11 +125,14 @@ export class ChannelSelectionComponent implements OnInit {
   public addEmojiRight(event) {
     this.chatEmojiRight = true;
     this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
-    this.reactionArrRight.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
+    // this.reactionArrRight.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
+    this.reactionArrRight.push(this.channelMessages.messageEmojis); // speichern in firebase fuer jede nachricht einzeln?
     this.emojiPickerRight = false;
     if (this.reactionArrRight.length > 1) {
       this.emojiFilterRight(this.reactionArrRight);
     }
+    this.channelMessages.UpdateEmojiToFirebase();
+    console.log(this.channelMessages.messageEmojis);
   }
 
   emojiFilterRight(reactionArr) {
