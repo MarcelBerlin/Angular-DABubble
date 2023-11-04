@@ -61,7 +61,6 @@ export class ChannelSelectionComponent implements OnInit {
     public answerService: SecondaryChatAnswerService,
     public secondaryAnswerService: SecondaryChatAnswerService,
     public inputService: MessageInputServiceService,
-    
   ) {
     
   }
@@ -122,70 +121,72 @@ export class ChannelSelectionComponent implements OnInit {
     }
   }
 
-  public addEmojiRight(event) {
-    this.chatEmojiRight = true;
-    this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
-    //this.reactionArrRight.push(this.messageService.emojis); 
-    this.channelMessages.messageEmojis.push(this.messageService.emojis);
+  addEmojiRight(event, index) {
+    // this.chatEmojiRight = true;   ####### braucht nicht mehr -> ngIf firebase array >= 1
+    this.messageService.emojis = `${this.emoji}${event.emoji.native}`; 
+    this.channelMessages.messageEmojis.push(this.messageService.emojis);  // firebase
     this.emojiPickerRight = false;
-    if (this.reactionArrRight.length > 1) {
-      this.emojiFilterRight(this.reactionArrRight);
-    }
-    console.log(this.channelMessages.messageEmojis, '(firebase)');
-    console.log(this.messageService.emojis);
-
-    this.channelMessages.UpdateEmojiToFirebase();
+    // if (this.channelMessages.messageEmojis.length > 1) {
+    //   this.emojiFilterRight(this.channelMessages.messageEmojis);
+    // }
+    debugger;
+    this.channelMessages.selectedMessageIndex = index;
+    console.log(this.channelMessages.messageEmojis,'firebase');
+    this.channelMessages.UpdateEmojiToFirebase(index);
   }
 
-  emojiFilterRight(reactionArr) {
+  emojiFilterRight() {
+    alert('currently working on it')
+
+    // const emojiCountMapRight: any = new Map();
+    // let reactionBarRight = document.getElementById('reactionBarRight'); // ABOUT TO CHANGE
+    // reactionArr.forEach((emoji) => {
+    //   if (emojiCountMapRight.has(emoji)) {
+    //     emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
+    //   } else {
+    //     emojiCountMapRight.set(emoji, 1);
+    //   }
+    // });
+    // reactionBarRight.innerHTML = '';
+    // emojiCountMapRight.forEach((count, emoji) => {
+    //   reactionBarRight.innerHTML += `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
+    // });
+    // if (reactionArr.length >= 7) {
+    //   reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊';
+    // }
+  }
+
+  addEmojiLeft() {  // event
+    alert('currently working on it')
+    // this.chatEmojiLeft = true;
+    // this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
+    // this.reactionArrLeft.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
+    // this.emojiPickerLeft = false;
+    // if (this.reactionArrLeft.length > 1) {
+    //   this.emojiFilterLeft(this.reactionArrLeft);
+    // }
+  }
+
+  emojiFilterLeft() {
+    alert('currently working on it');
     // tooltip funktioniert nicht mehr!
-    const emojiCountMapRight: any = new Map();
-    let reactionBarRight = document.getElementById('reactionBarRight'); // ABOUT TO CHANGE
-    reactionArr.forEach((emoji) => {
-      if (emojiCountMapRight.has(emoji)) {
-        emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
-      } else {
-        emojiCountMapRight.set(emoji, 1);
-      }
-    });
-    reactionBarRight.innerHTML = '';
-    emojiCountMapRight.forEach((count, emoji) => {
-      reactionBarRight.innerHTML += `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
-    });
-    if (reactionArr.length >= 7) {
-      reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊';
-    }
-  }
-
-  public addEmojiLeft(event) {
-    this.chatEmojiLeft = true;
-    this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
-    this.reactionArrLeft.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
-    this.emojiPickerLeft = false;
-    if (this.reactionArrLeft.length > 1) {
-      this.emojiFilterLeft(this.reactionArrLeft);
-    }
-  }
-
-  emojiFilterLeft(reactionArr) {
-    // tooltip funktioniert nicht mehr!
-    const emojiCountMapLeft: any = new Map();
-    let reactionBarLeft = document.getElementById('reactionBarLeft');
-    reactionArr.forEach((emoji) => {
-      if (emojiCountMapLeft.has(emoji)) {
-        emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
-      } else {
-        emojiCountMapLeft.set(emoji, 1);
-      }
-    });
-    reactionBarLeft.innerHTML = '';
-    emojiCountMapLeft.forEach((count, emoji) => {
-      reactionBarLeft.innerHTML += `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"><span> ${emoji} ${count} </span></div>`;
-    });
-    if (reactionArr.length >= 7) {
-      reactionBarLeft.innerHTML =
-        'zu viele reaktionen. Wir arbeiten gerade daran 🙁';
-    }
+    // const emojiCountMapLeft: any = new Map();
+    // let reactionBarLeft = document.getElementById('reactionBarLeft');
+    // reactionArr.forEach((emoji) => {
+    //   if (emojiCountMapLeft.has(emoji)) {
+    //     emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
+    //   } else {
+    //     emojiCountMapLeft.set(emoji, 1);
+    //   }
+    // });
+    // reactionBarLeft.innerHTML = '';
+    // emojiCountMapLeft.forEach((count, emoji) => {
+    //   reactionBarLeft.innerHTML += `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"><span> ${emoji} ${count} </span></div>`;
+    // });
+    // if (reactionArr.length >= 7) {
+    //   reactionBarLeft.innerHTML =
+    //     'zu viele reaktionen. Wir arbeiten gerade daran 🙁';
+    // }
   }
 
   showInfoBox: number = -1;

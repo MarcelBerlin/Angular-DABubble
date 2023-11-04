@@ -70,7 +70,6 @@ export class ChannelMessagesService {
     this.selectedMessageId = this.messageData[index].messageId;
     this.selectedMessage = true;
     this.dcshService.chatSlideIn();
-
   }
 
   getSelectedMessageStatus() {
@@ -114,12 +113,12 @@ export class ChannelMessagesService {
   }
 
 
-  UpdateEmojiToFirebase() {
+  UpdateEmojiToFirebase(index: number) {
     debugger;
-    const messageIdForEmoji = this.selectedMessageId;
+    const messageIdForEmoji = this.messageData[index].messageId;
     const qData = doc(this.firestore, 'newMessages', messageIdForEmoji);
     const newData = { messageEmojis: this.messageEmojis }; 
-
+    
     try {
       updateDoc(qData, newData);
       console.log('Message Emoji wurde korrekt hinzugefügt');

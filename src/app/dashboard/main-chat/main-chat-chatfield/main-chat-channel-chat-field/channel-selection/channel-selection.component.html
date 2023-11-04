@@ -53,7 +53,7 @@
               <img ngDefaultControl (click)="emojiPickerLeft= !emojiPickerLeft;"
                 src="./../../../../assets/img/reaction.png">
               <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft"
-                (emojiSelect)="addEmojiLeft($event)" title="Choose your emoji">
+                (emojiSelect)="addEmojiLeft()" title="Choose your emoji">
               </emoji-mart>
             </div>
             <div (click)="channelMessages.openAnswer(i)">
@@ -165,7 +165,7 @@
                 <img ngDefaultControl (click)="emojiPickerRight= !emojiPickerRight;"
                   src="./../../../../assets/img/reaction.png">
                 <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerRight"
-                  (emojiSelect)="addEmojiRight($event)" title="Choose your emoji">
+                  (emojiSelect)="addEmojiRight($event, i)" title="Choose your emoji">
                   <!-- addEmoji(id oder index von nachricht) -->
                 </emoji-mart>
               </div>
@@ -235,10 +235,9 @@
               
             </div>
             <div class="reaction-bar-right">
-              <div class="reactions" id="reactionBarRight" *ngIf="chatEmojiRight"> <!-- id's stimmen nicht-->
-                <div id="reactionsRight" matTooltip='{{this.dataService.loggedInUserData.name}}'>
-                  <!--  reagierter User-->
-                  <span *ngIf="this.reactionArrRight.length <= 1"> {{ this.channelMessages.messageEmojis }} </span>
+              <div class="reactions" id="reactionBarRight" *ngIf="this.channelMessages.messageEmojis.length > 0">
+                <div id="reactionsRight" matTooltip='{{this.dataService.loggedInUserData.name}}'> <!-- user who picked emoji-->
+                  <span *ngIf="this.channelMessages.messageEmojis.length <= 1"> {{ this.channelMessages.messageEmojis }} </span>
                 </div>
               </div>
             </div>
