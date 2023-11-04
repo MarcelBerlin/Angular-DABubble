@@ -237,7 +237,7 @@
             <div class="reaction-bar-right">
               <div class="reactions" id="reactionBarRight" *ngIf="this.channelMessages.messageEmojis.length > 0">
                 <div id="reactionsRight" matTooltip='{{this.dataService.loggedInUserData.name}}'> <!-- user who picked emoji-->
-                  <span *ngIf="this.channelMessages.messageEmojis.length <= 1"> {{ this.channelMessages.messageEmojis }} </span>
+                  <span *ngIf="this.channelMessages.messageEmojis.length > 0"> {{ this.channelMessages.messageEmojis }} </span>
                 </div>
               </div>
             </div>

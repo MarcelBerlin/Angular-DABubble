@@ -114,7 +114,6 @@ export class ChannelMessagesService {
 
 
   UpdateEmojiToFirebase(index: number) {
-    debugger;
     const messageIdForEmoji = this.messageData[index].messageId;
     const qData = doc(this.firestore, 'newMessages', messageIdForEmoji);
     const newData = { messageEmojis: this.messageEmojis }; 

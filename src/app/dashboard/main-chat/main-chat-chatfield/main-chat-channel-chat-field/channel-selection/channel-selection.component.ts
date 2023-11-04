@@ -126,35 +126,30 @@ export class ChannelSelectionComponent implements OnInit {
     this.messageService.emojis = `${this.emoji}${event.emoji.native}`; 
     this.channelMessages.messageEmojis.push(this.messageService.emojis);  // firebase
     this.emojiPickerRight = false;
-    // if (this.channelMessages.messageEmojis.length > 1) {
-    //   this.emojiFilterRight(this.channelMessages.messageEmojis);
-    // }
-    debugger;
     this.channelMessages.selectedMessageIndex = index;
     console.log(this.channelMessages.messageEmojis,'firebase');
     this.channelMessages.UpdateEmojiToFirebase(index);
+    // if (this.channelMessages.messageEmojis.length > 1) { this.emojiFilterRight()}
   }
 
-  emojiFilterRight() {
-    alert('currently working on it')
-
-    // const emojiCountMapRight: any = new Map();
-    // let reactionBarRight = document.getElementById('reactionBarRight'); // ABOUT TO CHANGE
-    // reactionArr.forEach((emoji) => {
-    //   if (emojiCountMapRight.has(emoji)) {
-    //     emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
-    //   } else {
-    //     emojiCountMapRight.set(emoji, 1);
-    //   }
-    // });
-    // reactionBarRight.innerHTML = '';
-    // emojiCountMapRight.forEach((count, emoji) => {
-    //   reactionBarRight.innerHTML += `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
-    // });
-    // if (reactionArr.length >= 7) {
-    //   reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊';
-    // }
-  }
+  // emojiFilterRight() {
+  //   const emojiCountMapRight: any = new Map();
+  //   let reactionBarRight = document.getElementById('reactionBarRight');
+  //   this.channelMessages.messageEmojis.forEach((emoji) => {
+  //     if (emojiCountMapRight.has(emoji)) {
+  //       emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
+  //     } else {
+  //       emojiCountMapRight.set(emoji, 1);
+  //     }
+  //   });
+  //   reactionBarRight.innerHTML = '';
+  //   emojiCountMapRight.forEach((count, emoji) => {
+  //     reactionBarRight.innerHTML += `<div class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
+  //   });
+  //   if (this.channelMessages.messageEmojis.length >= 7) {
+  //     reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊';
+  //   }
+  // }
 
   addEmojiLeft() {  // event
     alert('currently working on it')
