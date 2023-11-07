@@ -40,7 +40,7 @@ export class MessageService {
   messageId: string = 'unset';
   selectedChannel: string = '';
   emojis: any = [];
-  tags: any; // ADDED BY FELIX
+  tags: any;
   dateString: string = '';  
   private emptyChatSubject = new Subject<boolean>()
   emptyChat$ = this.emptyChatSubject.asObservable();  
