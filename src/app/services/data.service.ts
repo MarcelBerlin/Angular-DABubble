@@ -6,6 +6,7 @@ import {
   setDoc,
   doc,
   updateDoc,
+  addDoc
 } from '@angular/fire/firestore';
 import { User } from '../models/user.class';
 import { __param } from 'tslib';
@@ -30,7 +31,7 @@ export class DataService {
   }
 
   subcribeUserData(): void {
-    let test = false;
+    console.log('subcribeUserData');
     const coll = collection(this.firestore, 'users');
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
@@ -41,6 +42,11 @@ export class DataService {
         return a.email < b.email ? -1 : 1;
       });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
+      // if (this.loggedInUserData !== undefined && user.directChat !== undefined){
+      //   if (this.loggedInUserData.directChats.length < user.directChat.length){
+      //     this.loggedInUserData.directChats = user.directChat;
+      //   }
+      // }
       this.updateUserDirectChatBagesAmount();
     });
   }
@@ -98,16 +104,35 @@ export class DataService {
    * @param {string} email - The email address of the signed up user.
    * @returns {void}
    */
-  saveSignUpUserData(email: string, name: string, img: string): void {
+  async saveSignUpUserData(email: string, name: string, img: string): Promise<void> {
     this.signUpUser.email = email;
     this.signUpUser.name = name;
     this.signUpUser.img = img;
+    // user Id wird nicht gesetzt
     const coll = collection(this.firestore, 'users');
-    setDoc(doc(coll), this.signUpUser.toJSON())
-      .then(() => { })
-      .catch((error) => {
-        console.log('save user failed');
-      });
+    // user Id update
+    let docId = await addDoc(coll, this.signUpUser.toJSON());
+
+    this.signUpUser.userId = docId.id;
+
+    this.updateSignUpUserId();
+    
+    // const qData = doc(this.firestore, 'users', this.signUpUser.userId);
+    // const newData = {userId: this.signUpUser.userId};
+    // updateDoc(qData, newData)
+
+    // setDoc(doc(coll), this.signUpUser.toJSON())
+    //   .then(() => { })
+    //   .catch((error) => {
+    //     console.log('save user failed');
+    //   });
+  }
+
+
+  updateSignUpUserId(){
+    const qData = doc(this.firestore, 'users', this.signUpUser.userId);
+    const newData = {userId: this.signUpUser.userId};
+    updateDoc(qData, newData)
   }
 
 
