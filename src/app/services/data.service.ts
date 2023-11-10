@@ -18,6 +18,8 @@ export class DataService {
   users$: any = [];
   users: any = [];
   userData: any = [];
+  directChatPartner: any = [];
+
   loggedUserLetters: string = '';
   signUpUser: User = new User();
   loggedInUserEmail: string = '';
@@ -31,7 +33,6 @@ export class DataService {
   }
 
   subcribeUserData(): void {
-    console.log('subcribeUserData');
     const coll = collection(this.firestore, 'users');
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
@@ -42,12 +43,8 @@ export class DataService {
         return a.email < b.email ? -1 : 1;
       });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
-      // if (this.loggedInUserData !== undefined && user.directChat !== undefined){
-      //   if (this.loggedInUserData.directChats.length < user.directChat.length){
-      //     this.loggedInUserData.directChats = user.directChat;
-      //   }
-      // }
       this.updateUserDirectChatBagesAmount();
+      if(this.loggedInUserData !== undefined && localStorage.getItem('user')) this.updateDirectPartners();
     });
   }
 
@@ -61,7 +58,7 @@ export class DataService {
     this.userData.forEach((user: any) => {
       let userJson: any = localStorage.getItem('user');
       this.loggedInUserEmail = JSON.parse(userJson);
-      if (user.email == this.loggedInUserEmail) {
+      if (user.email.toLowerCase() == this.loggedInUserEmail) {
         this.loggedInUserData = this.getLoggedUserData(user);
         this.updateUser();
       }
@@ -105,27 +102,13 @@ export class DataService {
    * @returns {void}
    */
   async saveSignUpUserData(email: string, name: string, img: string): Promise<void> {
-    this.signUpUser.email = email;
+    this.signUpUser.email = email.toLowerCase();
     this.signUpUser.name = name;
     this.signUpUser.img = img;
-    // user Id wird nicht gesetzt
     const coll = collection(this.firestore, 'users');
-    // user Id update
     let docId = await addDoc(coll, this.signUpUser.toJSON());
-
     this.signUpUser.userId = docId.id;
-
     this.updateSignUpUserId();
-    
-    // const qData = doc(this.firestore, 'users', this.signUpUser.userId);
-    // const newData = {userId: this.signUpUser.userId};
-    // updateDoc(qData, newData)
-
-    // setDoc(doc(coll), this.signUpUser.toJSON())
-    //   .then(() => { })
-    //   .catch((error) => {
-    //     console.log('save user failed');
-    //   });
   }
 
 
@@ -133,6 +116,19 @@ export class DataService {
     const qData = doc(this.firestore, 'users', this.signUpUser.userId);
     const newData = {userId: this.signUpUser.userId};
     updateDoc(qData, newData)
+  }
+
+
+  updateDirectPartners(){
+    this.directChatPartner = [];
+    this.directChatPartner.push(this.loggedInUserData);
+    this.userData.forEach(user => {
+      console.log('update directPartners', this.loggedInUserId );
+      user.directChats.forEach(data => {
+        if (data.partnerId === this.loggedInUserData.userId) this.directChatPartner.push(user);
+      });
+    });
+    console.log('directChatPartner: ', this.directChatPartner);
   }
 
 
