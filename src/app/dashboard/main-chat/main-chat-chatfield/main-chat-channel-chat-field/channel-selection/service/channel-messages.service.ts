@@ -11,13 +11,14 @@ import { MessageService } from 'src/app/services/messages.service';
   providedIn: 'root',
 })
 export class ChannelMessagesService {
-  index: number = 0;
+  index: number = 0;  
   messages$: any = []; 
   messageData: any = [];
   selectedMessageArray: any = [];
   selectedMessage = false;
   selectedMessageIndex: number | null = null;
   selectedMessageId: string = '';
+  selectedMessageContent: string = '';
   currentDate: string = new Date().toISOString().split('T')[0]; // Aktuelles Tagesdatum im Format "YYYY-MM-DD";
   currentChannelId: string = '';
   messageEmojis: any = [];
@@ -40,6 +41,7 @@ export class ChannelMessagesService {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
       );
+      console.log(this.messageData);
     });
   }
 
@@ -69,8 +71,22 @@ export class ChannelMessagesService {
     this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
     this.selectedMessage = true;
-    this.dcshService.chatSlideIn();
+    this.dcshService.chatSlideIn();    
   }
+
+  // nochmal abklären mit den anderen ?!?! #########################
+  //################################################
+
+
+  editOwnMessage(index: number) {    
+    this.selectedMessageIndex = index;
+    this.selectedMessageId = this.messageData[index].messageId;
+    this.selectedMessageContent = this.messageData[index].content;
+    console.log(this.selectedMessageContent);
+  }
+
+  // #################################################
+  // #####################
 
   getSelectedMessageStatus() {
     return this.selectedMessage;
