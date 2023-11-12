@@ -352,7 +352,6 @@ export class MessageInputComponent {
       this.messageService.addMessage();
       setTimeout(() => { this.restorePlaceholder(); }, 500);
     }
-    
   }
 
 

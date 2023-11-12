@@ -62,7 +62,6 @@ export class ChannelSelectionComponent implements OnInit {
     public answerService: SecondaryChatAnswerService,
     public secondaryAnswerService: SecondaryChatAnswerService,
     public inputService: MessageInputServiceService,
-    
   ) {
     
   }
@@ -123,74 +122,35 @@ export class ChannelSelectionComponent implements OnInit {
     }
   }
 
-  public addEmojiRight(event, i) {
-    
-    this.chatEmojiRight = true;
+  addEmoji(event, index) {
     this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
-    //this.reactionArrRight.push(this.messageService.emojis); 
     this.channelMessages.messageEmojis.push(this.messageService.emojis);
-    this.emojiPickerRight = false;
-    if (this.reactionArrRight.length > 1) {
-      this.emojiFilterRight(this.reactionArrRight);
-    }
-    console.log(this.channelMessages.messageEmojis, '(firebase)');
-    console.log(this.messageService.emojis);
-
-    this.channelMessages.UpdateEmojiToFirebase(i);
-    this.channelMessages.messageEmojis.push(this.messageService.emojis); 
+    if(this.emojiPickerLeft) { this.emojiPickerLeft = false };  // verlagern
+    if(this.emojiPickerRight) { this.emojiPickerRight = false };  // verlagern
+    this.channelMessages.selectedMessageIndex = index;
+    console.log(this.channelMessages.messageEmojis,'firebase');
+    this.channelMessages.UpdateEmojiToFirebase(index);
+    // if (this.channelMessages.messageEmojis.length > 1) { this.emojiFilterRight()}
   }
 
-  emojiFilterRight(reactionArr) {
-    // tooltip funktioniert nicht mehr!
-    const emojiCountMapRight: any = new Map();
-    let reactionBarRight = document.getElementById('reactionBarRight'); // ABOUT TO CHANGE
-    reactionArr.forEach((emoji) => {
-      if (emojiCountMapRight.has(emoji)) {
-        emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
-      } else {
-        emojiCountMapRight.set(emoji, 1);
-      }
-    });
-    reactionBarRight.innerHTML = '';
-    emojiCountMapRight.forEach((count, emoji) => {
-      reactionBarRight.innerHTML += `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
-    });
-    if (reactionArr.length >= 7) {
-      reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊';
-    }
-  }
-
-  public addEmojiLeft(event) {
-    this.chatEmojiLeft = true;
-    this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
-    this.reactionArrLeft.push(this.messageService.emojis); // speichern in firebase fuer jede nachricht einzeln?
-    this.emojiPickerLeft = false;
-    if (this.reactionArrLeft.length > 1) {
-      this.emojiFilterLeft(this.reactionArrLeft);
-    }  
-    
-  }
-
-  emojiFilterLeft(reactionArr) {
-    // tooltip funktioniert nicht mehr!
-    const emojiCountMapLeft: any = new Map();
-    let reactionBarLeft = document.getElementById('reactionBarLeft');
-    reactionArr.forEach((emoji) => {
-      if (emojiCountMapLeft.has(emoji)) {
-        emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
-      } else {
-        emojiCountMapLeft.set(emoji, 1);
-      }
-    });
-    reactionBarLeft.innerHTML = '';
-    emojiCountMapLeft.forEach((count, emoji) => {
-      reactionBarLeft.innerHTML += `<div matTooltip ='{{this.dataService.loggedInUserData.name}}' class="reaction-container"><span> ${emoji} ${count} </span></div>`;
-    });
-    if (reactionArr.length >= 7) {
-      reactionBarLeft.innerHTML =
-        'zu viele reaktionen. Wir arbeiten gerade daran 🙁';
-    }
-  }
+  // emojiFilterRight() {
+  //   const emojiCountMapRight: any = new Map();
+  //   let reactionBarRight = document.getElementById('reactionBarRight');
+  //   this.channelMessages.messageEmojis.forEach((emoji) => {
+  //     if (emojiCountMapRight.has(emoji)) {
+  //       emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
+  //     } else {
+  //       emojiCountMapRight.set(emoji, 1);
+  //     }
+  //   });
+  //   reactionBarRight.innerHTML = '';
+  //   emojiCountMapRight.forEach((count, emoji) => {
+  //     reactionBarRight.innerHTML += `<div class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
+  //   });
+  //   if (this.channelMessages.messageEmojis.length >= 7) {
+  //     reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊';
+  //   }
+  // }
 
   showInfoBox: number = -1;
   timeoutArray: any[] = [];

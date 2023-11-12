@@ -47,7 +47,6 @@ export class CreateAccountComponent {
   }
 
   createNewAccount(): void {
-    
     if (this.addAS.imgSelectedOK) {
       this.auth.signup(
         this.createAccountForm.value.email,

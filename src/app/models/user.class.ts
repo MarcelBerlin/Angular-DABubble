@@ -6,7 +6,7 @@ export class User {
     online: boolean;
     directChats: any[];
     channels: any[];
-
+    userId: any;
 
     constructor(obj?:any) {
         this.name = obj ? obj.name : '';
@@ -15,6 +15,7 @@ export class User {
         this.online = obj ? obj.online : false;
         this.directChats = obj ? obj.directChats : [];
         this.channels = obj ? obj.channels : [];
+        this.userId = obj ? obj.userId : '';
     }
 
     toJSON() {
@@ -24,7 +25,8 @@ export class User {
             email: this.email,
             online: this.online,
             directChats: this.directChats,
-            channels: this.channels
+            channels: this.channels,
+            userId: this.userId
         }
     }
 }

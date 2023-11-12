@@ -6,6 +6,7 @@ import {
   setDoc,
   doc,
   updateDoc,
+  addDoc
 } from '@angular/fire/firestore';
 import { User } from '../models/user.class';
 import { __param } from 'tslib';
@@ -17,6 +18,8 @@ export class DataService {
   users$: any = [];
   users: any = [];
   userData: any = [];
+  directChatPartner: any = [];
+
   loggedUserLetters: string = '';
   signUpUser: User = new User();
   loggedInUserEmail: string = '';
@@ -30,7 +33,6 @@ export class DataService {
   }
 
   subcribeUserData(): void {
-    let test = false;
     const coll = collection(this.firestore, 'users');
     this.users$ = collectionData(coll, { idField: 'id' });
     this.users$.subscribe((user: any) => {
@@ -42,6 +44,7 @@ export class DataService {
       });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
       this.updateUserDirectChatBagesAmount();
+      if(this.loggedInUserData !== undefined && localStorage.getItem('user')) this.updateDirectPartners();
     });
   }
 
@@ -55,7 +58,7 @@ export class DataService {
     this.userData.forEach((user: any) => {
       let userJson: any = localStorage.getItem('user');
       this.loggedInUserEmail = JSON.parse(userJson);
-      if (user.email == this.loggedInUserEmail) {
+      if (user.email.toLowerCase() == this.loggedInUserEmail) {
         this.loggedInUserData = this.getLoggedUserData(user);
         this.updateUser();
       }
@@ -98,16 +101,34 @@ export class DataService {
    * @param {string} email - The email address of the signed up user.
    * @returns {void}
    */
-  saveSignUpUserData(email: string, name: string, img: string): void {
-    this.signUpUser.email = email;
+  async saveSignUpUserData(email: string, name: string, img: string): Promise<void> {
+    this.signUpUser.email = email.toLowerCase();
     this.signUpUser.name = name;
     this.signUpUser.img = img;
     const coll = collection(this.firestore, 'users');
-    setDoc(doc(coll), this.signUpUser.toJSON())
-      .then(() => { })
-      .catch((error) => {
-        console.log('save user failed');
+    let docId = await addDoc(coll, this.signUpUser.toJSON());
+    this.signUpUser.userId = docId.id;
+    this.updateSignUpUserId();
+  }
+
+
+  updateSignUpUserId(){
+    const qData = doc(this.firestore, 'users', this.signUpUser.userId);
+    const newData = {userId: this.signUpUser.userId};
+    updateDoc(qData, newData)
+  }
+
+
+  updateDirectPartners(){
+    this.directChatPartner = [];
+    this.directChatPartner.push(this.loggedInUserData);
+    this.userData.forEach(user => {
+      console.log('update directPartners', this.loggedInUserId );
+      user.directChats.forEach(data => {
+        if (data.partnerId === this.loggedInUserData.userId) this.directChatPartner.push(user);
       });
+    });
+    console.log('directChatPartner: ', this.directChatPartner);
   }
 
 
