@@ -116,6 +116,7 @@ export class DataService {
     const qData = doc(this.firestore, 'users', this.signUpUser.userId);
     const newData = {userId: this.signUpUser.userId};
     updateDoc(qData, newData)
+    
   }
 
 
