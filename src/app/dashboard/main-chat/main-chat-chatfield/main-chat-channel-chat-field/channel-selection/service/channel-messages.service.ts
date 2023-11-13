@@ -23,6 +23,7 @@ export class ChannelMessagesService {
   currentChannelId: string = '';
   messageEmojis: any = [];
   MessageAmount: number;
+  messageContentEdit: any = []; 
 
   constructor(
     private firestore: Firestore,
@@ -81,8 +82,23 @@ export class ChannelMessagesService {
   editOwnMessage(index: number) {    
     this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
-    this.selectedMessageContent = this.messageData[index].content;
-    console.log(this.selectedMessageContent);
+    this.selectedMessageContent = this.messageData[index].content[0].content;
+    console.log(this.selectedMessageId);
+    this.getActualMessageFromFirestore();
+  }
+
+  getActualMessageFromFirestore() {
+    const qData = doc(this.firestore, 'newMessages', this.selectedMessageId);
+    const newData = {
+      content: this.messageContentEdit 
+    };
+    try {
+      updateDoc(qData, newData);
+      console.log('Update erfolgreich!');
+    } catch (e) {
+      console.log('Update hat nicht funktioniert!!');
+    }
+      
   }
 
   // #################################################
