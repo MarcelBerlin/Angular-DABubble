@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, collectionData, doc, updateDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  collectionData,
+  doc,
+  updateDoc,
+  arrayUnion,
+} from '@angular/fire/firestore';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
 import { MenuSidenavComponent } from 'src/app/dashboard/menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/service/secondary-chat-answer.service';
@@ -11,8 +18,8 @@ import { MessageService } from 'src/app/services/messages.service';
   providedIn: 'root',
 })
 export class ChannelMessagesService {
-  index: number = 0;  
-  messages$: any = []; 
+  index: number = 0;
+  messages$: any = [];
   messageData: any = [];
   selectedMessageArray: any = [];
   selectedMessage = false;
@@ -23,14 +30,13 @@ export class ChannelMessagesService {
   currentChannelId: string = '';
   messageEmojis: any = [];
   MessageAmount: number;
-  messageContentEdit: any = []; 
+  messageContentEdit: string = 'Hallo kleiner test ob der Content aktualisiert wird';
 
   constructor(
     private firestore: Firestore,
     public timelinesService: TimelinesService,
     private dcshService: DashboardComponentsShowHideService,
-    private dialogAddService: DialogAddService,
-
+    private dialogAddService: DialogAddService
   ) {
     this.allMessages();
   }
@@ -45,7 +51,6 @@ export class ChannelMessagesService {
       console.log(this.messageData);
     });
   }
-
 
   // #################################
   // ##################### TEST FÜR TIMESTAMP VON MARCEL
@@ -72,14 +77,13 @@ export class ChannelMessagesService {
     this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
     this.selectedMessage = true;
-    this.dcshService.chatSlideIn();    
+    this.dcshService.chatSlideIn();
   }
 
   // nochmal abklären mit den anderen ?!?! #########################
   //################################################
 
-
-  editOwnMessage(index: number) {    
+  editOwnMessage(index: number) {
     this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
     this.selectedMessageContent = this.messageData[index].content[0].content;
@@ -87,18 +91,31 @@ export class ChannelMessagesService {
     this.getActualMessageFromFirestore();
   }
 
+
   getActualMessageFromFirestore() {
-    const qData = doc(this.firestore, 'newMessages', this.selectedMessageId);
-    const newData = {
-      content: this.messageContentEdit 
-    };
-    try {
-      updateDoc(qData, newData);
-      console.log('Update erfolgreich!');
-    } catch (e) {
-      console.log('Update hat nicht funktioniert!!');
+    const messageId = this.selectedMessageId;
+    const messageIndex = this.messageData.findIndex(
+      (message) => message.id === messageId
+    );
+    
+    if (messageIndex !== -1) {
+      const qData = doc(this.firestore, 'newMessages', messageId);
+      const newData = {
+        content: [
+          {
+            content: this.messageContentEdit
+          }
+        ]
+      };
+      try {
+        updateDoc(qData, newData);
+        console.log('Update erfolgreich!');
+        // Aktualisieren Sie den Textinhalt lokal in Ihrem Angular-Modell
+        this.messageData[messageIndex].content[0].content = this.messageContentEdit;
+      } catch (e) {
+        console.log('Update hat nicht funktioniert!!');
+      }
     }
-      
   }
 
   // #################################################
@@ -107,7 +124,6 @@ export class ChannelMessagesService {
   getSelectedMessageStatus() {
     return this.selectedMessage;
   }
-
 
   getChannelMessageFromFirestore() {
     const selectedChannelId = this.currentChannelId;
@@ -144,12 +160,11 @@ export class ChannelMessagesService {
     }
   }
 
-
-  UpdateEmojiToFirebase(index: number){ 
+  UpdateEmojiToFirebase(index: number) {
     const messageIdForEmoji = this.messageData[index].messageId;
     const qData = doc(this.firestore, 'newMessages', messageIdForEmoji);
-    const newData = { messageEmojis: this.messageEmojis }; 
-  
+    const newData = { messageEmojis: this.messageEmojis };
+
     try {
       updateDoc(qData, newData);
       console.log('Message Emoji wurde korrekt hinzugefügt');
