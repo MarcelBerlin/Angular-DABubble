@@ -121,14 +121,20 @@ export class DataService {
 
   updateDirectPartners(){
     this.directChatPartner = [];
-    this.directChatPartner.push(this.loggedInUserData);
+    let i = 0;
     this.userData.forEach(user => {
-      console.log('update directPartners', this.loggedInUserId );
       user.directChats.forEach(data => {
-        if (data.partnerId === this.loggedInUserData.userId) this.directChatPartner.push(user);
+        if (data.partnerId === this.loggedInUserData.userId) {
+        this.directChatPartner.push(user);
+        this.directChatPartner[this.directChatPartner.length - 1].index = i;
+        }
       });
+      i++;
     });
-    console.log('directChatPartner: ', this.directChatPartner);
+    if(this.directChatPartner.length == 0){
+      this.directChatPartner.push(this.loggedInUserData);
+      this.directChatPartner[0].index = 0;
+    }
   }
 
 

@@ -288,6 +288,10 @@ export class MenuSidenavComponent implements OnInit {
       this.messageInputService.chatChange = true;
       const clickedUserId: string = this.getUserData.userData[arrayId].id;
       const clickedUserName: string = this.getUserData.userData[arrayId].name;
+
+      // const clickedUserId: string = this.getUserData.directChatPartner[arrayId].id;
+      // const clickedUserName: string = this.getUserData.directChatPartner[arrayId].name;
+
       this.messageInputService.placeholderUserName = clickedUserName; 
       this.messageInputService.placeholderText = 'Nachricht an ' + clickedUserName;
       this.directChatService.getChatId(clickedUserId);

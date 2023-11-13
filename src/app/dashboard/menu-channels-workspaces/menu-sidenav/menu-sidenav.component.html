@@ -117,8 +117,9 @@
           class="direct-message-content"
           [@tagAnimation]="directMessageUserVisible ? 'visible' : 'hidden'"
         >
-          <div *ngFor="let user of getUserData.userData; let i = index">
-            <div class="direct-message-user" (click)="messageToUser(i)">
+          <!-- <div *ngFor="let user of getUserData.userData; let i = index"> -->
+          <div *ngFor="let user of getUserData.directChatPartner; let i = index">
+            <div class="direct-message-user" (click)="messageToUser(user.index)">
               <div>
                 <img class="pointer" [src]="user.img" />
               </div>
@@ -136,10 +137,10 @@
                 [style.background-color]="user.online ? '#92C83E' : '#686868'"
               ></div>
               <!-- Bossi Area for direct Chats -->
-              <p class="messageDot" *ngIf="getUserData.badgesArray[i] >= 1">
+              <p class="messageDot" *ngIf="getUserData.badgesArray[user.index] >= 1">
                 <span>
                   <span>
-                    {{ getUserData.badgesArray[i] }}
+                    {{ getUserData.badgesArray[user.index] }}
                   </span>
                 </span>
               </p>
