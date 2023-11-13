@@ -44,7 +44,7 @@ export class DataService {
       });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
       this.updateUserDirectChatBagesAmount();
-      if(this.loggedInUserData !== undefined && localStorage.getItem('user')) this.updateDirectPartners();
+      if (this.loggedInUserData !== undefined && localStorage.getItem('user')) this.updateDirectPartners();
     });
   }
 
@@ -112,29 +112,45 @@ export class DataService {
   }
 
 
-  updateSignUpUserId(){
+  updateSignUpUserId() {
     const qData = doc(this.firestore, 'users', this.signUpUser.userId);
-    const newData = {userId: this.signUpUser.userId};
+    const newData = { userId: this.signUpUser.userId };
     updateDoc(qData, newData)
   }
 
 
-  updateDirectPartners(){
+  updateDirectPartners() {
     this.directChatPartner = [];
     let i = 0;
     this.userData.forEach(user => {
       user.directChats.forEach(data => {
-        if (data.partnerId === this.loggedInUserData.userId) {
-        this.directChatPartner.push(user);
-        this.directChatPartner[this.directChatPartner.length - 1].index = i;
-        }
+        if (this.directChatPartnerFound(data)) this.addDirectChatPartnerArray(user, i);
       });
       i++;
     });
-    if(this.directChatPartner.length == 0){
-      this.directChatPartner.push(this.loggedInUserData);
-      this.directChatPartner[0].index = 0;
-    }
+    if (this.noDirectChatPartner()) this.addLoggedUserDataToDirectChatPartnerArray();
+  }
+
+
+  addLoggedUserDataToDirectChatPartnerArray(): void {
+    this.directChatPartner.push(this.loggedInUserData);
+    this.directChatPartner[0].index = 0;
+  }
+
+
+  addDirectChatPartnerArray(user: any, i: number): void {
+    this.directChatPartner.push(user);
+    this.directChatPartner[this.directChatPartner.length - 1].index = i;
+  }
+
+
+  noDirectChatPartner(): boolean {
+    return this.directChatPartner.length == 0;
+  }
+  
+
+  directChatPartnerFound(data: any): boolean {
+    return data.partnerId === this.loggedInUserData.userId;
   }
 
 
@@ -205,7 +221,7 @@ export class DataService {
       let userJson: any = localStorage.getItem('user');
       this.loggedInUserEmail = JSON.parse(userJson);
       // user?.directChat hinzugefügt. gez Basti
-      
+
       if (user.email == this.loggedInUserEmail && user?.directChat) {
         for (let i = 0; i < user.directChats.length; i++) {
           this.loggedInUserData.directChats[i].newMessageAmount =
