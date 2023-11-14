@@ -30,7 +30,7 @@ export class ChannelMessagesService {
   currentChannelId: string = '';
   messageEmojis: any = [];
   MessageAmount: number;
-  messageContentEdit: string = 'Gucken ob das klappt';
+  messageContentEdit: string = '';
 
   constructor(
     private firestore: Firestore,
@@ -140,7 +140,7 @@ export class ChannelMessagesService {
       this.tryUpdateToFirebase(qData, newData);
     } else {
       console.error('Die ausgewählte Nachricht wurde im Array nicht gefunden.');
-    }
+    }    
   }
 
   // funktion zum hochzählen der messages
