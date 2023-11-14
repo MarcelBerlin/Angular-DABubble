@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogInfoComponent } from 'src/app/dialog/dialog-info/dialog-info.component';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { HeaderDialogComponent } from 'src/app/dialog/header-dialog/header-dialog.component';
 import { DataService } from 'src/app/services/data.service';
+import { DialogInfoService } from 'src/app/services/dialog-info.service';
 import { VariablesService } from 'src/app/services/variables.service';
 
 @Component({
@@ -17,7 +19,8 @@ export class MainChatMessageHeadComponent {
   constructor(
     public dataService: DataService,
     private dialog: MatDialog,
-    public varService: VariablesService
+    public varService: VariablesService,
+    private dialogInfoService: DialogInfoService
   ) {}
 
   /**
@@ -50,5 +53,11 @@ export class MainChatMessageHeadComponent {
       this.dataService.loggedInUserData.email ===
       this.dataService.userData[this.varService.selectedUserToMessage].email
     );
+  }
+
+  option(event) {
+    event.stopPropagation();
+    this.dialogInfoService.setDialogInfoText(9);
+    this.dialog.open(DialogInfoComponent);
   }
 }

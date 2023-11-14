@@ -5,10 +5,20 @@
       <div
         class="activeDot"
         [style.background-color]="
-          userData[varService.selectedUserToMessage].online ? '#92C83E' : '#686868'
+          userData[varService.selectedUserToMessage].online
+            ? '#92C83E'
+            : '#686868'
         "
       ></div>
     </div>
-    <span>{{ userData[varService.selectedUserToMessage].name }} <span *ngIf="currentUser()">(Du)</span></span>
+    <span
+      >{{ userData[varService.selectedUserToMessage].name }}
+      <span *ngIf="currentUser()">(Du)</span></span
+    >
+    <div class="option" (click)="option($event)">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </div>

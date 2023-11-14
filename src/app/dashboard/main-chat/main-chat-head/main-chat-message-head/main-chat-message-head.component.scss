@@ -46,5 +46,23 @@
       font-size: 24px;
       margin-right: 8px;
     }
+    .option{
+      position: unset;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      gap: 2px;
+      margin: 0 !important;
+      div{
+        width: 4px;
+        height: 4px;
+        border-radius:50%;
+        margin: 0 !important;
+        background-color: black;
+      }
+    }
   }
 }
+
