@@ -48,6 +48,7 @@ export class DataService {
         this.updateDirectPartners();
         this.updateUserDirectChatBagesAmount();
       } 
+      
     });
   }
 
@@ -124,23 +125,27 @@ export class DataService {
 
   updateDirectPartners() {
     this.directChatPartner = [];
+    this.directChatPartner[0] = this.loggedInUserData;
+    this.directChatPartner[0].index = 0;
     let i = 0;
     this.userData.forEach(user => {
       user.directChats.forEach(data => {
-        if (this.directChatPartnerFound(data)) this.addDirectChatPartnerArray(user, i);
+        if (this.directChatPartnerFound(data)){
+          this.addDirectChatPartnerArray(user, i);
+        } 
       });
       i++;
     });
-    if (this.noDirectChatPartner()) this.addLoggedUserDataToDirectChatPartnerArray();
+    // if (this.noDirectChatPartner()) this.addLoggedUserDataToDirectChatPartnerArray();
   }
 
   
 
 
-  addLoggedUserDataToDirectChatPartnerArray(): void {
-    this.directChatPartner.push(this.loggedInUserData);
-    this.directChatPartner[0].index = 0;
-  }
+  // addLoggedUserDataToDirectChatPartnerArray(): void {
+  //   this.directChatPartner[0] = this.loggedInUserData;
+  //   this.directChatPartner[0].index = 0;
+  // }
 
 
   addDirectChatPartnerArray(user: any, i: number): void {
@@ -155,7 +160,7 @@ export class DataService {
   
 
   directChatPartnerFound(data: any): boolean {
-    return data.partnerId === this.loggedInUserData.userId && !this.chatInhibition(data);
+    return data.partnerId === this.loggedInUserData.userId && !this.chatInhibition(data) && data.ownId !== this.loggedInUserData.userId;
   }
 
 
@@ -163,7 +168,7 @@ export class DataService {
   chatInhibition(data: any): boolean {
     let chatInhibition: boolean = false;
     for (let i = 0; i < this.userData[0].directChats.length; i++) {
-      const chat = this.userData[0].directChats[i];
+      const chat = this.loggedInUserData.directChats[i];
       if(chat.directChatId == data.directChatId) chatInhibition = chat.inhibition;
     }
     return chatInhibition;
