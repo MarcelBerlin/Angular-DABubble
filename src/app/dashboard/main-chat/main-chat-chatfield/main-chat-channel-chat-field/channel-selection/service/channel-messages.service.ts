@@ -30,7 +30,7 @@ export class ChannelMessagesService {
   currentChannelId: string = '';
   messageEmojis: any = [];
   MessageAmount: number;
-  messageContentEdit: string = '';
+  messageContentEdit: string = 'Gucken ob das klappt';
 
   constructor(
     private firestore: Firestore,

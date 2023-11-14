@@ -51,13 +51,13 @@
             [style.transition]="'display 125ms ease-in-out'">
             <div class="interaction-bubble-emoji">
               <img ngDefaultControl (click)="emojiPickerLeft= !emojiPickerLeft;"
-                src="./../../../../assets/img/reaction.png">
+                src="./../../../../assets/img/reaction.png" title="Emoji auswählen">
               <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft"
-                (emojiSelect)="addEmoji($event,i)" title="Choose your emoji">
+                (emojiSelect)="addEmoji($event,i)">
               </emoji-mart>
             </div>
             <div (click)="channelMessages.openAnswer(i)">
-              <mat-icon class="interaction-bubble-comment">
+              <mat-icon class="interaction-bubble-comment" title="Antworten">
                 comment
               </mat-icon>
             </div>
@@ -163,19 +163,19 @@
             <div class="interaction-bubble-right" [style.display]="hoveredIndex === i ? 'block' : 'none'">
               <div class="interaction-bubble-emoji">
                 <img ngDefaultControl (click)="emojiPickerRight= !emojiPickerRight;"
-                  src="./../../../../assets/img/reaction.png">
+                  src="./../../../../assets/img/reaction.png" title="Emoji auswählen">
                 <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerRight"
-                  (emojiSelect)="addEmoji($event, i)" title="Choose your emoji">
+                  (emojiSelect)="addEmoji($event, i)">
                   <!-- addEmoji(id oder index von nachricht) -->
                 </emoji-mart>
               </div>
               <div (click)="channelMessages.openAnswer(i)">
-                <mat-icon class="interaction-bubble-comment">
+                <mat-icon class="interaction-bubble-comment" title="Antworten">
                   comment
                 </mat-icon>
               </div>
               <div (click)="channelMessages.editOwnMessage(i)">
-                <mat-icon class="material-symbols-outlined">
+                <mat-icon class="material-symbols-outlined" title="Bearbeiten">
                   more_vert
                 </mat-icon>
               </div>
