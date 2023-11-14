@@ -4,6 +4,7 @@ export class DirectChatIndex{
     lastTimeStamp: any; //last update of the chat
     directChatId: string; // ID of the Chat.
     newMessageAmount: number;
+    inhibition: boolean;
 
     constructor(obj?:any) {
         this.ownId = obj ? obj.ownId : 'unset';
@@ -11,6 +12,7 @@ export class DirectChatIndex{
         this.lastTimeStamp = obj ? obj.lastTimeStamp : {};
         this.directChatId = obj ? obj.directChatId : undefined; // changed from false to undefine
         this.newMessageAmount = obj ? obj.newMessageAmount : 0;
+        this.inhibition = obj ? obj.inhibition : false;
     }
 
     
@@ -20,7 +22,8 @@ export class DirectChatIndex{
             partnerId: this.partnerId,
             lastTimeStamp: this.lastTimeStamp,
             directChatId: this.directChatId,
-            newMessageAmount: this.newMessageAmount
+            newMessageAmount: this.newMessageAmount,
+            inhibition: this.inhibition
         }
     }
 }

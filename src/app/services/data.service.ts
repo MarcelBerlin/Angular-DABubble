@@ -43,8 +43,11 @@ export class DataService {
         return a.email < b.email ? -1 : 1;
       });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
-      this.updateUserDirectChatBagesAmount();
-      if (this.loggedInUserData !== undefined && localStorage.getItem('user')) this.updateDirectPartners();
+      
+      if (this.loggedInUserData !== undefined && localStorage.getItem('user')){
+        this.updateDirectPartners();
+        this.updateUserDirectChatBagesAmount();
+      } 
     });
   }
 
@@ -131,6 +134,8 @@ export class DataService {
     if (this.noDirectChatPartner()) this.addLoggedUserDataToDirectChatPartnerArray();
   }
 
+  
+
 
   addLoggedUserDataToDirectChatPartnerArray(): void {
     this.directChatPartner.push(this.loggedInUserData);
@@ -150,8 +155,20 @@ export class DataService {
   
 
   directChatPartnerFound(data: any): boolean {
-    return data.partnerId === this.loggedInUserData.userId;
+    return data.partnerId === this.loggedInUserData.userId && !this.chatInhibition(data);
   }
+
+
+
+  chatInhibition(data: any): boolean {
+    let chatInhibition: boolean = false;
+    for (let i = 0; i < this.userData[0].directChats.length; i++) {
+      const chat = this.userData[0].directChats[i];
+      if(chat.directChatId == data.directChatId) chatInhibition = chat.inhibition;
+    }
+    return chatInhibition;
+  }
+
 
 
   /**

@@ -71,9 +71,16 @@ export class DirectChatService {
    */
   searchUserDirectChat(clickedUserId: string): void {
     const directChatArray: [] = this.dataService.loggedInUserData.directChats;
+    let index = 0;
     if (this.directChatS.userHasDirectChats(directChatArray)) {
       directChatArray.forEach((userDirectChatIndex: DirectChatIndex) => {
-        if (userDirectChatIndex.partnerId == clickedUserId) this.directChatIndex = userDirectChatIndex;
+        if (userDirectChatIndex.partnerId == clickedUserId){
+          this.directChatIndex = userDirectChatIndex;
+          this.dataService.loggedInUserData.directChats[index].inhibition = false;
+          // Update funktion für die LoggedinUser directChats
+          this.updateUser();
+        }
+        index++;
       });
     }
     if (this.directChatFound()) this.loadChatDataSet(this.directChatIndex.directChatId);
