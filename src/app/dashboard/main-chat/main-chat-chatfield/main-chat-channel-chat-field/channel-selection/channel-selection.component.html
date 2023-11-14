@@ -169,12 +169,16 @@
                   <!-- addEmoji(id oder index von nachricht) -->
                 </emoji-mart>
               </div>
-              <div (click)="alertMessage(); channelMessages.editOwnMessage(i)">
+              <div (click)="channelMessages.openAnswer(i)">
                 <mat-icon class="interaction-bubble-comment">
                   comment
                 </mat-icon>
               </div>
-              <div></div>
+              <div (click)="channelMessages.editOwnMessage(i)">
+                <mat-icon class="material-symbols-outlined">
+                  more_vert
+                </mat-icon>
+              </div>
               <div></div>
             </div>
 

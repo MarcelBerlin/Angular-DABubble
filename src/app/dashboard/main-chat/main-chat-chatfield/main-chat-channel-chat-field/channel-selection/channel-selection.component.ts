@@ -211,7 +211,7 @@ export class ChannelSelectionComponent implements OnInit {
     console.log(entry);
   }
 
-  alertMessage(){
-    alert('Hier soll eigentlich der Button sein, zum bearbeiten der Frage');
-  }
+  // alertMessage(){
+  //   alert('Hier soll eigentlich der Button sein, zum bearbeiten der Frage');
+  // }
 }
