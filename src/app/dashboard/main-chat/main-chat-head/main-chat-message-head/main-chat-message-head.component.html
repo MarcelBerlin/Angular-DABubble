@@ -15,7 +15,7 @@
       >{{ userData[varService.selectedUserToMessage].name }}
       <span *ngIf="currentUser()">(Du)</span></span
     >
-    <div class="option" (click)="option($event)">
+    <div class="option" (click)="option($event)" *ngIf="!currentUser()">
       <div></div>
       <div></div>
       <div></div>

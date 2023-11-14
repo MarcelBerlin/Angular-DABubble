@@ -60,4 +60,6 @@ export class MainChatMessageHeadComponent {
     this.dialogInfoService.setDialogInfoText(9);
     this.dialog.open(DialogInfoComponent);
   }
+
+
 }
