@@ -170,6 +170,7 @@ export class MessageService {
   getDirectChatData(arrayId: number): void {
     if (this.directChatService.directChatActive) {
       let clickedUserId: string = this.dataService.userData[arrayId].id;
+      console.log(clickedUserId);
       this.directChatService.getChatId(clickedUserId);
     }
   }

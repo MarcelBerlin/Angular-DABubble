@@ -213,6 +213,7 @@ export class MenuSidenavComponent implements OnInit {
   }
 
   messageToUser(arrayId: number) {
+    
     this.currentUser()
       ? this.sendMessageToLoggedUser(arrayId)
       : this.sendMessageToSpecificUser(arrayId);

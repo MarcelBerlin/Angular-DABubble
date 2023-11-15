@@ -341,6 +341,7 @@ export class MessageInputComponent {
    * @returns {void}
    */
   saveMessage(): void {
+    console.log('saveMessage');
     if(this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2){
       this.directChatService.saveMessage(this.saveHTMLTagsAndText());
       this.inputService.contentArray = [];
