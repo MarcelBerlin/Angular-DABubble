@@ -6,16 +6,14 @@ import { DataService } from '../../services/data.service';
 import { ActualChat } from '../models/actual-chat.class';
 import { Firestore, collection, doc, updateDoc, addDoc, getDoc } from '@angular/fire/firestore';
 import { TimelinesService } from './timelines.service';
-import { ChannelTimeStamp } from 'src/app/dashboard/main-chat/main-chat-chatfield/main-chat-channel-chat-field/channel-selection/models/channel-timestamp.class';
 import { DirectChatServiceService } from './direct-chat-service.service';
 import { VariablesService } from 'src/app/services/variables.service';
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class DirectChatService {
   directChatIndex = new DirectChatIndex();
+  activeUserDirectChatIndex: number = 0;
   partnerIndex = new DirectChatIndex();
   timeStamp: TimeStamp = new TimeStamp();
   chatDataSet: ChatDataSet = new ChatDataSet(); // chat in direct chats
@@ -61,6 +59,13 @@ export class DirectChatService {
   }
 
 
+  inhibitionOfDirectChat(){
+    this.activeUserDirectChatIndex;
+    this.dataService.loggedInUserData.directChats[this.activeUserDirectChatIndex].inhibition = true;
+    this.updateUser();
+  }
+
+
   /**
    * Searches for a direct chat between the logged-in user and a clicked user within the directChatArray.
    * If the chat is found, it sets the chatDataId in dataService and loads the chat dataset.
@@ -76,8 +81,8 @@ export class DirectChatService {
       directChatArray.forEach((userDirectChatIndex: DirectChatIndex) => {
         if (userDirectChatIndex.partnerId == clickedUserId){
           this.directChatIndex = userDirectChatIndex;
+          this.activeUserDirectChatIndex = index;
           this.dataService.loggedInUserData.directChats[index].inhibition = false;
-          // Update funktion für die LoggedinUser directChats
           this.updateUser();
         }
         index++;

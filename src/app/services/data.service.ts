@@ -139,6 +139,7 @@ export class DataService {
     // if (this.noDirectChatPartner()) this.addLoggedUserDataToDirectChatPartnerArray();
   }
 
+
   
 
 
@@ -172,6 +173,13 @@ export class DataService {
       if(chat.directChatId == data.directChatId) chatInhibition = chat.inhibition;
     }
     return chatInhibition;
+  }
+
+
+  inhibitionOfDirectChat(){
+    this.loggedInUserData.inhibition = true;
+    this.updateUser();
+
   }
 
 
