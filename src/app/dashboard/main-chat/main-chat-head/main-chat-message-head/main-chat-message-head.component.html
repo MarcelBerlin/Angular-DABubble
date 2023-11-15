@@ -15,7 +15,11 @@
       >{{ userData[varService.selectedUserToMessage].name }}
       <span *ngIf="currentUser()">(Du)</span></span
     >
-    <mat-icon matTooltip="Kontakt ausblenden" class="option" (click)="option($event)" *ngIf="!currentUser()"
+    <mat-icon
+      matTooltip="Kontakt ausblenden"
+      class="option"
+      (click)="option($event)"
+      *ngIf="!currentUser()"
       >person_off
     </mat-icon>
   </div>
