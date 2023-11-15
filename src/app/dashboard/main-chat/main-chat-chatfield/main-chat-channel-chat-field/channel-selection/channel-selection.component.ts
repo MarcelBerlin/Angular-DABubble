@@ -33,14 +33,13 @@ export class ChannelSelectionComponent implements OnInit {
   messages$: any = [];
   messageData: any = [];
   hoveredIndex: number | null = null;
-
   chatEmojiRight: boolean = false;
   chatEmojiLeft: boolean = false;
   emojiPickerRight: boolean = false;
   emojiPickerLeft: boolean = false;
   emoji: string = '';
-  reactionArrRight: any = [];
-  reactionArrLeft: any = [];
+  // reactionArrRight: any = [];
+  // reactionArrLeft: any = [];
   isThereAnAnswer: boolean = false;
   emptyChat: boolean = false;
   private emptyChatSubscription: Subscription;
@@ -66,7 +65,7 @@ export class ChannelSelectionComponent implements OnInit {
     
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.emptyChatSubscription = this.messageService.emptyChat$.subscribe((isEmpty) => {
       this.emptyChat = isEmpty;
     });
@@ -76,12 +75,12 @@ export class ChannelSelectionComponent implements OnInit {
     this.emptyChatSubscription.unsubscribe();
   }
 
-  checkIfChannelIsEmpty() { 
+  checkIfChannelIsEmpty() {
     if (this.channelMessages.MessageAmount === 0) {
       this.emptyChat = true;
     } else {
       this.emptyChat = false;
-    }       
+    }
   }
 
   get isChannelEmpty() {
@@ -89,7 +88,7 @@ export class ChannelSelectionComponent implements OnInit {
     return this.emptyChat;
   }
 
-  
+
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
    *
@@ -123,17 +122,26 @@ export class ChannelSelectionComponent implements OnInit {
   }
 
   addEmoji(event, index) {
+    debugger;
+    // WIRFT AKTUELL EINEN FEHLER WEGEN INDEX WEIL WAHRSCHEINLICH NICHT JEDE NACHT DIESES ARAY HAT
     this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
     this.channelMessages.messageEmojis.push(this.messageService.emojis);
-    if(this.emojiPickerLeft) { this.emojiPickerLeft = false };  // verlagern
-    if(this.emojiPickerRight) { this.emojiPickerRight = false };  // verlagern
+    if (this.emojiPickerLeft) {
+      this.emojiPickerLeft = false;
+      this.chatEmojiLeft = true;
+    };
+
+    if (this.emojiPickerRight) {
+      this.emojiPickerRight = false;
+      this.chatEmojiRight = true;
+    };
     this.channelMessages.selectedMessageIndex = index;
-    console.log(this.channelMessages.messageEmojis,'firebase');
+    console.log(this.channelMessages.messageEmojis, 'firebase');
     this.channelMessages.UpdateEmojiToFirebase(index);
-    // if (this.channelMessages.messageEmojis.length > 1) { this.emojiFilterRight()}
+    // if (this.channelMessages.messageEmojis.length > 1) { this.emojiMapper()}
   }
 
-  // emojiFilterRight() {
+  // emojiMapper() {
   //   const emojiCountMapRight: any = new Map();
   //   let reactionBarRight = document.getElementById('reactionBarRight');
   //   this.channelMessages.messageEmojis.forEach((emoji) => {

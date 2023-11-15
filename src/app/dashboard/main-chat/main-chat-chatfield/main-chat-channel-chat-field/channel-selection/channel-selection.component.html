@@ -131,17 +131,22 @@
             <div class="reaction-bar-left">
               <div id="reactionBarLeft" *ngIf="chatEmojiLeft">
                 <div matTooltip='{{ dataService.loggedInUserData.name }}' class="reactions">
-                  <span>{{ reactionArrLeft }}</span>
+                  <span *ngIf="channelMessages.messageData[index].messageEmojis.length >= 1">
+                    {{ channelMessages.messageData[index].messageEmojis }}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div *ngIf="channelMessages.messageData[i].amountAnswers > 0" style="position: absolute; left: 85px; margin-left: 16px; display: flex; justify-content: flex-start; gap: 10px;">
-            <span style="display:flex; justify-content: flex-start; cursor: pointer; color: #797ef3; font-size: 15px"  [class.resposivView]="varService.getInnerBrowserWidth() <= 800"
-              (click)="channelMessages.openAnswer(i)" *ngIf="channelMessages.messageData[i].amountAnswers < 2">
+          <div *ngIf="channelMessages.messageData[i].amountAnswers > 0"
+            style="position: absolute; left: 85px; margin-left: 16px; display: flex; justify-content: flex-start; gap: 10px;">
+            <span style="display:flex; justify-content: flex-start; cursor: pointer; color: #797ef3; font-size: 15px"
+              [class.resposivView]="varService.getInnerBrowserWidth() <= 800" (click)="channelMessages.openAnswer(i)"
+              *ngIf="channelMessages.messageData[i].amountAnswers < 2">
               {{ channelMessages.messageData[i].amountAnswers }} Antwort </span>
-              <span style="display:flex; justify-content: flex-start; cursor: pointer; color: #797ef3; font-size: 15px"  [class.resposivView]="varService.getInnerBrowserWidth() <= 800"
-              (click)="channelMessages.openAnswer(i)" *ngIf="channelMessages.messageData[i].amountAnswers >= 2">
+            <span style="display:flex; justify-content: flex-start; cursor: pointer; color: #797ef3; font-size: 15px"
+              [class.resposivView]="varService.getInnerBrowserWidth() <= 800" (click)="channelMessages.openAnswer(i)"
+              *ngIf="channelMessages.messageData[i].amountAnswers >= 2">
               {{ channelMessages.messageData[i].amountAnswers }} Antworten </span>
             <span style="font-size: 13px;">Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span>
           </div>
@@ -234,26 +239,29 @@
                       <img src="../../assets/img/PDF.png" alt="" *ngIf="inputService.fileIsPDF(entry.content)">
                     </span>
                   </span>
-
                 </div>
               </div>
               <!-- testarea new message Data format  end-->
-              
+
             </div>
             <div class="reaction-bar-right">
-              <div class="reactions" id="reactionBarRight" *ngIf="chatEmojiRight"> <!-- id's stimmen nicht-->
+              <div class="reactions" id="reactionBarRight" *ngIf="chatEmojiRight">
                 <div id="reactionsRight" matTooltip='{{this.dataService.loggedInUserData.name}}'>
-                  <!--  reagierter User-->
-                  <span *ngIf="this.reactionArrRight.length <= 1"> {{ this.channelMessages.messageEmojis }} </span>
+                  <span *ngIf="channelMessages.messageData[index].messageEmojis.length >= 1">
+                    {{ channelMessages.messageData[index].messageEmojis }}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-          <div *ngIf="channelMessages.messageData[i].amountAnswers > 0" style="position: absolute; right: 100px; margin-left: 16px; display: flex; justify-content: flex-end; gap: 10px;">
-            <span style="display:flex; justify-content: flex-end; cursor: pointer; color: #797ef3; font-size: 15px" (click)="channelMessages.openAnswer(i)" *ngIf="channelMessages.messageData[i].amountAnswers < 2">              
+          <div *ngIf="channelMessages.messageData[i].amountAnswers > 0"
+            style="position: absolute; right: 100px; margin-left: 16px; display: flex; justify-content: flex-end; gap: 10px;">
+            <span style="display:flex; justify-content: flex-end; cursor: pointer; color: #797ef3; font-size: 15px"
+              (click)="channelMessages.openAnswer(i)" *ngIf="channelMessages.messageData[i].amountAnswers < 2">
               {{ channelMessages.messageData[i].amountAnswers }} Antwort </span>
-              <span style="display:flex; cursor: pointer; color: #797ef3; font-size: 15px" (click)="channelMessages.openAnswer(i)" *ngIf="channelMessages.messageData[i].amountAnswers >= 2">              
-                {{ channelMessages.messageData[i].amountAnswers }} Antworten </span>
+            <span style="display:flex; cursor: pointer; color: #797ef3; font-size: 15px"
+              (click)="channelMessages.openAnswer(i)" *ngIf="channelMessages.messageData[i].amountAnswers >= 2">
+              {{ channelMessages.messageData[i].amountAnswers }} Antworten </span>
             <span style="font-size: 13px;">Letzte Antwort {{ channelMessages.messageData[i].lastClockTime }}</span>
           </div>
         </div>
