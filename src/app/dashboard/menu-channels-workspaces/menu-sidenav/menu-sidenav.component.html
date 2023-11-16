@@ -119,7 +119,7 @@
         >
           <!-- <div *ngFor="let user of getUserData.userData; let i = index"> -->
           <div *ngFor="let user of getUserData.directChatPartner; let i = index">
-            <div class="direct-message-user" (click)="messageToUser(user.index)">
+            <div class="direct-message-user" (click)="messageToUserService.messageToUser(user.index)">
               <div>
                 <img class="pointer" [src]="user.img" />
               </div>

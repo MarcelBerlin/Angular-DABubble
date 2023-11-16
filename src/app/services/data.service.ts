@@ -42,13 +42,14 @@ export class DataService {
         if (b.email === this.loggedInUserEmail) return 1;
         return a.email < b.email ? -1 : 1;
       });
-      if (this.loggedInUserData === undefined && localStorage.getItem('user')) this.getLoggedInUserData();
-      
+      if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
+        this.getLoggedInUserData();
+      }
       if (this.loggedInUserData !== undefined && localStorage.getItem('user')){
+        this.loggedInUserData = user[0];
         this.updateDirectPartners();
         this.updateUserDirectChatBagesAmount();
       } 
-      
     });
   }
 
@@ -150,8 +151,10 @@ export class DataService {
 
 
   addDirectChatPartnerArray(user: any, i: number): void {
-    this.directChatPartner.push(user);
-    this.directChatPartner[this.directChatPartner.length - 1].index = i;
+    if (!this.directChatPartner.includes(user)){
+      this.directChatPartner.push(user);
+     this.directChatPartner[this.directChatPartner.length - 1].index = i;
+    }
   }
 
 
@@ -169,7 +172,7 @@ export class DataService {
   chatInhibition(data: any): boolean {
     let chatInhibition: boolean = false;
     for (let i = 0; i < this.userData[0].directChats.length; i++) {
-      const chat = this.loggedInUserData.directChats[i];
+      const chat = this.userData[0].directChats[i];
       if(chat.directChatId == data.directChatId) chatInhibition = chat.inhibition;
     }
     return chatInhibition;
@@ -179,7 +182,6 @@ export class DataService {
   inhibitionOfDirectChat(){
     this.loggedInUserData.inhibition = true;
     this.updateUser();
-
   }
 
 
