@@ -214,7 +214,6 @@ export class DataService {
   }
 
 
-
   /**
    * Creates a new user with the provided user data, if logged in user not listed yet.
    *
