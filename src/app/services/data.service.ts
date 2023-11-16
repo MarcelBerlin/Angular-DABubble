@@ -46,7 +46,7 @@ export class DataService {
         this.getLoggedInUserData();
       }
       if (this.loggedInUserData !== undefined && localStorage.getItem('user')){
-        this.loggedInUserData = user[0];
+        this.loggedInUserData = this.userData[0];
         this.updateDirectPartners();
         this.updateUserDirectChatBagesAmount();
       } 
