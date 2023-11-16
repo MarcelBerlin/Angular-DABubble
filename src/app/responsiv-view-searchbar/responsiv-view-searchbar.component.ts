@@ -7,8 +7,9 @@ import { ConditionService } from 'src/app/services/condition.service';
 import { DashboardComponentsShowHideService } from '../dashboard/dashboard-components-show-hide.service';
 import { MessageService } from '../services/messages.service';
 import { MessageInputServiceService } from '../message-input/service/message-input-service.service';
-import { DirectChatService } from '../direct-chat/services/direct-chat.service';
-import { NewMessageAmountService } from '../direct-chat/services/new-message-amount.service';
+// import { DirectChatService } from '../direct-chat/services/direct-chat.service';
+// import { NewMessageAmountService } from '../direct-chat/services/new-message-amount.service';
+import { MessageToUserService } from '../direct-chat/services/message-to-user.service';
 @Component({
   selector: 'app-responsiv-view-searchbar',
   templateUrl: './responsiv-view-searchbar.component.html',
@@ -38,8 +39,9 @@ export class ResponsivViewSearchbarComponent {
     private dcshService: DashboardComponentsShowHideService,
     private messageService: MessageService,
     private messageInputService: MessageInputServiceService,
-    private directChatService: DirectChatService,
-    private newMessageAmountService: NewMessageAmountService
+    // private directChatService: DirectChatService,
+    // private newMessageAmountService: NewMessageAmountService,
+    private messageToUserService: MessageToUserService
   ) {}
 
 
@@ -220,7 +222,7 @@ export class ResponsivViewSearchbarComponent {
    */
   openApplicableChat(index: number, type: string): void {
     if (type == 'channel') this.openChannel(index);
-    else this.openDirectChat(index);
+    else this.messageToUserService.messageToUser(index);
   }
 
 
@@ -240,80 +242,5 @@ export class ResponsivViewSearchbarComponent {
     const channelId = selectedChannel.id;    
     if (innerWidth <= 800) this.dcshService.hideNavigation = true; 
     await this.messageService.onChannelClick(channelId);
-  }
-
-
-  /**
-   * Opens a direct chat or performs user-specific actions based on the provided arrayId.
-   *
-   * @param {number} arrayId - The index or identifier of the chat or user to open.
-   * @returns {void}
-   */
-  openDirectChat(arrayId: number): void {
-    this.currentUser()
-      ? this.openDirectChatLoggedUser(arrayId)
-      : this.openDirectChatToSpecificUser(arrayId);
-    this.varService.previousScrollTop = 0;
-    this.getDirectChatData(arrayId);
-  }
-
-
-  /**
-   * Opens a direct chat for a logged-in user with the specified arrayId.
-   *
-   * @param {number} arrayId - The identifier of the chat or user to open.
-   * @returns {void}
-   */
-  openDirectChatLoggedUser(arrayId: number): void {
-    this.varService.setVar('mainChatHead', 1);
-    this.varService.setVar('selectedUserToMessage', arrayId);
-  }
-
-
-  /**
-   * Opens a direct chat to a specific user with the specified arrayId.
-   *
-   * @param {number} arrayId - The identifier of the chat or user to open.
-   * @returns {void}
-   */
-  openDirectChatToSpecificUser(arrayId: number): void {
-    this.varService.setVar('mainChatHead', 1);
-    this.varService.setVar('selectedUserToMessage', arrayId);
-  }
-
-
-  /**
-   * Checks if the currently logged-in user matches the selected user for messaging.
-   *
-   * @returns {boolean} True if the currently logged-in user matches the selected user, false otherwise.
-   */
-  currentUser(): boolean {
-    return (
-      this.dataService.loggedInUserData.email ===
-      this.dataService.userData[this.varService.selectedUserToMessage].email
-    );
-  }
-
-
-  /**
-   * Retrieves data for a direct chat based on the provided arrayId and performs necessary actions.
-   *
-   * @param {number} arrayId - The index or identifier of the chat or user to get data for.
-   * @returns {void}
-   */
-  getDirectChatData(arrayId: number): void {
-    if (this.directChatService.directChatActive) {
-      this.messageInputService.chatChange = true;
-      const clickedUserId: string = this.dataService.userData[arrayId].id;
-      const clickedUserName: string = this.dataService.userData[arrayId].name;
-      this.messageInputService.placeholderUserName = clickedUserName; 
-      this.messageInputService.placeholderText = 'Nachricht an ' + clickedUserName;
-      this.directChatService.getChatId(clickedUserId);
-      this.newMessageAmountService.actualPartnerUserDataIndex = arrayId;
-      this.messageInputService.setMyVariable(true);
-      setTimeout(() => {
-        this.newMessageAmountService.setOwnMessageAmountToZero();
-      }, 1000);
-    }
   }
 }

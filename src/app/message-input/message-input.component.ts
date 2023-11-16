@@ -269,6 +269,7 @@ export class MessageInputComponent {
       this.fillContentArray(child, i);
     }
     this.inputService.addTagInfoLinkInfo();
+    console.log(this.inputService.contentArray);
     return this.inputService.contentArray;
   }
 

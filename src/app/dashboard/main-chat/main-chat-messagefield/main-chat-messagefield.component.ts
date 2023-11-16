@@ -70,10 +70,6 @@ export class MainChatMessagefieldComponent {
   }
 
   messageSend() {
-    // if (this.varService.mainChatHead == 0 && this.messageService.messageText.length >= 1) {
-    //   this.messageService.addMessage();   
-    //   this.messageService.messageText = '';
-    // }
     if (this.varService.mainChatHead == 0 && this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
       this.messageInputService.resetVariables();
       this.messageInputService.setMyVariable(true);
