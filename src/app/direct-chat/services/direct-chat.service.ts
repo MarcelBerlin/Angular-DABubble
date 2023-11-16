@@ -45,7 +45,7 @@ export class DirectChatService {
     return this.timeStamp.toJSON();
   }
 
- 
+
 
   /**
    * Retrieves the chat ID for a specific user from the dataService and initiates a search for a direct chat.
@@ -59,7 +59,13 @@ export class DirectChatService {
   }
 
 
-  inhibitionOfDirectChat(){
+  /**
+   * Sets the inhibition flag for a direct chat in the logged-in user's direct chats list 
+   * and updates the user data.
+   *
+   * @returns {void}
+   */
+  inhibitionOfDirectChat(): void {
     this.activeUserDirectChatIndex;
     this.dataService.loggedInUserData.directChats[this.activeUserDirectChatIndex].inhibition = true;
     this.updateUser();
@@ -79,7 +85,7 @@ export class DirectChatService {
     let index = 0;
     if (this.directChatS.userHasDirectChats(directChatArray)) {
       directChatArray.forEach((userDirectChatIndex: DirectChatIndex) => {
-        if (userDirectChatIndex.partnerId == clickedUserId){
+        if (userDirectChatIndex.partnerId == clickedUserId) {
           this.directChatIndex = userDirectChatIndex;
           this.activeUserDirectChatIndex = index;
           this.dataService.loggedInUserData.directChats[index].inhibition = false;
@@ -138,7 +144,7 @@ export class DirectChatService {
       this.directChat = chat.data();
       this.directChatActive = true;
       this.timelineService.createTimlines(this.directChat.chat);
-      this.checkForNewChat() ;
+      this.checkForNewChat();
     }).catch((error) => {
       console.log('Failure during load of the Document');
     });
@@ -152,9 +158,9 @@ export class DirectChatService {
    * @returns {void}
    */
   checkForNewChat(): void {
-    if (this.directChat.chat.length == 0){
+    if (this.directChat.chat.length == 0) {
       this.varService.conversationBetween = false;
-    }else {
+    } else {
       this.varService.conversationBetween = true;
     }
   }
@@ -326,7 +332,7 @@ export class DirectChatService {
    * 
    * @returns {void}
    */
-  updateFirestoreDirectChatIndex():void {
+  updateFirestoreDirectChatIndex(): void {
     this.directChat.lastTimeStamp = this.getActualTimeStamp();
     // this.directChat.timeStamp = this.getActualTimeStamp();
     this.dataService.loggedInUserData.directChats.forEach(chat => {
@@ -405,7 +411,7 @@ export class DirectChatService {
     }).catch((error) => {
       console.log('update other user failed');
     })
-  } 
+  }
 }
 
 

@@ -19,7 +19,6 @@ export class DataService {
   users: any = [];
   userData: any = [];
   directChatPartner: any = [];
-
   loggedUserLetters: string = '';
   signUpUser: User = new User();
   loggedInUserEmail: string = '';
@@ -27,6 +26,7 @@ export class DataService {
   loggedInUserId: string = '';
   forgotPasswordMenu: boolean = false;
   badgesArray: any[] = [];
+
 
   constructor(private firestore: Firestore) {
     this.subcribeUserData();
@@ -45,11 +45,11 @@ export class DataService {
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
       }
-      if (this.loggedInUserData !== undefined && localStorage.getItem('user')){
+      if (this.loggedInUserData !== undefined && localStorage.getItem('user')) {
         this.loggedInUserData = this.userData[0];
         this.updateDirectPartners();
         this.updateUserDirectChatBagesAmount();
-      } 
+      }
     });
   }
 
@@ -117,69 +117,98 @@ export class DataService {
   }
 
 
-  updateSignUpUserId() {
+  /**
+   * Updates the user ID in the Firestore database for the signed-up user.
+   * Assumes this.signUpUser.userId is set and represents the user's ID.
+   *
+   * @returns {void}
+   */
+  updateSignUpUserId(): void {
     const qData = doc(this.firestore, 'users', this.signUpUser.userId);
     const newData = { userId: this.signUpUser.userId };
-    updateDoc(qData, newData)
+    updateDoc(qData, newData);
   }
 
 
-  updateDirectPartners() {
+  /**
+   * Updates the list of direct chat partners based on user data and their direct chats.
+   *
+   * @returns {void}
+   */
+  updateDirectPartners(): void {
     this.directChatPartner = [];
     this.directChatPartner[0] = this.loggedInUserData;
     this.directChatPartner[0].index = 0;
     let i = 0;
     this.userData.forEach(user => {
       user.directChats.forEach(data => {
-        if (this.directChatPartnerFound(data)){
+        if (this.directChatPartnerFound(data)) {
           this.addDirectChatPartnerArray(user, i);
-        } 
+        }
       });
       i++;
     });
-    // if (this.noDirectChatPartner()) this.addLoggedUserDataToDirectChatPartnerArray();
   }
 
 
-  
-
-
-  // addLoggedUserDataToDirectChatPartnerArray(): void {
-  //   this.directChatPartner[0] = this.loggedInUserData;
-  //   this.directChatPartner[0].index = 0;
-  // }
-
-
+  /**
+   * Adds a user to the direct chat partner array if not already present and sets the index.
+   *
+   * @param {any} user - The user to add to the direct chat partner array.
+   * @param {number} i - The index of the user.
+   * @returns {void}
+   */
   addDirectChatPartnerArray(user: any, i: number): void {
-    if (!this.directChatPartner.includes(user)){
+    if (!this.directChatPartner.includes(user)) {
       this.directChatPartner.push(user);
-     this.directChatPartner[this.directChatPartner.length - 1].index = i;
+      this.directChatPartner[this.directChatPartner.length - 1].index = i;
     }
   }
 
 
+  /**
+   * Checks if there are no direct chat partners.
+   *
+   * @returns {boolean} True if there are no direct chat partners, false otherwise.
+   */
   noDirectChatPartner(): boolean {
     return this.directChatPartner.length == 0;
   }
-  
 
+
+  /**
+   * Checks if a direct chat partner is found based on certain conditions.
+   *
+   * @param {any} data - The data to check for direct chat partner conditions.
+   * @returns {boolean} True if a direct chat partner is found, false otherwise.
+   */
   directChatPartnerFound(data: any): boolean {
     return data.partnerId === this.loggedInUserData.userId && !this.chatInhibition(data) && data.ownId !== this.loggedInUserData.userId;
   }
 
 
-
+  /**
+   * Checks if chat inhibition is present for a specific chat.
+   *
+   * @param {any} data - The chat data to check for inhibition.
+   * @returns {boolean} True if chat inhibition is present, false otherwise.
+   */
   chatInhibition(data: any): boolean {
     let chatInhibition: boolean = false;
     for (let i = 0; i < this.userData[0].directChats.length; i++) {
       const chat = this.userData[0].directChats[i];
-      if(chat.directChatId == data.directChatId) chatInhibition = chat.inhibition;
+      if (chat.directChatId == data.directChatId) chatInhibition = chat.inhibition;
     }
     return chatInhibition;
   }
 
 
-  inhibitionOfDirectChat(){
+  /**
+   * Sets inhibition for the logged-in user's direct chat and updates the user data.
+   *
+   * @returns {void}
+   */
+  inhibitionOfDirectChat(): void {
     this.loggedInUserData.inhibition = true;
     this.updateUser();
   }
@@ -253,7 +282,6 @@ export class DataService {
       let userJson: any = localStorage.getItem('user');
       this.loggedInUserEmail = JSON.parse(userJson);
       // user?.directChat hinzugefügt. gez Basti
-
       if (user.email == this.loggedInUserEmail && user?.directChat) {
         for (let i = 0; i < user.directChats.length; i++) {
           this.loggedInUserData.directChats[i].newMessageAmount =
