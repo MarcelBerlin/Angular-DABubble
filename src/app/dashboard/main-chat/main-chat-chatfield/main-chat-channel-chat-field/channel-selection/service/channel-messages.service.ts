@@ -7,12 +7,15 @@ import {
   updateDoc,
   arrayUnion,
 } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
 import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
 import { MenuSidenavComponent } from 'src/app/dashboard/menu-channels-workspaces/menu-sidenav/menu-sidenav.component';
 import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/service/secondary-chat-answer.service';
+import { DialogEditMessageComponent } from 'src/app/dialog/dialog-edit-message/dialog-edit-message.component';
 import { TimelinesService } from 'src/app/direct-chat/services/timelines.service';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { MessageService } from 'src/app/services/messages.service';
+
 
 @Injectable({
   providedIn: 'root',
@@ -30,13 +33,21 @@ export class ChannelMessagesService {
   currentChannelId: string = '';
   messageEmojis: any = [];
   MessageAmount: number;
-  messageContentEdit: string = '';
+  messageContentEdit: any = [
+    {
+      tagType: 'text',
+      content: ''
+    },
+  ];
+  ;
 
+  
   constructor(
+    public dialog: MatDialog,
     private firestore: Firestore,
     public timelinesService: TimelinesService,
     private dcshService: DashboardComponentsShowHideService,
-    private dialogAddService: DialogAddService
+    private dialogAddService: DialogAddService,    
   ) {
     this.allMessages();
   }
@@ -86,32 +97,27 @@ export class ChannelMessagesService {
   editOwnMessage(index: number) {
     this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
-    this.selectedMessageContent = this.messageData[index].content[0].content;
-    console.log(this.selectedMessageId);
-    this.getActualMessageFromFirestore();
+    this.selectedMessageContent = this.messageData[index].content[0].content;   
+    this.dialog.open(DialogEditMessageComponent);    
   }
 
-
-  getActualMessageFromFirestore() {
+  getActualMessageFromFirestore(messageEdit) {
     const messageId = this.selectedMessageId;
     const messageIndex = this.messageData.findIndex(
       (message) => message.id === messageId
-    );
-    
+    );    
+    this.messageContentEdit[0].content = messageEdit;         
     if (messageIndex !== -1) {
       const qData = doc(this.firestore, 'newMessages', messageId);
-      const newData = {
-        content: [
-          {
-            content: this.messageContentEdit
-          }
-        ]
+      const newData = { 
+        content: this.messageContentEdit 
       };
       try {
         updateDoc(qData, newData);
         console.log('Update erfolgreich!');
         // Aktualisieren Sie den Textinhalt lokal in Ihrem Angular-Modell
-        this.messageData[messageIndex].content[0].content = this.messageContentEdit;
+        this.messageData[messageIndex].content[0].content =
+          this.messageContentEdit;
       } catch (e) {
         console.log('Update hat nicht funktioniert!!');
       }
@@ -140,7 +146,7 @@ export class ChannelMessagesService {
       this.tryUpdateToFirebase(qData, newData);
     } else {
       console.error('Die ausgewählte Nachricht wurde im Array nicht gefunden.');
-    }    
+    }
   }
 
   // funktion zum hochzählen der messages
@@ -166,8 +172,7 @@ export class ChannelMessagesService {
     const newData = { messageEmojis: this.messageEmojis };
     //  this.channelMessages.messageData[index].messageEmojis MUSS INS HTML
     console.log(this.messageData[index]);
-    
-    
+
     try {
       updateDoc(qData, newData);
       console.log('Message Emoji wurde korrekt hinzugefügt');

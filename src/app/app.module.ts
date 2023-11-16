@@ -71,6 +71,8 @@ import { MessageInputComponent } from './message-input/message-input.component';
 import { AddAvatarComponent } from './dialog/add-avatar/add-avatar.component';
 import { ResponsivViewSearchbarComponent } from './responsiv-view-searchbar/responsiv-view-searchbar.component';
 import { MessageInputThreadComponent } from './message-input-thread/message-input-thread.component';
+import { DialogEditMessageComponent } from './dialog/dialog-edit-message/dialog-edit-message.component';
+
 
 
 
@@ -116,6 +118,7 @@ import { MessageInputThreadComponent } from './message-input-thread/message-inpu
     AddAvatarComponent,
     ResponsivViewSearchbarComponent,
     MessageInputThreadComponent,
+    DialogEditMessageComponent,  
   ],
   imports: [
     BrowserModule,
