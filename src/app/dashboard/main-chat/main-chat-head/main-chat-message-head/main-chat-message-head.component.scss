@@ -19,6 +19,9 @@
     &:hover{
         transition: background-color 300ms ease-in-out;
         background-color: #ECEEFE;
+        .option{
+          display: flex;
+        }
     }
     div {
       position: relative;
@@ -48,7 +51,7 @@
     }
     .option{
       position: unset;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       width: 50px;
@@ -56,6 +59,9 @@
       border-radius: 50%;
       margin: 0 !important;
       transform: scaleX(-1);
+      &:hover{
+        color: red;
+      }
     }
   }
 }
