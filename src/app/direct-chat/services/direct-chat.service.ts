@@ -167,7 +167,6 @@ export class DirectChatService {
    * @returns {void} 
    */
   createNewChatDataSet(clickedUserId: string): void {
-    console.log("new chat dataset ", clickedUserId);
     this.chatDataSet.lastTimeStamp = this.getActualTimeStamp();
     this.chatDataSet.firstMember = this.dataService.loggedInUserData.userId;
     this.chatDataSet.secondMember = clickedUserId;
