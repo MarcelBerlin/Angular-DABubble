@@ -1,5 +1,5 @@
 import { UsersService } from 'src/app/services/users.service';
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatMenuTrigger, MatMenuModule } from '@angular/material/menu';
 import { HeaderDialogComponent } from 'src/app/dialog/header-dialog/header-dialog.component';
@@ -45,6 +45,7 @@ export class HeaderComponent {
   }
 
   
+  @ViewChild('inputField') inputField!: ElementRef;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
@@ -98,14 +99,14 @@ export class HeaderComponent {
         } else if (element.name.startsWith('')) {
           // this.messageService.messageToUser(this.varService.indexOfSearch); // ADDED BY FELIX
           this.messageToUserService.messageToUser(this.varService.indexOfSearch); // ADDED BY BOSSI
-
+          this.inputField.nativeElement.value = '';
         }
       } else if (element.email === selectedOption) {
         this.varService.setVar('indexOfSearch', index);
         this.varService.setVar('selectedArrayofSearch', this.selectedArray);
         // this.messageService.messageToUser(this.varService.indexOfSearch); // ADDED BY FELIX
         this.messageToUserService.messageToUser(this.varService.indexOfSearch); // ADDED BY BOSSI
-
+        this.inputField.nativeElement.value = '';
       }
     });
   }

@@ -110,7 +110,10 @@ export class MessageInputComponent {
   startApplicableButtonAction(): void {
     if (this.inputService.emojiSelected()) this.addHTMLTags();
     if (this.inputService.fileUploadSelected()) this.addHTMLTags();
-    if (this.inputService.sendButtonPressed()) this.saveMessage(); 
+    if (this.inputService.sendButtonPressed()){
+      this.saveMessage();
+      console.log('startApplicableButtonAction saveMessage');
+    }  
     if (this.inputService.newChatSelected()) this.resetInputField();
   }
 
@@ -135,6 +138,7 @@ export class MessageInputComponent {
    * @returns {void}
    */
   selectedUser(index: number): void {
+    console.log('user selected');
     this.inputService.setId += 1;
     this.inputService.textContent = '@' + this.dataService.userData[index].name;
     this.inputService.emailContent = this.dataService.userData[index].email;
@@ -334,6 +338,7 @@ export class MessageInputComponent {
     const doubleClickEvent = new MouseEvent('click', {bubbles: true, cancelable: true,view: window});
     el.dispatchEvent(doubleClickEvent);
   }
+
 
 
   /**

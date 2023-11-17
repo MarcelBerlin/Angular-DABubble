@@ -9,7 +9,7 @@ import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-
   providedIn: 'root'
 })
 export class MessageToUserService {
-  
+
 
   constructor(
     private dataService: DataService,
@@ -100,9 +100,12 @@ export class MessageToUserService {
       this.messageInputService.placeholderText = 'Nachricht an ' + clickedUserName;
       this.directChatService.getChatId(clickedUserId);
       this.newMessageAmountService.actualPartnerUserDataIndex = arrayId;
-      this.messageInputService.setMyVariable(true);
+
+      this.messageInputService.setMyVariable(true); // to set Placeholder
+
       setTimeout(() => {
         this.newMessageAmountService.setOwnMessageAmountToZero();
+        console.log(this.directChatService.directChat);
       }, 1000);
     }
   }

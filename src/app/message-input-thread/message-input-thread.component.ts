@@ -339,6 +339,7 @@ export class MessageInputThreadComponent {
    * @returns {void}
    */
   saveMessage(): void {
+    console.log('Saving message');
     this.answerService.newAnswer.content = this.saveHTMLTagsAndText();
     this.inputService.contentArray = [];
     document.getElementById('inputDivThread').innerHTML = '';

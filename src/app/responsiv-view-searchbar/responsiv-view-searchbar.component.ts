@@ -222,7 +222,9 @@ export class ResponsivViewSearchbarComponent {
    */
   openApplicableChat(index: number, type: string): void {
     if (type == 'channel') this.openChannel(index);
-    else this.messageToUserService.messageToUser(index);
+    else if (type == 'name' || type == 'email'){
+      this.messageToUserService.messageToUser(index);
+    } 
   }
 
 
