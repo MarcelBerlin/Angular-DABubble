@@ -132,7 +132,6 @@ export class SecondaryChatInputfieldComponent {
     // this.messageSend();
     this.messageInputService.resetVariables();
     this.messageInputService.setMyVariable(true);
-    console.log('thread Send Button pressed');
   }
 
 
@@ -144,7 +143,6 @@ export class SecondaryChatInputfieldComponent {
     if(this.varService.mainChatHead == 0 && this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView){
       this.messageInputService.resetVariables();
       this.messageInputService.setMyVariable(true);
-      
       this.messageInputService.sendButtonEnabled = false;
     }
 

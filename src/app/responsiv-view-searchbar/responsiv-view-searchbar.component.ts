@@ -1,6 +1,7 @@
-import { Component} from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
-import {FormControl, FormGroup, Validators,} from '@angular/forms';
+import { FormControl, FormGroup, Validators, } from '@angular/forms';
 import { DialogAddService } from 'src/app/services/dialog-add.service';
 import { VariablesService } from 'src/app/services/variables.service';
 import { ConditionService } from 'src/app/services/condition.service';
@@ -10,6 +11,7 @@ import { MessageInputServiceService } from '../message-input/service/message-inp
 // import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 // import { NewMessageAmountService } from '../direct-chat/services/new-message-amount.service';
 import { MessageToUserService } from '../direct-chat/services/message-to-user.service';
+
 @Component({
   selector: 'app-responsiv-view-searchbar',
   templateUrl: './responsiv-view-searchbar.component.html',
@@ -29,7 +31,7 @@ export class ResponsivViewSearchbarComponent {
       Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}.?[a-zA-Z]{0,2}',),
       Validators.minLength(8),])
   });
-  
+
 
   constructor(
     public varService: VariablesService,
@@ -42,7 +44,7 @@ export class ResponsivViewSearchbarComponent {
     // private directChatService: DirectChatService,
     // private newMessageAmountService: NewMessageAmountService,
     private messageToUserService: MessageToUserService
-  ) {}
+  ) { }
 
 
   /**
@@ -98,10 +100,10 @@ export class ResponsivViewSearchbarComponent {
       let emailLowerCase = data.email.toLowerCase();
       let nameLowerCase = data.name.toLowerCase();
       if (this.nameFound(nameLowerCase, enteredStringTrimmed) && !this.emailSearch && !this.channelSearch) {
-        this.nameArray.push({ term: data.name, index: index, type: 'name'});
+        this.nameArray.push({ term: data.name, index: index, type: 'name' });
       }
       if (this.emailFound(emailLowerCase, enteredStringTrimmed) && !this.channelSearch) {
-        this.emailArray.push({ term: data.email, index: index, type: 'email'});
+        this.emailArray.push({ term: data.email, index: index, type: 'email' });
       }
       index++;
     });
@@ -118,7 +120,7 @@ export class ResponsivViewSearchbarComponent {
     let index = 0;
     this.dialogAddService.tagsData.forEach((channel) => {
       let channelNameLowerCase = channel.name.toLowerCase();
-      if (this.channelFound(channelNameLowerCase, enteredStringTrimmed) && !this.emailSearch){
+      if (this.channelFound(channelNameLowerCase, enteredStringTrimmed) && !this.emailSearch) {
         this.channelArray.push({ term: channel.name, index: index, type: 'channel' });
       }
       index++;
@@ -222,9 +224,9 @@ export class ResponsivViewSearchbarComponent {
    */
   openApplicableChat(index: number, type: string): void {
     if (type == 'channel') this.openChannel(index);
-    else if (type == 'name' || type == 'email'){
+    else if (type == 'name' || type == 'email') {
       this.messageToUserService.messageToUser(index);
-    } 
+    }
   }
 
 
@@ -241,8 +243,85 @@ export class ResponsivViewSearchbarComponent {
     const selectedChannel = this.dialogAddService.tagsData[arrayId];
     this.messageInputService.placeholderUserName = selectedChannel.name;
     this.messageInputService.placeholderText = 'Nachricht an ' + selectedChannel.name;
-    const channelId = selectedChannel.id;    
-    if (innerWidth <= 800) this.dcshService.hideNavigation = true; 
+    const channelId = selectedChannel.id;
+    if (innerWidth <= 800) this.dcshService.hideNavigation = true;
     await this.messageService.onChannelClick(channelId);
   }
+
+
+  // Test ! Einbinden der Desktop Searchbar
+
+  actualUser: any;
+  control = new FormControl('');
+  filteredArrays: Observable<string[]>;
+  selectedArray: any = [];
+  property: string = '';
+  innerWidth: number = 0;
+
+  @ViewChild('inputField') inputField!: ElementRef;
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+    // console.log(this.innerWidth);
+  }
+
+
+  ngOnInit() {
+    this.filteredArrays = this.control.valueChanges.pipe(
+      map((value) => this._filter(value || ''))
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = this._normalizeValue(value);
+    if (filterValue.startsWith('#')) {
+      this.property = 'name';
+      this.selectedArray = this.dialogAddService.tagsData;
+      return this.dialogAddService.tagsData.filter((element) =>
+        this._normalizeValue(element.name).includes(filterValue)
+      );
+    } else if (filterValue.startsWith('@')) {
+      this.property = 'email';
+      this.selectedArray = this.dataService.userData;
+      return this.dataService.userData.filter((element) =>
+        this._normalizeValue(element.email).includes(filterValue)
+      );
+    } else if (filterValue.startsWith('')) {
+      this.property = 'name';
+      this.selectedArray = this.dataService.userData;
+      return this.dataService.userData.filter((element) =>
+        this._normalizeValue(element.name).includes(filterValue)
+      );
+    }
+
+    return [];
+  }
+
+  private _normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
+  }
+
+  onOptionSelected(event: any) {
+    const selectedOption = event.option.value;
+    this.selectedArray.forEach((element, index) => {
+      if (element.name === selectedOption) {
+        this.varService.setVar('indexOfSearch', index);
+        this.varService.setVar('selectedArrayofSearch', this.selectedArray);
+        if (element.name.startsWith('#')) {
+          this.messageService.openChannel(this.varService.indexOfSearch); // ADDED BY FELIX
+        } else if (element.name.startsWith('')) {
+          // this.messageService.messageToUser(this.varService.indexOfSearch); // ADDED BY FELIX
+          this.messageToUserService.messageToUser(this.varService.indexOfSearch); // ADDED BY BOSSI
+          this.inputField.nativeElement.value = '';
+        }
+      } else if (element.email === selectedOption) {
+        this.varService.setVar('indexOfSearch', index);
+        this.varService.setVar('selectedArrayofSearch', this.selectedArray);
+        // this.messageService.messageToUser(this.varService.indexOfSearch); // ADDED BY FELIX
+        this.messageToUserService.messageToUser(this.varService.indexOfSearch); // ADDED BY BOSSI
+        this.inputField.nativeElement.value = '';
+      }
+    });
+  }
+
 }

@@ -16,6 +16,7 @@ export class MessageInputThreadComponent {
   inputLength: number = 0;
   timeoutArray: any[] = [];
   @ViewChild('editableDivThread', { static: false }) editableDivThread!: ElementRef;
+  mySubscriptionThread;
 
 
   constructor(
@@ -38,7 +39,7 @@ export class MessageInputThreadComponent {
    */
   ngOnInit(): void {
     setTimeout(() => {
-      this.inputService.myVariableThread$.subscribe((newValue) => {
+      this.mySubscriptionThread = this.inputService.myVariableThread$.subscribe((newValue) => {
         if (newValue) this.startApplicableButtonAction();
       });
     }, 500);
@@ -47,6 +48,11 @@ export class MessageInputThreadComponent {
 
   ngAfterViewInit() {
     this.restorePlaceholder();
+  }
+
+
+  ngOnDestroy(): void {
+    this.mySubscriptionThread.unsubscribe();
   }
 
 
@@ -339,7 +345,6 @@ export class MessageInputThreadComponent {
    * @returns {void}
    */
   saveMessage(): void {
-    console.log('Saving message');
     this.answerService.newAnswer.content = this.saveHTMLTagsAndText();
     this.inputService.contentArray = [];
     document.getElementById('inputDivThread').innerHTML = '';

@@ -17,6 +17,8 @@ export class MessageInputComponent {
   inputLength: number = 0;
   timeoutArray: any[] = [];
   @ViewChild('editableDiv', { static: false }) editableDiv!: ElementRef;
+  mySubscription;
+
 
 
   constructor(
@@ -40,7 +42,7 @@ export class MessageInputComponent {
    */
   ngOnInit(): void {
     setTimeout(() => {
-      this.inputService.myVariable$.subscribe((newValue) => {
+      this.mySubscription = this.inputService.myVariable$.subscribe((newValue) => {
         if (newValue) this.startApplicableButtonAction();
       });
     }, 500);
@@ -49,6 +51,11 @@ export class MessageInputComponent {
 
   ngAfterViewInit() {
     this.restorePlaceholder();
+  }
+
+
+  ngOnDestroy(): void {
+    this.mySubscription.unsubscribe();
   }
 
 
@@ -112,9 +119,10 @@ export class MessageInputComponent {
     if (this.inputService.fileUploadSelected()) this.addHTMLTags();
     if (this.inputService.sendButtonPressed()){
       this.saveMessage();
-      console.log('startApplicableButtonAction saveMessage');
     }  
-    if (this.inputService.newChatSelected()) this.resetInputField();
+    if (this.inputService.newChatSelected()){
+      this.resetInputField();
+    } 
   }
 
 
@@ -138,7 +146,6 @@ export class MessageInputComponent {
    * @returns {void}
    */
   selectedUser(index: number): void {
-    console.log('user selected');
     this.inputService.setId += 1;
     this.inputService.textContent = '@' + this.dataService.userData[index].name;
     this.inputService.emailContent = this.dataService.userData[index].email;
@@ -273,7 +280,6 @@ export class MessageInputComponent {
       this.fillContentArray(child, i);
     }
     this.inputService.addTagInfoLinkInfo();
-    console.log(this.inputService.contentArray);
     return this.inputService.contentArray;
   }
 
@@ -347,7 +353,6 @@ export class MessageInputComponent {
    * @returns {void}
    */
   saveMessage(): void {
-    console.log('saveMessage');
     if(this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2){
       this.directChatService.saveMessage(this.saveHTMLTagsAndText());
       this.inputService.contentArray = [];
