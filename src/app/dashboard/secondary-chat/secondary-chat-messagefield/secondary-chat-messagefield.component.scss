@@ -13,7 +13,6 @@
       width: 0;
     }
 
-
     .full-message-left {
       position: relative;
       display: flex;
@@ -137,7 +136,8 @@
           // padding: 16px;
 
           display: flex;
-          background-color: #eceefe;
+          background-color: #797ef3;
+          color: white;
           justify-content: center;
           align-items: center;
           width: fit-content;
@@ -304,14 +304,14 @@
       .single-message-right-container {
         position: relative;
         transition: all 125ms ease-in-out;
-  
+
         &:hover {
           cursor: pointer;
           background-color: #eceefe;
           transition: all 125ms ease-in-out;
         }
       }
-  
+
       .single-message-right-container:hover .message-content-right {
         background-color: white;
       }
@@ -525,10 +525,7 @@
   }
 }
 
-
-
 // ###############################Bossi
-
 
 // .messageBox {
 //   display: flex;
@@ -549,7 +546,6 @@
 //   }
 // }
 
-
 .infoBox {
   display: flex;
   flex-direction: column;
@@ -565,7 +561,7 @@
   box-shadow: 5px 5px 15px -2px #000000;
   z-index: 10;
 
-  span{
+  span {
     color: black;
   }
 
@@ -600,10 +596,7 @@
       width: 40px;
       height: 40px;
     }
-
   }
-
-
 }
 
 .outputBox {

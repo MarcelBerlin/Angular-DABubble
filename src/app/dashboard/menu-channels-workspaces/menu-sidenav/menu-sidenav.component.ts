@@ -230,7 +230,8 @@ export class MenuSidenavComponent implements OnInit {
     if (innerWidth <= 800){
       this.dcshService.hideNavigation = true; 
     }   
-    await this.messageService.onChannelClick(channelId);    
+    await this.messageService.onChannelClick(channelId);  
+    console.log(this.channelMessageService.MessageAmount);     
   }
 
 

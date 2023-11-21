@@ -12,18 +12,16 @@ import { DialogRef } from '@angular/cdk/dialog';
 })
 export class DialogEditMessageComponent {
   messageEdit: string = '';
-  
 
   constructor(
     private channelMessageService: ChannelMessagesService,
     private dialogRef: DialogRef
-    ) {}
+  ) {}
 
-
-  editMessage() {    
-    this.channelMessageService.getActualMessageFromFirestore(this.messageEdit);    
+  editMessage() {
+    this.channelMessageService.getActualMessageFromFirestore(this.messageEdit);
     setTimeout(() => {
       this.dialogRef.close();
-    }, 1000);     
-  }  
+    }, 500);
+  }
 }

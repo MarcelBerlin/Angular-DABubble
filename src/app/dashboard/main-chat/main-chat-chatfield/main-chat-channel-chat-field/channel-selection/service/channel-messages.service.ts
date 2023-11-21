@@ -31,6 +31,7 @@ export class ChannelMessagesService {
   selectedMessageContent: string = '';
   currentDate: string = new Date().toISOString().split('T')[0]; // Aktuelles Tagesdatum im Format "YYYY-MM-DD";
   currentChannelId: string = '';
+  currentChannel: string = '';
   messageEmojis: any = [];
   MessageAmount: number;
   messageContentEdit: any = [
@@ -147,6 +148,8 @@ export class ChannelMessagesService {
     } else {
       console.error('Die ausgewählte Nachricht wurde im Array nicht gefunden.');
     }
+    this.currentChannel = selectedChannelData;
+    console.log(this.currentChannel);
   }
 
   // funktion zum hochzählen der messages

@@ -42,7 +42,7 @@ export class ChannelSelectionComponent implements OnInit {
   // reactionArrLeft: any = [];
   isThereAnAnswer: boolean = false;
   emptyChat: boolean = false;
-  private emptyChatSubscription: Subscription;
+  private emptyChatSubscription: Subscription;  
 
   constructor(
     private firestore: Firestore,
@@ -80,7 +80,7 @@ export class ChannelSelectionComponent implements OnInit {
     this.emptyChatSubscription.unsubscribe();
   }
 
-  checkIfChannelIsEmpty() {
+  checkIfChannelIsEmpty() {    
     if (this.channelMessages.MessageAmount === 0) {
       this.emptyChat = true;
     } else {
