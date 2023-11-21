@@ -65,11 +65,16 @@ export class ChannelSelectionComponent implements OnInit {
     
   }
 
+
+  // Felix wollte mal nachschauen ##############################
+  // zwecks direkter aktualisierung ##############################
+
   ngOnInit() {
     this.emptyChatSubscription = this.messageService.emptyChat$.subscribe((isEmpty) => {
       this.emptyChat = isEmpty;
     });
   }
+  
 
   ngOnDestroy() {
     this.emptyChatSubscription.unsubscribe();
@@ -87,6 +92,9 @@ export class ChannelSelectionComponent implements OnInit {
     this.checkIfChannelIsEmpty();
     return this.emptyChat;
   }
+
+
+  // ########################################################
 
 
   /**

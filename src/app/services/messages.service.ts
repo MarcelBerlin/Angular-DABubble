@@ -43,7 +43,7 @@ export class MessageService {
   tags: any;
   dateString: string = '';  
   private emptyChatSubject = new Subject<boolean>()
-  emptyChat$ = this.emptyChatSubject.asObservable();  
+  emptyChat$ = this.emptyChatSubject.asObservable();    
   
 
   constructor(
@@ -67,10 +67,11 @@ export class MessageService {
     this.channelMessagesService.getChannelMessageFromFirestore();   
     this.messageData.push(this.newMessage);
     this.dialogAddService.channelMessage.push(this.newMessage);
-    this.messageText = '';    
-    console.log(this.newMessage);  
+    this.messageText = '';      
+    console.log(this.newMessage); 
       
   }
+ 
 
   UserAndMessageDetails() {
     this.newMessage.channelId =
