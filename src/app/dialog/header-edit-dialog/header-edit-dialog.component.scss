@@ -114,6 +114,16 @@
   }
 }
 
+.btnDisabled {
+  height: 50px;
+  padding: 12px 25px;
+  border-radius: 50px;
+  background-color: gray;
+  color: #ffffff;
+  font-size: 18px;
+  border: none;
+}
+
 @media (max-width: 1000px) {
   .user-overview {
     position: unset !important;

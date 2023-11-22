@@ -4,7 +4,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from '../../services/data.service';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FileUploadService } from 'src/app/file-upload/services/file-upload.service';
 import { UploadService } from 'src/app/file-upload/services/upload.service';
 import { DialogRef } from '@angular/cdk/dialog';
@@ -16,10 +16,10 @@ import { DialogRef } from '@angular/cdk/dialog';
 })
 export class HeaderEditDialogComponent {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  // emailFormControl = new FormControl('', [
+  //   Validators.required,
+  //   Validators.email,
+  // ]);
   matcher = new ErrorStateMatcher();
 
   loggedUserName: string = '';
@@ -32,21 +32,36 @@ export class HeaderEditDialogComponent {
 
   @ViewChild('fileInput') fileInput!: ElementRef;
 
+  editForm: FormGroup = new FormGroup({
+    email: new FormControl(this.getUserData.loggedInUserData.email, [
+      Validators.required,
+      Validators.email,
+      Validators.pattern(
+        '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}.?[a-zA-Z]{0,2}'
+      ),
+    ]),
+    name: new FormControl(this.getUserData.loggedInUserData.name, [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+  });
+
   constructor(
     public dialog: MatDialog,
-    private auth: AuthService,
+    // private auth: AuthService,
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
     public getUserData: DataService,
     private dialogRef: DialogRef
-  ) {}
+  ) {
+  }
+
+
 
   saveUserChanges() {
-    console.log(this.newInputName.length);
-
-    if (this.newInputName.length > 2) {
-      this.getUserData.loggedInUserData.name = this.newInputName;
-      this.getUserData.loggedInUserData.email = this.newInputMail;
+    if (this.editForm.valid) {
+      this.getUserData.loggedInUserData.name = this.editForm.value.name;
+      this.getUserData.loggedInUserData.email = this.editForm.value.email;
       this.getUserData.updateUser();
       this.dialogRef.close();
     }

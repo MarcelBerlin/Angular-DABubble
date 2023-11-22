@@ -1,4 +1,4 @@
-<div class="user-overview">
+<form class="user-overview" [formGroup]="editForm" (submit)="saveUserChanges()">
   <mat-dialog-content class="user-profile">
     <div class="profile-overview-head">
       <span>Dein Profil bearbeiten</span>
@@ -52,11 +52,15 @@
         <span>Vollständiger Name</span>
       </div>
       <input
+        formControlName="name"
+        class="header-input"
+      />
+      <!-- <input
         #inputName
         [(ngModel)]="newInputName"
         class="header-input"
         placeholder="{{ getUserData.loggedInUserData.name }}"
-      />
+      /> -->
     </div>
     <div class="input-section">
       <div class="edit-description">
@@ -64,38 +68,24 @@
         <span> E-Mail Adresse </span>
       </div>
       <input
+        formControlName="email"
+        class="header-input"
+      />
+      <!-- <input
         [formControl]="emailFormControl"
         #inputMail
         [(ngModel)]="newInputMail"
         class="header-input"
         placeholder="{{ getUserData.loggedInUserData.email }}"
-      />
-      <!-- <input
-        matTooltip="not editable"
-        matTooltipPosition="above"
-        class="header-input"
-        value="{{ getUserData.loggedInUserData.email }}"
       /> -->
-      <!-- <mat-error
-        *ngIf="
-          emailFormControl.hasError('email') &&
-          !emailFormControl.hasError('required')
-        "
-        Please enter a valid email address
-      </mat-error> -->
+     
     </div>
 
     <div class="btn-container">
       <button [mat-dialog-close] class="cancel-btn">Abbrechen</button>
-      <!-- <button
-        [mat-dialog-close]="newInputMail"
-        [mat-dialog-close]="newInputName"
-        (click)="saveUserChanges()"
-        class="save-btn"
-      >
-        Speichern
-      </button> -->
-      <button (click)="saveUserChanges()" class="save-btn">Speichern</button>
+      
+      <button type="submit" class="save-btn" [disabled]="!editForm.valid" 
+      [class.btnDisabled]="!editForm.valid" [class.save-btn]="editForm.valid">Speichern</button>
     </div>
   </mat-dialog-content>
-</div>
+</form>
