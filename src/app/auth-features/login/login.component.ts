@@ -82,6 +82,7 @@ export class LoginComponent {
    * @returns {void}
    */
   setUserData(googleData: any): void {
+    console.log(googleData);
     const email: string = googleData.email;
     const familyName: string = googleData.family_name;
     const given_name: string = googleData.given_name;

@@ -13,13 +13,7 @@ import { DataService } from '../services/data.service';
   providedIn: 'root'
 })
 export class AuthService {
-// @HostListener('window:beforeunload', ['$event'])
-// beforeunloadHandler(event: Event) {
-//     this.signOut()
-//   }
-  
 selectedImprintOrDataProtection: string = 'logIn';
-
 
 
   constructor(

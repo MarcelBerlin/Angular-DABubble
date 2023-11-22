@@ -124,7 +124,7 @@ export class HeaderComponent {
   /**
    * logs out the actual user
    */
-  logout() {
+  async logout(): Promise<void> {
     this.auth.signOut();
   }
 

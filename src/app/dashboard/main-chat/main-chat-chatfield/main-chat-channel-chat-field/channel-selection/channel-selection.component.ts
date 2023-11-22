@@ -230,4 +230,21 @@ export class ChannelSelectionComponent implements OnInit {
   // alertMessage(){
   //   alert('Hier soll eigentlich der Button sein, zum bearbeiten der Frage');
   // }
+
+
+  filterMessages(){
+    let messages = [];
+    this.channelMessages.messageData.forEach(message => {
+      if (message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id){
+        messages.push(message);
+      }
+    });
+    console.log(messages);
+    if (messages.length == 0) {
+       return true;
+    }else {
+      return false;
+    }
+    
+  }
 }
