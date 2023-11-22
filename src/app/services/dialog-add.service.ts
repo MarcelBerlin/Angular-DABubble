@@ -70,7 +70,7 @@ export class DialogAddService {
         channelCreator: this.channelCreator,
         members: this.members, 
         channelMessage: this.channelMessage,     
-        channelMessageAmount: this.channelMessageAmount  
+        channelMessageAmount: this.channelMessageAmount 
       };
 
       // Firestore-Dokument erstellen und Tag speichern

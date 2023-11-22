@@ -231,7 +231,6 @@ export class MenuSidenavComponent implements OnInit {
       this.dcshService.hideNavigation = true; 
     }   
     await this.messageService.onChannelClick(channelId);  
-    console.log(this.channelMessageService.MessageAmount);     
   }
 
 

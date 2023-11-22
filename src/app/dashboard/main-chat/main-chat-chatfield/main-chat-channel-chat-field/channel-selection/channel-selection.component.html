@@ -132,7 +132,7 @@
               <div id="reactionBarLeft" *ngIf="chatEmojiLeft">
                 <div matTooltip='{{ dataService.loggedInUserData.name }}' class="reactions">
                   <span *ngIf="channelMessages.messageData[index].messageEmojis.length >= 1">
-                    {{ channelMessages.messageData[index].messageEmojis }}
+                    {{ message[index].messageEmojis }}
                   </span>
                 </div>
               </div>
@@ -195,7 +195,6 @@
             </div>
 
             <div class="message-content-right">
-              <!-- {{ message.content }} -->
 
               <!-- testarea new message Data format -->
 
@@ -241,14 +240,13 @@
                   </span>
                 </div>
               </div>
-              <!-- testarea new message Data format  end-->
 
             </div>
             <div class="reaction-bar-right">
-              <div class="reactions" id="reactionBarRight" *ngIf="chatEmojiRight">
-                <div id="reactionsRight" matTooltip='{{this.dataService.loggedInUserData.name}}'>
-                  <span *ngIf="channelMessages.messageData[index].messageEmojis.length >= 1">
-                    {{ channelMessages.messageData[index].messageEmojis }}
+              <div class="reactions" id="reactionBarRight" *ngIf="message.messageEmojis.length >= 1">
+                <div id="reactionsRight">
+                  <span>
+                    {{ message.messageEmojis }}
                   </span>
                 </div>
               </div>

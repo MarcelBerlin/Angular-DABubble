@@ -24,7 +24,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './channel-selection.component.html',
   styleUrls: ['./channel-selection.component.scss'],
 })
-export class ChannelSelectionComponent implements OnInit {
+export class ChannelSelectionComponent {
 
   hoveredMessagesMainChat: boolean = false;
 
@@ -33,16 +33,17 @@ export class ChannelSelectionComponent implements OnInit {
   messages$: any = [];
   messageData: any = [];
   hoveredIndex: number | null = null;
-  chatEmojiRight: boolean = false;
-  chatEmojiLeft: boolean = false;
+  chatEmojiRight: boolean;
+  chatEmojiLeft: boolean;
   emojiPickerRight: boolean = false;
   emojiPickerLeft: boolean = false;
   emoji: string = '';
+  messageEmote: any;
   // reactionArrRight: any = [];
   // reactionArrLeft: any = [];
   isThereAnAnswer: boolean = false;
-  emptyChat: boolean = false;
-  private emptyChatSubscription: Subscription;  
+  // emptyChat: boolean = false;
+  // private emptyChatSubscription: Subscription;  
 
   constructor(
     private firestore: Firestore,
@@ -61,40 +62,8 @@ export class ChannelSelectionComponent implements OnInit {
     public answerService: SecondaryChatAnswerService,
     public secondaryAnswerService: SecondaryChatAnswerService,
     public inputService: MessageInputServiceService,
-  ) {
-    
+  ) { 
   }
-
-
-  // Felix wollte mal nachschauen ##############################
-  // zwecks direkter aktualisierung ##############################
-
-  ngOnInit() {
-    this.emptyChatSubscription = this.messageService.emptyChat$.subscribe((isEmpty) => {
-      this.emptyChat = isEmpty;
-    });
-  }
-  
-
-  ngOnDestroy() {
-    this.emptyChatSubscription.unsubscribe();
-  }
-
-  checkIfChannelIsEmpty() {    
-    if (this.channelMessages.MessageAmount === 0) {
-      this.emptyChat = true;
-    } else {
-      this.emptyChat = false;
-    }
-  }
-
-  get isChannelEmpty() {
-    this.checkIfChannelIsEmpty();
-    return this.emptyChat;
-  }
-
-
-  // ########################################################
 
 
   /**
@@ -130,21 +99,18 @@ export class ChannelSelectionComponent implements OnInit {
   }
 
   addEmoji(event, index) {
-    debugger;
-    // WIRFT AKTUELL EINEN FEHLER WEGEN INDEX WEIL WAHRSCHEINLICH NICHT JEDE NACHT DIESES ARAY HAT
-    this.messageService.emojis = `${this.emoji}${event.emoji.native}`;
-    this.channelMessages.messageEmojis.push(this.messageService.emojis);
+    this.channelMessages.messageData[index].messageEmojis.push(`${this.emoji}${event.emoji.native}`);
     if (this.emojiPickerLeft) {
       this.emojiPickerLeft = false;
-      this.chatEmojiLeft = true;
+      this.chatEmojiLeft = true; // wenn einmal true, soll true bleiben, damit emote angezeigt wird! 
     };
 
     if (this.emojiPickerRight) {
       this.emojiPickerRight = false;
-      this.chatEmojiRight = true;
+      this.chatEmojiRight = true; // wenn einmal true, soll true bleiben, damit emote angezeigt wird! 
     };
+    
     this.channelMessages.selectedMessageIndex = index;
-    console.log(this.channelMessages.messageEmojis, 'firebase');
     this.channelMessages.UpdateEmojiToFirebase(index);
     // if (this.channelMessages.messageEmojis.length > 1) { this.emojiMapper()}
   }
@@ -227,24 +193,16 @@ export class ChannelSelectionComponent implements OnInit {
     console.log(entry);
   }
 
-  // alertMessage(){
-  //   alert('Hier soll eigentlich der Button sein, zum bearbeiten der Frage');
-  // }
-
 
   filterMessages(){
     let messages = [];
     this.channelMessages.messageData.forEach(message => {
-      if (message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id){
+      if (message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id) {
         messages.push(message);
       }
     });
-    console.log(messages);
-    if (messages.length == 0) {
-       return true;
-    }else {
-      return false;
-    }
+    if (messages.length == 0) { return true; } 
+    else { return false; }
     
   }
 }

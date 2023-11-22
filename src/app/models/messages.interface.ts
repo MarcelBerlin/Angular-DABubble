@@ -12,6 +12,7 @@ export class Messages {
     channelMessageAmount: number;
     amountAnswers: number;
     lastClockTime: string; 
+    messageEmojis: [];
     
        
    
@@ -28,6 +29,7 @@ export class Messages {
         this.channelMessageAmount = obj ? obj.channelMessageAmount : 0;
         this.amountAnswers = obj ? obj.amountAnswers : 0; 
         this.lastClockTime = obj ? obj.lastClockTime : 'unset';
+        this.messageEmojis = obj ? obj.messageEmojis : [];
     }
 
     toJSON() {
@@ -43,7 +45,8 @@ export class Messages {
             clockString: this.clockString,
             channelMessageAmount: this.channelMessageAmount,
             amountAnswers: this.amountAnswers,
-            lastClockTime: this.lastClockTime       
+            lastClockTime: this.lastClockTime,
+            messageEmojis: this.messageEmojis       
         }
     }
 }

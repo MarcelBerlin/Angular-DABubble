@@ -33,6 +33,7 @@ export class ChannelMessagesService {
   currentChannelId: string = '';
   currentChannel: string = '';
   messageEmojis: any = [];
+  emote: boolean = false;
   MessageAmount: number;
   messageContentEdit: any = [
     {
@@ -40,7 +41,7 @@ export class ChannelMessagesService {
       content: ''
     },
   ];
-  ;
+  
 
   
   constructor(
@@ -60,13 +61,10 @@ export class ChannelMessagesService {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
       );
-      console.log(this.messageData);
+      // console.log(this.messageData);
     });
   }
 
-  // #################################
-  // ##################### TEST FÜR TIMESTAMP VON MARCEL
-  // #################################
 
   formatDate(dateString) {
     // Splitte die Zeichenfolge an "." (Punkt) und erhalte Jahr, Monat und Tag
@@ -81,9 +79,6 @@ export class ChannelMessagesService {
     }
   }
 
-  // #####################
-  // ##################### TEST FÜR TIMESTAMP VON MARCEL
-  // #####################
 
   openAnswer(index: number) {
     this.selectedMessageIndex = index;
@@ -125,8 +120,6 @@ export class ChannelMessagesService {
     }
   }
 
-  // #################################################
-  // #####################
 
   getSelectedMessageStatus() {
     return this.selectedMessage;
@@ -172,9 +165,7 @@ export class ChannelMessagesService {
   UpdateEmojiToFirebase(index: number) {
     const messageIdForEmoji = this.messageData[index].messageId;
     const qData = doc(this.firestore, 'newMessages', messageIdForEmoji);
-    const newData = { messageEmojis: this.messageEmojis };
-    //  this.channelMessages.messageData[index].messageEmojis MUSS INS HTML
-    console.log(this.messageData[index]);
+    const newData = { messageEmojis: this.messageData[index].messageEmojis };
 
     try {
       updateDoc(qData, newData);
