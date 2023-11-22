@@ -27,7 +27,7 @@ export class HeaderEditDialogComponent {
   loggedUserMail: string = '';
 
   newInputName: string = '';
-  // newInputMail: string = '';
+  newInputMail: string = '';
   buttonDis: boolean = false;
 
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -46,7 +46,7 @@ export class HeaderEditDialogComponent {
 
     if (this.newInputName.length > 2) {
       this.getUserData.loggedInUserData.name = this.newInputName;
-      // this.getUserData.loggedInUserData.email = this.newInputMail;
+      this.getUserData.loggedInUserData.email = this.newInputMail;
       this.getUserData.updateUser();
       this.dialogRef.close();
     }

@@ -82,13 +82,14 @@ export class LoginComponent {
    * @returns {void}
    */
   setUserData(googleData: any): void {
-    console.log(googleData);
     const email: string = googleData.email;
     const familyName: string = googleData.family_name;
     const given_name: string = googleData.given_name;
     const userData: User = new User();
     userData.email = email;
     userData.name = given_name + ' ' + familyName;
+    userData.logInEmail = email;
+    userData.logInName = given_name + ' ' + familyName;
     setTimeout(() => {
       this.dataService.createGoogleUser(userData);
     }, 500);

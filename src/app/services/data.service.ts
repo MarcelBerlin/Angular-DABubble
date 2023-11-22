@@ -38,9 +38,9 @@ export class DataService {
     this.users$.subscribe((user: any) => {
       this.userData = user;
       this.userData.sort((a, b) => { // von Basti eingefügte Sortierfunktion nach eingeloggtem User
-        if (a.email === this.loggedInUserEmail) return -1;
-        if (b.email === this.loggedInUserEmail) return 1;
-        return a.email < b.email ? -1 : 1;
+        if (a.logInEmail === this.loggedInUserEmail) return -1;
+        if (b.logInEmail === this.loggedInUserEmail) return 1;
+        return a.logInEmail < b.logInEmail ? -1 : 1;
       });
       if (this.loggedInUserData === undefined && localStorage.getItem('user')) {
         this.getLoggedInUserData();
@@ -63,7 +63,11 @@ export class DataService {
     this.userData.forEach((user: any) => {
       let userJson: any = localStorage.getItem('user');
       this.loggedInUserEmail = JSON.parse(userJson);
-      if (user.email.toLowerCase() == this.loggedInUserEmail) {
+      // if (user.email.toLowerCase() == this.loggedInUserEmail) {
+      //   this.loggedInUserData = this.getLoggedUserData(user);
+      //   this.updateUser();
+      // }
+      if (user.logInEmail.toLowerCase() == this.loggedInUserEmail) {
         this.loggedInUserData = this.getLoggedUserData(user);
         this.updateUser();
       }
@@ -82,6 +86,8 @@ export class DataService {
       name: user.name,
       img: user.img,
       email: user.email,
+      logInEmail: user.logInEmail,
+      logInName: user.logInName,
       online: true,
       directChats: user.directChats,
       userId: user.id,
@@ -110,6 +116,8 @@ export class DataService {
     this.signUpUser.email = email.toLowerCase();
     this.signUpUser.name = name;
     this.signUpUser.img = img;
+    this.signUpUser.logInEmail = email.toLowerCase();
+    this.signUpUser.logInName = name;
     const coll = collection(this.firestore, 'users');
     let docId = await addDoc(coll, this.signUpUser.toJSON());
     this.signUpUser.userId = docId.id;

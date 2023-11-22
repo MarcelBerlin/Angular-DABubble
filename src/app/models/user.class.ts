@@ -7,6 +7,8 @@ export class User {
     directChats: any[];
     channels: any[];
     userId: any;
+    logInEmail: string;
+    logInName: string;
 
     constructor(obj?:any) {
         this.name = obj ? obj.name : '';
@@ -16,6 +18,8 @@ export class User {
         this.directChats = obj ? obj.directChats : [];
         this.channels = obj ? obj.channels : [];
         this.userId = obj ? obj.userId : '';
+        this.logInEmail = obj ? obj.logInEmail : '';
+        this.logInName = obj ? obj.logInName : '';
     }
 
     toJSON() {
@@ -26,7 +30,9 @@ export class User {
             online: this.online,
             directChats: this.directChats,
             channels: this.channels,
-            userId: this.userId
+            userId: this.userId,
+            logInEmail: this.logInEmail,
+            logInName: this.logInName,
         }
     }
 }

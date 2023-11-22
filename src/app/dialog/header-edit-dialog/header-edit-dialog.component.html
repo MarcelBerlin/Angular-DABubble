@@ -63,20 +63,19 @@
         <img src="assets/img/mail-icon.png" />
         <span> E-Mail Adresse </span>
       </div>
-      <!-- <input
+      <input
         [formControl]="emailFormControl"
         #inputMail
         [(ngModel)]="newInputMail"
         class="header-input"
         placeholder="{{ getUserData.loggedInUserData.email }}"
-      /> -->
-      <input
-        disabled
+      />
+      <!-- <input
         matTooltip="not editable"
         matTooltipPosition="above"
         class="header-input"
         value="{{ getUserData.loggedInUserData.email }}"
-      />
+      /> -->
       <!-- <mat-error
         *ngIf="
           emailFormControl.hasError('email') &&
