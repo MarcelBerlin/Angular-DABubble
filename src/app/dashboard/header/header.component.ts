@@ -13,6 +13,8 @@ import { MessageService } from 'src/app/services/messages.service';
 import { DashboardComponentsShowHideService } from '../dashboard-components-show-hide.service';
 import { ConditionService } from 'src/app/services/condition.service';
 import { MessageToUserService } from 'src/app/direct-chat/services/message-to-user.service';
+import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
+import { DirectChatServiceService } from 'src/app/direct-chat/services/direct-chat-service.service';
 
 
 @Component({
@@ -125,6 +127,7 @@ export class HeaderComponent {
    * logs out the actual user
    */
   async logout(): Promise<void> {
+    this.varService.mainChatHead = -1;
     this.auth.signOut();
   }
 
