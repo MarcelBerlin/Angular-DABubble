@@ -38,41 +38,73 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     public dataService: DataService,
     public answerService: SecondaryChatAnswerService,
     public inputService: MessageInputServiceService
-    
-  ) { 
+  ) {
     this.answerService.getThreadAnswer();
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
+  /**
+   * Retrieves the status of the selected message.
+   *
+   * @function getSelectedMessageStatus
+   * @returns {any} - The status of the selected message.
+   */
   getSelectedMessageStatus() {
     return this.channelMessages.getSelectedMessageStatus();
   }
 
+  /**
+   * Adds an emoji to the left side of a message and manages related properties.
+   *
+   * @function addEmojiLeft 
+   * @param {Event} event - The event object triggered by selecting an emoji.
+   * @returns {void}
+   */
   addEmojiLeft(event) {
     this.threadEmojiLeft = true;
     this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
     this.reactionArrLeft.push(this.getMessage.emojis);
     this.emojiPickerLeft = false;
-    if (this.reactionArrLeft.length > 1) {this.emojiFilterLeft(this.reactionArrLeft)};
+    if (this.reactionArrLeft.length > 1) {
+      this.emojiFilterLeft(this.reactionArrLeft);
+    }
   }
 
+  /**
+   * Adds an emoji to the right side of a message and manages related properties.
+   *
+   * @function addEmojiRight
+   * @param {Event} event - The event object triggered by selecting an emoji.
+   * @returns {void}
+   */
   addEmojiRight(event) {
     this.threadEmojiRight = true;
     this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
     this.reactionArrRight.push(this.getMessage.emojis);
     this.emojiPickerRight = false;
-    if (this.reactionArrRight.length > 1) { this.emojiFilterRight(this.reactionArrRight) }
+    if (this.reactionArrRight.length > 1) {
+      this.emojiFilterRight(this.reactionArrRight);
+    }
   }
 
+  /**
+   * Filters and displays emojis on the left side of a message, counting their occurrences.
+   * Updates the DOM element with the reaction bar based on the emoji count.
+   *
+   * @function emojiFilterLeft  
+   * @param {string[]} reactionArr - An array containing emojis for filtering.
+   * @returns {void}
+   */
   emojiFilterLeft(reactionArr) {
     const emojiCountMapLeft: any = new Map();
     let reactionBarLeft = document.getElementById('reactionBarLeft');
     reactionArr.forEach((emoji) => {
-      if (emojiCountMapLeft.has(emoji)) { emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1); }
-      else { emojiCountMapLeft.set(emoji, 1); }
+      if (emojiCountMapLeft.has(emoji)) {
+        emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
+      } else {
+        emojiCountMapLeft.set(emoji, 1);
+      }
     });
     reactionBarLeft.innerHTML = '';
     emojiCountMapLeft.forEach((count, emoji) => {
@@ -82,15 +114,28 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
           </span>
         </div>`;
     });
-    if (reactionArr.length >= 10) {reactionBarLeft.innerHTML = 'Zu viele reaktionen. Wir arbeiten gerade daran'};
+    if (reactionArr.length >= 10) {
+      reactionBarLeft.innerHTML =
+        'Zu viele reaktionen. Wir arbeiten gerade daran';
+    }
   }
 
+  /**
+   * Filters and displays emojis on the right side of a message, counting their occurrences.
+   * Updates the DOM element with the reaction bar based on the emoji count.
+   *
+   * @function emojiFilterRight   
+   * @param {string[]} reactionArr - An array containing emojis for filtering.
+   * @returns {void}
+   */
   emojiFilterRight(reactionArr) {
     const emojiCountMapRight: any = new Map();
     let reactionBarRight = document.getElementById('reactionBarRight');
     reactionArr.forEach((emoji) => {
-      if (emojiCountMapRight.has(emoji)) { emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
-      } else { emojiCountMapRight.set(emoji, 1);
+      if (emojiCountMapRight.has(emoji)) {
+        emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
+      } else {
+        emojiCountMapRight.set(emoji, 1);
       }
     });
     reactionBarRight.innerHTML = '';
@@ -99,41 +144,41 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
       <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reaction-container"> 
       <span> ${emoji} ${count} </span> </div>`;
     });
-    if (reactionArr.length >= 7) { reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran'};
+    if (reactionArr.length >= 7) {
+      reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran';
+    }
   }
 
-   /**
+  /**
    * Lifecycle hook that executes after Angular has checked the component's view.
-   * If autoscroll is enabled (true), it calls the 'scrollToBottom' method to scroll 
+   * If autoscroll is enabled (true), it calls the 'scrollToBottom' method to scroll
    * the chat container to the bottom.
-   * 
+   *
    * @returns {void}
    */
-   ngAfterViewChecked(): void {
-    if (this.autoscroll == true){
+  ngAfterViewChecked(): void {
+    if (this.autoscroll == true) {
       this.scrollToBottom();
-    } 
+    }
   }
-
 
   /**
    * Scrolls the chat container to the bottom.
-   * 
+   *
    * @returns {void}
    */
-  scrollToBottom(): void {    
+  scrollToBottom(): void {
     if (this.container) {
       const container = this.container.nativeElement;
       container.scrollTop = container.scrollHeight;
     }
   }
 
-
   /**
    * Handles the 'scroll' event of the chat container.
    * Determines whether the user is manually scrolling up or reaching the bottom of the chat.
    * Updates the 'autoscroll' flag accordingly to enable or disable autoscroll behavior.
-   * 
+   *
    * @param {Event} event - The 'scroll' event object.
    * @returns {void}
    */
@@ -144,11 +189,10 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     if (isScrollingUp) this.autoscroll = false;
     else {
       const scrollOffset = container.scrollHeight - container.clientHeight;
-      if (currentScrollTop >= scrollOffset -1) this.autoscroll = true;
+      if (currentScrollTop >= scrollOffset - 1) this.autoscroll = true;
     }
     this.varService.previousScrollTop = currentScrollTop;
   }
-
 
   showInfoBox: number = -1;
   timeoutArray: any[] = [];

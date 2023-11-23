@@ -82,8 +82,7 @@ export class SecondaryChatAnswerService {
   /**
    * Sets user and answer details for the new answer.
    *
-   * @function UserAndAnswerDetails
-   * @memberof SecondaryChatAnswerService
+   * @function UserAndAnswerDetails   
    * @returns {void}
    */
   UserAndAnswerDetails() {
@@ -100,7 +99,6 @@ export class SecondaryChatAnswerService {
    * Adds a timestamp to the new answer.
    *
    * @function addTimeStampToAnswer
-   * @memberof SecondaryChatAnswerService
    * @returns {void}
    */
   addTimeStampToAnswer() {
@@ -114,8 +112,7 @@ export class SecondaryChatAnswerService {
   /**
    * Saves an answer with an answerId to the 'threadAnswer' collection in Firestore.
    *
-   * @function saveAnswerWithAnswerId
-   * @memberof SecondaryChatAnswerService
+   * @function saveAnswerWithAnswerId 
    * @returns {Promise<void>} - A promise that resolves once the answer is saved with an answerId.
    */
   async saveAnswerWithAnswerId(): Promise<void> {
@@ -136,8 +133,7 @@ export class SecondaryChatAnswerService {
   /**
    * Updates the answerId in the answer collection with the newAnswer's answerId.
    *
-   * @function updateIdToAnswerCollection
-   * @memberof SecondaryChatAnswerService
+   * @function updateIdToAnswerCollection  
    * @returns {void}
    */
   updateIdToAnswerCollection(): void {
@@ -154,7 +150,6 @@ export class SecondaryChatAnswerService {
    * Retrieves answer amount data from Firestore for a selected message and updates it.
    *
    * @function getAnswerAmountFromFirestore
-   * @memberof SecondaryChatAnswerService
    * @returns {void}
    */
   getAnswerAmountFromFirestore() {
@@ -177,8 +172,7 @@ export class SecondaryChatAnswerService {
 
   /**
    * Increases the answer count for a selected message and updates the last clock time.
-   * @function increaseAnswerCount
-   * @memberof SecondaryChatAnswerService
+   * @function increaseAnswerCount 
    * @param {any} selectedMessageData - The data of the selected message.
    * @returns {void}
    */
@@ -193,8 +187,7 @@ export class SecondaryChatAnswerService {
    * Attempts to update Firestore data using the provided query and new data.
    * Logs success or failure messages based on the outcome of the update.
    *
-   * @function tryUpdateToFirebase
-   * @memberof SecondaryChatAnswerService
+   * @function tryUpdateToFirebase 
    * @param {any} qData - The query data for the Firestore update.
    * @param {any} newData - The new data to be updated in Firestore.
    * @returns {void}
@@ -211,8 +204,7 @@ export class SecondaryChatAnswerService {
   /**
    * Retrieves thread answers from Firestore and sorts them by date/time.
    *
-   * @function getThreadAnswer
-   * @memberof SecondaryChatAnswerService
+   * @function getThreadAnswer 
    * @returns {Promise<void>} - A promise that resolves once the thread answers are retrieved and sorted.
    */
   async getThreadAnswer() {
