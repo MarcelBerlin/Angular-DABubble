@@ -1,8 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Component, ElementRef, ViewChild, ViewChildren } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
-import { DashboardComponentsShowHideService } from 'src/app/dashboard/dashboard-components-show-hide.service';
 import { DialogProfileViewUsersComponent } from 'src/app/dialog/dialog-profile-view-users/dialog-profile-view-users.component';
 import { DirectChatService } from 'src/app/direct-chat/services/direct-chat.service';
 import { TimelinesService } from 'src/app/direct-chat/services/timelines.service';
@@ -16,7 +14,7 @@ import { Messages } from 'src/app/models/messages.interface';
 import { ChannelMessagesService } from './service/channel-messages.service';
 import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/service/secondary-chat-answer.service';
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
-import { Subscription } from 'rxjs';
+import { EmojiPickerBossiService } from 'src/app/emoji-picker-bossi/services/emoji-picker-bossi.service';
 
 
 @Component({
@@ -39,16 +37,13 @@ export class ChannelSelectionComponent {
   emojiPickerLeft: boolean = false;
   emoji: string = '';
   messageEmote: any;
-  // reactionArrRight: any = [];
-  // reactionArrLeft: any = [];
   isThereAnAnswer: boolean = false;
-  // emptyChat: boolean = false;
-  // private emptyChatSubscription: Subscription;  
+
+  @ViewChildren('reactionBarRight') emojiBar: ElementRef
+
+
 
   constructor(
-    private firestore: Firestore,
-    private dcshService: DashboardComponentsShowHideService,
-    private renderer: Renderer2,
     private dialog: Dialog,
     public varService: VariablesService,
     public dataService: DataService,
@@ -62,6 +57,7 @@ export class ChannelSelectionComponent {
     public answerService: SecondaryChatAnswerService,
     public secondaryAnswerService: SecondaryChatAnswerService,
     public inputService: MessageInputServiceService,
+    public emojiService: EmojiPickerBossiService
   ) { 
   }
 
@@ -102,35 +98,35 @@ export class ChannelSelectionComponent {
     this.channelMessages.messageData[index].messageEmojis.push(`${this.emoji}${event.emoji.native}`);
     if (this.emojiPickerLeft) {
       this.emojiPickerLeft = false;
-      this.chatEmojiLeft = true; // wenn einmal true, soll true bleiben, damit emote angezeigt wird! 
+      this.chatEmojiLeft = true;
     };
 
     if (this.emojiPickerRight) {
       this.emojiPickerRight = false;
-      this.chatEmojiRight = true; // wenn einmal true, soll true bleiben, damit emote angezeigt wird! 
+      this.chatEmojiRight = true;
     };
     
     this.channelMessages.selectedMessageIndex = index;
     this.channelMessages.UpdateEmojiToFirebase(index);
-    // if (this.channelMessages.messageEmojis.length > 1) { this.emojiMapper()}
+    // if(this.channelMessages.messageData[index].messageEmojis.length > 1) { this.emojiMapper(index)}
   }
 
-  // emojiMapper() {
+  // emojiMapper(index) {
+  //   debugger;
   //   const emojiCountMapRight: any = new Map();
-  //   let reactionBarRight = document.getElementById('reactionBarRight');
-  //   this.channelMessages.messageEmojis.forEach((emoji) => {
+  //   this.channelMessages.messageData[index].messageEmojis.forEach((emoji) => {
   //     if (emojiCountMapRight.has(emoji)) {
   //       emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
   //     } else {
   //       emojiCountMapRight.set(emoji, 1);
   //     }
   //   });
-  //   reactionBarRight.innerHTML = '';
+  //   this.emojiBar.nativeElement.innerHTML = '';
   //   emojiCountMapRight.forEach((count, emoji) => {
-  //     reactionBarRight.innerHTML += `<div class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
+  //     this.emojiBar.nativeElement.innerHTML += `<div class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
   //   });
-  //   if (this.channelMessages.messageEmojis.length >= 7) {
-  //     reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran 😊';
+  //   if (this.channelMessages.messageData[index].messageEmojis.length >= 7) {
+  //     this.emojiBar.nativeElement.innerHTML = '<p>Zu viele Reaktionen. Wir arbeiten daran 😊</p>';
   //   }
   // }
 

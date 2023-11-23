@@ -129,10 +129,10 @@
 
 
             <div class="reaction-bar-left">
-              <div id="reactionBarLeft" *ngIf="chatEmojiLeft">
-                <div matTooltip='{{ dataService.loggedInUserData.name }}' class="reactions">
-                  <span *ngIf="channelMessages.messageData[index].messageEmojis.length >= 1">
-                    {{ message[index].messageEmojis }}
+              <div id="reactionBarLeft" *ngIf="message.messageEmojis.length >= 1">
+                <div class="reactions">
+                  <span>
+                    {{ message.messageEmojis }} <!--.join(' ')-->
                   </span>
                 </div>
               </div>
@@ -173,7 +173,6 @@
                   src="./../../../../assets/img/reaction.png" title="Emoji auswählen">
                 <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerRight"
                   (emojiSelect)="addEmoji($event, i)">
-                  <!-- addEmoji(id oder index von nachricht) -->
                 </emoji-mart>
               </div>
               <div (click)="channelMessages.openAnswer(i)">
@@ -240,13 +239,12 @@
                   </span>
                 </div>
               </div>
-
             </div>
             <div class="reaction-bar-right">
-              <div class="reactions" id="reactionBarRight" *ngIf="message.messageEmojis.length >= 1">
-                <div id="reactionsRight">
+              <div class="reactions" #message.reactionBarRight *ngIf="message.messageEmojis.length >= 1">
+                <div>
                   <span>
-                    {{ message.messageEmojis }}
+                    {{ message.messageEmojis.join(' ') }}
                   </span>
                 </div>
               </div>
