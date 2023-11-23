@@ -241,9 +241,9 @@
               </div>
             </div>
             <div class="reaction-bar-right">
-              <div class="reactions" #message.reactionBarRight *ngIf="message.messageEmojis.length >= 1">
+              <div class="reactions" *ngIf="message.messageEmojis.length >= 1">
                 <div>
-                  <span>
+                  <span #reactionBarRight [attr.id]="'reactionBarRight-' + message">
                     {{ message.messageEmojis.join(' ') }}
                   </span>
                 </div>

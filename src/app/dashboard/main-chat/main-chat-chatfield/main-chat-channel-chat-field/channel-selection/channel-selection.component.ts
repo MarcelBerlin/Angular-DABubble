@@ -36,11 +36,9 @@ export class ChannelSelectionComponent {
   emojiPickerRight: boolean = false;
   emojiPickerLeft: boolean = false;
   emoji: string = '';
-  messageEmote: any;
   isThereAnAnswer: boolean = false;
 
-  @ViewChildren('reactionBarRight') emojiBar: ElementRef
-
+  @ViewChild("reactionBarRight") emojiBar!: ElementRef; // "'reactionBarRight-' + message"
 
 
   constructor(
@@ -94,33 +92,38 @@ export class ChannelSelectionComponent {
     }
   }
 
+  /**
+   * Adds a reaction to the chosen message
+   * 
+   * @param event - emoji popup
+   * @param index - index of the message
+   */
   addEmoji(event, index) {
     this.channelMessages.messageData[index].messageEmojis.push(`${this.emoji}${event.emoji.native}`);
-    if (this.emojiPickerLeft) {
-      this.emojiPickerLeft = false;
-      this.chatEmojiLeft = true;
-    };
-
-    if (this.emojiPickerRight) {
-      this.emojiPickerRight = false;
-      this.chatEmojiRight = true;
-    };
-    
+    if (this.emojiPickerLeft ) { this.emojiPickerLeft = false;}; // timeout 
+    if (this.emojiPickerRight || this.timeoutForEmojiPopup()) { this.emojiPickerRight = false;};
     this.channelMessages.selectedMessageIndex = index;
     this.channelMessages.UpdateEmojiToFirebase(index);
     // if(this.channelMessages.messageData[index].messageEmojis.length > 1) { this.emojiMapper(index)}
   }
 
+  timeoutForEmojiPopup() {
+    setTimeout(() => {
+      this.emojiPickerRight = false;
+    }, 1000);
+    return this.emojiPickerRight = false;
+  }
+
+
   // emojiMapper(index) {
   //   debugger;
+    
   //   const emojiCountMapRight: any = new Map();
   //   this.channelMessages.messageData[index].messageEmojis.forEach((emoji) => {
-  //     if (emojiCountMapRight.has(emoji)) {
-  //       emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
-  //     } else {
-  //       emojiCountMapRight.set(emoji, 1);
-  //     }
+  //     if (emojiCountMapRight.has(emoji)) { emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
+  //     } else { emojiCountMapRight.set(emoji, 1); }
   //   });
+
   //   this.emojiBar.nativeElement.innerHTML = '';
   //   emojiCountMapRight.forEach((count, emoji) => {
   //     this.emojiBar.nativeElement.innerHTML += `<div class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
@@ -199,6 +202,5 @@ export class ChannelSelectionComponent {
     });
     if (messages.length == 0) { return true; } 
     else { return false; }
-    
   }
 }
