@@ -103,7 +103,6 @@ export class MessageToUserService {
       this.messageInputService.setMyVariable(true); // to set Placeholder
       setTimeout(() => {
         this.newMessageAmountService.setOwnMessageAmountToZero();
-        console.log(this.directChatService.directChat);
       }, 1000);
     }
   }
