@@ -14,15 +14,15 @@ export class DirectChatServiceService {
    * @param {Date} today - The Date object from which to extract the day, month, and year.
    * @returns {string} A formatted date string in the format 'day.month.year'.
    */
-  createDateString(today: Date): string {
-    let day: string = today.getDate().toString();
-    let month: string = (today.getMonth() + 1).toString();
-    let year: string = today.getFullYear().toString();
-    if (day.length == 1) day = '0' + day;
-    if (month.length == 1) month = '0' + month;
-    let dateString: string = day + '.' + month + '.' + year;
-    return dateString;
-  }
+  // createDateString(today: Date): string {
+  //   let day: string = today.getDate().toString();
+  //   let month: string = (today.getMonth() + 1).toString();
+  //   let year: string = today.getFullYear().toString();
+  //   if (day.length == 1) day = '0' + day;
+  //   if (month.length == 1) month = '0' + month;
+  //   let dateString: string = day + '.' + month + '.' + year;
+  //   return dateString;
+  // }
 
 
   /**
@@ -31,14 +31,14 @@ export class DirectChatServiceService {
    * @param {Date} today - The Date object from which to extract the hour and minutes.
    * @returns {string} A formatted clock string in the format 'hour:minutes'.
    */
-  createClockString(today: Date): string {
-    let hour: string = today.getHours().toString();
-    let minutes: string = today.getMinutes().toString();
-    if (hour.length == 1) hour = '0' + hour;
-    if (minutes.length == 1) minutes = '0' + minutes;
-    let clockString: string = hour + ':' + minutes;
-    return clockString;
-  }
+  // createClockString(today: Date): string {
+  //   let hour: string = today.getHours().toString();
+  //   let minutes: string = today.getMinutes().toString();
+  //   if (hour.length == 1) hour = '0' + hour;
+  //   if (minutes.length == 1) minutes = '0' + minutes;
+  //   let clockString: string = hour + ':' + minutes;
+  //   return clockString;
+  // }
 
 
   /**

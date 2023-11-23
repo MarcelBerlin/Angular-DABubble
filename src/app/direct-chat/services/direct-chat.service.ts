@@ -38,13 +38,8 @@ export class DirectChatService {
    * @returns {Object} An object containing the current timestamp, date string, and clock string.
    */
   getActualTimeStamp(): Object {
-    let today: Date = new Date();
-    this.timeStamp.dateTimeNumber = today.getTime();
-    this.timeStamp.dateString = this.directChatS.createDateString(today);
-    this.timeStamp.clockString = this.directChatS.createClockString(today);
-    return this.timeStamp.toJSON();
+    return this.timeStamp.createTimeDateStringJson();
   }
-
 
 
   /**
@@ -312,12 +307,11 @@ export class DirectChatService {
    */
   saveMessage(chatData): void {
     this.directChatActive = false;
-    let today: Date = new Date();
     this.actualChat.message = chatData;
     this.actualChat.name = this.dataService.loggedInUserData.name;
-    this.actualChat.date = this.directChatS.createDateString(today);
-    this.actualChat.time = this.directChatS.createClockString(today);
-    this.actualChat.dateTimeNumber = today.getTime();
+    this.actualChat.dateTimeNumber = this.timeStamp.getDateTimeNumber();
+    this.actualChat.time = this.timeStamp.getClockString();
+    this.actualChat.date = this.timeStamp.getDateString();
     this.directChat.chat.push(this.actualChat.toJSON());
     this.directMessage = '';
     this.updateFirestoreChat();
@@ -334,7 +328,6 @@ export class DirectChatService {
    */
   updateFirestoreDirectChatIndex(): void {
     this.directChat.lastTimeStamp = this.getActualTimeStamp();
-    // this.directChat.timeStamp = this.getActualTimeStamp();
     this.dataService.loggedInUserData.directChats.forEach(chat => {
       if (chat.directChatId == this.directChat.id) {
         chat.lastTimeStamp = this.getActualTimeStamp();
