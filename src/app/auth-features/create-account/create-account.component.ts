@@ -1,17 +1,11 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { Dialog} from '@angular/cdk/dialog';
 import { AddAvatarComponent } from 'src/app/dialog/add-avatar/add-avatar.component';
 import { AddAvatarService } from 'src/app/dialog/add-avatar/add-avatar.service';
-
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
@@ -36,6 +30,7 @@ export class CreateAccountComponent {
     ]),
   });
 
+
   constructor(
     private router: Router,
     private auth: AuthService,
@@ -45,6 +40,7 @@ export class CreateAccountComponent {
   ) {
     this.dataService.forgotPasswordMenu = true;
   }
+
 
   createNewAccount(): void {
     if (this.addAS.imgSelectedOK) {
@@ -66,6 +62,17 @@ export class CreateAccountComponent {
     }
   }
 
+
+  signUp():void {
+    this.auth.signup( 
+      this.createAccountForm.value.email,
+      this.createAccountForm.value.password,
+      this.createAccountForm.value.name,
+      this.addAS.pickedAvatar
+    );
+  }
+
+
   /**
    * Navigates via router link back to the login page.
    *
@@ -74,6 +81,7 @@ export class CreateAccountComponent {
   backToLogin(): void {
     this.router.navigateByUrl('');
   }
+
 
   /**
    * Toggles the password visibility.
