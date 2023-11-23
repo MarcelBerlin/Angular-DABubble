@@ -9,7 +9,6 @@ import { Login } from '../../login';
 import { DataService } from '../../services/data.service';
 import { User } from '../../models/user.class';
 import { VariablesService } from 'src/app/services/variables.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -55,9 +54,7 @@ export class LoginComponent {
   loginWithGoogle(): void {
     this.loading = true;
     this.loginForm.disable();
-    this.authService
-      .signInWithGoogle()
-      .then((res: any) => {
+    this.authService.signInWithGoogle().then((res: any) => {
         this.authService.setLocalStorage({
           email: res.additionalUserInfo.profile.email,
           password: '',
@@ -104,19 +101,13 @@ export class LoginComponent {
   loginWithEmailAndPassword(): void {
     this.loading = true;
     this.loginForm.disable();
-    this.authService
-      .signWithEmailAndPassword(this.getLoginFormData())
-      .then((res: any) => {
+    this.authService.signWithEmailAndPassword(this.getLoginFormData()).then((res: any) => {
         this.loginOkProgramSettings();
-      })
-      .catch((error: any) => {
+      }).catch((error: any) => {
         this.loginFailedProgramSettings();
-        if (error.code === 'auth/user-not-found')
-          this.dialogLoginEmailUnknown();
-        else if (error.code === 'auth/wrong-password')
-          this.dialogLoginPasswordWrong();
-        else if (error.code === 'auth/network-request-failed')
-          this.dialogNoServerConnection();
+        if (error.code === 'auth/user-not-found') this.dialogLoginEmailUnknown();
+        else if (error.code === 'auth/wrong-password') this.dialogLoginPasswordWrong();
+        else if (error.code === 'auth/network-request-failed') this.dialogNoServerConnection();
         else this.dialogSystemError();
       });
   }
@@ -195,6 +186,7 @@ export class LoginComponent {
     return { email: this.email.toLowerCase(), password: this.password };
   }
 
+
   /**
    * Handles program settings after successful login.
    *
@@ -209,6 +201,7 @@ export class LoginComponent {
     this.loginForm.enable();
   }
 
+
   /**
    * Handles program settings after login failure.
    *
@@ -217,16 +210,6 @@ export class LoginComponent {
   loginFailedProgramSettings(): void {
     this.loading = false;
     this.loginForm.enable();
-  }
-
-
-  /**
-   * Initiates the forgot password process.
-   *
-   * @returns {void}
-   */
-  openDialogForgotPassword(): void {
-    // this.dialog.open(DialogForgotPasswordComponent);
   }
 
 

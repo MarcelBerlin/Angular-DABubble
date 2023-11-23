@@ -42,27 +42,27 @@ export class CreateAccountComponent {
   }
 
 
+  /**
+   * Creates a new user account.
+   * - If an image is selected, it performs the sign-up.
+   * - If no image is selected and the account form is valid, it opens a dialog for avatar selection.
+   * 
+   * @returns {void}
+   */
   createNewAccount(): void {
-    if (this.addAS.imgSelectedOK) {
-      this.auth.signup(
-        this.createAccountForm.value.email,
-        this.createAccountForm.value.password,
-        this.createAccountForm.value.name,
-        this.addAS.pickedAvatar
-      );
-    } else {
-      if (
-        (this.createAccountForm.value.email,
-        this.createAccountForm.value.password,
-        this.createAccountForm.value.name)
-      ) {
+    if (this.addAS.imgSelectedOK) this.signUp();
+    else if (this.createAccountForm.valid) {
         this.addAS.name = this.createAccountForm.value.name;
         this.dialog.open(AddAvatarComponent);
       }
-    }
   }
 
 
+  /**
+   * Performs user sign-up using the values from the account form.
+   * 
+   * @returns {void}
+   */
   signUp():void {
     this.auth.signup( 
       this.createAccountForm.value.email,
@@ -85,6 +85,8 @@ export class CreateAccountComponent {
 
   /**
    * Toggles the password visibility.
+   * 
+   * @returns {void}
    */
   passwordViewToggle(): void {
     this.passwordView = !this.passwordView;
