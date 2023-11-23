@@ -153,11 +153,8 @@ export class DirectChatService {
    * @returns {void}
    */
   checkForNewChat(): void {
-    if (this.directChat.chat.length == 0) {
-      this.varService.conversationBetween = false;
-    } else {
-      this.varService.conversationBetween = true;
-    }
+    if (this.directChat.chat.length == 0) this.varService.conversationBetween = false;
+    else this.varService.conversationBetween = true;
   }
 
 
@@ -174,7 +171,6 @@ export class DirectChatService {
     this.chatDataSet.chat = [];
     this.chatDataSet.id = 'unset';//hinzugefügt wichtig, da sonst nicht die Id aktualisiert wird.
     this.saveChatDataSet().then(() => {
-
     }).catch(() => {
       console.log('Error saving chat data');
     });
@@ -235,9 +231,7 @@ export class DirectChatService {
       this.directChat = chatDataSet.data();
       this.dataService.loggedInUserData.directChats.push(this.createDirectChatIndex());
       this.updateUser();
-      if (this.chatDataSet.firstMember != this.chatDataSet.secondMember) {
-        this.createNewDirectChatPartnerIndex();
-      }
+      if (this.chatDataSet.firstMember != this.chatDataSet.secondMember) this.createNewDirectChatPartnerIndex();
     }).catch((error) => {
       console.log('Fehler beim Abrufen des Dokuments:');
     });
@@ -329,9 +323,7 @@ export class DirectChatService {
   updateFirestoreDirectChatIndex(): void {
     this.directChat.lastTimeStamp = this.getActualTimeStamp();
     this.dataService.loggedInUserData.directChats.forEach(chat => {
-      if (chat.directChatId == this.directChat.id) {
-        chat.lastTimeStamp = this.getActualTimeStamp();
-      }
+      if (chat.directChatId == this.directChat.id) chat.lastTimeStamp = this.getActualTimeStamp();
     });
     this.updateUser();
   }
