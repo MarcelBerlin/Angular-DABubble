@@ -41,10 +41,9 @@ export class MessageService {
   selectedChannel: string = '';
   emojis: any = [];
   tags: any;
-  dateString: string = '';  
-  private emptyChatSubject = new Subject<boolean>()
-  emptyChat$ = this.emptyChatSubject.asObservable();    
-  
+  dateString: string = '';
+  private emptyChatSubject = new Subject<boolean>();
+  emptyChat$ = this.emptyChatSubject.asObservable();
 
   constructor(
     private firestore: Firestore,
@@ -54,36 +53,51 @@ export class MessageService {
     public varService: VariablesService,
     private dcshService: DashboardComponentsShowHideService,
     private channelTimestampService: ChannelTimestampService,
-    private channelMessagesService: ChannelMessagesService,  
-        
+    private channelMessagesService: ChannelMessagesService
   ) {}
 
-  // Methode zum Hinzufügen einer Nachricht in Firebase
+  /**
+   * Adds a new message and performs a series of operations
+   * to process the message and insert it into the appropriate data structures.
+   *
+   * @function addMessage
+   * @memberof MessageService
+   * @returns {void}
+   */
   async addMessage() {
-
     this.UserAndMessageDetails();
     this.addTimeStampToMessage();
     this.saveMessageWithIdToDoc();
-    this.channelMessagesService.getChannelMessageFromFirestore();   
+    this.channelMessagesService.getChannelMessageFromFirestore();
     this.messageData.push(this.newMessage);
     this.dialogAddService.channelMessage.push(this.newMessage);
-    this.messageText = '';      
-    console.log(this.newMessage); 
-      
+    this.messageText = '';
   }
- 
 
+  /**
+   * sets the user and message details like channelID, userId, userName and so on
+   *
+   * @function UserAndMessageDetails
+   * @memberof MessageService
+   * @returns {void}
+   */
   UserAndMessageDetails() {
     this.newMessage.channelId =
-      this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
+      this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id;
     this.varService.selectedChannelId =
       this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id;
     this.newMessage.userId = this.dataService.loggedInUserData.userId;
     this.newMessage.userName = this.dataService.loggedInUserData.name;
     this.newMessage.userImg = this.dataService.loggedInUserData.img;
-    // this.newMessage.content = this.messageText;       
   }
 
+  /**
+   * add the actual date and clocktime to the message
+   *
+   * @function addTimeStampToMessage
+   * @memberof MessageService
+   * @returns {void}
+   */
   addTimeStampToMessage() {
     const timeStampData: ChannelTimeStamp =
       this.channelTimestampService.getActualTimeStampForChannels();
@@ -93,6 +107,13 @@ export class MessageService {
     this.newMessage.clockString = timeStampData.clockString;
   }
 
+  /**
+   * saves the message with an individual ID to firestore
+   *
+   * @function saveMessageWithIdToDoc
+   * @memberof MessageService
+   * @returns {void}
+   */
   async saveMessageWithIdToDoc() {
     const coll = collection(this.firestore, 'newMessages'); // definiert die Collection, worauf man zugreifen möchte
     try {
@@ -104,6 +125,13 @@ export class MessageService {
     }
   }
 
+  /**
+   *  Updates the messageId in the message collection with the newMessage's messageId.
+   *
+   * @function updateIdToMessageCollection
+   * @memberof MessageService
+   * @returns {void}
+   */
   updateIdToMessageCollection(): void {
     const qData = doc(this.firestore, 'newMessages', this.newMessage.messageId);
     const newData = { messageId: this.newMessage.messageId };
@@ -113,8 +141,15 @@ export class MessageService {
       console.log('update doc failed!!');
     }
   }
- 
 
+  /**
+   * Loads channel messages from Firestore based on the provided channelId.
+   * 
+   * @function loadChannelMessages
+   * @memberof MessageService
+   * @param {string} channelId - The ID of the channel to load messages for.
+   * @returns {Promise<void>} - A promise that resolves once messages are loaded.
+   */
   async loadChannelMessages(channelId: string) {
     const coll = collection(this.firestore, 'messages');
     const q = query(coll, where('channelId', '==', channelId));
@@ -122,25 +157,47 @@ export class MessageService {
     this.messageData = messages.docs.map((doc) => doc.data());
   }
 
+  /**
+   * Handles the click event for a channel by setting the selected channel ID
+   * and loading messages for the corresponding channel.
+   * 
+   * @function onChannelClick
+   * @memberof MessageService
+   * @param {string} channelId - The ID of the clicked channel.
+   * @returns {Promise<void>} - A promise that resolves once messages for the channel are loaded.
+   */
   async onChannelClick(channelId: string) {
     this.varService.selectedChannelId = channelId;
     await this.loadChannelMessages(channelId);
   }
 
+  /**
+   * Sets the message data to the provided index.
+   * 
+   * @function privateAnswer
+   * @memberof YourClassName
+   * @param {number} index - The index to set as the message data.
+   * @returns {void}
+   */
   privateAnswer(index: number) {
     this.messageData = index;
   }
-
-  // setSelectedChannel(channelId: string) {
-  //   // Suche nach dem Index des Kanals basierend auf der übergebenen channelId
-  //   this.dialogAddService.channelIndex = this.dialogAddService.tags.findIndex(tag => tag.id === channelId);
-  // }
 
   // ######### AB HIER ############
   // ###### FELIX TESTZWECKE ######
   //   KOPIERT AUS MENU-SIDENAV.TS
   // ###### DIRECT MESSAGES #######
 
+  /**
+   * Sends a message to a user based on their array index,
+   * determines the recipient based on the current user's status,
+   * and retrieves data for direct chat.
+   * 
+   * @function messageToUser
+   * @memberof MessageService
+   * @param {number} arrayId - The index of the user in the array.
+   * @returns {void}
+   */
   messageToUser(arrayId: number) {
     this.currentUser()
       ? this.sendMessageToLoggedUser(arrayId)
@@ -149,6 +206,13 @@ export class MessageService {
     this.getDirectChatData(arrayId);
   }
 
+  /**
+   * Checks if the currently logged-in user matches the selected user for messaging.
+   * 
+   * @function currentUser
+   * @memberof MessageService
+   * @returns {boolean} - Indicates whether the current user matches the selected user for messaging.
+   */
   currentUser() {
     return (
       this.dataService.loggedInUserData.email ===
@@ -156,18 +220,42 @@ export class MessageService {
     );
   }
 
+  /**
+   * Sets variables and triggers UI changes for sending a message to the logged-in user.
+   * 
+   * @function sendMessageToLoggedUser
+   * @memberof MessageService
+   * @param {number} arrayId - The index of the user in the array.
+   * @returns {void}
+   */
   sendMessageToLoggedUser(arrayId: number) {
     this.varService.setVar('mainChatHead', 1);
     this.varService.setVar('selectedUserToMessage', arrayId);
     this.dcshService.chatSlideOut();
   }
 
+  /**
+   * Sets variables and triggers UI changes for sending a message to a specific user.
+   * 
+   * @function sendMessageToSpecificUser
+   * @memberof MessageService
+   * @param {number} arrayId - The index of the user in the array.
+   * @returns {void}
+   */
   sendMessageToSpecificUser(arrayId: number) {
     this.varService.setVar('mainChatHead', 1);
     this.varService.setVar('selectedUserToMessage', arrayId);
     this.dcshService.chatSlideOut();
   }
 
+  /**
+   * Retrieves data for direct chat based on the provided user's array index.
+   * 
+   * @function getDirectChatData
+   * @memberof MessageService
+   * @param {number} arrayId - The index of the user in the array.
+   * @returns {void}
+   */
   getDirectChatData(arrayId: number): void {
     if (this.directChatService.directChatActive) {
       let clickedUserId: string = this.dataService.userData[arrayId].id;
@@ -181,16 +269,20 @@ export class MessageService {
   //   KOPIERT AUS MENU-SIDENAV.TS
   // ######### CHANNELS  ##########
 
+  /**
+   * Opens a channel identified by its array index, sets variables and triggers UI changes.
+   * 
+   * @function openChannel
+   * @memberof MessageService
+   * @param {number} arrayId - The index of the channel in the array.
+   * @returns {Promise<void>} - A promise that resolves once the channel is opened.
+   */
   async openChannel(arrayId: number) {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
     this.dialogAddService.channelIndex = arrayId;
     this.dcshService.chatSlideIn();
-
     const selectedChannel = this.tags[arrayId];
     await this.onChannelClick(selectedChannel.id);
   }
-
-  
-
 }

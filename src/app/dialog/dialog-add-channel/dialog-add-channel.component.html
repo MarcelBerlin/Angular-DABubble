@@ -1,4 +1,5 @@
 <div class="channelEditionContainer">
+
     <div class="contentContainer">
         <div class="head">
             <div class="chanel">
@@ -7,17 +8,18 @@
             <!-- <div class="close"><img src="assets/img/close.png" alt="" /></div> -->
             <div class="close" (click)="closeDialog()">x</div>
         </div>
-        <span class="nunito-700-14">Channels dienen deinem Team zur Kommunikation. Am besten sollten sie themenbezogen
+        <span class="nunito-700-14">Channels dienen deinem Team zur Kommunikation. Am besten sollten sie
+            themenbezogen
             sein #marketing
             zum Beispiel.</span>
-        <div class="channelNameContainer">            
-                <div class="title">
-                    <span class="nunito-700-18 pd-bottom">Channel-Name</span>
-                    <input id="input-AddChannel" [(ngModel)]="newTag" [placeholder]="'z.B.Kooperationsprojekte'"
-                        type="text">
-                </div>
-                <div class="name">
-                </div>           
+        <div class="channelNameContainer">
+            <div class="title">
+                <span class="nunito-700-18 pd-bottom">Channel-Name</span>
+                <input id="input-AddChannel" [(ngModel)]="newTag" [placeholder]="'z.B.Kooperationsprojekte'"
+                    type="text">
+            </div>
+            <div class="name">
+            </div>
         </div>
         <div class="descriptionContainer">
             <div class="descriptionHead">
@@ -34,5 +36,5 @@
                 Erstellen
             </button>
         </div>
+
     </div>
-</div>

@@ -45,6 +45,13 @@ export class SecondaryChatAnswerService {
     private channelTimestampService: ChannelTimestampService
   ) {}
 
+  /**
+   * Checks if the answer input field is filled; if so, sends the answer, otherwise alerts the user.
+   *
+   * @function checkIfInputIsFilled
+   * @memberof SecondaryChatAnswerService
+   * @returns {void}
+   */
   async checkIfInputIsFilled() {
     if (this.answerText.length > 0) {
       await this.sendAnswer();
@@ -54,6 +61,14 @@ export class SecondaryChatAnswerService {
     }
   }
 
+  /**
+   * Sends an answer by setting user details, adding a timestamp, saving the answer with an ID,
+   * retrieving answer amount data from Firestore, and updating local data arrays.
+   *
+   * @function sendAnswer
+   * @memberof SecondaryChatAnswerService
+   * @returns {void}
+   */
   async sendAnswer() {
     this.UserAndAnswerDetails();
     this.addTimeStampToAnswer();
@@ -61,13 +76,16 @@ export class SecondaryChatAnswerService {
     this.getAnswerAmountFromFirestore();
     this.answerData.push(this.newAnswer);
     this.channelMessages.selectedMessageArray.push(this.newAnswer);
-    console.log(this.channelMessages.messageData);
     this.answerText = '';
-    // firebase aktualisieren für anzahl der Antworten - messageService.newMessage.amountAnswers
-
-    // console.log(this.answerData);
   }
 
+  /**
+   * Sets user and answer details for the new answer.
+   *
+   * @function UserAndAnswerDetails
+   * @memberof SecondaryChatAnswerService
+   * @returns {void}
+   */
   UserAndAnswerDetails() {
     this.newAnswer.channelId =
       this.dialogAddService.tagsData[this.dialogAddService.channelIndex].id; // die ChannelID wird auf die jeweilige neue Message Datei angewendet
@@ -76,10 +94,15 @@ export class SecondaryChatAnswerService {
     this.newAnswer.userId = this.dataService.loggedInUserData.userId;
     this.newAnswer.userName = this.dataService.loggedInUserData.name;
     this.newAnswer.userImg = this.dataService.loggedInUserData.img;
-    // hier wird die Antwort des Threads gespeichert.
-    // this.newAnswer.content = this.answerText;
   }
 
+  /**
+   * Adds a timestamp to the new answer.
+   *
+   * @function addTimeStampToAnswer
+   * @memberof SecondaryChatAnswerService
+   * @returns {void}
+   */
   addTimeStampToAnswer() {
     const timeStampData: ChannelTimeStamp =
       this.channelTimestampService.getActualTimeStampForChannels();
@@ -88,21 +111,35 @@ export class SecondaryChatAnswerService {
     this.newAnswer.clockString = timeStampData.clockString;
   }
 
+  /**
+   * Saves an answer with an answerId to the 'threadAnswer' collection in Firestore.
+   *
+   * @function saveAnswerWithAnswerId
+   * @memberof SecondaryChatAnswerService
+   * @returns {Promise<void>} - A promise that resolves once the answer is saved with an answerId.
+   */
   async saveAnswerWithAnswerId(): Promise<void> {
-    const coll = collection(this.firestore, 'threadAnswer'); // definiert die Collection, worauf man zugreifen möchte
+    const coll = collection(this.firestore, 'threadAnswer');
     this.newAnswer.messageId =
       this.channelMessages.messageData[
         this.channelMessages.selectedMessageIndex
       ]?.messageId;
     try {
-      let docId = await addDoc(coll, this.newAnswer.toJSON()); // generiert für das Dokument eine eigene ID in Firestore
-      this.newAnswer.answerId = docId.id; // die DokumentID wird auf die Variable messageID gesetzt.
-      this.updateIdToAnswerCollection(); // funktion zum Updaten der Dokumenten ID in die Collection selbst, damit später darauf zugegriffen werden kann.
+      let docId = await addDoc(coll, this.newAnswer.toJSON());
+      this.newAnswer.answerId = docId.id;
+      this.updateIdToAnswerCollection();
     } catch (error) {
       console.log('update Id to doc failed!!');
     }
   }
 
+  /**
+   * Updates the answerId in the answer collection with the newAnswer's answerId.
+   *
+   * @function updateIdToAnswerCollection
+   * @memberof SecondaryChatAnswerService
+   * @returns {void}
+   */
   updateIdToAnswerCollection(): void {
     const qData = doc(this.firestore, 'threadAnswer', this.newAnswer.answerId);
     const newData = { answerId: this.newAnswer.answerId };
@@ -113,14 +150,18 @@ export class SecondaryChatAnswerService {
     }
   }
 
-  // messageId wird für die jeweils ausgewählte Message gefunden und aktualisiert dann Index bezogen Anzahl der Antworten und die letzte Uhrzeit
-
+  /**
+   * Retrieves answer amount data from Firestore for a selected message and updates it.
+   *
+   * @function getAnswerAmountFromFirestore
+   * @memberof SecondaryChatAnswerService
+   * @returns {void}
+   */
   getAnswerAmountFromFirestore() {
     const selectedMessageId = this.channelMessages.selectedMessageId;
     const selectedMessageData = this.channelMessages.messageData.find(
       (messageData) => messageData.messageId === selectedMessageId
     );
-    console.log(selectedMessageData);
     if (selectedMessageData) {
       this.increaseAnswerCount(selectedMessageData);
       const qData = doc(this.firestore, 'newMessages', selectedMessageId);
@@ -134,8 +175,13 @@ export class SecondaryChatAnswerService {
     }
   }
 
-  // funktion zum hochzählen der antworten
-
+  /**
+   * Increases the answer count for a selected message and updates the last clock time.
+   * @function increaseAnswerCount
+   * @memberof SecondaryChatAnswerService
+   * @param {any} selectedMessageData - The data of the selected message.
+   * @returns {void}
+   */
   increaseAnswerCount(selectedMessageData) {
     selectedMessageData.amountAnswers += 1;
     let date = new Date();
@@ -143,8 +189,16 @@ export class SecondaryChatAnswerService {
       date.getHours() + ':' + date.getMinutes();
   }
 
-  // Firebase wird mit den daten geuptdated 
-  
+  /**
+   * Attempts to update Firestore data using the provided query and new data.
+   * Logs success or failure messages based on the outcome of the update.
+   *
+   * @function tryUpdateToFirebase
+   * @memberof SecondaryChatAnswerService
+   * @param {any} qData - The query data for the Firestore update.
+   * @param {any} newData - The new data to be updated in Firestore.
+   * @returns {void}
+   */
   tryUpdateToFirebase(qData, newData) {
     try {
       updateDoc(qData, newData);
@@ -154,6 +208,13 @@ export class SecondaryChatAnswerService {
     }
   }
 
+  /**
+   * Retrieves thread answers from Firestore and sorts them by date/time.
+   *
+   * @function getThreadAnswer
+   * @memberof SecondaryChatAnswerService
+   * @returns {Promise<void>} - A promise that resolves once the thread answers are retrieved and sorted.
+   */
   async getThreadAnswer() {
     const coll = collection(this.firestore, 'threadAnswer');
     this.answers$ = collectionData(coll, { idField: 'id' });

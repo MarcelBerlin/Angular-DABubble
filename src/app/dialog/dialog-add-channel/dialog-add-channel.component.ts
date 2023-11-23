@@ -26,6 +26,14 @@ export class DialogAddChannelComponent {
     private dataService: DataService
   ) {}
 
+  /**
+   * closes the actual dialog window and call the firestore document to get access to the tags.
+   *
+   * @function closeDialog
+   * @memberof DialogAddChannelComponent
+   * @instance
+   * @returns {void}
+   */
   closeDialog() {
     // Firestore-Dokumente abrufen und auf die Tags zugreifen
     const firestore = firebase.firestore();
@@ -40,8 +48,16 @@ export class DialogAddChannelComponent {
     this.dialogRef.close();
   }
 
-  generateTag() {  
-    if(this.newTag && this.newTag.length > 0) {
+  /**
+   * Generates a new channel for conversation
+   *
+   * @function generateTag
+   * @memberof DialogAddChannelComponent
+   * @instance
+   * @returns {void}   *
+   */
+  generateTag() {
+    if (this.newTag && this.newTag.length > 0) {
       this.getService.addTag(
         '# ' + this.newTag,
         this.description,
@@ -51,8 +67,8 @@ export class DialogAddChannelComponent {
       setTimeout(() => {
         this.closeDialog();
       }, 1000);
-    }  else {
+    } else {
       alert('Bitte einen Channel Namen eingeben!');
-    }    
+    }
   }
 }
