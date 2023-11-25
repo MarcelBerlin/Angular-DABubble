@@ -16,6 +16,7 @@
     .full-message-left {
       display: flex;
       flex-direction: row;
+      margin-top: 20px;
 
       .avatar-left {
         padding-top: 16px;
@@ -23,8 +24,8 @@
         height: 70px;
 
         img {
-          width: 70px !important;
-          height: 70px !important;
+          width: 70px;
+          height: 70px;
           border-radius: 50%;
           object-fit: cover;
         }
@@ -40,8 +41,6 @@
           display: flex;
           flex-direction: column-reverse;
           justify-content: flex-end;
-          margin-top: 20px;
-          margin-left: 8px;
 
           .name-left {
             font-family: "nunito";
@@ -131,8 +130,8 @@
         height: 70px;
 
         img {
-          width: 70px !important;
-          height: 70px !important;
+          width: 70px;
+          height: 70px;
           border-radius: 50%;
           object-fit: cover;
         }
@@ -142,12 +141,12 @@
         display: flex;
         flex-direction: column;
         width: 70%;
+        margin-top: 20px;
 
         .name-time-right {
           display: flex;
           flex-direction: column-reverse;
           justify-content: flex-end;
-          margin-top: 20px;
 
           .name-right {
             font-family: "nunito";
@@ -191,23 +190,23 @@
           gap: 5px;
           margin-bottom: 6px;
           margin-right: -120px;
-    
+
           img {
             cursor: pointer;
             padding: 5px;
             background: transparent;
             border: 0;
-    
+
             &:focus {
               outline: 0;
             }
-    
+
             &:hover {
               background-color: #eeebeb;
               border-radius: 10px;
             }
           }
-    
+
           .reactions {
             margin-right: 20px;
             border: 1px solid #adb0d9;
@@ -218,13 +217,13 @@
             width: fit-content;
             gap: 8px;
           }
-    
+
           .reaction-column {
             display: flex;
             align-items: flex-end;
             flex-direction: column;
             width: 10px;
-    
+
             .emoji-mart {
               z-index: 999;
               position: relative;
@@ -554,4 +553,55 @@
 
 .output {
   display: flex;
+}
+
+@media(max-width: 1150px) {
+  .full-message-right {
+    .avatar-right {
+      width: unset !important;
+      height: 60px !important;
+
+      img {
+        width: 60px !important;
+        height: 60px !important;
+      }
+    }
+
+    .message-content-right {
+      padding: 0 16px !important;
+      margin-left: 14px !important;
+      width: unset !important;
+
+      .reactions {
+        margin-left: 20px;
+      }
+
+      span {
+        font-size: 14px !important;
+      }
+    }
+  }
+
+  .full-message-left {
+    width: 80% !important;
+
+    .avatar-left {
+      width: unset !important;
+      height: 60px !important;
+
+      img {
+        width: 60px !important;
+        height: 60px !important;
+      }
+    }
+
+    .message-content-left {
+      padding: 0 16px !important;
+
+    }
+  }
+}
+
+.outputBox {
+  margin: 8px !important;
 }

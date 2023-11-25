@@ -85,6 +85,7 @@ export class ChannelSelectionComponent {
   }
 
   checkIfThereIsAnAnswer() {
+    // KANN DIE WEG?
     if (this.secondaryAnswerService.messagesArray[0].amountAnswers.length > 0) {
       this.isThereAnAnswer = true;
     } else {

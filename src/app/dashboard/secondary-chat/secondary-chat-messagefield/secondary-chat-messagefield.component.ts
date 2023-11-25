@@ -16,15 +16,8 @@ import { MessageInputServiceService } from 'src/app/message-input/service/messag
 })
 export class SecondaryChatMessagefieldComponent implements OnInit {
   @ViewChild('secondaryChatautoscrollContainer') private container: ElementRef;
-  threadEmojiLeft: boolean = false;
-  threadEmojiRight: boolean = false;
-  index: number = 0;
 
-  emojiPickerRight: boolean = false;
-  emojiPickerLeft: boolean = false;
-  emoji: string = '';
-  reactionArrLeft: any = [];
-  reactionArrRight: any = [];
+  index: number = 0;
   autoscroll: boolean = true;
 
   constructor(
@@ -54,100 +47,6 @@ export class SecondaryChatMessagefieldComponent implements OnInit {
     return this.channelMessages.getSelectedMessageStatus();
   }
 
-  /**
-   * Adds an emoji to the left side of a message and manages related properties.
-   *
-   * @function addEmojiLeft 
-   * @param {Event} event - The event object triggered by selecting an emoji.
-   * @returns {void}
-   */
-  addEmojiLeft(event) {
-    this.threadEmojiLeft = true;
-    this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
-    this.reactionArrLeft.push(this.getMessage.emojis);
-    this.emojiPickerLeft = false;
-    if (this.reactionArrLeft.length > 1) {
-      this.emojiFilterLeft(this.reactionArrLeft);
-    }
-  }
-
-  /**
-   * Adds an emoji to the right side of a message and manages related properties.
-   *
-   * @function addEmojiRight
-   * @param {Event} event - The event object triggered by selecting an emoji.
-   * @returns {void}
-   */
-  addEmojiRight(event) {
-    this.threadEmojiRight = true;
-    this.getMessage.emojis = `${this.emoji}${event.emoji.native}`;
-    this.reactionArrRight.push(this.getMessage.emojis);
-    this.emojiPickerRight = false;
-    if (this.reactionArrRight.length > 1) {
-      this.emojiFilterRight(this.reactionArrRight);
-    }
-  }
-
-  /**
-   * Filters and displays emojis on the left side of a message, counting their occurrences.
-   * Updates the DOM element with the reaction bar based on the emoji count.
-   *
-   * @function emojiFilterLeft  
-   * @param {string[]} reactionArr - An array containing emojis for filtering.
-   * @returns {void}
-   */
-  emojiFilterLeft(reactionArr) {
-    const emojiCountMapLeft: any = new Map();
-    let reactionBarLeft = document.getElementById('reactionBarLeft');
-    reactionArr.forEach((emoji) => {
-      if (emojiCountMapLeft.has(emoji)) {
-        emojiCountMapLeft.set(emoji, emojiCountMapLeft.get(emoji) + 1);
-      } else {
-        emojiCountMapLeft.set(emoji, 1);
-      }
-    });
-    reactionBarLeft.innerHTML = '';
-    emojiCountMapLeft.forEach((count, emoji) => {
-      reactionBarLeft.innerHTML += `<div>
-          <span class="base"> ${emoji} ${count} 
-            <!-- <span class="user-tool">${this.getUser.loggedInUserData.name}</span> -->
-          </span>
-        </div>`;
-    });
-    if (reactionArr.length >= 10) {
-      reactionBarLeft.innerHTML =
-        'Zu viele reaktionen. Wir arbeiten gerade daran';
-    }
-  }
-
-  /**
-   * Filters and displays emojis on the right side of a message, counting their occurrences.
-   * Updates the DOM element with the reaction bar based on the emoji count.
-   *
-   * @function emojiFilterRight   
-   * @param {string[]} reactionArr - An array containing emojis for filtering.
-   * @returns {void}
-   */
-  emojiFilterRight(reactionArr) {
-    const emojiCountMapRight: any = new Map();
-    let reactionBarRight = document.getElementById('reactionBarRight');
-    reactionArr.forEach((emoji) => {
-      if (emojiCountMapRight.has(emoji)) {
-        emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
-      } else {
-        emojiCountMapRight.set(emoji, 1);
-      }
-    });
-    reactionBarRight.innerHTML = '';
-    emojiCountMapRight.forEach((count, emoji) => {
-      reactionBarRight.innerHTML += `
-      <div matTooltip ='{{this.getUser.loggedInUserData.name}}' class="reaction-container"> 
-      <span> ${emoji} ${count} </span> </div>`;
-    });
-    if (reactionArr.length >= 7) {
-      reactionBarRight.innerHTML = 'Zu viele Reaktionen. Wir arbeiten daran';
-    }
-  }
 
   /**
    * Lifecycle hook that executes after Angular has checked the component's view.

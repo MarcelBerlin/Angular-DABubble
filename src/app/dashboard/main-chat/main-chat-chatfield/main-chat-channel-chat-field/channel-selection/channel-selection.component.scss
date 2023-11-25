@@ -341,17 +341,17 @@
         }
       }
 
-      .name-time {
+      .name-time-right {
         display: flex;
         flex-direction: row-reverse;
 
-        .name {
+        .name-right {
           font-family: "nunito";
           font-size: 18px;
           font-weight: 700;
         }
 
-        .time {
+        .time-right {
           color: #686868;
           font-family: "nunito";
           font-size: 14px;
@@ -594,5 +594,11 @@
 
   .name-time {
     padding-bottom: 6px;
+  }
+}
+
+@media (max-width: 450px) {
+  .outputBox {
+    margin: 10px !important;
   }
 }
