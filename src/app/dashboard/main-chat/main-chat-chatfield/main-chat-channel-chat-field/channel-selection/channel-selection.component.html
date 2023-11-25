@@ -17,10 +17,8 @@
       </ng-container>
     </ng-container>
   </div>
-
   <div *ngFor="let message of channelMessages.messageData, let i = index">
     <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
-
       <div class="timeline-container">
         <div
           *ngIf="i !== 0 && channelMessages.messageData[i-1].dateString != channelMessages.messageData[i].dateString">
@@ -30,7 +28,6 @@
             </span>
           </div>
         </div>
-
         <div *ngIf="i == 0">
           <div class="timeLine">
             <span class="timeLineHead">
@@ -38,15 +35,10 @@
             </span>
           </div>
         </div>
-
       </div>
-
       <div class="full-message-left">
-        <!-- Zeige Nachrichten auf der linken Seite des ausgewählten Kanals an -->
-
         <div class="single-message-left-container" *ngIf="message.userName != this.dataService.loggedInUserData.name"
           (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
-
           <div class="interaction-bubble-left" [style.display]="hoveredIndex === i ? 'block' : 'none'"
             [style.transition]="'display 125ms ease-in-out'">
             <div class="interaction-bubble-emoji">
@@ -61,30 +53,20 @@
                 comment
               </mat-icon>
             </div>
-            <div></div>
-            <div></div>
           </div>
-
           <div class="avatar-left">
             <img src="{{ message.userImg }}">
           </div>
-
           <div class="message-details-left">
-
-            <div class="name-time">
-              <div class="name">{{ message.userName }}</div>
-              <div class="time">{{ message.dateString }} {{ message.clockString }}</div>
+            <div class="name-time-left">
+              <div class="name-left">{{ message.userName }}</div>
+              <div class="time-left">{{ message.dateString }} {{ message.clockString }}</div>
             </div>
-
             <div class="message-content-left">
-              <!-- {{ message.content }} -->
-              <!-- testarea new message Data format -->
-
               <div class="outputBox">
                 <div class="output" *ngFor="let entry of message.content; let index = index" (click)="console(entry)">
                   <span *ngIf="entry.tagType == 'text'">
                     {{entry.content}}
-
                   </span>
                   <span *ngIf="entry.tagType == 'SPAN'">
                     {{entry.content}}
@@ -92,7 +74,6 @@
                   <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'EmojiType'">
                     {{entry.content}}
                   </span>
-
                   <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'NameType'"
                     class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"
                     (mouseleave)="hideInfoOutput()">
@@ -103,7 +84,6 @@
                       <span>{{ entry.linkInfo[0].emailContent }}</span>
                     </span>
                   </span>
-
                   <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'FileType'"
                     class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"
                     (mouseleave)="hideInfoOutput()">
@@ -120,19 +100,14 @@
                       <img src="../../assets/img/PDF.png" alt="" *ngIf="inputService.fileIsPDF(entry.content)">
                     </span>
                   </span>
-
                 </div>
               </div>
-
-              <!-- testarea new message Data format  end-->
             </div>
-
-
             <div class="reaction-bar-left">
               <div id="reactionBarLeft" *ngIf="message.messageEmojis.length >= 1">
                 <div class="reactions">
                   <span>
-                    {{ message.messageEmojis }} <!--.join(' ')-->
+                    {{ message.messageEmojis.join(' ') }}
                   </span>
                 </div>
               </div>
@@ -153,11 +128,7 @@
         </div>
       </div>
 
-
-
       <div class="full-message-right">
-
-        <!-- Zeige Nachrichten auf der rechten Seite des ausgewählten Kanals an -->
         <div class="single-message-right-container" *ngIf="message.userName == this.dataService.loggedInUserData.name"
           (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
 
@@ -185,18 +156,13 @@
                   more_vert
                 </mat-icon>
               </div>
-              <div></div>
             </div>
 
-            <div class="name-time">
-              <div class="name"> {{ message.userName }} </div>
-              <div class="time"> {{ message.dateString }} {{ message.clockString }}</div>
+            <div class="name-time-right">
+              <div class="name-right"> {{ message.userName }} </div>
+              <div class="time-right"> {{ message.dateString }} {{ message.clockString }}</div>
             </div>
-
             <div class="message-content-right">
-
-              <!-- testarea new message Data format -->
-
               <div class="outputBox">
                 <div class="output" *ngFor="let entry of message.content; let index = index" (click)="console(entry)">
                   <span *ngIf="entry.tagType == 'text'">
@@ -220,7 +186,6 @@
                       <span>{{ entry.linkInfo[0].emailContent }}</span>
                     </span>
                   </span>
-
                   <span *ngIf="entry.tagType == 'A' && entry.linkInfo[0].nameType == 'FileType'"
                     class={{entry.attributes[3].value}} (mouseenter)="showInfoOutput(index, i)"
                     (mouseleave)="hideInfoOutput()">
@@ -262,11 +227,8 @@
           </div>
         </div>
       </div>
-
       <div>
-
       </div>
-
     </div>
   </div>
 </div>

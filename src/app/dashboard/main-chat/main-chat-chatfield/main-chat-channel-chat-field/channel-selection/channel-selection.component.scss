@@ -1,5 +1,5 @@
 .thread-content {
-  height: 100%;
+  // height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -136,17 +136,17 @@
       display: flex;
       flex-direction: column;
 
-      .name-time {
+      .name-time-left {
         display: flex;
 
-        .name {
+        .name-left {
           font-family: "nunito";
           font-size: 18px;
           font-weight: 700;
           padding-right: 20px;
         }
 
-        .time {
+        .time-left {
           color: #686868;
           font-family: "nunito";
           font-size: 14px;
@@ -163,7 +163,7 @@
         border-top-right-radius: 20px;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
-        padding: 0 24px;
+        margin-right: 20%;
         font-family: "Nunito", "NotoColorEmojiLimited";
 
         span {
@@ -370,7 +370,7 @@
         border-top-left-radius: 20px;
         border-bottom-right-radius: 20px;
         border-bottom-left-radius: 20px;
-        padding: 0 24px;
+        margin-left: 20%;
         font-family: "Nunito", "NotoColorEmojiLimited";
       }
     }

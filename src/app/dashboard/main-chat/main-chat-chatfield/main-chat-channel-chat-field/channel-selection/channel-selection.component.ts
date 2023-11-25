@@ -56,7 +56,7 @@ export class ChannelSelectionComponent {
     public secondaryAnswerService: SecondaryChatAnswerService,
     public inputService: MessageInputServiceService,
     public emojiService: EmojiPickerBossiService
-  ) { 
+  ) {
   }
 
 
@@ -100,24 +100,17 @@ export class ChannelSelectionComponent {
    */
   addEmoji(event, index) {
     this.channelMessages.messageData[index].messageEmojis.push(`${this.emoji}${event.emoji.native}`);
-    if (this.emojiPickerLeft ) { this.emojiPickerLeft = false;}; // timeout 
-    if (this.emojiPickerRight || this.timeoutForEmojiPopup()) { this.emojiPickerRight = false;};
+    if (this.emojiPickerLeft) { this.emojiPickerLeft = false; };
+    if (this.emojiPickerRight) { this.emojiPickerRight = false;};
     this.channelMessages.selectedMessageIndex = index;
     this.channelMessages.UpdateEmojiToFirebase(index);
     // if(this.channelMessages.messageData[index].messageEmojis.length > 1) { this.emojiMapper(index)}
   }
 
-  timeoutForEmojiPopup() {
-    setTimeout(() => {
-      this.emojiPickerRight = false;
-    }, 1000);
-    return this.emojiPickerRight = false;
-  }
-
 
   // emojiMapper(index) {
   //   debugger;
-    
+
   //   const emojiCountMapRight: any = new Map();
   //   this.channelMessages.messageData[index].messageEmojis.forEach((emoji) => {
   //     if (emojiCountMapRight.has(emoji)) { emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
@@ -193,14 +186,14 @@ export class ChannelSelectionComponent {
   }
 
 
-  filterMessages(){
+  filterMessages() {
     let messages = [];
     this.channelMessages.messageData.forEach(message => {
       if (message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id) {
         messages.push(message);
       }
     });
-    if (messages.length == 0) { return true; } 
+    if (messages.length == 0) { return true; }
     else { return false; }
   }
 }

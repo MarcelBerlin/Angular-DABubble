@@ -183,10 +183,6 @@ export class MessageService {
     this.messageData = index;
   }
 
-  // ######### AB HIER ############
-  // ###### FELIX TESTZWECKE ######
-  //   KOPIERT AUS MENU-SIDENAV.TS
-  // ###### DIRECT MESSAGES #######
 
   /**
    * Sends a message to a user based on their array index,
@@ -263,11 +259,6 @@ export class MessageService {
       this.directChatService.getChatId(clickedUserId);
     }
   }
-
-  // ######### AB HIER ############
-  // ###### FELIX TESTZWECKE ######
-  //   KOPIERT AUS MENU-SIDENAV.TS
-  // ######### CHANNELS  ##########
 
   /**
    * Opens a channel identified by its array index, sets variables and triggers UI changes.
