@@ -240,7 +240,7 @@ export class LoginComponent {
   
   /**
    * Sets the selected imprint or data protection element.
-   *
+   * 
    * @param {string} element - The element to be selected (imprint or data protection).
    * @returns {void} - Any return value description, if applicable.
    */

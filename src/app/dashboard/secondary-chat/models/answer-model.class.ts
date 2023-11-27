@@ -1,5 +1,4 @@
 export class Answers {
-
     channelId: string;
     answerId: string; 
     messageId: string;

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-
 @Component({
   selector: 'app-imprint-data-protection',
   templateUrl: './imprint-data-protection.component.html',
@@ -9,8 +8,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ImprintDataProtectionComponent {
   imgPath: string = 'assets/img/arrow_back_black.png';
 
+
   constructor(public authService: AuthService) {}
 
+  
   /**
    * Sets the selected imprint or data protection element.
    *
