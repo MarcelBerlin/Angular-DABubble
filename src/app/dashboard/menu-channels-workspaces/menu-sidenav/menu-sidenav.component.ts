@@ -23,7 +23,6 @@ import { MessageInputServiceService } from 'src/app/message-input/service/messag
 import { ConditionService } from 'src/app/services/condition.service';
 import { MessageToUserService } from 'src/app/direct-chat/services/message-to-user.service';
 
-
 interface Tag {
   id: string;
   name: string;
@@ -84,38 +83,50 @@ export class MenuSidenavComponent implements OnInit {
     private channelMessageService: ChannelMessagesService,
     private messageInputService: MessageInputServiceService,
     public conditionService: ConditionService,
-    public messageToUserService: MessageToUserService,
+    public messageToUserService: MessageToUserService
   ) {
     this.tags = this.getService.tags;
     this.sortedUser = this.getUserData.userData;
-
   }
 
+  /**
+   * Executes when the component is initialized.
+   * Calls the 'allTags' method and performs some specific action.
+   *
+   * @returns {void}
+   */
   ngOnInit(): void {
     this.allTags();
     // this.getService.deleteFromFirebase('') // bitte lassen. Basti
   }
 
+  /**
+   * Listens for the window resize event and updates the innerWidth property accordingly.
+   *
+   * @param {Event} event - The resize event object.
+   * @returns {void}
+   */
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
   }
 
+  /**
+   * Fetches all tags from the 'tags' collection in Firestore and subscribes to changes.
+   * Updates the 'tags' property and logs the retrieved tags (for debugging purposes).
+   * 
+   * @returns {void}
+   */
   allTags() {
     const tagCollection = collection(this.firestore, 'tags');
     this.tags$ = collectionData(tagCollection, { idField: 'id' });
 
     this.tags$.subscribe((data) => {
       this.tags = data;
-      console.log(this.tags); // bitte lassen. Basti
-      // console.log(this.getUserData.userData); // bitte lassen. Basti
-
+      console.log(this.tags); // bitte lassen. Basti     
     });
   }
 
-  // sortUser() {
-  //   this.sortedUser.sort((, b) => {}
-  // }
 
   toggleChannels() {
     this.channelsVisible = !this.channelsVisible;
@@ -127,25 +138,36 @@ export class MenuSidenavComponent implements OnInit {
     this.arrowStateChannel = !this.arrowStateChannel;
   }
 
-
   hoverChannels() {
     this.hover = true;
     if (!this.arrowStateChannel) {
-      this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left_blue.png' : 'assets/img/sidenav/arrow_left_blue.png'
+      this.channelArrow = this.channelsVisible
+        ? 'assets/img/sidenav/arrow_left_blue.png'
+        : 'assets/img/sidenav/arrow_left_blue.png';
     } else {
-      this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down_blue.png' : 'assets/img/sidenav/arrow_down_blue.png'
+      this.channelArrow = this.channelsVisible
+        ? 'assets/img/sidenav/arrow_down_blue.png'
+        : 'assets/img/sidenav/arrow_down_blue.png';
     }
-    this.channelLogo = this.channelsVisible ? 'assets/img/sidenav/circles_blue.png' : 'assets/img/sidenav/circles_blue.png'
+    this.channelLogo = this.channelsVisible
+      ? 'assets/img/sidenav/circles_blue.png'
+      : 'assets/img/sidenav/circles_blue.png';
   }
 
   unhoverChannels() {
     this.hover = false;
     if (!this.arrowStateChannel) {
-      this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left.png' : 'assets/img/sidenav/arrow_left.png';
+      this.channelArrow = this.channelsVisible
+        ? 'assets/img/sidenav/arrow_left.png'
+        : 'assets/img/sidenav/arrow_left.png';
     } else {
-      this.channelArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down.png' : 'assets/img/sidenav/arrow_down.png';
+      this.channelArrow = this.channelsVisible
+        ? 'assets/img/sidenav/arrow_down.png'
+        : 'assets/img/sidenav/arrow_down.png';
     }
-    this.channelLogo = this.channelsVisible ? 'assets/img/sidenav/circles.png' : 'assets/img/sidenav/circles.png';
+    this.channelLogo = this.channelsVisible
+      ? 'assets/img/sidenav/circles.png'
+      : 'assets/img/sidenav/circles.png';
   }
 
   toggleDirectMessage() {
@@ -160,29 +182,45 @@ export class MenuSidenavComponent implements OnInit {
   hoverDirectMessage() {
     this.hover = true;
     if (!this.arrowStateMessage) {
-      this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left_blue.png' : 'assets/img/sidenav/arrow_left_blue.png'
+      this.chatArrow = this.channelsVisible
+        ? 'assets/img/sidenav/arrow_left_blue.png'
+        : 'assets/img/sidenav/arrow_left_blue.png';
     } else {
-      this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down_blue.png' : 'assets/img/sidenav/arrow_down_blue.png'
+      this.chatArrow = this.channelsVisible
+        ? 'assets/img/sidenav/arrow_down_blue.png'
+        : 'assets/img/sidenav/arrow_down_blue.png';
     }
-    this.chatLogo = this.channelsVisible ? 'assets/img/sidenav/account_blue.png' : 'assets/img/sidenav/account_blue.png'
+    this.chatLogo = this.channelsVisible
+      ? 'assets/img/sidenav/account_blue.png'
+      : 'assets/img/sidenav/account_blue.png';
   }
 
   unhoverDirectMessage() {
     this.hover = false;
     if (!this.arrowStateMessage) {
-      this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_left.png' : 'assets/img/sidenav/arrow_left.png';
+      this.chatArrow = this.channelsVisible
+        ? 'assets/img/sidenav/arrow_left.png'
+        : 'assets/img/sidenav/arrow_left.png';
     } else {
-      this.chatArrow = this.channelsVisible ? 'assets/img/sidenav/arrow_down.png' : 'assets/img/sidenav/arrow_down.png';
+      this.chatArrow = this.channelsVisible
+        ? 'assets/img/sidenav/arrow_down.png'
+        : 'assets/img/sidenav/arrow_down.png';
     }
-    this.chatLogo = this.channelsVisible ? 'assets/img/sidenav/account.png' : 'assets/img/sidenav/account.png';
+    this.chatLogo = this.channelsVisible
+      ? 'assets/img/sidenav/account.png'
+      : 'assets/img/sidenav/account.png';
   }
 
   hoverAddChannel() {
-    this.addNewChannel = this.channelsVisible ? 'assets/img/sidenav/add_circle_blue.png' : 'assets/img/sidenav/add_circle_blue.png'
+    this.addNewChannel = this.channelsVisible
+      ? 'assets/img/sidenav/add_circle_blue.png'
+      : 'assets/img/sidenav/add_circle_blue.png';
   }
 
   unhoverAddChannel() {
-    this.addNewChannel = this.channelsVisible ? 'assets/img/sidenav/add_circle.png' : 'assets/img/sidenav/add_circle.png'
+    this.addNewChannel = this.channelsVisible
+      ? 'assets/img/sidenav/add_circle.png'
+      : 'assets/img/sidenav/add_circle.png';
   }
 
   // onClickChannels() {
@@ -213,7 +251,6 @@ export class MenuSidenavComponent implements OnInit {
     // this.getService.deleteFromFirebase(tag);
   }
 
-  
   async openChannel(arrayId: number) {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
@@ -222,27 +259,27 @@ export class MenuSidenavComponent implements OnInit {
     const selectedChannel = this.tags[arrayId];
     this.messageInputService.chatChange = true;
     this.messageInputService.placeholderUserName = selectedChannel.name;
-    this.messageInputService.placeholderText = 'Nachricht an ' + selectedChannel.name;
+    this.messageInputService.placeholderText =
+      'Nachricht an ' + selectedChannel.name;
     this.messageInputService.setMyVariable(true);
-    const channelId = selectedChannel.id;    
-    this.channelMessageService.currentChannelId = channelId;    
-    this.channelMessageService.MessageAmount = selectedChannel.channelMessageAmount;     
-    if (innerWidth <= 800){
-      this.dcshService.hideNavigation = true; 
-    }   
-    await this.messageService.onChannelClick(channelId);  
+    const channelId = selectedChannel.id;
+    this.channelMessageService.currentChannelId = channelId;
+    this.channelMessageService.MessageAmount =
+      selectedChannel.channelMessageAmount;
+    if (innerWidth <= 800) {
+      this.dcshService.hideNavigation = true;
+    }
+    await this.messageService.onChannelClick(channelId);
   }
-
 
   openNewMessage() {
     this.varService.setVar('mainChatHead', 2);
     this.dcshService.chatSlideOut();
-    if (innerWidth <= 800){
+    if (innerWidth <= 800) {
       this.dcshService.hideNavigation = true;
-    }   
+    }
   }
 
-  
   /**
    * Checks user authorization to display a channel.
    * @param {number} index - The index of the channel in the Service Tags Data list.

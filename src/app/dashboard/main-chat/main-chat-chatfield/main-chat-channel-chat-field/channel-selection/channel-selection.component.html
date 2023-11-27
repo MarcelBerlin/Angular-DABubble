@@ -1,4 +1,4 @@
-<div class="thread-content">
+<div class="thread-content" [class.height-100]="filterMessages()">
 
   <div class="empty-chat-message" *ngIf="filterMessages()">
     <ng-container *ngIf="dialogAdd.tagsData && varService.selectedChannel">
@@ -17,6 +17,9 @@
       </ng-container>
     </ng-container>
   </div>
+
+
+
   <div *ngFor="let message of channelMessages.messageData, let i = index">
     <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
       <div class="timeline-container">

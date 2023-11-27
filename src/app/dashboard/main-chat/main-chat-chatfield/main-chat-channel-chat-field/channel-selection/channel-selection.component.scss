@@ -1,8 +1,11 @@
-.thread-content {
-  // height: 100%;
+.thread-content { 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  .height-100 {
+    height: 100% !important;
+  }
 
   .empty-chat-message {
     padding-left: 22px;
