@@ -16,14 +16,12 @@ import { SecondaryChatAnswerService } from 'src/app/dashboard/secondary-chat/ser
 import { MessageInputServiceService } from 'src/app/message-input/service/message-input-service.service';
 import { EmojiPickerBossiService } from 'src/app/emoji-picker-bossi/services/emoji-picker-bossi.service';
 
-
 @Component({
   selector: 'app-channel-selection',
   templateUrl: './channel-selection.component.html',
   styleUrls: ['./channel-selection.component.scss'],
 })
 export class ChannelSelectionComponent {
-
   hoveredMessagesMainChat: boolean = false;
 
   index: number;
@@ -38,8 +36,7 @@ export class ChannelSelectionComponent {
   emoji: string = '';
   isThereAnAnswer: boolean = false;
 
-  @ViewChild("reactionBarRight") emojiBar!: ElementRef; // "'reactionBarRight-' + message"
-
+  @ViewChild('reactionBarRight') emojiBar!: ElementRef; // "'reactionBarRight-' + message"
 
   constructor(
     private dialog: Dialog,
@@ -56,9 +53,7 @@ export class ChannelSelectionComponent {
     public secondaryAnswerService: SecondaryChatAnswerService,
     public inputService: MessageInputServiceService,
     public emojiService: EmojiPickerBossiService
-  ) {
-  }
-
+  ) {}
 
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
@@ -76,10 +71,21 @@ export class ChannelSelectionComponent {
     this.dialog.open(DialogProfileViewUsersComponent);
   }
 
+  /**
+   * Sets the hovered index to the provided index, initiating the hover state.
+   *
+   * @param {number} index - The index of the item being hovered.
+   * @returns {void}
+   */
   onHover(index: number) {
     this.hoveredIndex = index;
   }
 
+  /**
+   * Resets the hovered index to null, ending the hover state.
+   *
+   * @returns {void}
+   */
   onHoverEnd() {
     this.hoveredIndex = null;
   }
@@ -95,37 +101,24 @@ export class ChannelSelectionComponent {
 
   /**
    * Adds a reaction to the chosen message
-   * 
+   *
    * @param event - emoji popup
    * @param index - index of the message
    */
   addEmoji(event, index) {
-    this.channelMessages.messageData[index].messageEmojis.push(`${this.emoji}${event.emoji.native}`);
-    if (this.emojiPickerLeft) { this.emojiPickerLeft = false; };
-    if (this.emojiPickerRight) { this.emojiPickerRight = false;};
+    this.channelMessages.messageData[index].messageEmojis.push(
+      `${this.emoji}${event.emoji.native}`
+    );
+    if (this.emojiPickerLeft) {
+      this.emojiPickerLeft = false;
+    }
+    if (this.emojiPickerRight) {
+      this.emojiPickerRight = false;
+    }
     this.channelMessages.selectedMessageIndex = index;
     this.channelMessages.UpdateEmojiToFirebase(index);
     // if(this.channelMessages.messageData[index].messageEmojis.length > 1) { this.emojiMapper(index)}
   }
-
-
-  // emojiMapper(index) {
-  //   debugger;
-
-  //   const emojiCountMapRight: any = new Map();
-  //   this.channelMessages.messageData[index].messageEmojis.forEach((emoji) => {
-  //     if (emojiCountMapRight.has(emoji)) { emojiCountMapRight.set(emoji, emojiCountMapRight.get(emoji) + 1);
-  //     } else { emojiCountMapRight.set(emoji, 1); }
-  //   });
-
-  //   this.emojiBar.nativeElement.innerHTML = '';
-  //   emojiCountMapRight.forEach((count, emoji) => {
-  //     this.emojiBar.nativeElement.innerHTML += `<div class="reaction-container"> <span> ${emoji} ${count} </span> </div>`;
-  //   });
-  //   if (this.channelMessages.messageData[index].messageEmojis.length >= 7) {
-  //     this.emojiBar.nativeElement.innerHTML = '<p>Zu viele Reaktionen. Wir arbeiten daran 😊</p>';
-  //   }
-  // }
 
   showInfoBox: number = -1;
   timeoutArray: any[] = [];
@@ -182,19 +175,35 @@ export class ChannelSelectionComponent {
     }
   }
 
+  /**
+   * Logs the provided entry to the console.
+   *
+   * @param {*} entry - The data or value to be logged.
+   * @returns {void}
+   */
   console(entry) {
     console.log(entry);
   }
 
-
+  /**
+   * Filters messages based on the current channel ID.
+   *
+   * @returns {boolean} - Returns `true` if there are no messages for the current channel, otherwise `false`.
+   */
   filterMessages() {
     let messages = [];
-    this.channelMessages.messageData.forEach(message => {
-      if (message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id) {
+    this.channelMessages.messageData.forEach((message) => {
+      if (
+        message.channelId ==
+        this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id
+      ) {
         messages.push(message);
       }
     });
-    if (messages.length == 0) { return true; }
-    else { return false; }
+    if (messages.length == 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

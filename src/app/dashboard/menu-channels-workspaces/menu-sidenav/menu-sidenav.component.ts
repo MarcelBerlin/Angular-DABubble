@@ -114,7 +114,7 @@ export class MenuSidenavComponent implements OnInit {
   /**
    * Fetches all tags from the 'tags' collection in Firestore and subscribes to changes.
    * Updates the 'tags' property and logs the retrieved tags (for debugging purposes).
-   * 
+   *
    * @returns {void}
    */
   allTags() {
@@ -123,21 +123,32 @@ export class MenuSidenavComponent implements OnInit {
 
     this.tags$.subscribe((data) => {
       this.tags = data;
-      console.log(this.tags); // bitte lassen. Basti     
+      console.log(this.tags); // bitte lassen. Basti
     });
   }
 
-
+  /**
+   * Toggles the visibility of channels and updates related properties.
+   * Updates 'channelsVisible' to its opposite value and changes 'channelArrow' accordingly.
+   * Also toggles 'arrowStateChannel' and logs 'channelsVisible' for debugging.
+   *
+   * @returns {void}
+   */
   toggleChannels() {
     this.channelsVisible = !this.channelsVisible;
     this.channelArrow = this.channelsVisible
       ? 'assets/img/sidenav/arrow_down.png'
       : 'assets/img/sidenav/arrow_left.png';
-    // this.hover ? (this.channelArrow += '_hover') : '';
     console.log(this.channelsVisible);
     this.arrowStateChannel = !this.arrowStateChannel;
   }
 
+  /**
+   * Handles hover effects for channels.
+   * Updates properties related to channel hover state and visuals.
+   *
+   * @returns {void}
+   */
   hoverChannels() {
     this.hover = true;
     if (!this.arrowStateChannel) {
@@ -154,6 +165,12 @@ export class MenuSidenavComponent implements OnInit {
       : 'assets/img/sidenav/circles_blue.png';
   }
 
+  /**
+   * Handles the removal of hover effects for channels.
+   * Resets properties related to channel hover state and visuals.
+   *
+   * @returns {void}
+   */
   unhoverChannels() {
     this.hover = false;
     if (!this.arrowStateChannel) {
@@ -170,15 +187,27 @@ export class MenuSidenavComponent implements OnInit {
       : 'assets/img/sidenav/circles.png';
   }
 
+  /**
+   * Toggles the visibility of direct messages for users.
+   * Updates 'directMessageUserVisible' to its opposite value and changes 'chatArrow' accordingly.
+   * Also toggles 'arrowStateMessage'.
+   *
+   * @returns {void}
+   */
   toggleDirectMessage() {
     this.directMessageUserVisible = !this.directMessageUserVisible;
     this.chatArrow = this.directMessageUserVisible
       ? 'assets/img/sidenav/arrow_down.png'
       : 'assets/img/sidenav/arrow_left.png';
-    // this.hover ? (this.chatLogo += '_hover') : '';
     this.arrowStateMessage = !this.arrowStateMessage;
   }
 
+  /**
+   * Handles hover effects for direct messages.
+   * Updates properties related to direct message hover state and visuals.
+   *
+   * @returns {void}
+   */
   hoverDirectMessage() {
     this.hover = true;
     if (!this.arrowStateMessage) {
@@ -195,6 +224,12 @@ export class MenuSidenavComponent implements OnInit {
       : 'assets/img/sidenav/account_blue.png';
   }
 
+  /**
+   * Handles the removal of hover effects for direct messages.
+   * Resets properties related to direct message hover state and visuals.
+   *
+   * @returns {void}
+   */
   unhoverDirectMessage() {
     this.hover = false;
     if (!this.arrowStateMessage) {
@@ -211,38 +246,46 @@ export class MenuSidenavComponent implements OnInit {
       : 'assets/img/sidenav/account.png';
   }
 
+  /**
+   * Handles hover effects for the add channel button.
+   * Updates the 'addNewChannel' property based on the 'channelsVisible' state.
+   *
+   * @returns {void}
+   */
   hoverAddChannel() {
     this.addNewChannel = this.channelsVisible
       ? 'assets/img/sidenav/add_circle_blue.png'
       : 'assets/img/sidenav/add_circle_blue.png';
   }
 
+  /**
+   * Handles the removal of hover effects for the add channel button.
+   * Resets the 'addNewChannel' property to its default state based on 'channelsVisible'.
+   *
+   * @returns {void}
+   */
   unhoverAddChannel() {
     this.addNewChannel = this.channelsVisible
       ? 'assets/img/sidenav/add_circle.png'
       : 'assets/img/sidenav/add_circle.png';
   }
 
-  // onClickChannels() {
-  //   this.channelArrow = this.channelsVisible
-  //     ? 'assets/img/sidenav/arrow_down_blue.png'
-  //     : 'assets/img/sidenav/arrow_left_blue.png';
-  // }
-
-  // onClickDirectMessage() {
-  //   this.chatArrow = this.directMessageUserVisible
-  //     ? 'assets/img/sidenav/arrow_down.png'
-  //     : 'assets/img/sidenav/arrow_left.png';
-
-  //   this.chatLogo = this.directMessageUserVisible
-  //     ? 'assets/img/sidenav/account_blue.png'
-  //     : 'assets/img/sidenav/account.png';
-  // }
-
+  /**
+   * Opens a dialog to add a new channel.
+   * Utilizes the MatDialog service to open the 'DialogAddChannelComponent'.
+   *
+   * @returns {void}
+   */
   addChannel() {
     this.dialog.open(DialogAddChannelComponent);
   }
 
+  /**
+   * Deletes a tag from the view and Firestore database.
+   *
+   * @param {Tag} tag - The tag to be deleted.
+   * @returns {void}
+   */
   deleteTag(tag: Tag) {
     // Löschen des Tags aus der HTML-Ansicht
     this.getService.tags = this.getService.tags.filter((t) => t !== tag);
@@ -251,6 +294,12 @@ export class MenuSidenavComponent implements OnInit {
     // this.getService.deleteFromFirebase(tag);
   }
 
+  /**
+   * Opens a channel based on its ID, updating various service and UI-related variables.
+   *
+   * @param {number} arrayId - The ID of the channel in the array.
+   * @returns {Promise<void>}
+   */
   async openChannel(arrayId: number) {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
@@ -272,6 +321,11 @@ export class MenuSidenavComponent implements OnInit {
     await this.messageService.onChannelClick(channelId);
   }
 
+  /**
+   * Opens a new message window, updating UI-related variables.
+   *
+   * @returns {void}
+   */
   openNewMessage() {
     this.varService.setVar('mainChatHead', 2);
     this.dcshService.chatSlideOut();
