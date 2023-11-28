@@ -44,19 +44,39 @@ export class MainChatMessagefieldComponent {
   ) { }
 
 
+  /**
+ * Checks if the currently logged-in user matches the selected user to message.
+ *
+ * @returns {boolean} Returns `true` if the currently logged-in user matches the selected user to message, otherwise `false`.
+ *
+ */
   currentUser() {
     return (
       this.dataService.loggedInUserData.email ===
       this.dataService.userData[this.varService.selectedUserToMessage].email
     );
-
   }
 
+
+  /**
+ * Initiates the process of sending a chat message.
+ *
+ * @returns {void}
+ *
+ */
   send() {
     this.onChatTextChanged();
     this.messageSend();
   }
 
+
+  /**
+ * Updates the chatService's emptyChat property based on the current chat context.
+ *
+ * @method
+ * @returns {void}
+ *
+ */
   onChatTextChanged() {
     this.chatService.emptyChat = (
       this.varService.mainChatHead === 0 && this.specificChannel.trim() === ''
@@ -69,13 +89,14 @@ export class MainChatMessagefieldComponent {
       );
   }
 
+
+
   messageSend() {
     if (this.varService.mainChatHead == 0 && this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
       this.messageInputService.resetVariables();
       this.messageInputService.setMyVariable(true);
       this.messageInputService.sendButtonEnabled = false;
     }
-    // add by Bossi for directChatService
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
       if (this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
         this.newMessageAmountService.addPartnerDirectChatMessageAmount();
@@ -93,6 +114,14 @@ export class MainChatMessagefieldComponent {
     }
   }
 
+
+  /**
+ * Toggles the value of the 'sign' property in the varService.
+ *
+ * @method
+ * @returns {void}
+ *
+ */
   addSign() {
     this.varService.sign = !this.varService.sign;
   }

@@ -60,6 +60,14 @@ export class MainChatMessageHeadComponent {
   }
 
 
+  /**
+ * Handles the option action triggered by an event.
+ *
+ * @method
+ * @param {Event} event - The event triggering the option action.
+ * @returns {void}
+ *
+ */
   option(event) {
     this.directChatService.inhibitionOfDirectChat();
     this.messageToUserService.messageToUser(0);

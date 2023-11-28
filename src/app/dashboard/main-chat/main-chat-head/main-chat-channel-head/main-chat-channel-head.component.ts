@@ -27,14 +27,28 @@ export class MainChatChannelHeadComponent {
   }
 
 
+  /**
+ * Host listener method triggered on window resize.
+ *
+ * @method
+ * @param {Event} event - The resize event.
+ * @returns {void}
+ *
+ */
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.innerWidth = window.innerWidth;
     this.mobileView();
-    // console.log(this.innerWidth);
   }
 
   
+  /**
+ * Adjusts the visibility of the 'addMember' element based on the mobile view conditions.
+ *
+ * @function
+ * @returns {void}
+ *
+ */
   mobileView() {
     let addMember = document.getElementById('addMember');
     if (!this.thread.secondaryChatSlideOut && this.innerWidth <= 951) { addMember.style.display = 'none'}

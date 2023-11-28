@@ -41,19 +41,29 @@ export class ChannelMessagesService {
       content: ''
     },
   ];
-  
 
-  
+
+
   constructor(
     public dialog: MatDialog,
     private firestore: Firestore,
     public timelinesService: TimelinesService,
     private dcshService: DashboardComponentsShowHideService,
-    private dialogAddService: DialogAddService,    
+    private dialogAddService: DialogAddService,
   ) {
     this.allMessages();
   }
 
+
+  /**
+ * Fetches all messages from the Firestore database and sorts them based on the timestamp.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} A promise that fulfills when all messages are successfully loaded and sorted.
+ * @throws {Error} An error if loading or sorting the messages fails.
+ *
+ */
   async allMessages() {
     const coll = collection(this.firestore, 'newMessages');
     this.messages$ = collectionData(coll, { idField: 'id' });
@@ -61,13 +71,18 @@ export class ChannelMessagesService {
       this.messageData = message.sort(
         (a, b) => a.dateTimeNumber - b.dateTimeNumber
       );
-      // console.log(this.messageData);
     });
   }
 
 
+  /**
+ * Formats a date string in the format 'DD.MM.YYYY' to 'DD,MM.YYYY'.
+ *
+ * @param {string} dateString - The date string to be formatted.
+ * @returns {string} The formatted date string or the original string if the format is not 'DD.MM.YYYY'.
+ *
+ */
   formatDate(dateString) {
-    // Splitte die Zeichenfolge an "." (Punkt) und erhalte Jahr, Monat und Tag
     const dateParts = dateString.split('.');
     if (dateParts.length === 3) {
       const year = dateParts[2];
@@ -75,11 +90,18 @@ export class ChannelMessagesService {
       const day = dateParts[0];
       return `${day},${month}.${year}`;
     } else {
-      return dateString; // Rückgabe der Zeichenfolge, wenn das Format nicht erkannt wird
+      return dateString;
     }
   }
 
 
+  /**
+ * Opens the answer corresponding to the given index in the message data.
+ *
+ * @param {number} index - The index of the selected message in the message data array.
+ * @returns {void}
+ *
+ */
   openAnswer(index: number) {
     this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
@@ -87,33 +109,40 @@ export class ChannelMessagesService {
     this.dcshService.chatSlideIn();
   }
 
-  // nochmal abklären mit den anderen ?!?! #########################
-  //################################################
 
+  /**
+ * Edits the content of the user's own message identified by the given index.
+ *
+ * @param {number} index - The index of the selected message in the message data array.
+ * @returns {void}
+ *
+ */
   editOwnMessage(index: number) {
     this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
-    this.selectedMessageContent = this.messageData[index].content[0].content;   
-    this.dialog.open(DialogEditMessageComponent);    
+    this.selectedMessageContent = this.messageData[index].content[0].content;
+    this.dialog.open(DialogEditMessageComponent);
   }
 
+
+/**
+ * Edits the content of the user's own message identified by the given index.
+ *
+ * @param {number} index - The index of the selected message in the message data array.
+ * @returns {void}
+ *
+ */
   getActualMessageFromFirestore(messageEdit) {
     const messageId = this.selectedMessageId;
-    const messageIndex = this.messageData.findIndex(
-      (message) => message.id === messageId
-    );    
-    this.messageContentEdit[0].content = messageEdit;         
+    const messageIndex = this.messageData.findIndex((message) => message.id === messageId );
+    this.messageContentEdit[0].content = messageEdit;
     if (messageIndex !== -1) {
       const qData = doc(this.firestore, 'newMessages', messageId);
-      const newData = { 
-        content: this.messageContentEdit 
-      };
+      const newData = { content: this.messageContentEdit };
       try {
         updateDoc(qData, newData);
         console.log('Update erfolgreich!');
-        // Aktualisieren Sie den Textinhalt lokal in Ihrem Angular-Modell
-        this.messageData[messageIndex].content[0].content =
-          this.messageContentEdit;
+        this.messageData[messageIndex].content[0].content = this.messageContentEdit;
       } catch (e) {
         console.log('Update hat nicht funktioniert!!');
       }
@@ -121,38 +150,61 @@ export class ChannelMessagesService {
   }
 
 
+  /**
+ * Gets the status of the selected message.
+ *
+ * @returns {boolean} The status of the selected message. `true` if a message is selected, otherwise `false`.
+ *
+ */
   getSelectedMessageStatus() {
     return this.selectedMessage;
   }
 
+
+/**
+ * Retrieves channel message data from Firestore based on the current channel ID.
+ * If the channel is found in the `tagsData` array, it increases the channel message count
+ * and updates the corresponding Firestore document with the new message count.
+ *
+ * @function
+ * @returns {void}
+ *
+ */
   getChannelMessageFromFirestore() {
     const selectedChannelId = this.currentChannelId;
-    const selectedChannelData = this.dialogAddService.tagsData.find(
-      (tagsData) => tagsData.id === selectedChannelId
-    );
-    console.log(selectedChannelData);
+    const selectedChannelData = this.dialogAddService.tagsData.find( (tagsData) => tagsData.id === selectedChannelId );
     if (selectedChannelData) {
       this.increaseChannelMessageCount(selectedChannelData);
       const qData = doc(this.firestore, 'tags', selectedChannelId);
-      const newData = {
-        channelMessageAmount: selectedChannelData.channelMessageAmount,
-      };
+      const newData = { channelMessageAmount: selectedChannelData.channelMessageAmount};
       this.tryUpdateToFirebase(qData, newData);
-    } else {
-      console.error('Die ausgewählte Nachricht wurde im Array nicht gefunden.');
-    }
+    } 
+    else { console.error('Die ausgewählte Nachricht wurde im Array nicht gefunden.');}
     this.currentChannel = selectedChannelData;
-    console.log(this.currentChannel);
   }
 
-  // funktion zum hochzählen der messages
 
+  /**Increases the message count for the specified channel data.
+  *
+  * @function
+  * @param {object} selectedChannelData - The data of the channel for which to increase the message count.
+  * @returns {void}
+  *
+  */
   increaseChannelMessageCount(selectedChannelData) {
     selectedChannelData.channelMessageAmount += 1;
   }
 
-  // Firebase wird mit den daten geuptdated
 
+  /**
+ * Tries to update Firestore data using the provided document reference and new data.
+ *
+ * @function
+ * @param {object} qData - Reference to the Firestore document to be updated.
+ * @param {object} newData - The updated data to be applied to the Firestore document.
+ * @returns {void}
+ *
+ */
   tryUpdateToFirebase(qData, newData) {
     try {
       updateDoc(qData, newData);
@@ -162,11 +214,19 @@ export class ChannelMessagesService {
     }
   }
 
+
+  /**
+ * Updates the message emojis in Firestore for the message at the specified index.
+ *
+ * @function
+ * @param {number} index - The index of the message in the message data array.
+ * @returns {void}
+ *
+ */
   UpdateEmojiToFirebase(index: number) {
     const messageIdForEmoji = this.messageData[index].messageId;
     const qData = doc(this.firestore, 'newMessages', messageIdForEmoji);
     const newData = { messageEmojis: this.messageData[index].messageEmojis };
-
     try {
       updateDoc(qData, newData);
       console.log('Message Emoji wurde korrekt hinzugefügt');
