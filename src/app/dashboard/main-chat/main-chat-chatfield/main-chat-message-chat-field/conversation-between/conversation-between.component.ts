@@ -31,6 +31,12 @@ export class ConversationBetweenComponent {
     private dialog: Dialog
   ) {}
 
+  /**
+   * Opens the profile view based on the current user's status and sets selected user details.
+   * If the current user exists, it opens a HeaderDialogComponent; otherwise, opens DialogProfileViewUsersComponent.
+   *
+   * @returns {void}
+   */
   profilView() {
     this.varService.setVar(
       'selectedUserDetailView',

@@ -65,7 +65,7 @@
           <div *ngFor="let tag of tags; let i = index">
             <div class="channels-line" *ngIf="authorizationShowChannel(i)">
               <div class="channels-line">
-                <div class="channel-name" (click)="openChannel(i)">
+                <div class="channel-name" (click)="openChannel(i)" [ngClass]="{'channelFocus': i === selectedChannelIndex}">
                   <span class="pointer"
                     ><span class="hashtag">{{ tag.name[0] }}</span
                     ><span class="afterHashtag">

@@ -68,6 +68,7 @@ export class MenuSidenavComponent implements OnInit {
   hover: boolean = false;
   directMessageUserVisible: boolean = true;
   innerWidth: number = window.innerWidth;
+  selectedChannelIndex: number = -1;
 
   constructor(
     public dialog: MatDialog,
@@ -302,6 +303,7 @@ export class MenuSidenavComponent implements OnInit {
     this.varService.setVar('mainChatHead', 0);
     this.varService.setVar('selectedChannel', arrayId);
     this.getService.channelIndex = arrayId;
+    this.selectedChannelIndex = arrayId;
     this.dcshService.chatSlideOut();
     const selectedChannel = this.tags[arrayId];
     this.messageInputService.chatChange = true;

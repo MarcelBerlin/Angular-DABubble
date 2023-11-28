@@ -2,14 +2,10 @@
   position: relative;
 
   .sidenavHeaderContainer {
-    // position: absolute;
-    // top: 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    // padding-left: 32px;
-    // padding-right: 32px;
     margin-top: 16px;
 
     .code-learning {
@@ -30,6 +26,8 @@
     }
   }
 
+  
+
   .channelAndMessage {
     position: absolute;
     top: 92px;
@@ -43,6 +41,7 @@
       min-height: 50px;
       overflow-y: scroll;
 
+    
       .channels-headline {
         position: sticky;
         top: 0;
@@ -54,8 +53,17 @@
         height: 46px;
         margin-bottom: 16px;
         background-color: white;
-        z-index: 1;
+        z-index: 1;       
       }
+
+      .channelFocus {        
+        border-radius: 20px;
+        background-color: #eceefe;       
+        height: 38px;  
+        padding-left: 32px; 
+        padding-right: 32px;
+        margin-left: -32px;     
+      } 
 
       .channels-content {
         display: flex;
