@@ -16,8 +16,15 @@ export class DialogEditMessageComponent {
   constructor(
     private channelMessageService: ChannelMessagesService,
     private dialogRef: DialogRef
-  ) {}
+  ) { }
 
+
+  /**
+ * Initiates the process of editing a channel message.
+ *
+ * @method
+ * @returns {void}
+ */
   editMessage() {
     this.channelMessageService.getActualMessageFromFirestore(this.messageEdit);
     setTimeout(() => {

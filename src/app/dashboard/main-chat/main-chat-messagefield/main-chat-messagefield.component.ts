@@ -90,7 +90,13 @@ export class MainChatMessagefieldComponent {
   }
 
 
-
+/**
+ * Sends a chat message based on the current chat context and input conditions.
+ *
+ * @method
+ * @returns {void}
+ *
+ */
   messageSend() {
     if (this.varService.mainChatHead == 0 && this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
       this.messageInputService.resetVariables();
@@ -113,6 +119,7 @@ export class MainChatMessagefieldComponent {
       }
     }
   }
+
 
 
   /**
@@ -140,4 +147,3 @@ export class MainChatMessagefieldComponent {
     this.fileInput.nativeElement.click();
   }
 }
-

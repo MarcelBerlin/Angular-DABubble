@@ -14,8 +14,6 @@ import { MessageService } from 'src/app/services/messages.service';
 
 export class DialogUserReactionsComponent {
 
-  // dialogEmoji: any[];
-
   constructor(public getUser: DataService,
     public messages: MessageService,
     public app: AppComponent,

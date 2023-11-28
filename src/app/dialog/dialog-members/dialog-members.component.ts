@@ -28,10 +28,16 @@ export class DialogMembersComponent {
     this.showMembers();
   }
 
+
+  /**
+ * Populates the 'members' array with details of users in the selected channel.
+ *
+ * @method
+ * @returns {void}
+ */
   showMembers() {
     const userDatas = this.dataService.userData;
-    const members =
-      this.tagService.tagsData[this.varService.selectedChannel].members;
+    const members = this.tagService.tagsData[this.varService.selectedChannel].members;
     members.forEach((element) => {
       userDatas.forEach((item, index) => {
         if (item.email === element) {

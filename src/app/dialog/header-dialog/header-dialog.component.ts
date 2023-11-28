@@ -24,18 +24,10 @@ export class HeaderDialogComponent {
     private auth: AuthService,
     public getUserData: DataService
   ) {
-    // setTimeout(() => {
-    //   this.loggedUserImg = getUserData.loggedInUserData.img;
-    //   this.loggedUserName = getUserData.loggedInUserData.name;
-    //   this.loggedUserMail = getUserData.loggedInUserData.email;
-    //   this.loggedUserStatus = getUserData.loggedInUserData.online;
-    // }, 1000);
   }
 
   editingProfile() {
     const dialogRef = this.dialog.open(HeaderEditDialogComponent);
     dialogRef.afterClosed();
   }
-
-  // edit by Bossi to upload profile image
 }

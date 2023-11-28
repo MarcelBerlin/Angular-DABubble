@@ -46,12 +46,6 @@ export class SecondaryChatInputfieldComponent {
     public messageService: MessageService,
     public chatService: ChatService,
     public answerService: SecondaryChatAnswerService,
-
-    // public varService: VariablesService,
-    // public dataService: DataService,
-    // public dialogAddService: DialogAddService,
-    // public messageService: MessageService,
-    // public chatService: ChatService,
     public directChatService: DirectChatService,
     public emojiService: EmojiPickerBossiService,
     public addUserToMessageService: AddUserToMessageService,
@@ -60,7 +54,7 @@ export class SecondaryChatInputfieldComponent {
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
     private messageInputService: MessageInputThreadService
-  ) {}
+  ) { }
 
   /**
    * Toggles the visibility of the user autocomplete feature.
@@ -176,16 +170,19 @@ export class SecondaryChatInputfieldComponent {
    * @returns {void}
    */
   send() {
-    // this.messageSend();
     this.messageInputService.resetVariables();
     this.messageInputService.setMyVariable(true);
   }
 
+
+  /**
+ * Sends a chat message based on the current chat context and input conditions.
+ *
+ * @method
+ * @returns {void}
+ * 
+ */
   messageSend() {
-    // if (this.varService.mainChatHead == 0 && this.messageService.messageText.length >= 1) {
-    //   this.messageService.addMessage();
-    //   this.messageService.messageText = '';
-    // }
     if (
       this.varService.mainChatHead == 0 &&
       this.messageInputService.sendButtonEnabled &&
@@ -195,8 +192,6 @@ export class SecondaryChatInputfieldComponent {
       this.messageInputService.setMyVariable(true);
       this.messageInputService.sendButtonEnabled = false;
     }
-
-    // add by Bossi for directChatService
     if (
       this.varService.mainChatHead === 1 &&
       this.directChatService.directChatActive &&

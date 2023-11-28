@@ -64,7 +64,6 @@ export class MenuSidenavComponent implements OnInit {
   arrowStateMessage: boolean = true;
   channelID: string = '';
   selChannelMessageAmount: number;
-
   channelsVisible: boolean = true;
   hover: boolean = false;
   directMessageUserVisible: boolean = true;
@@ -139,7 +138,6 @@ export class MenuSidenavComponent implements OnInit {
     this.channelArrow = this.channelsVisible
       ? 'assets/img/sidenav/arrow_down.png'
       : 'assets/img/sidenav/arrow_left.png';
-    console.log(this.channelsVisible);
     this.arrowStateChannel = !this.arrowStateChannel;
   }
 

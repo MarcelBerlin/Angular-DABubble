@@ -22,18 +22,41 @@ export class AddAvatarComponent {
   constructor(
     private dialogRef: DialogRef, 
     public addAS: AddAvatarService,
-    public uploadService: UploadService,
-    ) {}
+    public uploadService: UploadService) {
 
+  }
+
+
+  /**
+ * Handles navigating back or canceling an operation.
+ *
+ * @method
+ * @returns {void}
+ */
   back() {
     this.dialogRef.close();
   }
 
+
+  /**
+ * Handles the selection of an avatar.
+ *
+ * @method
+ * @param {number} index - The index of the selected avatar.
+ * @returns {void}
+ */
   avatarSelected(index: number) {
     this.selectedAvatar = index;
     this.addAS.pickedAvatar = this.avatars[this.selectedAvatar].img;
   }
 
+
+  /**
+ * Handles the signup process.
+ *
+ * @method
+ * @returns {void}
+ */
   signup() {
     this.addAS.imgSelectedOK = true;
     this.dialogRef.close();

@@ -16,16 +16,10 @@ import { DialogRef } from '@angular/cdk/dialog';
 })
 export class HeaderEditDialogComponent {
   @ViewChild('menuTrigger') menuTrigger: MatMenuTrigger;
-  // emailFormControl = new FormControl('', [
-  //   Validators.required,
-  //   Validators.email,
-  // ]);
   matcher = new ErrorStateMatcher();
-
   loggedUserName: string = '';
   loggedUserImg: string = '';
   loggedUserMail: string = '';
-
   newInputName: string = '';
   newInputMail: string = '';
   buttonDis: boolean = false;
@@ -48,7 +42,6 @@ export class HeaderEditDialogComponent {
 
   constructor(
     public dialog: MatDialog,
-    // private auth: AuthService,
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
     public getUserData: DataService,
@@ -56,8 +49,12 @@ export class HeaderEditDialogComponent {
   ) {
   }
 
-
-
+  /**
+ * Saves changes to the user profile if the edit form is valid.
+ *
+ * @method
+ * @returns {void}
+ */
   saveUserChanges() {
     if (this.editForm.valid) {
       this.getUserData.loggedInUserData.name = this.editForm.value.name;
