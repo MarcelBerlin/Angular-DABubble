@@ -38,6 +38,7 @@ export class EmojiPickerBossiService {
     } else this.emojiSelectorActive = false;
   }
 
+  
   toggleEmojiSelectorThread(): void {
     console.log('thread');
     if (this.varService.mainChatHead == 0 ||this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2) {

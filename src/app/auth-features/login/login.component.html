@@ -4,12 +4,10 @@
     <app-login-header
       *ngIf="authService.selectedImprintOrDataProtection === 'logIn'"
     ></app-login-header>
-    <!-- für imprintDataProtection geändert Basti -->
     <div
       class="card"
       *ngIf="authService.selectedImprintOrDataProtection === 'logIn'"
     >
-      <!-- für imprintDataProtection geändert Basti -->
       <form [formGroup]="loginForm" (submit)="loginWithEmailAndPassword()">
         <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
         <mat-card>
@@ -111,7 +109,6 @@
         </mat-card>
       </form>
 
-      <!-- für imprintDataProtection geändert Basti && window.innerWidth <= 800 Changed by Felix -->
       <div class="imprintDataProtection">
         <span (click)="openImprintDataProtection('imprint')">Impressum</span>
         <span (click)="openImprintDataProtection('dataProtection')">Datenschutz</span>

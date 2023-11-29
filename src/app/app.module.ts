@@ -28,8 +28,6 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatDialogActions } from '@angular/material/dialog';
-import { MatDialogContent } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
