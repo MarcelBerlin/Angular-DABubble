@@ -45,8 +45,7 @@
                     </div>
                     <div *ngIf="createAccountForm.controls['password'].dirty && createAccountForm.controls['password'].touched"
                         class="warnContainer">
-                        <span *ngIf="createAccountForm.controls['password'].errors">Falsches Passwort, bitte nocheinmal
-                            versuchen.</span>
+                        <span *ngIf="createAccountForm.controls['password'].errors">*Das Passwort muss mindestens aus 8 Zeichen bestehen.</span>
                     </div>
                 </div>
                 <div class="btnAction">

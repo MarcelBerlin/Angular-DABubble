@@ -19,9 +19,10 @@ export class CreateAccountComponent {
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     email: new FormControl('', [
       Validators.required,
-      Validators.email,
+      // Validators.email,
       Validators.pattern(
-        '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}.?[a-zA-Z]{0,2}'
+        // '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}.?[a-zA-Z]{0,2}'
+        '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\.[a-zA-Z]{2,}$'
       ),
     ]),
     password: new FormControl('', [
