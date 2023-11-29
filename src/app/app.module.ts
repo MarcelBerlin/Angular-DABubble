@@ -71,7 +71,7 @@ import { ResponsivViewSearchbarComponent } from './responsiv-view-searchbar/resp
 import { MessageInputThreadComponent } from './message-input-thread/message-input-thread.component';
 import { DialogEditMessageComponent } from './dialog/dialog-edit-message/dialog-edit-message.component';
 
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -140,7 +140,7 @@ import { DialogEditMessageComponent } from './dialog/dialog-edit-message/dialog-
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase}],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase}, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
