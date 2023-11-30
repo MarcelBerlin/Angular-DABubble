@@ -105,8 +105,10 @@ export class ChannelMessagesService {
   openAnswer(index: number) {
     this.selectedMessageIndex = index;
     this.selectedMessageId = this.messageData[index].messageId;
+    this.selectedMessageContent = this.messageData[index].content;
     this.selectedMessage = true;
     this.dcshService.chatSlideIn();
+    console.log(this.selectedMessageContent);
   }
 
 
