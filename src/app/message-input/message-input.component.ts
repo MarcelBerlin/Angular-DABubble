@@ -280,7 +280,10 @@ export class MessageInputComponent {
     const children = editableDiv.childNodes;
     for (let i = 0; i < children.length; i++) {
       const child = children[i];
-      this.fillContentArray(child, i);
+      if(child.innerHTML != '<br>'){
+        console.log(child);
+        this.fillContentArray(child, i);
+      }
     }
     this.inputService.addTagInfoLinkInfo();
     return this.inputService.contentArray;
