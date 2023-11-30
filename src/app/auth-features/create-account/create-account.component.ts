@@ -15,6 +15,7 @@ export class CreateAccountComponent {
   loading: boolean = false;
   passwordView: boolean = false;
   inputType: string = 'password';
+  checkbox: boolean = false;
   createAccountForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     email: new FormControl('', [
@@ -29,12 +30,14 @@ export class CreateAccountComponent {
       Validators.required,
       Validators.minLength(8),
     ]),
+    checkbox: new FormControl(false, [Validators.required]),
+    
   });
 
 
   constructor(
     private router: Router,
-    private auth: AuthService,
+    public auth: AuthService,
     private dataService: DataService,
     private dialog: Dialog,
     public addAS: AddAvatarService
@@ -93,5 +96,16 @@ export class CreateAccountComponent {
     this.passwordView = !this.passwordView;
     if (this.passwordView == true) this.inputType = 'text';
     else this.inputType = 'password';
+  }
+
+
+  /**
+   * Sets the selected imprint or data protection element.
+   *
+   * @param {string} element - The element to be selected (imprint or data protection).
+   * @returns {void} - Any return value description, if applicable.
+   */
+  openDataProtection(): void {
+    this.auth.selectedImprintOrDataProtection = 'dataProtection';
   }
 }

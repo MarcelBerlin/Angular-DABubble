@@ -57,7 +57,7 @@
                     margin-top: 40px;
                     margin-bottom: 40px;
                     padding: 0px 52px;
-                    font-family: 'Nunito Sans';
+                    font-family: 'Nunito';
                     text-align: center;
                     font-weight: 700;
                     font-size: 46px;
@@ -67,7 +67,7 @@
 
                 mat-card-subtitle {
                     padding: 0px 52px;
-                    font-family: 'Nunito Sans';
+                    font-family: 'Nunito';
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 24px;
@@ -144,21 +144,62 @@
 
     display: flex;
     justify-content: space-between;
-    img{
+
+    img {
         width: 50px;
         height: 50px;
         border-radius: 50%;
     }
 }
 
+
+.removeStandardStyling{
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    outline: none; 
+    border: 2px solid #8A8EF5 !important;
+    padding: 0px !important;
+}
+
+
+.imprintAcceptContainer {
+    width: 100%;
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: calc(100% - 160.2px);
+
+        input[type=checkbox] {
+            width: 18px !important;
+            height: 18px;
+        }
+
+        span {
+            font-family: Open Sans;
+            font-weight: 400;
+            font-size: 16px !important;
+            color: #42526E !important;
+
+            span {
+                color: #8A8EF5 !important;
+                cursor: pointer;
+            }
+        }
+    }
+
+}
+
 *::-webkit-scrollbar {
     display: none;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 0;
-  }
-  
+}
+
 
 @media screen and (max-width: 769px) {
     .card {
@@ -217,4 +258,43 @@
             padding: 0 !important;
         }
     }
+
+    .imprintAcceptContainer {
+        width: 100%;
+        margin-bottom: 5px;
+        margin-top: - 20px;
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .imprintAcceptContainer {
+        width: 100%;
+
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+
+            input {
+                width: 18px !important;
+                height: 18px;
+            }
+
+            span {
+                font-family: Open Sans;
+                font-weight: 400;
+                font-size: 12px !important;
+            }
+        }
+    }
+
 }

@@ -1,7 +1,7 @@
 <div class="createAccountContainer">
     <app-start-animation></app-start-animation>
     <app-login-header></app-login-header>
-    <div class="card">
+    <div class="card" *ngIf="auth.selectedImprintOrDataProtection == 'logIn'">
         <form [formGroup]="createAccountForm" (submit)="createNewAccount()">
             <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
             <mat-card>
@@ -48,13 +48,21 @@
                         <span *ngIf="createAccountForm.controls['password'].errors">*Das Passwort muss mindestens aus 8 Zeichen bestehen.</span>
                     </div>
                 </div>
+                <div class="imprintAcceptContainer">
+                    <div>
+                        <input type="checkbox" formControlName="checkbox" [class.removeStandardStyling]="!createAccountForm.value.checkbox"><span>Ich stimme der <span (click)="openDataProtection()">Datenschutserklärung</span> zu.</span>
+                    </div>
+                </div>
                 <div class="btnAction">
                     <img src="{{addAS.pickedAvatar}}">
-                    <button class="primaryButton" type="submit" [disabled]="!createAccountForm.valid || loading">
+                    <button class="primaryButton" type="submit" [disabled]="!createAccountForm.valid || loading || !createAccountForm.value.checkbox">
                         Weiter
                     </button>
                 </div>
             </mat-card>
         </form>
     </div>
+    <app-imprint-data-protection
+      *ngIf="auth.selectedImprintOrDataProtection !== 'logIn'"
+    ></app-imprint-data-protection>
 </div>
