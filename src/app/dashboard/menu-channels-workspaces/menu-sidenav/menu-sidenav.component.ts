@@ -117,13 +117,11 @@ export class MenuSidenavComponent implements OnInit {
    *
    * @returns {void}
    */
-  allTags() {
+  allTags():void {
     const tagCollection = collection(this.firestore, 'tags');
     this.tags$ = collectionData(tagCollection, { idField: 'id' });
-
     this.tags$.subscribe((data) => {
       this.tags = data;
-      console.log(this.tags); // bitte lassen. Basti
     });
   }
 
@@ -134,7 +132,7 @@ export class MenuSidenavComponent implements OnInit {
    *
    * @returns {void}
    */
-  toggleChannels() {
+  toggleChannels():void {
     this.channelsVisible = !this.channelsVisible;
     this.channelArrow = this.channelsVisible
       ? 'assets/img/sidenav/arrow_down.png'

@@ -41,7 +41,9 @@ export class MainChatMessagefieldComponent {
     public uploadService: UploadService,
     private messageInputService: MessageInputServiceService
 
-  ) { }
+  ) {
+    this.detectEnterButton();
+   }
 
 
   /**
@@ -64,7 +66,7 @@ export class MainChatMessagefieldComponent {
  * @returns {void}
  *
  */
-  send() {
+  send(): void {
     this.onChatTextChanged();
     this.messageSend();
   }
@@ -97,27 +99,35 @@ export class MainChatMessagefieldComponent {
  * @returns {void}
  *
  */
-  messageSend() {
+  messageSend(): void {
     if (this.varService.mainChatHead == 0 && this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
-      this.messageInputService.resetVariables();
-      this.messageInputService.setMyVariable(true);
-      this.messageInputService.sendButtonEnabled = false;
-    }
+      this.triggerMessageSave();
+    }else this.messageInputService.setMyVariable(true);
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && !this.currentUser()) {
       if (this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
         this.newMessageAmountService.addPartnerDirectChatMessageAmount();
-        this.messageInputService.resetVariables();
-        this.messageInputService.setMyVariable(true);
-        this.messageInputService.sendButtonEnabled = false;
-      }
+        this.triggerMessageSave();
+      } else this.messageInputService.setMyVariable(true);
     }
     if (this.varService.mainChatHead === 1 && this.directChatService.directChatActive && this.currentUser()) {
       if (this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
-        this.messageInputService.resetVariables();
-        this.messageInputService.setMyVariable(true);
-        this.messageInputService.sendButtonEnabled = false;
-      }
+        this.triggerMessageSave();
+      } else this.messageInputService.setMyVariable(true);
     }
+  }
+
+
+  /**
+   * Triggers the process to save a message by resetting variables,
+   * setting specific variables, and disabling the send button.
+   * It's designed to initiate the message saving process.
+   * 
+   * @returns {void}
+   */
+  triggerMessageSave(): void {
+    this.messageInputService.resetVariables();
+    this.messageInputService.setMyVariable(true);
+    this.messageInputService.sendButtonEnabled = false;
   }
 
 
@@ -125,11 +135,10 @@ export class MainChatMessagefieldComponent {
   /**
  * Toggles the value of the 'sign' property in the varService.
  *
- * @method
  * @returns {void}
  *
  */
-  addSign() {
+  addSign():void {
     this.varService.sign = !this.varService.sign;
   }
 
@@ -145,5 +154,21 @@ export class MainChatMessagefieldComponent {
     this.fileUploadService.profileImgUpload = false;
     this.fileUploadService.basePath = '/uploads/' + this.dataService.loggedInUserData.userId + '/files/' + today.getTime().toString();
     this.fileInput.nativeElement.click();
+  }
+
+
+  /**
+   * Listens for the 'keyup' event on the window and triggers the 'send' method
+   * if the Enter key is pressed and the send button is enabled.
+   * 
+   * @returns {void}
+   */
+  detectEnterButton(): void {
+    window.addEventListener('keyup', (e) => {
+      if (e.keyCode == 13 && !this.messageInputService.placeholerView) {
+        this.messageInputService.enterButtonPressed = true;
+        this.send();
+      }
+  })
   }
 }

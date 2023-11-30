@@ -6,6 +6,7 @@ import { DataService } from '../services/data.service';
 import { FileUploadService } from '../file-upload/services/file-upload.service';
 import { DirectChatService } from '../direct-chat/services/direct-chat.service';
 import { MessageService } from '../services/messages.service';
+
 @Component({
   selector: 'app-message-input',
   templateUrl: './message-input.component.html',
@@ -117,12 +118,14 @@ export class MessageInputComponent {
   startApplicableButtonAction(): void {
     if (this.inputService.emojiSelected()) this.addHTMLTags();
     if (this.inputService.fileUploadSelected()) this.addHTMLTags();
-    if (this.inputService.sendButtonPressed()){
+    if (this.inputService.sendButtonPressed()) {
       this.saveMessage();
-    }  
-    if (this.inputService.newChatSelected()){
+    } else if (!this.inputService.sendButtonEnabled && this.inputService.enterButtonPressed) {
+      this.editableDiv.nativeElement.blur();
+    }
+    if (this.inputService.newChatSelected()) {
       this.resetInputField();
-    } 
+    }
   }
 
 
@@ -341,29 +344,71 @@ export class MessageInputComponent {
     sel.removeAllRanges();
     sel.addRange(range);
     el.focus();
-    const doubleClickEvent = new MouseEvent('click', {bubbles: true, cancelable: true,view: window});
+    const doubleClickEvent = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
     el.dispatchEvent(doubleClickEvent);
   }
 
 
-
   /**
-   * Saves the message content, clears the input field, and restores the placeholder.
+   * Saves the message content, clears the input field, and restores the empty input field
    *
    * @returns {void}
    */
   saveMessage(): void {
-    if(this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2){
+    if (this.varService.mainChatHead == 1 || this.varService.mainChatHead == 2) {
       this.directChatService.saveMessage(this.saveHTMLTagsAndText());
       this.inputService.contentArray = [];
       document.getElementById('inputDiv').innerHTML = '';
-      setTimeout(() => { this.restorePlaceholder(); }, 500);
-    } else if(this.varService.mainChatHead == 0){
+      this.restoreEmptyInput();
+    } else if (this.varService.mainChatHead == 0) {
       this.messageService.newMessage.content = this.saveHTMLTagsAndText();
       document.getElementById('inputDiv').innerHTML = '';
       this.messageService.addMessage();
-      setTimeout(() => { this.restorePlaceholder(); }, 500);
+      this.restoreEmptyInput();
     }
+  }
+
+  /**
+   * Restores the input field based on certain conditions after a delay.
+   * If the enter button was not pressed, it restores the placeholder.
+   * If the enter button was pressed, resets the flag, blurs the input field,
+   * and simulates a click on the input after a delay.
+   * 
+   * @returns {void}
+   */
+  restoreEmptyInput(): void {
+    setTimeout(() => {
+      if (!this.inputService.enterButtonPressed) this.restorePlaceholder();
+      else {
+        this.inputService.enterButtonPressed = false;
+        this.editableDiv.nativeElement.blur();
+        setTimeout(() => {
+        this.simulateClickOnInput();
+        }, 100);
+      }
+    }, 500);
+  }
+
+
+  /**
+   * Simulates a click event on the input element.
+   * It sets the selection range, focuses on the input, and dispatches a click event.
+   * Additionally, it disables the send button in the input service.
+   * 
+   * @returns {void}
+   */
+  simulateClickOnInput():void {
+    const el = document.getElementById('inputDiv');
+    const doubleClickEvent = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.setStart(el.firstChild, 1);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    el.focus();
+    el.dispatchEvent(doubleClickEvent);
+    this.inputService.sendButtonEnabled = false;
   }
 
 

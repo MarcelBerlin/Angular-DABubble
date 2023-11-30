@@ -25,6 +25,7 @@ export class MessageInputServiceService {
 
   sendButtonEnabled: boolean = false;
   placeholerView: boolean = false;
+  enterButtonPressed: boolean = false;
 
 
   constructor() { }
@@ -102,7 +103,6 @@ export class MessageInputServiceService {
    * @returns {void}
    */
   openInNewTab(href: string): void {
-    console.log('openInNewTab', href);
     window.open(href, '_blank');
   }
 
@@ -267,6 +267,13 @@ export class MessageInputServiceService {
   }
 
 
+  /**
+   * Enables or disables the send button based on the text length within the input element.
+   * It retrieves the text length, trims leading and trailing spaces, and updates the sendButtonEnabled flag.
+   * If the text length is 0, the send button is disabled. If the length is greater than or equal to 1, it's enabled.
+   * 
+   * @returns {void}
+   */
   enableSendButton(): void {
     let textLenght = document.getElementById('inputDiv').textContent.trim().length;
     if (textLenght == 0){
