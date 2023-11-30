@@ -96,7 +96,7 @@ export class MenuSidenavComponent implements OnInit {
    * @returns {void}
    */
   ngOnInit(): void {
-    this.allTags();
+    this.allTags();    
     // this.getService.deleteFromFirebase('') // bitte lassen. Basti
   }
 
@@ -316,7 +316,7 @@ export class MenuSidenavComponent implements OnInit {
     if (innerWidth <= 800) {
       this.dcshService.hideNavigation = true;
     }
-    await this.messageService.onChannelClick(channelId);
+    await this.messageService.onChannelClick(channelId);       
   }
 
   /**
