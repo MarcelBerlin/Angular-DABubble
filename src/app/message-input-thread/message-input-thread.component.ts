@@ -114,7 +114,11 @@ export class MessageInputThreadComponent {
   startApplicableButtonAction(): void {
     if (this.inputService.emojiSelected()) this.addHTMLTags();
     if (this.inputService.fileUploadSelected()) this.addHTMLTags();
-    if (this.inputService.sendButtonPressed()) this.saveMessage();
+    if (this.inputService.sendButtonPressed()){
+      this.saveMessage();
+    }else if (!this.inputService.sendButtonEnabled && this.inputService.enterButtonPressed) {
+      this.editableDivThread.nativeElement.blur();
+    }
     if (this.inputService.newChatSelected()) this.resetInputField();
   }
 
@@ -345,11 +349,57 @@ export class MessageInputThreadComponent {
    * @returns {void}
    */
   saveMessage(): void {
+    this.inputService.sendButtonEnabled = false;
     this.answerService.newAnswer.content = this.saveHTMLTagsAndText();
     this.inputService.contentArray = [];
     document.getElementById('inputDivThread').innerHTML = '';
     this.answerService.sendAnswer();
-    setTimeout(() => { this.restorePlaceholder(); }, 500);
+    this.restoreEmptyInput();
+  }
+
+
+  /**
+   * Restores the input field based on certain conditions after a delay.
+   * If the enter button was not pressed, it restores the placeholder.
+   * If the enter button was pressed, resets the flag, blurs the input field,
+   * and simulates a click on the input after a delay.
+   * 
+   * @returns {void}
+   */
+  restoreEmptyInput(): void {
+    console.log('restoring input');
+    setTimeout(() => {
+      if (!this.inputService.enterButtonPressed) this.restorePlaceholder();
+      else {
+        this.inputService.enterButtonPressed = false;
+        this.editableDivThread.nativeElement.blur();
+        setTimeout(() => {
+        this.simulateClickOnInput();
+        }, 100);
+      }
+    }, 500);
+  }
+
+
+  /**
+   * Simulates a click event on the input element.
+   * It sets the selection range, focuses on the input, and dispatches a click event.
+   * Additionally, it disables the send button in the input service.
+   * 
+   * @returns {void}
+   */
+  simulateClickOnInput():void {
+    const el = document.getElementById('inputDivThread');
+    const doubleClickEvent = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.setStart(el.firstChild, 1);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    el.focus();
+    el.dispatchEvent(doubleClickEvent);
+    this.inputService.sendButtonEnabled = false;
   }
 
 

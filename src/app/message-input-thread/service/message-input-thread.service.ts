@@ -26,6 +26,7 @@ export class MessageInputThreadService {
 
   sendButtonEnabled: boolean = false;
   placeholerView: boolean = false;
+  enterButtonPressed: boolean = false;
 
 
   constructor() { }
@@ -268,8 +269,15 @@ export class MessageInputThreadService {
   }
 
 
+  /**
+   * Updates the state of the send button based on the text length within the 'inputDivThread' element.
+   * Retrieves the text length, trims leading and trailing spaces, and updates the sendButtonEnabled flag.
+   * If the text length is 0, the send button is disabled. If the length is greater than or equal to 1, it's enabled.
+   * 
+   * @returns {void}
+   */
   enableSendButton(): void {
-    let textLenght = document.getElementById('inputDiv').textContent.trim().length;
+    let textLenght = document.getElementById('inputDivThread').textContent.trim().length;
     if (textLenght == 0){
       this.sendButtonEnabled = false;
     } else  if (textLenght >= 1){

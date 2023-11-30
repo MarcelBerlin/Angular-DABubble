@@ -54,7 +54,9 @@ export class SecondaryChatInputfieldComponent {
     public fileUploadService: FileUploadService,
     public uploadService: UploadService,
     private messageInputService: MessageInputThreadService
-  ) { }
+  ) {
+    this.detectEnterButton();
+  }
 
   /**
    * Toggles the visibility of the user autocomplete feature.
@@ -169,9 +171,15 @@ export class SecondaryChatInputfieldComponent {
    * @function send
    * @returns {void}
    */
-  send() {
-    this.messageInputService.resetVariables();
-    this.messageInputService.setMyVariable(true);
+  send(): void {
+    console.log(this.messageInputService.sendButtonEnabled);
+    if (this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
+      this.messageInputService.resetVariables();
+      this.messageInputService.setMyVariable(true);
+      this.messageInputService.sendButtonEnabled = false;
+    } else {
+      this.messageInputService.setMyVariable(true);
+    }
   }
 
 
@@ -249,5 +257,20 @@ export class SecondaryChatInputfieldComponent {
       '/files/' +
       today.getTime().toString();
     this.fileInputThread.nativeElement.click();
+  }
+
+  /**
+   * Listens for the 'keyup' event on the window and triggers the 'send' method
+   * if the Enter key is pressed and the send button is enabled.
+   * 
+   * @returns {void}
+   */
+  detectEnterButton(): void {
+    window.addEventListener('keyup', (e) => {
+      if (e.keyCode == 13 && !this.messageInputService.placeholerView) {
+        this.messageInputService.enterButtonPressed = true;
+        this.send();
+      }
+    })
   }
 }
