@@ -252,7 +252,7 @@
       transition: all 125ms ease-in-out;
 
       &:hover {
-        // cursor: pointer;
+        cursor: pointer;
         background-color: #eceefe;
         transition: all 125ms ease-in-out;
       }
@@ -366,7 +366,7 @@
       .message-content-right {
         display: flex;
         background-color: #797ef3;
-        color: white;
+        // color: white;
         justify-content: center;
         align-items: center;
         width: fit-content;

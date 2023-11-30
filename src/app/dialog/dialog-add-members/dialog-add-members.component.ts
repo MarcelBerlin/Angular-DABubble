@@ -117,6 +117,7 @@ export class DialogAddMembersComponent {
    * @returns {string} The email address of the selected user.
    */
   resultSelectedEmail(index: number) {
-    return this.dataService.userData[index].email;
+    // return this.dataService.userData[index].email;
+    return this.dataService.userData[index].logInEmail;
   }
 }
