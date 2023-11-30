@@ -208,7 +208,7 @@ export class ChannelMessagesService {
   tryUpdateToFirebase(qData, newData) {
     try {
       updateDoc(qData, newData);
-      console.log('Message gesendet und channelMessageAmount aktualisiert.');
+      // console.log('Message gesendet und channelMessageAmount aktualisiert.');
     } catch (error) {
       console.error('Fehler beim Aktualisieren der Firestore-Daten:', error);
     }

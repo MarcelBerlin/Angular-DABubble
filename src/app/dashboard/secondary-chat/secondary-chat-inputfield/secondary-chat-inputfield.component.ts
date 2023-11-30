@@ -172,7 +172,6 @@ export class SecondaryChatInputfieldComponent {
    * @returns {void}
    */
   send(): void {
-    console.log(this.messageInputService.sendButtonEnabled);
     if (this.messageInputService.sendButtonEnabled && !this.messageInputService.placeholerView) {
       this.messageInputService.resetVariables();
       this.messageInputService.setMyVariable(true);
@@ -184,60 +183,12 @@ export class SecondaryChatInputfieldComponent {
 
 
   /**
- * Sends a chat message based on the current chat context and input conditions.
- *
- * @method
- * @returns {void}
- * 
- */
-  messageSend() {
-    if (
-      this.varService.mainChatHead == 0 &&
-      this.messageInputService.sendButtonEnabled &&
-      !this.messageInputService.placeholerView
-    ) {
-      this.messageInputService.resetVariables();
-      this.messageInputService.setMyVariable(true);
-      this.messageInputService.sendButtonEnabled = false;
-    }
-    if (
-      this.varService.mainChatHead === 1 &&
-      this.directChatService.directChatActive &&
-      !this.currentUser()
-    ) {
-      if (
-        this.messageInputService.sendButtonEnabled &&
-        !this.messageInputService.placeholerView
-      ) {
-        this.messageInputService.resetVariables();
-        this.messageInputService.setMyVariable(true);
-        this.newMessageAmountService.addPartnerDirectChatMessageAmount();
-        this.messageInputService.sendButtonEnabled = false;
-      }
-    }
-    if (
-      this.varService.mainChatHead === 1 &&
-      this.directChatService.directChatActive &&
-      this.currentUser()
-    ) {
-      if (
-        this.messageInputService.sendButtonEnabled &&
-        !this.messageInputService.placeholerView
-      ) {
-        this.messageInputService.resetVariables();
-        this.messageInputService.setMyVariable(true);
-        this.messageInputService.sendButtonEnabled = false;
-      }
-    }
-  }
-
-  /**
    * Toggles the signThread variable to add or remove a sign.
    *
    * @function addSign
    * @returns {void}
    */
-  addSign() {
+  addSign(): void {
     this.varService.signThread = !this.varService.signThread;
   }
 

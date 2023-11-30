@@ -367,7 +367,6 @@ export class MessageInputThreadComponent {
    * @returns {void}
    */
   restoreEmptyInput(): void {
-    console.log('restoring input');
     setTimeout(() => {
       if (!this.inputService.enterButtonPressed) this.restorePlaceholder();
       else {

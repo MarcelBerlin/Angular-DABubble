@@ -195,7 +195,7 @@ export class SecondaryChatAnswerService {
   tryUpdateToFirebase(qData, newData) {
     try {
       updateDoc(qData, newData);
-      console.log('Antwort gesendet und amountAnswers aktualisiert.');
+      // console.log('Antwort gesendet und amountAnswers aktualisiert.');
     } catch (error) {
       console.error('Fehler beim Aktualisieren der Firestore-Daten:', error);
     }
