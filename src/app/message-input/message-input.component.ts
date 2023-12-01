@@ -122,7 +122,8 @@ export class MessageInputComponent {
       this.saveMessage();
     } else if (!this.inputService.sendButtonEnabled && this.inputService.enterButtonPressed) {
       this.editableDiv.nativeElement.blur();
-    }
+    } 
+
     if (this.inputService.newChatSelected()) {
       this.resetInputField();
     }
@@ -217,6 +218,8 @@ export class MessageInputComponent {
     this.renderer.appendChild(inputDiv, emptySpan);
     this.inputService.inputLinks[this.inputService.setId] = this.inputService.createLinkInfo();
     this.setCursorWithClick(`${this.inputService.setId}` + 'Span');
+    this.inputService.nameType = 'unset';
+    this.inputService.filename = 'unset';
     this.inputService.enableSendButton();
   }
 
@@ -280,10 +283,10 @@ export class MessageInputComponent {
     const children = editableDiv.childNodes;
     for (let i = 0; i < children.length; i++) {
       const child = children[i];
-      if(child.innerHTML != '<br>'){
-        console.log(child);
+      if (child.innerHTML == '<br>') {
+        child.innerHTML = ' ';
         this.fillContentArray(child, i);
-      }
+      } else this.fillContentArray(child, i);
     }
     this.inputService.addTagInfoLinkInfo();
     return this.inputService.contentArray;
@@ -386,8 +389,8 @@ export class MessageInputComponent {
         this.inputService.enterButtonPressed = false;
         this.editableDiv.nativeElement.blur();
         setTimeout(() => {
-        this.simulateClickOnInput();
-        }, 100);
+          this.simulateClickOnInput();
+        }, 500);
       }
     }, 500);
   }
@@ -400,7 +403,7 @@ export class MessageInputComponent {
    * 
    * @returns {void}
    */
-  simulateClickOnInput():void {
+  simulateClickOnInput(): void {
     const el = document.getElementById('inputDiv');
     const doubleClickEvent = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
     const range = document.createRange();
