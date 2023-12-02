@@ -1,31 +1,52 @@
-<div class="headMembers">
-  <div class="head" (click)="channelEdition()" *ngIf="tagChannel?.tagsData && variableService?.selectedChannel !== -1">
-    <span class="nameContainer">
-      <span class="hashtag">
-        {{tagChannel.tagsData[variableService.selectedChannel]?.name[0]}}
+<div class="headMembers" [style.flex-direction]="variableService.mobileMatch?'column':''">
+  <div>
+    <div
+      class="head"
+      (click)="channelEdition()"
+      *ngIf="tagChannel?.tagsData && variableService?.selectedChannel !== -1"
+    >
+      <span class="nameContainer">
+        <span class="hashtag">
+          {{ tagChannel.tagsData[variableService.selectedChannel]?.name[0] }}
+        </span>
+        <span class="afterHashtag">
+          {{
+            tagChannel.tagsData[variableService.selectedChannel]?.name.slice(1)
+          }}
+        </span>
       </span>
-      <span class="afterHashtag">
-        {{ tagChannel.tagsData[variableService.selectedChannel]?.name.slice(1)}}
-      </span>
-    </span>
-    <mat-icon>keyboard_arrow_down</mat-icon>
-  </div>
-  <div class="marqueeHead" *ngIf="variableService.selectedChannel == -1">
-    <marquee>
-      <h3>Hier könnte Ihr Slogan stehen!</h3>
-    </marquee>
-  </div>
-  <div class="membersAndAdd">
-    <div class="members" (click)="variableService.selectedChannel !== -1 ? showMembers() : null">
-      <img src="assets/img/members/MembersPreviewTest.png" />
-      <span>
-        {{tagChannel.tagsData[variableService.selectedChannel]?.members?.length}}
-      </span>
+      <mat-icon>keyboard_arrow_down</mat-icon>
     </div>
-    <div id="addMember" class="add" (mouseenter)="hoveredAddIcon = true" (mouseleave)="hoveredAddIcon = false"
-      (click)="variableService.selectedChannel !== -1 ? addMember() : null">
-      <img *ngIf="!hoveredAddIcon" src="assets/img/person_add.png" />
-      <img *ngIf="hoveredAddIcon" src="assets/img/person_add_hover.png" />
+    <div class="marqueeHead" *ngIf="variableService.selectedChannel == -1">
+      <marquee>
+        <h3>Hier könnte Ihr Slogan stehen!</h3>
+      </marquee>
+    </div>
+  </div>
+  <div>
+    <div class="membersAndAdd">
+      <div
+        class="members"
+        (click)="variableService.selectedChannel !== -1 ? showMembers() : null"
+      >
+        <img src="assets/img/members/MembersPreviewTest.png" />
+        <span>
+          {{
+            tagChannel.tagsData[variableService.selectedChannel]?.members
+              ?.length
+          }}
+        </span>
+      </div>
+      <div
+        id="addMember"
+        class="add"
+        (mouseenter)="hoveredAddIcon = true"
+        (mouseleave)="hoveredAddIcon = false"
+        (click)="variableService.selectedChannel !== -1 ? addMember() : null"
+      >
+        <img *ngIf="!hoveredAddIcon" src="assets/img/person_add.png" />
+        <img *ngIf="hoveredAddIcon" src="assets/img/person_add_hover.png" />
+      </div>
     </div>
   </div>
 </div>

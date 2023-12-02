@@ -2,14 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 870px;
+  max-width: 870px;
+  width: 80vw;
   height: 615px;
   background-color: white;
 
   .contentContainer {
     display: flex;
     flex-direction: column;
-    width: 790px;
+    width: 90%;
     height: 535px;
     gap: 20px;
 
@@ -195,37 +196,37 @@
   font-size: 18px;
 }
 
-@media (max-width: 800px) {
-  .channelEditionContainer {
-    width: unset !important;
-    height: unset !important;
-    padding: 30px !important;
+// @media (max-width: 800px) {
+//   .channelEditionContainer {
+//     width: unset !important;
+//     height: unset !important;
+//     padding: 30px !important;
 
-    .contentContainer {
-      width: unset !important;
-      height: unset !important;
+//     .contentContainer {
+//       width: unset !important;
+//       height: unset !important;
 
-      .channelNameContainer {
-        width: unset !important;
-        height: unset !important;
-        padding: 10px !important;
-      }
+//       .channelNameContainer {
+//         width: unset !important;
+//         height: unset !important;
+//         padding: 10px !important;
+//       }
 
-      .edit {
-        font-size: 16px !important;
-      }
+//       .edit {
+//         font-size: 16px !important;
+//       }
 
-      .nunito-700-18 {
-        font-size: 16px !important;
-      }
-    }
+//       .nunito-700-18 {
+//         font-size: 16px !important;
+//       }
+//     }
 
-    .creator {
-      font-size: 19px !important;
-    }
+//     .creator {
+//       font-size: 19px !important;
+//     }
 
-    .buttonContainer {
-      justify-content: center !important;
-    }
-  }
-}
+//     .buttonContainer {
+//       justify-content: center !important;
+//     }
+//   }
+// }

@@ -23,8 +23,8 @@
   }
 
   .timeline-container {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 50px;
+    margin-bottom: 40px;
 
     .timeLine {
       position: relative;
@@ -607,7 +607,7 @@
   }
 
   .outputBox {
-    margin: 0 !important;
+    margin: 10px !important;
   }
 
   .timeLineHead {
@@ -620,8 +620,8 @@
   }
 }
 
-@media (max-width: 450px) {
-  .outputBox {
-    margin: 10px !important;
-  }
-}
+// @media (max-width: 450px) {
+//   .outputBox {
+//     margin: 10px !important;
+//   }
+// }
