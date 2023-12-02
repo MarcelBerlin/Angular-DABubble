@@ -29,6 +29,8 @@ export class AppComponent {
     this.breakpointObserver.observe([
       Breakpoints.Handset,
       Breakpoints.Tablet,
+      Breakpoints.HandsetPortrait,
+  Breakpoints.TabletPortrait,
     ]).subscribe(result => {
       if (result.matches) {
         console.log('Mobilgerät erkannt');
@@ -36,7 +38,6 @@ export class AppComponent {
       }
       else{
         console.log('Desktop erkannt');
-        
         this.varService.mobileMatch = false
       }
     });  }
