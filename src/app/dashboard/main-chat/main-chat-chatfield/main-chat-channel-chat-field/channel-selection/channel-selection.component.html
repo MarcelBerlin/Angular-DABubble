@@ -42,7 +42,7 @@
       <div class="full-message-left">
         <div class="single-message-left-container" *ngIf="message.userName != this.dataService.loggedInUserData.name"
           (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
-          <div class="interaction-bubble-left" [style.display]="hoveredIndex === i ? 'block' : 'none'"
+          <div class="interaction-bubble-left" [style.display]="hoveredIndex === i || varService.mobileMatch ? 'block' : 'none'"
             [style.transition]="'display 125ms ease-in-out'">
             <div class="interaction-bubble-emoji">
               <img ngDefaultControl (click)="emojiPickerLeft= !emojiPickerLeft;"
@@ -141,7 +141,7 @@
 
           <div class="message-details-right">
 
-            <div class="interaction-bubble-right" [style.display]="hoveredIndex === i ? 'block' : 'none'">
+            <div class="interaction-bubble-right" [style.display]="hoveredIndex === i || varService.mobileMatch ? 'block' : 'none'">
               <div class="interaction-bubble-emoji">
                 <img ngDefaultControl (click)="emojiPickerRight= !emojiPickerRight;"
                   src="./../../../../assets/img/reaction.png" title="Emoji auswählen">
