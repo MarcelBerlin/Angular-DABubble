@@ -18,6 +18,7 @@ export class VariablesService {
   sign: boolean = false;
   signThread: boolean = false;
   windowWidth: number;
+  mobileMatch: boolean = false;
   
 
   constructor() {}

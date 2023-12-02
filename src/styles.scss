@@ -122,3 +122,11 @@ body {
   }
 }
 // mat dialog custom settings for dialog info end
+
+
+@media screen and (max-width: 769px) {
+  .secondaryButton {
+    background-color: rgba(83, 90, 241, 1);
+    color: white;
+  }
+}

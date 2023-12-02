@@ -458,5 +458,18 @@
   }
 }
 
+@media screen and (max-width: 769px) {
+  .direct-message-user{
+    border-radius: 30px;
+    background-color: #eceefe !important;
+    color: #535af1 !important;
+  }
+  .channels-line{
+    border-radius: 30px;
+    background-color: #eceefe;    
+
+  }
+}
+
 @media (max-width: 500px) {
 }
