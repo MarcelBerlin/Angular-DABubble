@@ -16,19 +16,25 @@ export class DialogEditMessageComponent {
   constructor(
     private channelMessageService: ChannelMessagesService,
     private dialogRef: DialogRef
-  ) { }
-
+  ) {}
 
   /**
- * Initiates the process of editing a channel message.
- *
- * @method
- * @returns {void}
- */
+   * Initiates the process of editing a channel message.
+   *
+   * @method
+   * @returns {void}
+   */
   editMessage() {
-    this.channelMessageService.getActualMessageFromFirestore(this.messageEdit);
-    setTimeout(() => {
-      this.dialogRef.close();
-    }, 500);
+    if (this.messageEdit.length > 0) {
+      this.channelMessageService.getActualMessageFromFirestore(
+        this.messageEdit
+      );
+      setTimeout(() => {
+        this.dialogRef.close();
+      }, 500);
+    } else {
+      alert('Das Eingabefeld darf nicht leer sein!');
+      return;
+    }
   }
 }
