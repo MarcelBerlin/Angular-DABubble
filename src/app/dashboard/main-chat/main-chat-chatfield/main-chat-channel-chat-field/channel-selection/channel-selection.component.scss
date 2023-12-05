@@ -68,10 +68,60 @@
         transition: all 125ms ease-in-out;
       }
 
+     
+      mat-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+          background-color: #eceefe;
+          border-radius: 100%;
+        }
+      }
+    }
+
+    .single-message-left-container:hover .message-content-left {
+      background-color: white;
+      transition: all 75ms ease-in-out;      
+       
+      &:hover {
+        background-color: white;
+        color: black;
+        transition: all 75ms ease-in-out;
+      }
+    }
+
+    .avatar-left {
+      margin-left: 16px;
+      padding-top: 16px;
+      width: 70px;
+      height: 70px;
+
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+      }
+    }
+
+    .message-details-left {
+      position: relative;
+      margin-top: -70px;
+      margin-left: 100px;
+      width: calc(100% - 100px);
+      display: flex;
+      flex-direction: column;
+
       .interaction-bubble-left {
         position: absolute;
         display: none;
-        top: -35px;
+        top: -50px;
         right: 50%;
         width: 100px;
         height: 50px;
@@ -98,54 +148,6 @@
           border-radius: 100%;
         }
       }
-
-      mat-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        width: 40px;
-        height: 40px;
-
-        &:hover {
-          background-color: #eceefe;
-          border-radius: 100%;
-        }
-      }
-    }
-
-    .single-message-left-container:hover .message-content-left {
-      background-color: white;
-      transition: all 75ms ease-in-out;
-       
-      &:hover {
-        background-color: white;
-        color: black;
-        transition: all 75ms ease-in-out;
-      }
-    }
-
-    .avatar-left {
-      margin-left: 16px;
-      padding-top: 16px;
-      width: 70px;
-      height: 70px;
-
-      img {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-      }
-    }
-
-    .message-details-left {
-      margin-top: -70px;
-      margin-left: 100px;
-      width: calc(100% - 100px);
-      display: flex;
-      flex-direction: column;
 
       .name-time-left {
         display: flex;
@@ -323,7 +325,7 @@
 
     .message-details-right {
       position: relative;
-      margin-top: -60px;
+      margin-top: -70px;
       margin-left: 0px;
       width: calc(100% - 100px);
       display: flex;

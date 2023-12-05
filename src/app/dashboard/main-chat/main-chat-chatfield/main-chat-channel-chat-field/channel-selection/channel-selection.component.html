@@ -42,25 +42,28 @@
       <div class="full-message-left">
         <div class="single-message-left-container" *ngIf="message.userName != this.dataService.loggedInUserData.name"
           (mouseover)="onHover(i)" (mouseout)="onHoverEnd()">
-          <div class="interaction-bubble-left" [style.display]="hoveredIndex === i || varService.mobileMatch ? 'block' : 'none'"
-            [style.transition]="'display 125ms ease-in-out'">
-            <div class="interaction-bubble-emoji">
-              <img ngDefaultControl (click)="emojiPickerLeft= !emojiPickerLeft;"
-                src="./../../../../assets/img/reaction.png" title="Emoji auswählen">
-              <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft"
-                (emojiSelect)="addEmoji($event,i)">
-              </emoji-mart>
-            </div>
-            <div (click)="channelMessages.openAnswer(i)">
-              <mat-icon class="interaction-bubble-comment" title="Antworten">
-                comment
-              </mat-icon>
-            </div>
-          </div>
+
           <div class="avatar-left">
             <img src="{{ message.userImg }}">
           </div>
           <div class="message-details-left">
+
+            <div class="interaction-bubble-left"
+              [style.display]="hoveredIndex === i || varService.mobileMatch ? 'block' : 'none'"
+              [style.transition]="'display 125ms ease-in-out'">
+              <div class="interaction-bubble-emoji">
+                <img ngDefaultControl (click)="emojiPickerLeft= !emojiPickerLeft;"
+                  src="./../../../../assets/img/reaction.png" title="Emoji auswählen">
+                <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft"
+                  (emojiSelect)="addEmoji($event,i)">
+                </emoji-mart>
+              </div>
+              <div (click)="channelMessages.openAnswer(i)">
+                <mat-icon class="interaction-bubble-comment" title="Antworten">
+                  comment
+                </mat-icon>
+              </div>
+            </div>
             <div class="name-time-left">
               <div class="name-left">{{ message.userName }}</div>
               <div class="time-left">{{ message.dateString }} {{ message.clockString }}</div>
@@ -141,7 +144,8 @@
 
           <div class="message-details-right">
 
-            <div class="interaction-bubble-right" [style.display]="hoveredIndex === i || varService.mobileMatch ? 'block' : 'none'">
+            <div class="interaction-bubble-right"
+              [style.display]="hoveredIndex === i || varService.mobileMatch ? 'block' : 'none'">
               <div class="interaction-bubble-emoji">
                 <img ngDefaultControl (click)="emojiPickerRight= !emojiPickerRight;"
                   src="./../../../../assets/img/reaction.png" title="Emoji auswählen">
