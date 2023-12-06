@@ -423,7 +423,7 @@
       }
 
       .reactions {
-        margin-right: 20px;
+        margin-right: 120px;
         border: 1px solid #adb0d9;
         border-radius: 20px;
         display: flex;
@@ -438,12 +438,6 @@
         align-items: flex-end;
         flex-direction: column;
         width: 10px;
-
-        .emoji-mart {
-          z-index: 999;
-          position: relative;
-          left: 100px;
-        }
       }
     }
   }
@@ -456,6 +450,11 @@
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
   }
+}
+
+emoji-mart {
+  z-index: 999;
+  position: relative;
 }
 
 .reaction-bar-right {

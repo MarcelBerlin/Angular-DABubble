@@ -35,6 +35,8 @@ export class ChannelSelectionComponent {
   emojiPickerLeft: boolean = false;
   emoji: string = '';
   isThereAnAnswer: boolean = false;
+  rightEmojiInterval: any;
+  leftEmojiInterval: any;
 
   @ViewChild('reactionBarRight') emojiBar!: ElementRef; // "'reactionBarRight-' + message"
 
@@ -53,7 +55,7 @@ export class ChannelSelectionComponent {
     public secondaryAnswerService: SecondaryChatAnswerService,
     public inputService: MessageInputServiceService,
     public emojiService: EmojiPickerBossiService
-  ) {}
+  ) { }
 
   /**
    * Opens the secondary chat by invoking the 'chatSlideIn' method of the 'dcshService'.
@@ -100,6 +102,44 @@ export class ChannelSelectionComponent {
   }
 
   /**
+   * checks each 200ms the condition of the boolean 'emojiPickerRight'
+   * 
+   * @param i - index of the hovered message
+   */
+  rightEmojiIntervalfunction(i) {
+    this.rightEmojiInterval = setInterval(() => {
+      if (this.hoveredIndex == i) { this.emojiPickerRight = true; }
+      else { this.emojiPickerRight = false; }
+      this.stopEmojiInterval();
+    }, 200);
+  }
+
+
+   /**
+   * checks each 200ms the condition of the boolean 'emojiPickerLeft'
+   * 
+   * @param i - index of the hovered message
+   */
+  leftEmojiIntervalfunction(i) {
+    this.leftEmojiInterval = setInterval(() => {
+      if (this.hoveredIndex == i) {
+        this.emojiPickerLeft = true; console.log("if left interval", this.emojiPickerLeft);
+      }
+      else { this.emojiPickerLeft = false; console.log(" else left interval", this.emojiPickerLeft) }
+      this.stopEmojiInterval();
+    }, 200);
+  }
+
+
+  /**
+   * if the condition of the given boolean is false, the function stops the interval
+   */
+  stopEmojiInterval() {
+    if (!this.emojiPickerRight) { clearInterval(this.rightEmojiInterval) }
+    if (!this.emojiPickerLeft) { clearInterval(this.leftEmojiInterval) }
+  }
+
+  /**
    * Adds a reaction to the chosen message
    *
    * @param event - emoji popup
@@ -109,8 +149,10 @@ export class ChannelSelectionComponent {
     this.channelMessages.messageData[index].messageEmojis.push(
       `${this.emoji}${event.emoji.native}`
     );
+    console.log("left is", this.emojiPickerLeft);
     if (this.emojiPickerLeft) {
       this.emojiPickerLeft = false;
+      console.log(" if left is", this.emojiPickerLeft);
     }
     if (this.emojiPickerRight) {
       this.emojiPickerRight = false;
