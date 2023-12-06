@@ -112,8 +112,26 @@
 }
 
 @media (max-width: 500px) {
+  .headMembers {
+    justify-content: unset !important;
+    flex-direction: unset !important;
+    height: unset !important;
+  }
+
+  .membersAndAdd {
+    padding-right:  0 !important;
+  }
+
+  .head {
+    margin-left: 0 !important;
+
+    mat-icon {
+      margin-right: 0 !important;
+    }
+  }
+
   .afterHashtag {
-    font-size: 21px;
+    font-size: 21px !important;
   }
 
   .add {

@@ -73,9 +73,10 @@
     width: 25%;
     transition: 200ms;
 
-    // @media (max-width: 800px) {
-    //   width: 100%;
-    // }
+    @media (max-width: 400px) {
+      top: 75px !important;
+      right: 0px !important;
+    }
   }
 
   .secondarySlideOut {

@@ -78,5 +78,10 @@
       }
     }
   }
+}
 
+@media(max-width: 500px) {
+  .head {
+    height: 65px !important;
+  }
 }
