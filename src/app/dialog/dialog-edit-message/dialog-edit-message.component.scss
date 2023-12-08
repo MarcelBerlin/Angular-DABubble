@@ -6,9 +6,38 @@
     align-items: center;
     justify-content: start;
     flex-direction: column;
+
+    .edit-window {
+        width: 100% !important;
+    }
+    
 }
 
 mat-form-field {   
     width: 100%;
 }
+
+@media (max-width: 1200px) {
+    .example-form {
+        width: 35vw !important;
+    }
+
+}
+
+@media (max-width: 900px) {
+    .example-form {
+        width: 50vw !important;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .example-form {
+        width: 75vw !important;
+    }
+
+}
+
+
+
 

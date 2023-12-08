@@ -24,7 +24,7 @@
 
   .timeline-container {
     margin-top: 50px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 
     .timeLine {
       position: relative;
@@ -611,6 +611,11 @@ emoji-mart {
     margin: 10px !important;
   }
 
+  .timeline-container {
+    margin-top: 70px !important; 
+    margin-bottom: 70px !important;
+  }
+
   .timeLineHead {
     top: -12px !important;
     height: 24px !important;
@@ -619,6 +624,94 @@ emoji-mart {
   .name-time {
     padding-bottom: 6px;
   }
+
+  .interaction-bubble-left {
+    
+    right: 50%;
+    width: 100px;
+    height: 30px !important;    
+  }
+
+  .interaction-bubble-right {
+    
+    left: 50%;
+    width: 100px;
+    height: 30px !important;    
+  }
+
+  .interaction-bubble-emoji {
+    top: 25% !important;
+    height: 15px !important;
+  }
+
+  .interaction-bubble-comment {   
+    top: -10% !important;    
+  }
+
+  .material-symbols-outlined {    
+    top: -10% !important;    
+  }
+  
+}
+
+@media (max-width: 600px) {
+
+  .message-content-left { 
+    margin-top: 5% !important;
+  }
+
+  .message-content-right { 
+    margin-top: 5% !important;
+  }
+  
+}
+
+@media (max-width: 400px) {
+  .name-left {
+    font-size: 16px !important;
+    padding-right: 10px !important;
+  }
+
+  .name-right {
+    font-size: 16px !important;    
+  }
+
+  .avatar-left {
+    margin-left: 8px !important;    
+
+    img {
+      width: 50px !important;
+      height: 50px !important;
+      
+    }
+  }
+
+  .avatar-right {
+    margin-right: 8px !important;    
+
+    img {
+      width: 50px !important;
+      height: 50px !important;
+      
+    }
+  }
+
+  .message-content-left {
+    
+    span {
+      font-size: 14px !important;
+    }
+   
+  }
+
+  .message-content-right {
+    
+    span {
+      font-size: 14px !important;
+    }
+   
+  }
+  
 }
 
 // @media (max-width: 450px) {
