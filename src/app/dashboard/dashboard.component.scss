@@ -49,6 +49,7 @@
     left: 25%;
     right: 25%;
     transition: 200ms;
+    
 
     @media (max-width: 800px) {
       left: 0px;
@@ -72,6 +73,7 @@
     right: 8px;
     width: 25%;
     transition: 200ms;
+   
 
     @media (max-width: 400px) {
       top: 75px !important;
@@ -80,7 +82,7 @@
   }
 
   .secondarySlideOut {
-    transform: translateX(25vw);
+    transform: translateX(35vw);
     transition: 200ms;
   }
 }
@@ -134,3 +136,4 @@
 
 
 }
+
