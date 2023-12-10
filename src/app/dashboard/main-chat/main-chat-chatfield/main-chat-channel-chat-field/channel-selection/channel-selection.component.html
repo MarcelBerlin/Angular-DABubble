@@ -19,7 +19,6 @@
   </div>
 
 
-
   <div *ngFor="let message of channelMessages.messageData, let i = index">
     <div *ngIf="message.channelId == this.dialogAdd.tagsData[this.dialogAdd.channelIndex].id">
       <div class="timeline-container">
@@ -53,9 +52,9 @@
               [style.transition]="'display 125ms ease-in-out'">
               <div class="interaction-bubble-emoji">
                 <img ngDefaultControl (click)="leftEmojiIntervalfunction(i)"
-                  src="./../../../../assets/img/reaction.png" >
+                  src="./../../../../assets/img/reaction.png">
                 <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerLeft"
-                (emojiSelect)="addEmoji($event,i)">
+                  (emojiSelect)="addEmoji($event,i)">
                 </emoji-mart>
               </div>
               <div (click)="channelMessages.openAnswer(i)">
@@ -147,8 +146,8 @@
             <div class="interaction-bubble-right"
               [style.display]="hoveredIndex === i || varService.mobileMatch ? 'block' : 'none'">
               <div class="interaction-bubble-emoji">
-                <img ngDefaultControl (click)="rightEmojiIntervalfunction(i)" 
-                   src="./../../../../assets/img/reaction.png">
+                <img ngDefaultControl (click)="rightEmojiIntervalfunction(i)"
+                  src="./../../../../assets/img/reaction.png">
                 <emoji-mart ngDefaultControl class="emoji-mart" *ngIf="emojiPickerRight"
                   (emojiSelect)="addEmoji($event, i)">
                 </emoji-mart>

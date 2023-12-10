@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: flex-end;
 
-  
+    
   .empty-chat-message {
     padding-left: 22px;
     padding-bottom: 20px;
@@ -21,6 +21,8 @@
       color: #535af1;
     }
   }
+
+  
 
   .timeline-container {
     margin-top: 50px;
@@ -130,7 +132,7 @@
         border-top-right-radius: 30px;
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;
-        transition: display 125ms ease-in-out;
+        transition: display 125ms ease-in-out;        
       }
 
       .interaction-bubble-emoji {
@@ -252,21 +254,47 @@
   // ######  USER MESSAGE  ######
 
   .full-message-right {
-    width: 100%;
+    width: 100%;       
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;   
     // border-bottom: 1px solid #eeebeb;
 
     .single-message-right-container {
       position: relative;
       transition: all 125ms ease-in-out;
+      
 
       &:hover {
         cursor: pointer;
         background-color: #eceefe;
         transition: all 125ms ease-in-out;
+      }      
+    }
+
+    .avatar-right {
+      width: 100%;
+      height: 70px;
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 16px;
+
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        margin-right: 10px;
       }
+    }
+
+    .message-details-right {
+      position: relative;      
+      margin-top: -70px;
+      margin-left: 0px;
+      width: calc(100% - 100px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
 
       .interaction-bubble-right {
         position: absolute;
@@ -278,7 +306,7 @@
         border: 1px solid rgba(0, 0, 0, 0.2);
         border-top-right-radius: 30px;
         border-top-left-radius: 30px;
-        border-bottom-left-radius: 30px;
+        border-bottom-left-radius: 30px;       
       }
 
       .interaction-bubble-comment {
@@ -306,32 +334,6 @@
           border-radius: 100%;
         }
       }
-    }
-
-    .avatar-right {
-      width: 100%;
-      height: 70px;
-      display: flex;
-      justify-content: flex-end;
-      padding-top: 16px;
-
-      img {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        margin-right: 10px;
-      }
-    }
-
-    .message-details-right {
-      position: relative;
-      margin-top: -70px;
-      margin-left: 0px;
-      width: calc(100% - 100px);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-
      
       .material-symbols-outlined {
         cursor: pointer;
@@ -377,7 +379,7 @@
 
       .message-content-right {
         display: flex;
-        background-color: #797ef3;
+        background-color: #797ef3;        
         color: white;
         justify-content: center;
         align-items: center;
@@ -396,50 +398,53 @@
           transition: all 75ms ease-in-out;
         }
       }
+
+      .reaction-bar-right {
+        position: absolute;
+        bottom: -40%;
+        right: -5%;
+        display: flex;
+        padding-right: 10px;
+        padding-top: 12px;
+        gap: 5px;
+        margin-bottom: 6px;        
+  
+        img {
+          cursor: pointer;
+          padding: 5px;
+          background: transparent;
+          border: 0;
+  
+          &:focus {
+            outline: 0;
+          }
+  
+          &:hover {
+            background-color: #eeebeb;
+            border-radius: 10px;
+          }
+        }
+  
+        .reactions {
+          border: 1px solid #adb0d9;
+          border-radius: 20px;
+          display: flex;
+          justify-content: flex-end;
+          padding: 3px 15px;
+          width: fit-content;
+          gap: 8px;
+        }
+  
+        .reaction-column {
+          display: flex;
+          align-items: flex-end;
+          flex-direction: column;
+          width: 10px;
+        }
+      }
     }
 
-    .reaction-bar-right {
-      display: flex;
-      padding-right: 10px;
-      padding-top: 12px;
-      gap: 5px;
-      margin-bottom: 6px;
-      margin-right: -120px;
-
-      img {
-        cursor: pointer;
-        padding: 5px;
-        background: transparent;
-        border: 0;
-
-        &:focus {
-          outline: 0;
-        }
-
-        &:hover {
-          background-color: #eeebeb;
-          border-radius: 10px;
-        }
-      }
-
-      .reactions {
-        margin-right: 120px;
-        border: 1px solid #adb0d9;
-        border-radius: 20px;
-        display: flex;
-        justify-content: flex-end;
-        padding: 3px 15px;
-        width: fit-content;
-        gap: 8px;
-      }
-
-      .reaction-column {
-        display: flex;
-        align-items: flex-end;
-        flex-direction: column;
-        width: 10px;
-      }
-    }
+   
   }
 
   .interaction-bubble-left {
