@@ -137,10 +137,8 @@ export class DialogAddService {
    * @param {string} channelId - The ID of the channel to which members will be added.
    * @param {Array} membersCache - An array containing the members to be added.
    */
-  addUserToChannel(channelId, membersCache) {
-    // Get the Firestore document reference for the specified channel.
-    const document = doc(this.firestore, 'tags', channelId);
-    // Prepare the data to update in the document.
+  addUserToChannel(channelId, membersCache) {    
+    const document = doc(this.firestore, 'tags', channelId);    
     const newData = {
       members: membersCache,
     };

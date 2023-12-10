@@ -107,8 +107,7 @@ export class ChannelMessagesService {
     this.selectedMessageId = this.messageData[index].messageId;
     this.selectedMessageContent = this.messageData[index].content;
     this.selectedMessage = true;
-    this.dcshService.chatSlideIn();
-    console.log(this.selectedMessageContent);
+    this.dcshService.chatSlideIn();    
   }
 
 
@@ -209,8 +208,7 @@ export class ChannelMessagesService {
  */
   tryUpdateToFirebase(qData, newData) {
     try {
-      updateDoc(qData, newData);
-      // console.log('Message gesendet und channelMessageAmount aktualisiert.');
+      updateDoc(qData, newData);      
     } catch (error) {
       console.error('Fehler beim Aktualisieren der Firestore-Daten:', error);
     }

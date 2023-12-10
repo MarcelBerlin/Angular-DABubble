@@ -62,11 +62,7 @@ export class DataService {
   getLoggedInUserData(): void {
     this.userData.forEach((user: any) => {
       let userJson: any = localStorage.getItem('user');
-      this.loggedInUserEmail = JSON.parse(userJson);
-      // if (user.email.toLowerCase() == this.loggedInUserEmail) {
-      //   this.loggedInUserData = this.getLoggedUserData(user);
-      //   this.updateUser();
-      // }
+      this.loggedInUserEmail = JSON.parse(userJson);      
       if (user.logInEmail.toLowerCase() == this.loggedInUserEmail) {
         this.loggedInUserData = this.getLoggedUserData(user);
         this.updateUser();

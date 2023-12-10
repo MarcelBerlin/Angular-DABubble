@@ -32,12 +32,10 @@ export class AppComponent {
       Breakpoints.HandsetPortrait,
   Breakpoints.TabletPortrait,
     ]).subscribe(result => {
-      if (result.matches) {
-        console.log('Mobilgerät erkannt');
+      if (result.matches) {        
         this.varService.mobileMatch = true
       }
-      else{
-        console.log('Desktop erkannt');
+      else{        
         this.varService.mobileMatch = false
       }
     });  }

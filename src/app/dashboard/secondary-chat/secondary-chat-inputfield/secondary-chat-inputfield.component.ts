@@ -136,11 +136,9 @@ export class SecondaryChatInputfieldComponent {
       console.log(file.type);
       const reader: FileReader = new FileReader();
       reader.onload = (e: any) => {
-        this.textarea = e.target.result;
-        console.log(e.target.result);
+        this.textarea = e.target.result;       
       };
-      reader.readAsDataURL(file);
-      // console.log(file);
+      reader.readAsDataURL(file);     
     }
   }
 
