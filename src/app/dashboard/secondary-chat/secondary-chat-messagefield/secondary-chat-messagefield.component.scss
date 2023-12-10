@@ -184,17 +184,13 @@
           }          
         }
 
-        .reaction-bar-right {
-          position: absolute;
-          top: 95%;
-          left: 5%;
+        .reaction-bar-right {          
           display: flex;
-          width: fit-content;
-          padding-right: 10px;
-          padding-top: 12px;
+          width: fit-content;         
+          padding-top: 6px;
           gap: 5px;
-          margin-bottom: 6px;
-          margin-right: -120px;
+          margin-bottom: 6px;         
+          margin-left: 32px;         
 
           img {
             cursor: pointer;

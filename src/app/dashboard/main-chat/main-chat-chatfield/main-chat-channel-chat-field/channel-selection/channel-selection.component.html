@@ -210,17 +210,17 @@
                   </span>
                 </div>
               </div>
-
-              <div class="reaction-bar-right">
-                <div class="reactions" *ngIf="message.messageEmojis.length >= 1">
-                  <div>
-                    <span #reactionBarRight [attr.id]="'reactionBarRight-' + message">
-                      {{ message.messageEmojis.join(' ') }}
-                    </span>
-                  </div>
+            </div>
+            <div class="reaction-bar-right">
+              <div class="reactions" *ngIf="message.messageEmojis.length >= 1">
+                <div>
+                  <span #reactionBarRight [attr.id]="'reactionBarRight-' + message">
+                    {{ message.messageEmojis.join(' ') }}
+                  </span>
                 </div>
               </div>
             </div>
+
           </div>
           <div *ngIf="channelMessages.messageData[i].amountAnswers > 0"
             style="position: absolute; right: 100px; margin-left: 16px; display: flex; justify-content: flex-end; gap: 10px;">
