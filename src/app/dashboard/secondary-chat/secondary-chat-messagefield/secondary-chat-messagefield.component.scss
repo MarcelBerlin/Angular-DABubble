@@ -49,7 +49,7 @@
             padding-right: 20px;
           }
 
-          .time {
+          .time-left {
             color: #686868;
             font-family: "nunito";
             font-size: 14px;
@@ -125,7 +125,7 @@
       padding-right: 4px;
 
       .avatar-right {
-        padding-top: 16px;
+        padding-top: 46px;
         width: 70px;
         height: 70px;
 
@@ -138,6 +138,7 @@
       }
 
       .message-details-right {
+        position: relative !important;
         display: flex;
         flex-direction: column;
         width: 70%;
@@ -155,7 +156,7 @@
             padding-right: 20px;
           }
 
-          .time {
+          .time-right {
             color: #686868;
             font-family: "nunito";
             font-size: 14px;
@@ -163,6 +164,7 @@
         }
 
         .message-content-right {
+          position: relative;
           display: flex;
           background-color: #797ef3;
           color: white;
@@ -179,10 +181,13 @@
 
           span {
             font-size: 14px;
-          }
+          }          
         }
 
         .reaction-bar-right {
+          position: absolute;
+          top: 95%;
+          left: 5%;
           display: flex;
           width: fit-content;
           padding-right: 10px;
@@ -233,261 +238,7 @@
         }
       }
     }
-  }
-
-  //   .full-message-left {
-  //     margin-bottom: 16px;
-
-  //     .single-message-left-container:hover .message-content-left {
-  //       background-color: white;
-  //     }
-
-  //     .reaction-bar-left {
-  //       display: flex;
-  //       align-items: center;
-  //       padding-left: 10px;
-  //       padding-bottom: 12px;
-  //       gap: 5px;
-  //       margin-top: 6px;
-
-  //       img {
-  //         cursor: pointer;
-  //         padding: 5px;
-
-  //         &:hover {
-  //           background-color: #eeebeb;
-  //           border-radius: 10px;
-  //         }
-  //       }
-
-  //       .reactions {
-  //         margin-right: 20px;
-  //         border: 1px solid #adb0d9;
-  //         border-radius: 20px;
-  //         display: flex;
-  //         justify-content: center;
-  //         padding: 3px 15px;
-  //         width: fit-content;
-  //       }
-  //     }
-
-  //     .reaction-column {
-  //       display: flex;
-  //       align-items: flex-start;
-  //       flex-direction: column;
-
-  //       .emoji-mart {
-  //         z-index: 1;
-  //         position: relative;
-  //         right: 100px;
-  //       }
-  //     }
-  //   }
-
-  //   .new-answers {
-  //     color: #adb0d9;
-  //     position: absolute;
-  //     left: 10%;
-  //     bottom: 0;
-  //     display: flex;
-  //     align-items: center;
-
-  //     p {
-  //       font-size: 18px;
-  //       margin-bottom: 0;
-  //       padding-right: 10px;
-  //     }
-
-  //     img {
-  //       height: 2px;
-  //       width: 50%;
-  //     }
-  //   }
-
-  //   .full-message-right {
-  //     width: calc(100% - 20px);
-  //     position: relative;
-  //     display: flex;
-  //     flex-direction: column;
-  //     margin-bottom: 16px;
-
-  //     .single-message-right-container {
-  //       position: relative;
-  //       transition: all 125ms ease-in-out;
-
-  //       &:hover {
-  //         cursor: pointer;
-  //         background-color: #eceefe;
-  //         transition: all 125ms ease-in-out;
-  //       }
-  //     }
-
-  //     .single-message-right-container:hover .message-content-right {
-  //       background-color: white;
-  //     }
-
-  //     .avatar-right {
-  //       width: 100%;
-  //       height: 70px;
-  //       display: flex;
-  //       justify-content: flex-end;
-  //       padding-top: 16px;
-
-  //       img {
-  //         width: 70px;
-  //         height: 70px;
-  //         border-radius: 50%;
-  //         margin-right: 10px;
-  //       }
-  //     }
-
-  //     .message-details-right {
-  //       // position: relative;
-  //       // margin-top: -60px;
-  //       // margin-left: 0px;
-  //       // // width: calc(100% - 100px);
-  //       // display: flex;
-  //       // flex-direction: column;
-  //       // align-items: flex-end;
-
-  //       .interaction-bubble-right {
-  //         position: absolute;
-  //         top: -20px;
-  //         left: 100px;
-  //         width: 100px;
-  //         height: 50px;
-  //         background-color: white;
-  //         border: 1px solid rgba(0, 0, 0, 0.2);
-  //         border-top-right-radius: 30px;
-  //         border-top-left-radius: 30px;
-  //         border-bottom-left-radius: 30px;
-  //       }
-
-  //       .interaction-bubble-emoji {
-  //         display: flex;
-  //         justify-content: center;
-  //         align-items: center;
-  //         position: absolute;
-  //         top: 6px;
-  //         left: 8px;
-  //         width: 40px;
-  //         height: 40px;
-
-  //         &:hover {
-  //           background-color: #eceefe;
-  //           border-radius: 100%;
-  //         }
-  //       }
-
-  //       mat-icon {
-  //         display: flex;
-  //         justify-content: center;
-  //         align-items: center;
-  //         position: absolute;
-  //         top: 8px;
-  //         right: 8px;
-  //         width: 40px;
-  //         height: 40px;
-
-  //         &:hover {
-  //           background-color: #eceefe;
-  //           border-radius: 100%;
-  //         }
-  //       }
-
-  //       // .name-time-right {
-  //       //   display: flex;
-  //       //   flex-direction: column-reverse;
-  //       //   justify-content: flex-end;
-  //       //   margin-top: 10px;
-  //       //   margin-right: 16px;
-
-  //       //   .name {
-  //       //     font-family: "nunito";
-  //       //     font-size: 18px;
-  //       //     font-weight: 700;
-  //       //   }
-
-  //       //   .time {
-  //       //     color: #686868;
-  //       //     font-family: "nunito";
-  //       //     font-size: 14px;
-  //       //     padding-right: 20px;
-  //       //   }
-  //       // }
-  //     }
-
-  //     .reaction-bar-right {
-  //       display: flex;
-  //       padding-right: 10px;
-  //       padding-top: 12px;
-  //       gap: 5px;
-  //       margin-right: -120px;
-
-  //       img {
-  //         cursor: pointer;
-  //         padding: 5px;
-  //         background: transparent;
-  //         border: 0;
-
-  //         &:focus {
-  //           outline: 0;
-  //         }
-
-  //         &:hover {
-  //           background-color: #eeebeb;
-  //           border-radius: 10px;
-  //         }
-  //       }
-
-  //       .reactions {
-  //         margin-right: 20px;
-  //         border: 1px solid #adb0d9;
-  //         border-radius: 20px;
-  //         display: flex;
-  //         justify-content: flex-end;
-  //         padding: 3px 15px;
-  //         width: fit-content;
-  //         gap: 8px;
-  //       }
-
-  //       .reaction-column {
-  //         display: flex;
-  //         align-items: flex-end;
-  //         flex-direction: column;
-  //         width: 10px;
-
-  //         .emoji-mart {
-  //           z-index: 1;
-  //           position: relative;
-  //           left: 100px;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  // .interaction-bubble-left {
-  //   width: 500px;
-  //   height: 300px;
-  //   background-color: #eeebeb;
-  //   border-top-right-radius: 30px;
-  //   border-top-left-radius: 30px;
-  //   border-bottom-left-radius: 30px;
-  // }
-
-  // .reaction-column {
-  //   display: flex;
-  //   align-items: flex-end;
-  //   flex-direction: column;
-  //   width: 10px;
-
-  //   .emoji-mart {
-  //     z-index: 1;
-  //     position: relative;
-  //     left: 100px;
-  //   }
-  // }
+  } 
 }
 
 .infoBox {
@@ -604,4 +355,17 @@
 
 .outputBox {
   margin: 8px !important;
+}
+
+
+@media (max-width: 600px) {
+
+  .message-content-right {
+    margin-top: 5% !important;
+  }
+
+  .message-content-left {
+    margin-top: 5% !important;
+  }
+  
 }

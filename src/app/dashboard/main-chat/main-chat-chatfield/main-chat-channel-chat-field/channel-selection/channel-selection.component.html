@@ -210,13 +210,14 @@
                   </span>
                 </div>
               </div>
-            </div>
-            <div class="reaction-bar-right">
-              <div class="reactions" *ngIf="message.messageEmojis.length >= 1">
-                <div>
-                  <span #reactionBarRight [attr.id]="'reactionBarRight-' + message">
-                    {{ message.messageEmojis.join(' ') }}
-                  </span>
+
+              <div class="reaction-bar-right">
+                <div class="reactions" *ngIf="message.messageEmojis.length >= 1">
+                  <div>
+                    <span #reactionBarRight [attr.id]="'reactionBarRight-' + message">
+                      {{ message.messageEmojis.join(' ') }}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

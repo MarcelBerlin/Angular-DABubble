@@ -377,7 +377,8 @@
         }
       }
 
-      .message-content-right {
+      .message-content-right {   
+        position: relative;           
         display: flex;
         background-color: #797ef3;        
         color: white;
@@ -396,52 +397,55 @@
           background-color: white;
           color: black;
           transition: all 75ms ease-in-out;
+        }      
+
+        .reaction-bar-right {
+          position: absolute;
+          top: 90%;
+          right: -5%;
+          display: flex;
+          padding-right: 10px;
+          padding-top: 12px;
+          gap: 5px;
+          margin-bottom: 6px;        
+    
+          img {
+            cursor: pointer;
+            padding: 5px;
+            background: transparent;
+            border: 0;
+    
+            &:focus {
+              outline: 0;
+            }
+    
+            &:hover {
+              background-color: #eeebeb;
+              border-radius: 10px;
+            }
+          }
+    
+          .reactions {
+            border: 1px solid #adb0d9;
+            border-radius: 20px;
+            display: flex;
+            justify-content: flex-end;
+            padding: 3px 15px;
+            width: fit-content;
+            gap: 8px;
+          }
+    
+          .reaction-column {
+            display: flex;
+            align-items: flex-end;
+            flex-direction: column;
+            width: 10px;
+          }
         }
       }
 
-      .reaction-bar-right {
-        position: absolute;
-        bottom: -40%;
-        right: -5%;
-        display: flex;
-        padding-right: 10px;
-        padding-top: 12px;
-        gap: 5px;
-        margin-bottom: 6px;        
-  
-        img {
-          cursor: pointer;
-          padding: 5px;
-          background: transparent;
-          border: 0;
-  
-          &:focus {
-            outline: 0;
-          }
-  
-          &:hover {
-            background-color: #eeebeb;
-            border-radius: 10px;
-          }
-        }
-  
-        .reactions {
-          border: 1px solid #adb0d9;
-          border-radius: 20px;
-          display: flex;
-          justify-content: flex-end;
-          padding: 3px 15px;
-          width: fit-content;
-          gap: 8px;
-        }
-  
-        .reaction-column {
-          display: flex;
-          align-items: flex-end;
-          flex-direction: column;
-          width: 10px;
-        }
-      }
+      
+      
     }
 
    
