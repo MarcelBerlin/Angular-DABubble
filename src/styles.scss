@@ -5,6 +5,7 @@ body {
   height: 100%;
   user-select: none;
   scroll-behavior: smooth;
+  margin: 0;
 }
 
 body {
@@ -114,14 +115,20 @@ body {
 // mat dialog custom settings for dialog info
 .custom-modalbox {
   mat-dialog-container {
+    padding: 0px;
     .mdc-dialog__container {
       .mdc-dialog__surface {
         border-radius: 30px;
+        overflow: hidden;
       }
     }
   }
 }
 // mat dialog custom settings for dialog info end
+
+::-webkit-scrollbar{
+  width: 0px;
+}
 
 
 @media screen and (max-width: 769px) {

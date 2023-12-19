@@ -14,6 +14,10 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+
+
+
+
 import { LoginComponent } from './auth-features/login/login.component';
 import { FormsModule, FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
